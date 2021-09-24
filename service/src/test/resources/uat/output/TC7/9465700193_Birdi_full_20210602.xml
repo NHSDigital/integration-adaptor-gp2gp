@@ -1,0 +1,1978 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
+    <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C" />
+    <creationTime value="20200101010101" />
+    <versionCode code="V3NPfIT3.1.10" />
+    <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
+    <processingCode code="P" />
+    <processingModeCode code="T" />
+    <acceptAckCode code="NE" />
+    <communicationFunctionRcv typeCode="RCV">
+        <device classCode="DEV" determinerCode="INSTANCE">
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
+        </device>
+    </communicationFunctionRcv>
+    <communicationFunctionSnd typeCode="SND">
+        <device classCode="DEV" determinerCode="INSTANCE">
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
+        </device>
+    </communicationFunctionSnd>
+    <ControlActEvent classCode="CACT" moodCode="EVN">
+        <author1 typeCode="AUT">
+            <AgentSystemSDS classCode="AGNT">
+                <agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
+                </agentSystemSDS>
+            </AgentSystemSDS>
+        </author1>
+        <subject typeCode="SUBJ" contextConductionInd="false">
+            <EhrExtract classCode="EXTRACT" moodCode="EVN">
+    <id root="F5C1FDBB-A948-43BB-AB30-CEAA51FC0CC0" />
+    <statusCode code="COMPLETE" />
+    <availabilityTime value="20200101010101" />
+    <recordTarget typeCode="RCT">
+        <patient classCode="PAT">
+            <id root="2.16.840.1.113883.2.1.4.1" extension="1234567890" />
+        </patient>
+    </recordTarget>
+    <author typeCode="AUT">
+        <time value="20200101010101" />
+        <AgentOrgSDS classCode="AGNT">
+            <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
+            </agentOrganizationSDS>
+        </AgentOrgSDS>
+    </author>
+    <destination typeCode="DST">
+        <AgentOrgSDS classCode="AGNT">
+            <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
+            </agentOrganizationSDS>
+        </AgentOrgSDS>
+    </destination>
+    <component typeCode="COMP">
+        <ehrFolder classCode="FOLDER" moodCode="EVN">
+            <id root="287B3A3C-5E88-427B-A2EF-A14A20353B0C" />
+            <statusCode code="COMPLETE" />
+            <effectiveTime>
+                <low value="20201222"/>
+            </effectiveTime>
+            <availabilityTime value="20200101010101" />
+            <author typeCode="AUT">
+                <time value="20200101010101" />
+                <AgentOrgSDS classCode="AGNT">
+                    <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                        <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
+                    </agentOrganizationSDS>
+                </AgentOrgSDS>
+            </author>
+            <responsibleParty typeCode="RESP">
+    <agentDirectory classCode="AGNT">
+        <part typeCode="PART">
+    <Agent classCode="AGNT">
+        <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C" />
+        <agentOrganization determinerCode="INSTANCE" classCode="ORG">
+                        <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+            <telecom value="01133800000" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>Fulford Grange</streetAddressLine>
+                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS19 6BA</postalCode>
+            </addr>
+        </agentOrganization>
+    </Agent>
+</part>
+            <part typeCode="PART">
+    <Agent classCode="AGNT">
+        <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0"/>
+        <code nullFlavor="UNK">
+            <originalText>System Administrator</originalText>
+        </code>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <prefix>Dr</prefix>
+                <given>EMIS Web</given>
+                <family>Recall Schedule</family>
+            </name>
+        </agentPerson>
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+            <telecom value="01133800000" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>Fulford Grange</streetAddressLine>
+                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS19 6BA</postalCode>
+            </addr>
+        </representedOrganization>
+    </Agent>
+</part>
+            <part typeCode="PART">
+    <Agent classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <prefix>Dr</prefix>
+                <given>David</given>
+                <family>McAvenue</family>
+            </name>
+        </agentPerson>
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+            <telecom value="01133800000" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>Fulford Grange</streetAddressLine>
+                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS19 6BA</postalCode>
+            </addr>
+        </representedOrganization>
+    </Agent>
+</part>
+            <part typeCode="PART">
+    <Agent classCode="AGNT">
+        <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <prefix>Mr</prefix>
+                <given>GPONE</given>
+                <family>TEMPLE SOWERBY</family>
+            </name>
+        </agentPerson>
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+            <telecom value="01133800000" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>Fulford Grange</streetAddressLine>
+                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS19 6BA</postalCode>
+            </addr>
+        </representedOrganization>
+    </Agent>
+</part>
+    </agentDirectory>
+</responsibleParty>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222144600"/>
+        </effectiveTime>
+        <availabilityTime value="20201222144600"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222144853" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="263B2A9F-0B1D-4697-943A-328F70E068DE" />
+        <text>Type: Referral for further care Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care from Dr David McAvenue at EMIS LV Test Practice 1 (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222144600" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="263B2A9F-0B1D-4697-943A-328F70E068DE"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="image/bmp">
+                    <reference value="file://localhost/263B2A9F-0B1D-4697-943A-328F70E068DE_263B2A9F-0B1D-4697-943A-328F70E068DE.bmp"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222144700"/>
+        </effectiveTime>
+        <availabilityTime value="20201222144700"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222145337" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF" />
+        <text>Type: Letter from specialist Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Special Characters in filename</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222144700" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF_CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222145200"/>
+        </effectiveTime>
+        <availabilityTime value="20201222145200"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222145421" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC" />
+        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222145200" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC_BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222145200"/>
+        </effectiveTime>
+        <availabilityTime value="20201222145200"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222145439" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400" />
+        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222145200" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment6DFFAEC4-7527-4D80-A2BD-81BDEBA04400.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222145300"/>
+        </effectiveTime>
+        <availabilityTime value="20201222145300"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222145505" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222145300" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment1AB77AC2-0026-4C4B-A168-DAA15D108BA8.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222145300"/>
+        </effectiveTime>
+        <availabilityTime value="20201222145300"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222145530" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80" />
+        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222145300" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachmentD03E2E72-BE97-411D-9AB1-C6BB53D2BC80.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222145300"/>
+        </effectiveTime>
+        <availabilityTime value="20201222145300"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222145558" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42" />
+        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222145300" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachmentFE85DB22-274E-4B1D-9698-5C4809E9CD42.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222145800"/>
+        </effectiveTime>
+        <availabilityTime value="20201222145800"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222150038" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
+        <text>Type: Date records held from Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Date records held from (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222145800" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment2F6B04C6-297A-4270-9B4E-C213B8B175AC.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222145900"/>
+        </effectiveTime>
+        <availabilityTime value="20201222145900"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222150118" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D" />
+        <text>Type: Clinical report Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Clinical report (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222145900" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="image/gif">
+                    <reference value="file://localhost/A8896415-81A1-4366-9E92-3AFC04AEF25D_A8896415-81A1-4366-9E92-3AFC04AEF25D.gif"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222145900"/>
+        </effectiveTime>
+        <availabilityTime value="20201222145900"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222150139" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F" />
+        <text>Type: Date records held from Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Date records held from (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222145900" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/html">
+                    <reference value="file://localhost/3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F_3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F.html"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222150000"/>
+        </effectiveTime>
+        <availabilityTime value="20201222150000"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222150157" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E" />
+        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222150000" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/html">
+                    <reference value="file://localhost/5F8BBC0E-0FB7-4828-84AA-817F5243A12E_5F8BBC0E-0FB7-4828-84AA-817F5243A12E.html"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="5BB18E92-DABB-4C22-838A-410B4A278060" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222150000"/>
+        </effectiveTime>
+        <availabilityTime value="20201222150000"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222150701" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B" />
+        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222150000" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="image/jpeg">
+                    <reference value="file://localhost/B857C1E3-3A27-4A58-B341-FC5DFCD8C58B_B857C1E3-3A27-4A58-B341-FC5DFCD8C58B.jpg"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222150500"/>
+        </effectiveTime>
+        <availabilityTime value="20201222150500"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222150840" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="72DB5398-C825-4498-88CA-899A3653EC04" />
+        <text>Type: Sore throat Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Sore throat (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222150500" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="audio/mpeg">
+                    <reference value="file://localhost/72DB5398-C825-4498-88CA-899A3653EC04_72DB5398-C825-4498-88CA-899A3653EC04.mp3"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222150700"/>
+        </effectiveTime>
+        <availabilityTime value="20201222150700"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151257" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355" />
+        <text>Type: Sore throat Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Sore throat (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222150700" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="video/mpeg">
+                    <reference value="file://localhost/3D5E3D14-66FD-4E2F-B52F-D30BD253F355_3D5E3D14-66FD-4E2F-B52F-D30BD253F355.mpeg"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="DB7C94B1-01A6-491F-AC41-A36D88023069" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151100"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151100"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151324" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF" />
+        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151100" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="video/mpeg">
+                    <reference value="file://localhost/E984FD8F-391C-4E6E-9309-1BDE587E23EF_E984FD8F-391C-4E6E-9309-1BDE587E23EF.mpeg"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="884E7627-796C-4C70-870A-D61B88AD2E57" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151200"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151200"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151404" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
+        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151200" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="video/mpeg">
+                    <reference value="file://localhost/137CDA70-9A78-43E2-930D-2758C7E11D8D_137CDA70-9A78-43E2-930D-2758C7E11D8D.mpeg"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151200"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151200"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151429" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9" />
+        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151200" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/pdf">
+                    <reference value="file://localhost/D0152980-C786-4D93-B06D-7EE55CAFDDA9_D0152980-C786-4D93-B06D-7EE55CAFDDA9.pdf"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151200"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151200"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151451" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00" />
+        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222000000" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="image/png">
+                    <reference value="file://localhost/382E9F46-B7A6-4267-BC80-0AAD7E055D00_382E9F46-B7A6-4267-BC80-0AAD7E055D00.png"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151300"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151300"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151516" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="82A39454-299F-432E-993E-5A6232B4E099" />
+        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151300" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="82A39454-299F-432E-993E-5A6232B4E099"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/richtext">
+                    <reference value="file://localhost/82A39454-299F-432E-993E-5A6232B4E099_82A39454-299F-432E-993E-5A6232B4E099.rtx"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="CF670325-7982-46BA-9A52-85C3C78FE40A" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151300"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151300"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151535" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310" />
+        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151300" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    <reference value="file://localhost/919AE1B8-6BBB-49EF-9FA0-0C04D35BE310_919AE1B8-6BBB-49EF-9FA0-0C04D35BE310.docx"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="BD418AAA-36ED-476E-967C-7CCBA1D0AAED" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151400"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151400"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151555" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904" />
+        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151400" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/msword">
+                    <reference value="file://localhost/F0A2FE75-1856-47AD-9A20-570C9E4CF904_F0A2FE75-1856-47AD-9A20-570C9E4CF904.doc"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="1A4049B6-A065-4CB1-B222-77FBE702EA14" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151400"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151400"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151618" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="09A882DA-C219-4146-97EF-3FD9A57135B0" />
+        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151400" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/09A882DA-C219-4146-97EF-3FD9A57135B0_09A882DA-C219-4146-97EF-3FD9A57135B0.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="5F44FD1C-BC5B-4B5F-8861-79F254D0D969" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151500"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151500"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151705" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4" />
+        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151500" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/msword">
+                    <reference value="file://localhost/97CE760A-7759-4FEA-B5A9-8667E06F86A4_97CE760A-7759-4FEA-B5A9-8667E06F86A4.doc"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="6A894B1B-F266-415C-83E6-375A4296C1C4" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151500"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151500"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151737" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="432103E4-651E-417C-97ED-37E4E8649C89" />
+        <text>Type: Letter sent to patient Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151500" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="image/tiff">
+                    <reference value="file://localhost/432103E4-651E-417C-97ED-37E4E8649C89_432103E4-651E-417C-97ED-37E4E8649C89.tiff"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="F972CFDF-B4D7-4392-A96A-4D1BD8D14F14" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151600"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151600"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151815" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="DF996C91-D888-4D2D-9D3A-5523480337B1" />
+        <text>Type: Diabetes monitoring first letter Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Diabetes monitoring first letter (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151600" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/msword">
+                    <reference value="file://localhost/DF996C91-D888-4D2D-9D3A-5523480337B1_DF996C91-D888-4D2D-9D3A-5523480337B1.doc"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="4CF7DECB-3AE2-42C3-97F0-BB440F28D385" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151600"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151600"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151841" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F" />
+        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151600" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="image/tiff">
+                    <reference value="file://localhost/98E65972-3B3A-48B0-BEF2-F662F905A09F_98E65972-3B3A-48B0-BEF2-F662F905A09F.tiff"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="B88A5FEC-A207-4E2A-93C4-04402D84C1BE" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151700"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151700"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151908" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF" />
+        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151700" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachmentBC8F0E5D-53ED-45CC-A45C-DE4933E064EF.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151700"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151700"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222151948" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46" />
+        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151700" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/xml">
+                    <reference value="file://localhost/F5392292-A88D-4FC2-8840-A6EBFF39FA46_F5392292-A88D-4FC2-8840-A6EBFF39FA46.xml"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="0AB4B3C4-6F23-45FF-955D-35BB6E6D239B" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151900"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151900"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222152116" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD" />
+        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151900" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                    <reference value="file://localhost/16A8F240-9B4C-4EFF-9B97-723E341D9AAD_16A8F240-9B4C-4EFF-9B97-723E341D9AAD.xlsx"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="268EFBF2-65A8-4B1C-8490-85A0528F86E3" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222151900"/>
+        </effectiveTime>
+        <availabilityTime value="20201222151900"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222152148" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="409C8344-FFB9-40C9-A802-D71602F56263" />
+        <text>Type: Clinical report Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Clinical report (22-Dec-2020)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222151900" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment409C8344-FFB9-40C9-A802-D71602F56263.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20210106150000"/>
+        </effectiveTime>
+        <availabilityTime value="20210106150000"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20210106150358" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9" />
+        <text>Type: Letter sent to patient Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient from TEMPLE SOWERBY MEDICAL PRACTICE (06-Jan-2021)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210106150000" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    <reference value="file://localhost/6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9_6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9.docx"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="4067DD8E-2B9B-4270-A382-CE035D7D352D" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20210106150300"/>
+        </effectiveTime>
+        <availabilityTime value="20210106150300"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20210106150616" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3" />
+        <text>Type: Letter sent to patient Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient from Dr David McAvenue at EMIS LV Test Practice 1 (06-Jan-2021) Absent Attachment: File size 5265867 bytes greater than maximum allowable (5MB)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210106150300" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment5654E733-A9E5-4086-AD63-3A3C72A8E1B3.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="9A4CF638-ABA1-4CF9-8055-C5846EE42542" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>Other</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20210106151800"/>
+        </effectiveTime>
+        <availabilityTime value="20210106151800"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20210106152106" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B" />
+        <text>Type: Letter sent to patient Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient from Dr Peter Whitcombe, General Medical Practitioner at EMIS LV Test Practice 1 (06-Jan-2021) Absent Attachment: File size 5918228 bytes greater than maximum allowable (5MB)</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210106151800" />
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachmentF599E6DD-92AA-4CC7-BAF0-20530EE1108B.txt"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20210104"/>
+        </effectiveTime>
+        <availabilityTime value="20210104"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20210104" />
+            <agentRef classCode="AGNT">
+                <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id nullFlavor="UNK"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
+        <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20210104"/>
+        </effectiveTime>
+        <availabilityTime value="20210104" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C"/>
+                <code code="716186003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No known allergy">
+</code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20210104"/>
+                </effectiveTime>
+                <availabilityTime value="20210104" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
+    </agentRef>
+</Participant>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222131511"/>
+        </effectiveTime>
+        <availabilityTime value="20201222131511"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222131511" />
+            <agentRef classCode="AGNT">
+                <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <PlanStatement classCode="OBS" moodCode="INT">
+        <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450" />
+        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of influenza vaccine">
+    <originalText>Influenza vaccination</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20311220"/>
+        </effectiveTime>
+        <availabilityTime value="20201222131511"/>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0"/>
+    </agentRef>
+</Participant>
+    </PlanStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222"/>
+        </effectiveTime>
+        <availabilityTime value="20201222"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222" />
+            <agentRef classCode="AGNT">
+                <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92" />
+        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
+    <originalText>Preferred method of contact: unknown</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222"/>
+        </effectiveTime>
+        <availabilityTime value="20201222"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text></text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+        </ehrFolder>
+    </component>
+    <inFulfillmentOf typeCode="FLFS">
+        <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
+            <id root="17A3A644-A4EB-4C0A-A870-152D310FD1F8" />
+        </priorEhrRequest>
+    </inFulfillmentOf>
+    <limitation typeCode="LIMIT" inversionInd="true">
+        <limitingEhrExtractSpecification classCode="OBS" moodCode="DEF">
+            <id root="76C49C11-5271-11EA-9384-E83935108FD5" />
+            <code code="37241000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Entire record available to originator (administrative concept)" />
+        </limitingEhrExtractSpecification>
+    </limitation>
+</EhrExtract>
+
+        </subject>
+    </ControlActEvent>
+</RCMR_IN030000UK06>
