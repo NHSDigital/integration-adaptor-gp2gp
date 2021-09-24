@@ -43,16 +43,17 @@ public class EncounterMapperTest {
     private static final Date CONSULTATION_DATE = Date.from(Instant.parse("2010-01-13T15:13:32Z"));
     private static final String TEST_LOCATION_NAME = "Test Location";
     private static final String TEST_LOCATION_ID = "EB3994A6-5A87-4B53-A414-913137072F57";
-    public static final Bundle.BundleEntryComponent BUNDLE_WITH_CONSULTATION = new Bundle.BundleEntryComponent()
+    public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_CONSULTATION = new Bundle.BundleEntryComponent()
         .setResource(new ListResource()
             .setEncounter(new Reference()
                 .setReference(CONSULTATION_REFERENCE))
             .setCode(new CodeableConcept()
                 .setCoding(List.of(new Coding()
                     .setCode(CONSULTATION_LIST_CODE))))
-            .setDate(CONSULTATION_DATE))
-        .setResource(new Location().setName(TEST_LOCATION_NAME)
-            .setId(TEST_LOCATION_ID));
+            .setDate(CONSULTATION_DATE));
+
+    public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_LOCATION = new Bundle.BundleEntryComponent()
+        .setResource(new Location().setName(TEST_LOCATION_NAME).setId(TEST_LOCATION_ID));
 
     private static final String INPUT_JSON_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
         + "example-encounter-resource-1.json";
@@ -110,6 +111,10 @@ public class EncounterMapperTest {
         + "example-encounter-resource-15.json";
     private static final String INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILES_DIRECTORY
         + "example-encounter-resource-16.json";
+    private static final String INPUT_JSON_WITH_NO_LOCATION_REFERENCE = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-17.json";
+    private static final String OUTPUT_XML_WITH_NO_LOCATION_REFERENCE  = TEST_FILES_DIRECTORY
+        + "expected-output-encounter-14.xml";
     private static final String OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2  = TEST_FILES_DIRECTORY
         + "expected-output-encounter-13.xml";
 
@@ -128,7 +133,10 @@ public class EncounterMapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
-        lenient().when(bundle.getEntry()).thenReturn(List.of(BUNDLE_WITH_CONSULTATION));
+        lenient().when(bundle.getEntry()).thenReturn(List.of(
+            BUNDLE_ENTRY_WITH_CONSULTATION,
+            BUNDLE_ENTRY_WITH_LOCATION
+        ));
         encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
     }
 
@@ -166,7 +174,8 @@ public class EncounterMapperTest {
             Arguments.of(INPUT_JSON_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT),
-            Arguments.of(INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2)
+            Arguments.of(INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2),
+            Arguments.of(INPUT_JSON_WITH_NO_LOCATION_REFERENCE, OUTPUT_XML_WITH_NO_LOCATION_REFERENCE)
         );
     }
 
