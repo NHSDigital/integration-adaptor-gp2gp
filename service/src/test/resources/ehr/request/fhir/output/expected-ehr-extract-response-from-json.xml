@@ -5173,11 +5173,6 @@ The line below contains special characters...
                         <originalText>device</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="test-id-3"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -5257,11 +5252,6 @@ The line below contains special characters...
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="test-id-3"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 1 day</text>
@@ -5341,11 +5331,6 @@ The line below contains special characters...
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="test-id-3"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -6305,11 +6290,6 @@ The line below contains special characters...
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="test-id-3"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -6789,11 +6769,6 @@ The line below contains special characters...
                         <originalText>device</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="test-id-3"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 1825 day</text>
@@ -6873,11 +6848,6 @@ The line below contains special characters...
                         <originalText>device</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="test-id-3"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 1825 day</text>
@@ -7037,11 +7007,6 @@ The line below contains special characters...
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="test-id-3"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -7201,11 +7166,6 @@ The line below contains special characters...
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="test-id-3"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
