@@ -25,7 +25,7 @@ public final class StatementTimeMappingUtils {
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
     private static final String EFFECTIVE_TIME_LOW_TEMPLATE = "<low value=\"%s\"/>";
     private static final String EFFECTIVE_TIME_HIGH_TEMPLATE = "<high value=\"%s\"/>";
-    private static final String EFFECTIVE_TIME_NO_START_TEMPLATE = "<low nullFlavour=\"UNK\"/><high value=\"%s\"/>";
+    private static final String EFFECTIVE_TIME_NO_START_TEMPLATE = "<low nullFlavor=\"UNK\"/><high value=\"%s\"/>";
 
     private StatementTimeMappingUtils() {
     }
@@ -63,13 +63,13 @@ public final class StatementTimeMappingUtils {
         return DEFAULT_AVAILABILITY_TIME_VALUE;
     }
 
-    public static String prepareAvailabilityTimeForBloodPressureNote(Observation observation) {
+    public static String prepareAvailabilityTimeForObservationStatement(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
             return String.format(
                 AVAILABILITY_TIME_VALUE_TEMPLATE,
                 toHl7Format(observation.getEffectiveDateTimeType())
             );
-        } else if (observation.hasEffectivePeriod()) {
+        } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) {
             return String.format(
                 AVAILABILITY_TIME_VALUE_TEMPLATE,
                 toHl7Format(observation.getEffectivePeriod().getStartElement())
@@ -92,6 +92,13 @@ public final class StatementTimeMappingUtils {
                 return String.format(
                         EFFECTIVE_TIME_NO_START_TEMPLATE,
                         toHl7Format(observation.getEffectivePeriod().getEndElement())
+                );
+            }
+
+            if (observation.getEffectivePeriod().hasStart() && !observation.getEffectivePeriod().hasEnd()) {
+                return String.format(
+                        EFFECTIVE_TIME_LOW_TEMPLATE,
+                        toHl7Format(observation.getEffectivePeriod().getStartElement())
                 );
             }
 

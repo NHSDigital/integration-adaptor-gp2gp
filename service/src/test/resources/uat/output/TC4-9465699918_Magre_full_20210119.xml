@@ -294,13 +294,13 @@
         <effectiveTime>
             <center value="20181203095000"/>
         </effectiveTime>
-        <availabilityTime value="20201214101259"/>
+        <availabilityTime value="20181203095000"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First</text>
+                <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -319,13 +319,13 @@
         <effectiveTime>
             <center value="20181203095000"/>
         </effectiveTime>
-        <availabilityTime value="20201214101300"/>
+        <availabilityTime value="20181203095000"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Intermittent, ongoing periods of nausea</text>
+                <text>Intermittent, ongoing periods of nausea</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -344,7 +344,7 @@
         <effectiveTime>
             <center value="20181203095000"/>
         </effectiveTime>
-        <availabilityTime value="20201214101301"/>
+        <availabilityTime value="20181203095000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -369,7 +369,7 @@
         <effectiveTime>
             <center value="20181203095000"/>
         </effectiveTime>
-        <availabilityTime value="20201214101301"/>
+        <availabilityTime value="20181203095000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -406,7 +406,7 @@
         <effectiveTime>
             <center value="20181203095000"/>
         </effectiveTime>
-        <availabilityTime value="20201214101301"/>
+        <availabilityTime value="20181203095000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -431,7 +431,7 @@
         <effectiveTime>
             <center value="20181203095000"/>
         </effectiveTime>
-        <availabilityTime value="20201214101301"/>
+        <availabilityTime value="20181203095000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1751,13 +1751,13 @@
         <effectiveTime>
             <center value="20200921"/>
         </effectiveTime>
-        <availabilityTime value="20200921123032"/>
+        <availabilityTime value="20200921"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Referral Direction:Inbound, Referral Target:Mr   Ferro at EMIS LV Test Practice 1, ReferralMode:Written, Purpose:Self Referral, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2020-09-21T12:30:32.737+01:00, UBRN:123244113132</text>
+                <text>Referral Direction:Inbound, Referral Target:Mr   Ferro at EMIS LV Test Practice 1, ReferralMode:Written, Purpose:Self Referral, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2020-09-21T12:30:32.737+01:00, UBRN:123244113132</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1878,13 +1878,13 @@
         <effectiveTime>
             <center value="20200921"/>
         </effectiveTime>
-        <availabilityTime value="20200921141141"/>
+        <availabilityTime value="20200921"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Referral Direction:Inbound, Referral Source:TEMPLE SOWERBY MEDICAL PRACTICE, Referral Target:Referral Service at TEMPLE SOWERBY MEDICAL PRACTICE, ReferralMode:Written, Purpose:Investigation, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2020-09-21T14:11:41.24+01:00, UBRN:215152651654</text>
+                <text>Referral Direction:Inbound, Referral Source:TEMPLE SOWERBY MEDICAL PRACTICE, Referral Target:Referral Service at TEMPLE SOWERBY MEDICAL PRACTICE, ReferralMode:Written, Purpose:Investigation, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2020-09-21T14:11:41.24+01:00, UBRN:215152651654</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2055,13 +2055,13 @@
         <effectiveTime>
             <center value="20201214101800"/>
         </effectiveTime>
-        <availabilityTime value="20201214102506"/>
+        <availabilityTime value="20201214101800"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2080,13 +2080,13 @@
         <effectiveTime>
             <center value="20201214101800"/>
         </effectiveTime>
-        <availabilityTime value="20201214102506"/>
+        <availabilityTime value="20201214101800"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: especially in the afternoon / evening</text>
+                <text>especially in the afternoon / evening</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2105,7 +2105,7 @@
         <effectiveTime>
             <center value="20201214101800"/>
         </effectiveTime>
-        <availabilityTime value="20201214102506"/>
+        <availabilityTime value="20201214101800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2130,13 +2130,13 @@
         <effectiveTime>
             <center value="20201214101800"/>
         </effectiveTime>
-        <availabilityTime value="20201214102506"/>
+        <availabilityTime value="20201214101800"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: gone now</text>
+                <text>gone now</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2155,13 +2155,13 @@
         <effectiveTime>
             <center value="20201214101800"/>
         </effectiveTime>
-        <availabilityTime value="20201214102507"/>
+        <availabilityTime value="20201214101800"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: stomach and arms</text>
+                <text>stomach and arms</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2180,13 +2180,13 @@
         <effectiveTime>
             <center value="20201214101800"/>
         </effectiveTime>
-        <availabilityTime value="20201214102507"/>
+        <availabilityTime value="20201214101800"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: smells bread when no one else does</text>
+                <text>smells bread when no one else does</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2205,7 +2205,7 @@
         <effectiveTime>
             <center value="20201214101800"/>
         </effectiveTime>
-        <availabilityTime value="20201214102507"/>
+        <availabilityTime value="20201214101800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2264,13 +2264,13 @@
         <effectiveTime>
             <center value="20200907"/>
         </effectiveTime>
-        <availabilityTime value="20210111120105"/>
+        <availabilityTime value="20200907"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Referral Direction:Inbound, Referral Source:Consultant Surgeon at EMIS LV Test Practice 1, Referral Target:Dr David McAvenue at EMIS LV Test Practice 1, ReferralMode:Written, Purpose:Treatment, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2021-01-11T12:01:05.07+00:00, Reason for Referral:Referred for priority vaccination, UBRN:123456778901</text>
+                <text>Referral Direction:Inbound, Referral Source:Consultant Surgeon at EMIS LV Test Practice 1, Referral Target:Dr David McAvenue at EMIS LV Test Practice 1, ReferralMode:Written, Purpose:Treatment, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2021-01-11T12:01:05.07+00:00, Reason for Referral:Referred for priority vaccination, UBRN:123456778901</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2322,13 +2322,13 @@
         <effectiveTime>
             <center value="20210112113300"/>
         </effectiveTime>
-        <availabilityTime value="20210112114001"/>
+        <availabilityTime value="20210112113300"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : Flare Up</text>
+                <text>Significance : Major - Episodicity : Flare Up</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2347,13 +2347,13 @@
         <effectiveTime>
             <center value="20210112113300"/>
         </effectiveTime>
-        <availabilityTime value="20210112114001"/>
+        <availabilityTime value="20210112113300"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: within limits</text>
+                <text>within limits</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2538,11 +2538,6 @@
                         <originalText>capsule</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="8DF92722-5B5F-4324-866E-0328D5EA4286"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Patient Instruction: Script note Expected Supply Duration: 14 day Notes: Prescriber Notes:Administrative note Patient Notes:Script note</text>
@@ -4029,11 +4024,6 @@
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 7 day</text>
@@ -5197,7 +5187,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0814FE49-058E-4B3C-9F74-040922A26099" />
+        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5255,11 +5245,6 @@
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 42 day</text>
@@ -5283,7 +5268,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A" />
+        <id root="9EC5CD05-9875-4F82-AC04-19B706D79BC0" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5311,7 +5296,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36"/>
+        <id root="0814FE49-058E-4B3C-9F74-040922A26099"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20200717"/><high value="20200828"/>
@@ -5328,7 +5313,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C"/>
+                <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20200717"/>
@@ -5365,7 +5350,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA" />
+        <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5393,7 +5378,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8"/>
+        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A"/>
         <statusCode code="ACTIVE"/>
         <effectiveTime>
             <low value="20200717"/>
@@ -5410,7 +5395,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="2317993E-315F-4AED-B9A7-65D00D23C35D"/>
+                <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="ACTIVE"/>
                     <effectiveTime>
@@ -5423,11 +5408,6 @@
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -5451,7 +5431,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03" />
+        <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5479,7 +5459,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C"/>
+        <id root="3E9C68B8-AB3F-4114-B67B-1174CB327195"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20200717"/><high value="20200717"/>
@@ -5496,7 +5476,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
+                <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                     <effectiveTime>
@@ -5532,7 +5512,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15" />
+        <id root="619D08A7-F6DA-449B-8609-FF129D688943" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5560,7 +5540,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14"/>
+        <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20200717"/><high value="20200814"/>
@@ -5577,7 +5557,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="4F02ED83-3153-4786-96C2-200FE456A1E4"/>
+                <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20200717"/>
@@ -5588,7 +5568,7 @@
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
+        <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -5642,7 +5622,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
+        <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20200717"/><high value="20200717"/>
@@ -5659,7 +5639,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
+                <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                     <effectiveTime>
@@ -5751,7 +5731,7 @@
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
+        <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -6181,9 +6161,9 @@
         <effectiveTime>
             <center value="20200724"/>
         </effectiveTime>
-        <availabilityTime value="20200724134021"/>
+        <availabilityTime value="20200724"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200724134021" />
+            <time value="20200724" />
             <agentRef classCode="AGNT">
                 <id root="7BBAEAC9-0079-4A8C-9CF7-53335BF684E9" />
             </agentRef>
@@ -6209,7 +6189,7 @@
         <effectiveTime>
             <center value="20200724"/>
         </effectiveTime>
-        <availabilityTime value="20200724134021" />
+        <availabilityTime value="20200724" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="0D07B623-3926-4245-80AF-97F1098D90C1"/>
@@ -6219,7 +6199,7 @@
                 <effectiveTime>
                     <center value="20200724"/>
                 </effectiveTime>
-                <availabilityTime value="20200724134021" />
+                <availabilityTime value="20200724" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -6245,9 +6225,9 @@
         <effectiveTime>
             <center value="20200724"/>
         </effectiveTime>
-        <availabilityTime value="20200724133829"/>
+        <availabilityTime value="20200724"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200724133829" />
+            <time value="20200724" />
             <agentRef classCode="AGNT">
                 <id root="7BBAEAC9-0079-4A8C-9CF7-53335BF684E9" />
             </agentRef>
@@ -6273,7 +6253,7 @@
         <effectiveTime>
             <center value="20200724"/>
         </effectiveTime>
-        <availabilityTime value="20200724133829" />
+        <availabilityTime value="20200724" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="041E16C5-CB96-4A2C-A8D8-BF6CD904671E"/>
@@ -6283,7 +6263,7 @@
                 <effectiveTime>
                     <center value="20200724"/>
                 </effectiveTime>
-                <availabilityTime value="20200724133829" />
+                <availabilityTime value="20200724" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -6309,9 +6289,9 @@
         <effectiveTime>
             <center value="20200106"/>
         </effectiveTime>
-        <availabilityTime value="20201214102924"/>
+        <availabilityTime value="20200106"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201214102924" />
+            <time value="20200106" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -6338,11 +6318,11 @@
         <effectiveTime>
             <center value="20200106"/>
         </effectiveTime>
-        <availabilityTime value="20201214102924" />
+        <availabilityTime value="20200106" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Batch: hep12345 Parent present</text>
+                <text>Primary Source: true Batch: hep12345 Parent present</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -6363,9 +6343,9 @@
         <effectiveTime>
             <center value="20201020"/>
         </effectiveTime>
-        <availabilityTime value="20201214103233"/>
+        <availabilityTime value="20201020"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201214103233" />
+            <time value="20201020" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -6392,11 +6372,11 @@
         <effectiveTime>
             <center value="20201020"/>
         </effectiveTime>
-        <availabilityTime value="20201214103233" />
+        <availabilityTime value="20201020" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Manufacturer: Acme Pharmaceuticals Batch: FLU-87654</text>
+                <text>Primary Source: true Manufacturer: Acme Pharmaceuticals Batch: FLU-87654</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -6417,9 +6397,9 @@
         <effectiveTime>
             <center value="20190116"/>
         </effectiveTime>
-        <availabilityTime value="20201214101550"/>
+        <availabilityTime value="20190116"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201214101550" />
+            <time value="20190116" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -6446,13 +6426,13 @@
         <effectiveTime>
             <center value="20190116"/>
         </effectiveTime>
-        <availabilityTime value="20201214101550"/>
+        <availabilityTime value="20190116"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: seems ok when not coughing</text>
+                <text>seems ok when not coughing</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6473,9 +6453,9 @@
         <effectiveTime>
             <center value="20190304"/>
         </effectiveTime>
-        <availabilityTime value="20201214101724"/>
+        <availabilityTime value="20190304"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201214101724" />
+            <time value="20190304" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -6502,13 +6482,13 @@
         <effectiveTime>
             <center value="20190304"/>
         </effectiveTime>
-        <availabilityTime value="20201214101724"/>
+        <availabilityTime value="20190304"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Severity : Moderate, Frequencies : Infrequent - Only happens, when has a cold but not with exercise could be asthmatic</text>
+                <text>Severity : Moderate, Frequencies : Infrequent - Only happens, when has a cold but not with exercise could be asthmatic</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6529,9 +6509,9 @@
         <effectiveTime>
             <center value="20190902"/>
         </effectiveTime>
-        <availabilityTime value="20201214101913"/>
+        <availabilityTime value="20190902"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201214101913" />
+            <time value="20190902" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -6558,13 +6538,13 @@
         <effectiveTime>
             <center value="20190902"/>
         </effectiveTime>
-        <availabilityTime value="20201214101913"/>
+        <availabilityTime value="20190902"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6585,9 +6565,9 @@
         <effectiveTime>
             <center value="20200302"/>
         </effectiveTime>
-        <availabilityTime value="20200302120055"/>
+        <availabilityTime value="20200302"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200302120055" />
+            <time value="20200302" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -6615,7 +6595,7 @@
         <effectiveTime>
             <center value="20200302"/>
         </effectiveTime>
-        <availabilityTime value="20200302120055"/>
+        <availabilityTime value="20200302"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6698,9 +6678,9 @@
         <effectiveTime>
             <center value="20200921"/>
         </effectiveTime>
-        <availabilityTime value="20200921141408"/>
+        <availabilityTime value="20200921"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200921141408" />
+            <time value="20200921" />
             <agentRef classCode="AGNT">
                 <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450" />
             </agentRef>
@@ -6728,7 +6708,7 @@
         <effectiveTime>
             <center value="20200921"/>
         </effectiveTime>
-        <availabilityTime value="20200921141408"/>
+        <availabilityTime value="20200921"/>
         
         
         <pertinentInformation typeCode="PERT">

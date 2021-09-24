@@ -65,11 +65,11 @@
         <effectiveTime>
             <center value="20100630055900"/>
         </effectiveTime>
-        <availabilityTime value="20100630054806" />
+        <availabilityTime value="20100630055900" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>immunization note</text>
+                <text>Primary Source: true immunization note</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -87,13 +87,13 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100113152950"/>
+        <availabilityTime nullFlavor="UNK"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: observation uncategorised</text>
+                <text>observation uncategorised</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -160,7 +160,7 @@
         <effectiveTime>
             <center value="19781231"/>
         </effectiveTime>
-        <availabilityTime value="20100114095757" />
+        <availabilityTime value="19781231" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="394559384658936"/>
@@ -169,7 +169,7 @@
                 <effectiveTime>
                     <center value="19781231"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095757" />
+                <availabilityTime value="19781231" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -296,7 +296,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -305,7 +305,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
@@ -319,7 +319,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: NEGATIVE
+NEGATIVE
      In normal pregnancies the test will usually be positive from the
      second day after the expected menstruation.</text>
         <statusCode code="COMPLETE"/>
@@ -337,7 +337,7 @@ Interpretation: NEGATIVE
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151704
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151704"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -384,7 +384,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -393,7 +393,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="8.800" unit="1"><translation value="8.800"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -414,7 +414,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151713
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -461,7 +461,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -470,7 +470,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
@@ -484,7 +484,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Test not available</text>
+Test not available</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -500,7 +500,7 @@ Interpretation: Test not available</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151713
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
@@ -99,7 +98,7 @@ public class ObservationMapper {
         String codeElement = prepareCodeElement(observation);
         String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation);
         String availabilityTimeElement =
-            StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement());
+            StatementTimeMappingUtils.prepareAvailabilityTimeForObservationStatement(observation);
         CompoundStatementClassCode classCode = prepareClassCode(relatedObservations);
 
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
@@ -164,7 +163,7 @@ public class ObservationMapper {
             .observationStatementId(holder.nextHl7InstanceIdentifier())
             .codeElement(prepareCodeElement(holder.getObservation()))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(holder.getObservation()))
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(holder.getObservation().getIssuedElement()));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservationStatement(holder.getObservation()));
 
         if (holder.getObservation().hasValue()) {
             Type value = holder.getObservation().getValue();
@@ -211,17 +210,22 @@ public class ObservationMapper {
             )
             .ifPresent(narrativeStatementsBlock::append);
 
-        String interpretationTextAndComment = Stream.concat(
-            CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation()).stream(),
-            Optional.ofNullable(observation.getComment()).stream()
-        ).collect(Collectors.joining(StringUtils.SPACE));
+        StringBuilder interpretationTextAndComment = new StringBuilder();
 
-        if (!interpretationTextAndComment.isBlank()) {
-            interpretationTextAndComment = INTERPRETATION_PREFIX.concat(interpretationTextAndComment);
+        if (observation.hasInterpretation()) {
+            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
+                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF);
+            });
+        }
 
+        if (observation.hasComment()) {
+            interpretationTextAndComment.append(observation.getComment());
+        }
+
+        if (!interpretationTextAndComment.toString().isBlank()) {
             narrativeStatementsBlock.append(
                 mapObservationToNarrativeStatement(
-                    holder, interpretationTextAndComment, CommentType.AGGREGATE_COMMENT_SET.getCode()
+                    holder, interpretationTextAndComment.toString().trim(), CommentType.AGGREGATE_COMMENT_SET.getCode()
                 )
             );
         }

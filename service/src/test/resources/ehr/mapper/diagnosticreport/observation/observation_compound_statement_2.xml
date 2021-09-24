@@ -7,7 +7,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
@@ -17,7 +17,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="8.800" unit="1"><translation value="8.800"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -38,7 +38,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151713
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">

@@ -39,8 +39,6 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-all-pertinent-information.json";
     private static final String INPUT_JSON_WITHOUT_REQUIRED_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-no-pertinent-information.json";
-    private static final String INPUT_JSON_WITHOUT_DATE_RECORDED_EXTENSION = IMMUNIZATION_FILE_LOCATIONS
-        + "immunization-no-date-recorded.json";
     private static final String INPUT_JSON_WITHOUT_CODEABLE_CONCEPT_TEXT = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-codeable-concepts-text.json";
     private static final String INPUT_JSON_WITHOUT_DATE = IMMUNIZATION_FILE_LOCATIONS
@@ -85,6 +83,10 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-site-with-user-selected.json";
     private static final String INPUT_JSON_WITH_SITE_NO_USER_SELECTED = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-site-with-no-user-selected.json";
+    private static final String INPUT_JSON_WITH_NO_PRIMARY_SOURCE = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-no-primary-source.json";
+    private static final String INPUT_JSON_WITH_PRIMARY_SOURCE_FALSE = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-primary-source-false.json";
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -125,6 +127,10 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-site-user-selected.xml";
     private static final String OUTPUT_XML_WITH_IMMUNIZATION_SITE_NO_USER_SELECTED = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-site-no-user-selected.xml";
+    private static final String OUTPUT_XML_WITH_IMMUNIZATION_NO_PRIMARY_SOURCE = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-no-primary-source.xml";
+    private static final String OUTPUT_XML_WITH_IMMUNIZATION_PRIMARY_SOURCE_FALSE = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-primary-source-false.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -196,18 +202,10 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_DOSE_QUANTITY_AS_UNIT_NO_VALUE,
                 OUTPUT_XML_WITH_IMMUNIZATION_DOSE_QUANTITY_AS_UNIT_NO_VALUE, false),
             Arguments.of(INPUT_JSON_WITH_SITE_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_USER_SELECTED, false),
-            Arguments.of(INPUT_JSON_WITH_SITE_NO_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_NO_USER_SELECTED, false)
+            Arguments.of(INPUT_JSON_WITH_SITE_NO_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_NO_USER_SELECTED, false),
+            Arguments.of(INPUT_JSON_WITH_NO_PRIMARY_SOURCE, OUTPUT_XML_WITH_IMMUNIZATION_NO_PRIMARY_SOURCE, false),
+            Arguments.of(INPUT_JSON_WITH_PRIMARY_SOURCE_FALSE, OUTPUT_XML_WITH_IMMUNIZATION_PRIMARY_SOURCE_FALSE, false)
         );
-    }
-
-    @Test
-    public void When_MappingParsedImmunizationJsonWithoutDateRecordedExtension_Expect_Error() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITHOUT_DATE_RECORDED_EXTENSION);
-        Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
-
-        assertThatThrownBy(() -> observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, false))
-            .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessage("Could not map recorded date");
     }
 
     @Test

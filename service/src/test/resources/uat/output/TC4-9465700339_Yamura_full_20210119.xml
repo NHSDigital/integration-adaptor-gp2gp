@@ -287,13 +287,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: Other. NOTES: This is the ended event. Ended on 21/10/2005</text>
+                <text>Episode: Other. NOTES: This is the ended event. Ended on 21/10/2005</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -312,13 +312,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Eating habits:Moderate,Type of diet:Vegetarian. NOTES: Dietarr notes.</text>
+                <text>Eating habits:Moderate,Type of diet:Vegetarian. NOTES: Dietarr notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -337,13 +337,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Type of exercise: Inactive. NOTES: Exercise notes.</text>
+                <text>Type of exercise: Inactive. NOTES: Exercise notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -361,7 +361,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149" />
+        <availabilityTime value="20050201" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
@@ -372,7 +372,7 @@
                 <effectiveTime>
                     <center value="20050201"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149" />
+                <availabilityTime value="20050201" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -396,7 +396,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -421,7 +421,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -497,7 +497,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -522,13 +522,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="76.204" unit="1"><translation value="76.204"><originalText>kg</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: BMI: 22.7. NOTES: WEight notes.</text>
+                <text>BMI: 22.7. NOTES: WEight notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -548,13 +548,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="22.700" unit="1"><translation value="22.700"><originalText>kg/m2</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: WEight notes</text>
+                <text>WEight notes</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -573,13 +573,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="1.829" unit="1"><translation value="1.829"><originalText>m</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Height notes</text>
+                <text>Height notes</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -599,13 +599,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Result:Normal,Laterality:Right. NOTES: Fundo notes.</text>
+                <text>Result:Normal,Laterality:Right. NOTES: Fundo notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -625,7 +625,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -650,13 +650,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for Smoking.</text>
+                <text>for Smoking.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -676,13 +676,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for Alcohol.</text>
+                <text>for Alcohol.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -702,13 +702,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for Blood pressure.</text>
+                <text>for Blood pressure.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -728,13 +728,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for CHD.</text>
+                <text>for CHD.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -754,13 +754,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for Stroke or TIA.</text>
+                <text>for Stroke or TIA.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -780,13 +780,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for FH of CVA or IHD.</text>
+                <text>for FH of CVA or IHD.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -805,13 +805,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Type of advice given: Advice, Advice: Family History.</text>
+                <text>Type of advice given: Advice, Advice: Family History.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -831,13 +831,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Type of agency:Health Visitor. NOTES: Thes are some HV notes.</text>
+                <text>Type of agency:Health Visitor. NOTES: Thes are some HV notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -857,13 +857,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for Overweight. NOTES: Some Health ed notes.</text>
+                <text>for Overweight. NOTES: Some Health ed notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -882,13 +882,13 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Cardio notes</text>
+                <text>Cardio notes</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -940,13 +940,14 @@
         <effectiveTime>
             <center value="20050208"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050208"/>
         <value xsi:type="PQ" value="4.000" unit="1"><translation value="4.000"><originalText>[iU]/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: LO - Below low reference limit Low</text>
+                <text>Interpretation: LO - Below low reference limit
+Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -970,13 +971,14 @@
         <effectiveTime>
             <center value="20050208"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050208"/>
         <value xsi:type="PQ" value="16.000" unit="1"><translation value="16.000"><originalText>[iU]/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: LO - Below low reference limit Weeks: 4. Very Low</text>
+                <text>Interpretation: LO - Below low reference limit
+Weeks: 4. Very Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1000,13 +1002,14 @@
         <effectiveTime>
             <center value="20050208"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050208"/>
         <value xsi:type="PQ" value="8.000" unit="1"><translation value="8.000"><originalText>g/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal Abnormal Abnormal</text>
+                <text>Interpretation: PA - Potentially abnormal
+Abnormal Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1030,13 +1033,14 @@
         <effectiveTime>
             <center value="20050208"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050208"/>
         <value xsi:type="IVL_PQ"><low value="6.000" unit="1" inclusive="true"><translation value="6.000"><originalText>[iU]/L</originalText></translation></low></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: HI - Above high reference limit High</text>
+                <text>Interpretation: HI - Above high reference limit
+High</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1060,13 +1064,13 @@
         <effectiveTime>
             <center value="20050208"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050208"/>
         <value xsi:type="PQ" value="60.000" unit="1"><translation value="60.000"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: This should be abnormal according to the range</text>
+                <text>This should be abnormal according to the range</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1141,13 +1145,14 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="PQ" value="6.000" unit="1"><translation value="6.000"><originalText>umol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal Abnormal</text>
+                <text>Interpretation: PA - Potentially abnormal
+Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1171,13 +1176,14 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal Normal</text>
+                <text>Interpretation: PA - Potentially abnormal
+Normal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1197,13 +1203,14 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal Normal</text>
+                <text>Interpretation: PA - Potentially abnormal
+Normal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1222,7 +1229,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Potential Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1247,7 +1254,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1272,7 +1279,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Negative</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1297,13 +1304,14 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal Abnormal</text>
+                <text>Interpretation: PA - Potentially abnormal
+Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1322,7 +1330,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Negative</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1347,7 +1355,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1373,13 +1381,14 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal Abnormal</text>
+                <text>Interpretation: PA - Potentially abnormal
+Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1398,7 +1407,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Potential Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1423,7 +1432,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Potential Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1448,7 +1457,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1474,13 +1483,14 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal Abnormal</text>
+                <text>Interpretation: PA - Potentially abnormal
+Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1499,7 +1509,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1524,7 +1534,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1550,7 +1560,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Potential Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1575,7 +1585,7 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1600,13 +1610,13 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Notes associated with the Urethral swab</text>
+                <text>Notes associated with the Urethral swab</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1626,13 +1636,13 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Notes associated with this Barium Meal</text>
+                <text>Notes associated with this Barium Meal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1651,7 +1661,7 @@
         <effectiveTime>
             <center value="200502"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="200502"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1677,13 +1687,13 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime nullFlavor="UNK"/>
         <value xsi:type="PQ" value="8.000" unit="1"><translation value="8.000"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Dated Unknown test resuly</text>
+                <text>Dated Unknown test resuly</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1707,13 +1717,13 @@
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="PQ" value="8.000" unit="1"><translation value="8.000"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Some notes
+                <text>Some notes
 Spanning multiple Lines
 And more stuff</text>
             </pertinentAnnotation>
@@ -1739,7 +1749,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="PQ" value="7.000" unit="1"><translation value="7.000"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1769,7 +1779,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="IVL_PQ"><high value="8.000" unit="1" inclusive="false"><translation value="8.000"><originalText>nmol/L</originalText></translation></high></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1799,13 +1809,14 @@ And more stuff</text>
         <effectiveTime>
             <center value="2005"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="2005"/>
         <value xsi:type="IVL_PQ"><high value="8.000" unit="1" inclusive="true"><translation value="8.000"><originalText>mmol/L</originalText></translation></high></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: LO - Below low reference limit Year only test result Low</text>
+                <text>Interpretation: LO - Below low reference limit
+Year only test result Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1829,7 +1840,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="IVL_PQ"><low value="7.000" unit="1" inclusive="false"><translation value="7.000"><originalText>mmol/L</originalText></translation></low></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1859,13 +1870,14 @@ And more stuff</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="IVL_PQ"><low value="8.000" unit="1" inclusive="true"><translation value="8.000"><originalText>nmol/L</originalText></translation></low></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: HI - Above high reference limit Very High</text>
+                <text>Interpretation: HI - Above high reference limit
+Very High</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1889,13 +1901,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Ap 6.000 %</value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Range: </text>
+                <text>Range: Low: 4.000 % High: 9.000 %</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1914,13 +1926,14 @@ And more stuff</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="PQ" value="5.000" unit="1"><translation value="5.000"><originalText>nmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: HI - Above high reference limit This should be normal according to the range High</text>
+                <text>Interpretation: HI - Above high reference limit
+This should be normal according to the range High</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1976,7 +1989,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20050723"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149" />
+        <availabilityTime value="20050723" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
@@ -1987,7 +2000,7 @@ And more stuff</text>
                 <effectiveTime>
                     <center value="20050723"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149" />
+                <availabilityTime value="20050723" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2010,7 +2023,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20050722"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149" />
+        <availabilityTime value="20050722" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
@@ -2020,7 +2033,7 @@ And more stuff</text>
                 <effectiveTime>
                     <center value="20050722"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149" />
+                <availabilityTime value="20050722" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2077,13 +2090,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="200411"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="200411"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: Other. NOTES: Notes on bereavement.</text>
+                <text>Episode: Other. NOTES: Notes on bereavement.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2102,13 +2115,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="2004"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="2004"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: Other. NOTES: and some notes.</text>
+                <text>Episode: Other. NOTES: and some notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2214,13 +2227,13 @@ And more stuff</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime nullFlavor="UNK"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever. NOTES: This is the availabilityTime UNK.</text>
+                <text>Episode: First ever. NOTES: This is the availabilityTime UNK.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2397,13 +2410,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Eating habits:Poor,Type of diet:Vegetarian. NOTES: Poor vegetarian - all those nut loaves.</text>
+                <text>Eating habits:Poor,Type of diet:Vegetarian. NOTES: Poor vegetarian - all those nut loaves.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2422,13 +2435,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Type of exercise: Inactive. NOTES: Exercise notes.</text>
+                <text>Type of exercise: Inactive. NOTES: Exercise notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2447,13 +2460,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060420"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060420"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Language Read:Farsi,Preferred Language:No. NOTES: This has the In Practice flag unticked.</text>
+                <text>Language Read:Farsi,Preferred Language:No. NOTES: This has the In Practice flag unticked.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2472,13 +2485,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060422"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060422"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Language Read:Farsi,Preferred Language:No. NOTES: New eveent episodicity.</text>
+                <text>Language Read:Farsi,Preferred Language:No. NOTES: New eveent episodicity.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2497,13 +2510,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Language Read:Farsi,Preferred Language:No. NOTES: Other episodicity.</text>
+                <text>Language Read:Farsi,Preferred Language:No. NOTES: Other episodicity.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2522,13 +2535,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060421"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060421"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Language Read:Farsi,Preferred Language:No. NOTES: Reads Farsi Again private and In Practice.</text>
+                <text>Language Read:Farsi,Preferred Language:No. NOTES: Reads Farsi Again private and In Practice.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2547,13 +2560,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Smoking status on date of event: Never smoked. NOTES: Never smoked.</text>
+                <text>Smoking status on date of event: Never smoked. NOTES: Never smoked.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2572,7 +2585,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2597,7 +2610,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2622,7 +2635,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2680,13 +2693,14 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="1200.000" unit="1"><translation value="1200.000"><originalText>m[iU]/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal Abnormal</text>
+                <text>Interpretation: PA - Potentially abnormal
+Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -2743,7 +2757,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060425122200"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425122200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2818,7 +2832,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060425163000"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425163000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2877,13 +2891,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060519"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060519"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever.</text>
+                <text>Episode: First ever.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2936,13 +2950,13 @@ And more stuff</text>
         <effectiveTime>
             <center value="20060605"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060605"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever. NOTES: These are notes containing
+                <text>Episode: First ever. NOTES: These are notes containing
 %^%!&quot;£$%^&amp;*()-_+=&apos;;:#~/&gt;&lt;.?/¬
 and some 
 line
@@ -3015,13 +3029,13 @@ with special characters
         <effectiveTime>
             <center value="20060614"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060614"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever.</text>
+                <text>Episode: First ever.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3073,13 +3087,13 @@ with special characters
         <effectiveTime>
             <center value="20060811"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060811"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever. NOTES: This is the &quot;blocked ear&quot; notes.</text>
+                <text>Episode: First ever. NOTES: This is the &quot;blocked ear&quot; notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3098,13 +3112,13 @@ with special characters
         <effectiveTime>
             <center value="20060811"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060811"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever.</text>
+                <text>Episode: First ever.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3156,13 +3170,13 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: No value range only</text>
+                <text>No value range only</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3181,13 +3195,13 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         <value xsi:type="PQ" value="4.000" unit="1"><translation value="4.000"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: No range</text>
+                <text>No range</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3206,13 +3220,13 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         <value xsi:type="PQ" value="3.000" unit="1"><translation value="3.000"></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: No units</text>
+                <text>No units</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -3236,13 +3250,14 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: LO - Below low reference limit abnormality only Very Low</text>
+                <text>Interpretation: LO - Below low reference limit
+abnormality only Very Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3261,13 +3276,13 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: No nothing</text>
+                <text>No nothing</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3287,13 +3302,13 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         <value xsi:type="PQ" value="1.000" unit="1"><translation value="1.000"><originalText>mm/h</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Upper range only</text>
+                <text>Upper range only</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -3318,13 +3333,13 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>nmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Lower range only</text>
+                <text>Lower range only</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -3381,13 +3396,13 @@ with special characters
         <effectiveTime>
             <center value="20060906"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060906"/>
         <value xsi:type="PQ" value="12.000" unit="1"><translation value="12.000"><originalText>[iU]/mL</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: This is the consultation to test edits</text>
+                <text>This is the consultation to test edits</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -3411,13 +3426,13 @@ with special characters
         <effectiveTime>
             <center value="20060906"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060906"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever. NOTES: Patient anxious.</text>
+                <text>Episode: First ever. NOTES: Patient anxious.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3482,13 +3497,13 @@ with special characters
         <effectiveTime>
             <center value="20061027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20061027"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Drinking status on eventdate: Life teetotaler. NOTES: This is the teetotaller.</text>
+                <text>Drinking status on eventdate: Life teetotaler. NOTES: This is the teetotaller.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3507,7 +3522,7 @@ with special characters
         <effectiveTime>
             <center value="20061027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20061027"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3564,7 +3579,7 @@ with special characters
         <effectiveTime>
             <center value="20080307"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149" />
+        <availabilityTime value="20080307" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3D83E26F-FCA2-49F8-BC3D-6F0B8BB33C05"/>
@@ -3575,7 +3590,7 @@ with special characters
                 <effectiveTime>
                     <center value="20080307"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149" />
+                <availabilityTime value="20080307" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -3632,13 +3647,13 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Request by: GP, Refrain from work: Yes, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Off for: 0 month(s)  14 day(s), Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: These are some MED3 notes.</text>
+                <text>Request by: GP, Refrain from work: Yes, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Off for: 0 month(s)  14 day(s), Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: These are some MED3 notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3690,13 +3705,13 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Request by: GP, Refrain from work: No, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This is the empty one.</text>
+                <text>Request by: GP, Refrain from work: No, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This is the empty one.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3748,13 +3763,13 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Clinical diagnosis: Happy puppet syndrome [PKyz500], Med3 form diagnosis: Happy puppet syndrome, Request by: GP, Refrain from work: Yes, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This has a diagnosis. Ended on 08/05/2009</text>
+                <text>Clinical diagnosis: Happy puppet syndrome [PKyz500], Med3 form diagnosis: Happy puppet syndrome, Request by: GP, Refrain from work: Yes, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This has a diagnosis. Ended on 08/05/2009</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3773,13 +3788,13 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Clinical diagnosis: Tiredness symptom [168..00], Med3 form diagnosis: Tiredness symptom, Request by: GP, Refrain from work: No, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This one isn&apos;t issues.</text>
+                <text>Clinical diagnosis: Tiredness symptom [168..00], Med3 form diagnosis: Tiredness symptom, Request by: GP, Refrain from work: No, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This one isn&apos;t issues.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3832,13 +3847,13 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: GP to sign death certificate: No, Review date: 07/05/2009.</text>
+                <text>GP to sign death certificate: No, Review date: 07/05/2009.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3858,13 +3873,13 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Date of agreement: 04/05/2009, GP to sign death certificate: Yes, Review date: 08/05/2009.</text>
+                <text>Date of agreement: 04/05/2009, GP to sign death certificate: Yes, Review date: 08/05/2009.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3883,13 +3898,13 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Additional drugs available at home: No, Catheter products at home: No, Moving/handling equipment at home: No.</text>
+                <text>Additional drugs available at home: No, Catheter products at home: No, Moving/handling equipment at home: No.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3908,13 +3923,13 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Additional drugs available at home: Yes, Catheter products at home: Yes, Moving/handling equipment at home: Yes.</text>
+                <text>Additional drugs available at home: Yes, Catheter products at home: Yes, Moving/handling equipment at home: Yes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3934,13 +3949,13 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Should GP be contacted out of hours: No.</text>
+                <text>Should GP be contacted out of hours: No.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3960,13 +3975,13 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Date discussed with patient: 03/05/2009, Date discussed with carer: 04/05/2009, Should GP be contacted out of hours: Yes, GP contact number: 01413572402.</text>
+                <text>Date discussed with patient: 03/05/2009, Date discussed with carer: 04/05/2009, Should GP be contacted out of hours: Yes, GP contact number: 01413572402.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4018,13 +4033,14 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         <value xsi:type="PQ" value="5.000" unit="1"><translation value="5.000"><originalText>%</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal This is an empty one Abnormal</text>
+                <text>Interpretation: PA - Potentially abnormal
+This is an empty one Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -4048,13 +4064,14 @@ with special characters
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal This is the HepB antutbody notes Absent</text>
+                <text>Interpretation: PA - Potentially abnormal
+This is the HepB antutbody notes Absent</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4106,13 +4123,13 @@ with special characters
         <effectiveTime>
             <center value="20120112"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20120112"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: Other. NOTES: Blah de Blah.</text>
+                <text>Episode: Other. NOTES: Blah de Blah.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4261,9 +4278,9 @@ with special characters
         <effectiveTime>
             <center value="20010325"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20010325"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20010325" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -4290,7 +4307,7 @@ with special characters
         <effectiveTime>
             <center value="20010325"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20010325"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4317,9 +4334,9 @@ with special characters
         <effectiveTime>
             <center value="20010425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20010425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20010425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -4346,7 +4363,7 @@ with special characters
         <effectiveTime>
             <center value="20010425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20010425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4373,9 +4390,9 @@ with special characters
         <effectiveTime>
             <center value="200112"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="200112"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="200112" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -4402,7 +4419,7 @@ with special characters
         <effectiveTime>
             <center value="200112"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="200112"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4429,9 +4446,9 @@ with special characters
         <effectiveTime>
             <center value="20041027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20041027"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20041027" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -4458,7 +4475,7 @@ with special characters
         <effectiveTime>
             <center value="20041027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20041027"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4788,9 +4805,9 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20050201" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -4817,7 +4834,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="20.000" unit="1"><translation value="20.000"><originalText>/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -4844,9 +4861,9 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20050201" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -4873,7 +4890,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="160.000" unit="1"><translation value="160.000"><originalText>mm[Hg]</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -4900,9 +4917,9 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20050201" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -4929,7 +4946,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="60.000" unit="1"><translation value="60.000"><originalText>mm[Hg]</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -4956,9 +4973,9 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20050201" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -4986,7 +5003,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="10.000" unit="1"><translation value="10.000"><originalText>/wk</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5013,9 +5030,9 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="2005"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="2005"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="2005" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5042,7 +5059,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="2005"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="2005"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5286,9 +5303,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20060425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5315,7 +5332,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="5.000" unit="1"><translation value="5.000"><originalText>/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5342,9 +5359,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20060425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5371,7 +5388,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="12.000" unit="1"><translation value="12.000"><originalText>/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5398,9 +5415,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20060425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5427,7 +5444,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="6.000" unit="1"><translation value="6.000"><originalText>[oz_av]/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5454,9 +5471,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20060425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5483,7 +5500,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="4.000" unit="1"><translation value="4.000"><originalText>/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5510,9 +5527,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20060425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5539,7 +5556,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="12.000" unit="1"><translation value="12.000"><originalText>/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5972,9 +5989,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20061027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20061027"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20061027" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -6002,7 +6019,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20061027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20061027"/>
         <value xsi:type="PQ" value="12.000" unit="1"><translation value="12.000"><originalText>/wk</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -6029,9 +6046,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20201125"/>
         </effectiveTime>
-        <availabilityTime value="20201125165553"/>
+        <availabilityTime value="20201125"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201125165553" />
+            <time value="20201125" />
             <agentRef classCode="AGNT">
                 <id root="176ECCF6-93C9-426E-9C10-640DC3C1E86A" />
             </agentRef>
@@ -6059,7 +6076,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20201125"/>
         </effectiveTime>
-        <availabilityTime value="20201125165553"/>
+        <availabilityTime value="20201125"/>
         
         
         <pertinentInformation typeCode="PERT">

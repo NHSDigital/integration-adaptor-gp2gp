@@ -6,13 +6,14 @@
         <effectiveTime>
             <center value="20100714163251"/>
         </effectiveTime>
-        <availabilityTime value="20100113152950"/>
+        <availabilityTime value="20100714163251"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: An example of text in interpretation Example comment</text>
+                <text>Interpretation: An example of text in interpretation
+Example comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
