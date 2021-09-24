@@ -112,6 +112,10 @@ public class EncounterMapperTest {
         + "example-encounter-resource-15.json";
     private static final String INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILES_DIRECTORY
         + "example-encounter-resource-16.json";
+    private static final String INPUT_JSON_WITH_NO_LOCATION_REFERENCE = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-17.json";
+    private static final String OUTPUT_XML_WITH_NO_LOCATION_REFERENCE  = TEST_FILES_DIRECTORY
+        + "expected-output-encounter-14.xml";
     private static final String OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2  = TEST_FILES_DIRECTORY
         + "expected-output-encounter-13.xml";
 
@@ -173,7 +177,9 @@ public class EncounterMapperTest {
             Arguments.of(INPUT_JSON_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT),
-            Arguments.of(INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2)
+            Arguments.of(INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2),
+            Arguments.of(INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2),
+            Arguments.of(INPUT_JSON_WITH_NO_LOCATION_REFERENCE, OUTPUT_XML_WITH_NO_LOCATION_REFERENCE)
         );
     }
 

@@ -44,10 +44,6 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-invalid-based-on-medication-reference.json";
     private static final String INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE_TYPE = TEST_FILE_DIRECTORY
         + "medication-request-with-invalid-based-on-medication-reference-type.json";
-    private static final String INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE = TEST_FILE_DIRECTORY
-        + "medication-request-with-invalid-prior-prescription-medication-reference.json";
-    private static final String INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE_TYPE = TEST_FILE_DIRECTORY
-        + "medication-request-with-invalid-prior-prescription-medication-reference-type.json";
     private static final String INPUT_JSON_WITH_NO_STATUS = TEST_FILE_DIRECTORY + "medication-request-with-no-status.json";
     private static final String INPUT_JSON_WITH_NO_DOSAGE_INSTRUCTION = TEST_FILE_DIRECTORY
         + "medication-request-with-no-dosage-instruction.json";
@@ -115,8 +111,6 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-order-based-on.json";
     private static final String OUTPUT_XML_WITH_PRESCRIBE_BASED_ON = TEST_FILE_DIRECTORY
         + "medication-statement-with-prescribe-based-on.xml";
-    private static final String OUTPUT_XML_WITH_AUTHORISE_PRIOR_PRESCRIPTION = TEST_FILE_DIRECTORY
-        + "medication-statement-with-prescribe-prior-prescription.xml";
     private static final String INPUT_JSON_WITH_PLAN_NO_STATUS_REASON_CODE = TEST_FILE_DIRECTORY
         + "medication-request-with-plan-no-status-reason-code.json";
     private static final String OUTPUT_XML_WITH_AUTHORISE_DEFAULT_STATUS_REASON_CODE = TEST_FILE_DIRECTORY
@@ -251,26 +245,6 @@ public class MedicationStatementMapperTest {
         assertThat(outputMessageWithBasedOn).isEqualTo(expected);
     }
 
-    @SneakyThrows
-    @Test
-    public void When_MappingPriorPrescriptionField_Expect_CorrectReferences() {
-        var expected = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_AUTHORISE_PRIOR_PRESCRIPTION);
-
-        when(mockRandomIdGeneratorService.createNewId()).thenReturn("123");
-        var inputAuthorise = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_ACUTE_PRESCRIPTION);
-        var parsedMedicationRequest = new FhirParseService().parseResource(inputAuthorise, MedicationRequest.class);
-        medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
-
-        when(mockRandomIdGeneratorService.createNewId()).thenReturn("456", "456", "123");
-        var inputWithPriorPrescription = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_OPTIONAL_FIELDS);
-        var parsedMedicationRequestWithPriorPrescription =
-            new FhirParseService().parseResource(inputWithPriorPrescription, MedicationRequest.class);
-        String outputMessageWithPriorPrescription =
-            medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequestWithPriorPrescription);
-
-        assertThat(outputMessageWithPriorPrescription).isEqualTo(expected);
-    }
-
     @ParameterizedTest
     @MethodSource("resourceFileExpectException")
     public void When_MappingMedicationRequestWithInvalidResource_Expect_Exception(String inputJson) throws IOException {
@@ -292,8 +266,6 @@ public class MedicationStatementMapperTest {
             INPUT_JSON_WITH_INVALID_PRESCRIPTION_TYPE,
             INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE,
             INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE_TYPE,
-            INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE,
-            INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE_TYPE,
             INPUT_JSON_WITH_NO_STATUS,
             INPUT_JSON_WITH_NO_DOSAGE_INSTRUCTION,
             INPUT_JSON_WITH_NO_DISPENSE_REQUEST,
