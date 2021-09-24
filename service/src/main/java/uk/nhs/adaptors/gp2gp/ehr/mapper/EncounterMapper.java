@@ -15,6 +15,7 @@ import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Encounter.EncounterParticipantComponent;
 import org.hl7.fhir.dstu3.model.ListResource;
+import org.hl7.fhir.dstu3.model.Location;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,8 @@ public class EncounterMapper {
             .components(components)
             .code(buildCode(encounter))
             .displayName(buildDisplayName(encounter))
-            .originalText(buildOriginalText(encounter));
+            .originalText(buildOriginalText(encounter))
+            .locationName(buildLocationPertinentInformation(encounter));
 
         final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
             .map(agentDirectory::getAgentId)
@@ -86,6 +88,18 @@ public class EncounterMapper {
 
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
+    }
+
+    private String buildLocationPertinentInformation(Encounter encounter) {
+        if (encounter.hasLocation()) {
+            return messageContext
+                .getInputBundleHolder()
+                .getResource(encounter.getLocationFirstRep().getLocation().getReferenceElement())
+                .map(resource -> (Location) resource)
+                .map(Location::getName)
+                .orElse(StringUtils.EMPTY);
+        }
+        return StringUtils.EMPTY;
     }
 
     private void updateEhrFolderEffectiveTime(Encounter encounter) {
