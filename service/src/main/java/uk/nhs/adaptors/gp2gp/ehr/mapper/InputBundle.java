@@ -11,12 +11,13 @@ import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
+import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.*;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.extractListByEncounterReference;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.extractResourceByReference;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils.isIgnoredResourceType;
@@ -90,7 +91,7 @@ public class InputBundle {
     }
 
     public List<Condition> getRelatedConditions(String referenceId) {
-        return extractResourcesByType(bundle, Condition.class)
+        return ResourceExtractor.extractResourcesByType(bundle, Condition.class)
             .filter(condition -> filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
                     .map(Extension::getValue)
                     .map(Reference.class::cast)
@@ -102,7 +103,7 @@ public class InputBundle {
     }
 
     public Optional<PractitionerRole> getPractitionerRoleFor(String practitionerReference, String organizationReference) {
-        return extractResourcesByType(bundle, PractitionerRole.class)
+        return ResourceExtractor.extractResourcesByType(bundle, PractitionerRole.class)
             .filter(PractitionerRole::hasPractitioner)
             .filter(PractitionerRole::hasOrganization)
             .filter(practitionerRole -> isPractitionerRoleOf(practitionerReference, organizationReference, practitionerRole))
