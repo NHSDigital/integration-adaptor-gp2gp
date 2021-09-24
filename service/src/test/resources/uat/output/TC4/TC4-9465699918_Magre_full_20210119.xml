@@ -2538,11 +2538,6 @@
                         <originalText>capsule</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="8DF92722-5B5F-4324-866E-0328D5EA4286"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Patient Instruction: Script note Expected Supply Duration: 14 day Notes: Prescriber Notes:Administrative note Patient Notes:Script note</text>
@@ -4029,11 +4024,6 @@
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 7 day</text>
@@ -5197,7 +5187,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0814FE49-058E-4B3C-9F74-040922A26099" />
+        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5255,11 +5245,6 @@
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 42 day</text>
@@ -5283,7 +5268,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A" />
+        <id root="9EC5CD05-9875-4F82-AC04-19B706D79BC0" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5311,7 +5296,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36"/>
+        <id root="0814FE49-058E-4B3C-9F74-040922A26099"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20200717"/><high value="20200828"/>
@@ -5328,7 +5313,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C"/>
+                <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20200717"/>
@@ -5365,7 +5350,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA" />
+        <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5393,7 +5378,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8"/>
+        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A"/>
         <statusCode code="ACTIVE"/>
         <effectiveTime>
             <low value="20200717"/>
@@ -5410,7 +5395,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="2317993E-315F-4AED-B9A7-65D00D23C35D"/>
+                <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="ACTIVE"/>
                     <effectiveTime>
@@ -5423,11 +5408,6 @@
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -5451,7 +5431,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03" />
+        <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5479,7 +5459,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C"/>
+        <id root="3E9C68B8-AB3F-4114-B67B-1174CB327195"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20200717"/><high value="20200717"/>
@@ -5496,7 +5476,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
+                <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                     <effectiveTime>
@@ -5532,7 +5512,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15" />
+        <id root="619D08A7-F6DA-449B-8609-FF129D688943" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5560,7 +5540,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14"/>
+        <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20200717"/><high value="20200814"/>
@@ -5577,7 +5557,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="4F02ED83-3153-4786-96C2-200FE456A1E4"/>
+                <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20200717"/>
@@ -5588,7 +5568,7 @@
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
+        <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -5642,7 +5622,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
+        <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20200717"/><high value="20200717"/>
@@ -5659,7 +5639,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
+                <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                     <effectiveTime>
@@ -5751,7 +5731,7 @@
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
+        <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
