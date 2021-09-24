@@ -7948,8 +7948,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Abnormal
-(EMISTest) - No Action</text>
+                <text>(EMISTest) - No Action</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -8065,8 +8064,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Abnormal
-Less than or equal to 5 and abnormal</text>
+                <text>Less than or equal to 5 and abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -8315,8 +8313,7 @@ Less than or equal to 5 and abnormal</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Abnormal
-This is marked as abnormal but in range</text>
+                <text>This is marked as abnormal but in range</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -8502,8 +8499,7 @@ This is marked as abnormal but in range</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Abnormal
-This is hand entered abnormal with no range</text>
+                <text>This is hand entered abnormal with no range</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
