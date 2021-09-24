@@ -69,8 +69,6 @@ import wiremock.org.custommonkey.xmlunit.XMLAssert;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrExtractUATTest {
-    private static final String FILES_PREFIX_TC4 = "TC4-";
-    private static final String FILES_PREFIX_TC7 = "TC7-";
     private static final String INPUT_PATH = "/uat/input/";
     private static final String OUTPUT_PATH = "/uat/output/";
     private static final boolean OVERWRITE_XML = false;
@@ -193,9 +191,9 @@ public class EhrExtractUATTest {
     @MethodSource("testValueFilePathsTC4")
     public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutputTC4(String inputJson, String expectedOutputXml)
         throws IOException, SAXException {
-        final String expectedXmlResourcePath = OUTPUT_PATH + "TC4/" + FILES_PREFIX_TC4 + expectedOutputXml;
+        final String expectedXmlResourcePath = OUTPUT_PATH + "TC4/"  + expectedOutputXml;
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
-        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC4/" + FILES_PREFIX_TC4 + inputJson);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC4/" + inputJson);
         inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
         final Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
 
@@ -227,9 +225,9 @@ public class EhrExtractUATTest {
     @MethodSource("testValueFilePathsTC7")
     public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutputTC7(String inputJson, String expectedOutputXml)
         throws IOException, SAXException {
-        final String expectedXmlResourcePath = OUTPUT_PATH + "TC7/" + FILES_PREFIX_TC7 + expectedOutputXml;
+        final String expectedXmlResourcePath = OUTPUT_PATH + "TC7/"  + expectedOutputXml;
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
-        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC7/" + FILES_PREFIX_TC7 + inputJson);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC7/" + inputJson);
         inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
         final Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
 

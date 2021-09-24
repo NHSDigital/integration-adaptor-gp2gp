@@ -6158,11 +6158,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -6244,11 +6239,6 @@ Episodicity : Review</text>
                         <originalText>capsule</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day Notes: Prescriber Notes:Repeat Dispensing Pharmacy Note</text>
@@ -7738,11 +7728,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="FEB76FD7-EA3E-47AE-9D92-DDB7EB866A99"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 14 day</text>
@@ -9940,11 +9925,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -10108,11 +10088,6 @@ Episodicity : Review</text>
                         <originalText>capsule</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="37DB2ED6-7B8C-495A-AA4A-38C5CC4EA25D"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -10218,7 +10193,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="411883E4-1C19-40EE-BFFE-6CD7BB6E4C0B" />
+        <id root="7E90D79F-EC2F-4B4A-8B62-A292760860E4" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10276,11 +10251,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="616257C9-D034-4DB7-9E71-41CE4CCF7399"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -10332,7 +10302,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="C61DF18D-5DD7-4934-8248-CCF80E0514E8"/>
+        <id root="411883E4-1C19-40EE-BFFE-6CD7BB6E4C0B"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100323"/><high value="20100323"/>
@@ -10349,7 +10319,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="616257C9-D034-4DB7-9E71-41CE4CCF7399"/>
+                <id root="C61DF18D-5DD7-4934-8248-CCF80E0514E8"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                     <effectiveTime>
@@ -10362,11 +10332,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="F7600EB7-9A46-4AC3-A726-96DEB40E096A"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -10446,7 +10411,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="616257C9-D034-4DB7-9E71-41CE4CCF7399"/>
+        <id root="C61DF18D-5DD7-4934-8248-CCF80E0514E8"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -10530,11 +10495,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="12A053A5-6886-4DF5-9352-0440B9802D3A"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 30 day</text>
@@ -11350,11 +11310,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="9131C78A-EFF1-455E-8969-62D984B5F29C"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Patient Instruction: yutyuhyfhf Expected Supply Duration: 28 day Notes: Prescriber Notes:These are some pharmacy notes for Methylphenidate Patient Notes:yutyuhyfhf</text>
@@ -11518,11 +11473,6 @@ Episodicity : Review</text>
                         <originalText>capsule</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day Notes: Prescriber Notes:Repeat Dispensing Pharmacy Note</text>
@@ -12360,7 +12310,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0DB69A17-78EE-4772-AAF7-290B3AB031F4" />
+        <id root="D22B8348-7EEA-4E10-9E68-2BA6A8F5F0A7" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -12418,11 +12368,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 30 day</text>
@@ -12446,7 +12391,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A5371E90-1A5E-47CA-8E4E-D46137750B9F" />
+        <id root="64EE9F15-9718-4738-8187-455BE2A44C29" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -12474,7 +12419,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="888463F3-DB21-4941-8AD2-FED505F0A180"/>
+        <id root="0DB69A17-78EE-4772-AAF7-290B3AB031F4"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100812"/><high value="20100911"/>
@@ -12491,7 +12436,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="7BD053C7-97F9-4E1D-BCE6-723ECC6EF7CC"/>
+                <id root="888463F3-DB21-4941-8AD2-FED505F0A180"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100812"/>
@@ -12528,7 +12473,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="042B2C37-28A6-4DC3-B3ED-4E8F440A9E77" />
+        <id root="10994868-8289-479C-814F-5704EA0D9BEC" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -12556,7 +12501,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="F604BE07-5293-408F-871C-163358055486"/>
+        <id root="A5371E90-1A5E-47CA-8E4E-D46137750B9F"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100911"/><high value="20101011"/>
@@ -12573,7 +12518,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="88A7D6CB-A511-4668-AE09-E321B5660F90"/>
+                <id root="F604BE07-5293-408F-871C-163358055486"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100911"/>
@@ -12610,7 +12555,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D0852560-A8D0-4B51-BF75-2BFD582BC166" />
+        <id root="29841BD8-74E2-442E-88A5-DD1EBF76A10D" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -12638,7 +12583,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="B71F3669-565D-4B7A-BB5C-E29E6498B269"/>
+        <id root="042B2C37-28A6-4DC3-B3ED-4E8F440A9E77"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101011"/><high value="20101110"/>
@@ -12655,7 +12600,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="D23ABB4B-29A8-419F-83D1-E6B716BBFAB7"/>
+                <id root="B71F3669-565D-4B7A-BB5C-E29E6498B269"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20101011"/>
@@ -12692,7 +12637,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="5195DE81-364A-43DD-AF69-D5B735D981F4" />
+        <id root="ECED2795-6E5C-4BEC-B576-4BE3591B60D7" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -12720,7 +12665,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="615E5632-4928-4B5B-9797-5CE35EEA651D"/>
+        <id root="D0852560-A8D0-4B51-BF75-2BFD582BC166"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101110"/><high value="20101210"/>
@@ -12737,7 +12682,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="F7EEC0CC-79F0-40F6-96A9-993DBFBBC651"/>
+                <id root="615E5632-4928-4B5B-9797-5CE35EEA651D"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20101110"/>
@@ -12774,7 +12719,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6A869220-837A-4436-BD25-EEAFC29B7849" />
+        <id root="F30D840E-82DF-4FE0-82C2-126DA8D023A3" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -12802,7 +12747,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="0EBBA138-16DE-49A7-A5A9-F3D4E758CFE0"/>
+        <id root="5195DE81-364A-43DD-AF69-D5B735D981F4"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101210"/><high value="20110109"/>
@@ -12819,7 +12764,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="78E90EFA-8191-4CB9-8757-F4139FC247FE"/>
+                <id root="0EBBA138-16DE-49A7-A5A9-F3D4E758CFE0"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20101210"/>
@@ -12856,7 +12801,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="1B1ABB7C-C161-4D1C-9388-C022FB894B4E" />
+        <id root="742A289C-4B8A-4BD1-98AD-11A15084E74C" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -12884,7 +12829,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="EB9FA6BE-6233-46AA-999E-678029090A31"/>
+        <id root="6A869220-837A-4436-BD25-EEAFC29B7849"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110109"/><high value="20110208"/>
@@ -12901,7 +12846,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="64836A3D-C55D-4022-8A33-38D536CF0357"/>
+                <id root="EB9FA6BE-6233-46AA-999E-678029090A31"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110109"/>
@@ -12938,7 +12883,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="08C5C565-863E-4FDA-B216-7C1F8DC9E507" />
+        <id root="3FA6C543-2AE9-4AE7-A2DA-4E2A85FBD9F3" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -12966,7 +12911,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="A239F1DF-FA6D-44C4-BC0B-F28094896BB4"/>
+        <id root="1B1ABB7C-C161-4D1C-9388-C022FB894B4E"/>
         <statusCode code="ACTIVE"/>
         <effectiveTime>
             <low value="20100812"/>
@@ -12983,7 +12928,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="5ED73758-0204-4C1C-A660-C50AD23EE0A3"/>
+                <id root="A239F1DF-FA6D-44C4-BC0B-F28094896BB4"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="ACTIVE"/>
                     <effectiveTime>
@@ -13019,7 +12964,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0009DEB3-D325-46CC-B488-CB9C0AF5A563" />
+        <id root="3AB98D31-BC1C-40C9-B476-3E4012FBD72E" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -13047,7 +12992,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="604BD88B-17A9-4562-A226-685C6908BBCE"/>
+        <id root="08C5C565-863E-4FDA-B216-7C1F8DC9E507"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100812"/><high value="20100815"/>
@@ -13064,7 +13009,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="CB2E1628-E70E-4159-879B-8E0DE218AE78"/>
+                <id root="604BD88B-17A9-4562-A226-685C6908BBCE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100812"/>
@@ -13075,7 +13020,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5ED73758-0204-4C1C-A660-C50AD23EE0A3"/>
+        <id root="A239F1DF-FA6D-44C4-BC0B-F28094896BB4"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -13101,7 +13046,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="AAA3D848-FEC9-4324-AAE4-1D85E765CF72" />
+        <id root="898A1291-291E-4CF1-8A1B-B803150E0F53" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -13129,7 +13074,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="CACD8306-7218-4BA6-A71A-089207D27D51"/>
+        <id root="0009DEB3-D325-46CC-B488-CB9C0AF5A563"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100812"/><high value="20100815"/>
@@ -13146,7 +13091,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="B057BEAA-4AB2-46B2-800F-C3643875EAEC"/>
+                <id root="CACD8306-7218-4BA6-A71A-089207D27D51"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100812"/>
@@ -13157,7 +13102,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5ED73758-0204-4C1C-A660-C50AD23EE0A3"/>
+        <id root="A239F1DF-FA6D-44C4-BC0B-F28094896BB4"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -13211,7 +13156,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
+        <id root="AAA3D848-FEC9-4324-AAE4-1D85E765CF72"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100812"/><high value="20100812"/>
@@ -13228,7 +13173,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+                <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                     <effectiveTime>
@@ -13320,7 +13265,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -13402,7 +13347,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -13484,7 +13429,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -13566,7 +13511,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -13648,7 +13593,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -13730,7 +13675,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -13812,7 +13757,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -13894,7 +13839,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -13976,7 +13921,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -14058,7 +14003,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="22854E45-B852-455E-B744-B002D06D32F9"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -15791,11 +15736,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="5E55B187-65DD-447E-902A-AD73AF142A02"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -15819,7 +15759,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="49271890-37EC-4C17-839E-CB8DBAC51B09" />
+        <id root="E2F67CFE-3707-48CF-9ADE-7B6B92672FE4" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -15877,11 +15817,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -15925,7 +15860,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="23137F83-2549-496B-8AE9-120FDFE6E932" />
+        <id root="78252A19-1D51-4C94-B7EF-978CA58CB08C" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -15953,7 +15888,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="151BB11F-6751-48CC-A647-C6F3169F38D1"/>
+        <id root="49271890-37EC-4C17-839E-CB8DBAC51B09"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100817"/><high value="20100914"/>
@@ -15970,7 +15905,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="0572BE86-0BF3-4BFB-BA04-3E1DE76CF7C0"/>
+                <id root="151BB11F-6751-48CC-A647-C6F3169F38D1"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100817"/>
@@ -16007,7 +15942,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D12DFD0F-8A39-4ACC-905E-ED6170409DC4" />
+        <id root="FF3AEF96-AF1E-4C56-8CDE-839E62D1E095" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -16035,7 +15970,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="8E5B1C8C-F1DD-4D61-A75D-DE6D9DC182A1"/>
+        <id root="23137F83-2549-496B-8AE9-120FDFE6E932"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100914"/><high value="20101012"/>
@@ -16052,7 +15987,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="F66A263F-8FF4-4610-835E-7AC4E4BA209F"/>
+                <id root="8E5B1C8C-F1DD-4D61-A75D-DE6D9DC182A1"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100914"/>
@@ -16089,7 +16024,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="5D48CB27-F7F3-4572-B368-AA1A98E24178" />
+        <id root="68CFE821-A4CC-4316-BC05-E309F7AF2D33" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -16117,7 +16052,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="79D1E4D8-5F2D-48AC-AF16-AD6CD5A8521A"/>
+        <id root="D12DFD0F-8A39-4ACC-905E-ED6170409DC4"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101012"/><high value="20101109"/>
@@ -16134,7 +16069,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="DDDD42B3-E3FC-442F-B195-78F204A844EA"/>
+                <id root="79D1E4D8-5F2D-48AC-AF16-AD6CD5A8521A"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20101012"/>
@@ -16171,7 +16106,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="5F9C871A-9927-4F9F-ACF1-ABB290B70D29" />
+        <id root="257B12B4-BBDD-4EFE-9E87-13C62C361F40" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -16199,7 +16134,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="AF67830C-4710-4730-8ECE-F7C754931108"/>
+        <id root="5D48CB27-F7F3-4572-B368-AA1A98E24178"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101109"/><high value="20101207"/>
@@ -16216,7 +16151,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="5FB6FBC6-3677-4672-A356-346CBA4107F0"/>
+                <id root="AF67830C-4710-4730-8ECE-F7C754931108"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20101109"/>
@@ -16281,7 +16216,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
+        <id root="5F9C871A-9927-4F9F-ACF1-ABB290B70D29"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100817"/><high value="20100817"/>
@@ -16298,7 +16233,7 @@ Episodicity : Review</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+                <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                     <effectiveTime>
@@ -16311,11 +16246,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="E96B55C1-7C8E-40CA-A6C0-A2951CFEE860"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -16395,7 +16325,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -16477,7 +16407,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -16559,7 +16489,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -16641,7 +16571,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -16723,7 +16653,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -16805,7 +16735,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -16887,7 +16817,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -16969,7 +16899,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -17051,7 +16981,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -17133,7 +17063,7 @@ Episodicity : Review</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -17399,11 +17329,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="2810EE1B-93EE-4417-B70B-C692AD0B2A17"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -18486,11 +18411,6 @@ Episodicity : Review</text>
                         <originalText>capsule</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="DB7C94B1-01A6-491F-AC41-A36D88023069"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -18755,11 +18675,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
@@ -19106,11 +19021,6 @@ Episodicity : Review</text>
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C"/>
-                        </priorMedicationRef>
-                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 150 day</text>
