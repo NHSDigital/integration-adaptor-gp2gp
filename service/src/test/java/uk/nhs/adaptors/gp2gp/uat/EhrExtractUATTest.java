@@ -69,7 +69,6 @@ import wiremock.org.custommonkey.xmlunit.XMLAssert;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrExtractUATTest {
-    private static final String FILES_PREFIX = "TC4-";
     private static final String INPUT_PATH = "/uat/input/";
     private static final String OUTPUT_PATH = "/uat/output/";
     private static final boolean OVERWRITE_XML = false;
@@ -83,7 +82,7 @@ public class EhrExtractUATTest {
     private GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
     @SuppressWarnings("unused")
-    private static Stream<Arguments> testValueFilePaths() {
+    private static Stream<Arguments> testValueFilePathsTC4() {
         return Stream.of(
             Arguments.of("9465701483_Dougill_full_20210119.json", "9465701483_Dougill_full_20210119.xml"),
             Arguments.of("9465701483_Nel_full_20210119.json", "9465701483_Nel_full_20210119.xml"),
@@ -97,6 +96,22 @@ public class EhrExtractUATTest {
             Arguments.of("9465698490_Daniels_full_20210119.json", "9465698490_Daniels_full_20210119.xml"),
             Arguments.of("9465701718_Guerra_full_20210119.json", "9465701718_Guerra_full_20210119.xml"),
             Arguments.of("9465700088_Mold_full_20210119.json", "9465700088_Mold_full_20210119.xml")
+        );
+    }
+
+    private static Stream<Arguments> testValueFilePathsTC7() {
+        return Stream.of(
+            Arguments.of("9465698490_Daniels_full_20210602.json", "9465698490_Daniels_full_20210602.xml"),
+            Arguments.of("9465698679_Gainsford_full_20210602.json", "9465698679_Gainsford_full_20210602.xml"),
+            Arguments.of("9465699918_Magre_full_20210602.json", "9465699918_Magre_full_20210602.xml"),
+            Arguments.of("9465700088_Mold_full_20210602.json", "9465700088_Mold_full_20210602.xml"),
+            Arguments.of("9465700193_Birdi_full_20210602.json", "9465700193_Birdi_full_20210602.xml"),
+            Arguments.of("9465700339_Yamura_full_20210602.json", "9465700339_Yamura_full_20210602.xml"),
+            Arguments.of("9465701262_Meyers_full_20210602.json", "9465701262_Meyers_full_20210602.xml"),
+            Arguments.of("9465701297_Livermore_full_20210602.json", "9465701297_Livermore_full_20210602.xml"),
+            Arguments.of("9465701459_Nel_full_20210602.json", "9465701459_Nel_full_20210602.xml"),
+            Arguments.of("9465701483_Dougill_full_20210602.json", "9465701483_Dougill_full_20210602.xml"),
+            Arguments.of("9465701718_Guerra_full_20210602.json", "9465701718_Guerra_full_20210602.xml")
         );
     }
 
@@ -173,12 +188,46 @@ public class EhrExtractUATTest {
     }
 
     @ParameterizedTest
-    @MethodSource("testValueFilePaths")
-    public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutput(String inputJson, String expectedOutputXml)
+    @MethodSource("testValueFilePathsTC4")
+    public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutputTC4(String inputJson, String expectedOutputXml)
         throws IOException, SAXException {
-        final String expectedXmlResourcePath = OUTPUT_PATH + FILES_PREFIX + expectedOutputXml;
+        final String expectedXmlResourcePath = OUTPUT_PATH + "TC4/"  + expectedOutputXml;
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
-        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + FILES_PREFIX + inputJson);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC4/" + inputJson);
+        inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
+        final Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
+
+        messageContext.initialize(bundle);
+
+        final EhrExtractTemplateParameters ehrExtractTemplateParameters =
+            ehrExtractMapper.mapBundleToEhrFhirExtractParams(getGpcStructuredTaskDefinition, bundle);
+
+        final String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+
+        final String hl7TranslatedResponse = outputMessageWrapperMapper.map(getGpcStructuredTaskDefinition, ehrExtractContent);
+
+        if (OVERWRITE_XML) {
+            try (PrintWriter printWriter = new PrintWriter("src/test/resources" + expectedXmlResourcePath, StandardCharsets.UTF_8)) {
+                printWriter.print(hl7TranslatedResponse);
+            }
+            fail("Re-run the tests with OVERWRITE_XML=false");
+        }
+
+        XMLAssert.assertXMLEqual(hl7TranslatedResponse, expectedJsonToXmlContent);
+
+        assertThatCode(() -> validateFileContentAgainstSchema(hl7TranslatedResponse))
+            .doesNotThrowAnyException();
+
+        assertThatAgentReferencesAreValid(hl7TranslatedResponse);
+    }
+
+    @ParameterizedTest
+    @MethodSource("testValueFilePathsTC7")
+    public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutputTC7(String inputJson, String expectedOutputXml)
+        throws IOException, SAXException {
+        final String expectedXmlResourcePath = OUTPUT_PATH + "TC7/"  + expectedOutputXml;
+        final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC7/" + inputJson);
         inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
         final Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
 
