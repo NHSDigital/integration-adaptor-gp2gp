@@ -92,13 +92,9 @@ public class EncounterMapper {
 
     private String buildLocationPertinentInformation(Encounter encounter) {
         if (encounter.hasLocation()) {
-            var locationResource = messageContext.getInputBundleHolder().getEntries()
-                .stream()
-                .map(e -> e.getResource())
-                .filter(resource -> resource.getResourceType().equals(ResourceType.Location))
-                .findFirst();
-
-            return locationResource
+            return messageContext
+                .getInputBundleHolder()
+                .getResource(encounter.getLocationFirstRep().getLocation().getReferenceElement())
                 .map(resource -> (Location) resource)
                 .map(Location::getName)
                 .orElse(StringUtils.EMPTY);

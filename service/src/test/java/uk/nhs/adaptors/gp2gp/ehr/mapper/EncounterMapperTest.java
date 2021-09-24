@@ -44,7 +44,7 @@ public class EncounterMapperTest {
     private static final Date CONSULTATION_DATE = Date.from(Instant.parse("2010-01-13T15:13:32Z"));
     private static final String TEST_LOCATION_NAME = "Test Location";
     private static final String TEST_LOCATION_ID = "EB3994A6-5A87-4B53-A414-913137072F57";
-    public static final Bundle.BundleEntryComponent BUNDLE_WITH_CONSULTATION = new Bundle.BundleEntryComponent()
+    public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_CONSULTATION = new Bundle.BundleEntryComponent()
         .setResource(new ListResource()
             .setEncounter(new Reference()
                 .setReference(CONSULTATION_REFERENCE))
@@ -52,6 +52,9 @@ public class EncounterMapperTest {
                 .setCoding(List.of(new Coding()
                     .setCode(CONSULTATION_LIST_CODE))))
             .setDate(CONSULTATION_DATE));
+
+    public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_LOCATION = new Bundle.BundleEntryComponent()
+        .setResource(new Location().setName(TEST_LOCATION_NAME).setId(TEST_LOCATION_ID));
 
     private static final String INPUT_JSON_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
         + "example-encounter-resource-1.json";
@@ -127,12 +130,10 @@ public class EncounterMapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
-      //  lenient().when(bundle.getEntry()).thenReturn(List.of(BUNDLE_WITH_CONSULTATION));
 
         lenient().when(bundle.getEntry()).thenReturn(List.of(
-            BUNDLE_WITH_CONSULTATION,
-            new Bundle.BundleEntryComponent()
-                .setResource(new Location().setName(TEST_LOCATION_NAME).setId(TEST_ID))
+            BUNDLE_ENTRY_WITH_CONSULTATION,
+            BUNDLE_ENTRY_WITH_LOCATION
         ));
 
         encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);

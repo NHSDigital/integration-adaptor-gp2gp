@@ -11,8 +11,6 @@ import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
-import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -80,10 +78,6 @@ public class InputBundle {
         } else {
             throw new EhrMapperException("Reference not supported resource type: " + reference);
         }
-    }
-
-    public List<Bundle.BundleEntryComponent> getEntries(){
-        return extractAllEntries(this.bundle);
     }
 
     public Resource getRequiredResource(IIdType reference) {
