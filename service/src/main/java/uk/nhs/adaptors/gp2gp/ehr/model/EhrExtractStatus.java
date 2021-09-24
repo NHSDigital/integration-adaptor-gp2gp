@@ -28,20 +28,62 @@ import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
 public class EhrExtractStatus implements TimeToLive {
     public static final String EHR_EXTRACT_STATUS_UNIQUE_INDEX = "ehr_extract_status_unique_index";
 
+    /**
+     * Random unique identifier of the EhrExtractStatus. UUIDv4 format
+     */
     @Id
     private String id;
+    /**
+     * Time that the ehrExtractStatus was created / The start time of the EhrExtract Request being processed
+     */
     private Instant created;
+    /**
+     * Timestamp of most recent ehrExtractStatus update
+     */
     private Instant updatedAt;
+    /**
+     * Random unique identifier for tracking progress of the task through
+     */
     private String conversationId;
+    /**
+     * Database Object that tracks information on the received request
+     */
     private EhrRequest ehrRequest;
+    /**
+     * Database Object that tracks the retrieval and storage of the patients structured record
+     */
     private GpcAccessStructured gpcAccessStructured;
+    /**
+     * Database Object that tracks the retrieval and storage of the patients documents
+     */
     private GpcAccessDocument gpcAccessDocument;
+    /**
+     * Database Object that tracks when the ehrExtract is sent to the requesting system
+     */
     private EhrExtractCore ehrExtractCore;
+    /**
+     * Database Object that tracks the readiness of the ehrExtract being ready to send
+     */
     private EhrExtractCorePending ehrExtractCorePending;
+    /**
+     * Database Object that tracks when continue message is received from the requesting system
+     */
     private EhrContinue ehrContinue;
+    /**
+     * Database Object that tracks when the acknowledgement was sent to the requesting system
+     */
     private AckToRequester ackToRequester;
+    /**
+     * Database Object that tracks when we begin waiting for acknowledgement from the requesting system
+     */
     private AckPending ackPending;
+    /**
+     * Database Object that tracks when the acknowledgement was received from the requesting system
+     */
     private EhrReceivedAcknowledgement ehrReceivedAcknowledgement;
+    /**
+     * Database Object that tracks errors at any point in the transformation process
+     */
     private Error error;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {

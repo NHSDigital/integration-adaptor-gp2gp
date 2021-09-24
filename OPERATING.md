@@ -78,6 +78,8 @@ Follow Azure documentation on Cosmos DB's API for MongoDB
 ## Database Design
 
 TODO: Document database design
+Adaptor database object is defined and documented in Java source code:
+* [EhrExtractStatus.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/blob/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/model/EhrExtractStatus.java)
 
 ## Detecting Failed GP2GP Transfers
 
