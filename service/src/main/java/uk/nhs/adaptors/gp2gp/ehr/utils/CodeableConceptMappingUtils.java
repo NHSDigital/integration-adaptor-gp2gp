@@ -49,8 +49,8 @@ public class CodeableConceptMappingUtils {
             .map(Coding::getCode)
             .anyMatch(codeLists::contains);
     }
-    
-    private static String getExtensionTermText(List<Extension> extensions){
+
+    private static String getExtensionTermText(List<Extension> extensions) {
         return extensions.stream()
             .filter(extension -> extension.getUrl().equals(DISPLAY_EXTENSION_URL))
             .map(Extension.class::cast)
