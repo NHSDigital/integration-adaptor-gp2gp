@@ -98,14 +98,41 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class EhrRequest {
+        /**
+         * UUID for tracking the journey of the request
+         */
         private String requestId;
+        /**
+         * NHS Number for patient being migrated
+         */
         private String nhsNumber;
+        /**
+         * todo: find out what these are
+         */
         private String fromPartyId;
+        /**
+         * todo: find out what these are
+         */
         private String toPartyId;
+        /**
+         * todo: find out what these are
+         */
         private String fromAsid;
+        /**
+         * todo: find out what these are
+         */
         private String toAsid;
+        /**
+         * todo: find out what these are
+         */
         private String fromOdsCode;
+        /**
+         * todo: find out what these are
+         */
         private String toOdsCode;
+        /**
+         * todo: find out what these are
+         */
         private String messageId;
     }
 
@@ -114,12 +141,33 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class GpcDocument {
+        /**
+         * Unique identifier of the GpcDocument in GPC Document storage. UUIDv4 format
+         */
         private String documentId;
+        /**
+         * URL of the document resource to retrieve from GPC
+         */
         private String accessDocumentUrl;
+        /**
+         * Name of the document as stored in configured storage todo:// check this is correct
+         */
         private String objectName;
+        /**
+         * Time that the document was retrieved
+         */
         private Instant accessedAt;
+        /**
+         * The id of the task created to retrieve the document
+         */
         private String taskId;
+        /**
+         * The ID of the message this is in response todo:// check this is right
+         */
         private String messageId;
+        /**
+         * Details of when respective documents were sent to MHS Outbound
+         */
         private GpcAccessDocument.SentToMhs sentToMhs;
     }
 
@@ -128,9 +176,21 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class GpcAccessStructured {
+        /**
+         * Name of the Structured Record as stored in configured storage todo:// check this is correct
+         */
         private String objectName;
+        /**
+         * Time that the Structured Record was retrieved
+         */
         private Instant accessedAt;
+        /**
+         * The ID of the task created to retrieve the Structured Record
+         */
         private String taskId;
+        /**
+         * The ID of the GpcDocument that is attached to the record
+         */
         private GpcDocument attachment;
     }
 
@@ -139,7 +199,13 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class GpcAccessDocument {
+        /**
+         * List of documents that are linked to the request
+         */
         private List<GpcDocument> documents;
+        /**
+         * TODO:// check this
+         */
         private String patientId;
 
         @Data
@@ -147,8 +213,17 @@ public class EhrExtractStatus implements TimeToLive {
         @Document
         @Builder
         public static class SentToMhs {
+            /**
+             * The list of message ids for the outbound messages
+             */
             private List<String> messageId;
+            /**
+             * Time that messages were sent to MHS Outbound
+             */
             private String sentAt;
+            /**
+             * The ID of the task created to send the documents to MHS
+             */
             private String taskId;
         }
     }
@@ -158,7 +233,13 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class EhrExtractCore {
+        /**
+         * The time the EhrExtractCore was sent
+         */
         private Instant sentAt;
+        /**
+         * The ID of the task created to send the EhrExtractCore
+         */
         private String taskId;
     }
 
@@ -167,7 +248,13 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class EhrExtractCorePending {
+        /**
+         * The time the EhrExtractCore was pending being sent
+         */
         private Instant sentAt;
+        /**
+         * The ID of the task created to send the EhrExtractCore
+         */
         private String taskId;
     }
 
@@ -176,6 +263,9 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class EhrContinue {
+        /**
+         * The time that the "continue" message was received from requesting system
+         */
         private Instant received;
     }
 
@@ -184,10 +274,25 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class AckToRequester {
+        /**
+         * The ID of the task created to send an ACK back to the requesting system
+         */
         private String taskId;
+        /**
+         * The ID of the task created to send the EhrExtractCore
+         */
         private String messageId;
+        /**
+         * The type of acknowledgement being sent
+         */
         private String typeCode;
+        /**
+         * The reason for the acknowledgement
+         */
         private String reasonCode;
+        /**
+         * Details of any errors that may have occurred
+         */
         private String detail;
     }
 
@@ -196,12 +301,25 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class AckPending {
+        /**
+         * The ID of the task created to send an ACK back to the requesting system
+         */
         private String taskId;
+        /**
+         * The ID of the message this is in response todo:// check this is right
+         */
         private String messageId;
+        /**
+         * Type code for the acknowledgement being sent to the Requesting System
+         */
         private String typeCode;
+        /**
+         * Time that ack the acknowledgement was pending to be sent
+         */
         private String updatedAt;
     }
 
+    // TODO: 24/09/2021 Check purpose of these objects 
     @Data
     @AllArgsConstructor
     @Document
