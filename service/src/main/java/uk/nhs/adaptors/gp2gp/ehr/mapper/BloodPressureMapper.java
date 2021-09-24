@@ -22,8 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareAvailabilityTime;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareAvailabilityTimeForObservationStatement;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareAvailabilityTimeForObservation;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForObservation;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils.loadTemplate;
 
@@ -64,7 +63,7 @@ public class BloodPressureMapper {
             .isNested(isNested)
             .id(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getIdElement()))
             .effectiveTime(prepareEffectiveTimeForObservation(observation))
-            .availabilityTime(prepareAvailabilityTimeForObservationStatement(observation))
+            .availabilityTime(prepareAvailabilityTimeForObservation(observation))
             .compoundStatementCode(buildBloodPressureCode(observation));
 
         extractBloodPressureComponent(observation, SYSTOLIC_CODE).ifPresent(observationComponent -> {
@@ -86,7 +85,7 @@ public class BloodPressureMapper {
         extractNarrativeText(observation).ifPresent(narrativeText -> {
             builder.narrativeId(randomIdGeneratorService.createNewId());
             builder.narrativeText(narrativeText);
-            builder.narrativeAvailabilityTime(prepareAvailabilityTimeForObservationStatement(observation));
+            builder.narrativeAvailabilityTime(prepareAvailabilityTimeForObservation(observation));
         });
 
         if (observation.hasPerformer()) {
