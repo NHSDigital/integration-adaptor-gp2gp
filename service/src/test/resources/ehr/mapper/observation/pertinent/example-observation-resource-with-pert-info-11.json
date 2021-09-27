@@ -4,13 +4,7 @@
     "effectiveDateTime":"2019-06-01T10:30:00+00:00",
     "issued":"2019-06-01T10:30:00+00:00",
     "valueRatio": {
-        "numerator": {
-            "value": 10,
-            "unit": "test-unit"
-        },
-        "denominator": {
-            "value": 20,
-            "unit": "test-unit"
-        }
+        "numerator": {},
+        "denominator": {}
     }
 }
