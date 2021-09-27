@@ -1,5 +1,7 @@
 # Database Objects
 
+
+
 ## EHR Extract Status
 
 | Field Name                 | Datatype | Constraints                                                  |
@@ -117,15 +119,15 @@
 
 ## GPC Document
 
-| Field Name        | Datatype | Constraints |
-| ----------------- | -------- | ----------- |
-| documentId        | String   | UUID V4     |
-| accessDocumentUrl | String   | URL         |
-| accessedDate      | Date     | N/A         |
-| taskId            | String   | UUID V4     |
-| messageId         | String   | UUID V4     |
-| objectName        | String   | N/A         |
-| sentToMhs         | Object   | Sent To MHS |
+| Field Name        | Datatype | Constraints                             |
+| ----------------- | -------- | --------------------------------------- |
+| documentId        | String   | UUID V4                                 |
+| accessDocumentUrl | String   | URL                                     |
+| accessedDate      | Date     | N/A                                     |
+| taskId            | String   | UUID V4                                 |
+| messageId         | String   | UUID V4                                 |
+| objectName        | String   | N/A                                     |
+| sentToMhs         | Object   | [EHR Continue](database.md#sent-to-mhs) |
 
 
 
