@@ -10,13 +10,13 @@ Adaptor document tasks are defined and documented in Java source code:
 
 * [TaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/common/task/TaskDefinition.java)
 * [DocumentTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/DocumentTaskDefinition.java) 
-  * [Get GPC Document Task Example](/documentation/examples/Task queue payloads/GetGpcDocumentTaskDefinition)
+  * [Get GPC Document Task Example](/documentation/examples/Task_queue_payloads/GetGpcDocumentTaskDefinition)
 * [SendEhrExtractCoreTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendEhrExtractCoreTaskDefinition.java) 
-  * [Send EHR Extract Core Task Example](/documentation/examples/Task queue payloads/SendEhrExtractCoreTaskDefinition)
+  * [Send EHR Extract Core Task Example](/documentation/examples/Task_queue_payloads/SendEhrExtractCoreTaskDefinition)
 * [GetGpcStructuredTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/gpc/GetGpcStructuredTaskDefinition.java) 
-  * [Get GPC Structured Record Task Example](/documentation/examples/Task queue payloads/GetGpcStructuredTaskDefinition)
+  * [Get GPC Structured Record Task Example](/documentation/examples/Task_queue_payloads/GetGpcStructuredTaskDefinition)
 * [SendAcknowledgementTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendAcknowledgementTaskDefinition.java) 
-  * [Send Acknowledgement Task Example](/Users/elliotb/Documents/GP2GP/integration-adaptor-gp2gp/documentation/examples/Task queue payloads/sendAcknowledgementTaskDefinition)
+  * [Send Acknowledgement Task Example](/documentation/examples/Task_queue_payloads/sendAcknowledgementTaskDefinition)
 
 ## Logging and Tracing
 
