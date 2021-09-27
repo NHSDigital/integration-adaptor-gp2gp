@@ -50,7 +50,7 @@ public class PertinentInformationObservationValueMapper {
     private static final String CODEABLE_CONCEPT_VALUE_TEMPLATE = "Code Value: %s %s ";
     private static final String BOOLEAN_VALUE_TEMPLATE = "Boolean Value: %s ";
     private static final String RANGE_VALUE_TEMPLATE = "Range Value: %s ";
-    private static final String RATIO_VALUE_TEMPLATE = "Ratio Value: %s / %s ";
+    private static final String RATIO_VALUE_TEMPLATE = "Ratio Value: %s %s %s / %s %s %s ";
     private static final String TIME_VALUE_TEMPLATE = "Time Value: %s ";
     private static final String DATE_TIME_VALUE_TEMPLATE = "DateTime Value: %s ";
     private static final String PERIOD_VALUE_TEMPLATE = "Period Value: Start %s End %s ";

@@ -193,7 +193,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -242,7 +242,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -291,7 +291,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -340,7 +340,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -389,7 +389,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -438,7 +438,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -487,7 +487,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -536,7 +536,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -585,7 +585,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -634,7 +634,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -683,7 +683,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -732,7 +732,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -781,7 +781,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -830,7 +830,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -879,7 +879,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -928,7 +928,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -977,7 +977,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1026,7 +1026,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1075,7 +1075,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1124,7 +1124,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1173,7 +1173,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1222,7 +1222,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1271,7 +1271,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1320,7 +1320,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1369,7 +1369,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1418,7 +1418,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1467,7 +1467,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1516,7 +1516,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1565,7 +1565,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1614,7 +1614,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1663,7 +1663,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1712,7 +1712,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1761,7 +1761,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>EMIS Test Practice Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1804,14 +1804,6 @@
                 <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id nullFlavor="UNK"/>
@@ -1868,14 +1860,6 @@
                 <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0"/>
@@ -1915,14 +1899,6 @@
                 <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>

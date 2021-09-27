@@ -1,0 +1,114 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "AllergyIntolerance",
+                "id": "230D3D37-99E3-450A-AE88-B5AB802B7137",
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1",
+                        "extension": [
+                            {
+                                "url": "reasonEnded",
+                                "valueString": "Patient reports no subsequent recurrence on same medication"
+                            }
+                        ]
+                    }
+                ],
+                "clinicalStatus": "resolved",
+                "type": "allergy",
+                "category": [
+                    "medication"
+                ],
+                "criticality": "low",
+                "onsetDateTime": "1978-12-31",
+                "assertedDate": "2010-01-14T09:57:57.33+00:00",
+                "note": [
+                    {
+                        "text": "Example note text"
+                    }
+                ],
+                "lastOccurrence": "1978-12-31",
+                "code": {
+                    "text": "test"
+                }
+            }
+        },
+        {
+            "resource":{
+                "resourceType":"List",
+                "meta":{
+                    "profile":[
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "contained":[
+                    {
+                        "resourceType": "AllergyIntolerance",
+                        "id": "3",
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1",
+                                "extension": [
+                                    {
+                                        "url": "reasonEnded",
+                                        "valueString": "Patient reports no subsequent recurrence on same medication"
+                                    }
+                                ]
+                            }
+                        ],
+                        "clinicalStatus": "resolved",
+                        "type": "allergy",
+                        "category": [
+                            "medication"
+                        ],
+                        "criticality": "low",
+                        "onsetDateTime": "1978-12-31",
+                        "assertedDate": "2010-01-14T09:57:57.33+00:00",
+                        "note": [
+                            {
+                                "text": "Example note text"
+                            }
+                        ],
+                        "lastOccurrence": "1978-12-31",
+                        "code": {
+                            "text": "test"
+                        }
+                    }
+                ],
+                "status":"current",
+                "mode":"snapshot",
+                "title":"Ended allergies",
+                "code":{
+                    "coding":[
+                        {
+                            "system":"http://snomed.info/sct",
+                            "code":"1103671000000101",
+                            "display":"Ended allergies"
+                        }
+                    ]
+                },
+                "subject":{
+                    "identifier":{
+                        "system":"https://fhir.nhs.uk/Id/nhs-number",
+                        "value":"9690938622"
+                    }
+                },
+                "entry":[
+                    {
+                        "item":{
+                            "reference":"#3"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

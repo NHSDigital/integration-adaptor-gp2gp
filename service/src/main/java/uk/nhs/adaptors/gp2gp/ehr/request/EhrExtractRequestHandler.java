@@ -97,17 +97,17 @@ public class EhrExtractRequestHandler {
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {
-        return new EhrExtractStatus.EhrRequest(
-            getRequiredValue(payload, REQUEST_ID_PATH),
-            getRequiredValue(payload, NHS_NUMBER_PATH),
-            getRequiredValue(header, FROM_PARTY_ID_PATH),
-            getRequiredValue(header, TO_PARTY_ID_PATH),
-            getRequiredValue(payload, FROM_ASID_PATH),
-            getRequiredValue(payload, TO_ASID_PATH),
-            getRequiredValue(payload, FROM_ODS_CODE_PATH),
-            getRequiredValue(payload, TO_ODS_CODE_PATH),
-            getRequiredValue(header, MESSAGE_ID_PATH)
-        );
+        return EhrExtractStatus.EhrRequest.builder()
+            .requestId(getRequiredValue(payload, REQUEST_ID_PATH))
+            .nhsNumber(getRequiredValue(payload, NHS_NUMBER_PATH))
+            .fromPartyId(getRequiredValue(header, FROM_PARTY_ID_PATH))
+            .toPartyId(getRequiredValue(header, TO_PARTY_ID_PATH))
+            .fromAsid(getRequiredValue(payload, FROM_ASID_PATH))
+            .toAsid(getRequiredValue(payload, TO_ASID_PATH))
+            .fromOdsCode(getRequiredValue(payload, FROM_ODS_CODE_PATH))
+            .toOdsCode(getRequiredValue(payload, TO_ODS_CODE_PATH))
+            .messageId(getRequiredValue(header, MESSAGE_ID_PATH))
+            .build();
     }
 
     private String getRequiredValue(Document xml, String xpath) {

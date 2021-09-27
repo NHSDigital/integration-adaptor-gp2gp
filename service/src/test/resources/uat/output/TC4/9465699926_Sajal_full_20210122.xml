@@ -256,7 +256,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -890,7 +890,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -949,7 +949,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1008,7 +1008,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1067,7 +1067,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1112,7 +1112,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1527,7 +1527,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1572,7 +1572,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1785,7 +1785,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -1954,7 +1954,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2039,7 +2039,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2098,7 +2098,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2157,7 +2157,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2241,7 +2241,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2401,7 +2401,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2485,7 +2485,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2569,7 +2569,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2654,7 +2654,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2707,7 +2707,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2752,7 +2752,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -2852,7 +2852,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -3090,7 +3090,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -3149,7 +3149,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -3224,7 +3224,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -3412,7 +3412,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -3476,7 +3476,7 @@ Status: unknown</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -3556,7 +3556,7 @@ Sent: 07 Mar 2011 16:58</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -3618,7 +3618,7 @@ Administrative notes: blah notes</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -3677,7 +3677,7 @@ Administrative notes: blah notes</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -3849,7 +3849,7 @@ Dosage: 0.5 ml</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -3908,7 +3908,7 @@ Dosage: 0.5 ml</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -4199,7 +4199,7 @@ Dosage: 0.5 ml</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -4258,7 +4258,7 @@ Dosage: 0.5 ml</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -4317,7 +4317,7 @@ Dosage: 0.5 ml</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -4376,7 +4376,7 @@ Dosage: 0.5 ml</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -4487,7 +4487,7 @@ Dosage: 0.5 ml</text>
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Testvale Surgery</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
@@ -4540,14 +4540,6 @@ Dosage: 0.5 ml</text>
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -4621,14 +4613,6 @@ Dosage: 0.5 ml</text>
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -4702,14 +4686,6 @@ Dosage: 0.5 ml</text>
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -4783,14 +4759,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -4841,14 +4809,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -4899,14 +4859,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -4977,14 +4929,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -5035,14 +4979,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -5093,14 +5029,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -5196,14 +5124,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -5254,14 +5174,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -5312,14 +5224,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -5370,14 +5274,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -5443,14 +5339,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -5521,14 +5409,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -5629,14 +5509,6 @@ Dosage: 0.5 ml</text>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -5687,14 +5559,6 @@ Dosage: 0.5 ml</text>
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -5785,14 +5649,6 @@ Dosage: 0.5 ml</text>
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -5843,14 +5699,6 @@ Dosage: 0.5 ml</text>
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -5901,14 +5749,6 @@ Dosage: 0.5 ml</text>
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -5959,14 +5799,6 @@ Dosage: 0.5 ml</text>
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -6017,14 +5849,6 @@ Dosage: 0.5 ml</text>
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -6100,14 +5924,6 @@ Dosage: 0.5 ml</text>
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -6158,14 +5974,6 @@ Dosage: 0.5 ml</text>
                 <id root="9CB8DF0D-85DF-401E-9BF1-7A25555DB111" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="9CB8DF0D-85DF-401E-9BF1-7A25555DB111"/>
@@ -6205,14 +6013,6 @@ Dosage: 0.5 ml</text>
                 <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>

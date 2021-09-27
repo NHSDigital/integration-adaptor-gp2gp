@@ -60,6 +60,8 @@ public class ObservationMapper {
 
     private static final String COMMENT_NOTE_CODE = "37331000000100";
 
+    private boolean interpretationCodeMapped = false;
+
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
 
     private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
@@ -212,7 +214,7 @@ public class ObservationMapper {
 
         StringBuilder interpretationTextAndComment = new StringBuilder();
 
-        if (observation.hasInterpretation()) {
+        if (!interpretationCodeMapped && observation.hasInterpretation()) {
             CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
                 interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF);
             });
@@ -345,7 +347,13 @@ public class ObservationMapper {
             return observation.getInterpretation().getCoding().stream()
                 .filter(this::isInterpretationCode)
                 .findFirst()
-                .map(structuredObservationValueMapper::mapInterpretation);
+                .map(coding -> {
+                    String mappedValue = structuredObservationValueMapper.mapInterpretation(coding);
+                    if (StringUtils.isNotBlank(mappedValue)) {
+                        interpretationCodeMapped = true;
+                    }
+                    return mappedValue;
+                });
         }
 
         return Optional.empty();
