@@ -9,10 +9,14 @@ TODO: Sequence diagram "user journey" of Spine messages, tasks, and GPCC request
 Adaptor document tasks are defined and documented in Java source code:
 
 * [TaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/common/task/TaskDefinition.java)
-* [DocumentTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/DocumentTaskDefinition.java)
-* [SendEhrExtractCoreTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendEhrExtractCoreTaskDefinition.java)
-* [GetGpcStructuredTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/gpc/GetGpcStructuredTaskDefinition.java)
-* [SendAcknowledgementTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendAcknowledgementTaskDefinition.java)
+* [DocumentTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/DocumentTaskDefinition.java) 
+  * [Get GPC Document Task Example](/documentation/examples/Task queue payloads/GetGpcDocumentTaskDefinition)
+* [SendEhrExtractCoreTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendEhrExtractCoreTaskDefinition.java) 
+  * [Send EHR Extract Core Task Example](/documentation/examples/Task queue payloads/SendEhrExtractCoreTaskDefinition)
+* [GetGpcStructuredTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/gpc/GetGpcStructuredTaskDefinition.java) 
+  * [Get GPC Structured Record Task Example](/documentation/examples/Task queue payloads/GetGpcStructuredTaskDefinition)
+* [SendAcknowledgementTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendAcknowledgementTaskDefinition.java) 
+  * [Send Acknowledgement Task Example](/Users/elliotb/Documents/GP2GP/integration-adaptor-gp2gp/documentation/examples/Task queue payloads/sendAcknowledgementTaskDefinition)
 
 ## Logging and Tracing
 
