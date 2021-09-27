@@ -1,5 +1,3 @@
-[TOC]
-
 # Database Objects
 
 ## EHR Extract Status
