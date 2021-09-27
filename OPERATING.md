@@ -10,13 +10,13 @@ Adaptor document tasks are defined and documented in Java source code:
 
 * [TaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/common/task/TaskDefinition.java)
 * [DocumentTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/DocumentTaskDefinition.java) 
-  * [Get GPC Document Task Example](/documentation/examples/Task_queue_payloads/GetGpcDocumentTaskDefinition)
+  * [Get GPC Document Task Example](/documentation/examples/Task_queue_payloads/GetGpcDocumentTaskDefinition.md)
 * [SendEhrExtractCoreTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendEhrExtractCoreTaskDefinition.java) 
-  * [Send EHR Extract Core Task Example](/documentation/examples/Task_queue_payloads/SendEhrExtractCoreTaskDefinition)
+  * [Send EHR Extract Core Task Example](/documentation/examples/Task_queue_payloads/SendEhrExtractCoreTaskDefinition.md)
 * [GetGpcStructuredTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/gpc/GetGpcStructuredTaskDefinition.java) 
-  * [Get GPC Structured Record Task Example](/documentation/examples/Task_queue_payloads/GetGpcStructuredTaskDefinition)
+  * [Get GPC Structured Record Task Example](/documentation/examples/Task_queue_payloads/GetGpcStructuredTaskDefinition.md)
 * [SendAcknowledgementTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendAcknowledgementTaskDefinition.java) 
-  * [Send Acknowledgement Task Example](/documentation/examples/Task_queue_payloads/sendAcknowledgementTaskDefinition)
+  * [Send Acknowledgement Task Example](/documentation/examples/Task_queue_payloads/sendAcknowledgementTaskDefinition.md)
 
 ## Logging and Tracing
 
