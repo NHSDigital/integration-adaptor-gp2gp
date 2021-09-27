@@ -2,20 +2,20 @@
 
 ## EHR Extract Status
 
-| Field Name                 | Datatype | Constraints                   |
-| -------------------------- | -------- | ----------------------------- |
-| created                    | Date     | N/A                           |
-| updatedAt                  | Date     | N/A                           |
-| conversationId             | String   | UUID V4                       |
-| ehrRequest                 | Object   | EHR Request                   |
-| gpcAccessDocument          | Object   | GPC Access Document           |
-| gpcAccessStructured        | Object   | GPC Access Structured         |
-| ehrExtractCorePending      | Object   | EHR Extract Core Pending      |
-| ehrContrinue               | Object   | EHR Continue                  |
-| ehrExtractCore             | Object   | EHR Extract Core              |
-| ackPending                 | Object   | ACK Pending                   |
-| ackToRequester             | Object   | ACK To Requester              |
-| ehrReceivedAcknowledgement | Object   | EHR Receieved Acknowledgement |
+| Field Name                 | Datatype | Constraints                                            |
+| -------------------------- | -------- | ------------------------------------------------------ |
+| created                    | Date     | N/A                                                    |
+| updatedAt                  | Date     | N/A                                                    |
+| conversationId             | String   | UUID V4                                                |
+| ehrRequest                 | Object   | [EHR Request](database.md#ehr-request)                 |
+| gpcAccessDocument          | Object   | [GPC Access Document](database.md#gpc-access-document) |
+| gpcAccessStructured        | Object   | GPC Access Structured                                  |
+| ehrExtractCorePending      | Object   | EHR Extract Core Pending                               |
+| ehrContrinue               | Object   | EHR Continue                                           |
+| ehrExtractCore             | Object   | EHR Extract Core                                       |
+| ackPending                 | Object   | ACK Pending                                            |
+| ackToRequester             | Object   | ACK To Requester                                       |
+| ehrReceivedAcknowledgement | Object   | EHR Receieved Acknowledgement                          |
 
 
 
