@@ -2,20 +2,20 @@
 
 ## EHR Extract Status
 
-| Field Name                 | Datatype | Constraints                                            |
-| -------------------------- | -------- | ------------------------------------------------------ |
-| created                    | Date     | N/A                                                    |
-| updatedAt                  | Date     | N/A                                                    |
-| conversationId             | String   | UUID V4                                                |
-| ehrRequest                 | Object   | [EHR Request](database.md#ehr-request)                 |
-| gpcAccessDocument          | Object   | [GPC Access Document](database.md#gpc-access-document) |
-| gpcAccessStructured        | Object   | GPC Access Structured                                  |
-| ehrExtractCorePending      | Object   | EHR Extract Core Pending                               |
-| ehrContrinue               | Object   | EHR Continue                                           |
-| ehrExtractCore             | Object   | EHR Extract Core                                       |
-| ackPending                 | Object   | ACK Pending                                            |
-| ackToRequester             | Object   | ACK To Requester                                       |
-| ehrReceivedAcknowledgement | Object   | EHR Receieved Acknowledgement                          |
+| Field Name                 | Datatype | Constraints                                                  |
+| -------------------------- | -------- | ------------------------------------------------------------ |
+| created                    | Date     | N/A                                                          |
+| updatedAt                  | Date     | N/A                                                          |
+| conversationId             | String   | UUID V4                                                      |
+| ehrRequest                 | Object   | [EHR Request](database.md#ehr-request)                       |
+| gpcAccessDocument          | Object   | [GPC Access Document](database.md#gpc-access-document)       |
+| gpcAccessStructured        | Object   | [GPC Access Structured](database.md#gpc-access-structured)   |
+| ehrExtractCorePending      | Object   | [EHR Extract Core Pending](database.md#ehr-extract-core-pending) |
+| ehrContrinue               | Object   | [EHR Continue](database.md#ehr-continue)                     |
+| ehrExtractCore             | Object   | [EHR Extract Core](database.md#ehr-extract-core)             |
+| ackPending                 | Object   | [ACK Pending](database.md#ack-pending)                       |
+| ackToRequester             | Object   | [ACK To Requester](database.md#ack-to-requester)             |
+| ehrReceivedAcknowledgement | Object   | [EHR Receieved Acknowledgement](database.md#ehr-received-acknowledgement) |
 
 
 
@@ -37,21 +37,21 @@
 
 ## GPC Access Document
 
-| Field Name | Datatype       | Constraints |
-| ---------- | -------------- | ----------- |
-| patientId  | String         | N/A         |
-| documents  | Object (Array) | GpcDocument |
+| Field Name | Datatype       | Constraints                              |
+| ---------- | -------------- | ---------------------------------------- |
+| patientId  | String         | N/A                                      |
+| documents  | Object (Array) | [GPC Document](database.md#gpc-document) |
 
 
 
 ## GPC Access Structured
 
-| Field Name | Datatype | Constraints |
-| ---------- | -------- | ----------- |
-| attachment | Object   | GpcDocument |
-| accessedAt | Date     | N/A         |
-| objectName | String   | N/A         |
-| taskId     | String   | UUID V4     |
+| Field Name | Datatype | Constraints                              |
+| ---------- | -------- | ---------------------------------------- |
+| attachment | Object   | [GPC Document](database.md#gpc-document) |
+| accessedAt | Date     | N/A                                      |
+| objectName | String   | N/A                                      |
+| taskId     | String   | UUID V4                                  |
 
 
 
