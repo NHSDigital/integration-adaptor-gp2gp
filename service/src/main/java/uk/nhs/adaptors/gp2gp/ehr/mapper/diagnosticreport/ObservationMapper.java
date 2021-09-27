@@ -343,6 +343,7 @@ public class ObservationMapper {
     }
 
     private Optional<String> prepareInterpretation(Observation observation) {
+        interpretationCodeMapped = false;
         if (observation.hasInterpretation()) {
             return observation.getInterpretation().getCoding().stream()
                 .filter(this::isInterpretationCode)

@@ -75,6 +75,7 @@ public class ObservationStatementMapper {
                 structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
         }
 
+        interpretationCodeMapped = false;
         if (observation.hasInterpretation()) {
             observation.getInterpretation().getCoding().stream()
                 .filter(this::isInterpretationCode)
