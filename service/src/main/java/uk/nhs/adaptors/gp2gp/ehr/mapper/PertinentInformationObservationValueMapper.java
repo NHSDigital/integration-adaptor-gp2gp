@@ -48,7 +48,7 @@ public class PertinentInformationObservationValueMapper {
     private static final String CODEABLE_CONCEPT_VALUE_TEMPLATE = "Code Value: %s %s ";
     private static final String BOOLEAN_VALUE_TEMPLATE = "Boolean Value: %s ";
     private static final String RANGE_VALUE_TEMPLATE = "Range Value: %s ";
-    private static final String RATIO_VALUE_TEMPLATE = "Ratio Value: %s %s %s / %s %s %s ";
+    private static final String RATIO_VALUE_TEMPLATE = "Ratio Value: %s / %s ";
     private static final String TIME_VALUE_TEMPLATE = "Time Value: %s ";
     private static final String DATE_TIME_VALUE_TEMPLATE = "DateTime Value: %s ";
     private static final String PERIOD_VALUE_TEMPLATE = "Period Value: Start %s End %s ";
@@ -66,6 +66,8 @@ public class PertinentInformationObservationValueMapper {
     private static final String COMPONENT_QUANTITY_VALUE_TEMPLATE = "Quantity Value: %s";
     private static final String COMPONENT_STRING_VALUE_TEMPLATE = "String Value: %s";
     private static final String COMPONENT_DELIMITER_TEMPLATE = "[%s]";
+    private static final String QUANTITY_TEMPLATE = "%s %s %s";
+    private static final String QUANTITY_TEMPLATE_WITHOUT_COMPARATOR = "%s %s";
 
     public String mapObservationValueToPertinentInformation(Type value) {
         if (!isPertinentInformation(value)) {
@@ -170,19 +172,18 @@ public class PertinentInformationObservationValueMapper {
 
     private static String processRatio(Ratio value) {
         if (isNumeratorPresent(value) && isDenominatorPresent(value)) {
-            Quantity numerator = value.getNumerator();
-            Quantity denominator = value.getDenominator();
-
             return String.format(RATIO_VALUE_TEMPLATE,
-                numerator.getComparator().toCode(),
-                numerator.getValue(),
-                numerator.getUnit(),
-                denominator.getComparator().toCode(),
-                denominator.getValue(),
-                denominator.getUnit());
+                processQuantity(value.getNumerator()),
+                processQuantity(value.getDenominator()));
         }
 
         return StringUtils.EMPTY;
+    }
+
+    private static String processQuantity(Quantity quantity) {
+        return quantity.hasComparator()
+            ? String.format(QUANTITY_TEMPLATE, quantity.getComparator().toCode(), quantity.getValue(), quantity.getUnit())
+            : String.format(QUANTITY_TEMPLATE_WITHOUT_COMPARATOR, quantity.getValue(), quantity.getUnit());
     }
 
     private static String processTimeType(TimeType value) {
@@ -213,14 +214,12 @@ public class PertinentInformationObservationValueMapper {
 
     private static boolean isNumeratorPresent(Ratio ratio) {
         return ratio.hasNumerator()
-            && ratio.getNumerator().hasComparator()
             && ratio.getNumerator().hasValue()
             && ratio.getNumerator().hasUnit();
     }
 
     private static boolean isDenominatorPresent(Ratio ratio) {
         return ratio.hasDenominator()
-            && ratio.getDenominator().hasComparator()
             && ratio.getDenominator().hasValue()
             && ratio.getDenominator().hasUnit();
     }
