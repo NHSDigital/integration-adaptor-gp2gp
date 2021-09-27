@@ -1,0 +1,146 @@
+[TOC]
+
+# Database Objects
+
+## EHR Extract Status
+
+| Field Name                 | Datatype | Constraints                   |
+| -------------------------- | -------- | ----------------------------- |
+| created                    | Date     | N/A                           |
+| updatedAt                  | Date     | N/A                           |
+| conversationId             | String   | UUID V4                       |
+| ehrRequest                 | Object   | EHR Request                   |
+| gpcAccessDocument          | Object   | GPC Access Document           |
+| gpcAccessStructured        | Object   | GPC Access Structured         |
+| ehrExtractCorePending      | Object   | EHR Extract Core Pending      |
+| ehrContrinue               | Object   | EHR Continue                  |
+| ehrExtractCore             | Object   | EHR Extract Core              |
+| ackPending                 | Object   | ACK Pending                   |
+| ackToRequester             | Object   | ACK To Requester              |
+| ehrReceivedAcknowledgement | Object   | EHR Receieved Acknowledgement |
+
+
+
+## EHR Request
+
+| Field Name  | Datatype | Constraints |
+| ----------- | -------- | ----------- |
+| requestId   | String   | UUID V4     |
+| nhsNumber   | String   | NHS Number  |
+| fromPartyId | String   | N/A         |
+| toPartyId   | String   | N/A         |
+| fromAsid    | String   | N/A         |
+| toAsid      | String   | N/A         |
+| fromOdsCode | String   | N/A         |
+| toOdsCode   | String   | N/A         |
+| messageId   | String   | UUID V4     |
+
+
+
+## GPC Access Document
+
+| Field Name | Datatype       | Constraints |
+| ---------- | -------------- | ----------- |
+| patientId  | String         | N/A         |
+| documents  | Object (Array) | GpcDocument |
+
+
+
+## GPC Access Structured
+
+| Field Name | Datatype | Constraints |
+| ---------- | -------- | ----------- |
+| attachment | Object   | GpcDocument |
+| accessedAt | Date     | N/A         |
+| objectName | String   | N/A         |
+| taskId     | String   | UUID V4     |
+
+
+
+## EHR Extract Core Pending
+
+| Field Name | Datatype | Constraints |
+| ---------- | -------- | ----------- |
+| sentAt     | Date     | N/A         |
+| taskId     | String   | UUID V4     |
+
+
+
+## EHR Continue
+
+| Field Name | Datatype | Constraints |
+| ---------- | -------- | ----------- |
+| received   | Date     | N/A         |
+
+
+
+## EHR Extract Core
+
+| Field Name | Datatype | Constraints |
+| ---------- | -------- | ----------- |
+| sentAt     | Date     | N/A         |
+| taskId     | String   | UUID V4     |
+
+
+
+## ACK Pending
+
+| Field Name | Datatype | Constraints |
+| ---------- | -------- | ----------- |
+| messageId  | String   | UUID V4     |
+| taskId     | String   | UUID V4     |
+| typeCode   | String   | AA, AE      |
+| updatedAt  | Date     | N/A         |
+
+
+
+## ACK To Requester
+
+| Field Name | Datatype | Constraints |
+| ---------- | -------- | ----------- |
+| details    | String   | N/A         |
+| messageId  | String   | UUID V4     |
+| reasonCode | String   | N/A         |
+| taskId     | String   | UUID V4     |
+| typeCode   | String   | AA, AE      |
+
+
+
+## EHR Received Acknowledgement
+
+| Field Name         | Datatype | Constraints |
+| ------------------ | -------- | ----------- |
+| conversationClosed | Date     | N/A         |
+| messageRef         | String   | UUID V4     |
+| received           | Date     | N/A         |
+| rootId             | String   | UUID V4     |
+
+
+
+## GPC Document
+
+| Field Name        | Datatype | Constraints |
+| ----------------- | -------- | ----------- |
+| documentId        | String   | UUID V4     |
+| accessDocumentUrl | String   | URL         |
+| accessedDate      | Date     | N/A         |
+| taskId            | String   | UUID V4     |
+| messageId         | String   | UUID V4     |
+| objectName        | String   | N/A         |
+| sentToMhs         | Object   | Sent To MHS |
+
+
+
+## Sent To MHS
+
+| Field Name | Datatype       | Constraints |
+| ---------- | -------------- | ----------- |
+| messageId  | String (Array) | UUID V4's   |
+| sentAt     | Date           | N/A         |
+| taskId     | String         | UUID V4     |
+
+
+
+## Database entities
+
+![EHR Extract Status Structure](EhrExtractStatus.drawio.png "EHR Extract Status Structure")
