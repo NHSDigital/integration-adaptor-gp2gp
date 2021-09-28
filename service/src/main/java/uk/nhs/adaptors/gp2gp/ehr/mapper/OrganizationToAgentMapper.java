@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.ContactPoint;
-import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
