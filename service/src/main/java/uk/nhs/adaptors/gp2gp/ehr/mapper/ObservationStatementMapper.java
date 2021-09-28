@@ -52,7 +52,7 @@ public class ObservationStatementMapper {
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
             .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
             .code(prepareCode(observation))
-            .issued(StatementTimeMappingUtils.prepareAvailabilityTimeForObservationStatement(observation))
+            .issued(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation))
             .isNested(isNested)
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation));
 
