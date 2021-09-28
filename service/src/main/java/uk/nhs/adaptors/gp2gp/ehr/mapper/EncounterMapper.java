@@ -53,6 +53,10 @@ public class EncounterMapper {
         LOGGER.debug("Generating ehrComposition for Encounter {}", encounter.getId());
         String components = encounterComponentsMapper.mapComponents(encounter);
 
+        if (StringUtils.isBlank(components)) {
+            return StringUtils.EMPTY;
+        }
+        
         final IdMapper idMapper = messageContext.getIdMapper();
         AgentDirectory agentDirectory = messageContext.getAgentDirectory();
 
