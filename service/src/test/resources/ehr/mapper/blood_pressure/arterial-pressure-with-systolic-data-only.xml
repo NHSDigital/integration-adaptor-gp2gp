@@ -6,7 +6,7 @@
         <effectiveTime>
             <center value="20121008104149"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20121008104149"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
@@ -15,7 +15,7 @@
                 <effectiveTime>
                     <center value="20121008104149"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20121008104149"/>
                 <value xsi:type="PQ" value="120" unit="1"><translation value="120"><originalText>mmHg</originalText></translation></value>
             </ObservationStatement>
         </component>
