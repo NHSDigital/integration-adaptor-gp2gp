@@ -55,6 +55,8 @@ public class ObservationMapperTest {
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_with_data_absent_reason_and_interpretation_and_body_site_and_method.json";
     private static final String OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_with_value_quantity_and_reference_range.json";
+    private static final String OBSERVATION_WITH_REFERENCE_RANGE_AND_INTERPRETATION_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_with_reference_range_and_interpretation.json";
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_compound_statement_1.xml";
@@ -73,6 +75,9 @@ public class ObservationMapperTest {
             + "observation_compound_statement_with_data_absent_reason_and_interpretation_and_body_site_and_method.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_quantity_and_reference_range.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCE_RANGE_AND_INTERPRETATION_XML =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_reference_range_and_interpretation.xml";
+
 
     @Mock
     private IdMapper idMapper;
@@ -171,6 +176,10 @@ public class ObservationMapperTest {
             Arguments.of(
                 OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON,
                 OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML
+            ),
+            Arguments.of(
+                OBSERVATION_WITH_REFERENCE_RANGE_AND_INTERPRETATION_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCE_RANGE_AND_INTERPRETATION_XML
             )
         );
     }
