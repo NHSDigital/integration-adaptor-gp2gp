@@ -52,11 +52,11 @@ public class CodeableConceptMappingUtils {
 
     private static String getExtensionTermText(List<Extension> extensions) {
         return extensions.stream()
-            .filter(extension -> extension.getUrl().equals(DISPLAY_EXTENSION_URL))
+            .filter(extension -> DISPLAY_EXTENSION_URL.equals(extension.getUrl()))
             .map(Extension.class::cast)
             .map(Extension::getExtension)
             .flatMap(List::stream)
-            .filter(extension -> extension.getUrl().equals(DESCRIPTION_DISPLAY_URL))
+            .filter(extension -> DESCRIPTION_DISPLAY_URL.equals(extension.getUrl()))
             .findFirst()
             .map(value -> value.getValue().toString())
             .orElse(StringUtils.EMPTY);
