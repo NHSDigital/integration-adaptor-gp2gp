@@ -80,7 +80,7 @@ public class ObservationStatementMapper {
                 .findFirst()
                 .map(structuredObservationValueMapper::mapInterpretation)
                 .orElse(StringUtils.EMPTY);
-            
+
             if (StringUtils.isNotBlank(interpretationCode)) {
                 observationStatementTemplateParametersBuilder.interpretation(interpretationCode);
                 interpretationCodeMapped = true;

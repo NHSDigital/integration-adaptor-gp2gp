@@ -51,7 +51,7 @@ public class ObservationMapper {
         TemplateUtils.loadTemplate("observation_statement_template.mustache");
     private static final Mustache OBSERVATION_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("observation_compound_statement_template.mustache");
-    
+
     private static final String INTERPRETATION_CODE = "<interpretationCode code=";
 
     private static final String DATA_ABSENT_PREFIX = "Data Absent: ";
@@ -105,7 +105,9 @@ public class ObservationMapper {
 
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
             .orElse(StringUtils.EMPTY);
-        String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen, isInterpretationCodeMapped(observationStatement))
+        String narrativeStatements = prepareNarrativeStatements(
+            observationAssociatedWithSpecimen,
+            isInterpretationCodeMapped(observationStatement))
             .orElse(StringUtils.EMPTY);
         String statementsForDerivedObservations = prepareStatementsForDerivedObservations(relatedObservations);
 
@@ -145,7 +147,9 @@ public class ObservationMapper {
         CompoundStatementClassCode classCode = CompoundStatementClassCode.CLUSTER;
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
             .orElse(StringUtils.EMPTY);
-        String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen, isInterpretationCodeMapped(observationStatement))
+        String narrativeStatements = prepareNarrativeStatements(
+            observationAssociatedWithSpecimen,
+            isInterpretationCodeMapped(observationStatement))
             .orElse(StringUtils.EMPTY);
 
         return observationStatement + narrativeStatements;
@@ -388,7 +392,7 @@ public class ObservationMapper {
     private boolean isRangeUnitValid(String unit, Quantity quantity) {
         return quantity.hasUnit() && !unit.equals(quantity.getUnit());
     }
-    
+
     private boolean isInterpretationCodeMapped(String observationStatementAsText) {
         return observationStatementAsText.contains(INTERPRETATION_CODE);
     }
