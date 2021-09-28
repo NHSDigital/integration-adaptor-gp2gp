@@ -87,7 +87,10 @@ public class AllergyStructureExtractor {
 
     private static String buildReactionExposureRoute(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent) {
         if (reactionComponent.hasExposureRoute() && extractTextOrCoding(reactionComponent.getExposureRoute()).isPresent()) {
-            return REACTION_EXPOSURE_ROUTE + extractTextOrCoding(reactionComponent.getExposureRoute()).get();
+            return Optional.ofNullable(reactionComponent.getExposureRoute())
+                .flatMap(CodeableConceptMappingUtils::extractTextOrCoding)
+                .map(value -> REACTION_EXPOSURE_ROUTE + value)
+                .orElse(StringUtils.EMPTY);
         }
         return StringUtils.EMPTY;
     }

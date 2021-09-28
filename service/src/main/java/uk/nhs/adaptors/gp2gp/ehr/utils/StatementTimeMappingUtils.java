@@ -110,12 +110,11 @@ public final class StatementTimeMappingUtils {
     }
 
     public static String prepareEffectiveTimeForAllergyIntolerance(String onsetDate, String endDate) {
-        if (!onsetDate.isEmpty() && !endDate.isEmpty()) {
+        if (!onsetDate.isEmpty()) {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, onsetDate);
-        } else if (!onsetDate.isEmpty()) {
-            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, onsetDate);
+        } else {
+            return DEFAULT_TIME_VALUE;
         }
-        return DEFAULT_TIME_VALUE;
     }
 
     public static String prepareEffectiveTimeForMedicationRequest(MedicationRequest medicationRequest) {
