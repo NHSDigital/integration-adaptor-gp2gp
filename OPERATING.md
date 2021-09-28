@@ -77,7 +77,7 @@ Follow Azure documentation on Cosmos DB's API for MongoDB
 
 ## Database Design
 
-TODO: Document database design
+Refer to [database.md](/documentation/database/database.md) for design details
 
 ## Detecting Failed GP2GP Transfers
 
