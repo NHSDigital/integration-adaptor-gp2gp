@@ -37,12 +37,15 @@ public class PertinentInformationObservationValueMapperTest {
         + "example-observation-resource-with-pert-info-9.json";
     private static final String INPUT_JSON_WITH_REFERENCE_RANGE_WITH_HIGH = TEST_FILES_DIRECTORY
         + "example-observation-resource-with-pert-info-10.json";
+    private static final String INPUT_JSON_WITH_RATIO_WITH_EMPTY_QUANTITIES = TEST_FILES_DIRECTORY
+            + "example-observation-resource-with-pert-info-11.json";
     private static final String INPUT_JSON_WITH_INVALID_VALUE = TEST_FILES_DIRECTORY
         + "invalid-value-observation-resource.json";
     private static final String EXPECTED_CODEABLE_CONCEPT_VALUE = "Code Value: test-code Test display ";
     private static final String EXPECTED_BOOLEAN = "Boolean Value: true ";
     private static final String EXPECTED_RANGE = "Range Value: Low 10.1 test-unit High 20.5 test-unit ";
     private static final String EXPECTED_RATIO = "Ratio Value: < 10 test-unit / > 20 test-unit ";
+    private static final String EXPECTED_RATIO_WITH_EMPTY_QUANTITIES = "Ratio Value:  /  ";
     private static final String EXPECTED_TIME = "Time Value: 12:30:10 ";
     private static final String EXPECTED_DATE_TIME = "DateTime Value: 2017-03-01 12:50:12 ";
     private static final String EXPECTED_PERIOD = "Period Value: Start 2017-03-01 12:50:12 End 2018-06-03 14:12:10 ";
@@ -100,7 +103,8 @@ public class PertinentInformationObservationValueMapperTest {
             Arguments.of(INPUT_JSON_WITH_RATIO, EXPECTED_RATIO),
             Arguments.of(INPUT_JSON_WITH_TIME, EXPECTED_TIME),
             Arguments.of(INPUT_JSON_WITH_DATE_TIME, EXPECTED_DATE_TIME),
-            Arguments.of(INPUT_JSON_WITH_PERIOD, EXPECTED_PERIOD)
+            Arguments.of(INPUT_JSON_WITH_PERIOD, EXPECTED_PERIOD),
+            Arguments.of(INPUT_JSON_WITH_RATIO_WITH_EMPTY_QUANTITIES, EXPECTED_RATIO_WITH_EMPTY_QUANTITIES)
         );
     }
 

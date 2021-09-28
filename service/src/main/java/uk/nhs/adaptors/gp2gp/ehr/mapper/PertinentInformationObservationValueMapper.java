@@ -2,8 +2,10 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -48,7 +50,7 @@ public class PertinentInformationObservationValueMapper {
     private static final String CODEABLE_CONCEPT_VALUE_TEMPLATE = "Code Value: %s %s ";
     private static final String BOOLEAN_VALUE_TEMPLATE = "Boolean Value: %s ";
     private static final String RANGE_VALUE_TEMPLATE = "Range Value: %s ";
-    private static final String RATIO_VALUE_TEMPLATE = "Ratio Value: %s %s %s / %s %s %s ";
+    private static final String RATIO_VALUE_TEMPLATE = "Ratio Value: %s / %s ";
     private static final String TIME_VALUE_TEMPLATE = "Time Value: %s ";
     private static final String DATE_TIME_VALUE_TEMPLATE = "DateTime Value: %s ";
     private static final String PERIOD_VALUE_TEMPLATE = "Period Value: Start %s End %s ";
@@ -169,20 +171,18 @@ public class PertinentInformationObservationValueMapper {
     }
 
     private static String processRatio(Ratio value) {
-        if (isNumeratorPresent(value) && isDenominatorPresent(value)) {
-            Quantity numerator = value.getNumerator();
-            Quantity denominator = value.getDenominator();
+        return String.format(RATIO_VALUE_TEMPLATE,
+            value.hasNumerator() ? processQuantity(value.getNumerator()) : StringUtils.EMPTY,
+            value.hasDenominator() ? processQuantity(value.getDenominator()) : StringUtils.EMPTY);
+    }
 
-            return String.format(RATIO_VALUE_TEMPLATE,
-                numerator.getComparator().toCode(),
-                numerator.getValue(),
-                numerator.getUnit(),
-                denominator.getComparator().toCode(),
-                denominator.getValue(),
-                denominator.getUnit());
-        }
-
-        return StringUtils.EMPTY;
+    private static String processQuantity(Quantity quantity) {
+        return Stream.of(quantity.hasComparator() ? quantity.getComparator().toCode() : null,
+                         quantity.getValue(),
+                         quantity.getUnit())
+            .filter(Objects::nonNull)
+            .map(Object::toString)
+            .collect(Collectors.joining(" "));
     }
 
     private static String processTimeType(TimeType value) {
@@ -209,20 +209,6 @@ public class PertinentInformationObservationValueMapper {
         }
 
         return StringUtils.EMPTY;
-    }
-
-    private static boolean isNumeratorPresent(Ratio ratio) {
-        return ratio.hasNumerator()
-            && ratio.getNumerator().hasComparator()
-            && ratio.getNumerator().hasValue()
-            && ratio.getNumerator().hasUnit();
-    }
-
-    private static boolean isDenominatorPresent(Ratio ratio) {
-        return ratio.hasDenominator()
-            && ratio.getDenominator().hasComparator()
-            && ratio.getDenominator().hasValue()
-            && ratio.getDenominator().hasUnit();
     }
 
     public String mapComponentToPertinentInformation(Observation observation) {
