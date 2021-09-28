@@ -51,6 +51,8 @@ public class ObservationMapper {
         TemplateUtils.loadTemplate("observation_statement_template.mustache");
     private static final Mustache OBSERVATION_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("observation_compound_statement_template.mustache");
+    
+    private static final String INTERPRETATION_CODE = "<interpretationCode code=";
 
     private static final String DATA_ABSENT_PREFIX = "Data Absent: ";
     private static final String INTERPRETATION_PREFIX = "Interpretation: ";
@@ -59,8 +61,6 @@ public class ObservationMapper {
     private static final String RANGE_UNITS_PREFIX = "Range Units: ";
 
     private static final String COMMENT_NOTE_CODE = "37331000000100";
-
-    private boolean interpretationCodeMapped = false;
 
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
 
@@ -105,7 +105,7 @@ public class ObservationMapper {
 
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
             .orElse(StringUtils.EMPTY);
-        String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen)
+        String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen, isInterpretationCodeMapped(observationStatement))
             .orElse(StringUtils.EMPTY);
         String statementsForDerivedObservations = prepareStatementsForDerivedObservations(relatedObservations);
 
@@ -145,7 +145,7 @@ public class ObservationMapper {
         CompoundStatementClassCode classCode = CompoundStatementClassCode.CLUSTER;
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
             .orElse(StringUtils.EMPTY);
-        String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen)
+        String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen, isInterpretationCodeMapped(observationStatement))
             .orElse(StringUtils.EMPTY);
 
         return observationStatement + narrativeStatements;
@@ -194,7 +194,7 @@ public class ObservationMapper {
         );
     }
 
-    private Optional<String> prepareNarrativeStatements(MultiStatementObservationHolder holder) {
+    private Optional<String> prepareNarrativeStatements(MultiStatementObservationHolder holder, boolean interpretationCodeMapped) {
         Observation observation = holder.getObservation();
 
         if (observation.getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX)) {
@@ -286,7 +286,9 @@ public class ObservationMapper {
             var derivedObservation = derivedObservationHolder.getObservation();
             Optional<String> observationStatement =
                 prepareObservationStatement(derivedObservationHolder, CompoundStatementClassCode.CLUSTER);
-            Optional<String> narrativeStatements = prepareNarrativeStatements(derivedObservationHolder);
+            Optional<String> narrativeStatements = prepareNarrativeStatements(
+                derivedObservationHolder,
+                isInterpretationCodeMapped(observationStatement.orElse(StringUtils.EMPTY)));
 
             if (observationStatement.isPresent() && narrativeStatements.isPresent()) {
                 String compoundStatementId = derivedObservationHolder.nextHl7InstanceIdentifier();
@@ -343,18 +345,11 @@ public class ObservationMapper {
     }
 
     private Optional<String> prepareInterpretation(Observation observation) {
-        interpretationCodeMapped = false;
         if (observation.hasInterpretation()) {
             return observation.getInterpretation().getCoding().stream()
                 .filter(this::isInterpretationCode)
                 .findFirst()
-                .map(coding -> {
-                    String mappedValue = structuredObservationValueMapper.mapInterpretation(coding);
-                    if (StringUtils.isNotBlank(mappedValue)) {
-                        interpretationCodeMapped = true;
-                    }
-                    return mappedValue;
-                });
+                .map(structuredObservationValueMapper::mapInterpretation);
         }
 
         return Optional.empty();
@@ -392,5 +387,9 @@ public class ObservationMapper {
 
     private boolean isRangeUnitValid(String unit, Quantity quantity) {
         return quantity.hasUnit() && !unit.equals(quantity.getUnit());
+    }
+    
+    private boolean isInterpretationCodeMapped(String observationStatementAsText) {
+        return observationStatementAsText.contains(INTERPRETATION_CODE);
     }
 }

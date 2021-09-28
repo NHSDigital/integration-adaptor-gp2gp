@@ -41,8 +41,6 @@ public class ObservationStatementMapper {
     private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
     private static final Set<String> INTERPRETATION_CODES = Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA");
 
-    private boolean interpretationCodeMapped = false;
-
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final PertinentInformationObservationValueMapper pertinentInformationObservationValueMapper;
@@ -75,26 +73,25 @@ public class ObservationStatementMapper {
                 structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
         }
 
-        interpretationCodeMapped = false;
+        boolean interpretationCodeMapped = false;
         if (observation.hasInterpretation()) {
-            observation.getInterpretation().getCoding().stream()
+            String interpretationCode = observation.getInterpretation().getCoding().stream()
                 .filter(this::isInterpretationCode)
                 .findFirst()
-                .ifPresent(coding -> {
-                    String mappedValue = structuredObservationValueMapper.mapInterpretation(coding);
-                    if (StringUtils.isNotBlank(mappedValue)) {
-                        interpretationCodeMapped = true;
-                    }
-                    observationStatementTemplateParametersBuilder.interpretation(mappedValue);
-                }
-            );
+                .map(structuredObservationValueMapper::mapInterpretation)
+                .orElse(StringUtils.EMPTY);
+            
+            if (StringUtils.isNotBlank(interpretationCode)) {
+                observationStatementTemplateParametersBuilder.interpretation(interpretationCode);
+                interpretationCodeMapped = true;
+            }
         }
 
         if (observation.hasPerformer()) {
             observationStatementTemplateParametersBuilder.participant(buildParticipant(observation));
         }
 
-        observationStatementTemplateParametersBuilder.comment(prepareComment(observation));
+        observationStatementTemplateParametersBuilder.comment(prepareComment(observation, interpretationCodeMapped));
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE,
             observationStatementTemplateParametersBuilder.build());
@@ -126,7 +123,7 @@ public class ObservationStatementMapper {
             .findFirst();
     }
 
-    private String prepareComment(Observation observation) {
+    private String prepareComment(Observation observation, boolean interpretationCodeMapped) {
         StringBuilder commentBuilder = new StringBuilder();
 
         if (observation.hasComponent()) {
