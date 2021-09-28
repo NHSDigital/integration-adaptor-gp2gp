@@ -100,7 +100,7 @@ public class ObservationMapper {
         String codeElement = prepareCodeElement(observation);
         String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation);
         String availabilityTimeElement =
-            StatementTimeMappingUtils.prepareAvailabilityTimeForObservationStatement(observation);
+            StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation);
         CompoundStatementClassCode classCode = prepareClassCode(relatedObservations);
 
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
@@ -165,7 +165,7 @@ public class ObservationMapper {
             .observationStatementId(holder.nextHl7InstanceIdentifier())
             .codeElement(prepareCodeElement(holder.getObservation()))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(holder.getObservation()))
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservationStatement(holder.getObservation()));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(holder.getObservation()));
 
         if (holder.getObservation().hasValue()) {
             Type value = holder.getObservation().getValue();
