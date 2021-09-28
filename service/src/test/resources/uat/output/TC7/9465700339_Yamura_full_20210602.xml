@@ -265,14 +265,6 @@
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -547,7 +539,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201113300"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201113300"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
@@ -557,7 +549,7 @@ Line breaks in the notes</text>
                 <effectiveTime>
                     <center value="20050201113300"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20050201113300"/>
                 <value xsi:type="PQ" value="180.000" unit="1"><translation value="180.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -570,7 +562,7 @@ Line breaks in the notes</text>
                 <effectiveTime>
                     <center value="20050201113300"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20050201113300"/>
                 <value xsi:type="PQ" value="60.000" unit="1"><translation value="60.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1105,14 +1097,6 @@ Line breaks in the notes</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1310,14 +1294,6 @@ High</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2155,14 +2131,6 @@ This should be normal according to the range High</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
@@ -2256,14 +2224,6 @@ This should be normal according to the range High</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
@@ -2339,14 +2299,6 @@ This should be normal according to the range High</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
@@ -2392,14 +2344,6 @@ This should be normal according to the range High</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -2451,14 +2395,6 @@ This should be normal according to the range High</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -2523,14 +2459,6 @@ This should be normal according to the range High</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -2576,14 +2504,6 @@ This should be normal according to the range High</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -3120,14 +3040,6 @@ This should be normal according to the range High</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -3184,14 +3096,6 @@ Abnormal</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -3243,7 +3147,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20060425122200"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425122200"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF"/>
@@ -3253,7 +3157,7 @@ Abnormal</text>
                 <effectiveTime>
                     <center value="20060425122200"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20060425122200"/>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -3265,7 +3169,7 @@ Abnormal</text>
                 <effectiveTime>
                     <center value="20060425122200"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20060425122200"/>
                 <value xsi:type="PQ" value="91.000" unit="1"><translation value="91.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -3292,7 +3196,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20060425122200"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425122200"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="D27E4A12-8EA6-44D7-AB94-821503546B45"/>
@@ -3302,7 +3206,7 @@ Abnormal</text>
                 <effectiveTime>
                     <center value="20060425122200"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20060425122200"/>
                 <value xsi:type="PQ" value="181.000" unit="1"><translation value="181.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -3315,7 +3219,7 @@ Abnormal</text>
                 <effectiveTime>
                     <center value="20060425122200"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20060425122200"/>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -3341,7 +3245,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20060425122200"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425122200"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="2DAE1ADC-4B4F-4081-84C4-E93E78346185"/>
@@ -3351,7 +3255,7 @@ Abnormal</text>
                 <effectiveTime>
                     <center value="20060425122200"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20060425122200"/>
                 <value xsi:type="PQ" value="182.000" unit="1"><translation value="182.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -3364,7 +3268,7 @@ Abnormal</text>
                 <effectiveTime>
                     <center value="20060425122200"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20060425122200"/>
                 <value xsi:type="PQ" value="92.000" unit="1"><translation value="92.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -3430,7 +3334,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425163000"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425163000"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="3D83E26F-FCA2-49F8-BC3D-6F0B8BB33C05"/>
@@ -3440,7 +3344,7 @@ and extending onto other lines as well.</text>
                 <effectiveTime>
                     <center value="20060425163000"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20060425163000"/>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -3452,7 +3356,7 @@ and extending onto other lines as well.</text>
                 <effectiveTime>
                     <center value="20060425163000"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20060425163000"/>
                 <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -3479,7 +3383,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425163000"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425163000"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="49C185EE-784C-497C-A7E0-C63A25C057B7"/>
@@ -3489,7 +3393,7 @@ and extending onto other lines as well.</text>
                 <effectiveTime>
                     <center value="20060425163000"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20060425163000"/>
                 <value xsi:type="PQ" value="180.000" unit="1"><translation value="180.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -3502,7 +3406,7 @@ and extending onto other lines as well.</text>
                 <effectiveTime>
                     <center value="20060425163000"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149"/>
+                <availabilityTime value="20060425163000"/>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -3539,14 +3443,6 @@ and extending onto other lines as well.</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -3598,14 +3494,6 @@ and extending onto other lines as well.</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -3678,14 +3566,6 @@ with special characters
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -3737,14 +3617,6 @@ with special characters
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -3821,14 +3693,6 @@ with special characters
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -4047,14 +3911,6 @@ abnormality only Very Low</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -4147,14 +4003,6 @@ abnormality only Very Low</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -4306,14 +4154,6 @@ abnormality only Very Low</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -4373,14 +4213,6 @@ abnormality only Very Low</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -4431,14 +4263,6 @@ abnormality only Very Low</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -4489,14 +4313,6 @@ abnormality only Very Low</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -4572,14 +4388,6 @@ abnormality only Very Low</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -4759,14 +4567,6 @@ abnormality only Very Low</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -4849,14 +4649,6 @@ This is the HepB antutbody notes Absent</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="03245FA5-238F-4857-878F-975411328E56"/>
@@ -4905,14 +4697,6 @@ This is the HepB antutbody notes Absent</text>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C"/>
@@ -4986,14 +4770,6 @@ This is the HepB antutbody notes Absent</text>
                 <id root="7217C8E7-F51A-46B4-8590-6FF88478C7A8" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="7217C8E7-F51A-46B4-8590-6FF88478C7A8"/>
@@ -5034,14 +4810,6 @@ This is the HepB antutbody notes Absent</text>
                 <id root="56B35114-6813-469B-AD36-F9E4944E7866" />
             </agentRef>
         </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="56B35114-6813-469B-AD36-F9E4944E7866"/>
