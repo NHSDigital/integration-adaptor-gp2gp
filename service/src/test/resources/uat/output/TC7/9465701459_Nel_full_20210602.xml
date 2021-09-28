@@ -584,7 +584,7 @@ note - this is obviously wrong?</text>
         <effectiveTime>
             <center value="20100714175500"/>
         </effectiveTime>
-        <availabilityTime value="20100714162813"/>
+        <availabilityTime value="20100714175500"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
@@ -595,7 +595,7 @@ note - this is obviously wrong?</text>
                 <effectiveTime>
                     <center value="20100714175500"/>
                 </effectiveTime>
-                <availabilityTime value="20100714162813"/>
+                <availabilityTime value="20100714175500"/>
                 <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -609,7 +609,7 @@ note - this is obviously wrong?</text>
                 <effectiveTime>
                     <center value="20100714175500"/>
                 </effectiveTime>
-                <availabilityTime value="20100714162813"/>
+                <availabilityTime value="20100714175500"/>
                 <value xsi:type="PQ" value="75.000" unit="1"><translation value="75.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -7708,9 +7708,9 @@ This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
-        <availabilityTime value="20100714162749"/>
+        <availabilityTime value="20100714"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100714162749" />
+            <time value="20100714" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -7729,7 +7729,7 @@ This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
-        <availabilityTime value="20100714162749"/>
+        <availabilityTime value="20100714"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="74FFD762-0391-492E-94FC-9B825E906898"/>
@@ -7740,7 +7740,7 @@ This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes
                 <effectiveTime>
                     <center value="20100714"/>
                 </effectiveTime>
-                <availabilityTime value="20100714162749"/>
+                <availabilityTime value="20100714"/>
                 <value xsi:type="PQ" value="134.000" unit="1"><translation value="134.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -7754,7 +7754,7 @@ This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes
                 <effectiveTime>
                     <center value="20100714"/>
                 </effectiveTime>
-                <availabilityTime value="20100714162749"/>
+                <availabilityTime value="20100714"/>
                 <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
