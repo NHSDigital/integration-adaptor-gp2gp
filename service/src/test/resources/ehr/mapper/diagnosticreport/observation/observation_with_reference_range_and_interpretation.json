@@ -1,0 +1,89 @@
+{
+    "resourceType": "Observation",
+    "id": "F8545C74-96E1-4B87-9E23-D8B383E97744",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+        ]
+    },
+    "identifier": [
+        {
+            "system": "https://EMISWeb/A82038",
+            "value": "DAED5527198545D9993EC5FF51F36828F8545C7496E14B879E23D8B383E97744"
+        }
+    ],
+    "status": "unknown",
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/observation-category",
+                    "code": "laboratory",
+                    "display": "Laboratory"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://read.info/readv2",
+                "code": "42R7.00",
+                "display": "Serum iron level",
+                "userSelected": true
+            },
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "2558201000000119"
+                            }
+                        ]
+                    }
+                ],
+                "system": "http://snomed.info/sct",
+                "code": "1019351000000105",
+                "display": "Serum iron level"
+            }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+    },
+    "effectiveDateTime": "2003-06-16",
+    "issued": "2003-06-18T08:00:00+01:00",
+    "comment": "Test comment",
+    "performer": [
+        {
+            "reference": "Practitioner/0D1A68BE05FC873EBCA5A9048F8E2A0861D7EF0F-XPSP"
+        }
+    ],
+    "interpretation": {
+        "coding": [
+            {
+                "system": "http://hl7.org/fhir/v2/0078",
+                "code": "A",
+                "display": "Abnormal"
+            }
+        ]
+    },
+    "valueQuantity":{
+        "value":1779.000,
+        "unit":"umol/L"
+    },
+    "referenceRange":[
+        {
+            "low":{
+                "value":11.000,
+                "unit": "umol/L"
+            },
+            "high": {
+                "value": 29.000,
+                "unit": "umol/L"
+            }
+        }
+    ]
+}
