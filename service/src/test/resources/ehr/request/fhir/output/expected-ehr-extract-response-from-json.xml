@@ -598,7 +598,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100714175500"/>
         </effectiveTime>
-        <availabilityTime value="20100714162813"/>
+        <availabilityTime value="20100714175500"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="test-id-3"/>
@@ -607,7 +607,7 @@ The line below contains special characters...
                 <effectiveTime>
                     <center value="20100714175500"/>
                 </effectiveTime>
-                <availabilityTime value="20100714162813"/>
+                <availabilityTime value="20100714175500"/>
                 <value xsi:type="PQ" value="120" unit="1"><translation value="120"><originalText>mmHg</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -619,7 +619,7 @@ The line below contains special characters...
                 <effectiveTime>
                     <center value="20100714175500"/>
                 </effectiveTime>
-                <availabilityTime value="20100714162813"/>
+                <availabilityTime value="20100714175500"/>
                 <value xsi:type="PQ" value="75" unit="1"><translation value="75"><originalText>mmHg</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -7816,9 +7816,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
-        <availabilityTime value="20100714162749"/>
+        <availabilityTime value="20100714"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100714162749" />
+            <time value="20100714" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -7836,7 +7836,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
-        <availabilityTime value="20100714162749"/>
+        <availabilityTime value="20100714"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="test-id-3"/>
@@ -7845,7 +7845,7 @@ The line below contains special characters...
                 <effectiveTime>
                     <center value="20100714"/>
                 </effectiveTime>
-                <availabilityTime value="20100714162749"/>
+                <availabilityTime value="20100714"/>
                 <value xsi:type="PQ" value="134" unit="1"><translation value="134"><originalText>mmHg</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -7857,7 +7857,7 @@ The line below contains special characters...
                 <effectiveTime>
                     <center value="20100714"/>
                 </effectiveTime>
-                <availabilityTime value="20100714162749"/>
+                <availabilityTime value="20100714"/>
                 <value xsi:type="PQ" value="90" unit="1"><translation value="90"><originalText>mmHg</originalText></translation></value>
             </ObservationStatement>
         </component>

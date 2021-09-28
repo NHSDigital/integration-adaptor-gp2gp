@@ -2999,7 +2999,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307162500"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="452AFD1A-B615-4E2C-A733-544A3426DA24"/>
@@ -3009,7 +3009,7 @@ Status: unknown</text>
                 <effectiveTime>
                     <center value="20110307162500"/>
                 </effectiveTime>
-                <availabilityTime value="20110922110028"/>
+                <availabilityTime value="20110307162500"/>
                 <value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -3022,7 +3022,7 @@ Status: unknown</text>
                 <effectiveTime>
                     <center value="20110307162500"/>
                 </effectiveTime>
-                <availabilityTime value="20110922110028"/>
+                <availabilityTime value="20110307162500"/>
                 <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -3167,7 +3167,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20110307164600"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307164600"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="67DE330E-EDFA-462F-8732-1E91E6DAED9C"/>
@@ -3177,7 +3177,7 @@ Status: unknown</text>
                 <effectiveTime>
                     <center value="20110307164600"/>
                 </effectiveTime>
-                <availabilityTime value="20110922110028"/>
+                <availabilityTime value="20110307164600"/>
                 <value xsi:type="PQ" value="125.000" unit="1"><translation value="125.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -3190,7 +3190,7 @@ Status: unknown</text>
                 <effectiveTime>
                     <center value="20110307164600"/>
                 </effectiveTime>
-                <availabilityTime value="20110922110028"/>
+                <availabilityTime value="20110307164600"/>
                 <value xsi:type="PQ" value="70.000" unit="1"><translation value="70.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
