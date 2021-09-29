@@ -1,0 +1,22 @@
+<component typeCode="COMP" >
+	<ObservationStatement classCode="OBS" moodCode="EVN">
+		<id root="test-id" />
+		<code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+		<statusCode code="COMPLETE" />
+		<effectiveTime>
+			<center nullFlavor="UNK"/>
+		</effectiveTime>
+		<availabilityTime nullFlavor="UNK" />
+		<pertinentInformation typeCode="PERT">
+			<sequenceNumber value="+1"/>
+			<pertinentAnnotation classCode="OBS" moodCode="EVN">
+				<text>Site: Left arm</text>
+			</pertinentAnnotation>
+		</pertinentInformation>
+		<Participant typeCode="PRF" contextControlCode="OP">
+			<agentRef classCode="AGNT">
+				<id root="test-id"/>
+			</agentRef>
+		</Participant>
+	</ObservationStatement>
+</component>

@@ -87,6 +87,12 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-no-primary-source.json";
     private static final String INPUT_JSON_WITH_PRIMARY_SOURCE_FALSE = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-primary-source-false.json";
+    private static final String INPUT_JSON_WITH_SITE_TERM_TEXT_DISPLAY_SAME = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-site-term-text-display-same.json";
+    private static final String INPUT_JSON_WITH_SITE_TERM_TEXT_DISPLAY_DIFFERENT = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-site-term-text-display-different.json";
+    private static final String INPUT_JSON_WITH_SITE_TERM_TEXT_NO_DISPLAY = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-site-term-text-no-display.json";
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -131,6 +137,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-no-primary-source.xml";
     private static final String OUTPUT_XML_WITH_IMMUNIZATION_PRIMARY_SOURCE_FALSE = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-primary-source-false.xml";
+    private static final String OUTPUT_XML_WITH_SITE_USING_TERM_TEXT = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-site-term-text.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -204,7 +212,10 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_SITE_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_USER_SELECTED, false),
             Arguments.of(INPUT_JSON_WITH_SITE_NO_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_NO_USER_SELECTED, false),
             Arguments.of(INPUT_JSON_WITH_NO_PRIMARY_SOURCE, OUTPUT_XML_WITH_IMMUNIZATION_NO_PRIMARY_SOURCE, false),
-            Arguments.of(INPUT_JSON_WITH_PRIMARY_SOURCE_FALSE, OUTPUT_XML_WITH_IMMUNIZATION_PRIMARY_SOURCE_FALSE, false)
+            Arguments.of(INPUT_JSON_WITH_PRIMARY_SOURCE_FALSE, OUTPUT_XML_WITH_IMMUNIZATION_PRIMARY_SOURCE_FALSE, false),
+            Arguments.of(INPUT_JSON_WITH_SITE_TERM_TEXT_DISPLAY_SAME, OUTPUT_XML_WITH_SITE_USING_TERM_TEXT, false),
+            Arguments.of(INPUT_JSON_WITH_SITE_TERM_TEXT_DISPLAY_DIFFERENT, OUTPUT_XML_WITH_SITE_USING_TERM_TEXT, false),
+            Arguments.of(INPUT_JSON_WITH_SITE_TERM_TEXT_NO_DISPLAY, OUTPUT_XML_WITH_SITE_USING_TERM_TEXT, false)
         );
     }
 
