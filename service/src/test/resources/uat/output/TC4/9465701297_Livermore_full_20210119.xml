@@ -411,7 +411,7 @@
         <effectiveTime>
             <center value="20200904"/>
         </effectiveTime>
-        <availabilityTime value="20200904134806"/>
+        <availabilityTime value="20200904"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
@@ -421,7 +421,7 @@
                 <effectiveTime>
                     <center value="20200904"/>
                 </effectiveTime>
-                <availabilityTime value="20200904134806"/>
+                <availabilityTime value="20200904"/>
                 <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -434,7 +434,7 @@
                 <effectiveTime>
                     <center value="20200904"/>
                 </effectiveTime>
-                <availabilityTime value="20200904134806"/>
+                <availabilityTime value="20200904"/>
                 <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -627,7 +627,7 @@
         <effectiveTime>
             <center value="20200907174500"/>
         </effectiveTime>
-        <availabilityTime value="20201105134936"/>
+        <availabilityTime value="20200907174500"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="8DF92722-5B5F-4324-866E-0328D5EA4286"/>
@@ -637,7 +637,7 @@
                 <effectiveTime>
                     <center value="20200907174500"/>
                 </effectiveTime>
-                <availabilityTime value="20201105134936"/>
+                <availabilityTime value="20200907174500"/>
                 <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -650,7 +650,7 @@
                 <effectiveTime>
                     <center value="20200907174500"/>
                 </effectiveTime>
-                <availabilityTime value="20201105134936"/>
+                <availabilityTime value="20200907174500"/>
                 <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1127,7 +1127,7 @@
         <effectiveTime>
             <center value="20201110115000"/>
         </effectiveTime>
-        <availabilityTime value="20201110115343"/>
+        <availabilityTime value="20201110115000"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="CF670325-7982-46BA-9A52-85C3C78FE40A"/>
@@ -1137,7 +1137,7 @@
                 <effectiveTime>
                     <center value="20201110115000"/>
                 </effectiveTime>
-                <availabilityTime value="20201110115343"/>
+                <availabilityTime value="20201110115000"/>
                 <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1150,7 +1150,7 @@
                 <effectiveTime>
                     <center value="20201110115000"/>
                 </effectiveTime>
-                <availabilityTime value="20201110115343"/>
+                <availabilityTime value="20201110115000"/>
                 <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1615,7 +1615,7 @@
         <effectiveTime>
             <center value="20201217124900"/>
         </effectiveTime>
-        <availabilityTime value="20201217125756"/>
+        <availabilityTime value="20201217124900"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C"/>
@@ -1625,7 +1625,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125756"/>
+                <availabilityTime value="20201217124900"/>
                 <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1638,7 +1638,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125756"/>
+                <availabilityTime value="20201217124900"/>
                 <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1658,7 +1658,7 @@
         <effectiveTime>
             <center value="20201217124900"/>
         </effectiveTime>
-        <availabilityTime value="20201217125757"/>
+        <availabilityTime value="20201217124900"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D"/>
@@ -1668,7 +1668,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125757"/>
+                <availabilityTime value="20201217124900"/>
                 <value xsi:type="PQ" value="100.000" unit="1"><translation value="100.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1681,7 +1681,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125757"/>
+                <availabilityTime value="20201217124900"/>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1708,7 +1708,7 @@
         <effectiveTime>
             <center value="20201217124900"/>
         </effectiveTime>
-        <availabilityTime value="20201217125757"/>
+        <availabilityTime value="20201217124900"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
@@ -1718,7 +1718,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125757"/>
+                <availabilityTime value="20201217124900"/>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1730,7 +1730,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125757"/>
+                <availabilityTime value="20201217124900"/>
                 <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1784,7 +1784,7 @@
         <effectiveTime>
             <center value="20201217124900"/>
         </effectiveTime>
-        <availabilityTime value="20201217125758"/>
+        <availabilityTime value="20201217124900"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7"/>
@@ -1794,7 +1794,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125758"/>
+                <availabilityTime value="20201217124900"/>
                 <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1807,7 +1807,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125758"/>
+                <availabilityTime value="20201217124900"/>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1833,7 +1833,7 @@
         <effectiveTime>
             <center value="20201217124900"/>
         </effectiveTime>
-        <availabilityTime value="20201217125758"/>
+        <availabilityTime value="20201217124900"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C"/>
@@ -1843,7 +1843,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125758"/>
+                <availabilityTime value="20201217124900"/>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1855,7 +1855,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125758"/>
+                <availabilityTime value="20201217124900"/>
                 <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1883,7 +1883,7 @@
         <effectiveTime>
             <center value="20201217124900"/>
         </effectiveTime>
-        <availabilityTime value="20201217125758"/>
+        <availabilityTime value="20201217124900"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
@@ -1893,7 +1893,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125758"/>
+                <availabilityTime value="20201217124900"/>
                 <value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -1906,7 +1906,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125758"/>
+                <availabilityTime value="20201217124900"/>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1933,7 +1933,7 @@
         <effectiveTime>
             <center value="20201217124900"/>
         </effectiveTime>
-        <availabilityTime value="20201217125758"/>
+        <availabilityTime value="20201217124900"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>
@@ -1943,7 +1943,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125758"/>
+                <availabilityTime value="20201217124900"/>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1955,7 +1955,7 @@
                 <effectiveTime>
                     <center value="20201217124900"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125758"/>
+                <availabilityTime value="20201217124900"/>
                 <value xsi:type="PQ" value="100.000" unit="1"><translation value="100.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -4531,9 +4531,9 @@
         <effectiveTime>
             <center value="20201217"/>
         </effectiveTime>
-        <availabilityTime value="20201217130131"/>
+        <availabilityTime value="20201217"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201217130131" />
+            <time value="20201217" />
             <agentRef classCode="AGNT">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
             </agentRef>
@@ -4552,7 +4552,7 @@
         <effectiveTime>
             <center value="20201217"/>
         </effectiveTime>
-        <availabilityTime value="20201217130131"/>
+        <availabilityTime value="20201217"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="E24CCAB7-FF1A-4F00-B125-D383D2BA80A1"/>
@@ -4562,7 +4562,7 @@
                 <effectiveTime>
                     <center value="20201217"/>
                 </effectiveTime>
-                <availabilityTime value="20201217130131"/>
+                <availabilityTime value="20201217"/>
                 <value xsi:type="PQ" value="127.000" unit="1"><translation value="127.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -4575,7 +4575,7 @@
                 <effectiveTime>
                     <center value="20201217"/>
                 </effectiveTime>
-                <availabilityTime value="20201217130131"/>
+                <availabilityTime value="20201217"/>
                 <value xsi:type="PQ" value="98.000" unit="1"><translation value="98.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -4596,9 +4596,9 @@
         <effectiveTime>
             <center value="20201217"/>
         </effectiveTime>
-        <availabilityTime value="20201217125908"/>
+        <availabilityTime value="20201217"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201217125908" />
+            <time value="20201217" />
             <agentRef classCode="AGNT">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
             </agentRef>
@@ -4618,7 +4618,7 @@
         <effectiveTime>
             <center value="20201217"/>
         </effectiveTime>
-        <availabilityTime value="20201217125908"/>
+        <availabilityTime value="20201217"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="0814FE49-058E-4B3C-9F74-040922A26099"/>
@@ -4628,7 +4628,7 @@
                 <effectiveTime>
                     <center value="20201217"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125908"/>
+                <availabilityTime value="20201217"/>
                 <value xsi:type="PQ" value="132.000" unit="1"><translation value="132.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -4641,7 +4641,7 @@
                 <effectiveTime>
                     <center value="20201217"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125908"/>
+                <availabilityTime value="20201217"/>
                 <value xsi:type="PQ" value="95.000" unit="1"><translation value="95.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -4662,9 +4662,9 @@
         <effectiveTime>
             <center value="20201217"/>
         </effectiveTime>
-        <availabilityTime value="20201217125844"/>
+        <availabilityTime value="20201217"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201217125844" />
+            <time value="20201217" />
             <agentRef classCode="AGNT">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
             </agentRef>
@@ -4684,7 +4684,7 @@
         <effectiveTime>
             <center value="20201217"/>
         </effectiveTime>
-        <availabilityTime value="20201217125844"/>
+        <availabilityTime value="20201217"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A"/>
@@ -4694,7 +4694,7 @@
                 <effectiveTime>
                     <center value="20201217"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125844"/>
+                <availabilityTime value="20201217"/>
                 <value xsi:type="PQ" value="121.000" unit="1"><translation value="121.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
@@ -4707,7 +4707,7 @@
                 <effectiveTime>
                     <center value="20201217"/>
                 </effectiveTime>
-                <availabilityTime value="20201217125844"/>
+                <availabilityTime value="20201217"/>
                 <value xsi:type="PQ" value="101.000" unit="1"><translation value="101.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
