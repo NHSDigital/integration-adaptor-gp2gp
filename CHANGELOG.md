@@ -6,6 +6,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.2] - 2021-09-29
+
+- Bug fixes
+
+### Known Issues and Limitations
+
+- https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316638
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316639
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316640
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316641
+
+### Added
+
+- NIAD-1613: move to latest EMIS test records (#344)
+- Testing SSP Proxy against wiremock (#334)
+
+### Fixed
+
+- NIAD-1592: Immunization: When site is processed into to text the term text is incorrect for synonyms (#349)
+- NIAD-1719: BloodPressure: Exception when no effectivePeriod.start (#351)
+- NIAD-1779: DiagnosticReport: interpretationCode is output in wrong place (#352)
+- NIAD-1560: observation value ratio is not processed (#354)
+- NIAD-1523: Translate ehrComposition Location (#346)
+- NIAD-1699: Observation: (Testing fixes) NIAD-1476 has resulted in spurious 'Interpretation' label being generated in most Observation output  (#343)
+- NIAD-1560: Observation: made comparator to be considered optional in valueRatio (#345)
+- NIAD-1526: MedicationRequest - confusion from priorPrescription/predecessor linkages (#342)
+- NIAD-1480: AllergyIntolerance: Resolved drug allergies not accessible in Bundle (#340)
+- NIAD-1389: document task queue payloads (#330)
+- NIAD-1701: Observation: effectivePeriod with start but no end causes exception (#339)
+- NIAD-1375: Immunization: primarySource attribute not mapped to notes text (#341)
+- NIAD-1561: Observation: referenceRange not placed in notes text if no valueQuantity present is not processed (#337)
+- NIAD-1699: Observation: NIAD-1476 has resulted in spurious 'Interpretation' label being generated in most Observation output (#335)
+- NIAD-1667: MedicationRequest: quantityText is not being processed (#336)
+- NIAD-1559: effectivetime low not handled by emisweb (testing changes) (#338)
+- NIAD-1559: EffectiveTime not handled by EmisWeb (#324)
+- NIAD-1539: DiagnosticReport: Spurious indent on 1st line of all pathology text/comment NarrativeStatement (#329)
+- NIAD-1593: Immunization: The userSelected code is not being selected for the site code (#326)
+- NIAD-1544: DiagnosticReport: Use AGGREGATE COMMENT SET instead of LABORATORY RESULT DETAIL(E136) (#328)
+
+
 ## [1.3.1] - 2021-09-10
 
 - Bug fixes
