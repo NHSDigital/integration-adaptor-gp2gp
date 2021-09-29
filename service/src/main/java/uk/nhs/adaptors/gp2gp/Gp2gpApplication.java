@@ -11,4 +11,5 @@ public class Gp2gpApplication {
         app.setBannerMode(Banner.Mode.OFF);
         app.run(args);
     }
+
 }
