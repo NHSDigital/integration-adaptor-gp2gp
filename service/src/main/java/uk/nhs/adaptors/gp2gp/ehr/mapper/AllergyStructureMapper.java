@@ -261,24 +261,22 @@ public class AllergyStructureMapper {
     }
 
     private void buildAuthor(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParametersBuilder templateParameter) {
-        if (invalidAsserter(allergyIntolerance)) {
-            if (allergyIntolerance.hasRecorder()) {
-                buildParticipant(allergyIntolerance.getRecorder(), ParticipantType.PERFORMER)
-                    .ifPresent(templateParameter::performer);
-            }
-        } else {
+        if (isValidAsserter(allergyIntolerance)) {
             buildParticipant(allergyIntolerance.getAsserter(), ParticipantType.PERFORMER)
+                .ifPresent(templateParameter::performer);
+        } else if (allergyIntolerance.hasRecorder()) {
+            buildParticipant(allergyIntolerance.getRecorder(), ParticipantType.PERFORMER)
                 .ifPresent(templateParameter::performer);
         }
     }
 
-    private Boolean invalidAsserter(AllergyIntolerance allergyIntolerance) {
+    private Boolean isValidAsserter(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasAsserter()) {
             if (allergyIntolerance.getAsserter().getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name())) {
-                return false;
+                return true;
             }
-            return true;
         }
-        return true;
+        return false;
     }
+
 }
