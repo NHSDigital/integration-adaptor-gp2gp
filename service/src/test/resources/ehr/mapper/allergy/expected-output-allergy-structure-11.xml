@@ -27,6 +27,11 @@
         <id root="394559384658936"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
