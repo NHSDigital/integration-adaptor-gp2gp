@@ -276,11 +276,9 @@ public class ObservationMapper {
     private CommentType resolveCommentType(Observation observation){
         return observation.getRelated()
             .stream()
-            .map(rel -> rel.getTarget().getResource())
-            .filter(res -> ResourceType.Observation.name().equals(res.getIdElement().getResourceType()))
-            .map(Observation.class::cast)
-            .anyMatch(e -> e.getCode().getCoding().stream().anyMatch(f -> COMMENT_NOTE_CODE.equals(f.getCode())))
-            ? CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
+            .map(e -> e.getTarget().getReferenceElement())
+            .anyMatch(e -> messageContext.getInputBundleHolder().getResource(e).isPresent()) ?
+            CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
     }
 
     private String mapObservationToNarrativeStatement(MultiStatementObservationHolder holder, String comment, String commentType) {
