@@ -77,10 +77,7 @@ public class AllergyStructureMapper {
                 .ifPresent(allergyStructureTemplateParameters::author);
         }
 
-        if (allergyIntolerance.hasAsserter()) {
-            buildParticipant(allergyIntolerance.getAsserter(), ParticipantType.PERFORMER)
-                .ifPresent(allergyStructureTemplateParameters::performer);
-        }
+        buildAuthor(allergyIntolerance, allergyStructureTemplateParameters);
 
         return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters.build());
     }
@@ -261,5 +258,27 @@ public class AllergyStructureMapper {
         )
             .map(Annotation::getText)
             .collect(Collectors.joining(StringUtils.SPACE));
+    }
+
+    private void buildAuthor(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParametersBuilder templateParameter) {
+        if (invalidAsserter(allergyIntolerance)) {
+            if (allergyIntolerance.hasRecorder()) {
+                buildParticipant(allergyIntolerance.getRecorder(), ParticipantType.PERFORMER)
+                        .ifPresent(templateParameter::performer);
+            }
+        } else {
+            buildParticipant(allergyIntolerance.getAsserter(), ParticipantType.PERFORMER)
+                .ifPresent(templateParameter::performer);
+        }
+    }
+
+    private Boolean invalidAsserter(AllergyIntolerance allergyIntolerance) {
+        if (allergyIntolerance.hasAsserter()) {
+            if (allergyIntolerance.getAsserter().getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name())) {
+                return false;
+            }
+            return true;
+        }
+        return true;
     }
 }
