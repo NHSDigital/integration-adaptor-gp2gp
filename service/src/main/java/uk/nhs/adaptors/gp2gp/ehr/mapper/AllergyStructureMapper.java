@@ -264,7 +264,7 @@ public class AllergyStructureMapper {
         if (invalidAsserter(allergyIntolerance)) {
             if (allergyIntolerance.hasRecorder()) {
                 buildParticipant(allergyIntolerance.getRecorder(), ParticipantType.PERFORMER)
-                        .ifPresent(templateParameter::performer);
+                    .ifPresent(templateParameter::performer);
             }
         } else {
             buildParticipant(allergyIntolerance.getAsserter(), ParticipantType.PERFORMER)
