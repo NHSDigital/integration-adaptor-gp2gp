@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.hasCode;
 
 import java.util.List;
 import java.util.Optional;
@@ -270,9 +271,7 @@ public class ObservationMapper {
     }
 
     private CommentType prepareCommentType(Observation observation) {
-        return observation.getCode().getCoding()
-            .stream()
-            .anyMatch(coding -> COMMENT_NOTE_CODE.equals(coding.getCode()))
+        return hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE))
             ? CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
     }
 
@@ -335,7 +334,7 @@ public class ObservationMapper {
     }
 
     private boolean observationHasNonCommentNoteCode(Observation observation) {
-        return observation.hasCode() && !CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE));
+        return observation.hasCode() && !hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE));
     }
 
     private String prepareCodeElement(Observation observation) {
