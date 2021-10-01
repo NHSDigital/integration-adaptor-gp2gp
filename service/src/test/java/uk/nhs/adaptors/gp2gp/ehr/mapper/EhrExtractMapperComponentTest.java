@@ -1,13 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.time.Instant;
-import java.util.stream.Stream;
-
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.junit.jupiter.api.AfterEach;
@@ -21,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -30,9 +21,18 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.MultiStatementObservati
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import java.io.IOException;
+import java.time.Instant;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -144,7 +144,8 @@ public class EhrExtractMapperComponentTest {
             new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new DiagnosticReportMapper(
                 messageContext, specimenMapper, participantMapper, randomIdGeneratorService
-            )
+            ),
+            new BloodPressureValidator()
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
@@ -155,7 +156,9 @@ public class EhrExtractMapperComponentTest {
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
             randomIdGeneratorService,
             encounterComponentsMapper,
-            documentReferenceToNarrativeStatementMapper);
+            documentReferenceToNarrativeStatementMapper,
+            new BloodPressureValidator()
+        );
 
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
         timestampService,

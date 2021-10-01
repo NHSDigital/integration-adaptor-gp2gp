@@ -13,21 +13,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
+import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class NonConsultationResourceMapperTest {
@@ -189,7 +187,9 @@ public class NonConsultationResourceMapperTest {
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
             randomIdGeneratorService,
             encounterComponentsMapper,
-            documentReferenceToNarrativeStatementMapper);
+            documentReferenceToNarrativeStatementMapper,
+            new BloodPressureValidator()
+        );
     }
 
 }
