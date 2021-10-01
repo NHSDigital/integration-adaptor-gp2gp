@@ -270,7 +270,7 @@ public class AllergyStructureMapper {
         }
     }
 
-    private Boolean isValidAsserter(AllergyIntolerance allergyIntolerance) {
+    private boolean isValidAsserter(AllergyIntolerance allergyIntolerance) {
         return allergyIntolerance.hasAsserter()
                 && allergyIntolerance.getAsserter().getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name());
     }
