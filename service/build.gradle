@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.5'
-	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id "checkstyle"
 	id "com.github.spotbugs" version "4.5.0"
@@ -35,7 +35,9 @@ dependencies {
 	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
 
 	// WebClient
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation ('org.springframework.boot:spring-boot-starter-webflux:2.5.5') {
+		exclude group: 'io.netty', module: 'netty-codec'
+	}
 	implementation('org.projectreactor:reactor-spring:1.0.1.RELEASE') {
 		exclude group: 'com.jayway.jsonpath', module: 'json-path'
 	}
@@ -52,8 +54,12 @@ dependencies {
 
 	// Infrastructure
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.11.955'
-	implementation 'com.azure:azure-storage-blob:12.10.0'
-	implementation 'org.apache.qpid:qpid-jms-client:0.56.0'
+	implementation ('com.azure:azure-storage-blob:12.10.0') {
+		exclude group: 'io.netty', module: 'netty-codec'
+	}
+	implementation ('org.apache.qpid:qpid-jms-client:1.2.0') {
+		exclude group: 'io.netty', module: 'netty-codec-http'
+	}
 
 	// Utils
 	implementation 'org.apache.commons:commons-lang3:3.11'
@@ -67,7 +73,9 @@ dependencies {
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "org.assertj:assertj-core:3.18.1"
-	testImplementation "org.testcontainers:testcontainers:1.15.1"
+	testImplementation ("org.testcontainers:testcontainers:1.15.1") {
+		exclude group: 'org.apache.commons', module: 'commons-compress'
+	}
 	testImplementation 'org.awaitility:awaitility:4.0.3'
 	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.0'
 	testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.27.2'
@@ -85,8 +93,14 @@ dependencies {
 		implementation('commons-io:commons-io:2.7') {
 			because 'to fix https://snyk.io/vuln/SNYK-JAVA-COMMONSIO-1277109'
 		}
-		implementation('io.netty:netty-codec-http:4.1.59.Final') {
+		implementation('io.netty:netty-codec-http:4.1.68.Final') {
 			because 'to fix SNYK-JAVA-IONETTY-1070799'
+		}
+		implementation('io.netty:netty-codec:4.1.68.Final') {
+			because 'to fix SNYK-JAVA-IONETTY-1584064'
+		}
+		implementation('org.apache.commons:commons-compress:1.21') {
+			because 'to fix SNYK-JAVA-ORGAPACHECOMMONS-1316638'
 		}
 		implementation('com.azure:azure-core-http-netty:1.9.1') {
 			because 'to fix SNYK-JAVA-IONETTY-1083991'

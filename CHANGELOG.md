@@ -12,11 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Known Issues and Limitations
 
-- https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
-- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316638
-- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316639
-- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316640
-- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316641
+- Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268]
+- Denial of Service (DoS) [High Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1584063]
+- Denial of Service (DoS) [High Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1584064]
 
 ### Added
 
