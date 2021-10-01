@@ -269,11 +269,11 @@ public class ObservationMapper {
         return Optional.empty();
     }
 
-    private CommentType prepareCommentType(Observation observation){
+    private CommentType prepareCommentType(Observation observation) {
         return observation.getCode().getCoding()
             .stream()
-            .anyMatch(coding -> COMMENT_NOTE_CODE.equals(coding.getCode())) ?
-            CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
+            .anyMatch(coding -> COMMENT_NOTE_CODE.equals(coding.getCode()))
+            ? CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
     }
 
     private String mapObservationToNarrativeStatement(MultiStatementObservationHolder holder, String comment, String commentType) {
