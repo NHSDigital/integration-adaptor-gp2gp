@@ -47,6 +47,15 @@ public class AgentPersonMapper {
             if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
                 builder.practitionerFamilyName(UNKNOWN);
             }
+        } else {
+            // Use organization name as the agentPerson family value
+            builder.practitioner(true);
+            var organizationName = messageContext.getInputBundleHolder()
+                .getResource(new IdType(agentKey.getOrganizationReference()))
+                .map(Organization.class::cast)
+                .map(organization -> organization.getName())
+                .get();
+            builder.practitionerFamilyName(organizationName.toString());
         }
 
         buildPractitionerRole(agentKey).ifPresent(builder::practitionerRole);
