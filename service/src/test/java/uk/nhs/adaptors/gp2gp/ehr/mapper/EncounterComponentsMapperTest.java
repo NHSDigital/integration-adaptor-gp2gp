@@ -19,15 +19,18 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.MultiStatementObservati
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
@@ -55,6 +58,8 @@ public class EncounterComponentsMapperTest {
     private CodeableConceptCdMapper codeableConceptCdMapper;
     @Mock
     private TimestampService timestampService;
+    @Mock
+    private BloodPressureValidator bloodPressureValidator;
 
     private EncounterComponentsMapper encounterComponentsMapper;
     private MessageContext messageContext;
@@ -66,6 +71,11 @@ public class EncounterComponentsMapperTest {
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(bloodPressureValidator.isValidBloodPressure(argThat(observation ->
+            CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(
+                "bloodPressureCode1", "bloodPressureCode2", "bloodPressureCode3"
+            ))
+        ))).thenReturn(true);
         messageContext = new MessageContext(randomIdGeneratorService);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
@@ -127,7 +137,7 @@ public class EncounterComponentsMapperTest {
             observationStatementMapper,
             requestStatementMapper,
             diagnosticReportMapper,
-            new BloodPressureValidator()
+            bloodPressureValidator
         );
     }
 
