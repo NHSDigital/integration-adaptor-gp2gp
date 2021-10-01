@@ -130,7 +130,7 @@
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100123140354
 
 This is some random free text</text>
