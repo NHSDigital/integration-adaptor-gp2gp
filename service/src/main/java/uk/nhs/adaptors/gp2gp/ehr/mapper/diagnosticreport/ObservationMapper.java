@@ -7,17 +7,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.xml.stream.events.Comment;
-
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.Opt;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
 import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -235,7 +231,7 @@ public class ObservationMapper {
         if (!interpretationTextAndComment.toString().isBlank()) {
             narrativeStatementsBlock.append(
                 mapObservationToNarrativeStatement(
-                    holder, interpretationTextAndComment.toString().trim(), resolveCommentType(observation).getCode()
+                    holder, interpretationTextAndComment.toString().trim(), prepareCommentType(observation).getCode()
                 )
             );
         }
@@ -273,11 +269,10 @@ public class ObservationMapper {
         return Optional.empty();
     }
 
-    private CommentType resolveCommentType(Observation observation){
-        return observation.getRelated()
+    private CommentType prepareCommentType(Observation observation){
+        return observation.getCode().getCoding()
             .stream()
-            .map(e -> e.getTarget().getReferenceElement())
-            .anyMatch(e -> messageContext.getInputBundleHolder().getResource(e).isPresent()) ?
+            .anyMatch(coding -> COMMENT_NOTE_CODE.equals(coding.getCode())) ?
             CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
     }
 

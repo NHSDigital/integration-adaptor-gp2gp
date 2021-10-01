@@ -78,6 +78,7 @@ public class ObservationMapperTest {
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCE_RANGE_AND_INTERPRETATION_XML =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_reference_range_and_interpretation.xml";
 
+    private static final Observation OBSERVATION_WITH_COMMENT_NOTE_CODE = (Observation) new Observation()
 
     @Mock
     private IdMapper idMapper;
