@@ -18,7 +18,9 @@ import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.Location;
+import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.joda.time.DateTime;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,9 @@ public class EncounterMapperTest {
     private static final Date CONSULTATION_DATE = Date.from(Instant.parse("2010-01-13T15:13:32Z"));
     private static final String TEST_LOCATION_NAME = "Test Location";
     private static final String TEST_LOCATION_ID = "EB3994A6-5A87-4B53-A414-913137072F57";
+    private static final String TEST_OBSERVATION_ID = "3377543D-5B1B-4C4F-BFF6-9F7BC3A1C3B8";
+    private static final String TEST_OBSERVATION_COMMENT = "Test comment";
+
     public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_CONSULTATION = new Bundle.BundleEntryComponent()
         .setResource(new ListResource()
             .setEncounter(new Reference()
@@ -50,7 +55,22 @@ public class EncounterMapperTest {
             .setCode(new CodeableConcept()
                 .setCoding(List.of(new Coding()
                     .setCode(CONSULTATION_LIST_CODE))))
-            .setDate(CONSULTATION_DATE));
+            .setDate(CONSULTATION_DATE)
+            .addEntry(new ListResource.ListEntryComponent().setItem(new Reference().setReference("List/EB3994A6-5A87-4B53-A414-913137072F09"))));
+    
+    public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_LIST_OBSERVATION = new Bundle.BundleEntryComponent()
+        .setResource(new ListResource()
+            .setEncounter(new Reference()
+                .setReference(CONSULTATION_REFERENCE))
+            .setCode(new CodeableConcept()
+                .setCoding(List.of(new Coding()
+                    .setCode("25851000000105"))))
+            .setDate(CONSULTATION_DATE)
+            .addEntry(new ListResource.ListEntryComponent().setItem(new Reference().setReference("Observation/"+TEST_OBSERVATION_ID)))
+            .setId("EB3994A6-5A87-4B53-A414-913137072F09"));
+
+    public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_OBSERVATION = new Bundle.BundleEntryComponent()
+        .setResource(new Observation().setIssued(DateTime.now().toDate()).setComment(TEST_OBSERVATION_COMMENT).setId(TEST_OBSERVATION_ID));
 
     public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_LOCATION = new Bundle.BundleEntryComponent()
         .setResource(new Location().setName(TEST_LOCATION_NAME).setId(TEST_LOCATION_ID));
@@ -135,7 +155,9 @@ public class EncounterMapperTest {
         messageContext.initialize(bundle);
         lenient().when(bundle.getEntry()).thenReturn(List.of(
             BUNDLE_ENTRY_WITH_CONSULTATION,
-            BUNDLE_ENTRY_WITH_LOCATION
+            BUNDLE_ENTRY_WITH_LOCATION,
+            BUNDLE_ENTRY_WITH_LIST_OBSERVATION,
+            BUNDLE_ENTRY_WITH_OBSERVATION
         ));
         encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
     }
