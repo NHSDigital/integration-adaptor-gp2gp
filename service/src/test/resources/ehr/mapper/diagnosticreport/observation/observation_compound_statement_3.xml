@@ -44,7 +44,7 @@ Test not available</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="Mapped-From-Observation/D0A358C9-4833-4827-B14B-E8515C25CB12-COMM"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20201215151713
 
 (q) - Normal - No Action</text>
