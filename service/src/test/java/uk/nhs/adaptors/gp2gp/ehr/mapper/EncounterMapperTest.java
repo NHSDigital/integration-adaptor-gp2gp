@@ -194,11 +194,11 @@ public class EncounterMapperTest {
     @Test
     public void When_MappingEncounterWithNoType_Expect_Exception() throws IOException {
         var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
-        
+
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_TYPE);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
-        
+
         when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
@@ -209,11 +209,11 @@ public class EncounterMapperTest {
     @Test
     public void When_MappingEncounterWithInvalidParticipantReferenceResourceType_Expect_Exception() throws IOException {
         var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
-        
+
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
-        
+
         when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
@@ -224,11 +224,11 @@ public class EncounterMapperTest {
     @Test
     public void When_MappingEncounterWithoutRecorderParticipant_Expect_Exception() throws IOException {
         var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
-        
+
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITHOUT_RECORDER_PARTICIPANT);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
-        
+
         when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
