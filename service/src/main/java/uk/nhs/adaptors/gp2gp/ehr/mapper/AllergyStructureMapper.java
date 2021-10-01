@@ -271,12 +271,8 @@ public class AllergyStructureMapper {
     }
 
     private Boolean isValidAsserter(AllergyIntolerance allergyIntolerance) {
-        if (allergyIntolerance.hasAsserter()) {
-            if (allergyIntolerance.getAsserter().getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name())) {
-                return true;
-            }
-        }
-        return false;
+        return allergyIntolerance.hasAsserter()
+                && allergyIntolerance.getAsserter().getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name());
     }
 
 }
