@@ -64,8 +64,6 @@ There will be 3 messages each having different NHS number, because the source `e
 
 When connecting to AMQP broker using a secured connection, `amqps://` protocol should be used instead of `amqp://`
 
-Using https://stackoverflow.com/a/44078785/249136 for generating UUID in javascript
-
 ### Downloading messages
 
 For PoC testing purpose only to download messages and confirm that all messages have different NHS number and each has a randomly generated ConversationId string property.
