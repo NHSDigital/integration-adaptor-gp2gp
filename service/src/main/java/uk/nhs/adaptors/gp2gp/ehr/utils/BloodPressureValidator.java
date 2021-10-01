@@ -1,11 +1,11 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.springframework.stereotype.Component;
-
-import java.util.Collection;
-import java.util.List;
 
 @Component
 public class BloodPressureValidator {
@@ -29,7 +29,9 @@ public class BloodPressureValidator {
     static final String DIASTOLIC_LYING_BLOOD_PRESSURE = "407557002";
 
     public boolean isValidBloodPressure(Observation observation) {
-        if (CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE, BLOOD_PRESSURE_CODE))) {
+        if (CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(
+            BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE, BLOOD_PRESSURE_CODE
+        ))) {
             if (hasBloodPressureCode(observation, List.of(SYSTOLIC_ARTERIAL_PRESSURE, SYSTOLIC_BLOOD_PRESSURE))) {
                 return hasBloodPressureCode(observation, List.of(DIASTOLIC_ARTERIAL_PRESSURE, DIASTOLIC_BLOOD_PRESSURE));
             }
@@ -40,8 +42,9 @@ public class BloodPressureValidator {
                 || hasTriple(observation, LYING_BLOOD_PRESSURE_CODE, SYSTOLIC_LYING_BLOOD_PRESSURE, DIASTOLIC_LYING_BLOOD_PRESSURE);
         }
     }
-    
-    private static boolean hasTriple(Observation observation, String panelCode, String systolicBloodPressureCode, String diastolicBloodPressureCode) {
+
+    private static boolean hasTriple(Observation observation, String panelCode, String systolicBloodPressureCode,
+        String diastolicBloodPressureCode) {
         return CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(panelCode))
             && hasBloodPressureCode(observation, List.of(systolicBloodPressureCode))
             && hasBloodPressureCode(observation, List.of(diastolicBloodPressureCode));

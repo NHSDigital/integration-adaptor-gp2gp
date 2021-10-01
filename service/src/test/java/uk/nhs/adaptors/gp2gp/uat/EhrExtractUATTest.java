@@ -1,32 +1,11 @@
 package uk.nhs.adaptors.gp2gp.uat;
 
-import lombok.SneakyThrows;
-import org.hl7.fhir.dstu3.model.Bundle;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
-import uk.nhs.adaptors.gp2gp.common.service.XPathService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.*;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.MultiStatementObservationHolderFactory;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
-import wiremock.org.custommonkey.xmlunit.XMLAssert;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.when;
+
+import static uk.nhs.adaptors.gp2gp.XsdValidator.validateFileContentAgainstSchema;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,9 +17,56 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.when;
-import static uk.nhs.adaptors.gp2gp.XsdValidator.validateFileContentAgainstSchema;
+import org.hl7.fhir.dstu3.model.Bundle;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import lombok.SneakyThrows;
+import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectoryMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentPersonMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.BloodPressureMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ConditionLinkSetMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.DiaryPlanStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.DocumentReferenceToNarrativeStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.EncounterComponentsMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.EncounterMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ImmunizationObservationStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.NonConsultationResourceMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationToNarrativeStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.MultiStatementObservationHolderFactory;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+import wiremock.org.custommonkey.xmlunit.XMLAssert;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrExtractUATTest {
@@ -167,7 +193,7 @@ public class EhrExtractUATTest {
     @MethodSource("testValueFilePathsTC4")
     public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutputTC4(String inputJson, String expectedOutputXml)
         throws IOException, SAXException {
-        final String expectedXmlResourcePath = OUTPUT_PATH + "TC4/"  + expectedOutputXml;
+        final String expectedXmlResourcePath = OUTPUT_PATH + "TC4/" + expectedOutputXml;
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC4/" + inputJson);
         inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
@@ -201,7 +227,7 @@ public class EhrExtractUATTest {
     @MethodSource("testValueFilePathsTC7")
     public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutputTC7(String inputJson, String expectedOutputXml)
         throws IOException, SAXException {
-        final String expectedXmlResourcePath = OUTPUT_PATH + "TC7/"  + expectedOutputXml;
+        final String expectedXmlResourcePath = OUTPUT_PATH + "TC7/" + expectedOutputXml;
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC7/" + inputJson);
         inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
