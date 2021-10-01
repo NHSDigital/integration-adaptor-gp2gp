@@ -19,9 +19,7 @@ import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.Location;
-import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
-import org.joda.time.DateTime;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,7 +59,7 @@ public class EncounterMapperTest {
 
     private static final String SAMPLE_EHR_COMPOSITION_COMPONENT = TEST_FILES_DIRECTORY
         + "sample-ehr-composition-component.xml";
-    
+
     private static final String INPUT_JSON_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
         + "example-encounter-resource-1.json";
     private static final String OUTPUT_XML_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
@@ -141,7 +139,7 @@ public class EncounterMapperTest {
 
     @BeforeEach
     public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
         lenient().when(bundle.getEntry()).thenReturn(List.of(
@@ -195,9 +193,13 @@ public class EncounterMapperTest {
 
     @Test
     public void When_MappingEncounterWithNoType_Expect_Exception() throws IOException {
+        var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
+        
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_TYPE);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+        
+        when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
@@ -206,9 +208,13 @@ public class EncounterMapperTest {
 
     @Test
     public void When_MappingEncounterWithInvalidParticipantReferenceResourceType_Expect_Exception() throws IOException {
+        var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
+        
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+        
+        when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
@@ -217,9 +223,13 @@ public class EncounterMapperTest {
 
     @Test
     public void When_MappingEncounterWithoutRecorderParticipant_Expect_Exception() throws IOException {
+        var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
+        
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITHOUT_RECORDER_PARTICIPANT);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+        
+        when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
@@ -228,8 +238,6 @@ public class EncounterMapperTest {
 
     @Test
     public void When_MappingEmptyConsultation_Expect_NoEhrCompositionGenerated() throws IOException {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_ENCOUNTER_NO_ASSOCIATED_CONSULTATION);
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
 

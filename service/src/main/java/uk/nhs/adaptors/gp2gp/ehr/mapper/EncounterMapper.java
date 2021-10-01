@@ -56,7 +56,7 @@ public class EncounterMapper {
         if (StringUtils.isBlank(components)) {
             return StringUtils.EMPTY;
         }
-        
+
         final IdMapper idMapper = messageContext.getIdMapper();
         AgentDirectory agentDirectory = messageContext.getAgentDirectory();
 
