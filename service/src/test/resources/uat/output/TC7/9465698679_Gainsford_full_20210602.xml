@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0" />
+    <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -70,7 +70,7 @@
     <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8" />
+        <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
                         <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -87,7 +87,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
+        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
         <code nullFlavor="UNK">
             <originalText>General Medical Practitioner</originalText>
         </code>
@@ -114,7 +114,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C"/>
+        <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
         <code nullFlavor="UNK">
             <originalText>General Medical Practitioner</originalText>
         </code>
@@ -168,7 +168,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
         <code nullFlavor="UNK">
             <originalText>General Medical Practitioner</originalText>
         </code>
@@ -197,7 +197,7 @@
 </responsibleParty>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C" />
+        <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -282,12 +282,17 @@
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06" />
+        <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
         <code code="1003231000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fissure sealant required">
     <originalText>Fissure sealant required</originalText>
 </code>
@@ -304,7 +309,7 @@
     </PlanStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
+        <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC" />
         <code code="980981000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Threats/reports of violence">
     <originalText>Threats/reports of violence</originalText>
 </code>
@@ -330,7 +335,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
+        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
         <code code="915831000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Patient died">
     <originalText>Patient died</originalText>
 </code>
@@ -356,7 +361,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039" />
+        <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400" />
         <code code="1662951000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Betel nut chewer">
     <originalText>Betel nut chewer</originalText>
 </code>
@@ -382,7 +387,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
+        <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -391,7 +396,7 @@
         <availabilityTime value="20100123132700" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
+                <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
                 <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -410,12 +415,17 @@
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+        <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C" />
         <code code="940541000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: allergies">
     <originalText>H/O: allergies</originalText>
 </code>
@@ -444,7 +454,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42" />
+        <id root="51463066-3087-424C-9265-EAAC461AFADE" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Nursing home visit note</originalText>
         </code>
@@ -456,7 +466,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20190128134114" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -469,12 +479,12 @@
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
+                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3"/>
+        <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -483,7 +493,7 @@
         <availabilityTime value="20190128133700" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="E4FAE359-1369-41C1-B39E-F54BB55E307A"/>
+                <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
                 <code nullFlavor="UNK">
     <originalText>[X]Beta-adrenorecep antag caus advers eff in ther use, NEC</originalText>
 </code>
@@ -500,7 +510,12 @@
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
+        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -511,7 +526,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361" />
+        <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -531,7 +546,7 @@
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="51463066-3087-424C-9265-EAAC461AFADE"/>
+        <id root="8DF92722-5B5F-4324-866E-0328D5EA4286"/>
         <statusCode code="ACTIVE"/>
         <effectiveTime>
             <low value="20100226"/>
@@ -548,7 +563,7 @@
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+                <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="ACTIVE"/>
                     <effectiveTime>
@@ -584,7 +599,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F" />
+        <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -604,7 +619,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D" />
+        <id root="DE743503-08D0-4381-903F-8C5691360B54" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -619,12 +634,12 @@
         <availabilityTime value="20100114095333" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
+                    <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B"/>
+                <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -639,7 +654,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806" />
+        <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -659,7 +674,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854" />
+        <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
@@ -674,12 +689,12 @@
         <availabilityTime value="20100114095356" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
+                    <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5"/>
+                <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -694,7 +709,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="5BB18E92-DABB-4C22-838A-410B4A278060" />
+        <id root="72DB5398-C825-4498-88CA-899A3653EC04" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -714,7 +729,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50" />
+        <id root="5BB18E92-DABB-4C22-838A-410B4A278060" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, major</originalText>
             <qualifier inverted="false">
@@ -729,7 +744,7 @@
         <availabilityTime value="20100114100555" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
+                <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -744,7 +759,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1" />
+        <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -764,7 +779,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F" />
+        <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
@@ -779,12 +794,12 @@
         <availabilityTime value="20100114095757" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594"/>
+                    <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
+                <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -799,7 +814,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037" />
+        <id root="DB7C94B1-01A6-491F-AC41-A36D88023069" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -819,7 +834,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="DF71EC06-9453-4AE7-9C3C-E42871252772" />
+        <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
@@ -834,7 +849,7 @@
         <availabilityTime value="20100114095728" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
+                <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -849,7 +864,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED" />
+        <id root="884E7627-796C-4C70-870A-D61B88AD2E57" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -869,7 +884,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="99792B9D-0715-4F2A-9934-1D5D4E975284" />
+        <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -884,7 +899,7 @@
         <availabilityTime value="20100114095412" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
+                <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -899,7 +914,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -919,7 +934,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86" />
+        <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -934,7 +949,7 @@
         <availabilityTime value="20100114095342" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -949,7 +964,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA" />
+        <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -969,7 +984,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
+        <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
@@ -984,7 +999,7 @@
         <availabilityTime value="20100114094956" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9"/>
+                <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -999,7 +1014,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="04AAA10E-3D26-4C86-8932-4BB384C94253" />
+        <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1019,7 +1034,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B" />
+        <id root="04AAA10E-3D26-4C86-8932-4BB384C94253" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -1034,7 +1049,7 @@
         <availabilityTime value="20100222134120" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00"/>
+                <id root="4209A033-4F0C-490E-8753-607E2799C3D8"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -1049,7 +1064,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E" />
+        <id root="CF670325-7982-46BA-9A52-85C3C78FE40A" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1069,7 +1084,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="4209A033-4F0C-490E-8753-607E2799C3D8" />
+        <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -1084,7 +1099,7 @@
         <availabilityTime value="20101001110006" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="82A39454-299F-432E-993E-5A6232B4E099"/>
+                <id root="85E19135-F780-437D-9633-24BF6C7E5D82"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -1099,7 +1114,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="C59316B2-2578-412C-8D00-5040C86BF306" />
+        <id root="BD418AAA-36ED-476E-967C-7CCBA1D0AAED" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1119,7 +1134,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="85E19135-F780-437D-9633-24BF6C7E5D82" />
+        <id root="C59316B2-2578-412C-8D00-5040C86BF306" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -1134,7 +1149,7 @@
         <availabilityTime value="20101012145055" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310"/>
+                <id root="F80F3DA3-0728-4880-BE71-C71251A49D08"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -1149,7 +1164,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7CB9F236-03CB-4AAD-BB0D-534201961315" />
+        <id root="1A4049B6-A065-4CB1-B222-77FBE702EA14" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1159,17 +1174,17 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20190128134522" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="F80F3DA3-0728-4880-BE71-C71251A49D08" />
+        <id root="7CB9F236-03CB-4AAD-BB0D-534201961315" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
@@ -1184,12 +1199,12 @@
         <availabilityTime value="20190128134522" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
+                <id root="90AB2301-DC3C-4A37-8EAB-AA171DB2B88E"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -1199,7 +1214,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD" />
+        <id root="5F44FD1C-BC5B-4B5F-8861-79F254D0D969" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1209,17 +1224,17 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20190321162524" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="90AB2301-DC3C-4A37-8EAB-AA171DB2B88E" />
+        <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -1234,12 +1249,12 @@
         <availabilityTime value="20190321162524" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
+                <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -1249,7 +1264,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088" />
+        <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1259,17 +1274,17 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time nullFlavor="UNK" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08"/>
+        <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1278,7 +1293,7 @@
         <availabilityTime nullFlavor="UNK" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
+                <id root="B4C0FCD1-D4B2-40F8-9B18-7B4C0AF946DB"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to pivampicillin</originalText>
 </code>
@@ -1295,7 +1310,12 @@
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -1306,7 +1326,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9" />
+        <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1321,12 +1341,12 @@
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="B4C0FCD1-D4B2-40F8-9B18-7B4C0AF946DB"/>
+        <id root="356F257A-A7D7-45DD-8B76-09C1DB97B40B"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1335,7 +1355,7 @@
         <availabilityTime value="19781231" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B"/>
+                <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to amoxycillin</originalText>
 </code>
@@ -1356,6 +1376,11 @@ Episodicity : First</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -1364,7 +1389,7 @@ Episodicity : First</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD" />
+        <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1379,12 +1404,12 @@ Episodicity : First</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
+        <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1393,7 +1418,7 @@ Episodicity : First</text>
         <availabilityTime value="19800321" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
+                <id root="4CF7DECB-3AE2-42C3-97F0-BB440F28D385"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to amoxycillin</originalText>
 </code>
@@ -1414,6 +1439,11 @@ Episodicity : Review</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -1422,7 +1452,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F" />
+        <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1437,12 +1467,12 @@ Episodicity : Review</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC"/>
+        <id root="B88A5FEC-A207-4E2A-93C4-04402D84C1BE"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1451,7 +1481,7 @@ Episodicity : Review</text>
         <availabilityTime value="20090112" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5"/>
+                <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
                 <code nullFlavor="UNK">
     <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
 </code>
@@ -1472,117 +1502,7 @@ Episodicity : First</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
-            </ObservationStatement>
-        </component>
-    </CompoundStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8DD1BB6C-F391-4E1F-B68F-A427448828CA" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100114"/>
-        </effectiveTime>
-        <availabilityTime value="20100114"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="6ACD49D4-7514-436A-93C3-6BCE26D8E3EA"/>
-        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100114"/>
-        </effectiveTime>
-        <availabilityTime value="20100114" />
-        <component typeCode="COMP" contextConductionInd="true">
-            <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
-                <code nullFlavor="UNK">
-</code>
-                <statusCode code="COMPLETE"/>
-                <effectiveTime>
-                    <center value="20100114"/>
-                </effectiveTime>
-                <availabilityTime value="20100114" />
-                <pertinentInformation typeCode="PERT">
-                    <sequenceNumber value="+1"/>
-                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text>Status: Active Significance : Major
-Episodicity : First</text>
-                    </pertinentAnnotation>
-                </pertinentInformation>
-                <Participant typeCode="AUT" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-            </ObservationStatement>
-        </component>
-    </CompoundStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="73CE838C-AB98-4BB2-8C69-4F6508BE99A0" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100114"/>
-        </effectiveTime>
-        <availabilityTime value="20100114"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="71F21980-0BAB-4831-944C-365717037140"/>
-        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100114"/>
-        </effectiveTime>
-        <availabilityTime value="20100114" />
-        <component typeCode="COMP" contextConductionInd="true">
-            <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
-                <code nullFlavor="UNK">
-    <originalText>[V]Personal history of bisphosphonate allergy</originalText>
-</code>
-                <statusCode code="COMPLETE"/>
-                <effectiveTime>
-                    <center value="20100114"/>
-                </effectiveTime>
-                <availabilityTime value="20100114" />
-                <pertinentInformation typeCode="PERT">
-                    <sequenceNumber value="+1"/>
-                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text>Status: Active Significance : Minor
-Episodicity : First</text>
-                    </pertinentAnnotation>
-                </pertinentInformation>
-                <Participant typeCode="AUT" contextControlCode="OP">
+                <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
@@ -1610,12 +1530,12 @@ Episodicity : First</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594"/>
+        <id root="73CE838C-AB98-4BB2-8C69-4F6508BE99A0"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1624,7 +1544,132 @@ Episodicity : First</text>
         <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD"/>
+                <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
+                <code nullFlavor="UNK">
+</code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100114"/>
+                </effectiveTime>
+                <availabilityTime value="20100114" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active Significance : Major
+Episodicity : First</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="C3A25ECF-E2B2-4861-A649-DC429738F252" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100114" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
+                <code nullFlavor="UNK">
+    <originalText>[V]Personal history of bisphosphonate allergy</originalText>
+</code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100114"/>
+                </effectiveTime>
+                <availabilityTime value="20100114" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active Significance : Minor
+Episodicity : First</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100114" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540"/>
                 <code nullFlavor="UNK">
     <originalText>[V]Personal history of bisphosphonate allergy</originalText>
 </code>
@@ -1645,6 +1690,11 @@ Episodicity : Ended</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -1653,7 +1703,7 @@ Episodicity : Ended</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7" />
+        <id root="9A4CF638-ABA1-4CF9-8055-C5846EE42542" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1668,12 +1718,12 @@ Episodicity : Ended</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21"/>
+        <id root="4067DD8E-2B9B-4270-A382-CE035D7D352D"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1682,7 +1732,7 @@ Episodicity : Ended</text>
         <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
+                <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
                 <code code="300909004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic reaction to wasp sting">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1703,177 +1753,7 @@ This is a Wasp Sting allergy note</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
-            </ObservationStatement>
-        </component>
-    </CompoundStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100114"/>
-        </effectiveTime>
-        <availabilityTime value="20100114"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="C3A25ECF-E2B2-4861-A649-DC429738F252"/>
-        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100114"/>
-        </effectiveTime>
-        <availabilityTime value="20100114" />
-        <component typeCode="COMP" contextConductionInd="true">
-            <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
-                <code nullFlavor="UNK">
-    <originalText>Drug hypersensitivity NOS</originalText>
-</code>
-                <statusCode code="COMPLETE"/>
-                <effectiveTime>
-                    <center value="20100114"/>
-                </effectiveTime>
-                <availabilityTime value="20100114" />
-                <pertinentInformation typeCode="PERT">
-                    <sequenceNumber value="+1"/>
-                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text>Status: Active asprin allergy Significance : Major
-Episodicity : First
-asprin allergy</text>
-                    </pertinentAnnotation>
-                </pertinentInformation>
-                <Participant typeCode="AUT" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-            </ObservationStatement>
-        </component>
-    </CompoundStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100114"/>
-        </effectiveTime>
-        <availabilityTime value="20100114"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
-        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100114"/>
-        </effectiveTime>
-        <availabilityTime value="20100114" />
-        <component typeCode="COMP" contextConductionInd="true">
-            <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
-                <code nullFlavor="UNK">
-    <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
-</code>
-                <statusCode code="COMPLETE"/>
-                <effectiveTime>
-                    <center value="20100114"/>
-                </effectiveTime>
-                <availabilityTime value="20100114" />
-                <pertinentInformation typeCode="PERT">
-                    <sequenceNumber value="+1"/>
-                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text>Status: Active Significance : Minor
-Episodicity : Flare Up</text>
-                    </pertinentAnnotation>
-                </pertinentInformation>
-                <Participant typeCode="AUT" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-            </ObservationStatement>
-        </component>
-    </CompoundStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="47D7EE76-9938-4063-9007-E74B6E92581E" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100114"/>
-        </effectiveTime>
-        <availabilityTime value="20100114"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A"/>
-        <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100114"/>
-        </effectiveTime>
-        <availabilityTime value="20100114" />
-        <component typeCode="COMP" contextConductionInd="true">
-            <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
-                <code code="91930004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to edible egg">
-    <originalText>Allergy to eggs</originalText>
-</code>
-                <statusCode code="COMPLETE"/>
-                <effectiveTime>
-                    <center value="20100114"/>
-                </effectiveTime>
-                <availabilityTime value="20100114" />
-                <pertinentInformation typeCode="PERT">
-                    <sequenceNumber value="+1"/>
-                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text>Status: Active Significance : Major
-Episodicity : First</text>
-                    </pertinentAnnotation>
-                </pertinentInformation>
-                <Participant typeCode="AUT" contextControlCode="OP">
+                <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
@@ -1901,12 +1781,12 @@ Episodicity : First</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
+        <id root="47D7EE76-9938-4063-9007-E74B6E92581E"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1915,7 +1795,197 @@ Episodicity : First</text>
         <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9"/>
+                <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86"/>
+                <code nullFlavor="UNK">
+    <originalText>Drug hypersensitivity NOS</originalText>
+</code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100114"/>
+                </effectiveTime>
+                <availabilityTime value="20100114" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active asprin allergy Significance : Major
+Episodicity : First
+asprin allergy</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100114" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450"/>
+                <code nullFlavor="UNK">
+    <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
+</code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100114"/>
+                </effectiveTime>
+                <availabilityTime value="20100114" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active Significance : Minor
+Episodicity : Flare Up</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100114" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33"/>
+        <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
+                <code code="91930004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to edible egg">
+    <originalText>Allergy to eggs</originalText>
+</code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100114"/>
+                </effectiveTime>
+                <availabilityTime value="20100114" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active Significance : Major
+Episodicity : First</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="86B82A72-9739-4517-8485-F15FF97CE21A" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100114" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="7AAC20C0-654A-446A-903F-2DFC0AA8B3F8"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B"/>
                 <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1936,6 +2006,11 @@ This is a note for anitbiotic allergy NOS</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -1944,7 +2019,7 @@ This is a note for anitbiotic allergy NOS</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7" />
+        <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1959,12 +2034,12 @@ This is a note for anitbiotic allergy NOS</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
+        <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1973,7 +2048,7 @@ This is a note for anitbiotic allergy NOS</text>
         <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450"/>
+                <id root="DECAA29B-D65A-45B0-805D-EC0BDE3DA971"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to Ethyol</originalText>
 </code>
@@ -1993,6 +2068,11 @@ This is a note for anitbiotic allergy NOS</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -2001,7 +2081,7 @@ This is a note for anitbiotic allergy NOS</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C" />
+        <id root="10720133-30C3-4145-9184-8713284C5A90" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2011,17 +2091,17 @@ This is a note for anitbiotic allergy NOS</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100809" />
             <agentRef classCode="AGNT">
-                <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
+                <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92"/>
+        <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2030,7 +2110,7 @@ This is a note for anitbiotic allergy NOS</text>
         <availabilityTime value="20100809" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33"/>
+                <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to Erythromid</originalText>
 </code>
@@ -2047,7 +2127,12 @@ This is a note for anitbiotic allergy NOS</text>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C"/>
+        <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -2058,7 +2143,7 @@ This is a note for anitbiotic allergy NOS</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E3ABD9D7-736E-47DB-A9A6-97D9898983D8" />
+        <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2073,12 +2158,12 @@ This is a note for anitbiotic allergy NOS</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C"/>
+        <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2087,7 +2172,7 @@ This is a note for anitbiotic allergy NOS</text>
         <availabilityTime value="20101012141200" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
+                <id root="77EE1EA7-135F-4541-99A5-F8D63433AE7D"/>
                 <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2106,6 +2191,11 @@ This is a note for anitbiotic allergy NOS</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -2114,7 +2204,7 @@ This is a note for anitbiotic allergy NOS</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2" />
+        <id root="EC6C913D-2276-43DF-B3C9-B13094B1EC26" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2124,17 +2214,17 @@ This is a note for anitbiotic allergy NOS</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="201812" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="9276C255-1641-4B9B-AD42-1A0FAD9189D3"/>
+        <id root="A01A1FB8-39F5-45D9-AF56-B8C480115AF2"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2143,7 +2233,7 @@ This is a note for anitbiotic allergy NOS</text>
         <availabilityTime value="201812" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
+                <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to EMIS Drug Groups/Constituents and Approved Names</originalText>
 </code>
@@ -2160,7 +2250,12 @@ This is a note for anitbiotic allergy NOS</text>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -2171,7 +2266,7 @@ This is a note for anitbiotic allergy NOS</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63" />
+        <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2181,17 +2276,17 @@ This is a note for anitbiotic allergy NOS</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="2018" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="DECAA29B-D65A-45B0-805D-EC0BDE3DA971"/>
+        <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2200,7 +2295,7 @@ This is a note for anitbiotic allergy NOS</text>
         <availabilityTime value="2018" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="AEB66D16-E1FA-462A-BC70-FBD16000E308"/>
+                <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17"/>
                 <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2216,7 +2311,12 @@ This is a note for anitbiotic allergy NOS</text>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -2227,7 +2327,7 @@ This is a note for anitbiotic allergy NOS</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="87102979-C329-4194-819B-D057AAEA625B" />
+        <id root="938365F3-8C68-4189-A550-FAB37F4F59C8" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2237,17 +2337,17 @@ This is a note for anitbiotic allergy NOS</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20190128" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
+        <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2256,7 +2356,7 @@ This is a note for anitbiotic allergy NOS</text>
         <availabilityTime value="20190128" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
+                <id root="90AB2301-DC3C-4A37-8EAB-AA171DB2B88E"/>
                 <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2274,7 +2374,12 @@ Allergy added as SNOMED code and as a problem</text>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -2285,7 +2390,7 @@ Allergy added as SNOMED code and as a problem</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF" />
+        <id root="54BF1314-A4AF-4A19-9BB9-32290AA6718B" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2295,17 +2400,17 @@ Allergy added as SNOMED code and as a problem</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20190128" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="10720133-30C3-4145-9184-8713284C5A90"/>
+        <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2314,7 +2419,7 @@ Allergy added as SNOMED code and as a problem</text>
         <availabilityTime value="20190128" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
+                <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to chloroquine</originalText>
 </code>
@@ -2331,7 +2436,12 @@ Allergy added as SNOMED code and as a problem</text>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -2342,7 +2452,7 @@ Allergy added as SNOMED code and as a problem</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64" />
+        <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2352,17 +2462,17 @@ Allergy added as SNOMED code and as a problem</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20190321" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="E2E18EA0-392E-43AD-8386-A3D94B2A9235"/>
+        <id root="886A145B-1825-4E79-B1DB-596666AE208A"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2371,7 +2481,7 @@ Allergy added as SNOMED code and as a problem</text>
         <availabilityTime value="20190321" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
+                <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to penicillins</originalText>
 </code>
@@ -2389,7 +2499,12 @@ Episodicity : First</text>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -2400,7 +2515,7 @@ Episodicity : First</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61" />
+        <id root="896104C7-9DC7-4E44-B77D-DB771691C344" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2410,17 +2525,17 @@ Episodicity : First</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20190321" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
+        <id root="730F742C-1164-45BF-9139-8484074E5995"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2429,7 +2544,7 @@ Episodicity : First</text>
         <availabilityTime value="20190321" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F"/>
+                <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to Beta-Adrenoceptor Blocking Drugs</originalText>
 </code>
@@ -2446,7 +2561,12 @@ Episodicity : First</text>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -2457,7 +2577,7 @@ Episodicity : First</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4F05B94B-999F-4699-AB93-EB90C79886B6" />
+        <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2477,7 +2597,7 @@ Episodicity : First</text>
         </Participant2>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17" />
+        <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920" />
         <code code="1662531000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dental recall - high caries in mother and siblings">
     <originalText>Dental recall - high caries in mother and siblings</originalText>
 </code>
@@ -2500,7 +2620,7 @@ Episodicity : First</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="46A43153-7A96-44D4-A14A-A63284061767" />
+        <id root="7374E13A-D408-460C-A021-3441347C5027" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2520,7 +2640,7 @@ Episodicity : First</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D" />
+        <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8" />
         <code code="408522002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Main spoken language Gaelic">
 </code>
         <statusCode code="COMPLETE" />
@@ -2548,7 +2668,7 @@ Episodicity : First</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="938365F3-8C68-4189-A550-FAB37F4F59C8" />
+        <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2568,7 +2688,7 @@ Episodicity : First</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7359502E-8EE3-416C-BD59-A298285418E6" />
+        <id root="09DAA58F-63BB-4B07-AD44-40F8C3E0109B" />
         <code code="160540005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Roman Catholic, follower of religion">
     <originalText>Roman Catholic</originalText>
 </code>
@@ -2597,7 +2717,7 @@ Episodicity : First</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4CF9262A-2676-4973-A45C-2538E5CC93E2" />
+        <id root="BB8DEB7C-BE1B-4639-8213-D94E8FEFA0F6" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2617,7 +2737,7 @@ Episodicity : First</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998" />
+        <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE" />
         <code code="494161000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="White Irish - ethnic category 2001 census">
 </code>
         <statusCode code="COMPLETE" />
@@ -2645,7 +2765,7 @@ Episodicity : First</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
+        <id root="40FD3445-A957-48D7-B7B5-3C839211C185" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2665,7 +2785,7 @@ Episodicity : First</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F" />
+        <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752" />
         <code code="38070000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cohabiting">
 </code>
         <statusCode code="COMPLETE" />
@@ -2693,7 +2813,7 @@ Episodicity : First</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A826995B-AB7B-4A63-9B89-FDA16209D357" />
+        <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2713,7 +2833,7 @@ Episodicity : First</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00" />
+        <id root="4209A033-4F0C-490E-8753-607E2799C3D8" />
         <code code="202307002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ankylosis of the elbow joint">
 </code>
         <statusCode code="COMPLETE" />
@@ -2743,7 +2863,7 @@ hhhh Problem Info: Problem Notes: hhhh</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A9F79684-3214-41E9-A642-A4542875E62B" />
+        <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2763,7 +2883,7 @@ hhhh Problem Info: Problem Notes: hhhh</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="82A39454-299F-432E-993E-5A6232B4E099" />
+        <id root="85E19135-F780-437D-9633-24BF6C7E5D82" />
         <code code="856901000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cervical smear adequate">
     <originalText>Cervical smear adequate</originalText>
 </code>
@@ -2794,7 +2914,7 @@ What does this really mean? Problem Info: Problem Notes: What does this really m
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="896104C7-9DC7-4E44-B77D-DB771691C344" />
+        <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2814,7 +2934,7 @@ What does this really mean? Problem Info: Problem Notes: What does this really m
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310" />
+        <id root="F80F3DA3-0728-4880-BE71-C71251A49D08" />
         <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
     <originalText>Happy puppet syndrome</originalText>
 </code>
@@ -2845,7 +2965,7 @@ hhh € Problem Info: Problem Notes: hhh €</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E" />
+        <id root="43B37138-F5A0-4F6F-8CEE-5B9A5632878B" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2855,17 +2975,17 @@ hhh € Problem Info: Problem Notes: hhh €</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20190313" />
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920" />
+        <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -2885,7 +3005,7 @@ hhh € Problem Info: Problem Notes: hhh €</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
     </agentRef>
 </Participant>
     </ObservationStatement>

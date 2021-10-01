@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="27BD72AD-C6A7-4775-B97C-72A615A78B9F" />
+    <id root="20878FB3-129C-4F79-BB16-DE503960811E" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -70,7 +70,7 @@
     <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="C1A259C7-774E-4054-A22B-7FA626E23E24" />
+        <id root="4270599D-C8A2-4AC3-A3E9-DAAAFA96528D" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
                         <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -87,7 +87,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="0B133BFB-AF2A-4F81-A44D-3F453EB37651"/>
+        <id root="94F00D99-0601-4A8E-AD1D-1B564307B0A6"/>
         <code nullFlavor="UNK">
             <originalText>General Medical Practitioner</originalText>
         </code>
@@ -17434,7 +17434,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2A7A7218-41DF-4790-8336-82D744DBD91A" />
+        <id root="381F47F1-F31D-4AEE-AAB5-C5EDE2A7CA39" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -17449,7 +17449,7 @@ Episodicity : Review</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -17483,6 +17483,11 @@ Episodicity : Review</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -17491,7 +17496,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4758DDB8-8BAC-4274-AD2A-240C5AE1BE52" />
+        <id root="BC25FB11-C00D-4EAA-BF47-4F032920DC10" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -17506,12 +17511,12 @@ Episodicity : Review</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="381F47F1-F31D-4AEE-AAB5-C5EDE2A7CA39"/>
+        <id root="F9768902-2D68-45F5-8B42-D01373CF8BD7"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -17520,7 +17525,7 @@ Episodicity : Review</text>
         <availabilityTime value="20100323" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="F9768902-2D68-45F5-8B42-D01373CF8BD7"/>
+                <id root="BBB69294-9C3E-43CD-8A91-D4767E7CE4C8"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to Mebeverine Hydrochloride</originalText>
 </code>
@@ -17540,6 +17545,11 @@ Episodicity : Review</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -17548,7 +17558,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F30D7F90-6FC7-463B-981C-F42C315B6F7E" />
+        <id root="64601FF3-BADF-466A-B295-23BBA3C1C110" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -17563,12 +17573,12 @@ Episodicity : Review</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="F8017767-8A54-432D-A099-1C3B7251BED0"/>
+        <id root="FCEAB11B-E2B2-43C0-9882-93CDB1581CD3"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -17577,7 +17587,7 @@ Episodicity : Review</text>
         <availabilityTime value="20100323" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="BC25FB11-C00D-4EAA-BF47-4F032920DC10"/>
+                <id root="F30D7F90-6FC7-463B-981C-F42C315B6F7E"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to Lustral</originalText>
 </code>
@@ -17597,6 +17607,11 @@ Episodicity : Review</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -17605,7 +17620,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="531E95BD-791D-4F0F-BB6F-EF7C029DED4D" />
+        <id root="D4176A83-432D-46C4-9295-80153409B452" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -17620,12 +17635,12 @@ Episodicity : Review</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="79F9AAD6-2503-4744-A2B7-7562EADC7ACB"/>
+        <id root="531E95BD-791D-4F0F-BB6F-EF7C029DED4D"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -17634,7 +17649,7 @@ Episodicity : Review</text>
         <availabilityTime value="20100809" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="00B078C1-F64C-476E-AA99-5D4BE0247863"/>
+                <id root="511808C9-61A9-43F7-A686-FF70507A8D57"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to Prednisolone</originalText>
 </code>
@@ -17654,6 +17669,11 @@ Episodicity : Review</text>
         <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -17662,7 +17682,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D4176A83-432D-46C4-9295-80153409B452" />
+        <id root="0B133BFB-AF2A-4F81-A44D-3F453EB37651" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -17677,12 +17697,12 @@ Episodicity : Review</text>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="511808C9-61A9-43F7-A686-FF70507A8D57"/>
+        <id root="C6CA7181-6DB0-402B-9C46-F28217183F8A"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -17691,7 +17711,7 @@ Episodicity : Review</text>
         <availabilityTime value="20110928" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="3585D2B6-0AC7-4252-B616-9F15D93326EA"/>
+                <id root="1EF85A89-A4BA-475B-9F1F-02935396DA36"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to Central Nervous System Drugs</originalText>
 </code>
@@ -17711,6 +17731,11 @@ Episodicity : Review</text>
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -17719,7 +17744,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="B6C0F5D2-8E85-408E-88D2-CEBF5E617F6A" />
+        <id root="27BD72AD-C6A7-4775-B97C-72A615A78B9F" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -17739,7 +17764,7 @@ Episodicity : Review</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="C6CA7181-6DB0-402B-9C46-F28217183F8A" />
+        <id root="84982E21-BD37-4CD3-8DD4-83B2D574E1ED" />
         <code code="160504008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Marital state unknown">
     <originalText>Civil state unknown</originalText>
 </code>
@@ -17768,7 +17793,7 @@ Episodicity : Review</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="84982E21-BD37-4CD3-8DD4-83B2D574E1ED" />
+        <id root="FE8D6F19-272E-4A59-81BE-BB5273E83C7B" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -17778,17 +17803,17 @@ Episodicity : Review</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20181030" />
             <agentRef classCode="AGNT">
-                <id root="0B133BFB-AF2A-4F81-A44D-3F453EB37651" />
+                <id root="94F00D99-0601-4A8E-AD1D-1B564307B0A6" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0B133BFB-AF2A-4F81-A44D-3F453EB37651"/>
+                <id root="94F00D99-0601-4A8E-AD1D-1B564307B0A6"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BCB06BBF-8F6D-4372-B3C3-393110E57907" />
+        <id root="71E6F6E8-F2D4-4DD2-8A87-E1C95F14111D" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -17808,7 +17833,7 @@ Episodicity : Review</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0B133BFB-AF2A-4F81-A44D-3F453EB37651"/>
+        <id root="94F00D99-0601-4A8E-AD1D-1B564307B0A6"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
