@@ -1,0 +1,44 @@
+{
+  "resourceType":"Encounter",
+  "id":"F550CC56-EF65-4934-A7B1-3DC2E02243C3",
+  "identifier":[
+    {
+      "system":"https://EMISWeb/A82038",
+      "value":"F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+    }
+  ],
+  "status":"finished",
+  "type":[
+    {
+      "text":"GP Surgery",
+      "coding": [
+        {
+          "system":"http://snomed.info/sct",
+          "code":"24561000000109",
+          "display":"A+E report"
+        }
+      ]
+    }
+  ],
+  "subject":{
+    "reference":"Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+  },
+  "participant":[
+    {
+      "type":[
+        {
+          "coding":[
+            {
+              "system":"http://hl7.org/fhir/v3/ParticipationType",
+              "code":"PPRF",
+              "display":"primary performer"
+            }
+          ]
+        }
+      ],
+      "individual":{
+        "reference":"Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+      }
+    }
+  ]
+}

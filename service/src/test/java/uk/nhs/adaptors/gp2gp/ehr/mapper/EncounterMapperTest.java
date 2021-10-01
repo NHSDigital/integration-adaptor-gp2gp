@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
@@ -45,8 +46,6 @@ public class EncounterMapperTest {
     private static final Date CONSULTATION_DATE = Date.from(Instant.parse("2010-01-13T15:13:32Z"));
     private static final String TEST_LOCATION_NAME = "Test Location";
     private static final String TEST_LOCATION_ID = "EB3994A6-5A87-4B53-A414-913137072F57";
-    private static final String TEST_OBSERVATION_ID = "3377543D-5B1B-4C4F-BFF6-9F7BC3A1C3B8";
-    private static final String TEST_OBSERVATION_COMMENT = "Test comment";
 
     public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_CONSULTATION = new Bundle.BundleEntryComponent()
         .setResource(new ListResource()
@@ -55,26 +54,14 @@ public class EncounterMapperTest {
             .setCode(new CodeableConcept()
                 .setCoding(List.of(new Coding()
                     .setCode(CONSULTATION_LIST_CODE))))
-            .setDate(CONSULTATION_DATE)
-            .addEntry(new ListResource.ListEntryComponent().setItem(new Reference().setReference("List/EB3994A6-5A87-4B53-A414-913137072F09"))));
-    
-    public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_LIST_OBSERVATION = new Bundle.BundleEntryComponent()
-        .setResource(new ListResource()
-            .setEncounter(new Reference()
-                .setReference(CONSULTATION_REFERENCE))
-            .setCode(new CodeableConcept()
-                .setCoding(List.of(new Coding()
-                    .setCode("25851000000105"))))
-            .setDate(CONSULTATION_DATE)
-            .addEntry(new ListResource.ListEntryComponent().setItem(new Reference().setReference("Observation/"+TEST_OBSERVATION_ID)))
-            .setId("EB3994A6-5A87-4B53-A414-913137072F09"));
-
-    public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_OBSERVATION = new Bundle.BundleEntryComponent()
-        .setResource(new Observation().setIssued(DateTime.now().toDate()).setComment(TEST_OBSERVATION_COMMENT).setId(TEST_OBSERVATION_ID));
+            .setDate(CONSULTATION_DATE));
 
     public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_LOCATION = new Bundle.BundleEntryComponent()
         .setResource(new Location().setName(TEST_LOCATION_NAME).setId(TEST_LOCATION_ID));
 
+    private static final String SAMPLE_EHR_COMPOSITION_COMPONENT = TEST_FILES_DIRECTORY
+        + "sample-ehr-composition-component.xml";
+    
     private static final String INPUT_JSON_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
         + "example-encounter-resource-1.json";
     private static final String OUTPUT_XML_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
@@ -137,6 +124,10 @@ public class EncounterMapperTest {
         + "expected-output-encounter-14.xml";
     private static final String OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2  = TEST_FILES_DIRECTORY
         + "expected-output-encounter-13.xml";
+    private static final String INPUT_JSON_ENCOUNTER_NO_ASSOCIATED_CONSULTATION = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-18.json";
+    private static final String OUTPUT_XML_WITH_NO_EHR_COMPOSITION_COMPONENTS = TEST_FILES_DIRECTORY
+        + "expected-output-encounter-14.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -155,9 +146,7 @@ public class EncounterMapperTest {
         messageContext.initialize(bundle);
         lenient().when(bundle.getEntry()).thenReturn(List.of(
             BUNDLE_ENTRY_WITH_CONSULTATION,
-            BUNDLE_ENTRY_WITH_LOCATION,
-            BUNDLE_ENTRY_WITH_LIST_OBSERVATION,
-            BUNDLE_ENTRY_WITH_OBSERVATION
+            BUNDLE_ENTRY_WITH_LOCATION
         ));
         encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
     }
@@ -171,10 +160,13 @@ public class EncounterMapperTest {
     @MethodSource("testFilePaths")
     public void When_MappingParsedEncounterJson_Expect_EhrCompositionXmlOutput(String input, String output) throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
+
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(output);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+        when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         String outputMessage = encounterMapper.mapEncounterToEhrComposition(parsedEncounter);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
@@ -232,5 +224,18 @@ public class EncounterMapperTest {
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Encounter.participant recorder is required");
+    }
+
+    @Test
+    public void When_MappingEmptyConsultation_Expect_NoEhrCompositionGenerated() throws IOException {
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_ENCOUNTER_NO_ASSOCIATED_CONSULTATION);
+        Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+
+        String outputMessage = encounterMapper.mapEncounterToEhrComposition(parsedEncounter);
+        assertThat(outputMessage).isEqualTo(StringUtils.EMPTY);
+
+        verify(encounterComponentsMapper).mapComponents(parsedEncounter);
     }
 }
