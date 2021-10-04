@@ -1409,7 +1409,7 @@ Episodicity : First</text>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F"/>
+        <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1418,7 +1418,7 @@ Episodicity : First</text>
         <availabilityTime value="19800321" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="4CF7DECB-3AE2-42C3-97F0-BB440F28D385"/>
+                <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F"/>
                 <code nullFlavor="UNK">
     <originalText>Adverse reaction to amoxycillin</originalText>
 </code>
@@ -1660,7 +1660,7 @@ Episodicity : First</text>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1"/>
+        <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1669,7 +1669,7 @@ Episodicity : First</text>
         <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540"/>
+                <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1"/>
                 <code nullFlavor="UNK">
     <originalText>[V]Personal history of bisphosphonate allergy</originalText>
 </code>
@@ -1850,7 +1850,7 @@ asprin allergy</text>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806"/>
+        <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1859,7 +1859,7 @@ asprin allergy</text>
         <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450"/>
+                <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806"/>
                 <code nullFlavor="UNK">
     <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
 </code>
