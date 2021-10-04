@@ -44,8 +44,7 @@
     <Agent classCode="AGNT">
         <id root="test-id-3" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
-                        <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
-            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+                        <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
                 <streetAddressLine>Fulford Grange</streetAddressLine>
@@ -72,7 +71,6 @@
             </name>
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
@@ -100,7 +98,6 @@
             </name>
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
@@ -147,7 +144,6 @@
             </name>
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
@@ -175,7 +171,6 @@
             </name>
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
@@ -6700,7 +6695,7 @@ The line below contains special characters...
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="test-id-3"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -6732,6 +6727,11 @@ The line below contains special characters...
         <id root="test-id-3"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -6755,7 +6755,7 @@ The line below contains special characters...
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="test-id-3"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -6787,6 +6787,11 @@ The line below contains special characters...
         <id root="test-id-3"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -6810,7 +6815,7 @@ The line below contains special characters...
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="test-id-3"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -6842,6 +6847,11 @@ The line below contains special characters...
         <id root="test-id-3"/>
     </agentRef>
 </Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -6865,7 +6875,7 @@ The line below contains special characters...
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="test-id-3"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -6893,6 +6903,11 @@ The line below contains special characters...
                     </pertinentAnnotation>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
     </agentRef>
