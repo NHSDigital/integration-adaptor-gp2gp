@@ -9,10 +9,14 @@ TODO: Sequence diagram "user journey" of Spine messages, tasks, and GPCC request
 Adaptor document tasks are defined and documented in Java source code:
 
 * [TaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/common/task/TaskDefinition.java)
-* [DocumentTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/DocumentTaskDefinition.java)
-* [SendEhrExtractCoreTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendEhrExtractCoreTaskDefinition.java)
-* [GetGpcStructuredTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/gpc/GetGpcStructuredTaskDefinition.java)
-* [SendAcknowledgementTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendAcknowledgementTaskDefinition.java)
+* [DocumentTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/DocumentTaskDefinition.java) 
+  * [Get GPC Document Task Example](/documentation/examples/Task_queue_payloads/GetGpcDocumentTaskDefinition.md)
+* [SendEhrExtractCoreTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendEhrExtractCoreTaskDefinition.java) 
+  * [Send EHR Extract Core Task Example](/documentation/examples/Task_queue_payloads/SendEhrExtractCoreTaskDefinition.md)
+* [GetGpcStructuredTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/gpc/GetGpcStructuredTaskDefinition.java) 
+  * [Get GPC Structured Record Task Example](/documentation/examples/Task_queue_payloads/GetGpcStructuredTaskDefinition.md)
+* [SendAcknowledgementTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendAcknowledgementTaskDefinition.java) 
+  * [Send Acknowledgement Task Example](/documentation/examples/Task_queue_payloads/sendAcknowledgementTaskDefinition.md)
 
 ## Logging and Tracing
 
@@ -28,7 +32,16 @@ yyyy-MM-dd HH:mm:ss.SSS Level=INFO Logger=u.n.a.g.e.m.AgentDirectoryExtractor Co
 
 ## Object Storage (AWS S3 / Azure Blob)
 
-TODO: Document storage scheme
+- Data stored:
+  - The patients transformed structured record once it has been transformed into an ehrExtract that is ready to send to MHS Outbound
+  - Attachments associated with the patients structured record once they have been transformed into an outbound message for sending to MHS Outbound
+- Filename convention:
+  - EhrExtracts files are named as a concatenation of {conversationId}/{conversationId}.json
+  - Attachment files are named as {conversationId}/{documentId}.json where documentId is the name of the file
+- Metadata stored with files
+  - Type - Task type that uploaded the file GET_GPC_STRUCTURED / GET_GPC_DOCUMENT
+  - ConversationId - Task conversation ID
+  - TaskId - Task ID
 
 ## AMQP Message Broker Requirements
 
@@ -77,7 +90,7 @@ Follow Azure documentation on Cosmos DB's API for MongoDB
 
 ## Database Design
 
-TODO: Document database design
+Refer to [database.md](/documentation/database/database.md) for design details
 
 ## Detecting Failed GP2GP Transfers
 
