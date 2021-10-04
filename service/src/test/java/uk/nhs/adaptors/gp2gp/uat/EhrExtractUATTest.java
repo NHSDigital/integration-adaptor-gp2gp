@@ -63,6 +63,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.MultiStatementObservati
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 import wiremock.org.custommonkey.xmlunit.XMLAssert;
@@ -166,7 +167,8 @@ public class EhrExtractUATTest {
                 participantMapper
             ),
             new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper, randomIdGeneratorService)
+            new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper, randomIdGeneratorService),
+            new BloodPressureValidator()
         );
 
         AgentPersonMapper agentPersonMapper
@@ -177,7 +179,7 @@ public class EhrExtractUATTest {
 
         final NonConsultationResourceMapper nonConsultationResourceMapper =
             new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper,
-                documentReferenceToNarrativeStatementMapper);
+                documentReferenceToNarrativeStatementMapper, new BloodPressureValidator());
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService, timestampService, encounterMapper,
             nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
     }
@@ -191,7 +193,7 @@ public class EhrExtractUATTest {
     @MethodSource("testValueFilePathsTC4")
     public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutputTC4(String inputJson, String expectedOutputXml)
         throws IOException, SAXException {
-        final String expectedXmlResourcePath = OUTPUT_PATH + "TC4/"  + expectedOutputXml;
+        final String expectedXmlResourcePath = OUTPUT_PATH + "TC4/" + expectedOutputXml;
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC4/" + inputJson);
         inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
@@ -225,7 +227,7 @@ public class EhrExtractUATTest {
     @MethodSource("testValueFilePathsTC7")
     public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutputTC7(String inputJson, String expectedOutputXml)
         throws IOException, SAXException {
-        final String expectedXmlResourcePath = OUTPUT_PATH + "TC7/"  + expectedOutputXml;
+        final String expectedXmlResourcePath = OUTPUT_PATH + "TC7/" + expectedOutputXml;
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC7/" + inputJson);
         inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);

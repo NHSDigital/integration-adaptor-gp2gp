@@ -30,6 +30,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.MultiStatementObservati
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
@@ -144,7 +145,8 @@ public class EhrExtractMapperComponentTest {
             new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new DiagnosticReportMapper(
                 messageContext, specimenMapper, participantMapper, randomIdGeneratorService
-            )
+            ),
+            new BloodPressureValidator()
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
@@ -155,14 +157,16 @@ public class EhrExtractMapperComponentTest {
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
             randomIdGeneratorService,
             encounterComponentsMapper,
-            documentReferenceToNarrativeStatementMapper);
+            documentReferenceToNarrativeStatementMapper,
+            new BloodPressureValidator()
+        );
 
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
-        timestampService,
-        new EncounterMapper(messageContext, encounterComponentsMapper),
-        nonConsultationResourceMapper,
-        agentDirectoryMapper,
-        messageContext);
+            timestampService,
+            new EncounterMapper(messageContext, encounterComponentsMapper),
+            nonConsultationResourceMapper,
+            agentDirectoryMapper,
+            messageContext);
     }
 
     @AfterEach
