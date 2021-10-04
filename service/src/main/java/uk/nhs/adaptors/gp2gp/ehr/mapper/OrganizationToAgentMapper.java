@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.ContactPoint;
-import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +45,6 @@ public class OrganizationToAgentMapper {
     public static String mapOrganizationToAgentInner(Organization organization) {
         var builder = AgentMapperTemplateParametersInner.builder();
 
-        buildAgentExtensionId(organization).ifPresent(builder::agentExtensionId);
         buildName(organization).ifPresent(builder::agentName);
         buildTelecom(organization).ifPresent(builder::telecomValue);
         buildAddressUse(organization).ifPresent(builder::addressUse);
@@ -61,17 +58,6 @@ public class OrganizationToAgentMapper {
         }
 
         return TemplateUtils.fillTemplate(AGENT_TEMPLATE_INNER, builder.build());
-    }
-
-    private static Optional<String> buildAgentExtensionId(Organization organization) {
-        if (organization.hasIdentifier()) {
-            return organization.getIdentifier()
-                .stream()
-                .filter(identifier -> identifier.getSystem().equalsIgnoreCase(ODS_ORG_CODE_SYSTEM))
-                .map(Identifier::getValue)
-                .findFirst();
-        }
-        return Optional.empty();
     }
 
     private static Optional<String> buildName(Organization organization) {

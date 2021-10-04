@@ -1,0 +1,14 @@
+{
+	"request": {
+		"method": "GET",
+		"urlPath": "/test"
+	},
+	"response": {
+		"status": 200,
+        "fixedDelayMilliseconds": 3000,
+		"bodyFileName": "binary.json",
+		"headers": {
+			"Content-Type": "application/fhir+json;"
+		}
+	}
+}
