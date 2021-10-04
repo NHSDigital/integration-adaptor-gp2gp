@@ -1,6 +1,16 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.when;
+
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -26,17 +36,10 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.MultiStatementObservationHolderFactory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
+import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
-
-import java.io.IOException;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class EncounterComponentsMapperTest {
@@ -62,6 +65,8 @@ public class EncounterComponentsMapperTest {
     private CodeableConceptCdMapper codeableConceptCdMapper;
     @Mock
     private TimestampService timestampService;
+    @Mock
+    private BloodPressureValidator bloodPressureValidator;
 
     private EncounterComponentsMapper encounterComponentsMapper;
     private MessageContext messageContext;
@@ -73,6 +78,11 @@ public class EncounterComponentsMapperTest {
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(bloodPressureValidator.isValidBloodPressure(argThat(observation ->
+            CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(
+                "bloodPressureCode1", "bloodPressureCode2", "bloodPressureCode3"
+            ))
+        ))).thenReturn(true);
         messageContext = new MessageContext(randomIdGeneratorService);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
@@ -133,7 +143,8 @@ public class EncounterComponentsMapperTest {
             observationToNarrativeStatementMapper,
             observationStatementMapper,
             requestStatementMapper,
-            diagnosticReportMapper
+            diagnosticReportMapper,
+            bloodPressureValidator
         );
     }
 
