@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.IdType;
@@ -48,13 +49,14 @@ public class AgentPersonMapper {
                 builder.practitionerFamilyName(UNKNOWN);
             }
         } else {
-            builder.practitioner(true);
-            var organizationName = messageContext.getInputBundleHolder()
+            messageContext.getInputBundleHolder()
                 .getResource(new IdType(agentKey.getOrganizationReference()))
                 .map(Organization.class::cast)
                 .map(organization -> organization.getName())
-                .get();
-            builder.practitionerFamilyName(organizationName);
+                .ifPresent(organizationName -> {
+                    builder.practitioner(true);
+                    builder.practitionerFamilyName(organizationName);
+                });
         }
 
         buildPractitionerRole(agentKey).ifPresent(builder::practitionerRole);
