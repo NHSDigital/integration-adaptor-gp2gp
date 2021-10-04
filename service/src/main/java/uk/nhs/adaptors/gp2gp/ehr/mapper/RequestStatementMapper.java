@@ -294,7 +294,7 @@ public class RequestStatementMapper {
                 buildServiceRequestedDescription(),
                 buildIdentifierDescription(),
                 buildSupportingInfoDescription(),
-                buildAsapPriorityText()
+                buildPriorityDescription()
             );
 
             if (hasReferencingAgent()) {
@@ -334,7 +334,7 @@ public class RequestStatementMapper {
             return StringUtils.EMPTY;
         }
 
-        private String buildAsapPriorityText() {
+        private String buildPriorityDescription() {
             if (referralRequest.hasPriority() && referralRequest.getPriority() == ReferralRequest.ReferralPriority.ASAP) {
                 return PRIORITY_ASAP;
             }
