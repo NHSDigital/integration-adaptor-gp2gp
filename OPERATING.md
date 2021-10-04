@@ -32,7 +32,7 @@ yyyy-MM-dd HH:mm:ss.SSS Level=INFO Logger=u.n.a.g.e.m.AgentDirectoryExtractor Co
   - The patients transformed structured record once it has been transformed into an ehrExtract that is ready to send to MHS Outbound
   - Attachments associated with the patients structured record once they have been transformed into an outbound message for sending to MHS Outbound
 - Filename convention:
-  - EhrExtracts files are named as a concatonation of {conversationId}/{conversationId}.json
+  - EhrExtracts files are named as a concatenation of {conversationId}/{conversationId}.json
   - Attachment files are named as {conversationId}/{documentId}.json where documentId is the name of the file
 - Metadata stored with files
   - Type - Task type that uploaded the file GET_GPC_STRUCTURED / GET_GPC_DOCUMENT
