@@ -101,7 +101,7 @@ public class ObservationMapper {
         String codeElement = prepareCodeElement(observation);
         String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation);
         String availabilityTimeElement =
-            StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation);
+            StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement());
         CompoundStatementClassCode classCode = prepareClassCode(relatedObservations);
 
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
