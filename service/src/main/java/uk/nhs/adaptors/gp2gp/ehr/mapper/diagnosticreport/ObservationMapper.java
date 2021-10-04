@@ -100,9 +100,11 @@ public class ObservationMapper {
         var observation = observationAssociatedWithSpecimen.getObservation();
         String codeElement = prepareCodeElement(observation);
         String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation);
-        String availabilityTimeElement =
-            StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement());
         CompoundStatementClassCode classCode = prepareClassCode(relatedObservations);
+
+        String availabilityTimeElement = (classCode.equals(CompoundStatementClassCode.CLUSTER))
+            ? StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement()) :
+            StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation);
 
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
             .orElse(StringUtils.EMPTY);
