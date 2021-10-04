@@ -48,6 +48,12 @@ public class AgentPersonMapper {
             if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
                 builder.practitionerFamilyName(UNKNOWN);
             }
+
+            messageContext.getInputBundleHolder()
+                .getResource(new IdType(agentKey.getOrganizationReference()))
+                .map(Organization.class::cast)
+                .map(OrganizationToAgentMapper::mapOrganizationToAgentInner)
+                .ifPresent(builder::organization);
         } else {
             messageContext.getInputBundleHolder()
                 .getResource(new IdType(agentKey.getOrganizationReference()))
@@ -60,12 +66,6 @@ public class AgentPersonMapper {
         }
 
         buildPractitionerRole(agentKey).ifPresent(builder::practitionerRole);
-
-        messageContext.getInputBundleHolder()
-            .getResource(new IdType(agentKey.getOrganizationReference()))
-            .map(Organization.class::cast)
-            .map(OrganizationToAgentMapper::mapOrganizationToAgentInner)
-            .ifPresent(builder::organization);
 
         return TemplateUtils.fillTemplate(AGENT_STATEMENT_TEMPLATE, builder.build());
     }

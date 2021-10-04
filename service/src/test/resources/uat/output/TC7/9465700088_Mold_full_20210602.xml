@@ -177,10 +177,6 @@
                 <family>MessageRecipient-J82150</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-J82150</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -194,10 +190,6 @@
                 <family>MessageRecipient-M81023</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-M81023</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -211,10 +203,6 @@
                 <family>OrderingParty-Brannam Medical Centre-L83073</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>OrderingParty-Brannam Medical Centre-L83073</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -228,10 +216,6 @@
                 <family>MessageRecipient-D82015</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-D82015</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -245,10 +229,6 @@
                 <family>MessageRecipient-E12345</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-E12345</name>
-
-        </representedOrganization>
     </Agent>
 </part>
     </agentDirectory>

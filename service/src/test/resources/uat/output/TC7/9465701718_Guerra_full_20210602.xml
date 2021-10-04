@@ -123,10 +123,6 @@
                 <family>MessageRecipient-J82182</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-J82182</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -140,10 +136,6 @@
                 <family>MessageRecipient-M81023</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-M81023</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -157,10 +149,6 @@
                 <family>MessageRecipient-A87004</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-A87004</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -174,10 +162,6 @@
                 <family>MessageRecipient-J82622</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-J82622</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -191,10 +175,6 @@
                 <family>MessageRecipient-B83001</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-B83001</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -235,10 +215,6 @@
                 <family>MessageRecipient-B86123</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-B86123</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -252,10 +228,6 @@
                 <family>MessageRecipient-J82150</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-J82150</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -323,10 +295,6 @@
                 <family>MessageRecipient-F81682</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-F81682</name>
-
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -340,10 +308,6 @@
                 <family>MessageRecipient-G85677</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-G85677</name>
-
-        </representedOrganization>
     </Agent>
 </part>
     </agentDirectory>
