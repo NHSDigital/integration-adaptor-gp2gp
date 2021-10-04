@@ -1,0 +1,15 @@
+{
+    "resourceType": "AllergyIntolerance",
+    "id": "230D3D37-99E3-450A-AE88-B5AB802B7137",
+    "category": [
+        "medication"
+    ],
+    "onsetDateTime": "1978-12-31",
+    "assertedDate": "2010-01-14T09:57:57.33+00:00",
+    "recorder": {
+        "reference": "Patient/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+    },
+    "code": {
+        "text": "test"
+    }
+}
