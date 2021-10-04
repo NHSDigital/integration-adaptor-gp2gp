@@ -54,6 +54,8 @@ public class EncounterMapper {
         String components = encounterComponentsMapper.mapComponents(encounter);
 
         if (StringUtils.isBlank(components)) {
+            LOGGER.info("Skipping Encounter with ID '{}'. The mapping output contains blank XML statement content",
+                encounter.getId());
             return StringUtils.EMPTY;
         }
 
