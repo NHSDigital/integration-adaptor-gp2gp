@@ -891,7 +891,7 @@
                         },
                         {
                             "system": "http://snomed.info/sct",
-                            "code": "163020007"
+                            "code": "bloodPressureCode1"
                         }
                     ]
                 },
@@ -913,7 +913,7 @@
                         },
                         {
                             "system": "http://snomed.info/sct",
-                            "code": "386534000"
+                            "code": "bloodPressureCode3"
                         }
                     ]
                 },
@@ -935,7 +935,7 @@
                         },
                         {
                             "system": "http://snomed.info/sct",
-                            "code": "75367002"
+                            "code": "bloodPressureCode2"
                         }
                     ]
                 },
