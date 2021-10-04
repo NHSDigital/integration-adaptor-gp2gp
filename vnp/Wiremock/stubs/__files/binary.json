@@ -1,0 +1,9 @@
+{
+    "resourceType": "Binary",
+    "id": "example",
+    "contentType": "application/pdf",
+    "securityContext": {
+      "reference": "DocumentReference/example"
+    },
+    "data": "{{randomValue length=500 type='ALPHANUMERIC_AND_SYMBOLS'}}"
+}
