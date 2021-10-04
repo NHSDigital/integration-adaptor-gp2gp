@@ -22,7 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Testing SSP Proxy against wiremock (#334)
 
 ### Fixed
-
+- NIAD-1557: SystmOne won't display responsibleParty agents with representedOrganisation/id code (#357)
+- NIAD-1703: AllergyIntolerance: Performer should fall back to recorder in absence of asserter  (#360)
+- NIAD-1699: Observation: NIAD-1476 has resulted in spurious 'Interpretation' label being generated in most Observation output (#353)
 - NIAD-1592: Immunization: When site is processed into to text the term text is incorrect for synonyms (#349)
 - NIAD-1719: BloodPressure: Exception when no effectivePeriod.start (#351)
 - NIAD-1779: DiagnosticReport: interpretationCode is output in wrong place (#352)
