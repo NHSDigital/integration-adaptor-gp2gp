@@ -53,6 +53,12 @@ public class EncounterMapper {
         LOGGER.debug("Generating ehrComposition for Encounter {}", encounter.getId());
         String components = encounterComponentsMapper.mapComponents(encounter);
 
+        if (StringUtils.isBlank(components)) {
+            LOGGER.info("Skipping Encounter with ID '{}'. The mapping output contains blank XML statement content",
+                encounter.getId());
+            return StringUtils.EMPTY;
+        }
+
         final IdMapper idMapper = messageContext.getIdMapper();
         AgentDirectory agentDirectory = messageContext.getAgentDirectory();
 
