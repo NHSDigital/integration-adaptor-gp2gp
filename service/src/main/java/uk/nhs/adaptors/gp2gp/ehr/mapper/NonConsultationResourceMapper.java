@@ -1,37 +1,38 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import com.github.mustachejava.Mustache;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
+import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
-import org.hl7.fhir.dstu3.model.ListResource;
-import org.hl7.fhir.dstu3.model.IdType;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters.EncounterTemplateParametersBuilder;
+import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.XpathExtractor;
-
-import java.util.function.BiFunction;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -58,6 +59,7 @@ public class NonConsultationResourceMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final EncounterComponentsMapper encounterComponentsMapper;
     private final DocumentReferenceToNarrativeStatementMapper narrativeStatementMapper;
+    private final BloodPressureValidator bloodPressureValidator;
     private final Map<ResourceType, BiFunction<String, Resource, EncounterTemplateParametersBuilder>> resourceBuilder =
         Map.of(
             ResourceType.Observation, this::buildForObservation,
@@ -251,7 +253,7 @@ public class NonConsultationResourceMapper {
         if (CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(EncounterComponentsMapper.NARRATIVE_STATEMENT_CODE))) {
             return buildForCommentObservation(component);
         }
-        if (CodeableConceptMappingUtils.hasCode(observation.getCode(), EncounterComponentsMapper.BLOOD_CODES)) {
+        if (bloodPressureValidator.isValidBloodPressure(observation)) {
             return buildForBloodPressureObservation(component);
         }
 
@@ -283,9 +285,9 @@ public class NonConsultationResourceMapper {
         if (resource.getResourceType().equals(ResourceType.List)) {
             var list = (ListResource) resource;
             var endedAllergies = Optional.ofNullable(list.getCode())
-                    .map(CodeableConcept::getCodingFirstRep)
-                    .filter(coding -> ENDED_ALLERGIES_CODE.equals(coding.getCode()))
-                    .orElse(null);
+                .map(CodeableConcept::getCodingFirstRep)
+                .filter(coding -> ENDED_ALLERGIES_CODE.equals(coding.getCode()))
+                .orElse(null);
             if (endedAllergies != null) {
                 return list.hasContained();
             }
