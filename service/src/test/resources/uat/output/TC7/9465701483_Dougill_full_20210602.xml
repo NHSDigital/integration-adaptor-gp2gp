@@ -72,8 +72,7 @@
     <Agent classCode="AGNT">
         <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
-                        <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
-            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+                        <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
                 <streetAddressLine>Fulford Grange</streetAddressLine>
@@ -118,7 +117,6 @@
             </name>
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
@@ -146,7 +144,6 @@
             </name>
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
@@ -174,7 +171,6 @@
             </name>
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
@@ -202,7 +198,6 @@
             </name>
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
