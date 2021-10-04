@@ -103,8 +103,8 @@ public class ObservationMapper {
         CompoundStatementClassCode classCode = prepareClassCode(relatedObservations);
 
         String availabilityTimeElement = (classCode.equals(CompoundStatementClassCode.CLUSTER))
-            ? StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement()) :
-            StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation);
+            ? StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement())
+            : StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation);
 
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
             .orElse(StringUtils.EMPTY);
