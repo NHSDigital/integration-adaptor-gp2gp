@@ -1555,7 +1555,7 @@ Interpretation: PA - Potentially abnormal
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100326140443
 
 (EMISTest) - Abnormal - Contact Patient</text>
@@ -3306,7 +3306,7 @@ U=Unsuitable for analysis</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B1310011-B620-48D7-A381-2BF0335C5B3D"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100326134544
 
 (EMISTest) - Abnormal - Contact Patient</text>
@@ -3457,7 +3457,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100326134545
 
 (EMISTest) - Normal - No Action</text>
@@ -3529,7 +3529,7 @@ Interpretation: OR - Outside reference range</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="85522AAC-80B6-4F73-BD34-50825EF0E45C"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100326134545
 
 (EMISTest) - Abnormal - No Action</text>
@@ -3601,7 +3601,7 @@ Interpretation: OR - Outside reference range</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="D3041FE6-2820-4938-8024-1FC80F2A694F"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100326134545
 
 (EMISTest) - Abnormal - Contact Patient</text>
@@ -3673,7 +3673,7 @@ Interpretation: OR - Outside reference range</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="200FC1C9-6A9F-47CE-A4F7-50199281322D"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100326134545
 
 (EMISTest) - Abnormal - Contact Patient</text>
@@ -3957,7 +3957,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100209122106
 
 (EMISTest) - Abnormal - Contact Patient</text>
@@ -4029,7 +4029,7 @@ Interpretation: HI - Above high reference limit</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C5676D58-9600-424A-BE35-3DDAE0CAC622"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100209122106
 
 (EMISTest) - Abnormal - Contact Patient</text>
@@ -4085,7 +4085,7 @@ CommentDate:20100209122106
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100209122106
 
 (EMISTest) - No Action</text>
@@ -4152,7 +4152,7 @@ Non fasting specimen.</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8EA77BE5-9F13-455B-B835-5B9825187E0C"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100209122106
 
 (EMISTest) - Normal - No Action</text>
@@ -4429,7 +4429,7 @@ I.M.Screen</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3FE921FD-5A7C-49A7-BF85-591FC6C8933C"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100201093313
 
 (EMISTest) - Abnormal - Contact Patient</text>
@@ -4495,7 +4495,7 @@ RBC MORPHOLOGY NORMAL</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9096D5A1-7370-4C51-AE78-52A89E2F6B63"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100201093313
 
 (EMISTest) - Normal - No Action</text>
@@ -5384,7 +5384,7 @@ ReportStatus: Supplementary result</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B06F16C9-95BA-41C5-99DA-902FC5B0B72B"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20100201093313
 
 (EMISTest) - Normal - No Action</text>

@@ -334,7 +334,7 @@ NEGATIVE
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20201215151704
 
 (q) - Normal - No Action</text>
@@ -411,7 +411,7 @@ CommentDate:20201215151704
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20201215151713
 
 (q) - Normal - No Action</text>
@@ -497,7 +497,7 @@ Test not available</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20201215151713
 
 (q) - Normal - No Action</text>
