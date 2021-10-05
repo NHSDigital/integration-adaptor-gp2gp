@@ -46,7 +46,7 @@ public class MhsMockRequestsJournal {
     public void deleteRequestsJournal() {
         var statusCode = client.send(buildDeleteRequest(), HttpResponse.BodyHandlers.ofString()).statusCode();
         if (statusCode != 200) {
-            throw new RuntimeException("Unexpected status code: " + statusCode);
+            throw new RuntimeException("Unexpected status_code=" + statusCode);
         }
     }
 

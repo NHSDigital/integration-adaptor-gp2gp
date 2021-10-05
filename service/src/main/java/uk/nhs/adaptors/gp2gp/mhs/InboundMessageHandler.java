@@ -1,23 +1,14 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
-import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.ACKNOWLEDGMENT_REQUEST;
-import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.CONTINUE_REQUEST;
-import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.EHR_EXTRACT_REQUEST;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
@@ -26,6 +17,13 @@ import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.UnsupportedInteractionException;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+
+import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.ACKNOWLEDGMENT_REQUEST;
+import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.CONTINUE_REQUEST;
+import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.EHR_EXTRACT_REQUEST;
 
 @Component
 @Slf4j
@@ -49,21 +47,21 @@ public class InboundMessageHandler {
         var messageID = message.getJMSMessageID();
         try {
             parsedMessage = parseMessage(message);
-            LOGGER.info("Decoded inbound MHS message");
+            LOGGER.debug("Decoded inbound MHS message: {}", parsedMessage);
             if (!processFailureHandlingService.hasProcessFailed(parsedMessage.getConversationId())) {
                 handleInboundMessage(parsedMessage);
             } else {
                 LOGGER.warn(
-                    "Aborting message handling - the process has already failed for Conversation-Id: {}.",
+                    "Aborting message handling - the process has already failed for conversation_id: {}.",
                     parsedMessage.getConversationId()
                 );
             }
             return true;
         } catch (MessageOutOfOrderException | NonExistingInteractionIdException | UnsupportedInteractionException e) {
-            LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
+            LOGGER.error("An error occurred while handing MHS inbound message id: {}", messageID, e);
             return false;
         } catch (Exception e) {
-            LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
+            LOGGER.error("An error occurred while handing MHS inbound message id: {}", messageID, e);
             return handleMessageProcessingError(parsedMessage);
         }
     }
@@ -83,7 +81,6 @@ public class InboundMessageHandler {
         String conversationId = inboundMessage.getConversationId();
         mdcService.applyConversationId(conversationId);
         String interactionId = inboundMessage.getInteractionId();
-        LOGGER.info("The inbound MHS message uses interaction id {}", interactionId);
 
         if (EHR_EXTRACT_REQUEST.getInteractionId().equals(interactionId)) {
             ehrExtractRequestHandler.handleStart(
