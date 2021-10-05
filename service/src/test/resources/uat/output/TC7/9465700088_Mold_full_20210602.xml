@@ -3315,7 +3315,7 @@ CommentDate:20201215151830
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4B331DB8-AC77-4438-A646-56E500E73885"/>
@@ -3937,7 +3937,7 @@ Quantity: 1750.000 mL
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43"/>
@@ -4758,7 +4758,7 @@ CommentDate:20100223000000
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B06F16C9-95BA-41C5-99DA-902FC5B0B72B"/>
@@ -4814,7 +4814,7 @@ CommentDate:20201215151742
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EF7BFB69-2694-46AE-8845-A49B83A88F16"/>
@@ -5576,7 +5576,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2897DE2C-4F80-423B-A871-F60824B65DD2"/>
@@ -5642,7 +5642,7 @@ CommentDate:20201215151733
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CC739FC8-B370-4E05-A33F-338BFAD0B5C4"/>
@@ -5913,7 +5913,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="576ED2CC-8803-440C-907F-D87B0610AB5C"/>
@@ -6003,7 +6003,7 @@ CommentDate:20201215151704
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BD4B3AF8-7A36-48B3-B589-881FDC03C47A"/>
@@ -6082,7 +6082,7 @@ CommentDate:20201215151713
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7F42E5DE-955D-442B-BC9A-EFEAAC42F098"/>
@@ -6992,7 +6992,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="52A74F19-B80D-449E-BD93-728B012F1E90"/>
@@ -7258,7 +7258,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5E55B187-65DD-447E-902A-AD73AF142A02"/>
@@ -8160,7 +8160,7 @@ CommentDate:20210108152501
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110219"/>
+        <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BD99E14B-4B48-4BE7-9BB2-1CD3BCB9281A"/>
@@ -8227,7 +8227,7 @@ CommentDate:20210108152502
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110219"/>
+        <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6B98D8A9-E1F3-4059-A2E6-62814CEC72A6"/>
@@ -8293,7 +8293,7 @@ CommentDate:20210108152502
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110219"/>
+        <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A9ACF4E9-006D-45D2-90E4-2CD1BCE6ABEF"/>
@@ -8359,7 +8359,7 @@ CommentDate:20210108152502
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110219"/>
+        <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="17814417-92EC-4543-9E1B-F71C2A2ABAE8"/>
@@ -8425,7 +8425,7 @@ CommentDate:20210108152503
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110219"/>
+        <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2599B42F-4D97-4012-8C2D-65415306E703"/>
@@ -8491,7 +8491,7 @@ CommentDate:20210108152503
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110219"/>
+        <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7C3F9C32-3622-4593-9A20-61909E688A24"/>
@@ -8558,7 +8558,7 @@ CommentDate:20210108152503
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110219"/>
+        <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D095459D-7BBD-4636-9FA7-AD3EF86A39D5"/>
@@ -8624,7 +8624,7 @@ CommentDate:20210108152503
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110219"/>
+        <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="883A6426-B1BC-4BAC-911C-B49F90571768"/>
@@ -8690,7 +8690,7 @@ CommentDate:20210108152503
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110219"/>
+        <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D0F312D0-18E9-4245-A4D0-8F8EBB18042D"/>
@@ -8757,7 +8757,7 @@ CommentDate:20210108152503
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110219"/>
+        <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="823DF5B4-6FCE-4022-B954-74DF663CAC16"/>
@@ -9267,7 +9267,7 @@ CommentDate:20210108152449
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030616"/>
+        <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="23137F83-2549-496B-8AE9-120FDFE6E932"/>
@@ -9339,7 +9339,7 @@ CommentDate:20210108152450
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030616"/>
+        <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64FC6993-B6D7-48B4-B17B-019DE85BD598"/>
@@ -9411,7 +9411,7 @@ CommentDate:20210108152450
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030616"/>
+        <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
@@ -9572,7 +9572,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20120726"/>
         </effectiveTime>
-        <availabilityTime value="20120726"/>
+        <availabilityTime value="20120726134600"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DE233834-A2B1-4805-BE0C-A2FBEBF33DB9"/>
