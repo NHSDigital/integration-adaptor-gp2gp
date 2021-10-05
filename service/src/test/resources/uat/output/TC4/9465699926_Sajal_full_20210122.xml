@@ -5388,7 +5388,7 @@ Dosage: 0.5 ml</text>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="9276C255-1641-4B9B-AD42-1A0FAD9189D3"/>
+                    <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
