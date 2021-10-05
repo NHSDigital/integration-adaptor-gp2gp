@@ -54,6 +54,7 @@ public class RequestStatementMapper {
     private static final String SPECIALTY = "Specialty: ";
     private static final String REASON_CODES = "Reason Codes: ";
     private static final String SUPPORTING_INFO = "Supporting Information: ";
+    private static final String PRIORITY_ASAP = "Priority: ASAP";
     private static final Set<String> SUPPORTED_AGENT_TYPES = Stream.of(ResourceType.Practitioner, ResourceType.RelatedPerson,
         ResourceType.Device, ResourceType.Patient, ResourceType.Organization)
         .map(ResourceType::name)
@@ -130,7 +131,7 @@ public class RequestStatementMapper {
 
             switch (referralRequest.getPriority()) {
                 case ASAP:
-                    return PRIORITY_CODE_IMMEDIATE;
+                    return null;
                 case ROUTINE:
                     return PRIORITY_CODE_NORMAL;
                 case URGENT:
@@ -292,7 +293,8 @@ public class RequestStatementMapper {
                 buildSpecialtyDescription(),
                 buildServiceRequestedDescription(),
                 buildIdentifierDescription(),
-                buildSupportingInfoDescription()
+                buildSupportingInfoDescription(),
+                buildPriorityDescription()
             );
 
             if (hasReferencingAgent()) {
@@ -329,6 +331,14 @@ public class RequestStatementMapper {
 
                 return supportingInfo.equals(SUPPORTING_INFO) ? StringUtils.EMPTY : supportingInfo;
             }
+            return StringUtils.EMPTY;
+        }
+
+        private String buildPriorityDescription() {
+            if (referralRequest.hasPriority() && referralRequest.getPriority() == ReferralRequest.ReferralPriority.ASAP) {
+                return PRIORITY_ASAP;
+            }
+
             return StringUtils.EMPTY;
         }
     }
