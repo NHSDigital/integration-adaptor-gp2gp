@@ -36,6 +36,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -163,6 +164,10 @@ public class SpecimenMapper {
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement) {
         SpecimenNarrativeStatementCommentBuilder specimenNarrativeStatementCommentBuilder = new SpecimenNarrativeStatementCommentBuilder();
 
+        if (specimen.hasReceivedTime()){
+            specimenNarrativeStatementCommentBuilder.receivedDate(specimen.getReceivedTime());
+        }
+
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
 
@@ -214,6 +219,7 @@ public class SpecimenMapper {
         private static final String FASTING_DURATION = "Fasting Duration:";
         private static final String QUANTITY = "Quantity:";
         private static final String COLLECTION_SITE = "Collection Site:";
+        private static final String RECEIVED_DATE = "Received Date:";
 
         private String text;
 
@@ -252,6 +258,15 @@ public class SpecimenMapper {
             );
 
             prependText(quantityElements);
+        }
+
+        public void receivedDate(Date date){
+            List<String> receivedDateElements = List.of(
+                RECEIVED_DATE,
+                Objects.toString(DateFormatUtil.toTextFormat(date), StringUtils.EMPTY)
+            );
+
+            prependText(receivedDateElements);
         }
 
         public void collectionSite(CodeableConcept collectionSite) {
