@@ -1,0 +1,40 @@
+{
+    "resourceType": "Condition",
+    "id": "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB",
+    "extension": [
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "AllergyIntolerance/230D3D37-99E3-450A-AE88-B5AB802B7137"
+            }
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "60126016"
+                            }
+                        ]
+                    }
+                ],
+                "system": "http://snomed.info/sct",
+                "code": "36031001",
+                "display": "Burning feet",
+                "userSelected": true
+            }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/4DBBED7B-7A91-47DC-B99B-35CDFA970590"
+    },
+    "assertedDate": "2020-09-07T10:12:02.093+01:00",
+    "asserter": {
+        "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+    }
+}
