@@ -16,8 +16,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Device;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
@@ -25,13 +25,13 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.RelatedPerson;
 import org.hl7.fhir.dstu3.model.ResourceType;
-
-import com.github.mustachejava.Mustache;
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.github.mustachejava.Mustache;
+
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.RequestStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.RequestStatementTemplateParameters.RequestStatementTemplateParametersBuilder;
@@ -62,6 +62,7 @@ public class RequestStatementMapper {
     private static final String DEFAULT_REASON_CODE_XML = "<code code=\"3457005\" displayName=\"Patient referral\" codeSystem=\"2.16.840.1"
         + ".113883.2.1.3.2.4.15\"/>";
     private static final String NOTE = "Annotation: %s @ %s %s";
+    private static final String NOTE_WITH_NO_AUTHOR_AND_TIME = "Annotation: %s";
     private static final String COMMA = ", ";
 
     private static final String PRIORITY_CODE_IMMEDIATE =
@@ -82,6 +83,14 @@ public class RequestStatementMapper {
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
+
+    private static boolean isReferenceToPractitioner(Reference reference) {
+        return isReferenceToType(reference, ResourceType.Practitioner);
+    }
+
+    private static boolean isReferenceToType(@NonNull Reference reference, @NonNull ResourceType type) {
+        return reference.getReference().startsWith(type.name() + "/");
+    }
 
     public String mapReferralRequestToRequestStatement(ReferralRequest referralRequest, boolean isNested) {
         return new InnerMapper(referralRequest, isNested).map();
@@ -124,6 +133,61 @@ public class RequestStatementMapper {
             return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, templateParameters.build());
         }
 
+        private boolean hasReferencingAgent() {
+            return referralRequest.hasRequester()
+                && referralRequest.getRequester().hasAgent()
+                && referralRequest.getRequester().getAgent().hasReference();
+        }
+
+        private void processAgent(@NonNull Reference agent, Reference onBehalfOf) {
+            AgentDirectory agentDirectory = messageContext.getAgentDirectory();
+
+            if (isReferenceToPractitioner(agent)
+                && onBehalfOf != null && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
+                final String participantRef = agentDirectory.getAgentRef(agent, onBehalfOf);
+                final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
+                templateParameters.participant(participant);
+            } else if (isReferenceToPractitioner(agent)) {
+                final String participantRef = agentDirectory.getAgentId(agent);
+                final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
+                templateParameters.participant(participant);
+            }
+        }
+
+        private String buildTextDescription() {
+            StringBuilder text = new StringBuilder();
+            if (referralRequest.hasDescription()) {
+                text.append(referralRequest.getDescription());
+            }
+            Stream<String> descriptions = Stream.of(
+                buildNoteDescription(),
+                buildReasonCodeDescription(),
+                buildRecipientDescription(),
+                buildSpecialtyDescription(),
+                buildServiceRequestedDescription(),
+                buildIdentifierDescription(),
+                buildSupportingInfoDescription(),
+                buildPriorityDescription()
+            );
+
+            if (hasReferencingAgent()) {
+                Reference agent = referralRequest.getRequester().getAgent();
+                descriptions = Stream.concat(descriptions, Stream.of(
+                    buildDeviceDescription(agent),
+                    buildOrganizationDescription(agent),
+                    buildPatientDescription(agent),
+                    buildRelatedPersonDescription(agent)
+                ));
+            }
+
+            descriptions
+                .filter(StringUtils::isNotBlank)
+                .map(description -> description + " ")
+                .forEach(description -> text.insert(0, description));
+
+            return text.toString();
+        }
+
         private String buildPriorityCode() {
             if (!referralRequest.hasPriority()) {
                 return null;
@@ -143,26 +207,53 @@ public class RequestStatementMapper {
             }
         }
 
-        private boolean hasReferencingAgent() {
-            return referralRequest.hasRequester()
-                && referralRequest.getRequester().hasAgent()
-                && referralRequest.getRequester().getAgent().hasReference();
+        private String buildCode() {
+            if (referralRequest.hasReasonCode()) {
+                return codeableConceptCdMapper.mapCodeableConceptToCd(referralRequest.getReasonCodeFirstRep());
+            }
+            return DEFAULT_REASON_CODE_XML;
         }
 
-        private void processAgent(@NonNull Reference agent, Reference onBehalfOf) {
-            AgentDirectory agentDirectory = messageContext.getAgentDirectory();
-
-            if (isReferenceToPractitioner(agent)
-                && onBehalfOf != null && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
-                final String participantRef = agentDirectory.getAgentRef(agent, onBehalfOf);
-                final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
-                templateParameters.participant(participant);
-
-            } else if (isReferenceToPractitioner(agent)) {
-                final String participantRef = agentDirectory.getAgentId(agent);
-                final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
-                templateParameters.participant(participant);
+        private String buildNoteDescription() {
+            if (referralRequest.hasNote()) {
+                return referralRequest.getNote().stream()
+                    .map(this::buildConditionalNoteDesc)
+                    .collect(Collectors.joining(COMMA));
             }
+            return StringUtils.EMPTY;
+        }
+
+        private String buildReasonCodeDescription() {
+            if (referralRequest.hasReasonCode() && referralRequest.getReasonCode().size() > 1) {
+                return REASON_CODES + extractReasonCode(referralRequest);
+            }
+            return StringUtils.EMPTY;
+        }
+
+        private String buildRecipientDescription() {
+            if (referralRequest.hasRecipient()) {
+                return getRecipientsWithoutFirstPractitioner().stream()
+                    .filter(Reference::hasReferenceElement)
+                    .map(value -> extractRecipient(messageContext, value))
+                    .collect(Collectors.joining(" "));
+            }
+            return StringUtils.EMPTY;
+        }
+
+        private String buildSpecialtyDescription() {
+            if (referralRequest.hasSpecialty()) {
+                return extractTextOrCoding(referralRequest.getSpecialty())
+                    .map(SPECIALTY::concat)
+                    .orElse(StringUtils.EMPTY);
+            }
+            return StringUtils.EMPTY;
+        }
+
+        private String buildServiceRequestedDescription() {
+            if (referralRequest.hasServiceRequested()) {
+                return SERVICES_REQUESTED + extractServiceRequested(referralRequest);
+            }
+            return StringUtils.EMPTY;
         }
 
         private String buildIdentifierDescription() {
@@ -179,58 +270,23 @@ public class RequestStatementMapper {
                 .orElse(StringUtils.EMPTY);
         }
 
-        private String buildServiceRequestedDescription() {
-            if (referralRequest.hasServiceRequested()) {
-                return SERVICES_REQUESTED + extractServiceRequested(referralRequest);
-            }
-            return StringUtils.EMPTY;
-        }
-
-        private String buildSpecialtyDescription() {
-            if (referralRequest.hasSpecialty()) {
-                return extractTextOrCoding(referralRequest.getSpecialty())
-                    .map(SPECIALTY::concat)
-                    .orElse(StringUtils.EMPTY);
-            }
-            return StringUtils.EMPTY;
-        }
-
-        private String buildRecipientDescription() {
-            if (referralRequest.hasRecipient()) {
-                return getRecipientsWithoutFirstPractitioner().stream()
-                    .filter(Reference::hasReferenceElement)
-                    .map(value -> extractRecipient(messageContext, value))
-                    .collect(Collectors.joining(" "));
-            }
-            return StringUtils.EMPTY;
-        }
-
-        private List<Reference> getRecipientsWithoutFirstPractitioner() {
-            boolean firstPractitionerFound = false;
-            var recipients = new ArrayList<Reference>(referralRequest.getRecipient().size());
-            for (Reference reference : referralRequest.getRecipient()) {
-                if (!firstPractitionerFound && isReferenceToPractitioner(reference)) {
-                    firstPractitionerFound = true;
-                } else {
-                    recipients.add(reference);
-                }
-            }
-            return recipients;
-        }
-
-        private String buildReasonCodeDescription() {
-            if (referralRequest.hasReasonCode() && referralRequest.getReasonCode().size() > 1) {
-                return REASON_CODES + extractReasonCode(referralRequest);
-            }
-            return StringUtils.EMPTY;
-        }
-
-        private String buildNoteDescription() {
-            if (referralRequest.hasNote()) {
-                return referralRequest.getNote().stream()
-                    .map(value -> String.format(NOTE, extractAuthor(messageContext, value), extractNoteTime(value), value.getText()))
+        private String buildSupportingInfoDescription() {
+            if (referralRequest.hasSupportingInfo()) {
+                String supportingInfo = SUPPORTING_INFO + referralRequest.getSupportingInfo().stream()
+                    .map(value -> extractSupportingInfo(messageContext, value))
+                    .filter(value -> !value.equals(StringUtils.EMPTY))
                     .collect(Collectors.joining(COMMA));
+
+                return supportingInfo.equals(SUPPORTING_INFO) ? StringUtils.EMPTY : supportingInfo;
             }
+            return StringUtils.EMPTY;
+        }
+
+        private String buildPriorityDescription() {
+            if (referralRequest.hasPriority() && referralRequest.getPriority() == ReferralRequest.ReferralPriority.ASAP) {
+                return PRIORITY_ASAP;
+            }
+
             return StringUtils.EMPTY;
         }
 
@@ -281,73 +337,28 @@ public class RequestStatementMapper {
             return StringUtils.EMPTY;
         }
 
-        private String buildTextDescription() {
-            StringBuilder text = new StringBuilder();
-            if (referralRequest.hasDescription()) {
-                text.append(referralRequest.getDescription());
+        private String buildConditionalNoteDesc(Annotation value) {
+            String author = extractAuthor(messageContext, value);
+            String time = extractNoteTime(value);
+
+            if (author.equals(StringUtils.EMPTY) && time.equals(StringUtils.EMPTY)) {
+                return String.format(NOTE_WITH_NO_AUTHOR_AND_TIME, value.getText());
+            } else {
+                return String.format(NOTE, author, time, value.getText());
             }
-            Stream<String> descriptions = Stream.of(
-                buildNoteDescription(),
-                buildReasonCodeDescription(),
-                buildRecipientDescription(),
-                buildSpecialtyDescription(),
-                buildServiceRequestedDescription(),
-                buildIdentifierDescription(),
-                buildSupportingInfoDescription(),
-                buildPriorityDescription()
-            );
-
-            if (hasReferencingAgent()) {
-                Reference agent = referralRequest.getRequester().getAgent();
-                descriptions = Stream.concat(descriptions, Stream.of(
-                    buildDeviceDescription(agent),
-                    buildOrganizationDescription(agent),
-                    buildPatientDescription(agent),
-                    buildRelatedPersonDescription(agent)
-                ));
-            }
-
-            descriptions
-                .filter(StringUtils::isNotBlank)
-                .map(description -> description + " ")
-                .forEach(description -> text.insert(0, description));
-
-            return text.toString();
         }
 
-        private String buildCode() {
-            if (referralRequest.hasReasonCode()) {
-                return codeableConceptCdMapper.mapCodeableConceptToCd(referralRequest.getReasonCodeFirstRep());
+        private List<Reference> getRecipientsWithoutFirstPractitioner() {
+            boolean firstPractitionerFound = false;
+            var recipients = new ArrayList<Reference>(referralRequest.getRecipient().size());
+            for (Reference reference : referralRequest.getRecipient()) {
+                if (!firstPractitionerFound && isReferenceToPractitioner(reference)) {
+                    firstPractitionerFound = true;
+                } else {
+                    recipients.add(reference);
+                }
             }
-            return DEFAULT_REASON_CODE_XML;
+            return recipients;
         }
-
-        private String buildSupportingInfoDescription() {
-            if (referralRequest.hasSupportingInfo()) {
-                String supportingInfo = SUPPORTING_INFO + referralRequest.getSupportingInfo().stream()
-                    .map(value -> extractSupportingInfo(messageContext, value))
-                    .filter(value -> !value.equals(StringUtils.EMPTY))
-                    .collect(Collectors.joining(COMMA));
-
-                return supportingInfo.equals(SUPPORTING_INFO) ? StringUtils.EMPTY : supportingInfo;
-            }
-            return StringUtils.EMPTY;
-        }
-
-        private String buildPriorityDescription() {
-            if (referralRequest.hasPriority() && referralRequest.getPriority() == ReferralRequest.ReferralPriority.ASAP) {
-                return PRIORITY_ASAP;
-            }
-
-            return StringUtils.EMPTY;
-        }
-    }
-
-    private static boolean isReferenceToPractitioner(Reference reference) {
-        return isReferenceToType(reference, ResourceType.Practitioner);
-    }
-
-    private static boolean isReferenceToType(@NonNull Reference reference, @NonNull ResourceType type) {
-        return reference.getReference().startsWith(type.name() + "/");
     }
 }

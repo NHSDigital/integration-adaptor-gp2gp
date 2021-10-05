@@ -1077,7 +1077,7 @@
         <id root="C59316B2-2578-412C-8D00-5040C86BF306" />
         <code code="305230000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by GP">
 </code>
-        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -1133,7 +1133,7 @@
         <id root="09A882DA-C219-4146-97EF-3FD9A57135B0" />
         <code code="183835003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer for angiogram">
 </code>
-        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -1189,7 +1189,7 @@
         <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088" />
         <code code="390884006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Heart failure follow-up">
 </code>
-        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required linked to a problem</text>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required linked to a problem</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -5121,7 +5121,7 @@
         <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8" />
         <code code="183450002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to burn unit">
 </code>
-        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Reason for referral comments field</text>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:Required Reason for referral comments field</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
