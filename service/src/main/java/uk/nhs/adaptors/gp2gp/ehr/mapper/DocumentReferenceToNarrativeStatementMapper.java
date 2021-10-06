@@ -35,6 +35,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
     private final MessageContext messageContext;
     private final SupportedContentTypes supportedContentTypes;
     private final TimestampService timestampService;
+    private final ParticipantMapper participantMapper;
 
     public String mapDocumentReferenceToNarrativeStatement(final DocumentReference documentReference) {
         if (documentReference.getContent().isEmpty()) {
@@ -62,7 +63,17 @@ public class DocumentReferenceToNarrativeStatementMapper {
                 .referenceContentType(attachmentContentType);
         }
 
+        buildParticipant(documentReference, builder);
+
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
+    }
+
+    private Optional<String> buildParticipant(DocumentReference documentReference, NarrativeStatementTemplateParametersBuilder builder) {
+        if (documentReference.hasAuthor()) {
+            return Optional.of(participantMapper.mapToParticipant("test", ParticipantType.PERFORMER));
+        }
+
+        return Optional.empty();
     }
 
     public String buildFragmentIndexNarrativeStatement(String bindingDocumentId) {
