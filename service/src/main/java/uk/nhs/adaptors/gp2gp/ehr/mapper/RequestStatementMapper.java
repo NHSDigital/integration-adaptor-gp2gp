@@ -348,11 +348,9 @@ public class RequestStatementMapper {
             String author = extractAuthor(messageContext, value);
             String time = extractNoteTime(value);
 
-            if (author.equals(StringUtils.EMPTY) && time.equals(StringUtils.EMPTY)) {
-                return String.format(NOTE_WITH_NO_AUTHOR_AND_TIME, value.getText());
-            } else {
-                return String.format(NOTE, author, time, value.getText());
-            }
+            return author.isEmpty() && time.isEmpty()
+                ? String.format(NOTE_WITH_NO_AUTHOR_AND_TIME, value.getText())
+                : String.format(NOTE, author, time, value.getText());
         }
     }
 
