@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Device;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
@@ -62,6 +63,7 @@ public class RequestStatementMapper {
     private static final String DEFAULT_REASON_CODE_XML = "<code code=\"3457005\" displayName=\"Patient referral\" codeSystem=\"2.16.840.1"
         + ".113883.2.1.3.2.4.15\"/>";
     private static final String NOTE = "Annotation: %s @ %s %s";
+    private static final String NOTE_WITH_NO_AUTHOR_AND_TIME = "Annotation: %s";
     private static final String COMMA = ", ";
 
     private static final String PRIORITY_CODE_IMMEDIATE =
@@ -228,7 +230,7 @@ public class RequestStatementMapper {
         private String buildNoteDescription() {
             if (referralRequest.hasNote()) {
                 return referralRequest.getNote().stream()
-                    .map(value -> String.format(NOTE, extractAuthor(messageContext, value), extractNoteTime(value), value.getText()))
+                    .map(this::buildConditionalNoteDesc)
                     .collect(Collectors.joining(COMMA));
             }
             return StringUtils.EMPTY;
@@ -340,6 +342,15 @@ public class RequestStatementMapper {
             }
 
             return StringUtils.EMPTY;
+        }
+
+        private String buildConditionalNoteDesc(Annotation value) {
+            String author = extractAuthor(messageContext, value);
+            String time = extractNoteTime(value);
+
+            return author.isEmpty() && time.isEmpty()
+                ? String.format(NOTE_WITH_NO_AUTHOR_AND_TIME, value.getText())
+                : String.format(NOTE, author, time, value.getText());
         }
     }
 
