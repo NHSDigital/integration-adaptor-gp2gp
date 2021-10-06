@@ -185,7 +185,7 @@ public class ConditionLinkSetMapper {
             .map(value -> (Reference) value)
             .filter(this::nonExistentResourceFilter)
             .filter(this::suppressedLinkageResourcesFilter)
-            .map(reference -> messageContext.getIdMapper().getOrNew(reference))
+            .map(this::mapLinkedId)
             .collect(Collectors.toList());
     }
 

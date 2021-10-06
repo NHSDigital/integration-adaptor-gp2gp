@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
@@ -43,6 +44,7 @@ public class EncounterMapperTest {
     private static final Date CONSULTATION_DATE = Date.from(Instant.parse("2010-01-13T15:13:32Z"));
     private static final String TEST_LOCATION_NAME = "Test Location";
     private static final String TEST_LOCATION_ID = "EB3994A6-5A87-4B53-A414-913137072F57";
+
     public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_CONSULTATION = new Bundle.BundleEntryComponent()
         .setResource(new ListResource()
             .setEncounter(new Reference()
@@ -54,6 +56,9 @@ public class EncounterMapperTest {
 
     public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_LOCATION = new Bundle.BundleEntryComponent()
         .setResource(new Location().setName(TEST_LOCATION_NAME).setId(TEST_LOCATION_ID));
+
+    private static final String SAMPLE_EHR_COMPOSITION_COMPONENT = TEST_FILES_DIRECTORY
+        + "sample-ehr-composition-component.xml";
 
     private static final String INPUT_JSON_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
         + "example-encounter-resource-1.json";
@@ -117,6 +122,10 @@ public class EncounterMapperTest {
         + "expected-output-encounter-14.xml";
     private static final String OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2  = TEST_FILES_DIRECTORY
         + "expected-output-encounter-13.xml";
+    private static final String INPUT_JSON_ENCOUNTER_NO_ASSOCIATED_CONSULTATION = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-18.json";
+    private static final String OUTPUT_XML_WITH_NO_EHR_COMPOSITION_COMPONENTS = TEST_FILES_DIRECTORY
+        + "expected-output-encounter-14.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -130,7 +139,7 @@ public class EncounterMapperTest {
 
     @BeforeEach
     public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
         lenient().when(bundle.getEntry()).thenReturn(List.of(
@@ -149,10 +158,13 @@ public class EncounterMapperTest {
     @MethodSource("testFilePaths")
     public void When_MappingParsedEncounterJson_Expect_EhrCompositionXmlOutput(String input, String output) throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
+
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(output);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+        when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         String outputMessage = encounterMapper.mapEncounterToEhrComposition(parsedEncounter);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
@@ -181,9 +193,13 @@ public class EncounterMapperTest {
 
     @Test
     public void When_MappingEncounterWithNoType_Expect_Exception() throws IOException {
+        var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
+
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_TYPE);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+
+        when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
@@ -192,9 +208,13 @@ public class EncounterMapperTest {
 
     @Test
     public void When_MappingEncounterWithInvalidParticipantReferenceResourceType_Expect_Exception() throws IOException {
+        var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
+
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+
+        when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
@@ -203,12 +223,27 @@ public class EncounterMapperTest {
 
     @Test
     public void When_MappingEncounterWithoutRecorderParticipant_Expect_Exception() throws IOException {
+        var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
+
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITHOUT_RECORDER_PARTICIPANT);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
 
+        when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
+
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Encounter.participant recorder is required");
+    }
+
+    @Test
+    public void When_MappingEmptyConsultation_Expect_NoEhrCompositionGenerated() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_ENCOUNTER_NO_ASSOCIATED_CONSULTATION);
+        Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+
+        String outputMessage = encounterMapper.mapEncounterToEhrComposition(parsedEncounter);
+        assertThat(outputMessage).isEqualTo(StringUtils.EMPTY);
+
+        verify(encounterComponentsMapper).mapComponents(parsedEncounter);
     }
 }

@@ -28,6 +28,33 @@
                 <id root="test-id" />
             </agentRef>
         </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E" />
+        <code code="907511000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[RFC] Chest infection">
+            <originalText>Test</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201110115000"/>
+        </effectiveTime>
+        <availabilityTime value="20201110115000"/>
+
+
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Test Observation</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+
+        <Participant typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
+            </agentRef>
+        </Participant>
+    </ObservationStatement>
+</component>
 
     </ehrComposition>
 </component>

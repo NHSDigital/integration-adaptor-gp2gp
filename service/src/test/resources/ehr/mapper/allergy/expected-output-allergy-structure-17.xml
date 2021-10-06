@@ -22,6 +22,11 @@
                         <text>End Date: 2018-03-01</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
+                <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
             </ObservationStatement>
         </component>
     </CompoundStatement>

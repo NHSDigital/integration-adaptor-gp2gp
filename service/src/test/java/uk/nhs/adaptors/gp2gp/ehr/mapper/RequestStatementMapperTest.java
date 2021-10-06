@@ -157,8 +157,8 @@ public class RequestStatementMapperTest {
         + "expected-output-request-statement-with-normal-priority.xml";
     private static final String OUTPUT_XML_WITH_HIGH_PRIORITY = TEST_FILE_DIRECTORY
         + "expected-output-request-statement-with-high-priority.xml";
-    private static final String OUTPUT_XML_WITH_IMMEDIATE_PRIORITY = TEST_FILE_DIRECTORY
-        + "expected-output-request-statement-with-immediate-priority.xml";
+    private static final String OUTPUT_XML_WITH_PRIORITY_ASAP = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-text-priority-asap.xml";
     private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE = TEST_FILE_DIRECTORY
         + "expected-output-request-statement-supportingInfo-with-document-reference.xml";
     private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE_NO_DESCRIPTION = TEST_FILE_DIRECTORY
@@ -212,10 +212,9 @@ public class RequestStatementMapperTest {
             arguments(INPUT_JSON_WITH_NOTES, OUTPUT_XML_WITH_NOTES),
             arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF),
             arguments(INPUT_JSON_WITH_MULTIPLE_RECIPIENTS, OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS),
-            arguments(INPUT_JSON_WITH_ASAP_PRIORITY, OUTPUT_XML_WITH_IMMEDIATE_PRIORITY),
+            arguments(INPUT_JSON_WITH_ASAP_PRIORITY, OUTPUT_XML_WITH_PRIORITY_ASAP),
             arguments(INPUT_JSON_WITH_ROUTINE_PRIORITY, OUTPUT_XML_WITH_NORMAL_PRIORITY),
             arguments(INPUT_JSON_WITH_URGENT_PRIORITY, OUTPUT_XML_WITH_HIGH_PRIORITY),
-            // ReferralRequest.supportingInfo resources for test
             arguments(INPUT_JSON_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE,
                 OUTPUT_XML_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE),
             arguments(INPUT_JSON_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE_NO_DESCRIPTION,
