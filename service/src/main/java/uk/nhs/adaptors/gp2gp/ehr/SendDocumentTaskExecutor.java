@@ -49,7 +49,6 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     @SneakyThrows
     @Override
     public void execute(SendDocumentTaskDefinition taskDefinition) {
-        LOGGER.info("SendDocument task was created, Sending EHR Document to GP");
         var storageDataWrapper = storageConnectorService.downloadFile(taskDefinition.getDocumentName());
         var mainMessageId = taskDefinition.getMessageId();
         var mainDocumentId = taskDefinition.getDocumentId();
