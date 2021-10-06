@@ -109,7 +109,7 @@ public final class StatementTimeMappingUtils {
         return DEFAULT_TIME_VALUE;
     }
 
-    public static String prepareEffectiveTimeForAllergyIntolerance(String onsetDate, String endDate) {
+    public static String prepareEffectiveTimeForAllergyIntolerance(String onsetDate) {
         if (!onsetDate.isEmpty()) {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, onsetDate);
         } else {

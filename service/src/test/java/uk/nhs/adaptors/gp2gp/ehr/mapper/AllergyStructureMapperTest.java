@@ -113,6 +113,8 @@ public class AllergyStructureMapperTest {
             + "expected-output-allergy-structure-19.xml";
     private static final String OUTPUT_XML_USES_RECORDER_AS_PERFORMER_PATIENT_ASSERTER = TEST_FILE_DIRECTORY
             + "expected-output-allergy-structure-20.xml";
+    private static final String OUTPUT_XML_USES_RECORDER_AS_FALLBACK_ASSERTER = TEST_FILE_DIRECTORY
+        + "expected-output-allergy-structure-21.xml";
     private static final String COMMON_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
 
     @Mock
@@ -145,7 +147,7 @@ public class AllergyStructureMapperTest {
             Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NAME_TEXT, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER),
             Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NO_NAME, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER_NO_NAME),
             Arguments.of(INPUT_JSON_WITHOUT_END_DATE, OUTPUT_XML_USES_NO_END_DATE),
-            Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_PERFORMER),
+            Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_FALLBACK_ASSERTER),
             Arguments.of(INPUT_JSON_WITH_INVALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_NO_AUTHOR_OR_PERFORMER),
             Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_RELATED_PERSON_ASSERTER,
                     OUTPUT_XML_USES_RECORDER_AS_PERFORMER_RELATED_PERSON_ASSERTER),

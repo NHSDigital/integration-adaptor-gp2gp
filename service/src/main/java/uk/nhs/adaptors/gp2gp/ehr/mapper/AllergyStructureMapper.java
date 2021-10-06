@@ -114,11 +114,8 @@ public class AllergyStructureMapper {
 
     private String buildEffectiveTime(AllergyIntolerance allergyIntolerance) {
         var onsetDate = extractOnsetDate(allergyIntolerance);
-        var endDate = filterExtensionByUrl(allergyIntolerance, ALLERGY_INTOLERANCE_END_URL)
-            .map(extension -> AllergyStructureExtractor.extractEndDate(extension, DateFormatUtil::toHl7Format))
-            .orElse(StringUtils.EMPTY);
 
-        return StatementTimeMappingUtils.prepareEffectiveTimeForAllergyIntolerance(onsetDate, endDate);
+        return StatementTimeMappingUtils.prepareEffectiveTimeForAllergyIntolerance(onsetDate);
     }
 
     private String buildAvailabilityTime(AllergyIntolerance allergyIntolerance) {
@@ -263,6 +260,7 @@ public class AllergyStructureMapper {
     }
 
     private String buildEndDatePertinentInformation(AllergyIntolerance allergyIntolerance) {
+        var a = 1;
         return filterExtensionByUrl(allergyIntolerance, ALLERGY_INTOLERANCE_END_URL)
             .map(extension -> AllergyStructureExtractor.extractEndDate(extension, DateFormatUtil::toTextFormat))
             .filter(StringUtils::isNotBlank)
@@ -284,5 +282,4 @@ public class AllergyStructureMapper {
         return allergyIntolerance.hasAsserter()
                 && allergyIntolerance.getAsserter().getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name());
     }
-  
 }
