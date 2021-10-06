@@ -119,6 +119,9 @@ public class RequestStatementMapperTest {
         + "example-referral-request-supportingInfo-with-medication-request-no-date.json";
     private static final String INPUT_JSON_WITH_SUPPORTINGINFO_IGNORED_RESOURCES = TEST_FILE_DIRECTORY
         + "example-referral-request-supportingInfo-with-ignored-resources.json";
+    private static final String INPUT_JSON_WITH_NO_AUTHOR_AND_TIME = TEST_FILE_DIRECTORY
+        + "example-referral-request-no-author-and-time.json";
+
 
     // OUTPUT FILES
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -183,6 +186,8 @@ public class RequestStatementMapperTest {
         + "expected-output-request-statement-supportingInfo-with-medication-request-no-date.xml";
     private static final String OUTPUT_XML_WITH_NO_SUPPORTINGINFO = TEST_FILE_DIRECTORY
         + "expected-output-request-statement-no-supportingInfo.xml";
+    private static final String OUTPUT_XML_WITH_NO_AUTHOR_AND_TIME = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-no-author-and-time.xml";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -242,7 +247,8 @@ public class RequestStatementMapperTest {
             arguments(INPUT_JSON_WITH_SUPPORTINGINFO_MEDICATIONREQUEST_NO_DATE,
                 OUTPUT_XML_WITH_SUPPORTINGINFO_MEDICATIONREQUEST_NO_DATE),
             arguments(INPUT_JSON_WITH_SUPPORTINGINFO_IGNORED_RESOURCES,
-                OUTPUT_XML_WITH_NO_SUPPORTINGINFO)
+                OUTPUT_XML_WITH_NO_SUPPORTINGINFO),
+            arguments(INPUT_JSON_WITH_NO_AUTHOR_AND_TIME, OUTPUT_XML_WITH_NO_AUTHOR_AND_TIME)
         );
     }
 
