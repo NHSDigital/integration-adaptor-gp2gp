@@ -1,17 +1,16 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-
-import lombok.SneakyThrows;
-import org.springframework.stereotype.Component;
-
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
 
 @Component
 @AllArgsConstructor
@@ -40,7 +39,7 @@ public class TaskHandler {
                 executeTask(taskDefinition);
             } else {
                 LOGGER.warn(
-                    "Aborting the execution of task {} for Conversation-Id: {}. The process has already failed",
+                    "Aborting the execution of task {} for conversation_id: {}. The process has already failed",
                     taskDefinition.getTaskType().name(),
                     taskDefinition.getConversationId()
                 );
@@ -48,7 +47,7 @@ public class TaskHandler {
 
             return true;
         } catch (Exception e) {
-            LOGGER.error("An error occurred while handing a task message {}", message.getJMSMessageID(), e);
+            LOGGER.error("An error occurred while handing a task message_id: {}", message.getJMSMessageID(), e);
             return handleProcessingError(taskDefinition);
         }
     }
@@ -58,7 +57,7 @@ public class TaskHandler {
             String taskType = message.getStringProperty(TASK_TYPE_HEADER_NAME);
             String body = JmsReader.readMessage(message);
 
-            LOGGER.info("Received a message on the task queue with {} header {}", TASK_TYPE_HEADER_NAME, taskType);
+            LOGGER.info("Message taskType: {}", taskType);
             return taskDefinitionFactory.getTaskDefinition(taskType, body);
         } catch (JMSException e) {
             throw new TaskHandlerException("Unable to read task definition from JMS message", e);
@@ -69,9 +68,9 @@ public class TaskHandler {
         mdcService.applyConversationId(taskDefinition.getConversationId());
         mdcService.applyTaskId(taskDefinition.getTaskId());
 
-        TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.getClass());
+        var taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.getClass());
 
-        LOGGER.info("Executing a {} with parameters from a {}", taskExecutor.getClass(), taskDefinition.getClass());
+        LOGGER.info("Executing {}", taskExecutor.getClass().getName());
 
         taskExecutor.execute(taskDefinition);
     }

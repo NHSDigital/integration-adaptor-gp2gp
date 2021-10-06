@@ -31,8 +31,6 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     @Override
     @SneakyThrows
     public void execute(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
-        LOGGER.info("SendEhrExtractCore task was created, Sending EHR extract to Spine");
-
         String structuredRecordFilename = GpcFilenameUtils.generateStructuredRecordFilename(
             sendEhrExtractCoreTaskDefinition.getConversationId());
         var storageDataWrapper = storageConnectorService.downloadFile(structuredRecordFilename);

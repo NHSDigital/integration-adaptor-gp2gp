@@ -277,7 +277,7 @@
         <code code="904771000006104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Audiological medicine referral">
     <originalText>Audiological medicine referral</originalText>
 </code>
-        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Unknown, Annotation:  @  NHS / Private:Private, Annotation:  @  Transport:None Required This is going to be a long description with blank lines included.  This referral has a Routine Urgency for a Purpose Unknown.  The Referral Mode is Written
+        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Unknown, Annotation: NHS / Private:Private, Annotation: Transport:None Required This is going to be a long description with blank lines included.  This referral has a Routine Urgency for a Purpose Unknown.  The Referral Mode is Written
 
 Text after 2 carriage returns - It is a Private Referral and Transport is set to None
 
@@ -1801,7 +1801,7 @@ Episodicity : First</text>
         <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F" />
         <code code="183444007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
 </code>
-        <text>Supporting Information: { Document: 2020-09-21 Referral Letter (21-Sep-2020) for 2 week rule referral - brain }, { Document: 2021-02-25 Letter sent to patient Letter sent to patient (25-Feb-2021) } Recipient Healthcare Service: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required 12</text>
+        <text>Supporting Information: { Document: 2020-09-21 Referral Letter (21-Sep-2020) for 2 week rule referral - brain }, { Document: 2021-02-25 Letter sent to patient Letter sent to patient (25-Feb-2021) } Recipient Healthcare Service: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Assessment, Annotation: NHS / Private:NHS, Annotation: Transport:None Required 12</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -1928,7 +1928,7 @@ Episodicity : First</text>
         <code code="831331000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - skin">
     <originalText>2 week rule referral - skin</originalText>
 </code>
-        <text>Supporting Information: { Document: 2020-09-21 Referral Letter (21-Sep-2020) for 2 week rule referral - skin } Recipient Healthcare Service: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required skin</text>
+        <text>Supporting Information: { Document: 2020-09-21 Referral Letter (21-Sep-2020) for 2 week rule referral - skin } Recipient Healthcare Service: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required skin</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -1996,7 +1996,7 @@ Episodicity : First</text>
         <code code="2008431000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Advice and guidance request sent">
     <originalText>Advice and guidance request sent</originalText>
 </code>
-        <text>Recipient Healthcare Service: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Performance of a Procedure or Operation, Annotation:  @  NHS / Private:Private, Annotation:  @  Transport:Required, Annotation:  @  Priority:Soon </text>
+        <text>Recipient Healthcare Service: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Performance of a Procedure or Operation, Annotation: NHS / Private:Private, Annotation: Transport:Required, Annotation: Priority:Soon </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -6131,7 +6131,7 @@ test</text>
         <code code="305226003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by Accident and Emergency doctor">
     <originalText>Admission by A &amp; E doctor</originalText>
 </code>
-        <text>Priority: ASAP Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment &amp; Education, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Special Characters !&apos;@£$%^&amp;*()_+-={}[]:&quot;|;&apos;\&lt;&gt;?,./</text>
+        <text>Priority: ASAP Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Assessment &amp; Education, Annotation: NHS / Private:NHS, Annotation: Transport:Required Special Characters !&apos;@£$%^&amp;*()_+-={}[]:&quot;|;&apos;\&lt;&gt;?,./</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
