@@ -264,7 +264,7 @@ public class SpecimenMapper {
         public void receivedDate(Date date) {
             List<String> receivedDateElements = List.of(
                 RECEIVED_DATE,
-                Objects.toString(DateFormatUtil.toTextFormat(date), StringUtils.EMPTY)
+                Objects.toString(DateFormatUtil.toTextFormatStraight(date.toInstant()), StringUtils.EMPTY)
             );
 
             prependText(receivedDateElements);

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toDateTypeTime;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormatStraight;
 
 import java.util.stream.Stream;
 
@@ -71,12 +72,12 @@ public class DateFormatUtilTest {
     }
 
     @Test
-    public void When_TextFormattingDate_Expect_String_With_Date_Hours_Minutes() {
+    public void When_FormattingDateToText_Expect_StringWithDateHoursMinutes() {
         final String expected = "2005-05-02 21:37";
         String specimenJson = String.format(DATETIME_SPECIMEN_TEMPLATE, "2005-05-02T21:37:05+00:00");
         Specimen specimen = FHIR_PARSER.parseResource(specimenJson, Specimen.class);
 
-        String actual = toTextFormat(specimen.getReceivedTime());
+        String actual = toTextFormatStraight(specimen.getReceivedTime().toInstant());
         assertThat(actual).isEqualTo(expected);
     }
 
