@@ -10,7 +10,6 @@ import org.hl7.fhir.dstu3.model.BaseReference;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.ResourceType;
-import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +33,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
     private static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
+    private static final List<String> VALID_AUTHOR_RESOURCE_TYPES = List.of("Organization", "Practitioner");
 
     private final MessageContext messageContext;
     private final SupportedContentTypes supportedContentTypes;
@@ -86,12 +85,11 @@ public class DocumentReferenceToNarrativeStatementMapper {
     }
 
     private String mapAuthorToParticipant(Reference reference) {
-        var authorReferenceId = messageContext.getAgentDirectory().getAgentId(reference);
-        return participantMapper.mapToParticipant(authorReferenceId, ParticipantType.PERFORMER);
+        return participantMapper.mapToParticipant(messageContext.getAgentDirectory().getAgentId(reference), ParticipantType.PERFORMER);
     }
 
     private boolean isValidAuthorReference(Reference reference) {
-        return Arrays.asList(Organization.class, Practitioner.class).contains((reference.getResource().getClass())) ? true : false;
+        return VALID_AUTHOR_RESOURCE_TYPES.contains(reference.getReferenceElement().getResourceType()) ? true : false;
     }
 
     public String buildFragmentIndexNarrativeStatement(String bindingDocumentId) {
