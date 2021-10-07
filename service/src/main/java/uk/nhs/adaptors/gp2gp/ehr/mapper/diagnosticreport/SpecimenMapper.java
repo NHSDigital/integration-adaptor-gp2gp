@@ -168,7 +168,7 @@ public class SpecimenMapper {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
 
             if ((specimen.hasReceivedTime() && collection.hasQuantity())
-                || (specimen.hasReceivedTime() && collection.hasBodySite())){
+                || (specimen.hasReceivedTime() && collection.hasBodySite())) {
                 specimenNarrativeStatementCommentBuilder.receivedDate(specimen.getReceivedTime());
             }
 
@@ -261,7 +261,7 @@ public class SpecimenMapper {
             prependText(quantityElements);
         }
 
-        public void receivedDate(Date date){
+        public void receivedDate(Date date) {
             List<String> receivedDateElements = List.of(
                 RECEIVED_DATE,
                 Objects.toString(DateFormatUtil.toTextFormat(date), StringUtils.EMPTY)
