@@ -91,10 +91,11 @@
         <code nullFlavor="UNK">
             <originalText>Unknown</originalText>
         </code>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>NHS e-Referral Service</name>
-
-        </representedOrganization>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>NHS e-Referral Service</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
             <part typeCode="PART">

@@ -89,7 +89,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
     }
 
     private boolean isValidAuthorReference(Reference reference) {
-        return VALID_AUTHOR_RESOURCE_TYPES.contains(reference.getReferenceElement().getResourceType()) ? true : false;
+        return VALID_AUTHOR_RESOURCE_TYPES.contains(reference.getReferenceElement().getResourceType());
     }
 
     public String buildFragmentIndexNarrativeStatement(String bindingDocumentId) {
