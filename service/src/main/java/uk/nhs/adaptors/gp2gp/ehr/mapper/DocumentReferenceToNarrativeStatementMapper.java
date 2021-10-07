@@ -11,6 +11,7 @@ import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Practitioner;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -70,12 +72,26 @@ public class DocumentReferenceToNarrativeStatementMapper {
     }
 
     private String buildParticipant(DocumentReference documentReference) {
-        if (documentReference.hasAuthor() && Arrays.asList(Organization.class, Practitioner.class)
-                .contains(documentReference.getAuthor().get(0).getResource().getClass())) {
-            var authorReferenceId = messageContext.getAgentDirectory().getAgentId(documentReference.getAuthor().get(0));
-            return participantMapper.mapToParticipant(authorReferenceId, ParticipantType.PERFORMER);
-        }
-        return StringUtils.EMPTY;
+        return Optional.of(documentReference)
+            .filter(DocumentReference::hasAuthor)
+            .map(DocumentReference::getAuthor)
+            .map(this::getFirstAuthorReference)
+            .filter(this::isValidAuthorReference)
+            .map(this::mapAuthorToParticipant)
+            .orElse(StringUtils.EMPTY);
+    }
+
+    private Reference getFirstAuthorReference(List<Reference> authorList) {
+        return authorList.get(0);
+    }
+
+    private String mapAuthorToParticipant(Reference reference) {
+        var authorReferenceId = messageContext.getAgentDirectory().getAgentId(reference);
+        return participantMapper.mapToParticipant(authorReferenceId, ParticipantType.PERFORMER);
+    }
+
+    private boolean isValidAuthorReference(Reference reference) {
+        return Arrays.asList(Organization.class, Practitioner.class).contains((reference.getResource().getClass())) ? true : false;
     }
 
     public String buildFragmentIndexNarrativeStatement(String bindingDocumentId) {
