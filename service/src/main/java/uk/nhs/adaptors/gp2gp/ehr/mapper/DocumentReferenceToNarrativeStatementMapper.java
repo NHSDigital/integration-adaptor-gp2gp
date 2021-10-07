@@ -10,6 +10,7 @@ import org.hl7.fhir.dstu3.model.BaseReference;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 @Component
@@ -48,7 +50,8 @@ public class DocumentReferenceToNarrativeStatementMapper {
         final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(narrativeStatementId)
             .availabilityTime(getAvailabilityTime(documentReference))
-            .hasReference(true);
+            .hasReference(true)
+            .participant(buildParticipant(documentReference));
 
         final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference);
         final String attachmentContentType = DocumentReferenceUtils.extractContentType(attachment);
@@ -63,17 +66,16 @@ public class DocumentReferenceToNarrativeStatementMapper {
                 .referenceContentType(attachmentContentType);
         }
 
-        buildParticipant(documentReference, builder);
-
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
     }
 
-    private Optional<String> buildParticipant(DocumentReference documentReference, NarrativeStatementTemplateParametersBuilder builder) {
-        if (documentReference.hasAuthor()) {
-            return Optional.of(participantMapper.mapToParticipant("test", ParticipantType.PERFORMER));
+    private String buildParticipant(DocumentReference documentReference) {
+        if (documentReference.hasAuthor() && Arrays.asList(Organization.class, Practitioner.class)
+                .contains(documentReference.getAuthor().get(0).getResource().getClass())) {
+            var authorReferenceId = messageContext.getAgentDirectory().getAgentId(documentReference.getAuthor().get(0));
+            return participantMapper.mapToParticipant(authorReferenceId, ParticipantType.PERFORMER);
         }
-
-        return Optional.empty();
+        return StringUtils.EMPTY;
     }
 
     public String buildFragmentIndexNarrativeStatement(String bindingDocumentId) {
