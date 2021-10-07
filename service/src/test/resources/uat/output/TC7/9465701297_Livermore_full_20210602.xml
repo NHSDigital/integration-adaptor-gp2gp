@@ -506,7 +506,7 @@
         <code code="831271000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - colorectal">
     <originalText>2 week rule referral - colorectal</originalText>
 </code>
-        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Alliance Surgical, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referring patient for investigation</text>
+        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Alliance Surgical, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required Referring patient for investigation</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -563,7 +563,7 @@
         <code code="32485007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hospital admission">
     <originalText>Admission to hospital</originalText>
 </code>
-        <text>Recipient Healthcare Service: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Investigation, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required, Annotation:  @  Priority:Soon follow up investigation.</text>
+        <text>Recipient Healthcare Service: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Investigation, Annotation: NHS / Private:NHS, Annotation: Transport:Required, Annotation: Priority:Soon follow up investigation.</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -713,7 +713,7 @@
         <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5" />
         <code code="183446009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to cardiac intensive care unit">
 </code>
-        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Alliance Surgical, Annotation:  @  Purpose:Performance of a Procedure or Operation, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required, Annotation:  @  Priority:Soon This referral will be rejected</text>
+        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Alliance Surgical, Annotation: Purpose:Performance of a Procedure or Operation, Annotation: NHS / Private:NHS, Annotation: Transport:None Required, Annotation: Priority:Soon This referral will be rejected</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -769,7 +769,7 @@
         <code code="305226003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by Accident and Emergency doctor">
     <originalText>Admission by A &amp; E doctor</originalText>
 </code>
-        <text>Priority: ASAP Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment &amp; Education, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Special characters !@£$%^&amp;*()_+-={}[]:&quot;;&apos;&lt;&gt;?,./~`...</text>
+        <text>Priority: ASAP Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Assessment &amp; Education, Annotation: NHS / Private:NHS, Annotation: Transport:Required Special characters !@£$%^&amp;*()_+-={}[]:&quot;;&apos;&lt;&gt;?,./~`...</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -1302,7 +1302,7 @@ Episodicity : Review</text>
         <code code="308448008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to counsellor">
     <originalText>Refer to counsellor</originalText>
 </code>
-        <text>Recipient Org: Armitage Bridge Hospital Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Too close to fire
+        <text>Recipient Org: Armitage Bridge Hospital Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:Required Too close to fire
 </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1510,7 +1510,7 @@ Episodicity : Review</text>
         <code code="831311000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - lung">
     <originalText>2 week rule referral - lung</originalText>
 </code>
-        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -2790,7 +2790,7 @@ Episodicity : Review</text>
         <id root="21F23DE7-D702-4DB4-AD0D-F8A0D56D7537" />
         <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
 </code>
-        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -2813,7 +2813,7 @@ Episodicity : Review</text>
         <id root="D32F7C6C-D220-42A1-8028-610E3DEBD991" />
         <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
 </code>
-        <text>Recipient Healthcare Service: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <text>Recipient Healthcare Service: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -4157,7 +4157,7 @@ Episodicity : First
         <code code="831251000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
     <originalText>2 week rule referral - brain</originalText>
 </code>
-        <text>Recipient Healthcare Service: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Unknown, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required To mark as &apos;Dormant&apos;</text>
+        <text>Recipient Healthcare Service: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Unknown, Annotation: NHS / Private:NHS, Annotation: Transport:None Required To mark as &apos;Dormant&apos;</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -4198,7 +4198,7 @@ Episodicity : First
         <id root="CC9ACAD0-C9F0-46ED-9B85-DEB7D5CB885B" />
         <code code="306312003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to hand surgeon">
 </code>
-        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Patient Reassurance, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referral from a consultation</text>
+        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Patient Reassurance, Annotation: NHS / Private:NHS, Annotation: Transport:None Required Referral from a consultation</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -4244,7 +4244,7 @@ Episodicity : First
         <id root="D651DDAA-03BA-4723-960A-FD13C13CE367" />
         <code code="281098006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer to appliance officer">
 </code>
-        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required adas</text>
+        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required adas</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>

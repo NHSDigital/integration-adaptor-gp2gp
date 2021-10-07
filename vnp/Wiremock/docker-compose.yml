@@ -8,3 +8,4 @@ services:
       - "8080:8080"
     command:
       - -global-response-templating
+      - --verbose

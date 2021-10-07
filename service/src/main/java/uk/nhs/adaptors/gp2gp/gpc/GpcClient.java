@@ -41,7 +41,7 @@ public class GpcClient {
     }
 
     private void logRequest(String logTemplate, TaskDefinition taskDefinition, String url) {
-        LOGGER.info(logTemplate,
+        LOGGER.debug(logTemplate,
             taskDefinition.getToAsid(),
             taskDefinition.getFromAsid(),
             url);
