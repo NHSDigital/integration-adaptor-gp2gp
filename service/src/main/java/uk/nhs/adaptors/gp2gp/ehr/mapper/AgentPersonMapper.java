@@ -30,32 +30,40 @@ public class AgentPersonMapper {
         var builder = PractitionerAgentPersonMapperParameters.builder()
             .agentId(agentDirectoryId);
 
-        Optional<Practitioner> practitioner = messageContext.getInputBundleHolder()
+        messageContext.getInputBundleHolder()
             .getResource(new IdType(agentKey.getPractitionerReference()))
-            .map(Practitioner.class::cast);
+            .map(Practitioner.class::cast)
+            .ifPresentOrElse(
+                practitioner -> {
+                    builder.practitioner(true);
+                    buildPractitionerPrefix(practitioner).ifPresent(builder::practitionerPrefix);
 
-        if (practitioner.isPresent()) {
-            builder.practitioner(true);
-            buildPractitionerPrefix(practitioner.get()).ifPresent(builder::practitionerPrefix);
+                    var practitionerGiven = buildPractitionerGivenName(practitioner);
+                    var practitionerFamily = buildPractitionerFamilyName(practitioner);
 
-            var practitionerGiven = buildPractitionerGivenName(practitioner.get());
-            var practitionerFamily = buildPractitionerFamilyName(practitioner.get());
+                    practitionerGiven.ifPresent(builder::practitionerGivenName);
+                    practitionerFamily.ifPresent(builder::practitionerFamilyName);
 
-            practitionerGiven.ifPresent(builder::practitionerGivenName);
-            practitionerFamily.ifPresent(builder::practitionerFamilyName);
+                    if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
+                        builder.practitionerFamilyName(UNKNOWN);
+                    }
 
-            if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
-                builder.practitionerFamilyName(UNKNOWN);
-            }
-        }
+                    messageContext.getInputBundleHolder()
+                        .getResource(new IdType(agentKey.getOrganizationReference()))
+                        .map(Organization.class::cast)
+                        .map(OrganizationToAgentMapper::mapOrganizationToAgentInner)
+                        .ifPresent(builder::organization);
+                },
+                () -> messageContext.getInputBundleHolder()
+                        .getResource(new IdType(agentKey.getOrganizationReference()))
+                        .map(Organization.class::cast)
+                        .map(Organization::getName)
+                        .ifPresent(organizationName -> {
+                            builder.practitioner(true);
+                            builder.practitionerFamilyName(organizationName);
+                        }));
 
         buildPractitionerRole(agentKey).ifPresent(builder::practitionerRole);
-
-        messageContext.getInputBundleHolder()
-            .getResource(new IdType(agentKey.getOrganizationReference()))
-            .map(Organization.class::cast)
-            .map(OrganizationToAgentMapper::mapOrganizationToAgentInner)
-            .ifPresent(builder::organization);
 
         return TemplateUtils.fillTemplate(AGENT_STATEMENT_TEMPLATE, builder.build());
     }
