@@ -1,10 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -28,6 +27,6 @@ public class SendEhrExtractCoreTaskDispatcher {
             .build();
 
         taskDispatcher.createTask(sendEhrExtractCoreTaskDefinition);
-        LOGGER.info("SendEhrExtractCoreTaskDefinition added to task queue.");
+        LOGGER.info("{} added to task queue.", SendEhrExtractCoreTaskDefinition.class.getSimpleName());
     }
 }

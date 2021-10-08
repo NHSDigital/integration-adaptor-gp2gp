@@ -1,16 +1,15 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition.ACK_TYPE_CODE;
-import static uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition.NACK_TYPE_CODE;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+
+import static uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition.ACK_TYPE_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition.NACK_TYPE_CODE;
 
 @Service
 @Slf4j
@@ -24,7 +23,7 @@ public class SendAcknowledgementTaskDispatcher {
             getAcknowledgementTaskDefinitionBuilder(ehrExtractStatus, ACK_TYPE_CODE);
 
         taskDispatcher.createTask(taskDefinitionBuilder.build());
-        LOGGER.info("SendAcknowledgementTaskDefinition for ACK added to task queue");
+        LOGGER.info("Sent {} task with ACK: {}", SendAcknowledgementTaskDefinition.class.getSimpleName(), ACK_TYPE_CODE);
     }
 
     public void sendNegativeAcknowledgement(EhrExtractStatus ehrExtractStatus, String reasonCode, String reasonMessage) {
@@ -34,7 +33,7 @@ public class SendAcknowledgementTaskDispatcher {
         taskDefinitionBuilder.detail(reasonMessage);
 
         taskDispatcher.createTask(taskDefinitionBuilder.build());
-        LOGGER.info("SendAcknowledgementTaskDefinition for NACK added to task queue");
+        LOGGER.info("Sent {} task with NACK: {}", SendAcknowledgementTaskDefinition.class.getSimpleName(), NACK_TYPE_CODE);
     }
 
     private SendAcknowledgementTaskDefinition.SendAcknowledgementTaskDefinitionBuilder<?, ?> getAcknowledgementTaskDefinitionBuilder(
