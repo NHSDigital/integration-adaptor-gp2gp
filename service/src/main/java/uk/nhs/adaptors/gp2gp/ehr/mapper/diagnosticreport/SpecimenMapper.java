@@ -167,8 +167,7 @@ public class SpecimenMapper {
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
 
-            if ((specimen.hasReceivedTime() && collection.hasQuantity())
-                || (specimen.hasReceivedTime() && collection.hasBodySite())) {
+            if (specimen.hasReceivedTime() && (collection.hasQuantity() || collection.hasBodySite())) {
                 specimenNarrativeStatementCommentBuilder.receivedDate(specimen.getReceivedTime());
             }
 
