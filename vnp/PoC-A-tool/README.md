@@ -1,4 +1,4 @@
-# Volumetric and Performance testing
+# Running the "A" tool
 
 GP2GP performance tests can be performed by putting messages directly onto MHS inbound queue from where GP2GP consumes them
 
