@@ -91,7 +91,7 @@ public class DiagnosticReportMapper {
         );
     }
 
-    private String fetchExtensionId(List<Identifier> identifiers){
+    private String fetchExtensionId(List<Identifier> identifiers) {
         return identifiers.stream()
             .filter(identifier -> EXTENSION_ID_SYSTEM_ID.equals(identifier.getSystem()))
             .map(Identifier::getValue)
