@@ -18,6 +18,7 @@ import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Duration;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SimpleQuantity;
@@ -183,6 +184,16 @@ public class SpecimenMapper {
             if (collection.hasBodySite()) {
                 specimenNarrativeStatementCommentBuilder.collectionSite(collection.getBodySite());
             }
+
+            if (collection.hasCollector()) {
+                var collector = messageContext.getInputBundleHolder().getResource(collection.getCollector().getReferenceElement());
+                collector.ifPresent(collectorPractitioner -> {
+                    if (collectorPractitioner.getResourceType().equals(ResourceType.Practitioner)) {
+                        var humanName = buildHumanName((Practitioner) collectorPractitioner);
+                        specimenNarrativeStatementCommentBuilder.collector(humanName);
+                    }
+                });
+            }
         }
 
         specimen.getNote().stream()
@@ -208,12 +219,41 @@ public class SpecimenMapper {
         return Optional.empty();
     }
 
+    private static String buildHumanName(Practitioner practitioner) {
+
+        if (practitioner.hasName()) {
+            var name = practitioner.getNameFirstRep();
+            var nameBuilder = new StringBuilder();
+
+            if (name.hasPrefix()) {
+                nameBuilder.append(name.getPrefix());
+                nameBuilder.append(StringUtils.SPACE);
+            }
+
+            if (name.hasGiven()) {
+                nameBuilder.append(name.getGivenAsSingleString());
+                nameBuilder.append(StringUtils.SPACE);
+            }
+
+            if (name.hasFamily()) {
+                nameBuilder.append(name.getFamily());
+            }
+
+            if (StringUtils.isNotBlank(nameBuilder.toString())) {
+                return nameBuilder.toString();
+            }
+        }
+
+        return StringUtils.EMPTY;
+    }
+
     private static class SpecimenNarrativeStatementCommentBuilder {
 
         private static final String FASTING_STATUS = "Fasting Status:";
         private static final String FASTING_DURATION = "Fasting Duration:";
         private static final String QUANTITY = "Quantity:";
         private static final String COLLECTION_SITE = "Collection Site:";
+        private static final String COLLECTED_BY = "Collected By:";
 
         private String text;
 
@@ -223,6 +263,10 @@ public class SpecimenMapper {
 
         private void prependText(String... texts) {
             text = newLine(withSpace((Object[]) texts), text);
+        }
+
+        private void appendText(String appendText) {
+            text = newLine(text, appendText);
         }
 
         private void prependText(List<String> texts) {
@@ -257,6 +301,10 @@ public class SpecimenMapper {
         public void collectionSite(CodeableConcept collectionSite) {
             CodeableConceptMappingUtils.extractTextOrCoding(collectionSite)
                 .ifPresent(collectionSiteValue -> prependText(COLLECTION_SITE, collectionSiteValue));
+        }
+
+        public void collector(String collectorName) {
+            appendText(COLLECTED_BY + StringUtils.SPACE + collectorName);
         }
 
         public void note(String note) {
