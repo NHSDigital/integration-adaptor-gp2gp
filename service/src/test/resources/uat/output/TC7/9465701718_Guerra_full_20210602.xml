@@ -118,10 +118,11 @@
         <code nullFlavor="UNK">
             <originalText>Unknown</originalText>
         </code>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-J82182</name>
-
-        </representedOrganization>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>MessageRecipient-J82182</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -130,10 +131,11 @@
         <code nullFlavor="UNK">
             <originalText>Unknown</originalText>
         </code>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-M81023</name>
-
-        </representedOrganization>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>MessageRecipient-M81023</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -142,10 +144,11 @@
         <code nullFlavor="UNK">
             <originalText>Unknown</originalText>
         </code>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-A87004</name>
-
-        </representedOrganization>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>MessageRecipient-A87004</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -154,10 +157,11 @@
         <code nullFlavor="UNK">
             <originalText>Unknown</originalText>
         </code>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-J82622</name>
-
-        </representedOrganization>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>MessageRecipient-J82622</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -166,10 +170,11 @@
         <code nullFlavor="UNK">
             <originalText>Unknown</originalText>
         </code>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-B83001</name>
-
-        </representedOrganization>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>MessageRecipient-B83001</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -205,10 +210,11 @@
         <code nullFlavor="UNK">
             <originalText>Unknown</originalText>
         </code>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-B86123</name>
-
-        </representedOrganization>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>MessageRecipient-B86123</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -217,10 +223,11 @@
         <code nullFlavor="UNK">
             <originalText>Unknown</originalText>
         </code>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-J82150</name>
-
-        </representedOrganization>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>MessageRecipient-J82150</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -283,10 +290,11 @@
         <code nullFlavor="UNK">
             <originalText>Unknown</originalText>
         </code>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-F81682</name>
-
-        </representedOrganization>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>MessageRecipient-F81682</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -295,10 +303,11 @@
         <code nullFlavor="UNK">
             <originalText>Unknown</originalText>
         </code>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>MessageRecipient-G85677</name>
-
-        </representedOrganization>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>MessageRecipient-G85677</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
     </agentDirectory>
