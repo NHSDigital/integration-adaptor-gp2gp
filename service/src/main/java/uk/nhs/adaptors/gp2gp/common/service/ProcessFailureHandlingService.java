@@ -34,11 +34,13 @@ public class ProcessFailureHandlingService {
                     return true;
                 })
                 .orElseGet(() -> {
-                    LOGGER.warn("EHR extract status not found for Conversation-Id {}. Can't update it with error information.");
+                    LOGGER.warn(
+                        "EHR extract status not found for conversation_id: {}. Can't update it with error information.",
+                        conversationId);
                     return false;
                 });
         } catch (Exception e) {
-            LOGGER.error("An error occurred when closing a failed process for Conversation-Id: {}", conversationId, e);
+            LOGGER.error("An error occurred when closing a failed process for conversation_id: {}", conversationId, e);
             return false;
         }
     }

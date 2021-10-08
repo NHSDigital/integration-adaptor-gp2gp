@@ -39,7 +39,6 @@ public class MhsRequestBuilder {
 
     private final MhsConfiguration mhsConfiguration;
     private final RequestBuilderService requestBuilderService;
-    private final WebClientFilterService webClientFilterService;
 
     public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(String extractCoreMessage, String conversationId, String fromOdsCode) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
@@ -67,7 +66,8 @@ public class MhsRequestBuilder {
             .builder()
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
-            .filter(webClientFilterService.errorHandlingFilter(WebClientFilterService.RequestType.MHS_OUTBOUND, HttpStatus.ACCEPTED))
+            .filters(filters -> WebClientFilterService
+                .addWebClientFilters(filters, WebClientFilterService.RequestType.MHS_OUTBOUND, HttpStatus.ACCEPTED))
             .baseUrl(mhsConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", mhsConfiguration.getUrl()))
             .build();

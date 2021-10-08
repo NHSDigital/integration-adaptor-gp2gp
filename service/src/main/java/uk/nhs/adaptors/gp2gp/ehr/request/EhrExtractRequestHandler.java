@@ -182,8 +182,9 @@ public class EhrExtractRequestHandler {
             .documentId(documentId)
             .externalEhrExtract(externalEhrExtract)
             .build();
+        LOGGER.info("Sending task for document_id: {} document_name: {}", documentId, documentName);
         taskDispatcher.createTask(sendDocumentTaskDefinition);
-        LOGGER.info("Ehr Continue task created for document: " + documentName + ", taskId: " + sendDocumentTaskDefinition.getTaskId());
+
     }
 
     public void handleAcknowledgement(String conversationId, Document payload) {
