@@ -80,9 +80,6 @@ public class DateFormatUtil {
 
     public static String toTextFormatStraight(Instant instant) {
         return instant.atZone(UTC_ZONE_ID).format(HL7_WITH_TIME_HUMAN_READABLE);
-//        var sdf = new SimpleDateFormat(HL7_DATE_TIME_HM_FORMAT);
-//        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-//        return sdf.format(date);
     }
 
     public static DateTimeType toDateTypeTime(String effectiveTimeHl7Format) {
