@@ -4,8 +4,9 @@ echo ""
 java -jar a-1.5.0-jar-with-dependencies.jar \
     -A \
     -b "amqp://admin:admin@localhost:5672" \
-    -p "@9690937286.json" \
-    -S "@set_conversation_id.js" \
+    -p "@patient_transfer_request.json" \
+    -S "@transform.js" \
+    -W "nhs_numbers.txt" \
     inbound
 
 echo ""
