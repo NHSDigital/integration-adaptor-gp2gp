@@ -98,18 +98,6 @@
                 <family>Recall Schedule</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-            <telecom value="01133800000" use="WP"/>
-            <addr use="WP">
-                <streetAddressLine>Fulford Grange</streetAddressLine>
-                <streetAddressLine>Micklefield Lane</streetAddressLine>
-                <streetAddressLine>Rawdon</streetAddressLine>
-                <streetAddressLine>Rawdon</streetAddressLine>
-                <streetAddressLine>Leeds</streetAddressLine>
-                <postalCode>LS19 6BA</postalCode>
-            </addr>
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -125,18 +113,6 @@
                 <family>McAvenue</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-            <telecom value="01133800000" use="WP"/>
-            <addr use="WP">
-                <streetAddressLine>Fulford Grange</streetAddressLine>
-                <streetAddressLine>Micklefield Lane</streetAddressLine>
-                <streetAddressLine>Rawdon</streetAddressLine>
-                <streetAddressLine>Rawdon</streetAddressLine>
-                <streetAddressLine>Leeds</streetAddressLine>
-                <postalCode>LS19 6BA</postalCode>
-            </addr>
-        </representedOrganization>
     </Agent>
 </part>
             <part typeCode="PART">
@@ -152,18 +128,6 @@
                 <family>TEMPLE SOWERBY</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-            <telecom value="01133800000" use="WP"/>
-            <addr use="WP">
-                <streetAddressLine>Fulford Grange</streetAddressLine>
-                <streetAddressLine>Micklefield Lane</streetAddressLine>
-                <streetAddressLine>Rawdon</streetAddressLine>
-                <streetAddressLine>Rawdon</streetAddressLine>
-                <streetAddressLine>Leeds</streetAddressLine>
-                <postalCode>LS19 6BA</postalCode>
-            </addr>
-        </representedOrganization>
     </Agent>
 </part>
     </agentDirectory>
