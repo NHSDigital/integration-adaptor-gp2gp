@@ -1,19 +1,17 @@
 package uk.nhs.adaptors.gp2gp.common.mongo;
 
-import java.time.Duration;
-
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import java.time.Duration;
 
 @Configuration
 @ConfigurationProperties(prefix = "gp2gp.mongodb")
@@ -72,12 +70,12 @@ public class MongoClientConfiguration extends AbstractMongoClientConfiguration {
             LOGGER.debug("Including a username and password in the mongo connection string");
             connectionString += username + ":" + password + "@";
         } else {
-            LOGGER.info("No mongodb username or password is configured. Will use an anonymous connection.");
+            LOGGER.info("Mongodb username or password are not configured. Using an anonymous connection.");
         }
-        LOGGER.debug("The generated connection string will used host '{}' and port '{}'", host, port);
+        LOGGER.debug("Using host: {} port: {} in the generated connection string.", host, port);
         connectionString += host + ":" + port;
         if (StringUtils.isNotBlank(options)) {
-            LOGGER.debug("The generated connection will use use options '{}'", options);
+            LOGGER.debug("Using options: '{}' in the generated connection string.", options);
             connectionString += "/?" + options;
         } else {
             LOGGER.warn("No options for the mongodb connection string were provided. "

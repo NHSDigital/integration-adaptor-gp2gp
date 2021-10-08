@@ -959,7 +959,7 @@ Episodicity : Flare Up</text>
         <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA" />
         <code code="305230000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by GP">
 </code>
-        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -1015,7 +1015,7 @@ Episodicity : Flare Up</text>
         <id root="82A39454-299F-432E-993E-5A6232B4E099" />
         <code code="183835003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer for angiogram">
 </code>
-        <text>Supporting Information: { Document: 2020-11-17 Postoperative urine specimen collection Postoperative urine specimen collection (17-Nov-2020) } Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <text>Supporting Information: { Document: 2020-11-17 Postoperative urine specimen collection Postoperative urine specimen collection (17-Nov-2020) } Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -1071,7 +1071,7 @@ Episodicity : Flare Up</text>
         <id root="C59316B2-2578-412C-8D00-5040C86BF306" />
         <code code="390884006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Heart failure follow-up">
 </code>
-        <text>Supporting Information: { Document: 2019-09-04 Clinical report Clinical report (04-Sep-2019) } Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required linked to a problem</text>
+        <text>Supporting Information: { Document: 2019-09-04 Clinical report Clinical report (04-Sep-2019) } Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required linked to a problem</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -6975,7 +6975,7 @@ historical date</text>
         <id root="5D69F207-B9F7-48EB-BDE9-F42CED45357F" />
         <code code="183450002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to burn unit">
 </code>
-        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Reason for referral comments field</text>
+        <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:Required Reason for referral comments field</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>

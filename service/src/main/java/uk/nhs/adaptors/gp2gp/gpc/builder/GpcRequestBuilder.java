@@ -19,7 +19,6 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
@@ -32,7 +31,6 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 import java.util.Collections;
-import java.util.List;
 
 import static java.lang.String.valueOf;
 import static org.apache.http.protocol.HTTP.CONTENT_LEN;
@@ -63,22 +61,21 @@ public class GpcRequestBuilder {
     private final GpcTokenBuilder gpcTokenBuilder;
     private final GpcConfiguration gpcConfiguration;
     private final RequestBuilderService requestBuilderService;
-    private final WebClientFilterService webClientFilterService;
 
     @Value("${gp2gp.gpc.overrideNhsNumber}")
     private String overrideNhsNumber;
 
     public Parameters buildGetStructuredRecordRequestBody(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return new Parameters()
-            .addParameter(buildParamterComponent("patientNHSNumber")
+            .addParameter(buildParameterComponent("patientNHSNumber")
                 .setValue(new Identifier().setSystem(NHS_NUMBER_SYSTEM).setValue(
                     ((overrideNhsNumber.isBlank()) ? structuredTaskDefinition.getNhsNumber() : overrideNhsNumber))))
-            .addParameter(buildParamterComponent("includeFullRecord")
-                .addPart(buildParamterComponent("includeSensitiveInformation")
+            .addParameter(buildParameterComponent("includeFullRecord")
+                .addPart(buildParameterComponent("includeSensitiveInformation")
                     .setValue(new BooleanType(true))));
     }
 
-    private ParametersParameterComponent buildParamterComponent(String parameterName) {
+    private ParametersParameterComponent buildParameterComponent(String parameterName) {
         return new ParametersParameterComponent()
             .setName(parameterName);
     }
@@ -122,7 +119,8 @@ public class GpcRequestBuilder {
             .builder()
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
-            .filters(this::addWebClientFilters)
+            .filters(filters -> WebClientFilterService
+                .addWebClientFilters(filters, WebClientFilterService.RequestType.GPC, HttpStatus.OK))
             .baseUrl(baseUrl)
             .defaultUriVariables(Collections.singletonMap("url", baseUrl))
             .build();
@@ -161,10 +159,5 @@ public class GpcRequestBuilder {
         return buildRequestWithHeaders(uri, taskDefinition, interactionId)
             .body(bodyInserter)
             .header(CONTENT_LEN, valueOf(requestBody.length()));
-    }
-
-    private void addWebClientFilters(List<ExchangeFilterFunction> filters) {
-        filters.add(webClientFilterService.errorHandlingFilter(WebClientFilterService.RequestType.GPC, HttpStatus.OK));
-        filters.add(webClientFilterService.logRequest());
     }
 }
