@@ -258,6 +258,7 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
+        <id extension="15/CH000039M/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -381,6 +382,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id extension="15/CH000041O/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -932,6 +934,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="90AB2301-DC3C-4A37-8EAB-AA171DB2B88E"/>
+        <id extension="15/CH000040N/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -1097,6 +1100,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="F972CFDF-B4D7-4392-A96A-4D1BD8D14F14"/>
+        <id extension="15/CH000038L/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -1214,6 +1218,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230"/>
+        <id extension="15/CH000037K/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -1324,6 +1329,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C"/>
+        <id extension="15/CH000055C/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -1433,6 +1439,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450"/>
+        <id extension="15/CH000046T/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -1556,6 +1563,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
+        <id extension="15/CH000060H/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -2031,6 +2039,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="3F170377-2DE6-45D3-90EE-9EC23EDB4F59"/>
+        <id extension="15/CH000057E/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -2349,6 +2358,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="3368F5B6-5CC7-456B-95AE-EC498D49245A"/>
+        <id extension="15/CH000042P/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -2834,6 +2844,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="EFD99868-BD82-4213-9586-11755332A60D"/>
+        <id extension="15/CH000043Q/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -3441,6 +3452,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A"/>
+        <id extension="15/CH000044R/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -3772,6 +3784,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="5EA65C4A-D999-4E1D-BB3B-19F9606EF1E3"/>
+        <id extension="15/CH000045S/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -3892,6 +3905,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="19B160E4-9406-4642-B202-4BDCF073BE76"/>
+        <id extension="15/CH000047U/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -4032,6 +4046,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38"/>
+        <id extension="15/CH000048V/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -4145,6 +4160,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="8F3B744A-93D9-433C-8D46-6EF68AC95052"/>
+        <id extension="15/CH000049W/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -4241,6 +4257,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E"/>
+        <id extension="15/CH000050X/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -4714,6 +4731,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="DE490ABD-6F61-489B-9D9D-19ADA4B558E8"/>
+        <id extension="15/CH000051Y/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -5372,6 +5390,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="81E9F560-F447-4E94-836A-970DAF5D9D52"/>
+        <id extension="15/CH000052Z/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -5544,6 +5563,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="ED30F999-14CA-41B9-93EE-334F60049174"/>
+        <id extension="15/CH000053A/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -5753,6 +5773,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="07A13996-C13B-45B6-8493-1C4C691ACB98"/>
+        <id extension="15/CH000054B/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -5881,6 +5902,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="7409E7A5-9227-43F2-83ED-1299B7B081DF"/>
+        <id extension="15/CH000056D/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -6192,6 +6214,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="4B31E250-0A11-4169-9A6C-F477DE9A5793"/>
+        <id extension="15/CH000058F/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -6600,6 +6623,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="A4FF5CDB-FD31-4C11-AB90-2205935377EF"/>
+        <id extension="15/CH000059G/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -6960,6 +6984,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B51C4A24-C5D4-4364-BACF-E2742FEEFFE7"/>
+        <id extension="15/CH000061I/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -7103,6 +7128,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="363ED140-1281-4D16-8B67-D7BD3FDD857E"/>
+        <id extension="15/CH000062J/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -7225,6 +7251,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="88387B21-458C-467E-8933-AD01BAA1EE13"/>
+        <id extension="15/CH000063K/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -7391,6 +7418,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B71F3669-565D-4B7A-BB5C-E29E6498B269"/>
+        <id extension="15/CH000064L/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -7517,6 +7545,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="F30D840E-82DF-4FE0-82C2-126DA8D023A3"/>
+        <id extension="15/CH000065M/200010191704" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -7634,6 +7663,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="4C654B41-5A11-48A9-A916-67B0342B9C86"/>
+        <id extension="CHM0100950302121100G,03.0999008001" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -7980,6 +8010,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="5D9BE528-E840-4FC4-A370-4E063EB5CE8F"/>
+        <id extension="2-59956572020000" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -8868,6 +8899,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="72C09079-6436-41D5-BF95-9A13878602C0"/>
+        <id extension="1-59338288280003" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -9539,6 +9571,7 @@ Status: unknown</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B6A13EFA-8D08-459E-8C42-01E11869064B"/>
+        <id extension="84272256" root="2.16.840.1.113883.2.1.4.5.5"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
@@ -51,6 +52,8 @@ public class DiagnosticReportMapper {
     private static final String PREPENDED_TEXT_FOR_CODED_DIAGNOSIS = "Lab Diagnosis: ";
     private static final String PREPENDED_TEXT_FOR_STATUS = "Status: ";
 
+    private static final String EXTENSION_ID_SYSTEM_ID = "2.16.840.1.113883.2.1.4.5.5";
+
     private final MessageContext messageContext;
     private final SpecimenMapper specimenMapper;
     private final ParticipantMapper participantMapper;
@@ -70,6 +73,7 @@ public class DiagnosticReportMapper {
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getIdElement()))
+            .extensionId(fetchExtensionId(diagnosticReport.getIdentifier()))
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()))
             .narrativeStatements(reportLevelNarrativeStatements)
             .specimens(mappedSpecimens);
@@ -85,6 +89,14 @@ public class DiagnosticReportMapper {
             DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE,
             diagnosticReportCompoundStatementTemplateParameters.build()
         );
+    }
+
+    private String fetchExtensionId(List<Identifier> identifiers) {
+        return identifiers.stream()
+            .filter(identifier -> EXTENSION_ID_SYSTEM_ID.equals(identifier.getSystem()))
+            .map(Identifier::getValue)
+            .findFirst()
+            .orElse(StringUtils.EMPTY);
     }
 
     private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport) {
