@@ -81,7 +81,6 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
 
     private DocumentReferenceToNarrativeStatementMapper mapper;
     private MessageContext messageContext;
-    private ParticipantMapper participantMapper;
 
     @BeforeEach
     public void setUp() throws IOException {
@@ -96,7 +95,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         lenient().when(timestampService.now()).thenReturn(Instant.parse("2021-08-18T12:00:00.00Z"));
 
         mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes, timestampService,
-                participantMapper);
+                new ParticipantMapper());
     }
 
     @AfterEach

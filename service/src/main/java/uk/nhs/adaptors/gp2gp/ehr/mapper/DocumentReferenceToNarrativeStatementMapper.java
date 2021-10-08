@@ -73,15 +73,10 @@ public class DocumentReferenceToNarrativeStatementMapper {
     private String buildParticipant(DocumentReference documentReference) {
         return Optional.of(documentReference)
             .filter(DocumentReference::hasAuthor)
-            .map(DocumentReference::getAuthor)
-            .map(this::getFirstAuthorReference)
+            .map(DocumentReference::getAuthorFirstRep)
             .filter(this::isValidAuthorReference)
             .map(this::mapAuthorToParticipant)
             .orElse(StringUtils.EMPTY);
-    }
-
-    private Reference getFirstAuthorReference(List<Reference> authorList) {
-        return authorList.get(0);
     }
 
     private String mapAuthorToParticipant(Reference reference) {
