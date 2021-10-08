@@ -164,12 +164,12 @@ public class SpecimenMapper {
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement) {
         SpecimenNarrativeStatementCommentBuilder specimenNarrativeStatementCommentBuilder = new SpecimenNarrativeStatementCommentBuilder();
 
+        if (specimen.hasReceivedTime()) {
+            specimenNarrativeStatementCommentBuilder.receivedDate(specimen.getReceivedTime());
+        }
+
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
-
-            if (specimen.hasReceivedTime() && (collection.hasQuantity() || collection.hasBodySite())) {
-                specimenNarrativeStatementCommentBuilder.receivedDate(specimen.getReceivedTime());
-            }
 
             collection.getExtensionsByUrl(FASTING_STATUS_URL).stream().findFirst()
                 .ifPresent(extension -> {
