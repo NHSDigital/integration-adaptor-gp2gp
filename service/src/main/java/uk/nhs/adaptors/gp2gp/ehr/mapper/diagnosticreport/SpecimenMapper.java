@@ -36,6 +36,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -166,6 +167,10 @@ public class SpecimenMapper {
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
 
+            if (specimen.hasReceivedTime() && (collection.hasQuantity() || collection.hasBodySite())) {
+                specimenNarrativeStatementCommentBuilder.receivedDate(specimen.getReceivedTime());
+            }
+
             collection.getExtensionsByUrl(FASTING_STATUS_URL).stream().findFirst()
                 .ifPresent(extension -> {
                     Type value = extension.getValue();
@@ -214,6 +219,7 @@ public class SpecimenMapper {
         private static final String FASTING_DURATION = "Fasting Duration:";
         private static final String QUANTITY = "Quantity:";
         private static final String COLLECTION_SITE = "Collection Site:";
+        private static final String RECEIVED_DATE = "Received Date:";
 
         private String text;
 
@@ -252,6 +258,15 @@ public class SpecimenMapper {
             );
 
             prependText(quantityElements);
+        }
+
+        public void receivedDate(Date date) {
+            List<String> receivedDateElements = List.of(
+                RECEIVED_DATE,
+                Objects.toString(DateFormatUtil.toTextFormatStraight(date.toInstant()), StringUtils.EMPTY)
+            );
+
+            prependText(receivedDateElements);
         }
 
         public void collectionSite(CodeableConcept collectionSite) {
