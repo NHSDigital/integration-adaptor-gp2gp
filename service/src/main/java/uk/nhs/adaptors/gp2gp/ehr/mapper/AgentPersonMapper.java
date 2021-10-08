@@ -30,38 +30,35 @@ public class AgentPersonMapper {
         var builder = PractitionerAgentPersonMapperParameters.builder()
             .agentId(agentDirectoryId);
 
-        messageContext.getInputBundleHolder()
-            .getResource(new IdType(agentKey.getPractitionerReference()))
-            .map(Practitioner.class::cast)
-            .ifPresentOrElse(
-                practitioner -> {
+        if (agentKey.getPractitionerReference() != null) {
+            messageContext.getInputBundleHolder()
+                .getResource(new IdType(agentKey.getPractitionerReference()))
+                .map(Practitioner.class::cast)
+                .ifPresent(
+                    practitioner -> {
+                        builder.practitioner(true);
+                        buildPractitionerPrefix(practitioner).ifPresent(builder::practitionerPrefix);
+
+                        var practitionerGiven = buildPractitionerGivenName(practitioner);
+                        var practitionerFamily = buildPractitionerFamilyName(practitioner);
+
+                        practitionerGiven.ifPresent(builder::practitionerGivenName);
+                        practitionerFamily.ifPresent(builder::practitionerFamilyName);
+
+                        if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
+                            builder.practitionerFamilyName(UNKNOWN);
+                        }
+                    });
+        } else if (agentKey.getOrganizationReference() != null) {
+            messageContext.getInputBundleHolder()
+                .getResource(new IdType(agentKey.getOrganizationReference()))
+                .map(Organization.class::cast)
+                .map(Organization::getName)
+                .ifPresent(organizationName -> {
                     builder.practitioner(true);
-                    buildPractitionerPrefix(practitioner).ifPresent(builder::practitionerPrefix);
-
-                    var practitionerGiven = buildPractitionerGivenName(practitioner);
-                    var practitionerFamily = buildPractitionerFamilyName(practitioner);
-
-                    practitionerGiven.ifPresent(builder::practitionerGivenName);
-                    practitionerFamily.ifPresent(builder::practitionerFamilyName);
-
-                    if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
-                        builder.practitionerFamilyName(UNKNOWN);
-                    }
-
-                    messageContext.getInputBundleHolder()
-                        .getResource(new IdType(agentKey.getOrganizationReference()))
-                        .map(Organization.class::cast)
-                        .map(OrganizationToAgentMapper::mapOrganizationToAgentInner)
-                        .ifPresent(builder::organization);
-                },
-                () -> messageContext.getInputBundleHolder()
-                        .getResource(new IdType(agentKey.getOrganizationReference()))
-                        .map(Organization.class::cast)
-                        .map(Organization::getName)
-                        .ifPresent(organizationName -> {
-                            builder.practitioner(true);
-                            builder.practitionerFamilyName(organizationName);
-                        }));
+                    builder.practitionerFamilyName(organizationName);
+                });
+        }
 
         buildPractitionerRole(agentKey).ifPresent(builder::practitionerRole);
 
