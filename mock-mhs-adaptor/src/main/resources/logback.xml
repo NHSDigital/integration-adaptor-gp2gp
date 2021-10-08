@@ -1,0 +1,16 @@
+<configuration>
+    <appender name="TEXT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${MHS_MOCK_LOGGING_FORMAT:-%d{yyyy-MM-dd HH:mm:ss.SSS} Level=%-5level Logger=%logger{36} ConversationId=%X{ConversationId} Thread="%thread" Message="%msg"%n}
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    <root level="${MHS_MOCK_ROOT_LOGGING_LEVEL:-WARN}">
+        <appender-ref ref="TEXT}"/>
+    </root>
+
+    <logger name="uk.nhs.adaptors.mockmhsservice" level="${MHS_MOCK_LOGGING_LEVEL:-INFO}" />
+    <logger name="reactor.netty.http.client" level="${MHS_MOCK_LOGGING_LEVEL:-WARN}" />
+</configuration>

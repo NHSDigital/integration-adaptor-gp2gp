@@ -1262,7 +1262,7 @@ High</text>
         <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08" />
         <code code="183444007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
 </code>
-        <text>Annotation:  @  Back pain without radiation NOS Source: GP Referral, Referral Type: Out Patient, Annotation:  @  Mode:Written, Annotation:  @  Purpose:Unknown, Annotation:  @  NHS / Private:Private, Annotation:  @  Transport:None Required </text>
+        <text>Annotation: Back pain without radiation NOS Source: GP Referral, Referral Type: Out Patient, Annotation: Mode:Written, Annotation: Purpose:Unknown, Annotation: NHS / Private:Private, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>

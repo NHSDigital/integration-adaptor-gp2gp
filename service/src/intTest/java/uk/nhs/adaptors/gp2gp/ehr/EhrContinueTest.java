@@ -1,12 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +7,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidInboundMessageException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -77,7 +76,7 @@ public class EhrContinueTest {
         Exception exception = assertThrows(NonExistingInteractionIdException.class,
             () -> ehrExtractRequestHandler.handleContinue(conversationId, CONTINUE_ACKNOWLEDGEMENT));
 
-        assertThat(exception.getMessage()).isEqualTo("Received a Continue message that is not recognised with Conversation-Id: '"
+        assertThat(exception.getMessage()).isEqualTo("Received a Continue message that is not recognised with conversation_id: '"
             + conversationId + "'");
         verify(taskDispatcher, never()).createTask(any());
     }

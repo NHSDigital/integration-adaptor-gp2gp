@@ -1,15 +1,16 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
-import javax.jms.Message;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.annotation.JmsListener;
-import org.springframework.stereotype.Component;
-
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
+import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
+
+import javax.jms.Message;
+
+import static uk.nhs.adaptors.gp2gp.common.utils.Jms.getJmsMessageTimestamp;
 
 @Component
 @Slf4j
@@ -23,17 +24,18 @@ public class TaskConsumer {
     @SneakyThrows
     public void receive(Message message) {
         var messageID = message.getJMSMessageID();
-        LOGGER.info("Received message from taskQueue {}", messageID);
+        var messageTimestamp = getJmsMessageTimestamp(message);
+        LOGGER.info("Received taskQueue message_id: {} timestamp: {}", messageID, messageTimestamp);
         try {
             if (taskHandler.handle(message)) {
                 message.acknowledge();
-                LOGGER.info("Acknowledged message {}", messageID);
+                LOGGER.info("Acknowledged taskQueue message_id: {}", messageID);
             } else {
-                LOGGER.info("Left message {} on the queue", messageID);
+                LOGGER.info("Leaving taskQueue message_id: {} on the queue", messageID);
             }
 
         } catch (Exception e) {
-            LOGGER.error("Error while processing task queue message {}", messageID, e);
+            LOGGER.error("Error while processing taskQueue message_id: {}", messageID, e);
         } finally {
             mdcService.resetAllMdcKeys();
         }

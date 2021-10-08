@@ -27,8 +27,6 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     @Override
     @SneakyThrows
     public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
-        LOGGER.info("Execute called from GetGpcDocumentTaskExecutor");
-
         var response = gpcClient.getDocumentRecord(taskDefinition);
 
         var taskId = taskDefinition.getTaskId();

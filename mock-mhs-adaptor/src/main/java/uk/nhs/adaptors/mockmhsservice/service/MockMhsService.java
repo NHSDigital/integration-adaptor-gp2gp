@@ -1,8 +1,10 @@
 package uk.nhs.adaptors.mockmhsservice.service;
 
-import static org.springframework.http.HttpStatus.ACCEPTED;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,17 +12,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jms.JmsException;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.mockmhsservice.common.MockMHSException;
 import uk.nhs.adaptors.mockmhsservice.common.OutboundMessage;
 import uk.nhs.adaptors.mockmhsservice.common.ResourceReader;
 import uk.nhs.adaptors.mockmhsservice.producer.InboundProducer;
+
+import static org.springframework.http.HttpStatus.ACCEPTED;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @RestController
 @Slf4j
@@ -93,7 +91,7 @@ public class MockMhsService {
             headers.setContentType(MediaType.TEXT_XML);
             return new ResponseEntity<>(headers, ACCEPTED);
         }
-        LOGGER.error("Error could not handle request header Interaction-Id {}", interactionId);
+        LOGGER.error("Error could not handle request header Interaction-Id: {}", interactionId);
         return new ResponseEntity<>(INTERNAL_SERVER_ERROR_RESPONSE, headers, INTERNAL_SERVER_ERROR);
     }
 

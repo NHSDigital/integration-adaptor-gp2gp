@@ -1,23 +1,20 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
@@ -62,8 +59,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     @SneakyThrows
     @Override
     public void execute(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        LOGGER.info("Execute called from GetGpcStructuredTaskExecutor");
-
         String hl7TranslatedResponse;
         List<OutboundMessage.Attachment> attachments = new ArrayList<>();
         List<OutboundMessage.ExternalAttachment> externalAttachments;

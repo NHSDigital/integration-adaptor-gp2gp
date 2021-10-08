@@ -3,17 +3,14 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mustachejava.Mustache;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
@@ -46,7 +43,6 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
     @Override
     @SneakyThrows
     public void execute(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition) {
-        LOGGER.info("Sending application acknowledgement from the adaptor to the requesting system");
         var ackMessageId = randomIdGeneratorService.createNewId();
 
         var sendAckTemplateParams = SendAckTemplateParameters.builder()
@@ -70,8 +66,8 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
     }
 
     private void sendToMHS(SendAcknowledgementTaskDefinition taskDefinition, String ackMessageId, String requestBody) {
-        LOGGER.info("Sending ACK message to MHS. ACK message Id: {} Conversation id: {} EhrRequest id {} ", ackMessageId,
-            taskDefinition.getConversationId(), taskDefinition.getEhrRequestMessageId());
+        LOGGER.info("Sending ACK message to MHS. ACK message_id: {} conversation_id: {} ehrRequest_id: {} ",
+            ackMessageId, taskDefinition.getConversationId(), taskDefinition.getEhrRequestMessageId());
 
         var request = mhsRequestBuilder.buildSendAcknowledgement(
             requestBody, taskDefinition.getFromOdsCode(), taskDefinition.getConversationId(), ackMessageId);
@@ -89,7 +85,7 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
     }
 
     private void updateEhrExtractStatus(SendAcknowledgementTaskDefinition taskDefinition, String ackMessageId) {
-        LOGGER.info("Updating EhrExtractStatus with ACK message Id: {} Conversation id: {}", ackMessageId,
+        LOGGER.info("Updating EhrExtractStatus with ACK message_id: {} conversation_id: {}", ackMessageId,
             taskDefinition.getConversationId());
 
         ehrExtractStatusService.updateEhrExtractStatusAcknowledgement(
@@ -99,7 +95,7 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
     }
 
     private void updateEhrExtractStatus(SendAcknowledgementTaskDefinition taskDefinition, String ackMessageId, String updatedAt) {
-        LOGGER.info("Updating EhrExtractStatus with pending ACK message Id: {} Conversation id: {}", ackMessageId,
+        LOGGER.info("Updating EhrExtractStatus with pending ACK message_id: {} conversation_id: {}", ackMessageId,
             taskDefinition.getConversationId());
 
         ehrExtractStatusService.updateEhrExtractStatusAcknowledgement(

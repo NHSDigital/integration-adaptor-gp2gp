@@ -3,12 +3,6 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -17,16 +11,20 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
-import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
-import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static java.lang.String.format;
 import static org.springframework.util.CollectionUtils.isEmpty;
@@ -212,11 +210,11 @@ public class EhrExtractStatusService {
                 EhrExtractStatus.class);
 
             if (ehrExtractStatus == null) {
-                throw new EhrExtractException("Received a Continue message with a Conversation-Id '" + conversationId
+                throw new EhrExtractException("Received a Continue message with a conversation_id '" + conversationId
                     + "' that is not recognised");
             }
 
-            LOGGER.info("Database successfully updated with EHRContinue, Conversation-Id: " + conversationId);
+            LOGGER.info("Database successfully updated with EHRContinue");
             return Optional.of(ehrExtractStatus);
         } else {
             return Optional.empty();
@@ -249,11 +247,11 @@ public class EhrExtractStatusService {
                 EhrExtractStatus.class);
 
             if (ehrExtractStatus == null) {
-                throw new EhrExtractException("Received an ACK message with a Conversation-Id '" + conversationId
+                throw new EhrExtractException("Received an ACK message with a conversation_id '" + conversationId
                     + "' that is not recognised");
             }
 
-            LOGGER.info("Database successfully updated with EHRAcknowledgement, Conversation-Id: " + conversationId);
+            LOGGER.info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
         }
     }
 
@@ -363,13 +361,13 @@ public class EhrExtractStatusService {
 
         if (ehrExtractStatus == null) {
             throw new EhrExtractException(format(
-                "Couldn't update EHR status with error information because it doesn't exist. Conversation-Id: %s",
+                "Couldn't update EHR status with error information because it doesn't exist conversation_id: %s",
                 conversationId
             ));
         }
 
         LOGGER.info(
-            "EHR status record successfully updated in the database with error information. Conversation-Id: {}",
+            "EHR status record successfully updated in the database with error information conversation_id: {}",
             conversationId
         );
 
@@ -455,7 +453,7 @@ public class EhrExtractStatusService {
         }
 
         if (ehrExtractStatus.getEhrReceivedAcknowledgement() != null) {
-            LOGGER.warn("Received an ACK message with a Conversation-Id '" + conversationId
+            LOGGER.warn("Received an ACK message with a conversation_id '" + conversationId
                 + "' that is duplicate");
             return true;
         }
@@ -472,7 +470,7 @@ public class EhrExtractStatusService {
         }
 
         if (ehrExtractStatus.getEhrContinue() != null) {
-            LOGGER.warn("Received a Continue message with a Conversation-Id '" + conversationId
+            LOGGER.warn("Received a Continue message with a conversation_id '" + conversationId
                 + "' that is duplicate");
             return true;
         }
