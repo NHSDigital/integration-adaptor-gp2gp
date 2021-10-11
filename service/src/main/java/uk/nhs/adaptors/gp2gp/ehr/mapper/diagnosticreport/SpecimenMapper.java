@@ -20,6 +20,7 @@ import org.hl7.fhir.dstu3.model.Duration;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SimpleQuantity;
 import org.hl7.fhir.dstu3.model.Specimen;
@@ -192,8 +193,9 @@ public class SpecimenMapper {
             }
 
             if (collection.hasCollector()) {
-                messageContext.getInputBundleHolder().getResource(collection.getCollector().getReferenceElement())
-                    .filter(resource -> resource.getResourceType().equals(ResourceType.Practitioner))
+                messageContext.getInputBundleHolder()
+                    .getResource(collection.getCollector().getReferenceElement())
+                    .filter(this::isPractitionerResource)
                     .map(Practitioner.class::cast)
                     .filter(Practitioner::hasName)
                     .map(SpecimenMapper::buildHumanName)
@@ -222,6 +224,10 @@ public class SpecimenMapper {
         }
 
         return Optional.empty();
+    }
+
+    private boolean isPractitionerResource(Resource resource) {
+        return ResourceType.Practitioner.equals(resource.getResourceType());
     }
 
     private static String buildHumanName(Practitioner practitioner) {
