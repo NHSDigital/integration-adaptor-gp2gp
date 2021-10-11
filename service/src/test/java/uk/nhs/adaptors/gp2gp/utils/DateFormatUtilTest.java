@@ -77,7 +77,7 @@ public class DateFormatUtilTest {
         String specimenJson = String.format(DATETIME_SPECIMEN_TEMPLATE, "2005-05-02T21:37:05+00:00");
         Specimen specimen = FHIR_PARSER.parseResource(specimenJson, Specimen.class);
 
-        String actual = toTextFormatStraight(specimen.getReceivedTime().toInstant());
+        String actual = toTextFormatStraight(specimen.getReceivedTime());
         assertThat(actual).isEqualTo(expected);
     }
 
