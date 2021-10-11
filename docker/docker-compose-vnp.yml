@@ -11,7 +11,7 @@ services:
     command:
       - -global-response-templating
       - --verbose
-    networks: 
+    networks:
       - commonforgp2gp
 
   gpc-api-mock:
@@ -23,7 +23,7 @@ services:
     command:
       - -global-response-templating
       - --verbose
-    networks: 
+    networks:
       - commonforgp2gp
 
   sds-api-mock:
@@ -38,7 +38,7 @@ services:
       - -global-response-templating
       - --verbose
       - --permitted-system-keys=GPC_CONSUMER_OVERRIDE_GPC_PROVIDER_URL
-    networks: 
+    networks:
       - commonforgp2gp
 
 networks:
