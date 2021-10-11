@@ -227,11 +227,9 @@ public class SpecimenMapper {
     private static String buildHumanName(Practitioner practitioner) {
         var practitionerName = practitioner.getNameFirstRep();
         return Stream.of(
-            practitionerName.getPrefixAsSingleString(),
-            practitionerName.getGivenAsSingleString(),
-            practitionerName.getFamily()
-            )
-            .filter(s -> !s.isEmpty())
+                practitionerName.getPrefixAsSingleString(),
+                practitionerName.getGivenAsSingleString(),
+                practitionerName.getFamily())
             .filter(StringUtils::isNotBlank)
             .collect(Collectors.joining(StringUtils.SPACE));
     }
