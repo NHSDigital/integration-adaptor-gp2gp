@@ -296,7 +296,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -384,7 +384,7 @@ CommentDate:20201215151704
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -461,7 +461,7 @@ CommentDate:20201215151713
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
