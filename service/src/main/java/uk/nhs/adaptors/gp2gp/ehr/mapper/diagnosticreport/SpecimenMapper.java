@@ -18,7 +18,9 @@ import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Duration;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SimpleQuantity;
 import org.hl7.fhir.dstu3.model.Specimen;
@@ -41,6 +43,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -188,6 +191,16 @@ public class SpecimenMapper {
             if (collection.hasBodySite()) {
                 specimenNarrativeStatementCommentBuilder.collectionSite(collection.getBodySite());
             }
+
+            if (collection.hasCollector()) {
+                messageContext.getInputBundleHolder()
+                    .getResource(collection.getCollector().getReferenceElement())
+                    .filter(this::isPractitionerResource)
+                    .map(Practitioner.class::cast)
+                    .filter(Practitioner::hasName)
+                    .map(SpecimenMapper::buildHumanName)
+                    .ifPresent(specimenNarrativeStatementCommentBuilder::collector);
+            }
         }
 
         specimen.getNote().stream()
@@ -213,12 +226,27 @@ public class SpecimenMapper {
         return Optional.empty();
     }
 
+    private boolean isPractitionerResource(Resource resource) {
+        return ResourceType.Practitioner.equals(resource.getResourceType());
+    }
+
+    private static String buildHumanName(Practitioner practitioner) {
+        var practitionerName = practitioner.getNameFirstRep();
+        return Stream.of(
+                practitionerName.getPrefixAsSingleString(),
+                practitionerName.getGivenAsSingleString(),
+                practitionerName.getFamily())
+            .filter(StringUtils::isNotBlank)
+            .collect(Collectors.joining(StringUtils.SPACE));
+    }
+
     private static class SpecimenNarrativeStatementCommentBuilder {
 
         private static final String FASTING_STATUS = "Fasting Status:";
         private static final String FASTING_DURATION = "Fasting Duration:";
         private static final String QUANTITY = "Quantity:";
         private static final String COLLECTION_SITE = "Collection Site:";
+        private static final String COLLECTED_BY = "Collected By:";
         private static final String RECEIVED_DATE = "Received Date:";
 
         private String text;
@@ -229,6 +257,10 @@ public class SpecimenMapper {
 
         private void prependText(String... texts) {
             text = newLine(withSpace((Object[]) texts), text);
+        }
+
+        private void appendText(String appendText) {
+            text = newLine(text, appendText);
         }
 
         private void prependText(List<String> texts) {
@@ -272,6 +304,10 @@ public class SpecimenMapper {
         public void collectionSite(CodeableConcept collectionSite) {
             CodeableConceptMappingUtils.extractTextOrCoding(collectionSite)
                 .ifPresent(collectionSiteValue -> prependText(COLLECTION_SITE, collectionSiteValue));
+        }
+
+        public void collector(String collectorName) {
+            appendText(COLLECTED_BY + StringUtils.SPACE + collectorName);
         }
 
         public void note(String note) {
