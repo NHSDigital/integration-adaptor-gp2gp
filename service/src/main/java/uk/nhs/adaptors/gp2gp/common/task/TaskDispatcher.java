@@ -1,19 +1,17 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
-import static uk.nhs.adaptors.gp2gp.common.task.TaskHandler.TASK_TYPE_HEADER_NAME;
-
-import javax.jms.TextMessage;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.jms.TextMessage;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static uk.nhs.adaptors.gp2gp.common.task.TaskHandler.TASK_TYPE_HEADER_NAME;
 
 @Component
 @Slf4j
@@ -30,7 +28,7 @@ public class TaskDispatcher {
         try {
             String messagePayload = objectMapper.writeValueAsString(taskDefinition);
             sendMessage(messagePayload, taskDefinition.getTaskType().getTaskName());
-            LOGGER.info("Created new {} task with id {}",
+            LOGGER.info("Sent {} task id: {}",
                 taskDefinition.getTaskType().getTaskName(),
                 taskDefinition.getTaskId());
         } catch (JsonProcessingException e) {

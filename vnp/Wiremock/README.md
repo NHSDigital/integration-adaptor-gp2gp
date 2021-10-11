@@ -31,3 +31,9 @@ Send GET request to Wiremock:
 The response gets back after the configured 3000ms delay elapses.
 
 Response body contains a FHIR Binary resource with `content` field filled with random 500 characters.
+
+## Logging
+
+Use `--verbose` parameter to make Wiremock log requests. This allows looking up `Conversation-Id` and/or `Correlation-Id` headers.
+Wiremock uses slf4j and logback.xml can be replaced but it is not easy to make it log those headers as separate log fields.
+Some regex expression should be used instead.

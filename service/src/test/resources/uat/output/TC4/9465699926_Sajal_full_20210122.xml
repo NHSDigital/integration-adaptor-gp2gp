@@ -3502,14 +3502,14 @@ Status: unknown</text>
         <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64" />
         <code code="183444007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
 </code>
-        <text>Recipient Org: Fictional Hospital Annotation:  @  Referral for manual lymphatic drainage Referrer: David McAvenue at Testvale Surgery (New Forest PCT)
+        <text>Recipient Org: Fictional Hospital Annotation: Referral for manual lymphatic drainage Referrer: David McAvenue at Testvale Surgery (New Forest PCT)
 Referral Type: Hospital
 Reason: Probation
 Service: Acute Hospital
 Urgency: Prospective
 Summary: This is the referral summary
 Recipient: Mr Quentin Quigley (Fictional Hospital)
-Sent: 07 Mar 2011 16:58, Annotation:  @  Mode:Written, Annotation:  @  Purpose:Unknown, Annotation:  @  NHS / Private:Private, Annotation:  @  Transport:None Required </text>
+Sent: 07 Mar 2011 16:58, Annotation: Mode:Written, Annotation: Purpose:Unknown, Annotation: NHS / Private:Private, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
