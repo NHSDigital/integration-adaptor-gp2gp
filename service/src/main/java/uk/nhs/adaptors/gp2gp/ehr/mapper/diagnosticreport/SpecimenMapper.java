@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -191,13 +192,11 @@ public class SpecimenMapper {
             }
 
             if (collection.hasCollector()) {
-                var collector = messageContext.getInputBundleHolder().getResource(collection.getCollector().getReferenceElement());
-                collector.ifPresent(collectorPractitioner -> {
-                    if (collectorPractitioner.getResourceType().equals(ResourceType.Practitioner)) {
-                        var humanName = buildHumanName((Practitioner) collectorPractitioner);
-                        specimenNarrativeStatementCommentBuilder.collector(humanName);
-                    }
-                });
+                messageContext.getInputBundleHolder().getResource(collection.getCollector().getReferenceElement())
+                    .filter(resource -> resource.getResourceType().equals(ResourceType.Practitioner))
+                    .map(Practitioner.class::cast)
+                    .map(SpecimenMapper::buildHumanName)
+                    .ifPresent(specimenNarrativeStatementCommentBuilder::collector);
             }
         }
 
@@ -225,31 +224,15 @@ public class SpecimenMapper {
     }
 
     private static String buildHumanName(Practitioner practitioner) {
-
-        if (practitioner.hasName()) {
-            var name = practitioner.getNameFirstRep();
-            var nameBuilder = new StringBuilder();
-
-            if (name.hasPrefix()) {
-                nameBuilder.append(name.getPrefix());
-                nameBuilder.append(StringUtils.SPACE);
-            }
-
-            if (name.hasGiven()) {
-                nameBuilder.append(name.getGivenAsSingleString());
-                nameBuilder.append(StringUtils.SPACE);
-            }
-
-            if (name.hasFamily()) {
-                nameBuilder.append(name.getFamily());
-            }
-
-            if (StringUtils.isNotBlank(nameBuilder.toString())) {
-                return nameBuilder.toString();
-            }
-        }
-
-        return StringUtils.EMPTY;
+        var practitionerName = practitioner.getNameFirstRep();
+        return Stream.of(
+            practitionerName.getPrefixAsSingleString(),
+            practitionerName.getGivenAsSingleString(),
+            practitionerName.getFamily()
+            )
+            .filter(s -> !s.isEmpty())
+            .filter(StringUtils::isNotBlank)
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private static class SpecimenNarrativeStatementCommentBuilder {

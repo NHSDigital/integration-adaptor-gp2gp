@@ -27,7 +27,7 @@ Collection Site: test value of collection site
 Quantity: 28 tablet
 Fasting Status: in progress
 
-Collected By: [Mr] NHS Test</text>
+Collected By: Mr NHS Test</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201012143344"/>
     </NarrativeStatement>
