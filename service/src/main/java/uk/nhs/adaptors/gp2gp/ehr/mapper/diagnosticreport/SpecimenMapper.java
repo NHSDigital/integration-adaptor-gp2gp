@@ -195,6 +195,7 @@ public class SpecimenMapper {
                 messageContext.getInputBundleHolder().getResource(collection.getCollector().getReferenceElement())
                     .filter(resource -> resource.getResourceType().equals(ResourceType.Practitioner))
                     .map(Practitioner.class::cast)
+                    .filter(Practitioner::hasName)
                     .map(SpecimenMapper::buildHumanName)
                     .ifPresent(specimenNarrativeStatementCommentBuilder::collector);
             }
