@@ -14,6 +14,33 @@ services:
     networks: 
       - commonforgp2gp
 
+  gpc-api-mock:
+    container_name: gpc-api-mock
+    build: ./gpc-api-mock
+    ports:
+      - "8091:8080"
+      - "8080"
+    command:
+      - -global-response-templating
+      - --verbose
+    networks: 
+      - commonforgp2gp
+
+  sds-api-mock:
+    container_name: sds-api-mock
+    build: ./sds-api-mock
+    ports:
+      - "8092:8080"
+      - "8080"
+    environment:
+      - GPC_CONSUMER_OVERRIDE_GPC_PROVIDER_URL
+    command:
+      - -global-response-templating
+      - --verbose
+      - --permitted-system-keys=GPC_CONSUMER_OVERRIDE_GPC_PROVIDER_URL
+    networks: 
+      - commonforgp2gp
+
 networks:
   commonforgp2gp:
     external: true
