@@ -1,6 +1,6 @@
 # PoC for running GPCC VnP tests
 
-This project shows how local environment can be set up to execute performance tests on GPCC adator
+This project shows how local environment can be set up to execute performance tests on GPCC adaptor
 
 ## Setup
 
