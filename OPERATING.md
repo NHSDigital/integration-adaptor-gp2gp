@@ -96,8 +96,11 @@ Refer to [database.md](/documentation/database/database.md) for design details
 
 The supplier must monitor the adaptor to detect failed GP2GP EHR Transfers.
 
-TODO: Database query to detect failed transfers
-TODO: Database query to detect incomplete transfers not updated after an amount of time
+`db.inventory.find({conversationId: "$conversationId"}, {error: 1})`
+
+Query will select the error object from the MongoDb
+
+Detecting incomplete transfers: monitor deadletter queue
 
 ## Retention of patient data
 
