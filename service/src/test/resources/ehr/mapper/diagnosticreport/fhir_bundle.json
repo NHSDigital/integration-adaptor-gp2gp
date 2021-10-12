@@ -548,6 +548,31 @@
           }
         ]
       }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "89890-1985-45D9-993E-C5FF51F36828",
+        "meta": {
+          "versionId": "7786052607397903776",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Test",
+            "given": [
+              "NHS"
+            ],
+            "prefix": [
+              "Mr"
+            ]
+          }
+        ],
+        "gender": "male"
+      }
     }
   ]
 }
