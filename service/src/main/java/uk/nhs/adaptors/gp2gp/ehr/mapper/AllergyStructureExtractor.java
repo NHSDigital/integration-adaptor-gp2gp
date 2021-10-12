@@ -86,15 +86,12 @@ public class AllergyStructureExtractor {
     }
 
     private static String buildReactionExposureRoute(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent) {
-        if (reactionComponent.hasExposureRoute() && extractTextOrCoding(reactionComponent.getExposureRoute()).isPresent()) {
-            return Optional.of(reactionComponent)
-                .filter(AllergyIntolerance.AllergyIntoleranceReactionComponent::hasExposureRoute)
-                .map(AllergyIntolerance.AllergyIntoleranceReactionComponent::getExposureRoute)
-                .flatMap(CodeableConceptMappingUtils::extractTextOrCoding)
-                .map(value -> REACTION_EXPOSURE_ROUTE + value)
-                .orElse(StringUtils.EMPTY);
-        }
-        return StringUtils.EMPTY;
+        return Optional.of(reactionComponent)
+            .filter(AllergyIntolerance.AllergyIntoleranceReactionComponent::hasExposureRoute)
+            .map(AllergyIntolerance.AllergyIntoleranceReactionComponent::getExposureRoute)
+            .map(route -> CodeableConceptMappingUtils.extractTextOrCoding(route).get())
+            .map(value -> REACTION_EXPOSURE_ROUTE + value)
+            .orElse(StringUtils.EMPTY);
     }
 
     private static String buildReactionSeverity(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent) {

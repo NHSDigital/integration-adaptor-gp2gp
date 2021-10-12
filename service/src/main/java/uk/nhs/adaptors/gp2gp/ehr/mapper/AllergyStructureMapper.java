@@ -275,7 +275,6 @@ public class AllergyStructureMapper {
     }
 
     private String buildEndDatePertinentInformation(AllergyIntolerance allergyIntolerance) {
-        var a = 1;
         return filterExtensionByUrl(allergyIntolerance, ALLERGY_INTOLERANCE_END_URL)
             .map(extension -> AllergyStructureExtractor.extractEndDate(extension, DateFormatUtil::toTextFormat))
             .filter(StringUtils::isNotBlank)
