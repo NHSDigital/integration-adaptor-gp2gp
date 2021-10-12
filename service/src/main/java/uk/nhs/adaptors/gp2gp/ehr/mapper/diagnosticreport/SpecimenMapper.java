@@ -200,15 +200,15 @@ public class SpecimenMapper {
             }
         }
 
+        getReceivedTime(specimen)
+            .map(PrimitiveType::getValue)
+            .ifPresent(specimenNarrativeStatementCommentBuilder::receivedDate);
+
         specimen.getNote().stream()
             .map(Annotation::getText)
             .forEach(specimenNarrativeStatementCommentBuilder::note);
 
         if (StringUtils.isNotBlank(specimenNarrativeStatementCommentBuilder.text)) {
-            getReceivedTime(specimen)
-                .map(PrimitiveType::getValue)
-                .ifPresent(specimenNarrativeStatementCommentBuilder::receivedDate);
-
             var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
                 .narrativeStatementId(randomIdGeneratorService.createNewId())
                 .commentType(CommentType.LAB_SPECIMEN_COMMENT.getCode())
