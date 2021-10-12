@@ -46,6 +46,8 @@ public class ObservationMapper {
 
     public static final Mustache NARRATIVE_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("narrative_statement_template.mustache");
+    public static final Mustache RAW_NARRATIVE_STATEMENT_TEMPLATE =
+        TemplateUtils.loadTemplate("raw_narrative_statement_template.mustache");
 
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("observation_statement_template.mustache");

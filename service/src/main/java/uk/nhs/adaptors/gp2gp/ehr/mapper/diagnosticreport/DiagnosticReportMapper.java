@@ -1,11 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
-import com.github.mustachejava.Mustache;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType.LABORATORY_RESULT_COMMENT;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.RAW_NARRATIVE_STATEMENT_TEMPLATE;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +19,10 @@ import org.hl7.fhir.dstu3.model.Specimen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -195,7 +195,7 @@ public class DiagnosticReportMapper {
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()));
 
         return TemplateUtils.fillTemplate(
-            NARRATIVE_STATEMENT_TEMPLATE,
+            RAW_NARRATIVE_STATEMENT_TEMPLATE,
             narrativeStatementTemplateParameters.build()
         );
     }
