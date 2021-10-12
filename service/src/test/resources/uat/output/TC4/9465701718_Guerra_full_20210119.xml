@@ -846,8 +846,8 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
 CommentDate:20020330092100
 
-Quantity: 1750.000 mL
 Received Date: 2002-03-30 12:21
+Quantity: 1750.000 mL
 </text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330162100"/>
@@ -2147,6 +2147,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
 CommentDate:20030602000000
 
+Received Date: 2003-06-02 13:55
 Some Test Specimen Comment
 </text>
         <statusCode code="COMPLETE"/>
@@ -2463,6 +2464,7 @@ Interpretation: HI - Above high reference limit
         <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
 CommentDate:20030602000000
 
+Received Date: 2003-06-02 13:55
 Another
 Specimen
 Comment
