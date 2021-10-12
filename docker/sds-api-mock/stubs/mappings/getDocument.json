@@ -1,0 +1,45 @@
+{
+  "id": "00000000-0000-0000-0000-000000000002", 
+  "priority": 2,
+  "request": {
+    "method": "GET",
+    "urlPath": "/Endpoint",
+    "queryParameters": {
+      "organization": {
+        "matches": "https:\/\/fhir[.]nhs[.]uk\/Id\/ods-organization-code[|].*"
+      },
+      "identifier": {
+        "or": [
+          {
+            "equalTo": "https://fhir.nhs.uk/Id/nhsServiceInteractionId|urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1"
+          },
+          {
+            "equalTo": "https://fhir.nhs.uk/Id/nhsServiceInteractionId|urn:nhs:names:services:gpconnect:documents:fhir:rest:migrate:binary-1"
+          },
+          {
+            "equalTo": "https://fhir.nhs.uk/Id/nhsServiceInteractionId|urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1"
+          },
+          {
+            "equalTo": "https://fhir.nhs.uk/Id/nhsServiceInteractionId|urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1"
+          }
+        ]
+      }
+    },
+    "headers": {
+      "X-Correlation-Id": {
+        "matches": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+      },
+      "apikey": {
+        "matches": ".*"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "getDocumentResponse.json",
+    "headers": {
+      "Content-Type": "application/fhir+json;",
+      "X-Correlation-Id": "{{request.headers.X-Correlation-Id}}"
+    }
+  }
+}
