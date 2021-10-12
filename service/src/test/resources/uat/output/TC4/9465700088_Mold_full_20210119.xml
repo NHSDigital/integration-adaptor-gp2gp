@@ -3797,8 +3797,8 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
 CommentDate:20100223154100
 
-Quantity: 1750.000 mL
 Received Date: 2010-02-24 15:41
+Quantity: 1750.000 mL
 </text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -6932,6 +6932,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
 CommentDate:20100223154100
 
+Received Date: 2010-02-24 15:41
 Fasting Status: F
 </text>
         <statusCode code="COMPLETE"/>

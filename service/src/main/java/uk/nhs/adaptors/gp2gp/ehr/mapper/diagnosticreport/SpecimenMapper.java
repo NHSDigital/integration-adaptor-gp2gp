@@ -18,6 +18,7 @@ import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Duration;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
@@ -170,10 +171,6 @@ public class SpecimenMapper {
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
 
-            if (specimen.hasReceivedTime() && (collection.hasQuantity() || collection.hasBodySite())) {
-                specimenNarrativeStatementCommentBuilder.receivedDate(specimen.getReceivedTime());
-            }
-
             collection.getExtensionsByUrl(FASTING_STATUS_URL).stream().findFirst()
                 .ifPresent(extension -> {
                     Type value = extension.getValue();
@@ -208,6 +205,10 @@ public class SpecimenMapper {
             .forEach(specimenNarrativeStatementCommentBuilder::note);
 
         if (StringUtils.isNotBlank(specimenNarrativeStatementCommentBuilder.text)) {
+            getReceivedTime(specimen)
+                .map(PrimitiveType::getValue)
+                .ifPresent(specimenNarrativeStatementCommentBuilder::receivedDate);
+
             var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
                 .narrativeStatementId(randomIdGeneratorService.createNewId())
                 .commentType(CommentType.LAB_SPECIMEN_COMMENT.getCode())
@@ -295,7 +296,7 @@ public class SpecimenMapper {
         public void receivedDate(Date date) {
             List<String> receivedDateElements = List.of(
                 RECEIVED_DATE,
-                Objects.toString(DateFormatUtil.toTextFormatStraight(date.toInstant()), StringUtils.EMPTY)
+                Objects.toString(DateFormatUtil.toTextFormatStraight(date), StringUtils.EMPTY)
             );
 
             prependText(receivedDateElements);

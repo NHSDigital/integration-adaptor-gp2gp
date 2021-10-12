@@ -78,8 +78,8 @@ public class DateFormatUtil {
         }
     }
 
-    public static String toTextFormatStraight(Instant instant) {
-        return instant.atZone(UTC_ZONE_ID).format(HL7_WITH_TIME_HUMAN_READABLE);
+    public static String toTextFormatStraight(Date date) {
+        return date.toInstant().atZone(UTC_ZONE_ID).format(HL7_WITH_TIME_HUMAN_READABLE);
     }
 
     public static DateTimeType toDateTypeTime(String effectiveTimeHl7Format) {
