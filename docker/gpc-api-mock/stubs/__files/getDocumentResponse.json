@@ -1,0 +1,6 @@
+{
+  "resourceType": "Binary",
+  "id": "07a6483f-732b-461e-86b6-edb665c45510",
+  "contentType": "application/msword",
+  "content": "{{randomValue length=500 type='ALPHANUMERIC_AND_SYMBOLS'}}"
+}
