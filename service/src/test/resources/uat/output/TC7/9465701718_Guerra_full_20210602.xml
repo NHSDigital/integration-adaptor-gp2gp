@@ -371,11 +371,11 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20010330161100
+CommentDate:UNK
 
 EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20010330161100"/>
+        <availabilityTime nullFlavor="UNK"/>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
@@ -492,11 +492,11 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20010330162700
+CommentDate:UNK
 
 EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20010330162700"/>
+        <availabilityTime nullFlavor="UNK"/>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
@@ -590,11 +590,11 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="51463066-3087-424C-9265-EAAC461AFADE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330162100
+CommentDate:UNK
 
 EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
+        <availabilityTime nullFlavor="UNK"/>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
@@ -688,11 +688,11 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330162100
+CommentDate:UNK
 
 EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
+        <availabilityTime nullFlavor="UNK"/>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
@@ -803,7 +803,7 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330162100
+CommentDate:20020330
 
 DVT Prophylaxis - INR 2.0-2.5
 Treatment of DVT,PE,AF,TIA - INR 2.0-3.0
@@ -811,7 +811,7 @@ Recurrent DVT or PE                )
 Arterial Disease                   )INR 3.0-4.5
 Mechanical Prosthetic Heart Valves )</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
+        <availabilityTime value="20020330"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
@@ -910,11 +910,11 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330162100
+CommentDate:UNK
 
 EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
+        <availabilityTime nullFlavor="UNK"/>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
@@ -1334,13 +1334,13 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="268EFBF2-65A8-4B1C-8490-85A0528F86E3"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: Abnormal
 NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
 Dr. N.O&apos;Connell</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1358,7 +1358,7 @@ Dr. N.O&apos;Connell</text>
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD"/>
@@ -1381,7 +1381,7 @@ Dr. N.O&apos;Connell</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
            Oral dose: 75g anhydrous glucose given as
@@ -1389,7 +1389,7 @@ Interpretation: PA - Potentially abnormal
           Plasma Glucose           Urine Results
  Time        (mmol/l)         Ketones         Glucose</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1413,7 +1413,7 @@ Interpretation: PA - Potentially abnormal
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0AB4B3C4-6F23-45FF-955D-35BB6E6D239B"/>
@@ -1436,7 +1436,7 @@ Interpretation: PA - Potentially abnormal
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4067DD8E-2B9B-4270-A382-CE035D7D352D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
  Fasting       4.3            negative        negative
@@ -1444,7 +1444,7 @@ Interpretation: PA - Potentially abnormal
  NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
  IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1468,7 +1468,7 @@ Interpretation: PA - Potentially abnormal
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="82376D4D-0A24-4B25-9A8A-CC84BEFFDE0D"/>
@@ -1491,7 +1491,7 @@ Interpretation: PA - Potentially abnormal
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="47D7EE76-9938-4063-9007-E74B6E92581E"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
      GLYCAEMIA
@@ -1499,7 +1499,7 @@ Interpretation: PA - Potentially abnormal
      TOLERANCE
  *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1523,7 +1523,7 @@ Interpretation: PA - Potentially abnormal
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21"/>
@@ -1546,14 +1546,14 @@ Interpretation: PA - Potentially abnormal
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
                                       2 hr 11.1 or above
  *(must also have symptoms - polyuria, polydipsia,
    unexplained weight loss)</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1681,13 +1681,13 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: Abnormal
 NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
 Dr. N.O&apos;Connell</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1705,7 +1705,7 @@ Dr. N.O&apos;Connell</text>
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DECAA29B-D65A-45B0-805D-EC0BDE3DA971"/>
@@ -1728,7 +1728,7 @@ Dr. N.O&apos;Connell</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="87102979-C329-4194-819B-D057AAEA625B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
            Oral dose: 75g anhydrous glucose given as
@@ -1736,7 +1736,7 @@ Interpretation: PA - Potentially abnormal
           Plasma Glucose           Urine Results
  Time        (mmol/l)         Ketones         Glucose</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1760,7 +1760,7 @@ Interpretation: PA - Potentially abnormal
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AEB66D16-E1FA-462A-BC70-FBD16000E308"/>
@@ -1783,7 +1783,7 @@ Interpretation: PA - Potentially abnormal
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E2E18EA0-392E-43AD-8386-A3D94B2A9235"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
  Fasting       4.3            negative        negative
@@ -1791,7 +1791,7 @@ Interpretation: PA - Potentially abnormal
  NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
  IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1815,7 +1815,7 @@ Interpretation: PA - Potentially abnormal
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>
@@ -1838,7 +1838,7 @@ Interpretation: PA - Potentially abnormal
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
      GLYCAEMIA
@@ -1846,7 +1846,7 @@ Interpretation: PA - Potentially abnormal
      TOLERANCE
  *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1870,7 +1870,7 @@ Interpretation: PA - Potentially abnormal
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63"/>
@@ -1893,14 +1893,14 @@ Interpretation: PA - Potentially abnormal
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4F05B94B-999F-4699-AB93-EB90C79886B6"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
                                       2 hr 11.1 or above
  *(must also have symptoms - polyuria, polydipsia,
    unexplained weight loss)</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -2013,13 +2013,13 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="54AC4831-6E33-4BB9-BC17-33D47E3C8251"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: Abnormal
 NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
 Dr. N.O&apos;Connell</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -2037,7 +2037,7 @@ Dr. N.O&apos;Connell</text>
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A826995B-AB7B-4A63-9B89-FDA16209D357"/>
@@ -2060,7 +2060,7 @@ Dr. N.O&apos;Connell</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
            Oral dose: 75g anhydrous glucose given as
@@ -2068,7 +2068,7 @@ Interpretation: PA - Potentially abnormal
           Plasma Glucose           Urine Results
  Time        (mmol/l)         Ketones         Glucose</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -2092,7 +2092,7 @@ Interpretation: PA - Potentially abnormal
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17"/>
@@ -2115,7 +2115,7 @@ Interpretation: PA - Potentially abnormal
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="7374E13A-D408-460C-A021-3441347C5027"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
  Fasting       4.3            negative        negative
@@ -2123,7 +2123,7 @@ Interpretation: PA - Potentially abnormal
  NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
  IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -2147,7 +2147,7 @@ Interpretation: PA - Potentially abnormal
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="730F742C-1164-45BF-9139-8484074E5995"/>
@@ -2170,7 +2170,7 @@ Interpretation: PA - Potentially abnormal
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="58826586-95CF-4F70-AF27-43BBAE229C7C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
      GLYCAEMIA
@@ -2178,7 +2178,7 @@ Interpretation: PA - Potentially abnormal
      TOLERANCE
  *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -2202,7 +2202,7 @@ Interpretation: PA - Potentially abnormal
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
@@ -2225,14 +2225,14 @@ Interpretation: PA - Potentially abnormal
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:20030109
 
 Interpretation: PA - Potentially abnormal
                                       2 hr 11.1 or above
  *(must also have symptoms - polyuria, polydipsia,
    unexplained weight loss)</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -2445,11 +2445,11 @@ Some Test Specimen Comment
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030602175200
+CommentDate:20030602
 
 Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030602175200"/>
+        <availabilityTime value="20030602"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
@@ -2466,7 +2466,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20030602"/>
         </effectiveTime>
-        <availabilityTime value="20030602175200"/>
+        <availabilityTime value="20030602"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A7E9FEF8-71BC-4A6E-B3D7-94638E59E6B7"/>
@@ -2495,11 +2495,11 @@ Interpretation: Abnormal</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="96167EAF-AC8E-4C48-8A80-AE4DEC414EEB"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030602175200
+CommentDate:20030602
 
 Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030602175200"/>
+        <availabilityTime value="20030602"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
@@ -2569,7 +2569,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20030602"/>
         </effectiveTime>
-        <availabilityTime value="20030602175200"/>
+        <availabilityTime value="20030602"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42"/>
@@ -2598,13 +2598,13 @@ Interpretation: HI - Above high reference limit</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6D62CF66-D522-4412-A2CB-3134819B46A0"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030602175200
+CommentDate:20030602
 
 Interpretation: HI - Above high reference limit
                              Cholesterol 6.5 - 7.8 Moderate Risk of CHD
                              Cholesterol     &gt; 7.8 Marked Risk of CHD</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030602175200"/>
+        <availabilityTime value="20030602"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
@@ -2723,11 +2723,11 @@ Comment
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3287DABC-6A46-4DD6-B99F-DB53886E7898"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030602175200
+CommentDate:20030602
 
 Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030602175200"/>
+        <availabilityTime value="20030602"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
@@ -2790,7 +2790,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20030602"/>
         </effectiveTime>
-        <availabilityTime value="20030602175200"/>
+        <availabilityTime value="20030602"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3368F5B6-5CC7-456B-95AE-EC498D49245A"/>
@@ -2819,11 +2819,11 @@ Interpretation: Abnormal</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E74F00A1-5189-4806-979F-5A57701BFF13"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030602175200
+CommentDate:20030602
 
 Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030602175200"/>
+        <availabilityTime value="20030602"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
@@ -3146,11 +3146,11 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="AEF25847-B67A-408C-8D62-316C63ABC6B9"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030618080000
+CommentDate:20030616
 
 Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
@@ -3260,7 +3260,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C"/>
@@ -3282,12 +3282,12 @@ Interpretation: Abnormal</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030618080000
+CommentDate:20030616
 
 Interpretation: OR - Outside reference range
 U=Unsuitable for analysis</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
@@ -3411,7 +3411,7 @@ CommentDate:20100326134544
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2CC07C55-8D38-43D0-B3BE-40BCFEC015AA"/>
@@ -3433,12 +3433,12 @@ CommentDate:20100326134544
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BDAD8BDB-770E-4B44-8EEE-79CF187B91A8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030618080000
+CommentDate:20030616
 
 U=Unsuitable for analysis
 U=Unsuitable,due to delay in delivery.</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
@@ -3506,7 +3506,7 @@ CommentDate:20100326134545
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CC9ACAD0-C9F0-46ED-9B85-DEB7D5CB885B"/>
@@ -3535,11 +3535,11 @@ CommentDate:20100326134545
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="855869E7-17B8-42BE-84FE-E3EB14492478"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030618080000
+CommentDate:20030616
 
 Interpretation: OR - Outside reference range</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
@@ -3578,7 +3578,7 @@ CommentDate:20100326134545
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ECF49E18-DB40-4001-954B-2666006B598B"/>
@@ -3607,11 +3607,11 @@ CommentDate:20100326134545
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C0D0904E-CBCF-42E6-A9C8-5ED28DECBD46"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030618080000
+CommentDate:20030616
 
 Interpretation: OR - Outside reference range</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
@@ -3650,7 +3650,7 @@ CommentDate:20100326134545
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
@@ -3679,11 +3679,11 @@ CommentDate:20100326134545
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0814FE49-058E-4B3C-9F74-040922A26099"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030618080000
+CommentDate:20030616
 
 Interpretation: OR - Outside reference range</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
@@ -3816,11 +3816,11 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030628112300
+CommentDate:20030627
 
 Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030628112300"/>
+        <availabilityTime value="20030627"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
@@ -3906,7 +3906,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20030627"/>
         </effectiveTime>
-        <availabilityTime value="20030628112300"/>
+        <availabilityTime value="20030627"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5EA65C4A-D999-4E1D-BB3B-19F9606EF1E3"/>
@@ -3935,11 +3935,11 @@ Interpretation: Abnormal</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030628112300
+CommentDate:20030627
 
 Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030628112300"/>
+        <availabilityTime value="20030627"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
@@ -4007,7 +4007,7 @@ CommentDate:20100209122106
         <effectiveTime>
             <center value="20030627"/>
         </effectiveTime>
-        <availabilityTime value="20030628112300"/>
+        <availabilityTime value="20030627"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7"/>
@@ -4036,11 +4036,11 @@ CommentDate:20100209122106
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030628112300
+CommentDate:20030627
 
 Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030628112300"/>
+        <availabilityTime value="20030627"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
@@ -4079,7 +4079,7 @@ CommentDate:20100209122106
         <effectiveTime>
             <center value="20030627"/>
         </effectiveTime>
-        <availabilityTime value="20030628112300"/>
+        <availabilityTime value="20030627"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2"/>
@@ -4136,7 +4136,7 @@ CommentDate:20100209122106
         <effectiveTime>
             <center value="20030627"/>
         </effectiveTime>
-        <availabilityTime value="20030628112300"/>
+        <availabilityTime value="20030627"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F668B1E-10E7-4771-8395-F1BA8D1A745A"/>
@@ -4159,11 +4159,11 @@ CommentDate:20100209122106
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2A78ED10-1E12-4703-B370-54FBFC4483FB"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030628112300
+CommentDate:20030627
 
 Non fasting specimen.</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030628112300"/>
+        <availabilityTime value="20030627"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
@@ -4414,7 +4414,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5911B7CE-B5E2-4E8A-8703-E3407548DB24"/>
@@ -4436,13 +4436,13 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="69C88E7E-45C4-4D52-9BB9-AAB4E62F13FB"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 Interpretation: PA - Potentially abnormal
 Negative
 I.M.Screen</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -4481,7 +4481,7 @@ CommentDate:20100201093313
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="451B0A75-8B34-4580-81E6-717831D3C236"/>
@@ -4503,12 +4503,12 @@ CommentDate:20100201093313
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B58EFB01-1CFF-49D4-9658-9547F40A24CC"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 WBC MORPHOLOGY NORMAL
 RBC MORPHOLOGY NORMAL</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -4553,11 +4553,11 @@ CommentDate:20100201093313
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="26E8B010-9ACB-4EB5-BEAC-C34C9D2A51CE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -4574,7 +4574,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="337FF7FD-DA23-4EA4-9ED5-D44E1B06E605"/>
@@ -4603,11 +4603,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="75DD574F-0CE6-4B2F-88FE-1CF7606B50AC"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -4630,7 +4630,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3390559A-D17E-4D30-9A51-B4459E1515EF"/>
@@ -4659,11 +4659,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CE6D306C-F337-43B9-AB9E-B96457A36CBD"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -4686,7 +4686,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ED51A3DF-3870-4669-9FDB-7FEF5BE77E3B"/>
@@ -4715,11 +4715,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A039C513-4426-49A9-B9AE-8624A64D6397"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -4742,7 +4742,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="543443CB-EFAA-4D57-8D06-9FDC5A34FD6A"/>
@@ -4771,11 +4771,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9413AD16-1088-40A3-B531-5D2B053C9897"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -4799,7 +4799,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="53847A06-6B81-4A50-BF84-C5588990485A"/>
@@ -4829,11 +4829,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DBF633AC-A255-4E0D-B1AA-B601AFE3E516"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -4856,7 +4856,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="07378FF7-547B-4A4E-9C58-3553095BA37E"/>
@@ -4885,11 +4885,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DF2D442F-9706-41A3-ACE0-A0C06AB49A8A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -4912,7 +4912,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9A11E815-9320-4952-96BA-CC83BECF62A3"/>
@@ -4941,11 +4941,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="381D7D39-7FB8-49C2-B042-F15A48B019EB"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -4968,7 +4968,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="92601097-8AE8-45DA-8D17-927B4727866C"/>
@@ -4997,11 +4997,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="21C8ABA5-6215-4623-A84C-F735B2A26CA6"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -5024,7 +5024,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E"/>
@@ -5053,11 +5053,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3ECDEBAA-FABE-433E-8CA4-B4E16EC88E55"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -5081,7 +5081,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FB313646-3FC3-49D0-8277-D11CEA14641D"/>
@@ -5111,11 +5111,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="60484FAA-43BB-494E-A00F-977364A464BC"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -5138,7 +5138,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="92726062-D62B-4736-92D1-CF3F1D83832B"/>
@@ -5167,11 +5167,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BD90553B-7040-4358-ADEB-1725EC9B5A59"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -5194,7 +5194,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9131C78A-EFF1-455E-8969-62D984B5F29C"/>
@@ -5223,11 +5223,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DFEA995B-2BF0-4CBB-AF6C-FDC482EE5B7A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -5250,7 +5250,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E0762612-0920-4AB0-9CFC-185F79641C10"/>
@@ -5279,11 +5279,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DE490ABD-6F61-489B-9D9D-19ADA4B558E8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -5307,7 +5307,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4264DD9C-01B2-4F68-A222-E3B48540496D"/>
@@ -5337,11 +5337,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="EBFC9E3E-BF6A-4D10-9134-E89BD09006C4"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -5364,7 +5364,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20030703"/>
         </effectiveTime>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FB01369F-2A94-4D0B-AC2F-843879B69915"/>
@@ -5387,11 +5387,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="65E669A1-21AD-4DBE-B241-4340C6AF4A0E"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030704111300
+CommentDate:20030703
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
+        <availabilityTime value="20030703"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -5529,12 +5529,12 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="90CDA895-C708-4A1D-B880-57DDA978F565"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 These LTG comments only apply to the Anti-nuclear factor and the
 rheumatoid factor tests.</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5551,7 +5551,7 @@ rheumatoid factor tests.</text>
         <effectiveTime>
             <center value="20050225"/>
         </effectiveTime>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6C572C7C-264C-4C0B-A1DC-AFED20507F5B"/>
@@ -5573,11 +5573,11 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="EB8754C6-ECF4-48D4-BA9B-E70F72149DB7"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 NEGATIVE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5600,7 +5600,7 @@ NEGATIVE</text>
         <effectiveTime>
             <center value="20050225"/>
         </effectiveTime>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B833E39B-3E99-475D-99C0-C25E3FA5FB1B"/>
@@ -5622,11 +5622,11 @@ NEGATIVE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="15DD9E32-0B6E-4539-93F0-CD7B34B15759"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 NEGATIVE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5667,11 +5667,11 @@ NEGATIVE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="ED30F999-14CA-41B9-93EE-334F60049174"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 Oligoclonals detected in both sera and CSF</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5699,11 +5699,11 @@ Oligoclonals detected in both sera and CSF</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6030B451-E3D8-40EC-8CDB-1CFAF88F535D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 NEGATIVE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5730,11 +5730,11 @@ NEGATIVE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="119CBC70-D99D-4C07-AA26-EBE05249A0D8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 NEGATIVE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5762,11 +5762,11 @@ NEGATIVE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="674A4471-1AE0-4A83-B3F7-E83BE09243B8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 NEGATIVE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5793,11 +5793,11 @@ NEGATIVE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F64CCBEB-A90B-421A-88E8-49B624695441"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 NEGATIVE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5825,11 +5825,11 @@ NEGATIVE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="765AAA6C-96A1-45E0-BBFD-19D887721A93"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 NEGATIVE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5857,11 +5857,11 @@ NEGATIVE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0A91A8E1-ADF0-4BCB-A51B-3EDCA53C99BA"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 NEGATIVE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5888,11 +5888,11 @@ NEGATIVE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="54DF49CD-11BF-4E74-B0B6-C254CB00A53A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 NEGATIVE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5920,11 +5920,11 @@ NEGATIVE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8ECDA0B4-E06F-4882-8D35-255F6BB79187"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 NEGATIVE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5952,11 +5952,11 @@ NEGATIVE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="848E19CD-3EDF-4727-9FD1-BB2F224AF805"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050225155300
+CommentDate:20050225
 
 Equivocal Result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
+        <availabilityTime value="20050225"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -6165,11 +6165,11 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="904733AD-B296-4F6F-8DDB-A49BFC3066A3"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050316060100
+CommentDate:20050315
 
 See FATS/Healthy Hearts guidelines for interpretation of lipids</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050316060100"/>
+        <availabilityTime value="20050315"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="7409E7A5-9227-43F2-83ED-1299B7B081DF"/>
@@ -6186,7 +6186,7 @@ See FATS/Healthy Hearts guidelines for interpretation of lipids</text>
         <effectiveTime>
             <center value="20050315"/>
         </effectiveTime>
-        <availabilityTime value="20050316060100"/>
+        <availabilityTime value="20050315"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="18753CCC-0C10-4D4B-B38F-87D49769F27C"/>
@@ -6209,11 +6209,11 @@ See FATS/Healthy Hearts guidelines for interpretation of lipids</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DD3E1D1B-2F11-4582-933A-730D478349B2"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050316060100
+CommentDate:20050315
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050316060100"/>
+        <availabilityTime value="20050315"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="7409E7A5-9227-43F2-83ED-1299B7B081DF"/>
@@ -6236,7 +6236,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20050315"/>
         </effectiveTime>
-        <availabilityTime value="20050316060100"/>
+        <availabilityTime value="20050315"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64E58B3C-733C-4F69-84F3-2D96B34498F6"/>
@@ -6265,11 +6265,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CFD0D666-8226-45CD-8339-8EC0F995CED0"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050316060100
+CommentDate:20050315
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050316060100"/>
+        <availabilityTime value="20050315"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="7409E7A5-9227-43F2-83ED-1299B7B081DF"/>
@@ -6292,7 +6292,7 @@ ReportStatus: Supplementary result</text>
         <effectiveTime>
             <center value="20050315"/>
         </effectiveTime>
-        <availabilityTime value="20050316060100"/>
+        <availabilityTime value="20050315"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="184E1C60-1A4A-4345-A5FA-D47BC26C2D3D"/>
@@ -6315,11 +6315,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F36DC49B-E56C-49F1-A121-26D01772A4F5"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050316060100
+CommentDate:20050315
 
 ReportStatus: Supplementary result</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050316060100"/>
+        <availabilityTime value="20050315"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="7409E7A5-9227-43F2-83ED-1299B7B081DF"/>
@@ -6367,11 +6367,11 @@ ReportStatus: Supplementary result</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A3D26CBE-190D-49D6-8D52-3ADE3DF256C5"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20050316060100
+CommentDate:20050315
 
 Euthyroid picture (including satisfactory thyroxine replacement)</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050316060100"/>
+        <availabilityTime value="20050315"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="7409E7A5-9227-43F2-83ED-1299B7B081DF"/>
@@ -6961,11 +6961,11 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="513D7148-C947-44E5-8CAB-E197E1F6F310"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+CommentDate:UNK
 
 EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime nullFlavor="UNK"/>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
