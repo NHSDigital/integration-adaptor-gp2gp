@@ -63,6 +63,8 @@ public class ObservationMapper {
 
     private static final String COMMENT_NOTE_CODE = "37331000000100";
 
+    private static final String HL7_UNKNOWN_VALUE = "UNK";
+
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
 
     private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
@@ -100,11 +102,9 @@ public class ObservationMapper {
         var observation = observationAssociatedWithSpecimen.getObservation();
         String codeElement = prepareCodeElement(observation);
         String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation);
+        String availabilityTimeElement =
+            StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation);
         CompoundStatementClassCode classCode = prepareClassCode(relatedObservations);
-
-        String availabilityTimeElement = (classCode.equals(CompoundStatementClassCode.CLUSTER))
-            ? StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement())
-            : StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation);
 
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
             .orElse(StringUtils.EMPTY);
@@ -282,13 +282,19 @@ public class ObservationMapper {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(holder.nextHl7InstanceIdentifier())
             .commentType(commentType)
-            .commentDate(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
+            .commentDate(handleEffectiveToCommentDate(observation))
             .comment(comment)
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement()));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
 
         prepareParticipant(observation).ifPresent(narrativeStatementTemplateParameters::participant);
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
+    }
+
+    private String handleEffectiveToCommentDate(Observation observation) {
+        return observation.hasEffectiveDateTimeType()
+            ? DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType()) :
+            HL7_UNKNOWN_VALUE;
     }
 
     private String prepareStatementsForDerivedObservations(List<MultiStatementObservationHolder> derivedObservations) {
@@ -307,7 +313,7 @@ public class ObservationMapper {
                 String codeElement = prepareCodeElement(derivedObservation);
                 String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(derivedObservation);
                 String availabilityTimeElement =
-                    StatementTimeMappingUtils.prepareAvailabilityTime(derivedObservation.getIssuedElement());
+                    StatementTimeMappingUtils.prepareAvailabilityTime(derivedObservation.getEffectiveDateTimeType());
 
                 var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
                     .classCode(CompoundStatementClassCode.CLUSTER.getCode())
