@@ -68,6 +68,8 @@ public class AllergyStructureMapperTest {
         + "example-allergy-intolerance-resource-19.json";
     private static final String INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NO_NAME = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-20.json";
+    private static final String INPUT_JSON_WITHOUT_END_DATE = TEST_FILE_DIRECTORY
+        + "example-allergy-intolerance-resource-without-endDate.json";
     private static final String INPUT_JSON_WITH_VALID_RECORDER_NO_ASSERTER = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-21.json";
     private static final String INPUT_JSON_WITH_INVALID_RECORDER_NO_ASSERTER = TEST_FILE_DIRECTORY
@@ -76,7 +78,6 @@ public class AllergyStructureMapperTest {
         + "example-allergy-intolerance-resource-23.json";
     private static final String INPUT_JSON_WITH_VALID_RECORDER_PATIENT_ASSERTER = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-24.json";
-
 
     private static final String OUTPUT_XML_USES_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-1.xml";
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-2.xml";
@@ -101,6 +102,9 @@ public class AllergyStructureMapperTest {
         + "expected-output-allergy-structure-15.xml";
     private static final String OUTPUT_XML_USES_RELATED_PERSON_ASSERTER_NO_NAME = TEST_FILE_DIRECTORY
         + "expected-output-allergy-structure-16.xml";
+    private static final String OUTPUT_XML_USES_END_DATE = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-17.xml";
+    private static final String OUTPUT_XML_USES_NO_END_DATE = TEST_FILE_DIRECTORY
+        + "expected-output-allergy-structure-without-endDate.xml";
     private static final String OUTPUT_XML_USES_RECORDER_AS_PERFORMER = TEST_FILE_DIRECTORY
         + "expected-output-allergy-structure-17.xml";
     private static final String OUTPUT_XML_USES_NO_AUTHOR_OR_PERFORMER = TEST_FILE_DIRECTORY
@@ -109,6 +113,8 @@ public class AllergyStructureMapperTest {
             + "expected-output-allergy-structure-19.xml";
     private static final String OUTPUT_XML_USES_RECORDER_AS_PERFORMER_PATIENT_ASSERTER = TEST_FILE_DIRECTORY
             + "expected-output-allergy-structure-20.xml";
+    private static final String OUTPUT_XML_USES_RECORDER_AS_FALLBACK_ASSERTER = TEST_FILE_DIRECTORY
+        + "expected-output-allergy-structure-21.xml";
     private static final String COMMON_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
 
     @Mock
@@ -127,11 +133,10 @@ public class AllergyStructureMapperTest {
             Arguments.of(INPUT_JSON_WITH_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_RECORDER_AND_ASSERTER),
             Arguments.of(INPUT_JSON_WITH_DATES, OUTPUT_XML_USES_DATES),
             Arguments.of(INPUT_JSON_WITH_ONSET_DATE_ONLY, OUTPUT_XML_USES_ONSET_DATE),
-            Arguments.of(INPUT_JSON_WITH_REASON_END_DATE_ONLY, OUTPUT_XML_USES_NULL_FLAVOR_DATE),
+            Arguments.of(INPUT_JSON_WITH_REASON_END_DATE_ONLY, OUTPUT_XML_USES_END_DATE),
             Arguments.of(INPUT_JSON_WITH_NO_DATES, OUTPUT_XML_USES_NULL_FLAVOR_DATE),
             Arguments.of(INPUT_JSON_WITH_ENVIRONMENT_CATEGORY, OUTPUT_XML_USES_ENVIRONMENT_CATEGORY),
             Arguments.of(INPUT_JSON_WITH_MEDICATION_CATEGORY, OUTPUT_XML_USES_MEDICATION_CATEGORY),
-            Arguments.of(INPUT_JSON_WITH_REACTION, OUTPUT_XML_USES_REACTION),
             Arguments.of(INPUT_JSON_WITH_REACTION, OUTPUT_XML_USES_REACTION),
             Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_ONE_NOTE),
             Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_TWO_NOTES),
@@ -140,7 +145,8 @@ public class AllergyStructureMapperTest {
             Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER),
             Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NAME_TEXT, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER),
             Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NO_NAME, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER_NO_NAME),
-            Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_PERFORMER),
+            Arguments.of(INPUT_JSON_WITHOUT_END_DATE, OUTPUT_XML_USES_NO_END_DATE),
+            Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_FALLBACK_ASSERTER),
             Arguments.of(INPUT_JSON_WITH_INVALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_NO_AUTHOR_OR_PERFORMER),
             Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_RELATED_PERSON_ASSERTER,
                     OUTPUT_XML_USES_RECORDER_AS_PERFORMER_RELATED_PERSON_ASSERTER),
