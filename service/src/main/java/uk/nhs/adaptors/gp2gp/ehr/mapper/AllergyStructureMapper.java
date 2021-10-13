@@ -40,6 +40,7 @@ public class AllergyStructureMapper {
 
     private static final String ALLERGY_INTOLERANCE_END_URL =
         "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1";
+    private static final String END_DATE = "End Date: ";
     private static final String STATUS = "Status: ";
     private static final String TYPE = "Type: ";
     private static final String CRITICALITY = "Criticality: ";
@@ -113,19 +114,16 @@ public class AllergyStructureMapper {
 
     private String buildAvailabilityTime(AllergyIntolerance allergyIntolerance) {
         return Optional.of(allergyIntolerance)
-            .filter(AllergyIntolerance:: hasOnsetDateTimeType)
-            .map(AllergyIntolerance:: getOnsetDateTimeType)
-            .map(DateFormatUtil:: toHl7Format)
+            .filter(AllergyIntolerance::hasOnsetDateTimeType)
+            .map(AllergyIntolerance::getOnsetDateTimeType)
+            .map(DateFormatUtil::toHl7Format)
             .orElse(StringUtils.EMPTY);
     }
 
     private String buildEffectiveTime(AllergyIntolerance allergyIntolerance) {
         var onsetDate = extractOnsetDate(allergyIntolerance);
-        var endDate = filterExtensionByUrl(allergyIntolerance, ALLERGY_INTOLERANCE_END_URL)
-            .map(AllergyStructureExtractor::extractEndDate)
-            .orElse(StringUtils.EMPTY);
 
-        return StatementTimeMappingUtils.prepareEffectiveTimeForAllergyIntolerance(onsetDate, endDate);
+        return StatementTimeMappingUtils.prepareEffectiveTimeForAllergyIntolerance(onsetDate);
     }
 
     private void buildCategory(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParametersBuilder templateParameters) {
@@ -154,6 +152,16 @@ public class AllergyStructureMapper {
         return Optional.empty();
     }
 
+    private void buildAuthor(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParametersBuilder templateParameter) {
+        if (isValidAsserter(allergyIntolerance)) {
+            buildParticipant(allergyIntolerance.getAsserter(), ParticipantType.PERFORMER)
+                .ifPresent(templateParameter::performer);
+        } else if (allergyIntolerance.hasRecorder()) {
+            buildParticipant(allergyIntolerance.getRecorder(), ParticipantType.PERFORMER)
+                .ifPresent(templateParameter::performer);
+        }
+    }
+
     private List<String> retrievePertinentInformation(AllergyIntolerance allergyIntolerance) {
         return List.of(
             buildExtensionReasonEndPertinentInformation(allergyIntolerance),
@@ -164,8 +172,14 @@ public class AllergyStructureMapper {
             buildLastOccurrencePertinentInformation(allergyIntolerance),
             buildRecorderPertinentInformation(allergyIntolerance),
             buildReactionPertinentInformation(allergyIntolerance),
-            buildNotePertinentInformation(allergyIntolerance)
+            buildNotePertinentInformation(allergyIntolerance),
+            buildEndDatePertinentInformation(allergyIntolerance)
         );
+    }
+
+    private boolean isValidAsserter(AllergyIntolerance allergyIntolerance) {
+        return allergyIntolerance.hasAsserter()
+            && allergyIntolerance.getAsserter().getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name());
     }
 
     private String buildExtensionReasonEndPertinentInformation(AllergyIntolerance allergyIntolerance) {
@@ -260,19 +274,11 @@ public class AllergyStructureMapper {
             .collect(Collectors.joining(StringUtils.SPACE));
     }
 
-    private void buildAuthor(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParametersBuilder templateParameter) {
-        if (isValidAsserter(allergyIntolerance)) {
-            buildParticipant(allergyIntolerance.getAsserter(), ParticipantType.PERFORMER)
-                .ifPresent(templateParameter::performer);
-        } else if (allergyIntolerance.hasRecorder()) {
-            buildParticipant(allergyIntolerance.getRecorder(), ParticipantType.PERFORMER)
-                .ifPresent(templateParameter::performer);
-        }
+    private String buildEndDatePertinentInformation(AllergyIntolerance allergyIntolerance) {
+        return filterExtensionByUrl(allergyIntolerance, ALLERGY_INTOLERANCE_END_URL)
+            .map(extension -> AllergyStructureExtractor.extractEndDate(extension, DateFormatUtil::toTextFormat))
+            .filter(StringUtils::isNotBlank)
+            .map(endDate -> END_DATE + endDate)
+            .orElse(StringUtils.EMPTY);
     }
-
-    private boolean isValidAsserter(AllergyIntolerance allergyIntolerance) {
-        return allergyIntolerance.hasAsserter()
-                && allergyIntolerance.getAsserter().getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name());
-    }
-
 }

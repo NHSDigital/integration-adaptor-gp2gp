@@ -90,8 +90,8 @@ public final class StatementTimeMappingUtils {
 
             if (!observation.getEffectivePeriod().hasStart()) {
                 return String.format(
-                        EFFECTIVE_TIME_NO_START_TEMPLATE,
-                        toHl7Format(observation.getEffectivePeriod().getEndElement())
+                    EFFECTIVE_TIME_NO_START_TEMPLATE,
+                    toHl7Format(observation.getEffectivePeriod().getEndElement())
                 );
             }
 
@@ -109,13 +109,12 @@ public final class StatementTimeMappingUtils {
         return DEFAULT_TIME_VALUE;
     }
 
-    public static String prepareEffectiveTimeForAllergyIntolerance(String onsetDate, String endDate) {
-        if (!onsetDate.isEmpty() && !endDate.isEmpty()) {
-            return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, onsetDate, endDate);
-        } else if (!onsetDate.isEmpty() && endDate.isEmpty()) {
+    public static String prepareEffectiveTimeForAllergyIntolerance(String onsetDate) {
+        if (!onsetDate.isEmpty()) {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, onsetDate);
+        } else {
+            return DEFAULT_TIME_VALUE;
         }
-        return DEFAULT_TIME_VALUE;
     }
 
     public static String prepareEffectiveTimeForMedicationRequest(MedicationRequest medicationRequest) {
