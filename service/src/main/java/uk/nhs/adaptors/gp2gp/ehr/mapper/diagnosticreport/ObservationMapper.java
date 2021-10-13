@@ -293,8 +293,8 @@ public class ObservationMapper {
 
     private String handleEffectiveToCommentDate(Observation observation) {
         return observation.hasEffectiveDateTimeType()
-            ? DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType()) :
-            HL7_UNKNOWN_VALUE;
+            ? DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType())
+            : HL7_UNKNOWN_VALUE;
     }
 
     private String prepareStatementsForDerivedObservations(List<MultiStatementObservationHolder> derivedObservations) {
