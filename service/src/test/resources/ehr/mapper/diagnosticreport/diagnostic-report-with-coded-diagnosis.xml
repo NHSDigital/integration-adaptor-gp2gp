@@ -10,26 +10,22 @@
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <!-- Mapped Specimen with id: DUMMY-SPECIMEN-5E496953-065B-41F2-9577-BE8F2FBD0757 -->
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+    </CompoundStatement>
+        <NarrativeStatement classCode="OBS" moodCode="EVN">
+    <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+    <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
 CommentDate:20100225154100
 
 Lab Diagnosis: Coded Diagnosis display 1</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+    <statusCode code="COMPLETE"/>
+    <availabilityTime value="20100225154100"/>
+</NarrativeStatement><NarrativeStatement classCode="OBS" moodCode="EVN">
+    <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+    <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
 CommentDate:20100225154100
 
 Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
-    </CompoundStatement>
+    <statusCode code="COMPLETE"/>
+    <availabilityTime value="20100225154100"/>
+</NarrativeStatement>
 </component>
