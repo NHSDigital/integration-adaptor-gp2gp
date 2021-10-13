@@ -168,6 +168,10 @@ public class SpecimenMapper {
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement) {
         SpecimenNarrativeStatementCommentBuilder specimenNarrativeStatementCommentBuilder = new SpecimenNarrativeStatementCommentBuilder();
 
+        getReceivedTime(specimen)
+            .map(PrimitiveType::getValue)
+            .ifPresent(specimenNarrativeStatementCommentBuilder::receivedDate);
+
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
 
@@ -205,10 +209,6 @@ public class SpecimenMapper {
             .forEach(specimenNarrativeStatementCommentBuilder::note);
 
         if (StringUtils.isNotBlank(specimenNarrativeStatementCommentBuilder.text)) {
-            getReceivedTime(specimen)
-                .map(PrimitiveType::getValue)
-                .ifPresent(specimenNarrativeStatementCommentBuilder::receivedDate);
-
             var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
                 .narrativeStatementId(randomIdGeneratorService.createNewId())
                 .commentType(CommentType.LAB_SPECIMEN_COMMENT.getCode())
