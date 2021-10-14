@@ -293,10 +293,10 @@ public class ObservationMapper {
     }
 
     private String handleEffectiveToCommentDate(Observation observation) {
-        if(observation.hasEffective()){
-            if(observation.hasEffectiveDateTimeType()) {
+        if (observation.hasEffective()) {
+            if (observation.hasEffectiveDateTimeType()) {
                 return DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType());
-            }else if(observation.hasEffectivePeriod()){
+            } else if (observation.hasEffectivePeriod()) {
                 return DateFormatUtil.toHl7Format(observation.getEffectivePeriod().getStartElement());
             }
         }
