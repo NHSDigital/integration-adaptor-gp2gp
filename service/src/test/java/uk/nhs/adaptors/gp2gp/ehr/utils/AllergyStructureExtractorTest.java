@@ -30,7 +30,8 @@ public class AllergyStructureExtractorTest {
     private static final String EXPECTED_REASON_END_TEXT = "Reason Ended: value1";
     private static final String REASON_END_NO_INFO = "No information available";
     private static final String REASON_END_DATE = "2018-03-01";
-    private static final String EXPECTED_REASON_END_DATE = "20180301";
+    private static final String EXPECTED_REASON_END_DATE_HL7 = "20180301";
+    private static final String EXPECTED_REASON_END_DATE_HUMAN_READABLE = "2018-03-01";
     private static final String ONSET_DATE = "1978-12-31";
     private static final String EXPECTED_ONSET_DATE = "19781231";
     private static final String REACTION_START = "Reaction 1 ";
@@ -40,6 +41,35 @@ public class AllergyStructureExtractorTest {
     private Extension extension;
     private List<Extension> extensionList;
     private Extension nestedExtension;
+
+    private static Stream<Arguments> reasonEndTextParams() {
+        return Stream.of(
+            Arguments.of(REASON_END_URL, REASON_END_TEXT, EXPECTED_REASON_END_TEXT),
+            Arguments.of(REASON_END_URL, REASON_END_NO_INFO, StringUtils.EMPTY),
+            Arguments.of(INVALID_URL, REASON_END_TEXT, StringUtils.EMPTY)
+        );
+    }
+
+    private static Stream<Arguments> reasonEndDateHL7Params() {
+        return Stream.of(
+            Arguments.of(ALLERGY_END_DATE_URL, REASON_END_DATE, EXPECTED_REASON_END_DATE_HL7),
+            Arguments.of(INVALID_URL, REASON_END_DATE, StringUtils.EMPTY)
+        );
+    }
+
+    private static Stream<Arguments> reasonEndDateHumanReadableParams() {
+        return Stream.of(
+            Arguments.of(ALLERGY_END_DATE_URL, REASON_END_DATE, EXPECTED_REASON_END_DATE_HUMAN_READABLE),
+            Arguments.of(INVALID_URL, REASON_END_DATE, StringUtils.EMPTY)
+        );
+    }
+
+    private static Stream<Arguments> onsetDateParams() {
+        return Stream.of(
+            Arguments.of(ONSET_DATE, EXPECTED_ONSET_DATE),
+            Arguments.of(null, StringUtils.EMPTY)
+        );
+    }
 
     @BeforeEach
     public void setUp() {
@@ -61,32 +91,31 @@ public class AllergyStructureExtractorTest {
         assertThat(outputReasonEnd).isEqualTo(expectedReasonEnd);
     }
 
-    private static Stream<Arguments> reasonEndTextParams() {
-        return Stream.of(
-            Arguments.of(REASON_END_URL, REASON_END_TEXT, EXPECTED_REASON_END_TEXT),
-            Arguments.of(REASON_END_URL, REASON_END_NO_INFO, StringUtils.EMPTY),
-            Arguments.of(INVALID_URL, REASON_END_TEXT, StringUtils.EMPTY)
-            );
-    }
-
     @ParameterizedTest
-    @MethodSource("reasonEndDateParams")
+    @MethodSource("reasonEndDateHL7Params")
     public void When_ExtractingReasonEndDate_Expect_EndDateOutput(String reasonEndDateUrl, String reasonEndDate, String expectedEndDate) {
         nestedExtension.setUrl(reasonEndDateUrl);
         nestedExtension.setValue(new DateTimeType(reasonEndDate));
         extensionList.add(nestedExtension);
         extension.setExtension(extensionList);
 
-        String outputEndDate = AllergyStructureExtractor.extractEndDate(extension);
+        String outputEndDate = AllergyStructureExtractor.extractEndDate(extension, DateFormatUtil::toHl7Format);
 
         assertThat(outputEndDate).isEqualTo(expectedEndDate);
     }
 
-    private static Stream<Arguments> reasonEndDateParams() {
-        return Stream.of(
-            Arguments.of(ALLERGY_END_DATE_URL, REASON_END_DATE, EXPECTED_REASON_END_DATE),
-            Arguments.of(INVALID_URL, REASON_END_DATE, StringUtils.EMPTY)
-        );
+    @ParameterizedTest
+    @MethodSource("reasonEndDateHumanReadableParams")
+    public void When_ExtractingReasonEndDateHumanReadable_Expect_EndDateOutput(String reasonEndDateUrl, String reasonEndDate,
+        String expectedEndDate) {
+        nestedExtension.setUrl(reasonEndDateUrl);
+        nestedExtension.setValue(new DateTimeType(reasonEndDate));
+        extensionList.add(nestedExtension);
+        extension.setExtension(extensionList);
+
+        String outputEndDate = AllergyStructureExtractor.extractEndDate(extension, DateFormatUtil::toTextFormat);
+
+        assertThat(outputEndDate).isEqualTo(expectedEndDate);
     }
 
     @ParameterizedTest
@@ -98,13 +127,6 @@ public class AllergyStructureExtractorTest {
         String outputReasonEnd = AllergyStructureExtractor.extractOnsetDate(allergyIntolerance);
 
         assertThat(outputReasonEnd).isEqualTo(expectedOnsetDate);
-    }
-
-    private static Stream<Arguments> onsetDateParams() {
-        return Stream.of(
-            Arguments.of(ONSET_DATE, EXPECTED_ONSET_DATE),
-            Arguments.of(null, StringUtils.EMPTY)
-        );
     }
 
     @Test
