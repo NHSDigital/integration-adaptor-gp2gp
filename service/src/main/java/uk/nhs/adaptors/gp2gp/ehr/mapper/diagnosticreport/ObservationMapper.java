@@ -348,9 +348,14 @@ public class ObservationMapper {
     }
 
     private DateTimeType resolveEffectiveDateTimeType(Observation observation) {
-        return observation.hasEffectiveDateTimeType()
-            ? observation.getEffectiveDateTimeType()
-            : new DateTimeType();
+        if (observation.hasEffective()) {
+            if (observation.hasEffectiveDateTimeType()) {
+                return observation.getEffectiveDateTimeType();
+            } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) {
+                return observation.getEffectivePeriod().getStartElement();
+            }
+        }
+        return new DateTimeType();
     }
 
     private boolean observationHasNonCommentNoteCode(Observation observation) {
