@@ -54,6 +54,9 @@ pipeline {
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml rm -f
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
+                                last_exit_code=$?
+                                docker ps
+                                exit $last_exit_code
                             '''
                         }
                     }
