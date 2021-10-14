@@ -51,12 +51,10 @@ pipeline {
                             sh '''
                                 source docker/vars.local.tests.sh
                                 docker network create commonforgp2gp || true
-                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml stop
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml rm -f
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
-                                last_exit_code=$?
-                                docker ps
-                                exit $last_exit_code
                             '''
                         }
                     }
@@ -90,6 +88,7 @@ pipeline {
                     steps {
                         script {
                             if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
+
                             if (publishWiremockImage) {
                                 if (sh(label: "Running ${WIREMOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/wiremock/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} docker/wiremock', returnStatus: true) != 0) {error("Failed to build ${WIREMOCK_ECR_REPO_DIR} Docker image")}
                             }
@@ -97,13 +96,13 @@ pipeline {
                                 if (sh(label: "Running ${MHS_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/mock-mhs-adaptor/Dockerfile -t ${MHS_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build ${MHS_MOCK_ECR_REPO_DIR} Docker image")}
                             }
                             if (publishGpccMockImage) {
-                                if (sh(label: "Running ${GPCC_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/gpcc-mock/Dockerfile -t ${GPCC_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build ${GPCC_MOCK_ECR_REPO_DIR} Docker image")}
+                                if (sh(label: "Running ${GPCC_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/gpcc-mock/Dockerfile -t ${GPCC_MOCK_DOCKER_IMAGE} docker/gpcc-mock', returnStatus: true) != 0) {error("Failed to build ${GPCC_MOCK_ECR_REPO_DIR} Docker image")}
                             }
                             if (publishGpcApiMockImage) {
-                                if (sh(label: "Running ${GPC_API_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/gpc-api-mock/Dockerfile -t ${GPC_API_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build ${GPC_API_MOCK_ECR_REPO_DIR} Docker image")}
+                                if (sh(label: "Running ${GPC_API_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/gpc-api-mock/Dockerfile -t ${GPC_API_MOCK_DOCKER_IMAGE} docker/gpc-api-mock', returnStatus: true) != 0) {error("Failed to build ${GPC_API_MOCK_ECR_REPO_DIR} Docker image")}
                             }
                             if (publishSdsApiMockImage) {
-                                if (sh(label: "Running ${SDS_API_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/sds-api-mock/Dockerfile -t ${SDS_API_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build ${SDS_API_MOCK_ECR_REPO_DIR} Docker image")}
+                                if (sh(label: "Running ${SDS_API_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/sds-api-mock/Dockerfile -t ${SDS_API_MOCK_DOCKER_IMAGE} docker/sds-api-mock', returnStatus: true) != 0) {error("Failed to build ${SDS_API_MOCK_ECR_REPO_DIR} Docker image")}
                             }
                         }
                     }
