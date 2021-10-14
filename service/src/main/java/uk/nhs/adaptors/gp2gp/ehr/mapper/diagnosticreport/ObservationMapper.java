@@ -296,7 +296,7 @@ public class ObservationMapper {
         if (observation.hasEffective()) {
             if (observation.hasEffectiveDateTimeType()) {
                 return DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType());
-            } else if (observation.hasEffectivePeriod()) {
+            } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) {
                 return DateFormatUtil.toHl7Format(observation.getEffectivePeriod().getStartElement());
             }
         }
