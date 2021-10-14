@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.ContactPoint;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,20 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersInner;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersManagingOrganization;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersOuter;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.PractitionerAgentPersonMapperParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class OrganizationToAgentMapper {
 
+    private static final Mustache AGENT_TEMPLATE_MANAGING_ORGANIZATION = TemplateUtils.loadTemplate("ehr_agent_template_managing_organization.mustache");
     private static final Mustache AGENT_TEMPLATE_OUTER = TemplateUtils.loadTemplate("ehr_agent_template_outer.mustache");
     private static final Mustache AGENT_TEMPLATE_INNER = TemplateUtils.loadTemplate("ehr_agent_template_inner.mustache");
+    private static final Mustache AGENT_STATEMENT_TEMPLATE = TemplateUtils
+        .loadTemplate("ehr_agent_person_template.mustache");
     private static final String ODS_ORG_CODE_SYSTEM = "https://fhir.nhs.uk/Id/ods-organization-code";
     private static final Map<String, String> ADDRESS_USES = Map.of(
         "home", "H",
@@ -33,19 +39,22 @@ public class OrganizationToAgentMapper {
     );
 
     public static String mapOrganizationToAgent(Organization organization, String newId) {
-        var builder = AgentMapperTemplateParametersOuter.builder()
-            .agentId(newId);
+        var builder = 
+            AgentMapperTemplateParametersManagingOrganization
+                .builder()
+                .agentId(newId);
 
-        var inner = Optional.of(mapOrganizationToAgentInner(organization));
-        inner.ifPresent(builder::organisationInfo);
+        if(organization.hasName()){
+            builder.name(organization.getName());
+        }
 
-        return TemplateUtils.fillTemplate(AGENT_TEMPLATE_OUTER, builder.build());
+        return TemplateUtils.fillTemplate(AGENT_TEMPLATE_MANAGING_ORGANIZATION, builder.build());
     }
 
     public static String mapOrganizationToAgentInner(Organization organization) {
         var builder = AgentMapperTemplateParametersInner.builder();
 
-        buildName(organization).ifPresent(builder::agentName);
+        buildName(organization).ifPresent(value -> builder.agentName("barry bell"));
         buildTelecom(organization).ifPresent(builder::telecomValue);
         buildAddressUse(organization).ifPresent(builder::addressUse);
         var addressLine = buildAddressLine(organization);

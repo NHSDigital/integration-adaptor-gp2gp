@@ -48,16 +48,10 @@ public class AgentPersonMapper {
                         if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
                             builder.practitionerFamilyName(UNKNOWN);
                         }
-
-                        if (agentKey.getOrganizationReference() != null) {
-                            messageContext.getInputBundleHolder()
-                                .getResource(new IdType(agentKey.getOrganizationReference()))
-                                .map(Organization.class::cast)
-                                .map(OrganizationToAgentMapper::mapOrganizationToAgentInner)
-                                .ifPresent(builder::organization);
-                        }
                     });
-        } else if (agentKey.getOrganizationReference() != null) {
+        } 
+        
+        if (agentKey.getOrganizationReference() != null) {
             messageContext.getInputBundleHolder()
                 .getResource(new IdType(agentKey.getOrganizationReference()))
                 .map(Organization.class::cast)
