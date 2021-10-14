@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.ContactPoint;
-import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +17,14 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersInner;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersManagingOrganization;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersOuter;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.PractitionerAgentPersonMapperParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class OrganizationToAgentMapper {
 
-    private static final Mustache AGENT_TEMPLATE_MANAGING_ORGANIZATION = TemplateUtils.loadTemplate("ehr_agent_template_managing_organization.mustache");
+    private static final Mustache AGENT_TEMPLATE_MANAGING_ORGANIZATION =
+        TemplateUtils.loadTemplate("ehr_agent_template_managing_organization.mustache");
     private static final Mustache AGENT_TEMPLATE_OUTER = TemplateUtils.loadTemplate("ehr_agent_template_outer.mustache");
     private static final Mustache AGENT_TEMPLATE_INNER = TemplateUtils.loadTemplate("ehr_agent_template_inner.mustache");
     private static final Mustache AGENT_STATEMENT_TEMPLATE = TemplateUtils
@@ -39,12 +37,10 @@ public class OrganizationToAgentMapper {
     );
 
     public static String mapOrganizationToAgent(Organization organization, String newId) {
-        var builder = 
-            AgentMapperTemplateParametersManagingOrganization
-                .builder()
+        var builder = AgentMapperTemplateParametersManagingOrganization.builder()
                 .agentId(newId);
 
-        if(organization.hasName()){
+        if (organization.hasName()) {
             builder.name(organization.getName());
         }
 
