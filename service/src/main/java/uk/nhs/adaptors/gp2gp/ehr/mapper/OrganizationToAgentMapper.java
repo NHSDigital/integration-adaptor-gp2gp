@@ -54,7 +54,7 @@ public class OrganizationToAgentMapper {
     public static String mapOrganizationToAgentInner(Organization organization) {
         var builder = AgentMapperTemplateParametersInner.builder();
 
-        buildName(organization).ifPresent(value -> builder.agentName("barry bell"));
+        buildName(organization).ifPresent(builder::agentName);
         buildTelecom(organization).ifPresent(builder::telecomValue);
         buildAddressUse(organization).ifPresent(builder::addressUse);
         var addressLine = buildAddressLine(organization);
