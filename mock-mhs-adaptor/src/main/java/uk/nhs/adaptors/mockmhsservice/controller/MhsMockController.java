@@ -50,7 +50,9 @@ public class MhsMockController {
             @RequestHeader Map<String, String> headers,
             @RequestBody(required=false) String mockMhsMessage) {
 
-        REQUEST_JOURNAL.add(mockMhsMessage);
+        if (isRequestJournalEnabled()) {
+            REQUEST_JOURNAL.add(mockMhsMessage);
+        }
 
         try {
             String correlationId = Optional.ofNullable(headers.get("correlation-id")).orElse(StringUtils.EMPTY);
@@ -67,7 +69,7 @@ public class MhsMockController {
             mdcService.resetAllMdcKeys();
         }
     }
-    
+
     @SneakyThrows(IOException.class)
     private String getInternalServerErrorResponse(){
         try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("InternalServerError.html")) {
@@ -84,5 +86,10 @@ public class MhsMockController {
     @GetMapping(value = "/__admin/requests")
     public ResponseEntity<List> getRequestJournal() {
         return new ResponseEntity<>(REQUEST_JOURNAL, HttpStatus.OK);
+    }
+
+    private boolean isRequestJournalEnabled() {
+        var requestJournalEnabled = System.getenv("MHS_MOCK_REQUEST_JOURNAL_ENABLED");
+        return Boolean.TRUE.toString().equalsIgnoreCase(requestJournalEnabled);
     }
 }
