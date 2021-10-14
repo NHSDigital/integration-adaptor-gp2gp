@@ -51,6 +51,7 @@ public class MhsMockController {
             @RequestBody(required=false) String mockMhsMessage) {
 
         if (isRequestJournalEnabled()) {
+            LOGGER.info("Logging request in journal");
             REQUEST_JOURNAL.add(mockMhsMessage);
         }
 
