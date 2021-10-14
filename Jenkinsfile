@@ -79,6 +79,7 @@ pipeline {
                             ])
                             sh "rm -rf build"
                             sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
+                            sh "docker network inspect commonforgp2gp"
                             sh "docker network rm commonforgp2gp"
                         }
                     }
@@ -189,6 +190,7 @@ pipeline {
                                     junit '**/e2e-build/test-results/**/*.xml'
                                     sh "rm -rf e2e-build"
                                     sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
+                                    sh "docker network inspect commonforgp2gp"
                                     sh "docker network rm commonforgp2gp"
                                 }
                             }
