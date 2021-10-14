@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Coding;
+import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
 import org.hl7.fhir.dstu3.model.Quantity;
@@ -292,9 +293,14 @@ public class ObservationMapper {
     }
 
     private String handleEffectiveToCommentDate(Observation observation) {
-        return observation.hasEffectiveDateTimeType()
-            ? DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType())
-            : HL7_UNKNOWN_VALUE;
+        if(observation.hasEffective()){
+            if(observation.hasEffectiveDateTimeType()) {
+                return DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType());
+            }else if(observation.hasEffectivePeriod()){
+                return DateFormatUtil.toHl7Format(observation.getEffectivePeriod().getStartElement());
+            }
+        }
+        return HL7_UNKNOWN_VALUE;
     }
 
     private String prepareStatementsForDerivedObservations(List<MultiStatementObservationHolder> derivedObservations) {
@@ -313,7 +319,7 @@ public class ObservationMapper {
                 String codeElement = prepareCodeElement(derivedObservation);
                 String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(derivedObservation);
                 String availabilityTimeElement =
-                    StatementTimeMappingUtils.prepareAvailabilityTime(derivedObservation.getEffectiveDateTimeType());
+                    StatementTimeMappingUtils.prepareAvailabilityTime(resolveEffectiveDateTimeType(derivedObservation));
 
                 var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
                     .classCode(CompoundStatementClassCode.CLUSTER.getCode())
@@ -339,6 +345,12 @@ public class ObservationMapper {
         });
 
         return derivedObservationsBlock.toString();
+    }
+
+    private DateTimeType resolveEffectiveDateTimeType(Observation observation) {
+        return observation.hasEffectiveDateTimeType()
+            ? observation.getEffectiveDateTimeType()
+            : new DateTimeType();
     }
 
     private boolean observationHasNonCommentNoteCode(Observation observation) {
