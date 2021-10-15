@@ -121,8 +121,8 @@ public class EhrExtractMapperComponentTest {
             participantMapper, multiStatementObservationHolderFactory);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
-            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes(), timestampService,
-                participantMapper);
+            = new DocumentReferenceToNarrativeStatementMapper(
+                messageContext, new SupportedContentTypes(), timestampService, participantMapper);
 
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,

@@ -106,8 +106,8 @@ public class EncounterComponentsMapperTest {
         DiaryPlanStatementMapper diaryPlanStatementMapper
             = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
-            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes(), timestampService,
-                participantMapper);
+            = new DocumentReferenceToNarrativeStatementMapper(
+                messageContext, new SupportedContentTypes(), timestampService, participantMapper);
         MedicationStatementMapper medicationStatementMapper
             = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
@@ -115,8 +115,7 @@ public class EncounterComponentsMapperTest {
         MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
             new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
         ObservationMapper specimenObservationMapper = new ObservationMapper(
-            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper,
-            multiStatementObservationHolderFactory);
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, multiStatementObservationHolderFactory);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
 
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
