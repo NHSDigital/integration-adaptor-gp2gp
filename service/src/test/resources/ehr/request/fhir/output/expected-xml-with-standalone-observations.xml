@@ -42,19 +42,12 @@
     <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="test-id-3" />
-        <agentOrganization determinerCode="INSTANCE" classCode="ORG">
-                        <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-            <telecom value="01133800000" use="WP"/>
-            <addr use="WP">
-                <streetAddressLine>Fulford Grange</streetAddressLine>
-                <streetAddressLine>Micklefield Lane</streetAddressLine>
-                <streetAddressLine>Rawdon</streetAddressLine>
-                <streetAddressLine>Rawdon</streetAddressLine>
-                <streetAddressLine>Leeds</streetAddressLine>
-                <postalCode>LS19 6BA</postalCode>
-            </addr>
-        </agentOrganization>
+        <id root="test-id-3"/>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>TEMPLE SOWERBY MEDICAL PRACTICE</family>
+            </name>
+        </agentPerson>
     </Agent>
 </part>
             <part typeCode="PART">
