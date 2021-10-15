@@ -19,6 +19,18 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+CommentDate:20100224154100
+
+Received Date: 2010-02-24 15:41
+</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20201012143344"/>
+    </NarrativeStatement>
+</component>
             <!-- Mapped Observation with id: Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2 -->
     </CompoundStatement>
 </component>

@@ -289,6 +289,18 @@
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+CommentDate:20100223000000
+
+Received Date: 2010-02-24 15:41
+</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
@@ -296,7 +308,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -334,7 +346,7 @@ NEGATIVE
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20201215151704
 
 (q) - Normal - No Action</text>
@@ -377,6 +389,18 @@ CommentDate:20201215151704
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+CommentDate:20100223154100
+
+Received Date: 2001-03-30 11:21
+</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
@@ -384,7 +408,7 @@ CommentDate:20201215151704
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -411,7 +435,7 @@ CommentDate:20201215151704
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20201215151713
 
 (q) - Normal - No Action</text>
@@ -454,6 +478,18 @@ CommentDate:20201215151713
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+CommentDate:20100224154100
+
+Received Date: 2010-02-24 15:41
+</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
@@ -461,7 +497,7 @@ CommentDate:20201215151713
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100223"/>
+        <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -497,7 +533,7 @@ Test not available</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20201215151713
 
 (q) - Normal - No Action</text>

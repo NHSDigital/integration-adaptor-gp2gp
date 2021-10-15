@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.InstantType;
@@ -31,6 +32,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
@@ -39,6 +41,7 @@ public class SpecimenMapperTest {
 
     private static final String DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
     private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12T13:33:44Z";
+    private static final String FHIR_INPUT_BUNDLE = DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "fhir_bundle.json";
 
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
@@ -65,8 +68,11 @@ public class SpecimenMapperTest {
 
     @BeforeEach
     public void setUp() throws IOException {
+        var inputBundleString = ResourceTestFileUtils.getFileContent(FHIR_INPUT_BUNDLE);
+        var inputBundle = new FhirParseService().parseResource(inputBundleString, Bundle.class);
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
+        lenient().when(messageContext.getInputBundleHolder()).thenReturn(new InputBundle(inputBundle));
         lenient().when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockId());
         lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockReference());
 

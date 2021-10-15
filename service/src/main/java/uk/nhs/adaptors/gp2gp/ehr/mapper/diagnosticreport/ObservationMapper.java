@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.hasCode;
 
 import java.util.List;
 import java.util.Optional;
@@ -99,9 +100,11 @@ public class ObservationMapper {
         var observation = observationAssociatedWithSpecimen.getObservation();
         String codeElement = prepareCodeElement(observation);
         String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation);
-        String availabilityTimeElement =
-            StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation);
         CompoundStatementClassCode classCode = prepareClassCode(relatedObservations);
+
+        String availabilityTimeElement = (classCode.equals(CompoundStatementClassCode.CLUSTER))
+            ? StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement())
+            : StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation);
 
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
             .orElse(StringUtils.EMPTY);
@@ -231,7 +234,7 @@ public class ObservationMapper {
         if (!interpretationTextAndComment.toString().isBlank()) {
             narrativeStatementsBlock.append(
                 mapObservationToNarrativeStatement(
-                    holder, interpretationTextAndComment.toString().trim(), CommentType.AGGREGATE_COMMENT_SET.getCode()
+                    holder, interpretationTextAndComment.toString().trim(), prepareCommentType(observation).getCode()
                 )
             );
         }
@@ -267,6 +270,11 @@ public class ObservationMapper {
         }
 
         return Optional.empty();
+    }
+
+    private CommentType prepareCommentType(Observation observation) {
+        return hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE))
+            ? CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
     }
 
     private String mapObservationToNarrativeStatement(MultiStatementObservationHolder holder, String comment, String commentType) {
@@ -328,7 +336,7 @@ public class ObservationMapper {
     }
 
     private boolean observationHasNonCommentNoteCode(Observation observation) {
-        return observation.hasCode() && !CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE));
+        return observation.hasCode() && !hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE));
     }
 
     private String prepareCodeElement(Observation observation) {
