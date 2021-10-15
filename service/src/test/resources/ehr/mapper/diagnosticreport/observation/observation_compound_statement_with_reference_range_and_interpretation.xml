@@ -29,11 +29,11 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030618080000
+CommentDate:20030616
 
 Test comment</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="REFERENCE-to-Practitioner/0D1A68BE05FC873EBCA5A9048F8E2A0861D7EF0F-XPSP"/>

@@ -2,10 +2,10 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="Mapped-From-Observation/DUMMY-OBSERVATION-5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20100225154100
+CommentDate:UNK
 
 EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
     </NarrativeStatement>
 </component>
