@@ -53,6 +53,7 @@ services:
     environment:
       - MOCK_MHS_SERVER_PORT=8081
       - MOCK_MHS_LOGGING_LEVEL
+      - MHS_MOCK_REQUEST_JOURNAL_ENABLED=false
       - GP2GP_MHS_INBOUND_QUEUE=inbound
       - GP2GP_AMQP_BROKERS=amqp://activemq:5672
       - GP2GP_AMQP_USERNAME
