@@ -4,9 +4,11 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReport
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.hasCode;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
@@ -17,6 +19,7 @@ import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
 import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.SampledData;
+import org.hl7.fhir.dstu3.model.SimpleQuantity;
 import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -61,6 +64,10 @@ public class ObservationMapper {
     private static final String BODY_SITE_PREFIX = "Site: ";
     private static final String METHOD_PREFIX = "Method: ";
     private static final String RANGE_UNITS_PREFIX = "Range Units: ";
+    private static final String RANGE_PREFIX = "Range: ";
+
+    private static final String RANGE_LOW_PREFIX = "Low: ";
+    private static final String RANGE_HIGH_PREFIX = "High: ";
 
     private static final String COMMENT_NOTE_CODE = "37331000000100";
 
@@ -224,20 +231,11 @@ public class ObservationMapper {
 
         if (!interpretationCodeMapped && observation.hasInterpretation()) {
             CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
-                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF);
-            });
+                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF); });
         }
 
         if (observation.hasComment()) {
             interpretationTextAndComment.append(observation.getComment());
-        }
-
-        if (!interpretationTextAndComment.toString().isBlank()) {
-            narrativeStatementsBlock.append(
-                mapObservationToNarrativeStatement(
-                    holder, interpretationTextAndComment.toString().trim(), prepareCommentType(observation).getCode()
-                )
-            );
         }
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
@@ -254,16 +252,28 @@ public class ObservationMapper {
             )
             .ifPresent(narrativeStatementsBlock::append);
 
-        if (observation.hasReferenceRange() && observation.hasValueQuantity()) {
+        if (observation.hasReferenceRange()) {
             Observation.ObservationReferenceRangeComponent referenceRange = observation.getReferenceRangeFirstRep();
 
-            extractUnit(referenceRange)
-                .filter(referenceRangeUnit -> isRangeUnitValid(referenceRangeUnit, observation.getValueQuantity()))
-                .map(RANGE_UNITS_PREFIX::concat)
-                .map(comment ->
-                    mapObservationToNarrativeStatement(holder, comment, CommentType.COMPLEX_REFERENCE_RANGE.getCode())
+            if(observation.hasValueQuantity()){
+                extractUnit(referenceRange)
+                    .filter(referenceRangeUnit -> isRangeUnitValid(referenceRangeUnit, observation.getValueQuantity()))
+                    .map(RANGE_UNITS_PREFIX::concat)
+                    .map(comment ->
+                        mapObservationToNarrativeStatement(holder, comment, CommentType.COMPLEX_REFERENCE_RANGE.getCode())
+                    )
+                    .ifPresent(narrativeStatementsBlock::append);
+            }else{
+                interpretationTextAndComment.append(prepareReferenceRangeToComment(referenceRange));
+            }
+        }
+
+        if (!interpretationTextAndComment.toString().isBlank()) {
+            narrativeStatementsBlock.append(
+                mapObservationToNarrativeStatement(
+                    holder, interpretationTextAndComment.toString().trim(), prepareCommentType(observation).getCode()
                 )
-                .ifPresent(narrativeStatementsBlock::append);
+            );
         }
 
         if (!narrativeStatementsBlock.toString().isBlank()) {
@@ -276,6 +286,34 @@ public class ObservationMapper {
     private CommentType prepareCommentType(Observation observation) {
         return hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE))
             ? CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
+    }
+
+    private String prepareReferenceRangeValues(SimpleQuantity simpleQuantity){
+        return Stream.of(
+            Optional.ofNullable(simpleQuantity.getValue()),
+            Optional.ofNullable(simpleQuantity.getUnit())
+            )
+            .flatMap(Optional::stream)
+            .map(input -> Objects.isNull(input) ? StringUtils.EMPTY : input.toString())
+            .collect(Collectors.joining(StringUtils.SPACE));
+    }
+
+    private String prepareReferenceRangeToComment(Observation.ObservationReferenceRangeComponent referenceRange){
+        StringBuilder referenceRangeCommentLine = new StringBuilder(RANGE_PREFIX);
+
+        if (referenceRange.hasLow()) {
+            referenceRangeCommentLine.append(
+                RANGE_LOW_PREFIX.concat(prepareReferenceRangeValues(referenceRange.getLow()))
+            ).append(StringUtils.SPACE);
+        }
+
+        if (referenceRange.hasHigh()) {
+            referenceRangeCommentLine.append(
+                RANGE_HIGH_PREFIX.concat(prepareReferenceRangeValues(referenceRange.getHigh()))
+            );
+        }
+
+        return referenceRangeCommentLine.toString().trim();
     }
 
     private String mapObservationToNarrativeStatement(MultiStatementObservationHolder holder, String comment, String commentType) {
