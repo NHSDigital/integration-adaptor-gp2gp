@@ -47,8 +47,8 @@ public class MhsMockController {
     )
     @ResponseStatus(value = ACCEPTED)
     public ResponseEntity<String> postMockMhs(
-            @RequestHeader Map<String, String> headers,
-            @RequestBody(required=false) String mockMhsMessage) {
+        @RequestHeader Map<String, String> headers,
+        @RequestBody(required=false) String mockMhsMessage) {
 
         if (isRequestJournalEnabled()) {
             LOGGER.info("Logging request in journal");

@@ -16,7 +16,3 @@ export GPC_CONSUMER_SDS_URL="http://sds-api-mock:8080"
 export GPC_ENABLE_SDS="true"
 export GPC_CONSUMER_SDS_APIKEY="anykey"
 export GPC_CONSUMER_LOGGING_LEVEL="INFO"
-
-export MHS_MOCK_REQUEST_JOURNAL_ENABLED="false"
-
-
