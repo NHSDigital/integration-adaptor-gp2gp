@@ -79,7 +79,6 @@ pipeline {
                             ])
                             sh "rm -rf build"
                             sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
-                            sh "docker network inspect commonforgp2gp"
                             sh "docker network rm commonforgp2gp"
                         }
                     }
@@ -187,9 +186,9 @@ pipeline {
                                     sh "docker cp e2e-tests:/home/gradle/e2e-tests/build ."
                                     sh "mv build e2e-build"
                                     archiveArtifacts artifacts: 'e2e-build/reports/**/*.*', fingerprint: true
+                                    junit '**/e2e-build/test-results/**/*.xml'
                                     sh "rm -rf e2e-build"
                                     sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
-                                    sh "docker network inspect commonforgp2gp"
                                     sh "docker network rm commonforgp2gp"
                                 }
                             }
