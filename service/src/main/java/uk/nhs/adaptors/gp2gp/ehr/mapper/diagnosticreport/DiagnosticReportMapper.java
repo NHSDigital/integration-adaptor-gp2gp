@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -18,7 +19,10 @@ import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Organization;
+import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Specimen;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +55,7 @@ public class DiagnosticReportMapper {
     private static final String PREPENDED_TEXT_FOR_CONCLUSION_COMMENT = "Interpretation: ";
     private static final String PREPENDED_TEXT_FOR_CODED_DIAGNOSIS = "Lab Diagnosis: ";
     private static final String PREPENDED_TEXT_FOR_STATUS = "Status: ";
+    private static final String PREPENDED_TEXT_FOR_PARTICIPANTS = "Participants: ";
 
     private static final String EXTENSION_ID_SYSTEM_ID = "2.16.840.1.113883.2.1.4.5.5";
 
@@ -185,6 +190,7 @@ public class DiagnosticReportMapper {
         }
 
         buildNarrativeStatementForMissingResults(diagnosticReport, reportLevelNarrativeStatements);
+        buildNarrativeStatementForParticipants(diagnosticReport, reportLevelNarrativeStatements);
 
         return reportLevelNarrativeStatements.toString();
     }
@@ -195,6 +201,16 @@ public class DiagnosticReportMapper {
                 diagnosticReport, CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT"
             );
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
+        }
+    }
+
+    private void buildNarrativeStatementForParticipants(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
+        if (diagnosticReport.hasPerformer()) {
+            var humanNames = buildListOfHumanReadableNames(diagnosticReport);
+            String performerNarrativeStatement = buildNarrativeStatementForDiagnosticReport(
+                diagnosticReport, CommentType.AGGREGATE_COMMENT_SET.getCode(), PREPENDED_TEXT_FOR_PARTICIPANTS + humanNames
+            );
+            reportLevelNarrativeStatements.append(performerNarrativeStatement);
         }
     }
 
@@ -210,5 +226,37 @@ public class DiagnosticReportMapper {
             NARRATIVE_STATEMENT_TEMPLATE,
             narrativeStatementTemplateParameters.build()
         );
+    }
+
+    private String buildListOfHumanReadableNames(DiagnosticReport diagnosticReport) {
+        var performers = diagnosticReport.getPerformer();
+        return
+            performers.stream()
+                .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
+                .map(this::fetchResource)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(this::fetchHumanNames)
+                .collect(Collectors.joining(", "));
+    }
+
+    private Optional<Resource> fetchResource(Reference reference) {
+        return messageContext.getInputBundleHolder().getResource(reference.getReferenceElement());
+    }
+
+    private String fetchHumanNames(Resource resource) {
+        if (ResourceType.Practitioner.equals(resource.getResourceType())) {
+            var practitionerName = ((Practitioner) resource).getNameFirstRep();
+            return Stream.of(
+                    practitionerName.getPrefixAsSingleString(),
+                    practitionerName.getGivenAsSingleString(),
+                    practitionerName.getFamily())
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.joining(StringUtils.SPACE));
+        }
+        if (ResourceType.Organization.equals(resource.getResourceType())) {
+            return ((Organization) resource).getName();
+        }
+        return StringUtils.EMPTY;
     }
 }
