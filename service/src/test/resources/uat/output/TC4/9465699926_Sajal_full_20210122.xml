@@ -314,13 +314,13 @@ Received Date: 2002-03-30 09:21
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330000000
+CommentDate:UNK
 
 Interpretation: Abnormal
 Abnormality indicator: Abnormal, but expected
 Clinical Information: GASTRIC ULCER DECLINE</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime nullFlavor="UNK"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -338,7 +338,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -361,13 +361,13 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330000000
+CommentDate:20020330092100
 
 Anisocytosis +, Polychromasia - slight, Occasional target
 cell present, Burr cells - occasional, Occasional nucleated
 red blood cell seen, Note low platelets</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -603,7 +603,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -632,11 +632,11 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330000000
+CommentDate:20020330092100
 
 Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -660,7 +660,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
@@ -690,11 +690,11 @@ Interpretation: HI - Above high reference limit</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330000000
+CommentDate:20020330092100
 
 Interpretation: LO - Below low reference limit</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -742,7 +742,7 @@ Interpretation: LO - Below low reference limit</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
@@ -772,11 +772,11 @@ Interpretation: LO - Below low reference limit</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330000000
+CommentDate:20020330092100
 
 Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -799,7 +799,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
@@ -828,11 +828,11 @@ Interpretation: HI - Above high reference limit</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330000000
+CommentDate:20020330092100
 
 Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>

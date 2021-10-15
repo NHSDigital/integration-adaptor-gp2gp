@@ -308,7 +308,7 @@ Received Date: 2010-02-24 15:41
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -329,13 +329,13 @@ Received Date: 2010-02-24 15:41
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20100225154100
+CommentDate:20100223
 
 NEGATIVE
      In normal pregnancies the test will usually be positive from the
      second day after the expected menstruation.</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
@@ -408,7 +408,7 @@ Received Date: 2001-03-30 11:21
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -497,7 +497,7 @@ Received Date: 2010-02-24 15:41
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -518,11 +518,11 @@ Received Date: 2010-02-24 15:41
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20100225154100
+CommentDate:20100223
 
 Test not available</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>

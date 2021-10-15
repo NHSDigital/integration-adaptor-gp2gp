@@ -57,6 +57,11 @@ public class ObservationMapperTest {
         + "observation_with_value_quantity_and_reference_range.json";
     private static final String OBSERVATION_WITH_REFERENCE_RANGE_AND_INTERPRETATION_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_with_reference_range_and_interpretation.json";
+    private static final String OBSERVATION_WITH_EFFECTIVEPERIOD_START_AND_NO_EFFECTIVEDATETIME_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_with_effectiveperiod_start_and_no_effectivedatetime.json";
+    private static final String OBSERVATION_WITH_NO_EFFECTIVEPERIOD_AND_NO_EFFECTIVEDATETIME_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_with_no_effectiveperiod_and_no_effectivedatetime.json";
+
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_compound_statement_1.xml";
@@ -77,6 +82,10 @@ public class ObservationMapperTest {
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_quantity_and_reference_range.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCE_RANGE_AND_INTERPRETATION_XML =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_reference_range_and_interpretation.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_AVAILABILITYTIME_AND_LOW_EFFECTIVETIME_XML =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_availabilitytime_and_low_effectivetime.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_NO_EFFECTIVE_PROPERLY_HANDLED =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_no_effective_properly_handled.xml";
 
 
     @Mock
@@ -180,6 +189,14 @@ public class ObservationMapperTest {
             Arguments.of(
                 OBSERVATION_WITH_REFERENCE_RANGE_AND_INTERPRETATION_JSON,
                 OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCE_RANGE_AND_INTERPRETATION_XML
+            ),
+            Arguments.of(
+                OBSERVATION_WITH_EFFECTIVEPERIOD_START_AND_NO_EFFECTIVEDATETIME_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_WITH_AVAILABILITYTIME_AND_LOW_EFFECTIVETIME_XML
+            ),
+            Arguments.of(
+                OBSERVATION_WITH_NO_EFFECTIVEPERIOD_AND_NO_EFFECTIVEDATETIME_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_WITH_NO_EFFECTIVE_PROPERLY_HANDLED
             )
         );
     }
