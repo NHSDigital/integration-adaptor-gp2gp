@@ -37,8 +37,8 @@ public class AgentDirectoryMapperTest {
     private static final String INPUT_AGENT_DIRECTORY_WITHOUT_MANAGING_ORGANIZATION_RESOURCE =
         AGENT_DIRECTORY_FOLDER + "without-patient-managing-organization-resource.json";
     private static final String EXPECTED_AGENT_DIRECTORY = AGENT_DIRECTORY_FOLDER + "expected-agent-directory.xml";
-    private static final String EXPECTED_AGENT_DIRECTORY_WITHOUT_AGENT_PERSON =
-        AGENT_DIRECTORY_FOLDER + "expected-without-agent-person.xml";
+    private static final String EXPECTED_AGENT_DIRECTORY_AGENT_PERSON_AS_ORGANIZATION =
+        AGENT_DIRECTORY_FOLDER + "expected-with-agent-person-as-organization.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -122,7 +122,7 @@ public class AgentDirectoryMapperTest {
         Bundle bundle = fhirParseService.parseResource(jsonInput, Bundle.class);
         messageContext.initialize(bundle);
 
-        var expectedOutput = ResourceTestFileUtils.getFileContent(EXPECTED_AGENT_DIRECTORY_WITHOUT_AGENT_PERSON);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(EXPECTED_AGENT_DIRECTORY_AGENT_PERSON_AS_ORGANIZATION);
 
         var mapperOutput = agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, NHS_NUMBER);
 

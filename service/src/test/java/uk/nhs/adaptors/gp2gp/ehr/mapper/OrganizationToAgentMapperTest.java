@@ -3,14 +3,10 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
-import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
@@ -25,36 +21,21 @@ public class OrganizationToAgentMapperTest {
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
     private static final String ORGANIZATION_FILE_LOCATION = "/ehr/mapper/organization/";
-    private static final String ORGANIZATION_INNER_FILE_LOCATION = ORGANIZATION_FILE_LOCATION + "inner_mapping/";
-    private static final String ORGANIZATION_FOR_INNER_MAPPER_JSON = ORGANIZATION_INNER_FILE_LOCATION
-        + "organization_with_address.json";
-    private static final String ORGANIZATION_FOR_INNER_MAPPER_XML = ORGANIZATION_INNER_FILE_LOCATION
-        + "organization_with_address.xml";
 
-    @ParameterizedTest
-    @MethodSource("readTestCases")
-    public void When_MappingOrganization_Expect_AgentResourceXml(String inputJson, String outputXml) throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
+    private static final String INPUT_ORGANIZATION_JSON = ORGANIZATION_FILE_LOCATION
+        + "input_organization_1.json";
+    private static final String OUTPUT_ORGANIZATION_AS_AGENT_PERSON_JSON = ORGANIZATION_FILE_LOCATION
+        + "output_organization_1.xml";
+
+    @Test
+    public void When_MappingOrganization_Expect_AgentResourceXml() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_ORGANIZATION_JSON);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_ORGANIZATION_AS_AGENT_PERSON_JSON);
 
         Organization organization = new FhirParseService().parseResource(jsonInput, Organization.class);
         var outputMessage = OrganizationToAgentMapper.mapOrganizationToAgent(organization, TEST_ID);
         assertThat(outputMessage)
-            .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
+            .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, INPUT_ORGANIZATION_JSON, OUTPUT_ORGANIZATION_AS_AGENT_PERSON_JSON)
             .isEqualToIgnoringWhitespace(expectedOutput);
-    }
-
-    @Test
-    public void When_MappingOrganizationInner_Expect_AgentResourceXmlInner() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(ORGANIZATION_FOR_INNER_MAPPER_JSON);
-        var expectedOutput = ResourceTestFileUtils.getFileContent(ORGANIZATION_FOR_INNER_MAPPER_XML);
-
-        Organization organization = new FhirParseService().parseResource(jsonInput, Organization.class);
-        var outputMessage = OrganizationToAgentMapper.mapOrganizationToAgentInner(organization);
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
-    }
-
-    private static Stream<Arguments> readTestCases() {
-        return TestArgumentsLoaderUtil.readTestCases(ORGANIZATION_FILE_LOCATION);
     }
 }
