@@ -80,7 +80,8 @@ public class GpcRequestBuilder {
             .setName(parameterName);
     }
 
-    public RequestHeadersSpec<?> buildGetStructuredRecordRequest(Parameters requestBodyParameters,
+    public RequestHeadersSpec<?> buildGetStructuredRecordRequest(
+        Parameters requestBodyParameters,
         GetGpcStructuredTaskDefinition structuredTaskDefinition, String gpcBaseUrl) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
