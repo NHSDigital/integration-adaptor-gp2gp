@@ -346,6 +346,27 @@
         </effectiveTime>
         <availabilityTime value="20010330161100"/>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20010330161100
+
+Interpretation: ON MEDICATION</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20010330161100"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20010330161100
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20010330161100"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -378,27 +399,6 @@ EMPTY REPORT</text>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20010330161100
-
-Interpretation: ON MEDICATION</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20010330161100"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20010330161100
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20010330161100"/>
-    </NarrativeStatement>
 </component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -469,6 +469,27 @@ Status: unknown</text>
         </effectiveTime>
         <availabilityTime value="20010330162700"/>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20010330162700
+
+Interpretation: COELIAC</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20010330162700"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20010330162700
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20010330162700"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -498,27 +519,6 @@ EMPTY REPORT</text>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20010330162700
-
-Interpretation: COELIAC</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20010330162700"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20010330162700
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20010330162700"/>
-    </NarrativeStatement>
 </component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -563,6 +563,27 @@ Status: unknown</text>
         </effectiveTime>
         <availabilityTime value="20020330162100"/>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20020330162100
+
+Interpretation: Otitis media</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20020330162100
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -595,27 +616,6 @@ EMPTY REPORT</text>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20020330162100
-
-Interpretation: Otitis media</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20020330162100
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
-    </NarrativeStatement>
 </component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -660,6 +660,27 @@ Status: unknown</text>
         </effectiveTime>
         <availabilityTime value="20020330162100"/>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20020330162100
+
+Interpretation: ON AZATHIOPRINE</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20020330162100
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -692,27 +713,6 @@ EMPTY REPORT</text>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20020330162100
-
-Interpretation: ON AZATHIOPRINE</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20020330162100
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
-    </NarrativeStatement>
 </component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -756,6 +756,27 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20020330162100"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="DB7C94B1-01A6-491F-AC41-A36D88023069"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20020330162100
+
+Interpretation: ON WARFARIN</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20020330162100
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037"/>
@@ -816,27 +837,6 @@ Mechanical Prosthetic Heart Valves )</text>
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="DB7C94B1-01A6-491F-AC41-A36D88023069"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20020330162100
-
-Interpretation: ON WARFARIN</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20020330162100
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
@@ -880,6 +880,17 @@ Status: unknown</text>
         </effectiveTime>
         <availabilityTime value="20020330162100"/>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20020330162100
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -912,17 +923,6 @@ EMPTY REPORT</text>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20020330162100
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
-    </NarrativeStatement>
 </component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -966,6 +966,17 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20020330162100"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="BD418AAA-36ED-476E-967C-7CCBA1D0AAED"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20020330162100
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="CF670325-7982-46BA-9A52-85C3C78FE40A"/>
@@ -1019,17 +1030,6 @@ Quantity: 1750.000 mL
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="BD418AAA-36ED-476E-967C-7CCBA1D0AAED"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20020330162100
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
@@ -1073,6 +1073,17 @@ Status: unknown</text>
         </effectiveTime>
         <availabilityTime value="20020330162100"/>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20020330162100
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="5F44FD1C-BC5B-4B5F-8861-79F254D0D969"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -1114,17 +1125,6 @@ Status: unknown</text>
     </ObservationStatement>
 </component>
     </CompoundStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20020330162100
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
-    </NarrativeStatement>
 </component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1168,6 +1168,17 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20020330162100"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="B88A5FEC-A207-4E2A-93C4-04402D84C1BE"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20020330162100
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F"/>
@@ -1235,17 +1246,6 @@ Status: unknown</text>
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="B88A5FEC-A207-4E2A-93C4-04402D84C1BE"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20020330162100
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330162100"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
@@ -1288,6 +1288,17 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20030221115000"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030221115000
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030221115000"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C"/>
@@ -1581,17 +1592,6 @@ CommentDate:20100326140443
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030221115000
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1634,6 +1634,17 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20030221115000"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030221115000
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030221115000"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4"/>
@@ -1912,17 +1923,6 @@ Interpretation: PA - Potentially abnormal
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030221115000
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -1965,6 +1965,17 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20030221115000"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030221115000
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030221115000"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB"/>
@@ -2243,17 +2254,6 @@ Interpretation: PA - Potentially abnormal
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030221115000
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
@@ -2296,6 +2296,17 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="9689E7D7-DD8B-4981-89D4-A2CA6C26DBE5"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030602175200
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030602175200"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60"/>
@@ -3041,17 +3052,6 @@ Interpretation: HI - Above high reference limit</text>
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="9689E7D7-DD8B-4981-89D4-A2CA6C26DBE5"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030602175200
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030602175200"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
@@ -3094,6 +3094,28 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="2317993E-315F-4AED-B9A7-65D00D23C35D"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030618080000
+
+Interpretation: Clinical Details:
+NOTE:Specimen date</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030618080000"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030618080000
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030618080000"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="9EC5CD05-9875-4F82-AC04-19B706D79BC0"/>
@@ -3699,28 +3721,6 @@ CommentDate:20100326134545
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="2317993E-315F-4AED-B9A7-65D00D23C35D"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030618080000
-
-Interpretation: Clinical Details:
-NOTE:Specimen date</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030618080000"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030618080000
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030618080000"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
@@ -3763,6 +3763,17 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20030628112300"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="17DC8229-FB0E-4811-A8D0-FAB7D7A05A8C"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030628112300
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030628112300"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="E6D3941E-4BB5-415A-8177-DAB155EB5FF6"/>
@@ -4178,17 +4189,6 @@ CommentDate:20100209122106
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="17DC8229-FB0E-4811-A8D0-FAB7D7A05A8C"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030628112300
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030628112300"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
@@ -4231,6 +4231,27 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20030701124000"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="9B331CF2-F4AD-45CE-86B8-5B4EEE7D1317"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030701124000
+
+Interpretation: None given</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030701124000"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="BD1680CF-1EE2-4844-87AE-61364D3B48A1"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030701124000
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030701124000"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="0D07B623-3926-4245-80AF-97F1098D90C1"/>
@@ -4301,27 +4322,6 @@ Status: unknown</text>
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="9B331CF2-F4AD-45CE-86B8-5B4EEE7D1317"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030701124000
-
-Interpretation: None given</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030701124000"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="BD1680CF-1EE2-4844-87AE-61364D3B48A1"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030701124000
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030701124000"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="EC913E83-7610-4FBD-9A60-1769D42E9DEB"/>
@@ -4364,6 +4364,27 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="81E9F560-F447-4E94-836A-970DAF5D9D52"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030704111300
+
+Interpretation: Infection</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030704111300"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="635F3A5D-71F2-4BAE-B4AD-0B4B3B77BA3E"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030704111300
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030704111300"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="C80E5FEF-086B-474B-9011-23F04C80371B"/>
@@ -5410,27 +5431,6 @@ CommentDate:20100201093313
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="81E9F560-F447-4E94-836A-970DAF5D9D52"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030704111300
-
-Interpretation: Infection</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="635F3A5D-71F2-4BAE-B4AD-0B4B3B77BA3E"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030704111300
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030704111300"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
@@ -5473,6 +5473,17 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20050225155300"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="2C266175-D484-4554-B5D2-46664E36BBF3"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20050225155300
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20050225155300"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="D9DDE959-B129-4F80-B9AE-D5D0E287910B"/>
@@ -5945,17 +5956,6 @@ Equivocal Result</text>
 </component>
     </CompoundStatement>
 </component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="2C266175-D484-4554-B5D2-46664E36BBF3"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20050225155300
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050225155300"/>
-    </NarrativeStatement>
-</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B"/>
@@ -5998,6 +5998,27 @@ Status: unknown</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20050316060100"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="8EE34ED1-EDAD-412E-89D5-467AE9B7982A"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20050316060100
+
+Interpretation: No clinical details given</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20050316060100"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="A867A0CA-D8A4-4B08-B05B-6C3C59A27788"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20050316060100
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20050316060100"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="BE04E276-DCB5-4057-96F5-DFF51B288BD5"/>
@@ -6358,27 +6379,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8EE34ED1-EDAD-412E-89D5-467AE9B7982A"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20050316060100
-
-Interpretation: No clinical details given</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050316060100"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="A867A0CA-D8A4-4B08-B05B-6C3C59A27788"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20050316060100
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20050316060100"/>
-    </NarrativeStatement>
 </component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6914,6 +6914,17 @@ Status: unknown</text>
         </effectiveTime>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="6BB0147E-E8F0-460F-BFE4-3AC1D9DA741B"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030221115000
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030221115000"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="52A74F19-B80D-449E-BD93-728B012F1E90"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -6946,17 +6957,6 @@ EMPTY REPORT</text>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="6BB0147E-E8F0-460F-BFE4-3AC1D9DA741B"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030221115000
-
-Status: unknown</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
-    </NarrativeStatement>
 </component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
