@@ -61,6 +61,8 @@ public class ObservationMapperTest {
         + "observation_with_effectiveperiod_start_and_no_effectivedatetime.json";
     private static final String OBSERVATION_WITH_NO_EFFECTIVEPERIOD_AND_NO_EFFECTIVEDATETIME_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_with_no_effectiveperiod_and_no_effectivedatetime.json";
+    private static final String OBSERVATION_WITH_REFERENCERANGE_AND_NO_VALUEQUANTITY_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_with_referencerange_and_no_valuequantity.json";
 
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = OBSERVATION_TEST_FILE_DIRECTORY
@@ -86,6 +88,8 @@ public class ObservationMapperTest {
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_availabilitytime_and_low_effectivetime.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_NO_EFFECTIVE_PROPERLY_HANDLED =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_no_effective_properly_handled.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCERANGE_IN_COMMENT =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_referencerange_in_comment.xml";
 
 
     @Mock
@@ -197,6 +201,10 @@ public class ObservationMapperTest {
             Arguments.of(
                 OBSERVATION_WITH_NO_EFFECTIVEPERIOD_AND_NO_EFFECTIVEDATETIME_JSON,
                 OBSERVATION_COMPOUND_STATEMENT_WITH_NO_EFFECTIVE_PROPERLY_HANDLED
+            ),
+            Arguments.of(
+                OBSERVATION_WITH_REFERENCERANGE_AND_NO_VALUEQUANTITY_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCERANGE_IN_COMMENT
             )
         );
     }
