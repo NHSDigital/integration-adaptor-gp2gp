@@ -259,10 +259,8 @@ public class ObservationMapper {
                 extractUnit(referenceRange)
                     .filter(referenceRangeUnit -> isRangeUnitValid(referenceRangeUnit, observation.getValueQuantity()))
                     .map(RANGE_UNITS_PREFIX::concat)
-                    .map(comment ->
-                        mapObservationToNarrativeStatement(holder, comment, CommentType.COMPLEX_REFERENCE_RANGE.getCode())
-                    )
-                    .ifPresent(narrativeStatementsBlock::append);
+                    .map(StringUtils.LF::concat)
+                    .ifPresent(interpretationTextAndComment::append);
             } else {
                 interpretationTextAndComment
                     .append(StringUtils.LF)
