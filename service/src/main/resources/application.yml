@@ -43,5 +43,7 @@ gp2gp:
     overrideNhsNumber: ${GP2GP_GPC_OVERRIDE_NHS_NUMBER:}
     overrideFromAsid: ${GP2GP_GPC_OVERRIDE_FROM_ASID:}
     overrideToAsid: ${GP2GP_GPC_OVERRIDE_TO_ASID:}
+    maxRequestSize: ${GP2GP_GPC_MAX_REQUEST_SIZE:150000000} # default 150MB
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}
+    maxRequestSize: ${GP2GP_MHS_MAX_REQUEST_SIZE:150000000} # default 150MB
