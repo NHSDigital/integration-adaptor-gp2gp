@@ -23,10 +23,8 @@ import java.util.stream.Collectors;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Medication;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
-import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
@@ -270,8 +268,8 @@ public class MedicationStatementMapper {
         var isPractitionerRole = buildPredicateReferenceIsA(ResourceType.PractitionerRole);
         var isOrganization = buildPredicateReferenceIsA(ResourceType.Organization);
         Predicate<Reference> isRelevant = isPractitioner.or(isPractitionerRole).or(isOrganization);
-        
-        if (medicationRequest.hasRequester()){
+
+        if (medicationRequest.hasRequester()) {
             final var requester = medicationRequest.getRequester();
             final var agent = requester.getAgent();
 
@@ -281,8 +279,8 @@ public class MedicationStatementMapper {
                 return participantMapper.mapToParticipant(
                     messageContext.getAgentDirectory().getAgentRef(agent, onBehalfOf), ParticipantType.AUTHOR);
             } else {
-                    return participantMapper.mapToParticipant(
-                        messageContext.getAgentDirectory().getAgentId(agent), ParticipantType.AUTHOR);
+                return participantMapper.mapToParticipant(
+                    messageContext.getAgentDirectory().getAgentId(agent), ParticipantType.AUTHOR);
             }
         } else if (medicationRequest.hasRecorder() && medicationRequest.getRecorder().hasReference()) {
             final var reference = medicationRequest.getRecorder();

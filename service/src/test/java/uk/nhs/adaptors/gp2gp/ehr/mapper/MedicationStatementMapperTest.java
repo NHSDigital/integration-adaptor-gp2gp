@@ -119,7 +119,6 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-plan-no-info-prescription-text.json";
     private static final String INPUT_JSON_WITH_NO_RECORDER_REFERENCE = TEST_FILE_DIRECTORY
         + "medication-request-with-no-recorder-reference.json";
-    
     private static final String INPUT_JSON_WITH_EXTENSION_STATUS_REASON_TEXT = TEST_FILE_DIRECTORY
         + "medication-request-with-extension-status-reason-with-text.json";
     private static final String OUTPUT_XML_WITH_STATUS_REASON_TEXT = TEST_FILE_DIRECTORY
