@@ -32,7 +32,7 @@
                 </quantity>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
-                        <text>Patient Instruction: Take in morning Requested by org: GP Practice</text>
+                        <text>Patient Instruction: Take in morning</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
             </ehrSupplyAuthorise>

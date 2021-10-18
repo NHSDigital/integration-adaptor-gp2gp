@@ -47,7 +47,10 @@
         }
     },
     "requester": {
-        "agent": {},
+        "agent":
+        {
+            "reference": "Practitioner/1"
+        },
         "onBehalfOf": {
             "reference": "Organization/2"
         }
