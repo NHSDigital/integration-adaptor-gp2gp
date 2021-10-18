@@ -70,6 +70,7 @@ public class EncounterComponentsMapperTest {
 
     private EncounterComponentsMapper encounterComponentsMapper;
     private MessageContext messageContext;
+    private ParticipantMapper participantMapper;
 
     @BeforeEach
     public void setUp() {
@@ -105,7 +106,8 @@ public class EncounterComponentsMapperTest {
         DiaryPlanStatementMapper diaryPlanStatementMapper
             = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
-            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes(), timestampService);
+            = new DocumentReferenceToNarrativeStatementMapper(
+                messageContext, new SupportedContentTypes(), timestampService, participantMapper);
         MedicationStatementMapper medicationStatementMapper
             = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
