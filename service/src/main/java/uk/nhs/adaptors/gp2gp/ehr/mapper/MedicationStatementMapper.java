@@ -163,8 +163,7 @@ public class MedicationStatementMapper {
         return List.of(
             buildPatientInstructionPertinentInformation(medicationRequest),
             buildExpectedSupplyDurationPertinentInformation(medicationRequest),
-            buildNotePertinentInformation(medicationRequest),
-            buildRequestedByOrgPertinentInformation(medicationRequest)
+            buildNotePertinentInformation(medicationRequest)
         );
     }
 
@@ -206,30 +205,6 @@ public class MedicationStatementMapper {
             return String.format(NOTES, notes);
         }
         return StringUtils.EMPTY;
-    }
-
-    private String buildRequestedByOrgPertinentInformation(MedicationRequest medicationRequest) {
-        if (medicationRequest.hasRequester() && medicationRequest.getRequester().hasOnBehalfOf()) {
-            var onBehalfOfReference = medicationRequest.getRequester().getOnBehalfOf().getReferenceElement();
-            var onBehalfOfResource = messageContext.getInputBundleHolder().getResource(onBehalfOfReference);
-
-            return onBehalfOfResource
-                .filter(resource -> ResourceType.Organization.equals(resource.getResourceType()))
-                .map(resource -> (Organization) resource)
-                .filter(organisation -> organisation.hasType())
-                .map(organisation -> String.format("Requested by org: %s", getOrganisationTypeText(organisation)))
-                .orElseGet(() -> StringUtils.EMPTY);
-        }
-
-        return StringUtils.EMPTY;
-    }
-
-    private String getOrganisationTypeText(Organization organisation) {
-        return organisation.getType()
-            .stream()
-            .filter(CodeableConcept::hasText)
-            .map(CodeableConcept::getText)
-            .collect(Collectors.joining(", "));
     }
 
     private String buildPatientInstructionPertinentInformation(MedicationRequest medicationRequest) {
@@ -298,11 +273,16 @@ public class MedicationStatementMapper {
         
         if (medicationRequest.hasRequester()){
             final var requester = medicationRequest.getRequester();
-            
-            //what if no requester.agent but there is requester.onBehalfOf?
-            if (isRelevant.test(reference)) {
+            final var agent = requester.getAgent();
+
+            if (ResourceType.Practitioner.name().equals(agent.getResource().getIdElement().getResourceType())
+                && requester.hasOnBehalfOf()) {
+                var onBehalfOf = requester.getOnBehalfOf();
                 return participantMapper.mapToParticipant(
-                    messageContext.getAgentDirectory().getAgentId(reference), ParticipantType.AUTHOR);
+                    messageContext.getAgentDirectory().getAgentRef(agent, onBehalfOf), ParticipantType.AUTHOR);
+            } else {
+                    return participantMapper.mapToParticipant(
+                        messageContext.getAgentDirectory().getAgentId(agent), ParticipantType.AUTHOR);
             }
         } else if (medicationRequest.hasRecorder() && medicationRequest.getRecorder().hasReference()) {
             final var reference = medicationRequest.getRecorder();
