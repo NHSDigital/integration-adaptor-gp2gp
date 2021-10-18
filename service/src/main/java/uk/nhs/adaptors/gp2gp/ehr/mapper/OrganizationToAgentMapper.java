@@ -16,16 +16,16 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersInner;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersOuter;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersManagingOrganization;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class OrganizationToAgentMapper {
 
-    private static final Mustache AGENT_TEMPLATE_OUTER = TemplateUtils.loadTemplate("ehr_agent_template_outer.mustache");
+    private static final Mustache AGENT_TEMPLATE_MANAGING_ORGANIZATION =
+        TemplateUtils.loadTemplate("ehr_agent_template_managing_organization.mustache");
     private static final Mustache AGENT_TEMPLATE_INNER = TemplateUtils.loadTemplate("ehr_agent_template_inner.mustache");
-    private static final String ODS_ORG_CODE_SYSTEM = "https://fhir.nhs.uk/Id/ods-organization-code";
     private static final Map<String, String> ADDRESS_USES = Map.of(
         "home", "H",
         "work", "WP",
@@ -33,13 +33,14 @@ public class OrganizationToAgentMapper {
     );
 
     public static String mapOrganizationToAgent(Organization organization, String newId) {
-        var builder = AgentMapperTemplateParametersOuter.builder()
-            .agentId(newId);
+        var builder = AgentMapperTemplateParametersManagingOrganization.builder()
+                .agentId(newId);
 
-        var inner = Optional.of(mapOrganizationToAgentInner(organization));
-        inner.ifPresent(builder::organisationInfo);
+        if (organization.hasName()) {
+            builder.name(organization.getName());
+        }
 
-        return TemplateUtils.fillTemplate(AGENT_TEMPLATE_OUTER, builder.build());
+        return TemplateUtils.fillTemplate(AGENT_TEMPLATE_MANAGING_ORGANIZATION, builder.build());
     }
 
     public static String mapOrganizationToAgentInner(Organization organization) {

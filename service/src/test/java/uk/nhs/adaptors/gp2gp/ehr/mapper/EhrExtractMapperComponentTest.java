@@ -78,6 +78,7 @@ public class EhrExtractMapperComponentTest {
     private static final String TEST_DATE_TIME = "2020-01-01T01:01:01.01Z";
 
     private static GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
+    private ParticipantMapper participantMapper;
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -120,7 +121,8 @@ public class EhrExtractMapperComponentTest {
             participantMapper, multiStatementObservationHolderFactory);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
-            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes(), timestampService);
+            = new DocumentReferenceToNarrativeStatementMapper(
+                messageContext, new SupportedContentTypes(), timestampService, participantMapper);
 
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,

@@ -4,6 +4,11 @@
         <text>Type: Referral Letter (21-Sep-2020) Author Org: Organisation name Custodian Org: Organisation name Description: for 2 week rule referral - skin Absent Attachment: some title Setting: Practice Setting Text</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200921" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="394559384658936"/>
