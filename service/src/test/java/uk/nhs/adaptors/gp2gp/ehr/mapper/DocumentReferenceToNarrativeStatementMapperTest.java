@@ -94,7 +94,8 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         lenient().when(supportedContentTypes.isContentTypeSupported("application/octet-stream")).thenReturn(false);
         lenient().when(timestampService.now()).thenReturn(Instant.parse("2021-08-18T12:00:00.00Z"));
 
-        mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes, timestampService);
+        mapper = new DocumentReferenceToNarrativeStatementMapper(
+            messageContext, supportedContentTypes, timestampService, new ParticipantMapper());
     }
 
     @AfterEach
