@@ -71,6 +71,9 @@
         <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF"/>
+        <code nullFlavor="UNK">
+            <originalText>Unknown</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
             <name>
                 <family>TEMPLE SOWERBY MEDICAL PRACTICE</family>
