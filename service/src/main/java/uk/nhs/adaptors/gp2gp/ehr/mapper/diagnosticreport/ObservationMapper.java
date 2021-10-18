@@ -255,7 +255,7 @@ public class ObservationMapper {
         if (observation.hasReferenceRange()) {
             Observation.ObservationReferenceRangeComponent referenceRange = observation.getReferenceRangeFirstRep();
 
-            if(observation.hasValueQuantity()){
+            if (observation.hasValueQuantity()) {
                 extractUnit(referenceRange)
                     .filter(referenceRangeUnit -> isRangeUnitValid(referenceRangeUnit, observation.getValueQuantity()))
                     .map(RANGE_UNITS_PREFIX::concat)
@@ -263,7 +263,7 @@ public class ObservationMapper {
                         mapObservationToNarrativeStatement(holder, comment, CommentType.COMPLEX_REFERENCE_RANGE.getCode())
                     )
                     .ifPresent(narrativeStatementsBlock::append);
-            }else{
+            } else {
                 interpretationTextAndComment
                     .append(StringUtils.LF)
                     .append(prepareReferenceRangeToComment(referenceRange));
@@ -290,7 +290,7 @@ public class ObservationMapper {
             ? CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
     }
 
-    private String prepareReferenceRangeValues(SimpleQuantity simpleQuantity){
+    private String prepareReferenceRangeValues(SimpleQuantity simpleQuantity) {
         return Stream.of(
             Optional.ofNullable(simpleQuantity.getValue()),
             Optional.ofNullable(simpleQuantity.getUnit())
@@ -300,7 +300,7 @@ public class ObservationMapper {
             .collect(Collectors.joining(StringUtils.SPACE));
     }
 
-    private String prepareReferenceRangeToComment(Observation.ObservationReferenceRangeComponent referenceRange){
+    private String prepareReferenceRangeToComment(Observation.ObservationReferenceRangeComponent referenceRange) {
         StringBuilder referenceRangeCommentLine = new StringBuilder(RANGE_PREFIX);
 
         if (referenceRange.hasLow()) {
