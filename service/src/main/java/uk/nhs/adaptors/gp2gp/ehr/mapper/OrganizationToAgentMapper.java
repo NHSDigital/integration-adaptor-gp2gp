@@ -25,11 +25,7 @@ public class OrganizationToAgentMapper {
 
     private static final Mustache AGENT_TEMPLATE_MANAGING_ORGANIZATION =
         TemplateUtils.loadTemplate("ehr_agent_template_managing_organization.mustache");
-    private static final Mustache AGENT_TEMPLATE_OUTER = TemplateUtils.loadTemplate("ehr_agent_template_outer.mustache");
     private static final Mustache AGENT_TEMPLATE_INNER = TemplateUtils.loadTemplate("ehr_agent_template_inner.mustache");
-    private static final Mustache AGENT_STATEMENT_TEMPLATE = TemplateUtils
-        .loadTemplate("ehr_agent_person_template.mustache");
-    private static final String ODS_ORG_CODE_SYSTEM = "https://fhir.nhs.uk/Id/ods-organization-code";
     private static final Map<String, String> ADDRESS_USES = Map.of(
         "home", "H",
         "work", "WP",
