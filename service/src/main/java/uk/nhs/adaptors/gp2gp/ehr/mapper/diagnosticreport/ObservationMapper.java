@@ -264,7 +264,9 @@ public class ObservationMapper {
                     )
                     .ifPresent(narrativeStatementsBlock::append);
             }else{
-                interpretationTextAndComment.append(prepareReferenceRangeToComment(referenceRange));
+                interpretationTextAndComment
+                    .append(StringUtils.LF)
+                    .append(prepareReferenceRangeToComment(referenceRange));
             }
         }
 
