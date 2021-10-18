@@ -234,8 +234,7 @@ public class DiagnosticReportMapper {
             performers.stream()
                 .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
                 .map(this::fetchResource)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+                .flatMap(Optional::stream)
                 .map(this::fetchHumanNames)
                 .collect(Collectors.joining(", "));
     }

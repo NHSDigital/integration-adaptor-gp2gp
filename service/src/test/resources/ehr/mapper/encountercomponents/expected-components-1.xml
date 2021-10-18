@@ -277,6 +277,16 @@ Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+CommentDate:20100225154100
+
+Participants: Dr David McAvenue</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -370,11 +380,6 @@ CommentDate:20201215151704
 </Participant>
     </NarrativeStatement>
 </component>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -459,11 +464,6 @@ CommentDate:20201215151713
 </Participant>
     </NarrativeStatement>
 </component>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -557,11 +557,6 @@ CommentDate:20201215151713
 </Participant>
     </NarrativeStatement>
 </component>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
