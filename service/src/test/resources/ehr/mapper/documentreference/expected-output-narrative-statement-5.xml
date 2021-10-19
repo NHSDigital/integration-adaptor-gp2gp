@@ -4,6 +4,11 @@
         <text>Author Org: Organisation name</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200921141759" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="394559384658936"/>
