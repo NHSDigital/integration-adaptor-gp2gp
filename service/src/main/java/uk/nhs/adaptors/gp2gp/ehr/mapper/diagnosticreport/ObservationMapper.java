@@ -232,6 +232,10 @@ public class ObservationMapper {
             interpretationTextAndComment.append(observation.getComment());
         }
 
+        if (observation.hasReferenceRange() && observation.getReferenceRangeFirstRep().hasText()) {
+            interpretationTextAndComment.append(observation.getReferenceRangeFirstRep().getText());
+        }
+
         if (!interpretationTextAndComment.toString().isBlank()) {
             narrativeStatementsBlock.append(
                 mapObservationToNarrativeStatement(

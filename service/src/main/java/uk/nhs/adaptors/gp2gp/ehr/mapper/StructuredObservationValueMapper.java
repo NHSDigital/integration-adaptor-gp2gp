@@ -78,12 +78,9 @@ public class StructuredObservationValueMapper {
     }
 
     public String mapReferenceRangeType(Observation.ObservationReferenceRangeComponent referenceRange) {
-        if (referenceRange.hasText()
-            || referenceRange.hasHigh() && referenceRange.getHigh().hasValue()
-            || referenceRange.hasLow() && referenceRange.getLow().hasValue()
-        ) {
+        if (referenceRange.hasHigh() && referenceRange.getHigh().hasValue()
+                || referenceRange.hasLow() && referenceRange.getLow().hasValue()) {
             var templateParameters = ReferenceRangeTemplateParameters.builder()
-                .text(referenceRange.getText())
                 .value(buildReferenceRangeValue(referenceRange))
                 .build();
 
