@@ -24,7 +24,9 @@ gp2gp:
     trustStorePassword: ${GP2GP_SSL_TRUST_STORE_PASSWORD:}
   amqp:
     inboundQueueName: "inbound"
+    inboundQueueConsumerConcurrency: ${GP2GP_MHS_INBOUND_QUEUE_CONSUMER_CONCURRENCY:1}
     taskQueueName: "taskQueue"
+    taskQueueConsumerConcurrency: ${GP2GP_TASK_QUEUE_CONSUMER_CONCURRENCY:1}
     brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672}
     exchange: amq.direct
     username: ${GP2GP_AMQP_USERNAME:}
