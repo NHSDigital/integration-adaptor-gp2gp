@@ -19,7 +19,7 @@ public class InboundMessageConsumer {
     private final InboundMessageHandler inboundMessageHandler;
     private final MDCService mdcService;
 
-    @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
+    @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}", concurrency = "10")
     public void receive(Message message) throws JMSException {
         var messageID = message.getJMSMessageID();
         var messageTimestamp = getJmsMessageTimestamp(message);

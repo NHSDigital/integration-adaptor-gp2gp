@@ -64,7 +64,6 @@ public class MhsRequestBuilder {
     private WebClient buildWebClient(HttpClient httpClient) {
         return WebClient
             .builder()
-            .codecs(cfg -> cfg.defaultCodecs().maxInMemorySize(mhsConfiguration.getMaxRequestSize()))
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
             .filters(filters -> WebClientFilterService

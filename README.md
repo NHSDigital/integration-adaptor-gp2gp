@@ -106,10 +106,11 @@ The adaptor fetches patient records and documents with the GP Connect Consumer A
 [Dockerhub](https://hub.docker.com/repository/docker/nhsdev/nia-gpc-consumer-adaptor)) consuming the 
 [GP Connect API](https://developer.nhs.uk/apis/gpconnect/).
 
-| Environment Variable                 | Default                                       | Description
-| -------------------------------------|-----------------------------------------------|-------------
+| Environment Variable                 | Default                                           | Description
+| -------------------------------------|---------------------------------------------------|-------------
 | GP2GP_GPC_GET_URL                    | http://localhost:8090/@ODS_CODE@/STU3/1/gpconnect | (*) The base URL of the GP Connect Consumer Adaptor. @ODS_CODE@ is a placeholder replaced in runtime with the actual ODS code of the loosing practice.
-| GP2GP_GPC_STRUCTURED_FHIR_BASE       | /fhir                                         | The path segment for Get Access Structured FHIR server
+| GP2GP_GPC_STRUCTURED_FHIR_BASE       | /fhir                                             | The path segment for Get Access Structured FHIR server
+| GP2GP_GPC_MAX_REQUEST_SIZE           | 150000000 (150 MB)                                | Buffer size when downloading data from GPC
 
 (*) `GP2GP_GPC_GET_URL` could be set to the base URL of a GP Connect Producer for limited testing purposes 
 
@@ -120,7 +121,7 @@ The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adapt
 | Environment Variable                 | Default                                       | Description
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
-| GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
+| GP2GP_MHS_INBOUND_QUEUE              | inbound                                       | Name of the queue for MHS inbound
 
 ### GP2GP Configuration Options
 
