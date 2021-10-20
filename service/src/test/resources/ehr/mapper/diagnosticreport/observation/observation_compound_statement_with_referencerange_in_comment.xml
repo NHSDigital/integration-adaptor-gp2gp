@@ -9,10 +9,6 @@
             <center value="20190601113000"/>
         </effectiveTime>
         <availabilityTime value="20190601113000"/>
-            <interpretationCode code="HI" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Above high reference limit">
-    <originalText>Very High Value</originalText>
-</interpretationCode>
-
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -20,8 +16,9 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20190601113000
 
+Interpretation: Blah di Blah
 Test comment
-Range: High: 20</text>
+Range: Low: 11.000 umol/L High: 29.000 umol/L</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>
     </NarrativeStatement>
