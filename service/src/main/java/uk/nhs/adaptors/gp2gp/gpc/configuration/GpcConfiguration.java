@@ -13,4 +13,5 @@ import lombok.Setter;
 public class GpcConfiguration {
     private String url;
     private String migrateStructuredEndpoint;
+    private int maxRequestSize;
 }

@@ -20,7 +20,7 @@ public class TaskConsumer {
     private final TaskHandler taskHandler;
     private final MDCService mdcService;
 
-    @JmsListener(destination = "${gp2gp.amqp.taskQueueName}")
+    @JmsListener(destination = "${gp2gp.amqp.taskQueueName}", concurrency = "${gp2gp.amqp.taskQueueConsumerConcurrency}")
     @SneakyThrows
     public void receive(Message message) {
         var messageID = message.getJMSMessageID();
