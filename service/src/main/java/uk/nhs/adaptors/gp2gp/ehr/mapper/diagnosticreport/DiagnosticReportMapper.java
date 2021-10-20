@@ -18,6 +18,7 @@ import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.dstu3.model.InstantType;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Practitioner;
@@ -160,7 +161,7 @@ public class DiagnosticReportMapper {
             String comment = PREPENDED_TEXT_FOR_CONCLUSION_COMMENT + diagnosticReport.getConclusion();
 
             String narrativeStatementFromConclusion = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), comment
+                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), comment
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromConclusion);
@@ -175,7 +176,7 @@ public class DiagnosticReportMapper {
             String comment = PREPENDED_TEXT_FOR_CODED_DIAGNOSIS + codedDiagnosisText;
 
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), comment
+                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), comment
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
@@ -184,7 +185,7 @@ public class DiagnosticReportMapper {
         if (diagnosticReport.hasStatus()) {
             String status = PREPENDED_TEXT_FOR_STATUS + diagnosticReport.getStatus().toCode();
             String statusNarrativeStatement = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), status);
+                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), status);
 
             reportLevelNarrativeStatements.append(statusNarrativeStatement);
         }
@@ -198,7 +199,7 @@ public class DiagnosticReportMapper {
     private void buildNarrativeStatementForMissingResults(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
         if (reportLevelNarrativeStatements.length() == 0 && !diagnosticReport.hasResult()) {
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT"
+                diagnosticReport.getIssuedElement(), CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT"
             );
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
         }
@@ -206,21 +207,22 @@ public class DiagnosticReportMapper {
 
     private void buildNarrativeStatementForParticipants(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
         if (diagnosticReport.hasPerformer()) {
-            var humanNames = buildListOfHumanReadableNames(diagnosticReport);
+            var humanNames = buildListOfHumanReadableNames(diagnosticReport.getPerformer());
             String performerNarrativeStatement = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, CommentType.AGGREGATE_COMMENT_SET.getCode(), PREPENDED_TEXT_FOR_PARTICIPANTS + humanNames
+                diagnosticReport.getIssuedElement(), CommentType.AGGREGATE_COMMENT_SET.getCode(),
+                PREPENDED_TEXT_FOR_PARTICIPANTS + humanNames
             );
             reportLevelNarrativeStatements.append(performerNarrativeStatement);
         }
     }
 
-    private String buildNarrativeStatementForDiagnosticReport(DiagnosticReport diagnosticReport, String commentType, String comment) {
+    private String buildNarrativeStatementForDiagnosticReport(InstantType issuedElement, String commentType, String comment) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(randomIdGeneratorService.createNewId())
             .commentType(commentType)
-            .commentDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement()))
+            .commentDate(DateFormatUtil.toHl7Format(issuedElement))
             .comment(comment)
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(issuedElement));
 
         return TemplateUtils.fillTemplate(
             NARRATIVE_STATEMENT_TEMPLATE,
@@ -228,8 +230,7 @@ public class DiagnosticReportMapper {
         );
     }
 
-    private String buildListOfHumanReadableNames(DiagnosticReport diagnosticReport) {
-        var performers = diagnosticReport.getPerformer();
+    private String buildListOfHumanReadableNames(List<DiagnosticReport.DiagnosticReportPerformerComponent> performers) {
         return
             performers.stream()
                 .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
