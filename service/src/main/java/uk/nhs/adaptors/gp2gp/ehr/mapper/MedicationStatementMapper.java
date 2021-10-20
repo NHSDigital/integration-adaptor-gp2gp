@@ -273,7 +273,7 @@ public class MedicationStatementMapper {
             final var requester = medicationRequest.getRequester();
             final var agent = requester.getAgent();
 
-            if (ResourceType.Practitioner.name().equals(agent.getResource().getIdElement().getResourceType())
+            if (ResourceType.Practitioner.name().equals(agent.getReferenceElement().getResourceType())
                 && requester.hasOnBehalfOf()) {
                 var onBehalfOf = requester.getOnBehalfOf();
                 return participantMapper.mapToParticipant(

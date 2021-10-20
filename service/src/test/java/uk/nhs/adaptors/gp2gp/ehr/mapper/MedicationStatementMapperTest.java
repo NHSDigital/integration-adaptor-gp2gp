@@ -3,7 +3,8 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
-
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.mock;
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -123,6 +125,21 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-extension-status-reason-with-text.json";
     private static final String OUTPUT_XML_WITH_STATUS_REASON_TEXT = TEST_FILE_DIRECTORY
         + "medication-statement-with-status-reason-text.xml";
+    private static final String INPUT_JSON_WITH_REQUESTER_ON_BEHALF_OF = TEST_FILE_DIRECTORY
+        + "medication-request-with-requester-on-behalf-of.json";
+    private static final String INPUT_JSON_WITH_REQUESTER = TEST_FILE_DIRECTORY
+        + "medication-request-with-requester.json";
+    private static final String INPUT_JSON_WITH_NO_REQUESTER = TEST_FILE_DIRECTORY
+        + "medication-request-with-no-requester.json";
+    private static final String INPUT_JSON_WITH_REQUESTER_AGENT_AS_ORG = TEST_FILE_DIRECTORY
+        + "medication-request-with-requester-agent-as-org.json";
+    private static final String INPUT_JSON_WITH_REQUESTER_ORG_AND_ON_BEHALF_OF = TEST_FILE_DIRECTORY
+        + "medication-request-with-requester-org-and-on-behalf-of.json";
+
+
+    private static final String PRACTITIONER_RESOURCE_1 = "Practitioner/1";
+    private static final String PRACTITIONER_RESOURCE_2 = "Practitioner/2";
+    private static final String ORGANIZATION_RESOURCE_1 = "Organization/1";
 
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
@@ -242,6 +259,79 @@ public class MedicationStatementMapperTest {
             INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE,
             INPUT_JSON_WITH_NO_RECORDER_REFERENCE,
             INPUT_JSON_WITH_INVALID_RECORDER_REFERENCE_TYPE
-            );
+        );
+    }
+
+    @Test
+    public void When_MappingMedicationRequestWithRequesterWithOnBehalfOf_Expect_ParticipantMappedToAgent() throws IOException {
+        when(mockRandomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        codeableConceptCdMapper = new CodeableConceptCdMapper();
+        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+
+        var messageContextMock = mock(MessageContext.class);
+        var agentDirectoryMock = mock(AgentDirectory.class);
+        var idMapper = new IdMapper(mockRandomIdGeneratorService);
+        var medicationRequestIdMapper = new MedicationRequestIdMapper(mockRandomIdGeneratorService);
+
+        when(messageContextMock.getIdMapper()).thenReturn(idMapper);
+        when(messageContextMock.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
+        when(messageContextMock.getMedicationRequestIdMapper()).thenReturn(medicationRequestIdMapper);
+        when(messageContextMock.getAgentDirectory()).thenReturn(agentDirectoryMock);
+
+        medicationStatementMapper = new MedicationStatementMapper(messageContextMock, codeableConceptCdMapper,
+            new ParticipantMapper(), mockRandomIdGeneratorService);
+
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_REQUESTER_ON_BEHALF_OF);
+        MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
+        medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
+
+        ArgumentCaptor<Reference> agent = ArgumentCaptor.forClass(Reference.class);
+        ArgumentCaptor<Reference> onBehalfOf = ArgumentCaptor.forClass(Reference.class);
+        verify(agentDirectoryMock).getAgentRef(agent.capture(), onBehalfOf.capture());
+
+        assertThat(agent.getValue().getReference()).isEqualTo(PRACTITIONER_RESOURCE_1);
+        assertThat(onBehalfOf.getValue().getReference()).isEqualTo(ORGANIZATION_RESOURCE_1);
+    }
+
+    private static Stream<Arguments> resourceFilesWithParticipant() {
+        return Stream.of(
+            Arguments.of(INPUT_JSON_WITH_REQUESTER, PRACTITIONER_RESOURCE_1),
+            Arguments.of(INPUT_JSON_WITH_NO_REQUESTER, PRACTITIONER_RESOURCE_2),
+            Arguments.of(INPUT_JSON_WITH_REQUESTER_AGENT_AS_ORG, ORGANIZATION_RESOURCE_1),
+            Arguments.of(INPUT_JSON_WITH_REQUESTER_ORG_AND_ON_BEHALF_OF, ORGANIZATION_RESOURCE_1)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("resourceFilesWithParticipant")
+    public void When_MappingMedicationRequestWithParticipant_Expect_ParticipantMappedToAgent(
+        String inputJson, String agentId) throws IOException {
+        when(mockRandomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        codeableConceptCdMapper = new CodeableConceptCdMapper();
+        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+
+        var messageContextMock = mock(MessageContext.class);
+        var agentDirectoryMock = mock(AgentDirectory.class);
+        var idMapper = new IdMapper(mockRandomIdGeneratorService);
+        var medicationRequestIdMapper = new MedicationRequestIdMapper(mockRandomIdGeneratorService);
+
+        when(messageContextMock.getIdMapper()).thenReturn(idMapper);
+        when(messageContextMock.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
+        when(messageContextMock.getMedicationRequestIdMapper()).thenReturn(medicationRequestIdMapper);
+        when(messageContextMock.getAgentDirectory()).thenReturn(agentDirectoryMock);
+
+        medicationStatementMapper = new MedicationStatementMapper(messageContextMock, codeableConceptCdMapper,
+            new ParticipantMapper(), mockRandomIdGeneratorService);
+
+        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
+        MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
+        medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
+
+        ArgumentCaptor<Reference> agent = ArgumentCaptor.forClass(Reference.class);
+        verify(agentDirectoryMock).getAgentId(agent.capture());
+
+        assertThat(agent.getValue().getReference()).isEqualTo(agentId);
     }
 }
