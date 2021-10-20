@@ -197,7 +197,8 @@ public class ObservationMapper {
 
         if (holder.getObservation().hasReferenceRange() && holder.getObservation().hasValueQuantity()) {
             observationStatementTemplateParametersBuilder.referenceRange(
-                structuredObservationValueMapper.mapReferenceRangeTypeForDiagnosticReport(holder.getObservation().getReferenceRangeFirstRep()));
+                structuredObservationValueMapper.mapReferenceRangeTypeForDiagnosticReport(holder.getObservation()
+                        .getReferenceRangeFirstRep()));
         }
 
         prepareInterpretation(holder.getObservation()).ifPresent(observationStatementTemplateParametersBuilder::interpretation);
