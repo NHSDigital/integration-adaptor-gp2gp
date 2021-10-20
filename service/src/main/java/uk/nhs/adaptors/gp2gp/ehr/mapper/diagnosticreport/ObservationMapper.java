@@ -241,7 +241,8 @@ public class ObservationMapper {
         }
 
         if (observation.hasReferenceRange() && observation.getReferenceRangeFirstRep().hasText()) {
-            interpretationTextAndComment.append(StringUtils.LF).append(RANGE_TEXT_PREFIX).append(observation.getReferenceRangeFirstRep().getText());
+            interpretationTextAndComment.append(StringUtils.LF).append(RANGE_TEXT_PREFIX)
+                    .append(observation.getReferenceRangeFirstRep().getText());
         }
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
