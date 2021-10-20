@@ -21,6 +21,7 @@
 CommentDate:20190601113000
 
 Test comment
+Range Text: Test reference range text
 Range: High: 20</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>

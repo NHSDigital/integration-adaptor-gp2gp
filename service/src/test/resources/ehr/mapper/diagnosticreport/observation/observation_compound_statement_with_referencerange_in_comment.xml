@@ -18,6 +18,7 @@ CommentDate:20190601113000
 
 Interpretation: Blah di Blah
 Test comment
+
 Range: Low: 11.000 umol/L High: 29.000 umol/L</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>

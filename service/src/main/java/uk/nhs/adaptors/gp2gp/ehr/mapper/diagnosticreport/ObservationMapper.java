@@ -65,6 +65,7 @@ public class ObservationMapper {
     private static final String METHOD_PREFIX = "Method: ";
     private static final String RANGE_UNITS_PREFIX = "Range Units: ";
     private static final String RANGE_PREFIX = "Range: ";
+    private static final String RANGE_TEXT_PREFIX = "Range Text: ";
 
     private static final String RANGE_LOW_PREFIX = "Low: ";
     private static final String RANGE_HIGH_PREFIX = "High: ";
@@ -240,7 +241,7 @@ public class ObservationMapper {
         }
 
         if (observation.hasReferenceRange() && observation.getReferenceRangeFirstRep().hasText()) {
-            interpretationTextAndComment.append(observation.getReferenceRangeFirstRep().getText());
+            interpretationTextAndComment.append(RANGE_TEXT_PREFIX).append(observation.getReferenceRangeFirstRep().getText());
         }
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
