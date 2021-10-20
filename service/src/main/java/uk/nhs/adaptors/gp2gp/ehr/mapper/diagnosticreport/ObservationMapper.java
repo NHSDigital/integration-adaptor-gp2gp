@@ -268,13 +268,14 @@ public class ObservationMapper {
             }
         }
 
-        if (!interpretationTextAndComment.toString().isBlank()) {
-            narrativeStatementsBlock.append(
+        Optional.of(interpretationTextAndComment)
+            .map(StringBuilder::toString)
+            .filter(StringUtils::isNotBlank)
+            .map(String::trim)
+            .map(textAndComment ->
                 mapObservationToNarrativeStatement(
-                    holder, interpretationTextAndComment.toString().trim(), prepareCommentType(observation).getCode()
-                )
-            );
-        }
+                    holder, textAndComment, prepareCommentType(observation).getCode())
+            ).ifPresent(narrativeStatementsBlock::append);
 
         if (!narrativeStatementsBlock.toString().isBlank()) {
             return Optional.of(narrativeStatementsBlock.toString());
@@ -294,7 +295,8 @@ public class ObservationMapper {
             Optional.ofNullable(simpleQuantity.getUnit())
             )
             .flatMap(Optional::stream)
-            .map(input -> Objects.isNull(input) ? StringUtils.EMPTY : input.toString())
+            .filter(Objects::nonNull)
+            .map(Object::toString)
             .collect(Collectors.joining(StringUtils.SPACE));
     }
 
