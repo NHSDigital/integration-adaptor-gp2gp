@@ -65,6 +65,7 @@ public class ObservationMapper {
     private static final String METHOD_PREFIX = "Method: ";
     private static final String RANGE_UNITS_PREFIX = "Range Units: ";
     private static final String RANGE_PREFIX = "Range: ";
+    private static final String RANGE_TEXT_PREFIX = "Range Text: ";
 
     private static final String RANGE_LOW_PREFIX = "Low: ";
     private static final String RANGE_HIGH_PREFIX = "High: ";
@@ -194,7 +195,8 @@ public class ObservationMapper {
 
         if (holder.getObservation().hasReferenceRange() && holder.getObservation().hasValueQuantity()) {
             observationStatementTemplateParametersBuilder.referenceRange(
-                structuredObservationValueMapper.mapReferenceRangeType(holder.getObservation().getReferenceRangeFirstRep()));
+                structuredObservationValueMapper.mapReferenceRangeTypeForDiagnosticReport(holder.getObservation()
+                        .getReferenceRangeFirstRep()));
         }
 
         prepareInterpretation(holder.getObservation()).ifPresent(observationStatementTemplateParametersBuilder::interpretation);
@@ -228,11 +230,16 @@ public class ObservationMapper {
 
         if (!interpretationCodeMapped && observation.hasInterpretation()) {
             CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
-                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF); });
+                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText); });
         }
 
         if (observation.hasComment()) {
-            interpretationTextAndComment.append(observation.getComment());
+            interpretationTextAndComment.append(StringUtils.LF).append(observation.getComment());
+        }
+
+        if (observation.hasReferenceRange() && observation.getReferenceRangeFirstRep().hasText()) {
+            interpretationTextAndComment.append(StringUtils.LF).append(RANGE_TEXT_PREFIX)
+                    .append(observation.getReferenceRangeFirstRep().getText());
         }
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
@@ -265,13 +272,14 @@ public class ObservationMapper {
             }
         }
 
-        if (!interpretationTextAndComment.toString().isBlank()) {
-            narrativeStatementsBlock.append(
+        Optional.of(interpretationTextAndComment)
+            .map(StringBuilder::toString)
+            .filter(StringUtils::isNotBlank)
+            .map(String::trim)
+            .map(textAndComment ->
                 mapObservationToNarrativeStatement(
-                    holder, interpretationTextAndComment.toString().trim(), prepareCommentType(observation).getCode()
-                )
-            );
-        }
+                    holder, textAndComment, prepareCommentType(observation).getCode())
+            ).ifPresent(narrativeStatementsBlock::append);
 
         if (!narrativeStatementsBlock.toString().isBlank()) {
             return Optional.of(narrativeStatementsBlock.toString());
@@ -291,7 +299,8 @@ public class ObservationMapper {
             Optional.ofNullable(simpleQuantity.getUnit())
             )
             .flatMap(Optional::stream)
-            .map(input -> Objects.isNull(input) ? StringUtils.EMPTY : input.toString())
+            .filter(Objects::nonNull)
+            .map(Object::toString)
             .collect(Collectors.joining(StringUtils.SPACE));
     }
 
