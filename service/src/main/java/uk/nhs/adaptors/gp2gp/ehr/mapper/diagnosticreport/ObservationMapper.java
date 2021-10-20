@@ -190,7 +190,7 @@ public class ObservationMapper {
 
         if (holder.getObservation().hasReferenceRange() && holder.getObservation().hasValueQuantity()) {
             observationStatementTemplateParametersBuilder.referenceRange(
-                structuredObservationValueMapper.mapReferenceRangeType(holder.getObservation().getReferenceRangeFirstRep()));
+                structuredObservationValueMapper.mapReferenceRangeTypeForDiagnosticReport(holder.getObservation().getReferenceRangeFirstRep()));
         }
 
         prepareInterpretation(holder.getObservation()).ifPresent(observationStatementTemplateParametersBuilder::interpretation);
@@ -229,7 +229,7 @@ public class ObservationMapper {
         }
 
         if (observation.hasComment()) {
-            interpretationTextAndComment.append(observation.getComment());
+            interpretationTextAndComment.append(observation.getComment()).append(StringUtils.LF);
         }
 
         if (observation.hasReferenceRange() && observation.getReferenceRangeFirstRep().hasText()) {
