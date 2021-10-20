@@ -118,6 +118,7 @@ public class GpcRequestBuilder {
     private WebClient buildWebClient(HttpClient httpClient, String baseUrl) {
         return WebClient
             .builder()
+            .codecs(cfg -> cfg.defaultCodecs().maxInMemorySize(gpcConfiguration.getMaxRequestSize()))
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
             .filters(filters -> WebClientFilterService
