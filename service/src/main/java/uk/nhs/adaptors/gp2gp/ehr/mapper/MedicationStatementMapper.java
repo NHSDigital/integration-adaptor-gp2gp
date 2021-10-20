@@ -269,11 +269,12 @@ public class MedicationStatementMapper {
         var isOrganization = buildPredicateReferenceIsA(ResourceType.Organization);
         Predicate<Reference> isRelevant = isPractitioner.or(isPractitionerRole).or(isOrganization);
 
-        if (medicationRequest.hasRequester()) {
+        if (medicationRequest.hasRequester() && medicationRequest.getRequester().hasAgent()) {
             final var requester = medicationRequest.getRequester();
             final var agent = requester.getAgent();
 
-            if (ResourceType.Practitioner.name().equals(agent.getReferenceElement().getResourceType())
+            if (ResourceType.Practitioner.name().equals(
+                    agent.getReferenceElement().getResourceType())
                 && requester.hasOnBehalfOf()) {
                 var onBehalfOf = requester.getOnBehalfOf();
                 return participantMapper.mapToParticipant(
