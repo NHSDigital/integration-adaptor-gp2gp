@@ -12,7 +12,6 @@
             <value xsi:type="IVL_PQ"><low value="37.1" unit="Cel" inclusive="true"/></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
-        <text>Test reference range text</text>
         <value><low value="20"/><high value="30"/></value>
     </referenceInterpretationRange>
 </referenceRange>
@@ -25,6 +24,7 @@
 CommentDate:20190601113000
 
 Test comment
+Range Text: Test reference range text
 Range Units: test-unit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>
