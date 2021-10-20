@@ -233,15 +233,15 @@ public class ObservationMapper {
 
         if (!interpretationCodeMapped && observation.hasInterpretation()) {
             CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
-                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF); });
+                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText); });
         }
 
         if (observation.hasComment()) {
-            interpretationTextAndComment.append(observation.getComment()).append(StringUtils.LF);
+            interpretationTextAndComment.append(StringUtils.LF).append(observation.getComment());
         }
 
         if (observation.hasReferenceRange() && observation.getReferenceRangeFirstRep().hasText()) {
-            interpretationTextAndComment.append(RANGE_TEXT_PREFIX).append(observation.getReferenceRangeFirstRep().getText());
+            interpretationTextAndComment.append(StringUtils.LF).append(RANGE_TEXT_PREFIX).append(observation.getReferenceRangeFirstRep().getText());
         }
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
