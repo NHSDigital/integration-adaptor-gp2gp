@@ -4,6 +4,7 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType.LABORATORY_RESULT_COMMENT;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 
@@ -231,13 +232,12 @@ public class DiagnosticReportMapper {
     }
 
     private String buildListOfHumanReadableNames(List<DiagnosticReport.DiagnosticReportPerformerComponent> performers) {
-        return
-            performers.stream()
-                .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
-                .map(this::fetchResource)
-                .flatMap(Optional::stream)
-                .map(this::fetchHumanNames)
-                .collect(Collectors.joining(", "));
+        return performers.stream()
+            .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
+            .map(this::fetchResource)
+            .flatMap(Optional::stream)
+            .map(this::fetchHumanNames)
+            .collect(Collectors.joining(", "));
     }
 
     private Optional<Resource> fetchResource(Reference reference) {
