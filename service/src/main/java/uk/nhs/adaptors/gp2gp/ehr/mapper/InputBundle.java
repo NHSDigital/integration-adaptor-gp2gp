@@ -3,7 +3,6 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Condition;
-import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
@@ -61,8 +60,12 @@ public class InputBundle {
         this.bundle = bundle;
     }
 
-    public List<Bundle.BundleEntryComponent> getBundleEntryComponents() {
-        return bundle.getEntry();
+    public List<Resource> getResourcesOfType(Class<?> classType) {
+        return bundle.getEntry()
+            .stream()
+            .map(Bundle.BundleEntryComponent::getResource)
+            .filter(resource -> ResourceType.valueOf(classType.getSimpleName()).equals(resource.getResourceType()))
+            .collect(Collectors.toList());
     }
 
     public Optional<Resource> getResource(IIdType reference) {
@@ -103,15 +106,6 @@ public class InputBundle {
                     .map(Reference::getReference)
                     .filter(referenceId::equals)
                     .isPresent()
-            )
-            .collect(Collectors.toList());
-    }
-
-    public List<DiagnosticReport> getRelatedDiagnosticReports(String referenceId) {
-        return ResourceExtractor.extractResourcesByType(bundle, DiagnosticReport.class)
-            .filter(diagnosticReport -> diagnosticReport.getResult()
-                .stream()
-                .anyMatch(reference -> referenceId.equals(reference.getReference()))
             )
             .collect(Collectors.toList());
     }
