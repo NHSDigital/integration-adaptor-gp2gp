@@ -57,6 +57,7 @@ public class SpecimenMapper {
     private static final String FASTING_STATUS_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
         + "-FastingStatus-1";
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
+    private static final String EMPTY_SPECIMEN_STRING = "EMPTY SPECIMEN";
 
     private final MessageContext messageContext;
     private final ObservationMapper observationMapper;
@@ -170,7 +171,7 @@ public class SpecimenMapper {
         SpecimenNarrativeStatementCommentBuilder specimenNarrativeStatementCommentBuilder = new SpecimenNarrativeStatementCommentBuilder();
 
         if (emptyMappedObservations) {
-            specimenNarrativeStatementCommentBuilder.appendText("EMPTY SPECIMEN");
+            specimenNarrativeStatementCommentBuilder.appendText(EMPTY_SPECIMEN_STRING);
         }
 
         getReceivedTime(specimen)

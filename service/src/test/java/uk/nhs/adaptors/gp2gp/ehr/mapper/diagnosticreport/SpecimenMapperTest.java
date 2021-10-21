@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
@@ -147,6 +148,26 @@ public class SpecimenMapperTest {
 
         String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
             specimen, observations, diagnosticReport
+        );
+
+        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
+    }
+
+    @Test
+    public void When_MappingDefaultSpecimenWithNoMappableObservations_Expect_EmptySpecimenXmlOutput() throws IOException {
+        String defaultSpecimenJson = ResourceTestFileUtils.getFileContent(
+                DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "input_default_specimen.json"
+        );
+        Specimen specimen = new FhirParseService().parseResource(defaultSpecimenJson, Specimen.class);
+        String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
+                DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_empty_specimen.xml"
+        );
+        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
+
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
+
+        String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
+                specimen, Collections.emptyList(), diagnosticReport
         );
 
         assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
