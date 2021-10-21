@@ -166,10 +166,10 @@ public class SpecimenMapper {
     }
 
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement,
-                                                             Boolean hasMappedObservations) {
+                                                             Boolean emptyMappedObservations) {
         SpecimenNarrativeStatementCommentBuilder specimenNarrativeStatementCommentBuilder = new SpecimenNarrativeStatementCommentBuilder();
 
-        if (hasMappedObservations) {
+        if (emptyMappedObservations) {
             specimenNarrativeStatementCommentBuilder.appendText("EMPTY SPECIMEN");
         }
 
