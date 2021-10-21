@@ -36,6 +36,14 @@
         "reference":"Patient/2"
     },
     "authoredOn":"2017-11-10T00:00:00+00:00",
+    "requester": {
+        "agent": {
+            "reference": "Practitioner/1"
+        },
+        "onBehalfOf": {
+            "reference": "Organization/1"
+        }
+    },
     "recorder":{
         "reference":"Practitioner/3"
     },
@@ -55,11 +63,5 @@
         {
             "reference": "MedicationRequest/D66D84C9-C073-4EDF-8C2C-F309A83C3DC7"
         }
-    ],
-    "requester": {
-        "agent": {},
-        "onBehalfOf": {
-            "reference": "Organization/2-multiple-types"
-        }
-    }
+    ]
 }

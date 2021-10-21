@@ -88,13 +88,14 @@ The adaptor uses AWS S3 or Azure Storage Blob to stage translated GP2GP HL7 and 
 The adaptor requires an AMQP 1.0 compatible message broker to 1) receive inbound Spine messages via MHS adaptor and 2)
 queue its own internal asynchronous tasks
 
-| Environment Variable                 | Default                   | Description
-| -------------------------------------|---------------------------|-------------
-| GP2GP_AMQP_BROKERS                   | amqp://localhost:5672     | A comma-separated list of URLs to AMQP brokers (*)
-| GP2GP_AMQP_USERNAME                  |                           | (Optional) username for the AMQP server
-| GP2GP_AMQP_PASSWORD                  |                           | (Optional) password for the AMQP server
-| GP2GP_AMQP_MAX_REDELIVERIES          | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
-| GP2GP_TASK_QUEUE                     | gp2gpTaskQueue            | Defines name of internal taskQueue.
+| Environment Variable                  | Default                   | Description
+| --------------------------------------|---------------------------|-------------
+| GP2GP_AMQP_BROKERS                    | amqp://localhost:5672     | A comma-separated list of URLs to AMQP brokers (*)
+| GP2GP_AMQP_USERNAME                   |                           | (Optional) username for the AMQP server
+| GP2GP_AMQP_PASSWORD                   |                           | (Optional) password for the AMQP server
+| GP2GP_AMQP_MAX_REDELIVERIES           | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
+| GP2GP_TASK_QUEUE                      | gp2gpTaskQueue            | Defines name of internal taskQueue.
+| GP2GP_TASK_QUEUE_CONSUMER_CONCURRENCY | 1                         | Defines the number of concurrent task queue consumers in a single application. https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jms/annotation/JmsListener.html#concurrency--
 
 (*) Active/Standby: The first broker in the list always used unless there is an error, in which case the other URLs 
 will be used. At least one URL is required.
@@ -106,10 +107,11 @@ The adaptor fetches patient records and documents with the GP Connect Consumer A
 [Dockerhub](https://hub.docker.com/repository/docker/nhsdev/nia-gpc-consumer-adaptor)) consuming the 
 [GP Connect API](https://developer.nhs.uk/apis/gpconnect/).
 
-| Environment Variable                 | Default                                       | Description
-| -------------------------------------|-----------------------------------------------|-------------
+| Environment Variable                 | Default                                           | Description
+| -------------------------------------|---------------------------------------------------|-------------
 | GP2GP_GPC_GET_URL                    | http://localhost:8090/@ODS_CODE@/STU3/1/gpconnect | (*) The base URL of the GP Connect Consumer Adaptor. @ODS_CODE@ is a placeholder replaced in runtime with the actual ODS code of the loosing practice.
-| GP2GP_GPC_STRUCTURED_FHIR_BASE       | /fhir                                         | The path segment for Get Access Structured FHIR server
+| GP2GP_GPC_STRUCTURED_FHIR_BASE       | /fhir                                             | The path segment for Get Access Structured FHIR server
+| GP2GP_GPC_MAX_REQUEST_SIZE           | 150000000 (150 MB)                                | Buffer size when downloading data from GPC
 
 (*) `GP2GP_GPC_GET_URL` could be set to the base URL of a GP Connect Producer for limited testing purposes 
 
@@ -117,10 +119,12 @@ The adaptor fetches patient records and documents with the GP Connect Consumer A
 
 The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adaptor-mhs) to send/receive messages to/from Spine.
 
-| Environment Variable                 | Default                                       | Description
-| -------------------------------------|-----------------------------------------------|-------------
-| GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
-| GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
+| Environment Variable                          | Default                                       | Description
+| ----------------------------------------------|-----------------------------------------------|-------------
+| GP2GP_MHS_OUTBOUND_URL                        | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
+| GP2GP_MHS_INBOUND_QUEUE                       | inbound                                       | Name of the queue for MHS inbound
+| GP2GP_MHS_INBOUND_QUEUE_CONSUMER_CONCURRENCY  | 1                                             | Defines the number of concurrent mhs inbound queue consumers in a single application. https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jms/annotation/JmsListener.html#concurrency--
+
 
 ### GP2GP Configuration Options
 
