@@ -36,6 +36,14 @@
         "reference":"Patient/2"
     },
     "authoredOn":"2017-11-10T00:00:00+00:00",
+    "requester": {
+        "agent": {
+            "reference": "Organization/1"
+        },
+        "onBehalfOf": {
+            "reference": "Organization/2"
+        }
+    },
     "recorder":{
         "reference":"Practitioner/3"
     },
