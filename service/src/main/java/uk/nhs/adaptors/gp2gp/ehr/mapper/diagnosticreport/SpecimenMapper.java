@@ -76,7 +76,7 @@ public class SpecimenMapper {
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
         buildSpecimenMaterialType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::specimenMaterialType);
-        buildSpecimenNarrativeStatement(specimen, availabilityTimeElement)
+        buildSpecimenNarrativeStatement(specimen, availabilityTimeElement, mappedObservations)
             .ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
         buildParticipant(specimen).ifPresent(specimenCompoundStatementTemplateParameters::participant);
 
@@ -165,8 +165,12 @@ public class SpecimenMapper {
             || (!observations.isEmpty() && observations.get(0).getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
-    private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement) {
+    private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement, String mappedObservations) {
         SpecimenNarrativeStatementCommentBuilder specimenNarrativeStatementCommentBuilder = new SpecimenNarrativeStatementCommentBuilder();
+
+        if (mappedObservations.isEmpty()) {
+            specimenNarrativeStatementCommentBuilder.appendText("EMPTY SPECIMEN");
+        }
 
         getReceivedTime(specimen)
             .map(PrimitiveType::getValue)
