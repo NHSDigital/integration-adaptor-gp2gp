@@ -12,12 +12,15 @@ import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
 import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.SimpleQuantity;
 import org.hl7.fhir.dstu3.model.Type;
@@ -94,7 +97,8 @@ public class ObservationMapper {
         var relatedObservations = getRelatedObservations(observationAssociatedWithSpecimen);
 
         final String output;
-        if (relatedObservations.isEmpty()) {
+        if (relatedObservations.isEmpty()
+            && !hasDiagnosticReportResultReference(observationAssociatedWithSpecimen.getObservation())) {
             output = outputWithoutCompoundStatement(observationAssociatedWithSpecimen);
         } else {
             output = outputWithCompoundStatement(observationAssociatedWithSpecimen, relatedObservations);
@@ -103,6 +107,19 @@ public class ObservationMapper {
         observationAssociatedWithSpecimen.verifyObservationWasMapped();
         relatedObservations.forEach(MultiStatementObservationHolder::verifyObservationWasMapped);
         return output;
+    }
+
+    private boolean hasDiagnosticReportResultReference(Observation observation) {
+        return messageContext.getInputBundleHolder().getBundleEntryComponents()
+            .stream()
+            .map(Bundle.BundleEntryComponent::getResource)
+            .filter(resource -> ResourceType.DiagnosticReport.equals(resource.getResourceType()))
+            .map(DiagnosticReport.class::cast)
+            .anyMatch(diagnosticReport ->
+                diagnosticReport.getResult()
+                    .stream()
+                    .anyMatch(reference -> observation.getId().equals(reference.getReference()))
+            );
     }
 
     private String outputWithCompoundStatement(MultiStatementObservationHolder observationAssociatedWithSpecimen,
