@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
