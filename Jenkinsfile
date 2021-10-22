@@ -5,6 +5,10 @@ String redirectEnv    = "build1"          // Name of environment where TF deploy
 String redirectBranch = "main"      // When deploying branch name matches, TF deployment gets redirected to environment defined in variable "redirectEnv"
 Boolean publishWiremockImage = true // true: To publish gp2gp wiremock image to AWS ECR gp2gp-wiremock
 Boolean publishMhsMockImage  = true // true: to publsh mhs mock image to AWS ECR gp2gp-mock-mhs
+Boolean publishGpccMockImage  = true // true: to publsh gpcc mock image to AWS ECR gp2gp-gpcc-mock
+Boolean publishGpcApiMockImage  = true // true: to publsh gpc api mock image to AWS ECR gp2gp-gpc-api-mock
+Boolean publishSdsApiMockImage  = true // true: to publsh sds api mock image to AWS ECR gp2gp-sds-api-mock
+
 Boolean gpccDeploy    = true         // true: To deploy GPC-Consumer service inside gp2gp
 String gpccBranch     = "main"      // Name of branch as a prefix to image name (GPC-Consumer) stored in ECR
 String gpccEcrRepo    = "gpc-consumer" // ECR Repo Name of GPC-Consumer
@@ -22,12 +26,20 @@ pipeline {
 
     environment {
         BUILD_TAG = sh label: 'Generating build tag', returnStdout: true, script: 'python3 scripts/tag.py ${GIT_BRANCH} ${BUILD_NUMBER} ${GIT_COMMIT}'
+        
         ECR_REPO_DIR = "gp2gp"
         WIREMOCK_ECR_REPO_DIR = "gp2gp-wiremock"
         MHS_MOCK_ECR_REPO_DIR = "gp2gp-mock-mhs"
+        GPCC_MOCK_ECR_REPO_DIR = "gp2gp-gpcc-mock"
+        GPC_API_MOCK_ECR_REPO_DIR = "gp2gp-gpc-api-mock"
+        SDS_API_MOCK_ECR_REPO_DIR = "gp2gp-sds-api-mock"
+
         DOCKER_IMAGE = "${DOCKER_REGISTRY}/${ECR_REPO_DIR}:${BUILD_TAG}"
         WIREMOCK_DOCKER_IMAGE = "${DOCKER_REGISTRY}/${WIREMOCK_ECR_REPO_DIR}:${BUILD_TAG}"
         MHS_MOCK_DOCKER_IMAGE  = "${DOCKER_REGISTRY}/${MHS_MOCK_ECR_REPO_DIR}:${BUILD_TAG}"
+        GPCC_MOCK_DOCKER_IMAGE  = "${DOCKER_REGISTRY}/${GPCC_MOCK_ECR_REPO_DIR}:${BUILD_TAG}"
+        GPC_API_MOCK_DOCKER_IMAGE  = "${DOCKER_REGISTRY}/${GPC_API_MOCK_ECR_REPO_DIR}:${BUILD_TAG}"
+        SDS_API_MOCK_DOCKER_IMAGE  = "${DOCKER_REGISTRY}/${SDS_API_MOCK_ECR_REPO_DIR}:${BUILD_TAG}"
     }
 
     stages {
@@ -39,6 +51,8 @@ pipeline {
                             sh '''
                                 source docker/vars.local.tests.sh
                                 docker network create commonforgp2gp || true
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml stop
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml rm -f
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
                             '''
@@ -74,11 +88,21 @@ pipeline {
                     steps {
                         script {
                             if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
+
                             if (publishWiremockImage) {
-                                if (sh(label: 'Running gp2gp-wiremock docker build', script: 'docker build -f docker/wiremock/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} docker/wiremock', returnStatus: true) != 0) {error("Failed to build gp2gp-wiremock Docker image")}
+                                if (sh(label: "Running ${WIREMOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/wiremock/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} docker/wiremock', returnStatus: true) != 0) {error("Failed to build ${WIREMOCK_ECR_REPO_DIR} Docker image")}
                             }
                             if (publishMhsMockImage) {
-                                if (sh(label: 'Running gp2gp-mhs-mock docker build', script: 'docker build -f docker/mock-mhs-adaptor/Dockerfile -t ${MHS_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp-mock-mhs Docker image")}
+                                if (sh(label: "Running ${MHS_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/mock-mhs-adaptor/Dockerfile -t ${MHS_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build ${MHS_MOCK_ECR_REPO_DIR} Docker image")}
+                            }
+                            if (publishGpccMockImage) {
+                                if (sh(label: "Running ${GPCC_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/gpcc-mock/Dockerfile -t ${GPCC_MOCK_DOCKER_IMAGE} docker/gpcc-mock', returnStatus: true) != 0) {error("Failed to build ${GPCC_MOCK_ECR_REPO_DIR} Docker image")}
+                            }
+                            if (publishGpcApiMockImage) {
+                                if (sh(label: "Running ${GPC_API_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/gpc-api-mock/Dockerfile -t ${GPC_API_MOCK_DOCKER_IMAGE} docker/gpc-api-mock', returnStatus: true) != 0) {error("Failed to build ${GPC_API_MOCK_ECR_REPO_DIR} Docker image")}
+                            }
+                            if (publishSdsApiMockImage) {
+                                if (sh(label: "Running ${SDS_API_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/sds-api-mock/Dockerfile -t ${SDS_API_MOCK_DOCKER_IMAGE} docker/sds-api-mock', returnStatus: true) != 0) {error("Failed to build ${SDS_API_MOCK_ECR_REPO_DIR} Docker image")}
                             }
                         }
                     }
@@ -91,17 +115,26 @@ pipeline {
                     steps {
                         script {
                             if (ecrLogin(TF_STATE_BUCKET_REGION) != 0 )  { error("Docker login to ECR failed") }
-                            String dockerPushCommand = "docker push ${DOCKER_IMAGE}"
-                            if (sh (label: "Pushing image", script: dockerPushCommand, returnStatus: true) !=0) { error("Docker push gp2gp image failed") }
+                            if (sh (label: "Pushing image", script: "docker push ${DOCKER_IMAGE}", returnStatus: true) !=0) { error("Docker push gp2gp image failed") }
 
-                            String dockerPushCommandWiremock = "docker push ${WIREMOCK_DOCKER_IMAGE}"
                             if (publishWiremockImage) {
-                                if (sh (label: "Pushing Wiremock image", script: dockerPushCommandWiremock, returnStatus: true) !=0) { error("Docker push gp2gp-wiremock image failed") }
+                                if (sh (label: "Pushing Wiremock image", script: "docker push ${WIREMOCK_DOCKER_IMAGE}", returnStatus: true) !=0) { error("Docker push ${WIREMOCK_ECR_REPO_DIR} image failed") }
                             }
 
-                            String dockerPushCommandMhsMock = "docker push ${MHS_MOCK_DOCKER_IMAGE}"
                             if (publishMhsMockImage) {
-                                if (sh(label: "Pushing MHS Mock image", script: dockerPushCommandMhsMock, returnStatus: true) != 0) {error("Docker push gp2gp-mock-mhs image failed") }
+                                if (sh(label: "Pushing MHS Mock image", script: "docker push ${MHS_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${MHS_MOCK_ECR_REPO_DIR} image failed") }
+                            }
+
+                            if (publishGpccMockImage) {
+                                if (sh(label: "Pushing GPCC Mock image", script: "docker push ${GPCC_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${GPCC_MOCK_ECR_REPO_DIR} image failed") }
+                            }
+
+                            if (publishGpcApiMockImage) {
+                                if (sh(label: "Pushing GPC API Mock image", script: "docker push ${GPC_API_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${GPC_API_MOCK_ECR_REPO_DIR} image failed") }
+                            }
+
+                            if (publishSdsApiMockImage) {
+                                if (sh(label: "Pushing SDS API Mock image", script: "docker push ${SDS_API_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${SDS_API_MOCK_ECR_REPO_DIR} image failed") }
                             }
                         }
                     }
@@ -168,7 +201,7 @@ pipeline {
     post {
         always {
             sh label: 'Remove images created by docker-compose', script: 'docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down --rmi local'
-            sh label: 'Remove exited containers', script: 'docker ps -a -f status=exited -q | xargs docker rm'
+            sh label: 'Remove exited containers', script: 'docker container prune --force'
             sh label: 'Remove images tagged with current BUILD_TAG', script: 'docker image rm -f $(docker images "*/*:*${BUILD_TAG}" -q) $(docker images "*/*/*:*${BUILD_TAG}" -q) || true'
         }
     }

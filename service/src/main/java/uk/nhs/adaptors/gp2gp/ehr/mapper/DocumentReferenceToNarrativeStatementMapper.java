@@ -10,6 +10,7 @@ import org.hl7.fhir.dstu3.model.BaseReference;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -31,10 +33,12 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
     private static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
+    private static final List<String> VALID_AUTHOR_RESOURCE_TYPES = List.of("Organization", "Practitioner");
 
     private final MessageContext messageContext;
     private final SupportedContentTypes supportedContentTypes;
     private final TimestampService timestampService;
+    private final ParticipantMapper participantMapper;
 
     public String mapDocumentReferenceToNarrativeStatement(final DocumentReference documentReference) {
         if (documentReference.getContent().isEmpty()) {
@@ -47,7 +51,8 @@ public class DocumentReferenceToNarrativeStatementMapper {
         final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(narrativeStatementId)
             .availabilityTime(getAvailabilityTime(documentReference))
-            .hasReference(true);
+            .hasReference(true)
+            .participant(buildParticipant(documentReference));
 
         final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference);
         final String attachmentContentType = DocumentReferenceUtils.extractContentType(attachment);
@@ -63,6 +68,23 @@ public class DocumentReferenceToNarrativeStatementMapper {
         }
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
+    }
+
+    private String buildParticipant(DocumentReference documentReference) {
+        return Optional.of(documentReference)
+            .filter(DocumentReference::hasAuthor)
+            .map(DocumentReference::getAuthorFirstRep)
+            .filter(this::isValidAuthorReference)
+            .map(this::mapAuthorToParticipant)
+            .orElse(StringUtils.EMPTY);
+    }
+
+    private String mapAuthorToParticipant(Reference reference) {
+        return participantMapper.mapToParticipant(messageContext.getAgentDirectory().getAgentId(reference), ParticipantType.PERFORMER);
+    }
+
+    private boolean isValidAuthorReference(Reference reference) {
+        return VALID_AUTHOR_RESOURCE_TYPES.contains(reference.getReferenceElement().getResourceType());
     }
 
     public String buildFragmentIndexNarrativeStatement(String bindingDocumentId) {
