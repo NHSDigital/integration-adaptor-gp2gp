@@ -74,7 +74,7 @@ public class ImmunizationObservationStatementMapper {
             .isNested(isNested)
             .code(buildCode(immunization));
 
-        if (immunization.hasPractitioner()) {
+        if (immunization.hasPractitioner() && immunization.getPractitionerFirstRep().hasActor()) {
             var practitioner = extractPractitioner(immunization);
             var practitionerRef = practitioner.getActor();
             var participantRef = messageContext.getAgentDirectory().getAgentId(practitionerRef);
