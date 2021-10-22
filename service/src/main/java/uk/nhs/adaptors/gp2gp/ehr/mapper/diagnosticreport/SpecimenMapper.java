@@ -20,7 +20,6 @@ import org.hl7.fhir.dstu3.model.Duration;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.Practitioner;
-import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SimpleQuantity;
@@ -79,7 +78,6 @@ public class SpecimenMapper {
         buildSpecimenMaterialType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::specimenMaterialType);
         buildSpecimenNarrativeStatement(specimen, availabilityTimeElement, mappedObservations.isEmpty())
             .ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
-        buildParticipant(specimen).ifPresent(specimenCompoundStatementTemplateParameters::participant);
 
         return TemplateUtils.fillTemplate(
             SPECIMEN_COMPOUND_STATEMENT_TEMPLATE,
@@ -113,16 +111,6 @@ public class SpecimenMapper {
             } else if (collection.hasCollectedPeriod() && collection.getCollectedPeriod().hasStartElement()) {
                 return Optional.of(collection.getCollectedPeriod().getStartElement());
             }
-        }
-
-        return Optional.empty();
-    }
-
-    private Optional<String> buildParticipant(Specimen specimen) {
-        if (specimen.hasCollection() && specimen.getCollection().hasCollector()) {
-            Reference collector = specimen.getCollection().getCollector();
-
-            return Optional.of(messageContext.getAgentDirectory().getAgentId(collector));
         }
 
         return Optional.empty();

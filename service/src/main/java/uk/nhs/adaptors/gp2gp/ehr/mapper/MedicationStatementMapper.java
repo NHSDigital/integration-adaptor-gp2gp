@@ -23,10 +23,8 @@ import java.util.stream.Collectors;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Medication;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
-import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
@@ -163,8 +161,7 @@ public class MedicationStatementMapper {
         return List.of(
             buildPatientInstructionPertinentInformation(medicationRequest),
             buildExpectedSupplyDurationPertinentInformation(medicationRequest),
-            buildNotePertinentInformation(medicationRequest),
-            buildRequestedByOrgPertinentInformation(medicationRequest)
+            buildNotePertinentInformation(medicationRequest)
         );
     }
 
@@ -206,30 +203,6 @@ public class MedicationStatementMapper {
             return String.format(NOTES, notes);
         }
         return StringUtils.EMPTY;
-    }
-
-    private String buildRequestedByOrgPertinentInformation(MedicationRequest medicationRequest) {
-        if (medicationRequest.hasRequester() && medicationRequest.getRequester().hasOnBehalfOf()) {
-            var onBehalfOfReference = medicationRequest.getRequester().getOnBehalfOf().getReferenceElement();
-            var onBehalfOfResource = messageContext.getInputBundleHolder().getResource(onBehalfOfReference);
-
-            return onBehalfOfResource
-                .filter(resource -> ResourceType.Organization.equals(resource.getResourceType()))
-                .map(resource -> (Organization) resource)
-                .filter(organisation -> organisation.hasType())
-                .map(organisation -> String.format("Requested by org: %s", getOrganisationTypeText(organisation)))
-                .orElseGet(() -> StringUtils.EMPTY);
-        }
-
-        return StringUtils.EMPTY;
-    }
-
-    private String getOrganisationTypeText(Organization organisation) {
-        return organisation.getType()
-            .stream()
-            .filter(CodeableConcept::hasText)
-            .map(CodeableConcept::getText)
-            .collect(Collectors.joining(", "));
     }
 
     private String buildPatientInstructionPertinentInformation(MedicationRequest medicationRequest) {
@@ -296,7 +269,20 @@ public class MedicationStatementMapper {
         var isOrganization = buildPredicateReferenceIsA(ResourceType.Organization);
         Predicate<Reference> isRelevant = isPractitioner.or(isPractitionerRole).or(isOrganization);
 
-        if (medicationRequest.hasRecorder() && medicationRequest.getRecorder().hasReference()) {
+        if (medicationRequest.hasRequester() && medicationRequest.getRequester().hasAgent()) {
+            final var requester = medicationRequest.getRequester();
+            final var agent = requester.getAgent();
+
+            if (ResourceType.Practitioner.name().equals(agent.getReferenceElement().getResourceType())
+                    && requester.hasOnBehalfOf()) {
+                var onBehalfOf = requester.getOnBehalfOf();
+                return participantMapper.mapToParticipant(
+                    messageContext.getAgentDirectory().getAgentRef(agent, onBehalfOf), ParticipantType.AUTHOR);
+            } else {
+                return participantMapper.mapToParticipant(
+                    messageContext.getAgentDirectory().getAgentId(agent), ParticipantType.AUTHOR);
+            }
+        } else if (medicationRequest.hasRecorder() && medicationRequest.getRecorder().hasReference()) {
             final var reference = medicationRequest.getRecorder();
             if (isRelevant.test(reference)) {
                 return participantMapper.mapToParticipant(
