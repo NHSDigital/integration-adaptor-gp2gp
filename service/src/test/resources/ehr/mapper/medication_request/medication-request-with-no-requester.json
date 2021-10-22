@@ -8,16 +8,17 @@
     },
     "extension":[
         {
-            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
-            "valueCodeableConcept": {
-                "coding": [
-                    {
-                        "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescriptionType-1",
-                        "code": "repeat",
-                        "display": "Repeat"
-                    }
-                ]
-            }
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationRepeatInformation-1",
+            "extension": [
+                {
+                    "url": "numberOfRepeatPrescriptionsAllowed",
+                    "valuePositiveInt": 12
+                },
+                {
+                    "url": "numberOfRepeatPrescriptionsIssued",
+                    "valuePositiveInt": 11
+                }
+            ]
         }
     ],
     "identifier":[
@@ -27,12 +28,16 @@
         }
     ],
     "status":"active",
-    "intent":"plan",
+    "intent":"order",
     "medicationReference":{
         "reference":"Medication/20"
     },
+    "subject":{
+        "reference":"Patient/2"
+    },
+    "authoredOn":"2017-11-10T00:00:00+00:00",
     "recorder":{
-        "reference":"Practitioner/1"
+        "reference":"Practitioner/2"
     },
     "dosageInstruction":[
         {
@@ -46,7 +51,9 @@
             "end":"2018-08-15T00:00:00+01:00"
         }
     },
-    "requester": {
-        "agent": {}
-    }
+    "basedOn": [
+        {
+            "reference": "MedicationRequest/D66D84C9-C073-4EDF-8C2C-F309A83C3DC7"
+        }
+    ]
 }
