@@ -170,11 +170,6 @@ This is some random free text</text>
 </Participant>
     </NarrativeStatement>
 </component>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -201,11 +196,6 @@ This is some random free text</text>
 </Participant>
     </ObservationStatement>
 </component>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
