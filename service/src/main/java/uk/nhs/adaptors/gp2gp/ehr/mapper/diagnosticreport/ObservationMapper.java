@@ -133,9 +133,6 @@ public class ObservationMapper {
             .narrativeStatements(narrativeStatements)
             .statementsForDerivedObservations(statementsForDerivedObservations);
 
-        prepareParticipant(observation)
-            .ifPresent(observationCompoundStatementTemplateParameters::participant);
-
         return TemplateUtils.fillTemplate(
             OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
             observationCompoundStatementTemplateParameters.build()

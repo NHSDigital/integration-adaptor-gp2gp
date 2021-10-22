@@ -20,7 +20,9 @@ gp2gp:
     trustStorePassword: ${GP2GP_SSL_TRUST_STORE_PASSWORD:}
   amqp:
     inboundQueueName: ${GP2GP_MHS_INBOUND_QUEUE:inbound}
+    inboundQueueConsumerConcurrency: ${GP2GP_MHS_INBOUND_QUEUE_CONSUMER_CONCURRENCY:1}
     taskQueueName: ${GP2GP_TASK_QUEUE:gp2gpTaskQueue}
+    taskQueueConsumerConcurrency: ${GP2GP_TASK_QUEUE_CONSUMER_CONCURRENCY:1}
     brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672}
     exchange: amq.direct
     username: ${GP2GP_AMQP_USERNAME:}
@@ -43,5 +45,6 @@ gp2gp:
     overrideNhsNumber: ${GP2GP_GPC_OVERRIDE_NHS_NUMBER:}
     overrideFromAsid: ${GP2GP_GPC_OVERRIDE_FROM_ASID:}
     overrideToAsid: ${GP2GP_GPC_OVERRIDE_TO_ASID:}
+    maxRequestSize: ${GP2GP_GPC_MAX_REQUEST_SIZE:150000000} # default 150MB
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}
