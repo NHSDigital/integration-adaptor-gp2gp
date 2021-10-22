@@ -199,21 +199,17 @@ public class DiagnosticReportMapper {
         return reportLevelNarrativeStatements.toString();
     }
 
-    private void buildNarrativeStatementForObservationTimes(List<Observation> observations, StringBuilder reportLevelNarrativeStatements,
-        InstantType diagnosticReportIssued) {
-        if (!observations.isEmpty()) {
-            var dateString = observations.stream()
-                .filter(observation -> observation.hasEffectiveDateTimeType() || observation.hasEffectivePeriod())
-                .findFirst()
-                .map(this::extractDateFromObservation);
-
-            if (dateString.isPresent()) {
-                String narrativeStatementForObservationTimes = buildNarrativeStatementForDiagnosticReport(
-                    diagnosticReportIssued, CommentType.AGGREGATE_COMMENT_SET.getCode(), dateString.get()
-                );
-                reportLevelNarrativeStatements.append(narrativeStatementForObservationTimes);
-            }
-        }
+    private void buildNarrativeStatementForObservationTimes(
+            List<Observation> observations,
+            StringBuilder reportLevelNarrativeStatements,
+            InstantType diagnosticReportIssued) {
+        observations.stream()
+            .filter(observation -> observation.hasEffectiveDateTimeType() || observation.hasEffectivePeriod())
+            .findFirst()
+            .map(this::extractDateFromObservation)
+            .map(dateString -> buildNarrativeStatementForDiagnosticReport(
+                diagnosticReportIssued, CommentType.AGGREGATE_COMMENT_SET.getCode(), dateString))
+            .ifPresent(reportLevelNarrativeStatements::append);
     }
 
     private String extractDateFromObservation(Observation observation) {
