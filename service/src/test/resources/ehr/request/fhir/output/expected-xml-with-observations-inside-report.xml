@@ -169,11 +169,6 @@ This is some random free text</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime nullFlavor="UNK"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
     </ObservationStatement>
 </component>
     </CompoundStatement>

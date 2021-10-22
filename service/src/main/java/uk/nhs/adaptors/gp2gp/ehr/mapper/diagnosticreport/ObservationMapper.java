@@ -200,7 +200,7 @@ public class ObservationMapper {
         }
 
         prepareInterpretation(holder.getObservation()).ifPresent(observationStatementTemplateParametersBuilder::interpretation);
-        prepareParticipant(holder.getObservation()).ifPresent(observationStatementTemplateParametersBuilder::participant);
+        //prepareParticipant(holder.getObservation()).ifPresent(observationStatementTemplateParametersBuilder::participant);
 
         return TemplateUtils.fillTemplate(
             OBSERVATION_STATEMENT_TEMPLATE,

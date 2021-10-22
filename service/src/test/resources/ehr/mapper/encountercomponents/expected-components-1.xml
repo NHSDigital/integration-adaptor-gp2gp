@@ -344,11 +344,6 @@ Received Date: 2010-02-24 15:41
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100223"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </ObservationStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -446,11 +441,6 @@ Received Date: 2001-03-30 11:21
     </referenceInterpretationRange>
 </referenceRange>
 
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </ObservationStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -523,11 +513,6 @@ Received Date: 2010-02-24 15:41
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100223"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </ObservationStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
