@@ -64,6 +64,8 @@ public class ObservationMapperTest {
         + "observation_with_no_effectiveperiod_and_no_effectivedatetime.json";
     private static final String OBSERVATION_WITH_REFERENCERANGE_AND_NO_VALUEQUANTITY_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_with_referencerange_and_no_valuequantity.json";
+    private static final String OBSERVATION_WITH_VALUE_STRING_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_with_value_string.json";
     private static final String OBSERVATION_REFERENCED_BY_DIAGNOSTICREPORT_RESULT_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_referenced_by_diagnosticreport_result.json";
 
@@ -93,6 +95,8 @@ public class ObservationMapperTest {
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_no_effective_properly_handled.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCERANGE_IN_COMMENT =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_referencerange_in_comment.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_STRING_OUTPUT =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_string.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_CLUSTERED_BY_DIAGNOSTICREPORT_REFERENCE_XML =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_clustered_by_diagnosticreport_reference.xml";
 
@@ -218,6 +222,10 @@ public class ObservationMapperTest {
             Arguments.of(
                 OBSERVATION_WITH_REFERENCERANGE_AND_NO_VALUEQUANTITY_JSON,
                 OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCERANGE_IN_COMMENT
+            ),
+            Arguments.of(
+                OBSERVATION_WITH_VALUE_STRING_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_STRING_OUTPUT
             ),
             Arguments.of(
                 OBSERVATION_REFERENCED_BY_DIAGNOSTICREPORT_RESULT_JSON,

@@ -61,6 +61,7 @@ public class ObservationMapper {
     private static final String INTERPRETATION_CODE = "<interpretationCode code=";
 
     private static final String DATA_ABSENT_PREFIX = "Data Absent: ";
+    private static final String VALUE_PREFIX = "Value: ";
     private static final String INTERPRETATION_PREFIX = "Interpretation: ";
     private static final String BODY_SITE_PREFIX = "Site: ";
     private static final String METHOD_PREFIX = "Method: ";
@@ -193,7 +194,7 @@ public class ObservationMapper {
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(holder.getObservation()))
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(holder.getObservation()));
 
-        if (holder.getObservation().hasValue()) {
+        if (holder.getObservation().hasValue() && !holder.getObservation().hasValueStringType()) {
             Type value = holder.getObservation().getValue();
 
             if (UNHANDLED_TYPES.contains(value.getClass())) {
@@ -248,6 +249,10 @@ public class ObservationMapper {
 
         if (observation.hasComment()) {
             interpretationTextAndComment.append(StringUtils.LF).append(observation.getComment());
+        }
+
+        if (observation.hasValueStringType()) {
+            interpretationTextAndComment.append(StringUtils.LF).append(VALUE_PREFIX).append(observation.getValueStringType());
         }
 
         if (observation.hasReferenceRange() && observation.getReferenceRangeFirstRep().hasText()) {
