@@ -152,6 +152,26 @@ public class SpecimenMapperTest {
         assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
     }
 
+    @Test
+    public void When_MappingDefaultSpecimenWithNoMappableObservations_Expect_EmptySpecimenXmlOutput() throws IOException {
+        String defaultSpecimenJson = ResourceTestFileUtils.getFileContent(
+                DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "input_default_specimen.json"
+        );
+        Specimen specimen = new FhirParseService().parseResource(defaultSpecimenJson, Specimen.class);
+        String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
+                DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_empty_specimen.xml"
+        );
+        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
+
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
+
+        String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
+                specimen, Collections.emptyList(), diagnosticReport
+        );
+
+        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
+    }
+
     private static Stream<Arguments> testData() {
         return Stream.of(
             Arguments.of("input-specimen.json", "expected-specimen.xml"),

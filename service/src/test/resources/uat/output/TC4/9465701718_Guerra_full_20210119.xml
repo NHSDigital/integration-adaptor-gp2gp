@@ -691,7 +691,6 @@ Received Date: 2002-03-30 12:21
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20020330"/>
-            <value xsi:type="ST">Ap 2.400</value>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -703,7 +702,8 @@ DVT Prophylaxis - INR 2.0-2.5
 Treatment of DVT,PE,AF,TIA - INR 2.0-3.0
 Recurrent DVT or PE                )
 Arterial Disease                   )INR 3.0-4.5
-Mechanical Prosthetic Heart Valves )</text>
+Mechanical Prosthetic Heart Valves )
+Value: Ap 2.400</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330"/>
     </NarrativeStatement>
