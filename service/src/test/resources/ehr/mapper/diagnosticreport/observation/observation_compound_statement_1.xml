@@ -31,11 +31,6 @@ NEGATIVE
      second day after the expected menstruation.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100223"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -47,11 +42,6 @@ CommentDate:20201215151704
 (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151704"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
     </CompoundStatement>

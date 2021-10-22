@@ -357,11 +357,6 @@ NEGATIVE
      second day after the expected menstruation.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100223"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -373,11 +368,6 @@ CommentDate:20201215151704
 (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151704"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
@@ -452,11 +442,6 @@ CommentDate:20201215151713
 (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
@@ -524,11 +509,6 @@ CommentDate:20100223
 Test not available</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100223"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -540,11 +520,6 @@ CommentDate:20201215151713
 (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
     </CompoundStatement>

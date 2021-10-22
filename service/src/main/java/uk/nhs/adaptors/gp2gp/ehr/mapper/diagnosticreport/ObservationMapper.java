@@ -200,7 +200,6 @@ public class ObservationMapper {
         }
 
         prepareInterpretation(holder.getObservation()).ifPresent(observationStatementTemplateParametersBuilder::interpretation);
-        //prepareParticipant(holder.getObservation()).ifPresent(observationStatementTemplateParametersBuilder::participant);
 
         return TemplateUtils.fillTemplate(
             OBSERVATION_STATEMENT_TEMPLATE,
@@ -331,8 +330,6 @@ public class ObservationMapper {
             .comment(comment)
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
 
-        prepareParticipant(observation).ifPresent(narrativeStatementTemplateParameters::participant);
-
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
     }
 
@@ -373,9 +370,6 @@ public class ObservationMapper {
                     .availabilityTimeElement(availabilityTimeElement)
                     .observationStatement(observationStatement.get())
                     .narrativeStatements(narrativeStatements.get());
-
-                prepareParticipant(derivedObservation).ifPresent(observationCompoundStatementTemplateParameters::participant);
-
                 derivedObservationsBlock.append(
                     TemplateUtils.fillTemplate(
                         OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
@@ -440,18 +434,6 @@ public class ObservationMapper {
 
         return (coding.hasSystem() && codingSystem.equals(INTERPRETATION_CODE_SYSTEM))
             && INTERPRETATION_CODES.contains(code);
-    }
-
-    private Optional<String> prepareParticipant(Observation observation) {
-        if (observation.hasPerformer()) {
-            final String participantReference = messageContext.getAgentDirectory().getAgentId(observation.getPerformerFirstRep());
-
-            return Optional.ofNullable(
-                participantMapper.mapToParticipant(participantReference, ParticipantType.PERFORMER)
-            );
-        }
-
-        return Optional.empty();
     }
 
     private Optional<String> extractUnit(Observation.ObservationReferenceRangeComponent referenceRange) {
