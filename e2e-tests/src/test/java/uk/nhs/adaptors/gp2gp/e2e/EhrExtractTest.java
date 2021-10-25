@@ -140,7 +140,7 @@ public class EhrExtractTest {
 
         assertThat(attachment.getPayload()).isNotBlank();
         assertThat(attachment.getContentType()).isEqualTo("application/xml");
-        assertThat(attachment.getIsBase64()).isEqualTo("false");
+        assertThat(attachment.getIsBase64()).isFalse();
 
         var description = attachment.getDescription();
         var descriptionElements = Arrays.stream(description.split("\n"))
