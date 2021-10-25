@@ -185,7 +185,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return OutboundMessage.Attachment.builder()
             .payload(content)
             .contentType(XML_CONTENT_TYPE)
-            .isBase64(Boolean.FALSE.toString())
+            .isBase64(Boolean.FALSE)
             .description(OutboundMessage.AttachmentDescription.builder()
                 .fileName(filename)
                 .contentType(XML_CONTENT_TYPE)
@@ -230,7 +230,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var attachments = Collections.singletonList(
             OutboundMessage.Attachment.builder()
                 .contentType(XML_CONTENT_TYPE)
-                .isBase64(Boolean.FALSE.toString())
+                .isBase64(Boolean.FALSE)
                 .description(taskDefinition.getDocumentId())
                 .payload(ehrExtract)
                 .build());
