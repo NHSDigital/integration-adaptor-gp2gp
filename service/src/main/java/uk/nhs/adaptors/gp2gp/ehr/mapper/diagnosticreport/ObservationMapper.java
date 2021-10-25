@@ -293,6 +293,7 @@ public class ObservationMapper {
             .stream()
             .map(observationRelatedComponent -> observationRelatedComponent.getTarget().getResource())
             .map(Observation.class::cast)
+            .filter(relatedObservation -> hasCode(relatedObservation.getCode(), List.of(COMMENT_NOTE_CODE)))
             .map(relatedObservation -> relatedObservation.getComment())
             .collect(Collectors.toList())
             .forEach(comment -> relatedObservationsComments.append(StringUtils.LF).append(comment));
