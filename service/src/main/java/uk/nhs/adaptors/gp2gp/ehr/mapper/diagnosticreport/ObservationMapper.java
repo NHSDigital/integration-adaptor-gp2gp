@@ -286,6 +286,24 @@ public class ObservationMapper {
                     holder, textAndComment, prepareCommentType(observation).getCode())
             ).ifPresent(narrativeStatementsBlock::append);
 
+
+        StringBuilder relatedObservationsComments = new StringBuilder();
+
+        observation.getRelated()
+            .stream()
+            .map(observationRelatedComponent -> (Observation) observationRelatedComponent.getTarget().getResource())
+            .map(relatedObservation -> relatedObservation.getComment())
+            .collect(Collectors.toList())
+            .forEach(comment -> relatedObservationsComments.append(StringUtils.LF).append(comment));
+
+        Optional.of(relatedObservationsComments)
+            .map(StringBuilder::toString)
+            .filter(StringUtils::isNotBlank)
+            .map(textAndComment -> mapObservationToNarrativeStatement(
+                    holder, textAndComment, CommentType.USER_COMMENT.getCode())
+            ).ifPresent(narrativeStatementsBlock::append);
+                        
+
         if (!narrativeStatementsBlock.toString().isBlank()) {
             return Optional.of(narrativeStatementsBlock.toString());
         }
