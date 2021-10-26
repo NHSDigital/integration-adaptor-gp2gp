@@ -313,14 +313,14 @@ public class ImmunizationObservationStatementMapper {
 
     private ImmunizationPractitionerComponent extractPractitioner(Immunization immunization) {
         return immunization.getPractitioner().stream()
-            .filter(Immunization.ImmunizationPractitionerComponent::hasRole)
-            .filter(pract -> hasAPPractitionerRole(pract.getRole()))
+            .filter(ImmunizationPractitionerComponent::hasRole)
+            .filter(this::hasAPPractitionerRole)
             .findFirst()
             .orElseGet(immunization::getPractitionerFirstRep);
     }
 
-    public boolean hasAPPractitionerRole(CodeableConcept codeableConcept) {
-        return codeableConcept.getCoding().stream()
+    public boolean hasAPPractitionerRole(ImmunizationPractitionerComponent immunizationPractitionerComponent) {
+        return immunizationPractitionerComponent.getRole().getCoding().stream()
             .anyMatch(value -> value.hasCode() && value.getCode().equals(AP_PRACTITIONER));
     }
 }
