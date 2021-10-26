@@ -75,6 +75,19 @@
                 "resourceType": "QuestionnaireResponse",
                 "id": "12345"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "54321"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "543210"
+            }
         }
+
     ]
 }
