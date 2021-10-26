@@ -76,7 +76,7 @@ public class DiagnosticReportMapper {
 
         final IdMapper idMapper = messageContext.getIdMapper();
 
-        String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport);
+        String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, observations);
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getIdElement()))
@@ -155,7 +155,7 @@ public class DiagnosticReportMapper {
             .setComment("EMPTY REPORT");
     }
 
-    private String prepareReportLevelNarrativeStatements(DiagnosticReport diagnosticReport) {
+    private String prepareReportLevelNarrativeStatements(DiagnosticReport diagnosticReport, List<Observation> observations) {
         StringBuilder reportLevelNarrativeStatements = new StringBuilder();
 
         if (diagnosticReport.hasConclusion()) {
@@ -193,8 +193,26 @@ public class DiagnosticReportMapper {
 
         buildNarrativeStatementForMissingResults(diagnosticReport, reportLevelNarrativeStatements);
         buildNarrativeStatementForParticipants(diagnosticReport, reportLevelNarrativeStatements);
+        buildNarrativeStatementForObservationComments(diagnosticReport.getIssuedElement(), observations, reportLevelNarrativeStatements);
 
         return reportLevelNarrativeStatements.toString();
+    }
+
+    private void buildNarrativeStatementForObservationComments(
+        InstantType issuedElement,
+        List<Observation> observations,
+        StringBuilder reportLevelNarrativeStatements) {
+
+        var narrativeStatementObservationComments = observations.stream()
+            .filter(Observation::hasComment)
+            .map(Observation::getComment)
+            .filter(StringUtils::isNotBlank)
+            .map(observationComment -> buildNarrativeStatementForDiagnosticReport(
+                issuedElement, CommentType.AGGREGATE_COMMENT_SET.getCode(), observationComment
+            ))
+            .collect(Collectors.joining(System.lineSeparator()));
+
+        reportLevelNarrativeStatements.append(narrativeStatementObservationComments);
     }
 
     private void buildNarrativeStatementForMissingResults(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {

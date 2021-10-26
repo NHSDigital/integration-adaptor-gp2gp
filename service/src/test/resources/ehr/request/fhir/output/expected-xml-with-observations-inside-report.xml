@@ -111,6 +111,16 @@ Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030221115000"/>
     </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="test-id-3"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+CommentDate:20030221115000
+
+This is some random free text</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030221115000"/>
+    </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
