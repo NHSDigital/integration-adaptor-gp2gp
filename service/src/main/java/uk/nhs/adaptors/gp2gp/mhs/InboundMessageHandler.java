@@ -21,8 +21,6 @@ import uk.nhs.adaptors.gp2gp.mhs.exception.UnsupportedInteractionException;
 import javax.jms.JMSException;
 import javax.jms.Message;
 
-import java.text.SimpleDateFormat;
-
 import static uk.nhs.adaptors.gp2gp.common.utils.Jms.getJmsMessageTimestamp;
 import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.ACKNOWLEDGMENT_REQUEST;
 import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.CONTINUE_REQUEST;
