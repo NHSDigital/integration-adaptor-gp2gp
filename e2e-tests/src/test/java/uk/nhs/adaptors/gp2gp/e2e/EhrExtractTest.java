@@ -40,6 +40,7 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_NO_DOCUMENTS = "9690937294";
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_1 = "9690937819";
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_2 = "9690937841";
+    private static final String NHS_NUMBER_TWO_DOCUMENTS = "9690937789";
     private static final String FROM_PARTY_ID = "N82668-820670";
     private static final String TO_PARTY_ID = "B86041-822103";
     private static final String FROM_ASID = "200000000359";
@@ -57,6 +58,7 @@ public class EhrExtractTest {
     private static final String DOCUMENT_ID_NORMAL = "07a6483f-732b-461e-86b6-edb665c45510";
     private static final String DOCUMENT_ID_LARGE = "11737b22-8cff-47e2-b741-e7f27c8c61a8";
     private static final String DOCUMENT_ID_LARGE_2 = "29c434d6-ad47-415f-b5f5-fd1dc2941d8d";
+    private static final String DOCUMENT_ID_LARGE_3 = "29f6e02e-59e5-4e84-9944-0996260d0c2f";
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
     private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
     private static final String CONVERSATION_ID_PLACEHOLDER = "%%ConversationId%%";
@@ -89,6 +91,15 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest2);
 
         assertHappyPathWithDocs(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER, DOCUMENT_ID_NORMAL);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedForPatientWith2Docs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_TWO_DOCUMENTS, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        //assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER, DOCUMENT_ID_NORMAL);
     }
 
     @Test
