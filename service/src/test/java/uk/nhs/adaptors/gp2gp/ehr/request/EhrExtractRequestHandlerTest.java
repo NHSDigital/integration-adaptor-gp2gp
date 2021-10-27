@@ -108,6 +108,7 @@ public class EhrExtractRequestHandlerTest {
             .created(timestamp)
             .updatedAt(timestamp)
             .conversationId(CONVERSATION_ID)
+            .messageTimestamp(MESSAGE_TIMESTAMP)
             .ehrRequest(EhrExtractStatus.EhrRequest.builder()
                 .requestId(REQUEST_ID)
                 .nhsNumber(NHS_NUMBER)
