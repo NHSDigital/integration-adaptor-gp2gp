@@ -21,6 +21,9 @@ import uk.nhs.adaptors.gp2gp.mhs.exception.UnsupportedInteractionException;
 import javax.jms.JMSException;
 import javax.jms.Message;
 
+import java.text.SimpleDateFormat;
+
+import static uk.nhs.adaptors.gp2gp.common.utils.Jms.getJmsMessageTimestamp;
 import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.ACKNOWLEDGMENT_REQUEST;
 import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.CONTINUE_REQUEST;
 import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.EHR_EXTRACT_REQUEST;
@@ -85,7 +88,8 @@ public class InboundMessageHandler {
         if (EHR_EXTRACT_REQUEST.getInteractionId().equals(interactionId)) {
             ehrExtractRequestHandler.handleStart(
                 inboundMessage.getEbXMLDocument(),
-                inboundMessage.getPayloadDocument()
+                inboundMessage.getPayloadDocument(),
+                inboundMessage.getMessageTimestamp()
             );
         } else if (CONTINUE_REQUEST.getInteractionId().equals(interactionId)) {
             ehrExtractRequestHandler.handleContinue(conversationId, inboundMessage.getRawPayload());
@@ -103,14 +107,16 @@ public class InboundMessageHandler {
         var payloadDocument = getMessagePayload(inboundMessage);
         var conversationId = getConversationId(ebXmlDocument);
         var interactionId = getInteractionId(ebXmlDocument);
+        var messageTimestamp = getJmsMessageTimestamp(message);
 
-        return new ParsedInboundMessage(
-            ebXmlDocument,
-            payloadDocument,
-            inboundMessage.getPayload(),
-            conversationId,
-            interactionId
-        );
+        return ParsedInboundMessage.builder()
+            .ebXMLDocument(ebXmlDocument)
+            .payloadDocument(payloadDocument)
+            .rawPayload(inboundMessage.getPayload())
+            .conversationId(conversationId)
+            .interactionId(interactionId)
+            .messageTimestamp(messageTimestamp)
+            .build();
     }
 
     @SneakyThrows
