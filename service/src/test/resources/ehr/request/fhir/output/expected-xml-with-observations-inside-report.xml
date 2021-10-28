@@ -53,21 +53,6 @@
         </agentPerson>
     </Agent>
 </part>
-            <part typeCode="PART">
-    <Agent classCode="AGNT">
-        <id root="test-id-3"/>
-        <code nullFlavor="UNK">
-            <originalText>Unknown</originalText>
-        </code>
-        <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <name>
-                <prefix>Dr</prefix>
-                <given>David</given>
-                <family>McAvenue</family>
-            </name>
-        </agentPerson>
-    </Agent>
-</part>
     </agentDirectory>
 </responsibleParty>
                 <component typeCode="COMP">
@@ -183,11 +168,6 @@ CommentDate:20100113
 This is some random free text</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100113"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
@@ -209,11 +189,6 @@ This is some random free text</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime nullFlavor="UNK"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
     </ObservationStatement>
 </component>
     </CompoundStatement>

@@ -20,11 +20,6 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100223"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
-    </agentRef>
-</Participant>
     </ObservationStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -41,11 +36,6 @@ Mechanical Prosthetic Heart Valves )
 Value: Ap 2.400</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100223"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
     </CompoundStatement>

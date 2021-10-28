@@ -19,11 +19,6 @@
     </referenceInterpretationRange>
 </referenceRange>
 
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/0D1A68BE05FC873EBCA5A9048F8E2A0861D7EF0F-XPSP"/>
-    </agentRef>
-</Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -34,10 +29,5 @@ CommentDate:20030616
 Test comment</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030616"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/0D1A68BE05FC873EBCA5A9048F8E2A0861D7EF0F-XPSP"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
