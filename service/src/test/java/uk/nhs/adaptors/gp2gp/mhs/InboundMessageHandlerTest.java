@@ -111,7 +111,7 @@ public class InboundMessageHandlerTest {
         var result = inboundMessageHandler.handle(message);
 
         assertThat(result).isTrue();
-        verify(ehrExtractRequestHandler).handleStart(header, payload);
+        verify(ehrExtractRequestHandler).handleStart(eq(header), eq(payload), any());
     }
 
     @Test
@@ -171,7 +171,7 @@ public class InboundMessageHandlerTest {
     public void When_MessageHandlingFails_Expect_ProcessToBeFailed() {
         setupValidMessage();
 
-        doThrow(new RuntimeException("test exception")).when(ehrExtractRequestHandler).handleStart(any(), any());
+        doThrow(new RuntimeException("test exception")).when(ehrExtractRequestHandler).handleStart(any(), any(), any());
         doReturn(true).when(processFailureHandlingService).failProcess(any(), any(), any(), any());
 
         var result = inboundMessageHandler.handle(message);
@@ -190,7 +190,7 @@ public class InboundMessageHandlerTest {
     public void When_MessageProcessingFails_Expect_ResultFromFailureHandlerToBeReturned() {
         setupValidMessage();
 
-        doThrow(new RuntimeException("test exception")).when(ehrExtractRequestHandler).handleStart(any(), any());
+        doThrow(new RuntimeException("test exception")).when(ehrExtractRequestHandler).handleStart(any(), any(), any());
 
         doReturn(true, false).when(processFailureHandlingService).failProcess(any(), any(), any(), any());
 
@@ -203,7 +203,7 @@ public class InboundMessageHandlerTest {
     public void When_ErrorHandlingFails_Expect_ExceptionThrown() {
         setupValidMessage();
 
-        doThrow(new RuntimeException("message handling exception")).when(ehrExtractRequestHandler).handleStart(any(), any());
+        doThrow(new RuntimeException("message handling exception")).when(ehrExtractRequestHandler).handleStart(any(), any(), any());
 
         var failureHandlingException = new RuntimeException("failure handling exception");
         doThrow(failureHandlingException).when(processFailureHandlingService).failProcess(any(), any(), any(), any());
