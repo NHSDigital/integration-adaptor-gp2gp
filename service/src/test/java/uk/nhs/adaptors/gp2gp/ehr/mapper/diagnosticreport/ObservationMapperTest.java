@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -63,6 +64,10 @@ public class ObservationMapperTest {
         + "observation_with_no_effectiveperiod_and_no_effectivedatetime.json";
     private static final String OBSERVATION_WITH_REFERENCERANGE_AND_NO_VALUEQUANTITY_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_with_referencerange_and_no_valuequantity.json";
+    private static final String OBSERVATION_WITH_VALUE_STRING_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_with_value_string.json";
+    private static final String OBSERVATION_REFERENCED_BY_DIAGNOSTICREPORT_RESULT_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_referenced_by_diagnosticreport_result.json";
 
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = OBSERVATION_TEST_FILE_DIRECTORY
@@ -90,7 +95,12 @@ public class ObservationMapperTest {
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_no_effective_properly_handled.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCERANGE_IN_COMMENT =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_referencerange_in_comment.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_STRING_OUTPUT =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_string.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_CLUSTERED_BY_DIAGNOSTICREPORT_REFERENCE_XML =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_clustered_by_diagnosticreport_reference.xml";
 
+    private static final String DIAGNOSTIC_REPORT_REFERENCE_ID = "Observation/TEST_REFERENCE_ID";
 
     @Mock
     private IdMapper idMapper;
@@ -110,6 +120,13 @@ public class ObservationMapperTest {
     public void setUp() throws IOException {
         String bundleJsonInput = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "fhir_bundle.json");
         Bundle bundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
+
+        bundle.addEntry(new Bundle.BundleEntryComponent().setResource(
+            new DiagnosticReport().addResult(
+                new Reference().setReference(DIAGNOSTIC_REPORT_REFERENCE_ID)
+            )
+        ));
+
         InputBundle inputBundle = new InputBundle(bundle);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
         lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
@@ -205,6 +222,14 @@ public class ObservationMapperTest {
             Arguments.of(
                 OBSERVATION_WITH_REFERENCERANGE_AND_NO_VALUEQUANTITY_JSON,
                 OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCERANGE_IN_COMMENT
+            ),
+            Arguments.of(
+                OBSERVATION_WITH_VALUE_STRING_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_STRING_OUTPUT
+            ),
+            Arguments.of(
+                OBSERVATION_REFERENCED_BY_DIAGNOSTICREPORT_RESULT_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_CLUSTERED_BY_DIAGNOSTICREPORT_REFERENCE_XML
             )
         );
     }

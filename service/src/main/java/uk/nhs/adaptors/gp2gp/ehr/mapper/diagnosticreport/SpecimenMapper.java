@@ -56,6 +56,7 @@ public class SpecimenMapper {
     private static final String FASTING_STATUS_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
         + "-FastingStatus-1";
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
+    private static final String EMPTY_SPECIMEN_STRING = "EMPTY SPECIMEN";
 
     private final MessageContext messageContext;
     private final ObservationMapper observationMapper;
@@ -75,7 +76,7 @@ public class SpecimenMapper {
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
         buildSpecimenMaterialType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::specimenMaterialType);
-        buildSpecimenNarrativeStatement(specimen, availabilityTimeElement)
+        buildSpecimenNarrativeStatement(specimen, availabilityTimeElement, mappedObservations.isEmpty())
             .ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
 
         return TemplateUtils.fillTemplate(
@@ -153,8 +154,13 @@ public class SpecimenMapper {
             || (!observations.isEmpty() && observations.get(0).getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
-    private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement) {
+    private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement,
+                                                             Boolean emptyMappedObservations) {
         SpecimenNarrativeStatementCommentBuilder specimenNarrativeStatementCommentBuilder = new SpecimenNarrativeStatementCommentBuilder();
+
+        if (emptyMappedObservations) {
+            specimenNarrativeStatementCommentBuilder.appendText(EMPTY_SPECIMEN_STRING);
+        }
 
         getReceivedTime(specimen)
             .map(PrimitiveType::getValue)

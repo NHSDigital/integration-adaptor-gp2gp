@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
 import org.hl7.fhir.dstu3.model.Quantity;
@@ -60,6 +61,7 @@ public class ObservationMapper {
     private static final String INTERPRETATION_CODE = "<interpretationCode code=";
 
     private static final String DATA_ABSENT_PREFIX = "Data Absent: ";
+    private static final String VALUE_PREFIX = "Value: ";
     private static final String INTERPRETATION_PREFIX = "Interpretation: ";
     private static final String BODY_SITE_PREFIX = "Site: ";
     private static final String METHOD_PREFIX = "Method: ";
@@ -94,7 +96,8 @@ public class ObservationMapper {
         var relatedObservations = getRelatedObservations(observationAssociatedWithSpecimen);
 
         final String output;
-        if (relatedObservations.isEmpty()) {
+        if (relatedObservations.isEmpty()
+            && !hasDiagnosticReportResultReference(observationAssociatedWithSpecimen.getObservation())) {
             output = outputWithoutCompoundStatement(observationAssociatedWithSpecimen);
         } else {
             output = outputWithCompoundStatement(observationAssociatedWithSpecimen, relatedObservations);
@@ -103,6 +106,17 @@ public class ObservationMapper {
         observationAssociatedWithSpecimen.verifyObservationWasMapped();
         relatedObservations.forEach(MultiStatementObservationHolder::verifyObservationWasMapped);
         return output;
+    }
+
+    private boolean hasDiagnosticReportResultReference(Observation observation) {
+        return messageContext.getInputBundleHolder().getResourcesOfType(DiagnosticReport.class)
+            .stream()
+            .map(DiagnosticReport.class::cast)
+            .anyMatch(diagnosticReport ->
+                diagnosticReport.getResult()
+                    .stream()
+                    .anyMatch(reference -> observation.getId().equals(reference.getReference()))
+            );
     }
 
     private String outputWithCompoundStatement(MultiStatementObservationHolder observationAssociatedWithSpecimen,
@@ -180,7 +194,7 @@ public class ObservationMapper {
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(holder.getObservation()))
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(holder.getObservation()));
 
-        if (holder.getObservation().hasValue()) {
+        if (holder.getObservation().hasValue() && !holder.getObservation().hasValueStringType()) {
             Type value = holder.getObservation().getValue();
 
             if (UNHANDLED_TYPES.contains(value.getClass())) {
@@ -235,6 +249,10 @@ public class ObservationMapper {
 
         if (observation.hasComment()) {
             interpretationTextAndComment.append(StringUtils.LF).append(observation.getComment());
+        }
+
+        if (observation.hasValueStringType()) {
+            interpretationTextAndComment.append(StringUtils.LF).append(VALUE_PREFIX).append(observation.getValueStringType());
         }
 
         if (observation.hasReferenceRange() && observation.getReferenceRangeFirstRep().hasText()) {

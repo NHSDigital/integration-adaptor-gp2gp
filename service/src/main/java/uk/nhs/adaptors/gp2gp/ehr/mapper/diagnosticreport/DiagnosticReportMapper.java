@@ -195,6 +195,7 @@ public class DiagnosticReportMapper {
         buildNarrativeStatementForMissingResults(diagnosticReport, reportLevelNarrativeStatements);
         buildNarrativeStatementForObservationTimes(observations, reportLevelNarrativeStatements, diagnosticReport.getIssuedElement());
         buildNarrativeStatementForParticipants(diagnosticReport, reportLevelNarrativeStatements);
+        buildNarrativeStatementForObservationComments(diagnosticReport.getIssuedElement(), observations, reportLevelNarrativeStatements);
 
         return reportLevelNarrativeStatements.toString();
     }
@@ -222,6 +223,23 @@ public class DiagnosticReportMapper {
                 + DateFormatUtil.toTextFormat(observation.getEffectivePeriod().getStartElement());
         }
         return StringUtils.EMPTY;
+    }
+
+    private void buildNarrativeStatementForObservationComments(
+        InstantType issuedElement,
+        List<Observation> observations,
+        StringBuilder reportLevelNarrativeStatements) {
+
+        var narrativeStatementObservationComments = observations.stream()
+            .filter(Observation::hasComment)
+            .map(Observation::getComment)
+            .filter(StringUtils::isNotBlank)
+            .map(observationComment -> buildNarrativeStatementForDiagnosticReport(
+                issuedElement, CommentType.AGGREGATE_COMMENT_SET.getCode(), observationComment
+            ))
+            .collect(Collectors.joining(System.lineSeparator()));
+
+        reportLevelNarrativeStatements.append(narrativeStatementObservationComments);
     }
 
     private void buildNarrativeStatementForMissingResults(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {

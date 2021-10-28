@@ -71,6 +71,7 @@ public class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_CODED_DIAGNOSIS = "diagnostic-report-with-coded-diagnosis.xml";
     private static final String OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.xml";
     private static final String OUTPUT_XML_EXTENSION_ID = "diagnostic-report-with-extension-id.xml";
+    private static final String OUTPUT_XML_MULTIPLE_RESULTS = "diagnostic-report-with-multiple-results.xml";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -133,7 +134,7 @@ public class DiagnosticReportMapperTest {
             Arguments.of(INPUT_JSON_ONE_SPECIMEN, OUTPUT_XML_ONE_SPECIMEN),
             Arguments.of(INPUT_JSON_ONE_RESULT, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_MULTI_SPECIMENS, OUTPUT_XML_MULTI_SPECIMENS),
-            Arguments.of(INPUT_JSON_MULTI_RESULTS, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_MULTI_RESULTS, OUTPUT_XML_MULTIPLE_RESULTS),
             Arguments.of(INPUT_JSON_PERFORMER, OUTPUT_XML_PARTICIPANT),
             Arguments.of(INPUT_JSON_PERFORMER_NO_ACTOR, OUTPUT_XML_STATUS_NARRATIVE),
             Arguments.of(INPUT_JSON_CONCLUSION, OUTPUT_XML_CONCLUSION),
