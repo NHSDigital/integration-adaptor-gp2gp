@@ -15,6 +15,7 @@ import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters;
@@ -27,6 +28,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DocumentReferenceToNarrativeStatementMapper {
@@ -57,7 +59,12 @@ public class DocumentReferenceToNarrativeStatementMapper {
         final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference);
         final String attachmentContentType = DocumentReferenceUtils.extractContentType(attachment);
 
-        if (!supportedContentTypes.isContentTypeSupported(attachmentContentType) || isFileAbsent(attachment)) {
+        boolean isContentTypeSupported = supportedContentTypes.isContentTypeSupported(attachmentContentType);
+        if (!isContentTypeSupported) {
+            LOGGER.info("Unsupported ContentType '{}'!", attachmentContentType);
+        }
+
+        if (!isContentTypeSupported || isFileAbsent(attachment)) {
             builder.referenceTitle(DocumentReferenceUtils.buildMissingAttachmentFileName(narrativeStatementId))
                 .comment(getComment(documentReference, attachment.getTitle()))
                 .referenceContentType(DEFAULT_ATTACHMENT_CONTENT_TYPE);
