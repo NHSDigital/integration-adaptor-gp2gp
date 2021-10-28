@@ -316,7 +316,7 @@ public class ObservationMapper {
             .map(textAndComment -> mapObservationToNarrativeStatement(
                     holder, textAndComment, CommentType.USER_COMMENT.getCode())
             ).ifPresent(narrativeStatementsBlock::append);
-        
+
         if (!narrativeStatementsBlock.toString().isBlank()) {
             return Optional.of(narrativeStatementsBlock.toString());
         }
