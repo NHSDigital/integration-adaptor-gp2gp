@@ -286,6 +286,15 @@ public class ObservationMapper {
                     holder, textAndComment, prepareCommentType(observation).getCode())
             ).ifPresent(narrativeStatementsBlock::append);
 
+        if (!narrativeStatementsBlock.toString().isBlank()) {
+            return Optional.of(narrativeStatementsBlock.toString());
+        }
+
+        return Optional.empty();
+    }
+
+    private Optional<String> prepareNarrativeStatementForRelatedObservationComments(MultiStatementObservationHolder holder) {
+        Observation observation = holder.getObservation();
 
         StringBuilder relatedObservationsComments = new StringBuilder();
 
@@ -293,10 +302,13 @@ public class ObservationMapper {
             .stream()
             .map(observationRelatedComponent -> observationRelatedComponent.getTarget().getResource())
             .map(Observation.class::cast)
+            .filter(Observation::hasComment)
             .filter(relatedObservation -> hasCode(relatedObservation.getCode(), List.of(COMMENT_NOTE_CODE)))
-            .map(relatedObservation -> relatedObservation.getComment())
+            .map(Observation::getComment)
             .collect(Collectors.toList())
             .forEach(comment -> relatedObservationsComments.append(StringUtils.LF).append(comment));
+
+        StringBuilder narrativeStatementsBlock = new StringBuilder();
 
         Optional.of(relatedObservationsComments)
             .map(StringBuilder::toString)
@@ -304,7 +316,7 @@ public class ObservationMapper {
             .map(textAndComment -> mapObservationToNarrativeStatement(
                     holder, textAndComment, CommentType.USER_COMMENT.getCode())
             ).ifPresent(narrativeStatementsBlock::append);
-
+        
         if (!narrativeStatementsBlock.toString().isBlank()) {
             return Optional.of(narrativeStatementsBlock.toString());
         }
@@ -381,6 +393,16 @@ public class ObservationMapper {
             Optional<String> narrativeStatements = prepareNarrativeStatements(
                 derivedObservationHolder,
                 isInterpretationCodeMapped(observationStatement.orElse(StringUtils.EMPTY)));
+            Optional<String> relatedObservationNarrativeStatement = prepareNarrativeStatementForRelatedObservationComments(
+                    derivedObservationHolder);
+
+            if (relatedObservationNarrativeStatement.isPresent()) {
+                if (narrativeStatements.isPresent()) {
+                    narrativeStatements = Optional.of(narrativeStatements.get().concat(relatedObservationNarrativeStatement.get()));
+                } else {
+                    narrativeStatements = relatedObservationNarrativeStatement;
+                }
+            }
 
             if (observationStatement.isPresent() && narrativeStatements.isPresent()) {
                 String compoundStatementId = derivedObservationHolder.nextHl7InstanceIdentifier();
