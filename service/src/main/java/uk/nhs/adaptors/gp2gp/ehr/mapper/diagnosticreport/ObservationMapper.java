@@ -328,7 +328,7 @@ public class ObservationMapper {
         return hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE))
             ? CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
     }
-    
+
     private String prepareReferenceRangeValues(SimpleQuantity simpleQuantity) {
         return Stream.of(
             Optional.ofNullable(simpleQuantity.getValue()),
