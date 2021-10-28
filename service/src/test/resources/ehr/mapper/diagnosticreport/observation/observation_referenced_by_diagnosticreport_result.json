@@ -1,0 +1,72 @@
+{
+    "resourceType": "Observation",
+    "id": "TEST_REFERENCE_ID",
+    "meta": {
+      "profile": [
+        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+      ]
+    },
+    "identifier": [
+      {
+        "system": "https://EMISWeb/A82038",
+        "value": "2F114350-80CF-4096-8DCA-4DFEEFC7B3D3"
+      }
+    ],
+    "status": "unknown",
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/observation-category",
+            "code": "laboratory",
+            "display": "Laboratory"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://read.info/readv2",
+          "code": "42QE.00",
+          "display": "International normalised ratio",
+          "userSelected": true
+        },
+        {
+          "extension": [
+            {
+              "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+              "extension": [
+                {
+                  "url": "descriptionId",
+                  "valueId": "257472014"
+                },
+                {
+                  "url": "descriptionDisplay",
+                  "valueString": "International normalised ratio"
+                }
+              ]
+            }
+          ],
+          "system": "http://snomed.info/sct",
+          "code": "165581004",
+          "display": "INR - international normalised ratio"
+        }
+      ]
+    },
+    "subject": {
+      "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+    },
+    "effectiveDateTime": "2010-02-23",
+    "issued": "2010-02-25T15:41:00+00:00",
+    "performer": [
+      {
+        "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+      }
+    ],
+    "valueString": "Ap 2.400",
+    "comment": "DVT Prophylaxis - INR 2.0-2.5\nTreatment of DVT,PE,AF,TIA - INR 2.0-3.0\nRecurrent DVT or PE                )\nArterial Disease                   )INR 3.0-4.5\nMechanical Prosthetic Heart Valves )",
+    "specimen": {
+      "reference": "Specimen/BC86D330-26F7-408E-8D60-3CC3CEAD9804-SPEC-0"
+    }
+}
