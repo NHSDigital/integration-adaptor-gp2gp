@@ -59,8 +59,8 @@ public class DocumentReferenceToNarrativeStatementMapper {
         final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference);
         final String attachmentContentType = DocumentReferenceUtils.extractContentType(attachment);
 
-        boolean isContentTypeSupported;
-        if (!(isContentTypeSupported = supportedContentTypes.isContentTypeSupported(attachmentContentType))) {
+        boolean isContentTypeSupported = supportedContentTypes.isContentTypeSupported(attachmentContentType);
+        if (!isContentTypeSupported) {
             LOGGER.info("Unsupported ContentType '{}'!", attachmentContentType);
         }
 
