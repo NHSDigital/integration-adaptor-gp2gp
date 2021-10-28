@@ -41,6 +41,7 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_1 = "9690937819";
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_2 = "9690937841";
     private static final String NHS_NUMBER_TWO_DOCUMENTS = "9690937789";
+    private static final String NHS_NUMBER_THREE_SMALL_DOCUMENTS = "9690937419";
     private static final String FROM_PARTY_ID = "N82668-820670";
     private static final String TO_PARTY_ID = "B86041-822103";
     private static final String FROM_ASID = "200000000359";
@@ -56,6 +57,7 @@ public class EhrExtractTest {
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
     private static final String EHR_CONTINUE = "ehrContinue";
     private static final String DOCUMENT_ID_NORMAL = "07a6483f-732b-461e-86b6-edb665c45510";
+    private static final String DOCUMENT_ID_NORMAL_2 = "43913840-7979-4554-9ab5-55a7a42f1852";
     private static final String DOCUMENT_ID_LARGE = "11737b22-8cff-47e2-b741-e7f27c8c61a8";
     private static final String DOCUMENT_ID_LARGE_2 = "29c434d6-ad47-415f-b5f5-fd1dc2941d8d";
     private static final String DOCUMENT_ID_LARGE_3 = "29f6e02e-59e5-4e84-9944-0996260d0c2f";
@@ -94,12 +96,23 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedForPatientWith2Docs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceivedForPatientWith2Docs1Large_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_TWO_DOCUMENTS, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        //assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER, DOCUMENT_ID_NORMAL);
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_TWO_DOCUMENTS, DOCUMENT_ID_NORMAL);
+        assertMultipleDocumentsRetrieved(conversationId, 2);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedForPatientWith3Docs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_DOCUMENTS, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_DOCUMENTS, DOCUMENT_ID_NORMAL_2);
+        assertMultipleDocumentsRetrieved(conversationId, 3);
     }
 
     @Test
@@ -210,6 +223,19 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, DOCUMENT_ID_LARGE_2, 3);
+    }
+
+    private void assertMultipleDocumentsRetrieved(String conversationId, int documentCount) {
+        var documentList = waitFor(() -> {
+            var extractStatus = ((Document) Mongo.findEhrExtractStatus(conversationId)
+                .get(GPC_ACCESS_DOCUMENT));
+            if (extractStatus == null) {
+                return null;
+            }
+            return extractStatus.get("documents", Collections.emptyList());
+        });
+
+        assertThat(documentList.size()).isEqualTo(documentCount);
     }
 
     private void assertMultipleDocsSent(String conversationId, String nhsNumber, String documentId, int arraySize) {
