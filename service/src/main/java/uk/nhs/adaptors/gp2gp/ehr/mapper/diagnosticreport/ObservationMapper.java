@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
 import org.hl7.fhir.dstu3.model.Quantity;
@@ -94,7 +95,8 @@ public class ObservationMapper {
         var relatedObservations = getRelatedObservations(observationAssociatedWithSpecimen);
 
         final String output;
-        if (relatedObservations.isEmpty()) {
+        if (relatedObservations.isEmpty()
+            && !hasDiagnosticReportResultReference(observationAssociatedWithSpecimen.getObservation())) {
             output = outputWithoutCompoundStatement(observationAssociatedWithSpecimen);
         } else {
             output = outputWithCompoundStatement(observationAssociatedWithSpecimen, relatedObservations);
@@ -103,6 +105,17 @@ public class ObservationMapper {
         observationAssociatedWithSpecimen.verifyObservationWasMapped();
         relatedObservations.forEach(MultiStatementObservationHolder::verifyObservationWasMapped);
         return output;
+    }
+
+    private boolean hasDiagnosticReportResultReference(Observation observation) {
+        return messageContext.getInputBundleHolder().getResourcesOfType(DiagnosticReport.class)
+            .stream()
+            .map(DiagnosticReport.class::cast)
+            .anyMatch(diagnosticReport ->
+                diagnosticReport.getResult()
+                    .stream()
+                    .anyMatch(reference -> observation.getId().equals(reference.getReference()))
+            );
     }
 
     private String outputWithCompoundStatement(MultiStatementObservationHolder observationAssociatedWithSpecimen,

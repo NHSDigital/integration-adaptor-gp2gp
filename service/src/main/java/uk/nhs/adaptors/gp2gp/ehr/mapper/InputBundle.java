@@ -60,6 +60,14 @@ public class InputBundle {
         this.bundle = bundle;
     }
 
+    public List<Resource> getResourcesOfType(Class<?> classType) {
+        return bundle.getEntry()
+            .stream()
+            .map(Bundle.BundleEntryComponent::getResource)
+            .filter(resource -> ResourceType.valueOf(classType.getSimpleName()).equals(resource.getResourceType()))
+            .collect(Collectors.toList());
+    }
+
     public Optional<Resource> getResource(IIdType reference) {
         if (reference.getResourceType() == null) {
             return Optional.empty();

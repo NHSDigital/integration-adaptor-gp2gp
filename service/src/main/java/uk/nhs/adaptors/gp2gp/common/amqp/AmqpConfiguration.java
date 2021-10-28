@@ -1,9 +1,8 @@
 package uk.nhs.adaptors.gp2gp.common.amqp;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-
 import javax.jms.ConnectionFactory;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.qpid.jms.JmsConnectionFactory;
 import org.apache.qpid.jms.JmsDestination;
 import org.apache.qpid.jms.message.JmsMessageSupport;
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
-import org.springframework.util.StringUtils;
 
 @Configuration
 @ConditionalOnMissingBean(ConnectionFactory.class)
@@ -31,13 +29,13 @@ public class AmqpConfiguration {
 
         factory.setRemoteURI(properties.getBrokers());
 
-        if (isNotBlank(properties.getUsername())) {
+        if (StringUtils.isNotBlank(properties.getUsername())) {
             factory.setUsername(properties.getUsername());
         }
-        if (isNotBlank(properties.getPassword())) {
+        if (StringUtils.isNotBlank(properties.getPassword())) {
             factory.setPassword(properties.getPassword());
         }
-        if (isNotBlank(properties.getClientId())) {
+        if (StringUtils.isNotBlank(properties.getClientId())) {
             factory.setClientID(properties.getClientId());
         }
         if (properties.getReceiveLocalOnly() != null) {
@@ -55,20 +53,20 @@ public class AmqpConfiguration {
 
     private void configureDeserializationPolicy(AmqpProperties properties, JmsConnectionFactory factory) {
         JmsDefaultDeserializationPolicy deserializationPolicy =
-                (JmsDefaultDeserializationPolicy) factory.getDeserializationPolicy();
+            (JmsDefaultDeserializationPolicy) factory.getDeserializationPolicy();
 
-        if (StringUtils.hasLength(properties.getDeserializationPolicy().getWhiteList())) {
+        if (StringUtils.isNotBlank(properties.getDeserializationPolicy().getWhiteList())) {
             deserializationPolicy.setWhiteList(properties.getDeserializationPolicy().getWhiteList());
         }
 
-        if (StringUtils.hasLength(properties.getDeserializationPolicy().getBlackList())) {
+        if (StringUtils.isNotBlank(properties.getDeserializationPolicy().getBlackList())) {
             deserializationPolicy.setBlackList(properties.getDeserializationPolicy().getBlackList());
         }
     }
 
     private void configureRedeliveryPolicy(AmqpProperties properties, JmsConnectionFactory factory) {
         factory.setRedeliveryPolicy(new CustomRedeliveryPolicy(
-                properties.getMaxRedeliveries(), JmsMessageSupport.MODIFIED_FAILED_UNDELIVERABLE));
+            properties.getMaxRedeliveries(), JmsMessageSupport.MODIFIED_FAILED_UNDELIVERABLE));
     }
 
     static final class CustomRedeliveryPolicy implements JmsRedeliveryPolicy {

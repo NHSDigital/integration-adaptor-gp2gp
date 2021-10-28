@@ -96,6 +96,16 @@ Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030221115000"/>
     </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="test-id-3"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+CommentDate:20030221115000
+
+This is some random free text</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030221115000"/>
+    </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -131,6 +141,15 @@ Received Date: 2003-01-09 13:54
     </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/><high value="20100115"/>
+        </effectiveTime>
+        <availabilityTime value="20100113"/>
+            <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
@@ -140,7 +159,18 @@ This is some random free text</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100113"/>
     </NarrativeStatement>
+</component>
+    </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center nullFlavor="UNK"/>
+        </effectiveTime>
+        <availabilityTime nullFlavor="UNK"/>
+            <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
@@ -150,6 +180,8 @@ This is some random free text</text>
         </effectiveTime>
         <availabilityTime nullFlavor="UNK"/>
     </ObservationStatement>
+</component>
+    </CompoundStatement>
 </component>
     </CompoundStatement>
 </component>
