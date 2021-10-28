@@ -74,6 +74,7 @@ public class ObservationMapper {
     private static final String COMMENT_NOTE_CODE = "37331000000100";
 
     private static final String HL7_UNKNOWN_VALUE = "UNK";
+    private static final String HAS_MEMBER_TYPE = "HASMEMBER";
 
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
 
@@ -300,6 +301,7 @@ public class ObservationMapper {
 
         observation.getRelated()
             .stream()
+            .filter(observationRelatedComponent -> HAS_MEMBER_TYPE.equals(observationRelatedComponent.getType().name()))
             .map(observationRelatedComponent -> observationRelatedComponent.getTarget().getResource())
             .map(Observation.class::cast)
             .filter(Observation::hasComment)
@@ -394,7 +396,7 @@ public class ObservationMapper {
                 derivedObservationHolder,
                 isInterpretationCodeMapped(observationStatement.orElse(StringUtils.EMPTY)));
             Optional<String> relatedObservationNarrativeStatement = prepareNarrativeStatementForRelatedObservationComments(
-                    derivedObservationHolder);
+                derivedObservationHolder);
 
             if (relatedObservationNarrativeStatement.isPresent()) {
                 if (narrativeStatements.isPresent()) {
