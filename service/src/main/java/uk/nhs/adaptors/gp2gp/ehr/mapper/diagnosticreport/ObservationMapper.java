@@ -309,29 +309,31 @@ public class ObservationMapper {
         Observation observation = holder.getObservation();
 
         StringBuilder relatedObservationsComments = new StringBuilder();
+        if (observation.hasRelated()) {
+            observation.getRelated()
+                .stream()
+                .filter(Observation.ObservationRelatedComponent::hasType)
+                .filter(observationRelatedComponent -> HAS_MEMBER_TYPE.equals(observationRelatedComponent.getType().name()))
+                .map(observationRelatedComponent -> observationRelatedComponent.getTarget().getResource())
+                .map(Observation.class::cast)
+                .filter(Observation::hasComment)
+                .filter(relatedObservation -> hasCode(relatedObservation.getCode(), List.of(COMMENT_NOTE_CODE)))
+                .map(Observation::getComment)
+                .collect(Collectors.toList())
+                .forEach(comment -> relatedObservationsComments.append(StringUtils.LF).append(comment));
 
-        observation.getRelated()
-            .stream()
-            .filter(observationRelatedComponent -> HAS_MEMBER_TYPE.equals(observationRelatedComponent.getType().name()))
-            .map(observationRelatedComponent -> observationRelatedComponent.getTarget().getResource())
-            .map(Observation.class::cast)
-            .filter(Observation::hasComment)
-            .filter(relatedObservation -> hasCode(relatedObservation.getCode(), List.of(COMMENT_NOTE_CODE)))
-            .map(Observation::getComment)
-            .collect(Collectors.toList())
-            .forEach(comment -> relatedObservationsComments.append(StringUtils.LF).append(comment));
+            StringBuilder narrativeStatementsBlock = new StringBuilder();
 
-        StringBuilder narrativeStatementsBlock = new StringBuilder();
+            Optional.of(relatedObservationsComments)
+                .map(StringBuilder::toString)
+                .filter(StringUtils::isNotBlank)
+                .map(textAndComment -> mapObservationToNarrativeStatement(
+                        holder, textAndComment, CommentType.USER_COMMENT.getCode())
+                ).ifPresent(narrativeStatementsBlock::append);
 
-        Optional.of(relatedObservationsComments)
-            .map(StringBuilder::toString)
-            .filter(StringUtils::isNotBlank)
-            .map(textAndComment -> mapObservationToNarrativeStatement(
-                    holder, textAndComment, CommentType.USER_COMMENT.getCode())
-            ).ifPresent(narrativeStatementsBlock::append);
-
-        if (!narrativeStatementsBlock.toString().isBlank()) {
-            return Optional.of(narrativeStatementsBlock.toString());
+            if (!narrativeStatementsBlock.toString().isBlank()) {
+                return Optional.of(narrativeStatementsBlock.toString());
+            }
         }
 
         return Optional.empty();
