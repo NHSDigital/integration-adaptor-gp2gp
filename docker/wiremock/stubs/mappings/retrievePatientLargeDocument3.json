@@ -1,0 +1,21 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/documents\/fhir\/Binary\/29f6e02e-59e5-4e84-9944-0996260d0c2f"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "correctPatientLargeDocumentResponse3.json",
+    "headers": {
+      "Server":"nginx",
+      "Date":"Tue, 12 Jan 2021 11:36:57 GMT",
+      "Content-Type":"application/fhir+json;charset=UTF-8",
+      "Connection":"keep-alive",
+      "expires":"0",
+      "Cache-Control": "no-store",
+      "Pragma": "no-cache",
+      "Strict-Transport-Security": "max-age:31536000"
+    }
+  }
+}
