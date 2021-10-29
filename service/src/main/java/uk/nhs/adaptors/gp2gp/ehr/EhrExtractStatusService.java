@@ -1,8 +1,15 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import com.mongodb.client.result.UpdateResult;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static java.lang.String.format;
+
+import static org.springframework.util.CollectionUtils.isEmpty;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,6 +17,11 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+
+import com.mongodb.client.result.UpdateResult;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
@@ -19,15 +31,6 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
-
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import static java.lang.String.format;
-import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
 @Slf4j
@@ -287,21 +290,21 @@ public class EhrExtractStatusService {
             Map<String, String> documentIdUrlMap) {
         Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
 
-        Update update = createUpdateWithUpdatedAt();
+        var docs = new ArrayList<>();
+
+        Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
         Instant now = Instant.now();
-        documentIdUrlMap.forEach((documentId, url) -> update.addToSet(GPC_DOCUMENTS,
-            EhrExtractStatus.GpcDocument.builder()
-            .documentId(documentId)
-            .accessDocumentUrl(url)
-            .objectName(null)
-            .accessedAt(now)
-            .taskId(documentReferencesTaskDefinition.getTaskId())
-            .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
+        documentIdUrlMap.forEach((documentId, url) ->
+            docs.add(EhrExtractStatus.GpcDocument.builder()
+                .documentId(documentId)
+                .accessDocumentUrl(url)
+                .objectName(null)
+                .accessedAt(now)
+                .taskId(documentReferencesTaskDefinition.getTaskId())
+                .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
-        if (documentIdUrlMap.size() == 0) {
-            update.set(GPC_DOCUMENTS, new ArrayList<>());
-        }
+        Update update = updateBuilder.each(docs);
 
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
             update,
