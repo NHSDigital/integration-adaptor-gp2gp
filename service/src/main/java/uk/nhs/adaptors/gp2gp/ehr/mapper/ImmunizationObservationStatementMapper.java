@@ -321,6 +321,6 @@ public class ImmunizationObservationStatementMapper {
 
     public boolean hasAPPractitionerRole(ImmunizationPractitionerComponent immunizationPractitionerComponent) {
         return immunizationPractitionerComponent.getRole().getCoding().stream()
-            .anyMatch(value -> value.hasCode() && value.getCode().equals(AP_PRACTITIONER));
+            .anyMatch(value -> value.hasCode() && AP_PRACTITIONER.equals(value.getCode()));
     }
 }
