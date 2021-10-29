@@ -97,8 +97,9 @@ public class ObservationMapper {
 
         final String output;
         if (relatedObservations.isEmpty()
-            || !hasDiagnosticReportResultReference(observationAssociatedWithSpecimen)
-            || !willHaveNarrativeStatements(observationAssociatedWithSpecimen)) {
+            && (!hasDiagnosticReportResultReference(observationAssociatedWithSpecimen)
+            || !willHaveNarrativeStatements(observationAssociatedWithSpecimen))
+        ) {
             output = outputWithoutCompoundStatement(observationAssociatedWithSpecimen);
         } else {
             output = outputWithCompoundStatement(observationAssociatedWithSpecimen, relatedObservations);
@@ -110,11 +111,13 @@ public class ObservationMapper {
     }
 
     private boolean willHaveNarrativeStatements(MultiStatementObservationHolder holder) {
-        return !mapObservationToNarrativeStatement(
+        var futureNarrativeStatement = prepareNarrativeStatements(
             holder,
-            holder.getObservation().getComment(),
-            StringUtils.EMPTY //for any CommentType (as it is just a check)
-        ).isEmpty();
+            isInterpretationCodeMapped(
+                prepareObservationStatement(holder, CompoundStatementClassCode.CLUSTER).orElse(StringUtils.EMPTY)
+            ));
+
+        return futureNarrativeStatement.isPresent() && !futureNarrativeStatement.get().isEmpty();
     }
 
     private boolean hasDiagnosticReportResultReference(MultiStatementObservationHolder observationHolder) {
@@ -176,6 +179,7 @@ public class ObservationMapper {
     }
 
     private String outputWithoutCompoundStatement(MultiStatementObservationHolder observationAssociatedWithSpecimen) {
+        //if there's a related observation or was jumped, check id
         CompoundStatementClassCode classCode = CompoundStatementClassCode.CLUSTER;
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
             .orElse(StringUtils.EMPTY);
