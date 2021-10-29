@@ -53,21 +53,6 @@
         </agentPerson>
     </Agent>
 </part>
-            <part typeCode="PART">
-    <Agent classCode="AGNT">
-        <id root="test-id-3"/>
-        <code nullFlavor="UNK">
-            <originalText>Unknown</originalText>
-        </code>
-        <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <name>
-                <prefix>Dr</prefix>
-                <given>David</given>
-                <family>McAvenue</family>
-            </name>
-        </agentPerson>
-    </Agent>
-</part>
     </agentDirectory>
 </responsibleParty>
                 <component typeCode="COMP">
@@ -111,6 +96,16 @@ Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030221115000"/>
     </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="test-id-3"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+CommentDate:20030221115000
+
+This is some random free text</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030221115000"/>
+    </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -146,6 +141,15 @@ Received Date: 2003-01-09 13:54
     </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/><high value="20100115"/>
+        </effectiveTime>
+        <availabilityTime value="20100113"/>
+            <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
@@ -154,13 +158,19 @@ CommentDate:20100113
 This is some random free text</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100113"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
+</component>
+    </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center nullFlavor="UNK"/>
+        </effectiveTime>
+        <availabilityTime nullFlavor="UNK"/>
+            <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
@@ -169,12 +179,9 @@ This is some random free text</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime nullFlavor="UNK"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
     </ObservationStatement>
+</component>
+    </CompoundStatement>
 </component>
     </CompoundStatement>
 </component>

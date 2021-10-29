@@ -51,6 +51,7 @@ public class EhrExtractRequestHandlerTest {
     private static final String TO_ODS_CODE = "B86041";
     private static final String FROM_ODS_CODE = "N82668";
     private static final String MESSAGE_ID = "DFF5321C-C6EA-468E-BBC2-B0E48000E071";
+    private static final String MESSAGE_TIMESTAMP = "some_timestamp";
 
     @Mock
     private EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -78,7 +79,7 @@ public class EhrExtractRequestHandlerTest {
         when(timestampService.now()).thenReturn(now);
         when(randomIdGeneratorService.createNewId()).thenReturn(TASK_ID);
 
-        ehrExtractRequestHandler.handleStart(soapHeader, soapBody);
+        ehrExtractRequestHandler.handleStart(soapHeader, soapBody, MESSAGE_TIMESTAMP);
 
         var expectedEhrExtractStatus = createEhrExtractStatusMatchingXmlFixture(now);
         verify(ehrExtractStatusRepository).save(expectedEhrExtractStatus);
@@ -96,7 +97,7 @@ public class EhrExtractRequestHandlerTest {
         EhrExtractStatus expected = createEhrExtractStatusMatchingXmlFixture(now);
         when(ehrExtractStatusRepository.save(expected)).thenThrow(mock(DuplicateKeyException.class));
 
-        ehrExtractRequestHandler.handleStart(soapHeader, soapBody);
+        ehrExtractRequestHandler.handleStart(soapHeader, soapBody, MESSAGE_TIMESTAMP);
 
         verify(ehrExtractStatusRepository).save(expected);
         verifyNoInteractions(taskDispatcher);
@@ -107,6 +108,7 @@ public class EhrExtractRequestHandlerTest {
             .created(timestamp)
             .updatedAt(timestamp)
             .conversationId(CONVERSATION_ID)
+            .messageTimestamp(MESSAGE_TIMESTAMP)
             .ehrRequest(EhrExtractStatus.EhrRequest.builder()
                 .requestId(REQUEST_ID)
                 .nhsNumber(NHS_NUMBER)
@@ -156,7 +158,7 @@ public class EhrExtractRequestHandlerTest {
         removeAttributeElement(xpath, body);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body, MESSAGE_TIMESTAMP))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }
@@ -171,7 +173,7 @@ public class EhrExtractRequestHandlerTest {
         clearAttribute(xpath, body);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body, MESSAGE_TIMESTAMP))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }
@@ -193,7 +195,7 @@ public class EhrExtractRequestHandlerTest {
         removeElement(xpath, header);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body, MESSAGE_TIMESTAMP))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }
@@ -208,7 +210,7 @@ public class EhrExtractRequestHandlerTest {
         clearElement(xpath, header);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body, MESSAGE_TIMESTAMP))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }

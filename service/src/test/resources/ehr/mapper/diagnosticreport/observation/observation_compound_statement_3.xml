@@ -18,11 +18,6 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100223"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
-    </agentRef>
-</Participant>
     </ObservationStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -34,11 +29,6 @@ CommentDate:20100223
 Test not available</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100223"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -50,11 +40,6 @@ CommentDate:20201215151713
 (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
     </CompoundStatement>
