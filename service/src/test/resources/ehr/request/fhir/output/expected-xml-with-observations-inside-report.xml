@@ -182,15 +182,6 @@ This is some random free text</text>
 </component>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="test-id-3"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center nullFlavor="UNK"/>
-        </effectiveTime>
-        <availabilityTime nullFlavor="UNK"/>
-            <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
@@ -205,8 +196,6 @@ This is some random free text</text>
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component>
-    </CompoundStatement>
 </component>
     </CompoundStatement>
 </component>
