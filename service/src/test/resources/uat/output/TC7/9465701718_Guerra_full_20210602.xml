@@ -6320,12 +6320,12 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20030221115000" />
             <agentRef classCode="AGNT">
-                <id root="AEB66D16-E1FA-462A-BC70-FBD16000E308" />
+                <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9" />
             </agentRef>
         </author>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="AEB66D16-E1FA-462A-BC70-FBD16000E308"/>
+                <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
