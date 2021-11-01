@@ -68,6 +68,8 @@ public class ObservationMapperTest {
         + "observation_with_value_string.json";
     private static final String OBSERVATION_REFERENCED_BY_DIAGNOSTICREPORT_RESULT_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_referenced_by_diagnosticreport_result.json";
+    private static final String OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_WITH_RELATED_COMMENT_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_associated_with_specimen_1_with_related_comment.json";
 
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = OBSERVATION_TEST_FILE_DIRECTORY
@@ -84,7 +86,7 @@ public class ObservationMapperTest {
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_interpretation_code_abnormal.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_XML =
         OBSERVATION_TEST_FILE_DIRECTORY
-            + "observation_compound_statement_with_data_absent_reason_and_interpretation_and_body_site_and_method.xml";
+        + "observation_compound_statement_with_data_absent_reason_and_interpretation_and_body_site_and_method.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_quantity_and_reference_range.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_REFERENCE_RANGE_AND_INTERPRETATION_XML =
@@ -99,6 +101,8 @@ public class ObservationMapperTest {
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_string.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_CLUSTERED_BY_DIAGNOSTICREPORT_REFERENCE_XML =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_clustered_by_diagnosticreport_reference.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_1_WITH_RELATED_COMMENT_XML = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_compound_statement_1_with_related_comment.xml";
 
     private static final String DIAGNOSTIC_REPORT_REFERENCE_ID = "Observation/TEST_REFERENCE_ID";
 
@@ -230,6 +234,10 @@ public class ObservationMapperTest {
             Arguments.of(
                 OBSERVATION_REFERENCED_BY_DIAGNOSTICREPORT_RESULT_JSON,
                 OBSERVATION_COMPOUND_STATEMENT_CLUSTERED_BY_DIAGNOSTICREPORT_REFERENCE_XML
+            ),
+            Arguments.of(
+                OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_WITH_RELATED_COMMENT_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_1_WITH_RELATED_COMMENT_XML
             )
         );
     }
