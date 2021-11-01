@@ -304,6 +304,48 @@
           }
         ],
         "status":"unknown",
+        "subject":{
+          "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+        },
+        "effectiveDateTime":"2020-12-15T15:17:04.917+00:00",
+        "issued":"2020-12-15T15:17:04.917+00:00",
+        "performer":[
+          {
+            "reference":"Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+          }
+        ],
+        "related":[
+          {
+            "type":"has-member",
+            "target":{
+              "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST1"
+            }
+          },
+          {
+            "type":"has-member",
+            "target":{
+              "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource":{
+        "resourceType":"Observation",
+        "id":"B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST1",
+        "meta":{
+          "profile":[
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "identifier":[
+          {
+            "system":"https://EMISWeb/A82038",
+            "value":"B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST1"
+          }
+        ],
+        "status":"unknown",
         "code":{
           "coding":[
             {
@@ -323,18 +365,12 @@
             "reference":"Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
           }
         ],
-        "comment":"TEST COMMENT",
+        "comment":"TEST COMMENT 1",
         "related":[
           {
-            "type":"has-member",
+            "type":"derived-from",
             "target":{
-              "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST2"
-            }
-          },
-          {
-            "type":"has-member",
-            "target":{
-              "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST3"
+              "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2"
             }
           }
         ]
@@ -376,52 +412,6 @@
           }
         ],
         "comment":"TEST COMMENT 2",
-        "related":[
-          {
-            "type":"derived-from",
-            "target":{
-              "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "resource":{
-        "resourceType":"Observation",
-        "id":"B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST3",
-        "meta":{
-          "profile":[
-            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
-          ]
-        },
-        "identifier":[
-          {
-            "system":"https://EMISWeb/A82038",
-            "value":"B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST3"
-          }
-        ],
-        "status":"unknown",
-        "code":{
-          "coding":[
-            {
-              "system":"http://snomed.info/sct",
-              "code":"37331000000100",
-              "display":"Comment note"
-            }
-          ]
-        },
-        "subject":{
-          "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
-        },
-        "effectiveDateTime":"2020-12-15T15:17:04.917+00:00",
-        "issued":"2020-12-15T15:17:04.917+00:00",
-        "performer":[
-          {
-            "reference":"Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
-          }
-        ],
-        "comment":"TEST COMMENT 3",
         "related":[
           {
             "type":"derived-from",

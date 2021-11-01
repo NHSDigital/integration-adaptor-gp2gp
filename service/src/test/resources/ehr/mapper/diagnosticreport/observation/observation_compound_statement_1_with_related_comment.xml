@@ -39,19 +39,9 @@ NEGATIVE
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20201215151704
 
-TEST COMMENT</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201215151704"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="random-unmapped-id"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-CommentDate:20201215151704
 
-
-TEST COMMENT 2
-TEST COMMENT 3</text>
+TEST COMMENT 1
+TEST COMMENT 2</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151704"/>
     </NarrativeStatement>
