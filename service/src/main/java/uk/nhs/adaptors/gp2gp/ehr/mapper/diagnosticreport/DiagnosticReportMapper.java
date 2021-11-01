@@ -133,7 +133,7 @@ public class DiagnosticReportMapper {
             .setType(new CodeableConcept().setText("UNKNOWN"));
     }
 
-    private List<Observation>   fetchObservations(DiagnosticReport diagnosticReport) {
+    private List<Observation> fetchObservations(DiagnosticReport diagnosticReport) {
         if (!diagnosticReport.hasResult()) {
             return Collections.singletonList(generateDefaultObservation(diagnosticReport));
         }
