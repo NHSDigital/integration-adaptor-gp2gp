@@ -71,6 +71,15 @@ public class IdMapper {
         throw new EhrMapperException("Resource referenced was not mapped " + referenceValue);
     }
 
+    public void markObservationAsMapped(IdType idType) {
+        Reference reference = buildReference(ResourceType.Observation, idType);
+        MappedId resourceId = new MappedId(randomIdGeneratorService.createNewId(), true);
+        ids.put(
+            reference.getReference(),
+            resourceId
+        );
+    }
+
     private static Reference buildReference(ResourceType resourceType, IdType id) {
         return new Reference(new IdType(resourceType.name(), id.getIdPart()));
     }

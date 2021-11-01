@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -60,6 +61,7 @@ public class DiagnosticReportMapper {
     private static final String PREPENDED_TEXT_FOR_PARTICIPANTS = "Participants: ";
 
     private static final String EXTENSION_ID_SYSTEM_ID = "2.16.840.1.113883.2.1.4.5.5";
+    private static final String COMMENT_NOTE = "37331000000100";
 
     private final MessageContext messageContext;
     private final SpecimenMapper specimenMapper;
@@ -69,12 +71,12 @@ public class DiagnosticReportMapper {
     public String mapDiagnosticReportToCompoundStatement(DiagnosticReport diagnosticReport) {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport);
         List<Observation> observations = fetchObservations(diagnosticReport);
+        final IdMapper idMapper = messageContext.getIdMapper();
+        markObservationsAsProcessed(idMapper, observations);
 
         String mappedSpecimens = specimens.stream()
             .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport))
             .collect(Collectors.joining());
-
-        final IdMapper idMapper = messageContext.getIdMapper();
 
         String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, observations);
 
@@ -204,7 +206,8 @@ public class DiagnosticReportMapper {
         StringBuilder reportLevelNarrativeStatements) {
 
         var narrativeStatementObservationComments = observations.stream()
-            .filter(Observation::hasComment)
+            .filter(Observation::hasCode)
+            .filter(this::hasCommentNote)
             .map(Observation::getComment)
             .filter(StringUtils::isNotBlank)
             .map(observationComment -> buildNarrativeStatementForDiagnosticReport(
@@ -213,6 +216,13 @@ public class DiagnosticReportMapper {
             .collect(Collectors.joining(System.lineSeparator()));
 
         reportLevelNarrativeStatements.append(narrativeStatementObservationComments);
+    }
+
+    private boolean hasCommentNote(Observation observation) {
+        return observation.getCode().hasCoding()
+            && observation.getCode().getCoding().stream()
+            .filter(Coding::hasCode)
+            .anyMatch(coding -> COMMENT_NOTE.equals(coding.getCode()));
     }
 
     private void buildNarrativeStatementForMissingResults(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
@@ -276,5 +286,11 @@ public class DiagnosticReportMapper {
             return ((Organization) resource).getName();
         }
         return StringUtils.EMPTY;
+    }
+
+    private void markObservationsAsProcessed(IdMapper idMapper, List<Observation> observations) {
+        observations.stream()
+            .map(Observation::getIdElement)
+            .forEach(idMapper::markObservationAsMapped);
     }
 }
