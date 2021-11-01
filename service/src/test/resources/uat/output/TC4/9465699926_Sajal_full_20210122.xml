@@ -271,7 +271,7 @@
         <availabilityTime value="20020330000000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
+        <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
 CommentDate:20020330000000
 
@@ -279,21 +279,10 @@ Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330000000"/>
     </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20020330000000
-
-Abnormality indicator: Abnormal, but expected
-Clinical Information: GASTRIC ULCER DECLINE</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330000000"/>
-    </NarrativeStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="51463066-3087-424C-9265-EAAC461AFADE"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -302,7 +291,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <availabilityTime value="20020330000000"/>
         <specimen typeCode="SPC">
             <specimenRole classCode="SPEC">
-                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+                <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="Unknown"/>
                 <effectiveTime>
                     <center value="20020330092100"/>
@@ -314,7 +303,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8DF92722-5B5F-4324-866E-0328D5EA4286"/>
+        <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
 CommentDate:20020330092100
 
@@ -337,7 +326,7 @@ Received Date: 2002-03-30 09:21
         <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:UNK
 
@@ -350,7 +339,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C"/>
+        <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Full blood count</originalText>
 </code>
@@ -361,7 +350,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <availabilityTime value="20020330092100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Full blood count</originalText>
 </code>
@@ -374,7 +363,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
+        <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20020330092100
 
@@ -388,7 +377,7 @@ red blood cell seen, Note low platelets</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+        <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
         <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -406,7 +395,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
+        <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Eosinophil count - observation</originalText>
 </code>
@@ -425,7 +414,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
+        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Haemoglobin concentration</originalText>
 </code>
@@ -444,7 +433,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
+        <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35"/>
         <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE"/>
@@ -462,7 +451,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35"/>
+        <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
         <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -480,7 +469,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
+        <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
         <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
     <originalText>Mean cell haemoglobin</originalText>
 </code>
@@ -499,7 +488,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
+        <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Mean cell haemoglobin concentration</originalText>
 </code>
@@ -518,7 +507,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
+        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
         <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
     <originalText>Mean cell volume</originalText>
 </code>
@@ -537,7 +526,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
+        <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Monocyte count - observation</originalText>
 </code>
@@ -556,7 +545,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80"/>
+        <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3"/>
         <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -566,7 +555,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20020330092100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
+        <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
         <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -585,7 +574,7 @@ red blood cell seen, Note low platelets</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
+        <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20020330092100
 
@@ -597,7 +586,7 @@ Interpretation: HI - Above high reference limit</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="E4FAE359-1369-41C1-B39E-F54BB55E307A"/>
+        <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Platelet count - observation</originalText>
 </code>
@@ -608,7 +597,7 @@ Interpretation: HI - Above high reference limit</text>
         <availabilityTime value="20020330092100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
+        <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Platelet count - observation</originalText>
 </code>
@@ -628,7 +617,7 @@ Interpretation: HI - Above high reference limit</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3"/>
+        <id root="E4FAE359-1369-41C1-B39E-F54BB55E307A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20020330092100
 
@@ -640,7 +629,7 @@ Interpretation: LO - Below low reference limit</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
+        <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Red blood cell count</originalText>
 </code>
@@ -659,7 +648,7 @@ Interpretation: LO - Below low reference limit</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
+        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
     <originalText>Total white blood count</originalText>
 </code>
@@ -670,7 +659,7 @@ Interpretation: LO - Below low reference limit</text>
         <availabilityTime value="20020330092100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
+        <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
     <originalText>Total white blood count</originalText>
 </code>
@@ -690,7 +679,7 @@ Interpretation: LO - Below low reference limit</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
+        <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20020330092100
 
@@ -702,7 +691,7 @@ Interpretation: HI - Above high reference limit</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="D81D22B7-5216-44E8-B306-DD542F214792"/>
+        <id root="51463066-3087-424C-9265-EAAC461AFADE"/>
         <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
 </code>
         <statusCode code="COMPLETE"/>
@@ -712,7 +701,7 @@ Interpretation: HI - Above high reference limit</text>
         <availabilityTime value="20020330092100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
+        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
         <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
 </code>
         <statusCode code="COMPLETE"/>
@@ -731,7 +720,7 @@ Interpretation: HI - Above high reference limit</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+        <id root="D81D22B7-5216-44E8-B306-DD542F214792"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20020330092100
 
@@ -4792,7 +4781,7 @@ Dosage: 0.5 ml</text>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+                    <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5367,7 +5356,7 @@ Dosage: 0.5 ml</text>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
+                    <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
