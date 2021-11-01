@@ -208,6 +208,7 @@ public class DiagnosticReportMapper {
             InstantType diagnosticReportIssued) {
         observations.stream()
             .filter(observation -> observation.hasEffectiveDateTimeType() || observation.hasEffectivePeriod())
+            .filter(this::hasCommentNote)
             .findFirst()
             .map(this::extractDateFromObservation)
             .map(dateString -> buildNarrativeStatementForDiagnosticReport(
