@@ -74,6 +74,7 @@ public class ObservationMapper {
     private static final String COMMENT_NOTE_CODE = "37331000000100";
 
     private static final String HL7_UNKNOWN_VALUE = "UNK";
+    private static final String HAS_MEMBER_TYPE = "HASMEMBER";
 
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
 
@@ -304,6 +305,40 @@ public class ObservationMapper {
         return Optional.empty();
     }
 
+    private Optional<String> prepareNarrativeStatementForRelatedObservationComments(MultiStatementObservationHolder holder) {
+        Observation observation = holder.getObservation();
+
+        StringBuilder relatedObservationsComments = new StringBuilder();
+        if (observation.hasRelated()) {
+            observation.getRelated()
+                .stream()
+                .filter(Observation.ObservationRelatedComponent::hasType)
+                .filter(observationRelatedComponent -> HAS_MEMBER_TYPE.equals(observationRelatedComponent.getType().name()))
+                .map(observationRelatedComponent -> observationRelatedComponent.getTarget().getResource())
+                .map(Observation.class::cast)
+                .filter(Observation::hasComment)
+                .filter(relatedObservation -> hasCode(relatedObservation.getCode(), List.of(COMMENT_NOTE_CODE)))
+                .map(Observation::getComment)
+                .collect(Collectors.toList())
+                .forEach(comment -> relatedObservationsComments.append(StringUtils.LF).append(comment));
+
+            StringBuilder narrativeStatementsBlock = new StringBuilder();
+
+            Optional.of(relatedObservationsComments)
+                .map(StringBuilder::toString)
+                .filter(StringUtils::isNotBlank)
+                .map(textAndComment -> mapObservationToNarrativeStatement(
+                        holder, textAndComment, CommentType.USER_COMMENT.getCode())
+                ).ifPresent(narrativeStatementsBlock::append);
+
+            if (!narrativeStatementsBlock.toString().isBlank()) {
+                return Optional.of(narrativeStatementsBlock.toString());
+            }
+        }
+
+        return Optional.empty();
+    }
+
     private CommentType prepareCommentType(Observation observation) {
         return hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE))
             ? CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
@@ -371,6 +406,16 @@ public class ObservationMapper {
             Optional<String> narrativeStatements = prepareNarrativeStatements(
                 derivedObservationHolder,
                 isInterpretationCodeMapped(observationStatement.orElse(StringUtils.EMPTY)));
+            Optional<String> relatedObservationNarrativeStatement = prepareNarrativeStatementForRelatedObservationComments(
+                derivedObservationHolder);
+
+            if (relatedObservationNarrativeStatement.isPresent()) {
+                if (narrativeStatements.isPresent()) {
+                    narrativeStatements = Optional.of(narrativeStatements.get().concat(relatedObservationNarrativeStatement.get()));
+                } else {
+                    narrativeStatements = relatedObservationNarrativeStatement;
+                }
+            }
 
             if (observationStatement.isPresent() && narrativeStatements.isPresent()) {
                 String compoundStatementId = derivedObservationHolder.nextHl7InstanceIdentifier();
