@@ -93,6 +93,10 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-site-term-text-display-different.json";
     private static final String INPUT_JSON_WITH_SITE_TERM_TEXT_NO_DISPLAY = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-site-term-text-no-display.json";
+    private static final String INPUT_JSON_WITH_MULTIPLE_PRACTITIONERS = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-multiple-practitioners.json";
+    private static final String INPUT_JSON_WITH_MULTIPLE_PRACTITIONERS_NO_AP_ROLE = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-multiple-practitioners-no-AP-roles.json";
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -139,6 +143,10 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-primary-source-false.xml";
     private static final String OUTPUT_XML_WITH_SITE_USING_TERM_TEXT = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-site-term-text.xml";
+    private static final String OUTPUT_XML_WITH_MULTIPLE_PRACTITIONERS = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-all-multiple-practitioners.xml";
+    private static final String OUTPUT_XML_WITH_MULTIPLE_PRACTITIONERS_NO_AP_ROLE = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-all-multiple-practitioners-no-AP-role.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -215,7 +223,9 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_PRIMARY_SOURCE_FALSE, OUTPUT_XML_WITH_IMMUNIZATION_PRIMARY_SOURCE_FALSE, false),
             Arguments.of(INPUT_JSON_WITH_SITE_TERM_TEXT_DISPLAY_SAME, OUTPUT_XML_WITH_SITE_USING_TERM_TEXT, false),
             Arguments.of(INPUT_JSON_WITH_SITE_TERM_TEXT_DISPLAY_DIFFERENT, OUTPUT_XML_WITH_SITE_USING_TERM_TEXT, false),
-            Arguments.of(INPUT_JSON_WITH_SITE_TERM_TEXT_NO_DISPLAY, OUTPUT_XML_WITH_SITE_USING_TERM_TEXT, false)
+            Arguments.of(INPUT_JSON_WITH_SITE_TERM_TEXT_NO_DISPLAY, OUTPUT_XML_WITH_SITE_USING_TERM_TEXT, false),
+            Arguments.of(INPUT_JSON_WITH_MULTIPLE_PRACTITIONERS, OUTPUT_XML_WITH_MULTIPLE_PRACTITIONERS, false),
+            Arguments.of(INPUT_JSON_WITH_MULTIPLE_PRACTITIONERS_NO_AP_ROLE, OUTPUT_XML_WITH_MULTIPLE_PRACTITIONERS_NO_AP_ROLE, false)
         );
     }
 
