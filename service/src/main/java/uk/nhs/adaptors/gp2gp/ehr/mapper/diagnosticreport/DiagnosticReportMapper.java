@@ -58,7 +58,7 @@ public class DiagnosticReportMapper {
     private static final String PREPENDED_TEXT_FOR_CONCLUSION_COMMENT = "Interpretation: ";
     private static final String PREPENDED_TEXT_FOR_CODED_DIAGNOSIS = "Lab Diagnosis: ";
     private static final String PREPENDED_TEXT_FOR_STATUS = "Status: ";
-    private static final String PREPENDED_TEXT_FOR_FILLING_DATE = "Filling Date: ";
+    private static final String PREPENDED_TEXT_FOR_FILLING_DATE = "Filing Date: ";
     private static final String PREPENDED_TEXT_FOR_PARTICIPANTS = "Participants: ";
 
     private static final String EXTENSION_ID_SYSTEM_ID = "2.16.840.1.113883.2.1.4.5.5";
