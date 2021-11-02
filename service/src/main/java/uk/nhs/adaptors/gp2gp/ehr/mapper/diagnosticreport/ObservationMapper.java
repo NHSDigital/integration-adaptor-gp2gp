@@ -39,6 +39,8 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
@@ -310,7 +312,7 @@ public class ObservationMapper {
 
         StringBuilder relatedObservationsComments = new StringBuilder();
         if (observation.hasRelated()) {
-            observation.getRelated()
+            List<Observation> validObservations = observation.getRelated()
                 .stream()
                 .filter(Observation.ObservationRelatedComponent::hasType)
                 .filter(observationRelatedComponent -> HAS_MEMBER_TYPE.equals(observationRelatedComponent.getType().name()))
@@ -318,9 +320,16 @@ public class ObservationMapper {
                 .map(Observation.class::cast)
                 .filter(Observation::hasComment)
                 .filter(relatedObservation -> hasCode(relatedObservation.getCode(), List.of(COMMENT_NOTE_CODE)))
-                .map(Observation::getComment)
-                .collect(Collectors.toList())
-                .forEach(comment -> relatedObservationsComments.append(StringUtils.LF).append(comment));
+                .collect(Collectors.toList());
+
+            if (!validObservations.isEmpty()) {
+                final IdMapper idMapper = messageContext.getIdMapper();
+                DiagnosticReportMapper.markObservationsAsProcessed(idMapper, validObservations);
+
+                validObservations.stream()
+                    .map(Observation::getComment)
+                    .forEach(comment -> relatedObservationsComments.append(StringUtils.LF).append(comment));
+            }
 
             StringBuilder narrativeStatementsBlock = new StringBuilder();
 
