@@ -523,8 +523,8 @@ public class ObservationMapper {
     }
 
     private boolean hasValidType(Observation.ObservationRelatedComponent observationRelatedComponent) {
-        return observationRelatedComponent.hasType() &&
-                HAS_MEMBER_TYPE.equals(observationRelatedComponent.getType().name());
+        return observationRelatedComponent.hasType()
+                && HAS_MEMBER_TYPE.equals(observationRelatedComponent.getType().name());
     }
 
     private boolean hasValidComment(Observation observation) {
