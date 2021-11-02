@@ -39,7 +39,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationStatementTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
@@ -314,12 +313,10 @@ public class ObservationMapper {
         if (observation.hasRelated()) {
             List<Observation> validObservations = observation.getRelated()
                 .stream()
-                .filter(Observation.ObservationRelatedComponent::hasType)
-                .filter(observationRelatedComponent -> HAS_MEMBER_TYPE.equals(observationRelatedComponent.getType().name()))
+                .filter(this::hasValidType)
                 .map(observationRelatedComponent -> observationRelatedComponent.getTarget().getResource())
                 .map(Observation.class::cast)
-                .filter(Observation::hasComment)
-                .filter(relatedObservation -> hasCode(relatedObservation.getCode(), List.of(COMMENT_NOTE_CODE)))
+                .filter(this::hasValidComment)
                 .collect(Collectors.toList());
 
             if (!validObservations.isEmpty()) {
@@ -523,5 +520,14 @@ public class ObservationMapper {
 
     private boolean isInterpretationCodeMapped(String observationStatementAsText) {
         return observationStatementAsText.contains(INTERPRETATION_CODE);
+    }
+
+    private boolean hasValidType(Observation.ObservationRelatedComponent observationRelatedComponent) {
+        return observationRelatedComponent.hasType() &&
+                HAS_MEMBER_TYPE.equals(observationRelatedComponent.getType().name());
+    }
+
+    private boolean hasValidComment(Observation observation) {
+        return observation.hasComment() && hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE));
     }
 }
