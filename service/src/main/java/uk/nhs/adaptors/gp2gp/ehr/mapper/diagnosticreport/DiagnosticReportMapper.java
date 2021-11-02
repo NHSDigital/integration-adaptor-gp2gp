@@ -316,7 +316,7 @@ public class DiagnosticReportMapper {
         return StringUtils.EMPTY;
     }
 
-    public static void markObservationsAsProcessed(IdMapper idMapper, List<Observation> observations) {
+    private void markObservationsAsProcessed(IdMapper idMapper, List<Observation> observations) {
         observations.stream()
             .map(Observation::getIdElement)
             .forEach(idMapper::markObservationAsMapped);

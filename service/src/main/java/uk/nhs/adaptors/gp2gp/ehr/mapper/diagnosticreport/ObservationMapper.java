@@ -321,11 +321,11 @@ public class ObservationMapper {
 
             if (!validObservations.isEmpty()) {
                 final IdMapper idMapper = messageContext.getIdMapper();
-                DiagnosticReportMapper.markObservationsAsProcessed(idMapper, validObservations);
 
-                validObservations.stream()
-                    .map(Observation::getComment)
-                    .forEach(comment -> relatedObservationsComments.append(StringUtils.LF).append(comment));
+                validObservations.forEach(validObservation -> {
+                    idMapper.markObservationAsMapped(validObservation.getIdElement());
+                    relatedObservationsComments.append(StringUtils.LF).append(validObservation.getComment());
+                });
             }
 
             StringBuilder narrativeStatementsBlock = new StringBuilder();
