@@ -58,6 +58,7 @@ public class DiagnosticReportMapper {
     private static final String PREPENDED_TEXT_FOR_CONCLUSION_COMMENT = "Interpretation: ";
     private static final String PREPENDED_TEXT_FOR_CODED_DIAGNOSIS = "Lab Diagnosis: ";
     private static final String PREPENDED_TEXT_FOR_STATUS = "Status: ";
+    private static final String PREPENDED_TEXT_FOR_FILLING_DATE = "Filling Date: ";
     private static final String PREPENDED_TEXT_FOR_PARTICIPANTS = "Participants: ";
 
     private static final String EXTENSION_ID_SYSTEM_ID = "2.16.840.1.113883.2.1.4.5.5";
@@ -194,10 +195,37 @@ public class DiagnosticReportMapper {
         }
 
         buildNarrativeStatementForMissingResults(diagnosticReport, reportLevelNarrativeStatements);
+        buildNarrativeStatementForObservationTimes(observations, reportLevelNarrativeStatements, diagnosticReport.getIssuedElement());
         buildNarrativeStatementForParticipants(diagnosticReport, reportLevelNarrativeStatements);
         buildNarrativeStatementForObservationComments(diagnosticReport.getIssuedElement(), observations, reportLevelNarrativeStatements);
 
         return reportLevelNarrativeStatements.toString();
+    }
+
+    private void buildNarrativeStatementForObservationTimes(
+            List<Observation> observations,
+            StringBuilder reportLevelNarrativeStatements,
+            InstantType diagnosticReportIssued) {
+        observations.stream()
+            .filter(observation -> observation.hasEffectiveDateTimeType() || observation.hasEffectivePeriod())
+            .filter(this::hasCommentNote)
+            .findFirst()
+            .map(this::extractDateFromObservation)
+            .map(dateString -> buildNarrativeStatementForDiagnosticReport(
+                diagnosticReportIssued, CommentType.AGGREGATE_COMMENT_SET.getCode(), dateString))
+            .ifPresent(reportLevelNarrativeStatements::append);
+    }
+
+    private String extractDateFromObservation(Observation observation) {
+        if (observation.hasEffectiveDateTimeType()) {
+            return PREPENDED_TEXT_FOR_FILLING_DATE
+                + DateFormatUtil.toTextFormat(observation.getEffectiveDateTimeType());
+        }
+        if (observation.hasEffectivePeriod()) {
+            return PREPENDED_TEXT_FOR_FILLING_DATE
+                + DateFormatUtil.toTextFormat(observation.getEffectivePeriod().getStartElement());
+        }
+        return StringUtils.EMPTY;
     }
 
     private void buildNarrativeStatementForObservationComments(
