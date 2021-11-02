@@ -288,6 +288,16 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
+Filling Date: 2020-12-15 15:17:04</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+CommentDate:20100225154100
+
 Participants: Dr David McAvenue</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -298,19 +308,6 @@ Participants: Dr David McAvenue</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-NEGATIVE
-     In normal pregnancies the test will usually be positive from the
-     second day after the expected menstruation.</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
-<component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="394559384658936"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20100225154100
-
 (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -323,17 +320,6 @@ CommentDate:20100225154100
 CommentDate:20100225154100
 
 (q) - Normal - No Action</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
-<component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="394559384658936"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20100225154100
-
-Test not available</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
