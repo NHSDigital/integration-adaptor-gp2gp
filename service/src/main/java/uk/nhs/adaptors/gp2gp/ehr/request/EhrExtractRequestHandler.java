@@ -49,7 +49,7 @@ public class EhrExtractRequestHandler {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final EhrExtractAckHandler ackHandler;
 
-    public void handleStart(Document header, Document payload, String messageTimestamp) {
+    public void handleStart(Document header, Document payload, Instant messageTimestamp) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload, messageTimestamp);
         if (saveNewExtractStatusDocument(ehrExtractStatus)) {
             LOGGER.info("Creating tasks to start the EHR Extract process");
@@ -59,7 +59,7 @@ public class EhrExtractRequestHandler {
         }
     }
 
-    private EhrExtractStatus prepareEhrExtractStatus(Document header, Document payload, String messageTimestamp) {
+    private EhrExtractStatus prepareEhrExtractStatus(Document header, Document payload, Instant messageTimestamp) {
         EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
         Instant now = timestampService.now();
         String conversationId = getRequiredValue(header, CONVERSATION_ID_PATH);
