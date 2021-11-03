@@ -98,7 +98,9 @@ public class ObservationMapper {
 
         final String output;
         if (relatedObservations.isEmpty()
-            && !hasDiagnosticReportResultReference(observationAssociatedWithSpecimen.getObservation())) {
+            && (!hasDiagnosticReportResultReference(observationAssociatedWithSpecimen)
+            || !willHaveNarrativeStatements(observationAssociatedWithSpecimen))
+        ) {
             output = outputWithoutCompoundStatement(observationAssociatedWithSpecimen);
         } else {
             output = outputWithCompoundStatement(observationAssociatedWithSpecimen, relatedObservations);
@@ -109,14 +111,24 @@ public class ObservationMapper {
         return output;
     }
 
-    private boolean hasDiagnosticReportResultReference(Observation observation) {
+    private boolean willHaveNarrativeStatements(MultiStatementObservationHolder holder) {
+        var futureNarrativeStatement = prepareNarrativeStatements(
+            holder,
+            isInterpretationCodeMapped(
+                prepareObservationStatement(holder, CompoundStatementClassCode.CLUSTER).orElse(StringUtils.EMPTY)
+            ));
+
+        return futureNarrativeStatement.isPresent() && !futureNarrativeStatement.get().isEmpty();
+    }
+
+    private boolean hasDiagnosticReportResultReference(MultiStatementObservationHolder observationHolder) {
         return messageContext.getInputBundleHolder().getResourcesOfType(DiagnosticReport.class)
             .stream()
             .map(DiagnosticReport.class::cast)
             .anyMatch(diagnosticReport ->
                 diagnosticReport.getResult()
                     .stream()
-                    .anyMatch(reference -> observation.getId().equals(reference.getReference()))
+                    .anyMatch(reference -> observationHolder.getObservation().getId().equals(reference.getReference()))
             );
     }
 
