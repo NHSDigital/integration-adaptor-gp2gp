@@ -1,18 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
-
-import java.time.Instant;
-import java.util.List;
-
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
-
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,8 +15,6 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-
-import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.ResourceHelper;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -39,6 +25,18 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+import java.time.Instant;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrExtractRequestHandlerTest {
@@ -51,7 +49,7 @@ public class EhrExtractRequestHandlerTest {
     private static final String TO_ODS_CODE = "B86041";
     private static final String FROM_ODS_CODE = "N82668";
     private static final String MESSAGE_ID = "DFF5321C-C6EA-468E-BBC2-B0E48000E071";
-    private static final String MESSAGE_TIMESTAMP = "some_timestamp";
+    private static final Instant MESSAGE_TIMESTAMP = Instant.ofEpochSecond(123);
 
     @Mock
     private EhrExtractStatusRepository ehrExtractStatusRepository;
