@@ -80,17 +80,12 @@ public class ConditionLinkSetMapper {
 
         buildConditionNamed(condition).ifPresentOrElse(builder::conditionNamed,
             () -> {
-
-                if (isResourceInList(condition)) {
-                    var a = 1;
-                } else {
-                    String newId = randomIdGeneratorService.createNewId();
-                    builder.generateObservationStatement(true);
-                    builder.conditionNamed(newId);
-                    buildObservationStatementAvailabilityTime(condition).ifPresent(builder::observationStatementAvailabilityTime);
-                    new ConditionWrapper(condition, messageContext, codeableConceptCdMapper)
-                            .buildProblemInfo().ifPresent(builder::pertinentInfo);
-                }
+                String newId = randomIdGeneratorService.createNewId();
+                builder.generateObservationStatement(true);
+                builder.conditionNamed(newId);
+                buildObservationStatementAvailabilityTime(condition).ifPresent(builder::observationStatementAvailabilityTime);
+                new ConditionWrapper(condition, messageContext, codeableConceptCdMapper)
+                        .buildProblemInfo().ifPresent(builder::pertinentInfo);
             });
 
         builder.code(buildCode(condition));
@@ -141,7 +136,7 @@ public class ConditionLinkSetMapper {
             .map(this::mapLinkedId);
     }
 
-    private boolean isResourceInList(Condition condition) {
+    private boolean isIrregularActualProblem(Condition condition) {
         return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
             .map(Extension::getValue)
             .map(value -> (Reference) value)
@@ -238,6 +233,10 @@ public class ConditionLinkSetMapper {
 
     private String buildCode(Condition condition) {
         if (condition.hasCode()) {
+            if (isIrregularActualProblem(condition)) {
+                return codeableConceptCdMapper.mapCodeableConceptToCdForSpecificActualProblem(condition.getCode());
+            }
+
             return codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode());
         }
         throw new EhrMapperException("Condition code not present");

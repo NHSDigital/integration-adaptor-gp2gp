@@ -28,6 +28,8 @@ public class CodeableConceptCdMapper {
     private static final String SNOMED_SYSTEM_CODE = "2.16.840.1.113883.2.1.3.2.4.15";
     private static final String DESCRIPTION_DISPLAY = "descriptionDisplay";
     private static final String DESCRIPTION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid";
+    private static final String FIXED_ACTUAL_PROBLEM_CODE = "55607006";
+    private static final String PROBLEM_DISPLAY_NAME = "Problem";
 
     public String mapCodeableConceptToCd(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
@@ -45,6 +47,19 @@ public class CodeableConceptCdMapper {
             code.ifPresent(builder::mainCode);
             displayText.ifPresent(builder::mainDisplayName);
         }
+
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
+    }
+
+    public String mapCodeableConceptToCdForSpecificActualProblem(CodeableConcept codeableConcept) {
+        var builder = CodeableConceptCdTemplateParameters.builder();
+
+        var originalText = CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
+        originalText.ifPresent(builder::mainOriginalText);
+
+        builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
+        builder.mainCode(FIXED_ACTUAL_PROBLEM_CODE);
+        builder.mainDisplayName(PROBLEM_DISPLAY_NAME);
 
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
