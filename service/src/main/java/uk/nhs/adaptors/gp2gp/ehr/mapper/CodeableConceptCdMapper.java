@@ -51,7 +51,7 @@ public class CodeableConceptCdMapper {
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
 
-    public String mapCodeableConceptToCdForSpecificActualProblem(CodeableConcept codeableConcept) {
+    public String mapCodeableConceptToCdForTransformedActualProblemHeader(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
 
         var originalText = CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);

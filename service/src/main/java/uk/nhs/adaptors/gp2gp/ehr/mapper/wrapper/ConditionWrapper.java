@@ -135,14 +135,14 @@ public class ConditionWrapper {
         var transformedProblemHeaderText = ExtensionMappingUtils.filterExtensionByUrl(this.condition, ACTUAL_PROBLEM_URL)
             .map(Extension::getValue)
             .map(value -> (Reference) value)
-            .filter(this::isInResourceList)
+            .filter(this::isTransformedActualProblemHeader)
             .map(this::buildTransformedText)
             .orElse(StringUtils.EMPTY);
 
         return Optional.of(transformedProblemHeaderText);
     }
 
-    private boolean isInResourceList(Reference reference) {
+    private boolean isTransformedActualProblemHeader(Reference reference) {
         return RESOURCE_LIST.contains(reference.getReferenceElement().getResourceType());
     }
 

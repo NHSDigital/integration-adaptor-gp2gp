@@ -85,7 +85,7 @@ public class ConditionLinkSetMapper {
                 builder.conditionNamed(newId);
                 buildObservationStatementAvailabilityTime(condition).ifPresent(builder::observationStatementAvailabilityTime);
                 new ConditionWrapper(condition, messageContext, codeableConceptCdMapper)
-                        .buildProblemInfo().ifPresent(builder::pertinentInfo);
+                    .buildProblemInfo().ifPresent(builder::pertinentInfo);
             });
 
         builder.code(buildCode(condition));
@@ -136,7 +136,7 @@ public class ConditionLinkSetMapper {
             .map(this::mapLinkedId);
     }
 
-    private boolean isIrregularActualProblem(Condition condition) {
+    private boolean isTransformedActualProblemHeader(Condition condition) {
         return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
             .map(Extension::getValue)
             .map(value -> (Reference) value)
@@ -233,8 +233,8 @@ public class ConditionLinkSetMapper {
 
     private String buildCode(Condition condition) {
         if (condition.hasCode()) {
-            if (isIrregularActualProblem(condition)) {
-                return codeableConceptCdMapper.mapCodeableConceptToCdForSpecificActualProblem(condition.getCode());
+            if (isTransformedActualProblemHeader(condition)) {
+                return codeableConceptCdMapper.mapCodeableConceptToCdForTransformedActualProblemHeader(condition.getCode());
             }
 
             return codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode());
