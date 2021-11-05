@@ -8,6 +8,6 @@ import java.time.Instant;
 public class Jms {
     @SneakyThrows
     public static Instant getJmsMessageTimestamp(Message message) {
-        return Instant.ofEpochSecond(message.getJMSTimestamp());
+        return Instant.ofEpochMilli(message.getJMSTimestamp());
     }
 }
