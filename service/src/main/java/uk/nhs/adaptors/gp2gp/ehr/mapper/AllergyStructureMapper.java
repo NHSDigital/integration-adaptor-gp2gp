@@ -197,7 +197,7 @@ public class AllergyStructureMapper {
     }
 
     private String buildClinicalStatusPertinentInformation(AllergyIntolerance allergyIntolerance) {
-        if (allergyIntolerance.hasClinicalStatus() ) {
+        if (allergyIntolerance.hasClinicalStatus()) {
             if (allergyIntolerance.hasNote()) {
                 return STATUS + StringUtils.capitalize(allergyIntolerance.getClinicalStatus().toCode());
             }

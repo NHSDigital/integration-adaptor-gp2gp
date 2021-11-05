@@ -349,7 +349,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
-                <code nullFlavor="UNK">
+                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
     <originalText>H/O: drug allergy Paracetamol 500mg capsules</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1958,7 +1958,7 @@ This should be normal according to the range High</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C"/>
-                <code nullFlavor="UNK">
+                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
     <originalText>[X] Adverse reaction to barbiturate NOS Amobarbital 50mg tablets</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -3430,7 +3430,7 @@ abnormality only Very Low</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B16209E7-8BA5-4533-B801-8A82645C6D04"/>
-                <code nullFlavor="UNK">
+                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
     <originalText>Beta blocker contraindicated Atenolol 50mg tablets</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
