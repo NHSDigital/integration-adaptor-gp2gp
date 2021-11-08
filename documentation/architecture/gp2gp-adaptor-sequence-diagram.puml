@@ -1,0 +1,102 @@
+@startuml
+
+box "Incumbent"
+    participant incumbent
+end box
+
+box "NHS services"
+    participant spine
+end box
+
+box "MHS" #LightBlue
+    participant mhs_outbound
+    participant mhs_inbound
+    participant inbound_queue
+end box
+
+box "GP2GP"
+    participant gp2gp
+    participant gpcc
+end box
+
+box "NHS services"
+    participant sds_api
+    participant gpc_api
+end box
+
+box "AWS"
+    participant S3
+end box
+
+group EHR request
+    incumbent -> spine
+    spine -> mhs_inbound
+    mhs_inbound -> inbound_queue
+    inbound_queue -> gp2gp
+end
+
+gp2gp -> gp2gp : Create GP2GP state record in DB
+
+group Get Structured Record
+    gp2gp -> gpcc : get Structured Record
+    gpcc -> sds_api : get Structured Record URL
+    gpcc <- sds_api : response with Structured Record URL
+    gpcc -> gpc_api : get Structured Record
+    gpcc <- gpc_api : response with Structured Record
+    gp2gp <- gpcc : response with Structured Record
+    gp2gp -> gp2gp : convert\nStructuredRecord\nto EHR Extract
+    gp2gp -> S3 : Store EHR Extract
+end
+
+group Get All Documents
+    loop
+        gp2gp -> gpcc : get Document
+        gpcc -> sds_api : get Document URL
+        gpcc <- sds_api : response with Document URL
+        gpcc -> gpc_api : get Document
+        gpcc <- gpc_api : response with Document
+        gp2gp <- gpcc : response with Document
+        gp2gp -> gp2gp : convert\nDocument\nto Attachment
+        gp2gp -> S3 : Store Attachment
+    end
+end
+
+group send EHR Extract
+    S3 -> gp2gp : Download EHR Extract
+    gp2gp -> mhs_outbound
+    mhs_outbound -> spine
+    spine -> incumbent
+end
+
+group EHR continue
+    incumbent -> spine
+    spine -> mhs_inbound
+    mhs_inbound -> inbound_queue
+    inbound_queue -> gp2gp
+end
+
+group Send All Attachments
+    loop 
+        S3 -> gp2gp : Download Document
+        gp2gp -> mhs_outbound
+        mhs_outbound -> spine
+        spine -> incumbent
+    end
+end
+
+group Send ACK
+    gp2gp -> mhs_outbound
+    mhs_outbound -> spine
+    spine -> incumbent
+end
+
+group Send ACK
+    incumbent -> spine
+    spine -> mhs_inbound
+    mhs_inbound -> inbound_queue
+    inbound_queue -> gp2gp
+end
+
+gp2gp -> gp2gp : Update GP2GP state DB\nthat patient transfer is complete
+
+@enduml

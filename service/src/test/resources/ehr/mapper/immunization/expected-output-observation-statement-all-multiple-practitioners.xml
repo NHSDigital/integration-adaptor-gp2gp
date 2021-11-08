@@ -1,0 +1,22 @@
+<component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="test-id" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100630055900"/>
+        </effectiveTime>
+        <availabilityTime value="20100630055900" />
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1"/>
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Parent Present: true Primary Source: true Location: Test Location Manufacturer: Test Organization Batch: 123456 Expiration: 2011-06-21 Site: Left arm Route: Injection, intramuscular Quantity: 5 mg Reason: Immunisation due Vaccination Protocol 1: A vaccination for Hepatitis Sequence: 1, Doses: 3 Target Disease: Viral hepatitis, type A,Viral hepatitis, type B Vaccination Protocol 2: A vaccination for Measles Sequence: 2, Doses: 1 Target Disease: Measles Pete, GMS : GMS - This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is the END of the long paragraph.</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        <Participant typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="test-id"/>
+            </agentRef>
+        </Participant>
+    </ObservationStatement>
+</component>
