@@ -236,6 +236,52 @@
                 "effectiveDateTime": "2010-01-14T09:42:00+00:00",
                 "issued": "2010-01-14T09:42:02.743+00:00"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "Condition",
+                "id": "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
+                        "valueCode": "major"
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+                        "value": "D06C0517-4D1C-11E3-A2DD-010000000161"
+                    }
+                ],
+                "clinicalStatus": "active",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://hl7.org/fhir/condition-category",
+                                "code": "problem-list-item",
+                                "display": "Problem List Item"
+                            }
+                        ]
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "231504006",
+                            "display": "Mixed anxiety and depressive disorder"
+                        }
+                    ],
+                    "text": "Anxiety with depression"
+                },
+                "assertedDate": "2020-06-01T00:00:00+01:00"
+            }
         }
     ]
 }

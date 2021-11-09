@@ -136,10 +136,10 @@ public class ConditionWrapper {
             .map(Extension::getValue)
             .map(value -> (Reference) value)
             .filter(this::isTransformedActualProblemHeader)
-            .map(this::buildTransformedText)
-            .orElse(StringUtils.EMPTY);
+            .map(this::buildTransformedText);
 
-        return Optional.of(transformedProblemHeaderText);
+
+        return transformedProblemHeaderText.isPresent() ? transformedProblemHeaderText : Optional.empty();
     }
 
     private boolean isTransformedActualProblemHeader(Reference reference) {
