@@ -77,7 +77,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                 var externalAttachment = OutboundMessage.ExternalAttachment.builder()
                     .description(OutboundMessage.AttachmentDescription.builder()
                         .fileName(filename)
-                        .contentType(AttachmentContentType.APPLICATION_OCTET_STREAM.getContentTypeName()) //no MIME filtering for large messaging
+                        .contentType(AttachmentContentType.APPLICATION_OCTET_STREAM.getContentTypeName())//no filtering for largemessaging
                         .compressed(false) //const
                         .largeAttachment(false) // const - chunks are not large attachments themself
                         .originalBase64(true) //const

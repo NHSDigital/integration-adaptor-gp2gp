@@ -22,7 +22,7 @@ public enum AttachmentContentType {
         this.contentTypeName = contentTypeName;
     }
 
-    public String getContentTypeName(){
+    public String getContentTypeName() {
         return this.contentTypeName;
     }
 }
