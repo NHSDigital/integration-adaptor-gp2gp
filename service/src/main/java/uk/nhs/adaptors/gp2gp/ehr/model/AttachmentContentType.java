@@ -16,5 +16,13 @@ public enum AttachmentContentType {
     APPLICATION_MSWORD("application/msword"),
     APPLICATION_OCTET_STREAM("application/octet-stream");
 
-    AttachmentContentType(String name) { }
+    private final String contentTypeName;
+
+    AttachmentContentType(String contentTypeName) {
+        this.contentTypeName = contentTypeName;
+    }
+
+    public String getContentTypeName(){
+        return this.contentTypeName;
+    }
 }
