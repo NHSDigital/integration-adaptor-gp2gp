@@ -130,6 +130,8 @@ public class ConditionLinkSetMapperTest {
 
         lenient().when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        lenient().when(codeableConceptCdMapper.mapCodeableConceptToCdForTransformedActualProblemHeader(any(CodeableConcept.class)))
+                .thenReturn(CodeableConceptMapperMockUtil.ACTUAL_PROBLEM_CODE);
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
@@ -197,21 +199,21 @@ public class ConditionLinkSetMapperTest {
 
     private static Stream<Arguments> testArguments() {
         return Stream.of(
-//            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_IS_NESTED, true),
-//            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITHOUT_IS_NESTED, false),
-//            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_CONDITION_NAMED, false),
-//            Arguments.of(INPUT_JSON_WITH_MAJOR_SIGNIFICANCE, OUTPUT_XML_WITH_MAJOR_SIGNIFICANCE, false),
-//            Arguments.of(INPUT_JSON_WITH_MINOR_SIGNIFICANCE, OUTPUT_XML_WITH_MINOR_SIGNIFICANCE, false),
-//            Arguments.of(INPUT_JSON_MAP_TWO_RELATED_CLINICAL_CONTENT_IGNORE_ONE, OUTPUT_XML_WITH_1_RELATED_CLINICAL_CONTENT, false),
-//            Arguments.of(INPUT_JSON_MAP_TWO_RELATED_CLINICAL_CONTENT, OUTPUT_XML_WITH_2_RELATED_CLINICAL_CONTENT, false),
-//            Arguments.of(INPUT_JSON_STATUS_ACTIVE, OUTPUT_XML_WITH_STATUS_ACTIVE, false),
-//            Arguments.of(INPUT_JSON_STATUS_INACTIVE, OUTPUT_XML_WITH_STATUS_INACTIVE, false),
-//            Arguments.of(INPUT_JSON_DATES_PRESENT, OUTPUT_XML_WITH_DATES_PRESENT, false),
-//            Arguments.of(INPUT_JSON_DATES_NOT_PRESENT, OUTPUT_XML_WITH_DATES_NOT_PRESENT, false),
-//            Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_LIST_REFERENCE, OUTPUT_XML_WITH_NO_RELATED_CLINICAL_CONTENT, false),
+            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_IS_NESTED, true),
+            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITHOUT_IS_NESTED, false),
+            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_CONDITION_NAMED, false),
+            Arguments.of(INPUT_JSON_WITH_MAJOR_SIGNIFICANCE, OUTPUT_XML_WITH_MAJOR_SIGNIFICANCE, false),
+            Arguments.of(INPUT_JSON_WITH_MINOR_SIGNIFICANCE, OUTPUT_XML_WITH_MINOR_SIGNIFICANCE, false),
+            Arguments.of(INPUT_JSON_MAP_TWO_RELATED_CLINICAL_CONTENT_IGNORE_ONE, OUTPUT_XML_WITH_1_RELATED_CLINICAL_CONTENT, false),
+            Arguments.of(INPUT_JSON_MAP_TWO_RELATED_CLINICAL_CONTENT, OUTPUT_XML_WITH_2_RELATED_CLINICAL_CONTENT, false),
+            Arguments.of(INPUT_JSON_STATUS_ACTIVE, OUTPUT_XML_WITH_STATUS_ACTIVE, false),
+            Arguments.of(INPUT_JSON_STATUS_INACTIVE, OUTPUT_XML_WITH_STATUS_INACTIVE, false),
+            Arguments.of(INPUT_JSON_DATES_PRESENT, OUTPUT_XML_WITH_DATES_PRESENT, false),
+            Arguments.of(INPUT_JSON_DATES_NOT_PRESENT, OUTPUT_XML_WITH_DATES_NOT_PRESENT, false),
+            Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_LIST_REFERENCE, OUTPUT_XML_WITH_NO_RELATED_CLINICAL_CONTENT, false),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_ALLERGY_INTOLERANCE, OUTPUT_XML_ALLERGY_INTOLERANCE_ACTUAL_PROBLEM, false),
-            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_IMMUNIZATION, OUTPUT_XML_IMMUNIZATION_ACTUAL_PROBLEM, false)
-//            Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_ALLERGY, OUTPUT_XML_WITH_STATEMENT_REF_LINK_ALLERGY_OBSERVATION, false)
+            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_IMMUNIZATION, OUTPUT_XML_IMMUNIZATION_ACTUAL_PROBLEM, false),
+            Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_ALLERGY, OUTPUT_XML_WITH_STATEMENT_REF_LINK_ALLERGY_OBSERVATION, false)
         );
     }
 
