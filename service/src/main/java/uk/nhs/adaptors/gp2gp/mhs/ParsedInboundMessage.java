@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import org.w3c.dom.Document;
 
+import java.time.Instant;
+
 @Getter
 @AllArgsConstructor
 @Builder
@@ -14,5 +16,5 @@ public class ParsedInboundMessage {
     private final String rawPayload;
     private final String conversationId;
     private final String interactionId;
-    private final String messageTimestamp;
+    private final Instant messageTimestamp;
 }

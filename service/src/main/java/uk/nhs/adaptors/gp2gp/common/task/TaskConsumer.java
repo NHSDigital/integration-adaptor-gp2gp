@@ -10,8 +10,6 @@ import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 import javax.jms.Message;
 
-import static uk.nhs.adaptors.gp2gp.common.utils.Jms.getJmsMessageTimestamp;
-
 @Component
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -24,8 +22,7 @@ public class TaskConsumer {
     @SneakyThrows
     public void receive(Message message) {
         var messageID = message.getJMSMessageID();
-        var messageTimestamp = getJmsMessageTimestamp(message);
-        LOGGER.info("Received taskQueue message_id: {} timestamp: {}", messageID, messageTimestamp);
+        LOGGER.info("Received taskQueue message_id: {}", messageID);
         try {
             if (taskHandler.handle(message)) {
                 message.acknowledge();

@@ -14,6 +14,7 @@ import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.DateType;
+import org.hl7.fhir.dstu3.model.Immunization.ImmunizationPractitionerComponent;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Location;
 import org.hl7.fhir.dstu3.model.Organization;
@@ -48,6 +49,7 @@ public class ImmunizationObservationStatementMapper {
     private static final String EXPIRATION = "Expiration: ";
     private static final String SITE = "Site: ";
     private static final String ROUTE = "Route: ";
+    private static final String AP_PRACTITIONER = "AP";
     private static final String QUANTITY = "Quantity: ";
     private static final String REASON = "Reason: ";
     private static final String REASON_NOT_GIVEN = "Reason not given: ";
@@ -73,7 +75,8 @@ public class ImmunizationObservationStatementMapper {
             .code(buildCode(immunization));
 
         if (immunization.hasPractitioner() && immunization.getPractitionerFirstRep().hasActor()) {
-            var practitionerRef = immunization.getPractitionerFirstRep().getActor();
+            var practitioner = extractPractitioner(immunization);
+            var practitionerRef = practitioner.getActor();
             var participantRef = messageContext.getAgentDirectory().getAgentId(practitionerRef);
             var participantContent = participantMapper.mapToParticipant(participantRef, ParticipantType.PERFORMER);
             observationStatementTemplateParameters.participant(participantContent);
@@ -306,5 +309,18 @@ public class ImmunizationObservationStatementMapper {
         }
 
         return StringUtils.EMPTY;
+    }
+
+    private ImmunizationPractitionerComponent extractPractitioner(Immunization immunization) {
+        return immunization.getPractitioner().stream()
+            .filter(ImmunizationPractitionerComponent::hasRole)
+            .filter(this::hasAPPractitionerRole)
+            .findFirst()
+            .orElseGet(immunization::getPractitionerFirstRep);
+    }
+
+    public boolean hasAPPractitionerRole(ImmunizationPractitionerComponent immunizationPractitionerComponent) {
+        return immunizationPractitionerComponent.getRole().getCoding().stream()
+            .anyMatch(value -> value.hasCode() && AP_PRACTITIONER.equals(value.getCode()));
     }
 }
