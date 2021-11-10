@@ -1,0 +1,38 @@
+<component typeCode="COMP">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="394559384658936"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center nullFlavor="UNK"/>
+        </effectiveTime>
+        <availabilityTime nullFlavor="UNK" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="394559384658936"/>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center nullFlavor="UNK"/>
+                </effectiveTime>
+                <availabilityTime nullFlavor="UNK" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Resolved allergy with no date recorded</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
+                <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>

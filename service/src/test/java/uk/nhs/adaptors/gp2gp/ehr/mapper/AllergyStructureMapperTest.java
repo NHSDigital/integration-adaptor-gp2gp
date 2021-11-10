@@ -78,6 +78,9 @@ public class AllergyStructureMapperTest {
         + "example-allergy-intolerance-resource-23.json";
     private static final String INPUT_JSON_WITH_VALID_RECORDER_PATIENT_ASSERTER = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-24.json";
+    private static final String INPUT_JSON_WITH_RESOLVED_CLINICAL_STATUS = TEST_FILE_DIRECTORY
+        + "example-allergy-intolerance-resource-25.json";
+
 
     private static final String OUTPUT_XML_USES_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-1.xml";
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-2.xml";
@@ -115,6 +118,8 @@ public class AllergyStructureMapperTest {
             + "expected-output-allergy-structure-20.xml";
     private static final String OUTPUT_XML_USES_RECORDER_AS_FALLBACK_ASSERTER = TEST_FILE_DIRECTORY
         + "expected-output-allergy-structure-21.xml";
+    private static final String OUTPUT_XML_USES_RESOLVED_CLINICAL_STATUS = TEST_FILE_DIRECTORY
+        + "expected-output-allergy-structure-22.xml";
     private static final String COMMON_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
 
     @Mock
@@ -150,7 +155,9 @@ public class AllergyStructureMapperTest {
             Arguments.of(INPUT_JSON_WITH_INVALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_NO_AUTHOR_OR_PERFORMER),
             Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_RELATED_PERSON_ASSERTER,
                     OUTPUT_XML_USES_RECORDER_AS_PERFORMER_RELATED_PERSON_ASSERTER),
-            Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_PATIENT_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_PERFORMER_PATIENT_ASSERTER)
+            Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_PATIENT_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_PERFORMER_PATIENT_ASSERTER),
+            Arguments.of(INPUT_JSON_WITH_RESOLVED_CLINICAL_STATUS, OUTPUT_XML_USES_RESOLVED_CLINICAL_STATUS)
+
         );
     }
 

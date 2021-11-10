@@ -1,0 +1,62 @@
+{
+    "resourceType": "AllergyIntolerance",
+    "id": "0C1232CF-D34B-4C16-A5F4-0F6461C51A41",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
+        ]
+    },
+    "identifier": [
+        {
+            "system": "https://EMISWeb/A82038",
+            "value": "55D2363D57A248F49A745B2E03F5E93D0C1232CFD34B4C16A5F40F6461C51A41"
+        }
+    ],
+    "clinicalStatus": "resolved",
+    "verificationStatus": "unconfirmed",
+    "category": [
+        "medication"
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://read.info/readv2",
+                "code": "TJ00800",
+                "display": "Adverse reaction to pivampicillin",
+                "userSelected": true
+            },
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "2164497013"
+                            },
+                            {
+                                "url": "descriptionDisplay",
+                                "valueString": "Adverse reaction to pivampicillin"
+                            }
+                        ]
+                    }
+                ],
+                "system": "http://snomed.info/sct",
+                "code": "292971006",
+                "display": "Pivampicillin adverse reaction"
+            }
+        ]
+    },
+    "patient": {
+        "reference": "Patient/55D2363D-57A2-48F4-9A74-5B2E03F5E93D"
+    },
+    "assertedDate": "2019-01-28T13:43:36.107+00:00",
+    "recorder": {
+        "reference": "Practitioner/2DB481A3-306A-4133-9491-1558161D6A2B"
+    },
+    "note": [
+        {
+            "text": "allergy with no date recorded"
+        }
+    ]
+}
