@@ -5871,6 +5871,11 @@ Episodicity : Flare Up</text>
             <high value="20200724"/>
         </effectiveTime>
         <availabilityTime value="20200724133829" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="B6C6FCA4-DC3D-474E-8E20-117460144AFE"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="C09FA44E-2285-4917-8C72-25031091D0F7"/>

@@ -5979,6 +5979,11 @@ Episodicity : Review</text>
             
         </effectiveTime>
         <availabilityTime value="20201118135652" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="E5C085B1-363D-49BB-86E7-8283D4D0DD56"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="9EEAB807-FDB5-494E-B83A-77AD10EF7EEE"/>
@@ -6049,6 +6054,11 @@ historical date Transformed Immunization problem header Originally coded: First 
             
         </effectiveTime>
         <availabilityTime value="20210326111505" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="64CA6C9B-7BBE-474A-824C-43A7BD5B90F7"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="B58EFB01-1CFF-49D4-9658-9547F40A24CC"/>

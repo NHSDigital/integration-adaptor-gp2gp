@@ -7087,6 +7087,11 @@ The line below contains special characters...
 
         </effectiveTime>
         <availabilityTime value="20100113145710" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="test-id-3"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="test-id-3"/>
@@ -7154,6 +7159,11 @@ The line below contains special characters...
             <high value="20100323000000"/>
         </effectiveTime>
         <availabilityTime value="20100113140445" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="test-id-3"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="test-id-3"/>
@@ -7221,6 +7231,11 @@ The line below contains special characters...
 
         </effectiveTime>
         <availabilityTime value="20100113114126" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="test-id-3"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="test-id-3"/>

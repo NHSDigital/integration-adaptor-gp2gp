@@ -6823,6 +6823,11 @@ note - this is obviously wrong?</text>
             
         </effectiveTime>
         <availabilityTime value="20100113145710" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="92601097-8AE8-45DA-8D17-927B4727866C"/>
@@ -6892,6 +6897,11 @@ note - this is obviously wrong?</text>
             <high value="20100323"/>
         </effectiveTime>
         <availabilityTime value="20100113140445" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="4264DD9C-01B2-4F68-A222-E3B48540496D"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="E0762612-0920-4AB0-9CFC-185F79641C10"/>
@@ -6962,6 +6972,11 @@ note - this is obviously wrong?</text>
             
         </effectiveTime>
         <availabilityTime value="20100113114126" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="3AC188FA-B46E-465B-9614-37F234BEB494"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="BA675192-24E0-4698-8736-00DD928283CB"/>

@@ -20,13 +20,13 @@
                 </statementRef>
             </component>
         {{/relatedClinicalContent}}
-        {{#actualProblemLink}}
+        {{#actualProblemLinkId}}
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="{{actualProblemLink}}"/>
+                    <id root="{{actualProblemLinkId}}"/>
                 </statementRef>
             </component>
-        {{/actualProblemLink}}
+        {{/actualProblemLinkId}}
         {{#conditionNamed}}
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">

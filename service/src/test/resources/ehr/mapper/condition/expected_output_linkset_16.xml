@@ -13,6 +13,11 @@
             <high value="20201004000000"/>
         </effectiveTime>
         <availabilityTime value="20200907101202" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="230D3D37-99E3-450A-AE88-B5AB802B7137-Condition-new-ID"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="50233a2f-128f-4b96-bdae-6207ed11a8ea"/>

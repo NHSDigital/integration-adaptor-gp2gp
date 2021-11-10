@@ -3359,6 +3359,11 @@
             
         </effectiveTime>
         <availabilityTime value="20201102111241" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="44598FC3-DB57-4303-8B26-7D058F2B3510"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D"/>

@@ -3733,6 +3733,11 @@ Episodicity : Review</text>
             
         </effectiveTime>
         <availabilityTime value="20201102111241" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="411235D8-7D97-4319-BE0B-25C0E7D55C55"/>
