@@ -1902,7 +1902,7 @@ Status: unknown</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
-                <code nullFlavor="UNK">
+                <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2771,7 +2771,7 @@ Status: unknown</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
-                <code nullFlavor="UNK">
+                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
     <originalText>H/O: drug allergy Palonosetron 250micrograms/5ml solution for injection vials</originalText>
 </code>
                 <statusCode code="COMPLETE"/>

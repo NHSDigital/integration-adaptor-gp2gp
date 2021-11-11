@@ -7070,7 +7070,7 @@ note - this is obviously wrong?</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="92601097-8AE8-45DA-8D17-927B4727866C"/>
-                <code nullFlavor="UNK">
+                <code code="294881007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to warfarin">
     <originalText>Warfarin allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -7200,7 +7200,7 @@ This is a peanut allergy
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B06F16C9-95BA-41C5-99DA-902FC5B0B72B"/>
-                <code nullFlavor="UNK">
+                <code code="293586001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to aspirin">
     <originalText>Aspirin allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
