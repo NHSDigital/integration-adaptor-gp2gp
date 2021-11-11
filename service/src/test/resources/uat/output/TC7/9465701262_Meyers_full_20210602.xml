@@ -1944,7 +1944,7 @@ Some additional notes about the heart disease review</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
-                <code nullFlavor="UNK">
+                <code code="292044008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin adverse reaction">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
