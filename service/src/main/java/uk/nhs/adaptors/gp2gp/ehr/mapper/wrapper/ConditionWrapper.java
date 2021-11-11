@@ -138,7 +138,6 @@ public class ConditionWrapper {
             .filter(this::isTransformedActualProblemHeader)
             .map(this::buildTransformedText);
 
-
         return transformedProblemHeaderText.isPresent() ? transformedProblemHeaderText : Optional.empty();
     }
 
