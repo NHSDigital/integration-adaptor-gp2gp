@@ -15,7 +15,7 @@
         <availabilityTime value="20200907101202" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="C93659E1-1107-441C-BE25-C5EF4B7831D1-Condition-new-ID"/>
+                    <id root="44AF36F0-12A9-4119-9DCA-399532CA28BA-Condition-new-ID"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -43,7 +43,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Problem Info: Transformed Immunization problem header Originally coded: Test Condition</text>
+                <text>Problem Info: Transformed MedicationRequest problem header Originally coded: Test Condition</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>

@@ -11,12 +11,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.Extension;
 
 import com.google.common.collect.ImmutableMap;
 
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 
 @Slf4j
 public class ConditionWrapper {
@@ -35,15 +38,22 @@ public class ConditionWrapper {
     private static final String UNKNOWN_RELATED_PROBLEM = "Unknown related problem";
     private static final String UNKNOWN_CONDITION = "Unknown Condition";
     private static final String NON_SNOMED_CONDITION = "Non-Snomed coded Condition";
+    private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
+        + "-ActualProblem-1";
+    private static final List<String> RESOURCE_LIST = List.of("AllergyIntolerance", "Immunization", "MedicationRequest");
+    private static final String TRANSFORMED_PROBLEM_TEXT = "Transformed %s problem header";
+    private static final String ORIGINALLY_CODED_TEXT = "Originally coded: %s";
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final Condition condition;
     private List<RelatedProblemWrapper> relatedProblems;
     private List<String> notes;
 
     public ConditionWrapper(Condition condition, MessageContext messageContext, CodeableConceptCdMapper cdMapper) {
         this.messageContext = messageContext;
         this.codeableConceptCdMapper = cdMapper;
+        this.condition = condition;
 
         this.relatedProblems = condition
             .getExtension()
@@ -61,6 +71,7 @@ public class ConditionWrapper {
     public Optional<String> buildProblemInfo() {
         LinkedList<String> info = new LinkedList<>();
 
+        getOptionalTransformedProblemHeaderText().ifPresent(info::push);
         getOptionalNotesText().ifPresent(info::push);
         getOptionalRelatedProblemsText().ifPresent(info::push);
 
@@ -118,5 +129,29 @@ public class ConditionWrapper {
         }
 
         return NON_SNOMED_CONDITION;
+    }
+
+    private Optional<String> getOptionalTransformedProblemHeaderText() {
+        var transformedProblemHeaderText = ExtensionMappingUtils.filterExtensionByUrl(this.condition, ACTUAL_PROBLEM_URL)
+            .map(Extension::getValue)
+            .map(value -> (Reference) value)
+            .filter(this::isTransformedActualProblemHeader)
+            .map(this::buildTransformedText);
+
+        return transformedProblemHeaderText.isPresent() ? transformedProblemHeaderText : Optional.empty();
+    }
+
+    private boolean isTransformedActualProblemHeader(Reference reference) {
+        return RESOURCE_LIST.contains(reference.getReferenceElement().getResourceType());
+    }
+
+    private String buildTransformedText(Reference reference) {
+        var transformedText = String.format(TRANSFORMED_PROBLEM_TEXT, reference.getReferenceElement().getResourceType());
+        var originallyCoded = CodeableConceptMappingUtils.extractTextOrCoding(this.condition.getCode());
+        if (originallyCoded.isPresent()) {
+            transformedText = transformedText.concat(StringUtils.SPACE + String.format(ORIGINALLY_CODED_TEXT, originallyCoded.get()));
+        }
+
+        return transformedText;
     }
 }
