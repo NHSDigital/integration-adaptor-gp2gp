@@ -277,7 +277,7 @@ public class ConditionLinkSetMapper {
         return ExtensionMappingUtils.filterAllExtensionsByUrl(condition, ACTUAL_PROBLEM_URL)
             .stream()
             .map(Extension::getValue)
-            .map(value -> (Reference) value)
+            .map(Reference.class::cast)
             .filter(this::nonExistentResourceFilter)
             .filter(this::suppressedLinkageResourcesFilter)
             .map(this::mapLinkedId)
