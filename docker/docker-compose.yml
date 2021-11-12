@@ -85,6 +85,15 @@ services:
     command:
       - -global-response-templating
 
+  integration-wiremock:
+    networks:
+      - commonforgp2gp
+    build: ./integration-wiremock
+    ports:
+      - "8110:8080"
+    command:
+      - -global-response-templating
+
   gpcc:
     image: nhsdev/nia-gpc-consumer-adaptor:0.1.5
     networks: 
