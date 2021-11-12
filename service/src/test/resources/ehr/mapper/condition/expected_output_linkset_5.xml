@@ -28,6 +28,11 @@
                     <id root="8747DFC5-11B7-4A77-B2F3-7720CC58C2FC-Condition-new-ID"/>
                 </statementRef>
             </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-Condition-new-ID"/>
+                </statementRef>
+            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="50233a2f-128f-4b96-bdae-6207ed11a8ea"/>

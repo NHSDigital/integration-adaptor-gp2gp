@@ -1,0 +1,13 @@
+{
+    "resourceType" : "Observation",
+    "code": {
+        "coding": [
+	        {
+	          "system": "http://blah.info/blahsomecodesystem",
+	          "code": "F%^^%",
+	          "display": "Happy puppet syndrome",
+	          "userSelected": true
+	        }
+      	]
+	}
+}
