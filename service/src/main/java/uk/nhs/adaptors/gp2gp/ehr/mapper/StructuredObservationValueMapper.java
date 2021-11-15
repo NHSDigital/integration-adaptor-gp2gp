@@ -93,6 +93,19 @@ public class StructuredObservationValueMapper {
         return StringUtils.EMPTY;
     }
 
+    public String mapReferenceRangeTypeForDiagnosticReport(Observation.ObservationReferenceRangeComponent referenceRange) {
+        if (referenceRange.hasHigh() && referenceRange.getHigh().hasValue()
+                || referenceRange.hasLow() && referenceRange.getLow().hasValue()) {
+            var templateParameters = ReferenceRangeTemplateParameters.builder()
+                    .value(buildReferenceRangeValue(referenceRange))
+                    .build();
+
+            return TemplateUtils.fillTemplate(REF_RANGE_TEMPLATE, templateParameters);
+        }
+
+        return StringUtils.EMPTY;
+    }
+
     private String buildReferenceRangeValue(Observation.ObservationReferenceRangeComponent referenceRange) {
         String rangeValue = StringUtils.EMPTY;
 

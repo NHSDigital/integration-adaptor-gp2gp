@@ -12,7 +12,6 @@
             <value xsi:type="IVL_PQ"><low value="37.1" unit="Cel" inclusive="true"/></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
-        <text>Test reference range text</text>
         <value><low value="20"/><high value="30"/></value>
     </referenceInterpretationRange>
 </referenceRange>
@@ -24,16 +23,8 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20190601113000
 
-Test comment</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20190601113000"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="random-unmapped-id"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:COMPLEX REFERENCE RANGE(E330)
-CommentDate:20190601113000
-
+Test comment
+Range Text: Test reference range text
 Range Units: test-unit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>
