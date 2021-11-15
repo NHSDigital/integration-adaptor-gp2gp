@@ -126,7 +126,7 @@ class StructuredRecordMappingServiceTest {
 
         when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_2);
         when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
-        when(supportedContentTypes.isContentTypeSupported(UNSUPPORTED_CONTENTTYPE)).thenReturn(false);
+        //when(supportedContentTypes.isContentTypeSupported(UNSUPPORTED_CONTENTTYPE)).thenReturn(false);
 
         DocumentReference documentReference1 = new DocumentReference();
         documentReference1.setId(buildIdType(ResourceType.DocumentReference, ID_1));
