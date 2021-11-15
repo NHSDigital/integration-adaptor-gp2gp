@@ -364,8 +364,8 @@ public class ObservationMapper {
 
     private String prepareReferenceRangeValues(SimpleQuantity simpleQuantity) {
         return Stream.of(
-            Optional.ofNullable(simpleQuantity.getValue()),
-            Optional.ofNullable(simpleQuantity.getUnit())
+                Optional.ofNullable(simpleQuantity.getValue()),
+                Optional.ofNullable(simpleQuantity.getUnit())
             )
             .flatMap(Optional::stream)
             .filter(Objects::nonNull)
@@ -375,7 +375,6 @@ public class ObservationMapper {
 
     private String prepareReferenceRangeToComment(Observation.ObservationReferenceRangeComponent referenceRange) {
         StringBuilder referenceRangeCommentLine = new StringBuilder(RANGE_PREFIX);
-
         if (referenceRange.hasLow()) {
             referenceRangeCommentLine.append(
                 RANGE_LOW_PREFIX.concat(prepareReferenceRangeValues(referenceRange.getLow()))
