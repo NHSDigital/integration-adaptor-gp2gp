@@ -16437,7 +16437,7 @@
                 "custodian": {
                     "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
                 },
-                "description": "Referral for further care (22-Dec-2020). Attachment of type application/msword.",
+                "description": "Referral for further care (22-Dec-2020). Attachment of type application/msword",
                 "content": [
                     {
                         "attachment": {
@@ -16461,7 +16461,7 @@
                 "meta": {
                     "versionId": "8017752596891037527",
                     "profile": [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-2"
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
                     ]
                 },
                 "identifier": [
@@ -16482,7 +16482,7 @@
                 "custodian": {
                     "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
                 },
-                "description": "Referral for further care (22-Dec-2020). Attachment of type application/pdf.",
+                "description": "Referral for further care (22-Dec-2020). Attachment of type application/pdf",
                 "content": [
                     {
                         "attachment": {
@@ -16499,6 +16499,235 @@
                 }
             }
         },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-3",
+                "meta": {
+                    "versionId": "8017752596891037527",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-3"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "text": "Referral for further care"
+                },
+                "subject": {
+                    "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
+                },
+                "created": "2020-12-22T14:53:00+00:00",
+                "indexed": "2020-12-22T14:55:58.567+00:00",
+                "custodian": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "description": "Referral for further care (22-Dec-2020). Attachment of type application/xml",
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "application/octet-stream",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510-3",
+                            "size": 13
+                        }
+                    }
+                ],
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/A44B64EA-172B-4EF5-8809-3FF24F5613C1"
+                    }
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-4",
+                "meta": {
+                    "versionId": "8017752596891037527",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-4"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "text": "Referral for further care"
+                },
+                "subject": {
+                    "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
+                },
+                "created": "2020-12-22T14:53:00+00:00",
+                "indexed": "2020-12-22T14:55:58.567+00:00",
+                "custodian": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "description": "Referral for further care (22-Dec-2020). Attachment of type application/vnd.ms-excel.addin.macroEnabled.12",
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "application/octet-stream",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510-4",
+                            "size": 13
+                        }
+                    }
+                ],
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/A44B64EA-172B-4EF5-8809-3FF24F5613C1"
+                    }
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-5",
+                "meta": {
+                    "versionId": "8017752596891037527",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-5"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "text": "Referral for further care"
+                },
+                "subject": {
+                    "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
+                },
+                "created": "2020-12-22T14:53:00+00:00",
+                "indexed": "2020-12-22T14:55:58.567+00:00",
+                "custodian": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "description": "Referral for further care (22-Dec-2020). Attachment of type application/vnd.ms-excel.sheet.binary.macroEnabled.12",
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "application/octet-stream",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510-5",
+                            "size": 13
+                        }
+                    }
+                ],
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/A44B64EA-172B-4EF5-8809-3FF24F5613C1"
+                    }
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-6",
+                "meta": {
+                    "versionId": "8017752596891037527",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-6"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "text": "Referral for further care"
+                },
+                "subject": {
+                    "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
+                },
+                "created": "2020-12-22T14:53:00+00:00",
+                "indexed": "2020-12-22T14:55:58.567+00:00",
+                "custodian": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "description": "Referral for further care (22-Dec-2020). Attachment of type application/vnd.ms-excel.sheet.macroEnabled.12",
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "application/octet-stream",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510-6",
+                            "size": 13
+                        }
+                    }
+                ],
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/A44B64EA-172B-4EF5-8809-3FF24F5613C1"
+                    }
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-7",
+                "meta": {
+                    "versionId": "8017752596891037527",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-7"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "text": "Referral for further care"
+                },
+                "subject": {
+                    "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
+                },
+                "created": "2020-12-22T14:53:00+00:00",
+                "indexed": "2020-12-22T14:55:58.567+00:00",
+                "custodian": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "description": "Referral for further care (22-Dec-2020). Attachment of type application/vnd.ms-excel.template.macroEnabled.12",
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "application/octet-stream",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510-7",
+                            "size": 13
+                        }
+                    }
+                ],
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/A44B64EA-172B-4EF5-8809-3FF24F5613C1"
+                    }
+                }
+            }
+        },
+
+
+
+
         {
             "resource": {
                 "resourceType": "Organization",
