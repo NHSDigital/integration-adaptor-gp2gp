@@ -46,9 +46,9 @@ public class StructuredRecordMappingService {
 
         String contentType = DocumentReferenceUtils.extractContentType(attachment);
         String fileName;
-        if(supportedContentTypes.isContentTypeSupported(contentType)){
+        if (supportedContentTypes.isContentTypeSupported(contentType)) {
             fileName = DocumentReferenceUtils.buildPresentAttachmentFileName(documentId, contentType);
-        }else{
+        } else {
             fileName = DocumentReferenceUtils.buildMissingAttachmentFileName(documentId);
             contentType = DEFAULT_ATTACHMENT_CONTENT_TYPE;
         }
