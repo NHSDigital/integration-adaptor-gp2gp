@@ -57,6 +57,8 @@ public class EhrExtractMapperComponentTest {
         "fhir-bundle-observations-after-diagnostic-report.json";
     private static final String FHIR_BUNDLE_WITH_OBSERVATIONS_UNRELATED_TO_DIAGNOSTIC_REPORT =
         "fhir-bundle-observations-unrelated-to-diagnostic-report.json";
+    private static final String FHIR_BUNDLE_WITH_OBSERVATIONS_WITH_RELATED_OBSERVATIONS =
+            "fhir-bundle-observations-with-related-observations.json";
 
     private static final String EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE = "ExpectedResponseFrom1ConsultationResponse.xml";
 
@@ -66,6 +68,7 @@ public class EhrExtractMapperComponentTest {
     private static final String EXPECTED_XML_WITH_EFFECTIVE_TIME = "expected-xml-with-effective-time.xml";
     private static final String EXPECTED_XML_WITH_OBSERVATIONS_INSIDE_REPORT = "expected-xml-with-observations-inside-report.xml";
     private static final String EXPECTED_XML_WITH_STANDALONE_OBSERVATIONS = "expected-xml-with-standalone-observations.xml";
+    private static final String EXPECTED_XML_WITH_RELATED_OBSERVATIONS = "expected-xml-with-related-observations.xml";
 
     private static final String TEST_ID_1 = "test-id-1";
     private static final String TEST_ID_2 = "test-id-2";
@@ -203,7 +206,8 @@ public class EhrExtractMapperComponentTest {
             Arguments.of(FHIR_BUNDLE_WITH_EFFECTIVE_TIME, EXPECTED_XML_WITH_EFFECTIVE_TIME),
             Arguments.of(FHIR_BUNDLE_WITH_WITH_OBSERVATIONS_BEFORE_DIAGNOSTIC_REPORT, EXPECTED_XML_WITH_OBSERVATIONS_INSIDE_REPORT),
             Arguments.of(FHIR_BUNDLE_WITH_WITH_OBSERVATIONS_AFTER_DIAGNOSTIC_REPORT, EXPECTED_XML_WITH_OBSERVATIONS_INSIDE_REPORT),
-            Arguments.of(FHIR_BUNDLE_WITH_OBSERVATIONS_UNRELATED_TO_DIAGNOSTIC_REPORT, EXPECTED_XML_WITH_STANDALONE_OBSERVATIONS)
+            Arguments.of(FHIR_BUNDLE_WITH_OBSERVATIONS_UNRELATED_TO_DIAGNOSTIC_REPORT, EXPECTED_XML_WITH_STANDALONE_OBSERVATIONS),
+            Arguments.of(FHIR_BUNDLE_WITH_OBSERVATIONS_WITH_RELATED_OBSERVATIONS, EXPECTED_XML_WITH_RELATED_OBSERVATIONS)
         );
     }
 

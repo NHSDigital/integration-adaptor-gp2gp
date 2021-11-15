@@ -73,6 +73,8 @@ public class NonConsultationResourceMapperTest {
     private static final String DIAGNOSTIC_REPORT_BUNDLE = FILES_DIRECTORY + "diagnostic-report-bundle.json";
     private static final String DIAGNOSTIC_REPORT_AFTER_OBSERVATION_BUNDLE =
         FILES_DIRECTORY + "diagnostic-report-after-observation-bundle.json";
+    private static final String DIAGNOSTIC_REPORT_PERFORMER_ORGANIZATION =
+        FILES_DIRECTORY + "diagnostic-report-performer-organization.json";
     private static final String EXPECTED_DIAGNOSTIC_REPORT_OUTPUT = FILES_DIRECTORY + "expected-diagnostic-report-output.xml";
     private static final String DIAGNOSTIC_REPORT_AGENT_PERSON_XML = FILES_DIRECTORY + "diagnostic-report-agent-person-stub.xml";
     private static final String DIAGNOSTIC_REPORT_AGENT_PERSON_BUNDLE = FILES_DIRECTORY + "diagnostic-report-agent-person-bundle.json";
@@ -174,7 +176,11 @@ public class NonConsultationResourceMapperTest {
             Arguments.of(DOCUMENT_REFERENCE_XML, DOCUMENT_REFERENCE_BUNDLE, EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT),
             Arguments.of(DIAGNOSTIC_REPORT_XML, DIAGNOSTIC_REPORT_BUNDLE, EXPECTED_DIAGNOSTIC_REPORT_OUTPUT),
             Arguments.of(
-                DIAGNOSTIC_REPORT_AGENT_PERSON_XML, DIAGNOSTIC_REPORT_AGENT_PERSON_BUNDLE, EXPECTED_DIAGNOSTIC_REPORT_AGENT_PERSON_OUTPUT)
+                DIAGNOSTIC_REPORT_AGENT_PERSON_XML, DIAGNOSTIC_REPORT_AGENT_PERSON_BUNDLE, EXPECTED_DIAGNOSTIC_REPORT_AGENT_PERSON_OUTPUT),
+            Arguments.of(
+                DIAGNOSTIC_REPORT_AGENT_PERSON_XML,
+                DIAGNOSTIC_REPORT_PERFORMER_ORGANIZATION,
+                EXPECTED_DIAGNOSTIC_REPORT_AGENT_PERSON_OUTPUT)
         );
     }
 

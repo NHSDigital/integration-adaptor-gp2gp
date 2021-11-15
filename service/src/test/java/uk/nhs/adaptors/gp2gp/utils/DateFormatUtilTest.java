@@ -5,12 +5,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toDateTypeTime;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormatStraight;
 
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.BaseDateTimeType;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Specimen;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -26,6 +29,7 @@ public class DateFormatUtilTest {
     private static final String INSTANT_OBSERVATION_TEMPLATE = "{\"resourceType\": \"Observation\", \"issued\": \"%s\"}";
     private static final String DATETYPE_IMMUNIZATION_TEMPLATE = "{\"resourceType\": \"Immunization\", \"expirationDate\": \"%s\"}";
     private static final String DATETIME_OBSERVATION_TEMPLATE = "{\"resourceType\": \"Observation\", \"valueDateTime\": \"%s\"}";
+    private static final String DATETIME_SPECIMEN_TEMPLATE = "{\"resourceType\": \"Specimen\", \"receivedTime\": \"%s\"}";
 
     @ParameterizedTest
     @MethodSource("instantParams")
@@ -64,6 +68,16 @@ public class DateFormatUtilTest {
         Observation observation = FHIR_PARSER.parseResource(observationJson, Observation.class);
 
         String actual = toTextFormat(observation.getValueDateTimeType());
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void When_FormattingDateToText_Expect_StringWithDateHoursMinutes() {
+        final String expected = "2005-05-02 21:37";
+        String specimenJson = String.format(DATETIME_SPECIMEN_TEMPLATE, "2005-05-02T21:37:05+00:00");
+        Specimen specimen = FHIR_PARSER.parseResource(specimenJson, Specimen.class);
+
+        String actual = toTextFormatStraight(specimen.getReceivedTime());
         assertThat(actual).isEqualTo(expected);
     }
 
