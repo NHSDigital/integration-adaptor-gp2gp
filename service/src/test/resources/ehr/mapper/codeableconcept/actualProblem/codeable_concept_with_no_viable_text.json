@@ -1,0 +1,12 @@
+{
+    "resourceType" : "Observation",
+    "code": {
+        "coding": [
+	        {
+	          "system": "http://blah.info/blahsomecodesystem",
+	          "code": "F%^^%",
+	          "userSelected": true
+	        }
+      	]
+	}
+}
