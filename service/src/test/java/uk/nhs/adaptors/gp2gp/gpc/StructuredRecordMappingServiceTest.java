@@ -151,13 +151,13 @@ class StructuredRecordMappingServiceTest {
         return structuredRecordMappingService.getExternalAttachments(bundle);
     }
 
-    private static OutboundMessage.ExternalAttachment buildExternalAttachment(String documentID, String messageID, String URL,
+    private static OutboundMessage.ExternalAttachment buildExternalAttachment(String documentID, String messageID, String url,
         OutboundMessage.AttachmentDescription description) {
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentID)
             .messageId(messageID)
             .description(description.toString())
-            .url(URL)
+            .url(url)
             .build();
     }
 
@@ -173,10 +173,10 @@ class StructuredRecordMappingServiceTest {
             .build();
     }
 
-    private static DocumentReference buildDocumentReference(String ID, String attachmentURL, String attachmentTitle,
+    private static DocumentReference buildDocumentReference(String id, String attachmentURL, String attachmentTitle,
         int size, String contentType) {
         var documentReference = new DocumentReference();
-        documentReference.setId(buildIdType(ResourceType.DocumentReference, ID));
+        documentReference.setId(buildIdType(ResourceType.DocumentReference, id));
         documentReference.getContentFirstRep().setAttachment(new Attachment()
             .setUrl(attachmentURL)
             .setTitle(attachmentTitle)
