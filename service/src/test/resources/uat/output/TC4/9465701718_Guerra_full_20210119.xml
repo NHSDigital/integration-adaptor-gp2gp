@@ -684,7 +684,7 @@ Received Date: 2002-03-30 12:21
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037"/>
         <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>International normalised ratio</originalText>
+    <originalText>INR - international normalised ratio</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -985,6 +985,7 @@ Status: unknown</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9"/>
         <code code="1006701000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum paracetamol level">
+    <originalText>Serum paracetamol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2781,8 +2782,20 @@ CommentDate:20030618080000
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="8169ED1C-68A3-410D-B538-BC5AC42C77DA"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+CommentDate:20030616000000
+
+Received Date: 2003-06-17 13:21
+</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030618080000"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="503999C4-17C3-4B14-8085-A995DBC80286"/>
+        <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF"/>
         <code code="1006761000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bone profile">
     <originalText>Bone profile</originalText>
 </code>
@@ -3351,8 +3364,20 @@ CommentDate:20030628112300
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="DE904918-5B6F-405B-9731-F9C528C98F2C"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+CommentDate:20030627000000
+
+Received Date: 2003-06-27 18:24
+</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030628112300"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="0814FE49-058E-4B3C-9F74-040922A26099"/>
+        <id root="46218E0A-240A-47A3-9793-2CA43C848EDB"/>
         <code code="997531000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
     <originalText>Liver function test</originalText>
 </code>
@@ -3904,8 +3929,20 @@ CommentDate:20030704111300
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="7217C8E7-F51A-46B4-8590-6FF88478C7A8"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+CommentDate:20030703151400
+
+Received Date: 2003-07-03 14:14
+</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030704111300"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="FE739904-2AAB-4B3F-9718-84BE019FD483"/>
+        <id root="43F68F4A-CF96-49AF-8BFD-2B89AAD86E4E"/>
         <code code="993571000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
     <originalText>Infectious mononucleosis test</originalText>
 </code>
@@ -4505,6 +4542,7 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="F42057DE-87B1-4FB2-97DD-16EE1B61FD58"/>
         <code code="995851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Double stranded deoxyribonucleic acid binding autoantibody level">
+    <originalText>Double stranded deoxyribonucleic acid binding autoantibody level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4540,7 +4578,7 @@ Oligoclonals detected in both sera and CSF</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="C09FA44E-2285-4917-8C72-25031091D0F7"/>
         <code code="1016761000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mitochondrial antibody screening test">
-    <originalText>Mitochondrial antibody level</originalText>
+    <originalText>Mitochondrial antibody screening test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4576,6 +4614,7 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="5911B7CE-B5E2-4E8A-8703-E3407548DB24"/>
         <code code="1005501000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver autoantibody level">
+    <originalText>Liver autoantibody level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4611,7 +4650,7 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="9EEAB807-FDB5-494E-B83A-77AD10EF7EEE"/>
         <code code="994601000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti smooth muscle antibody titre">
-    <originalText>Anti smooth muscle autoantibod</originalText>
+    <originalText>Anti smooth muscle antibody titre</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4647,6 +4686,7 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B58EFB01-1CFF-49D4-9658-9547F40A24CC"/>
         <code code="992101000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adrenal autoantibodies">
+    <originalText>Adrenal autoantibodies</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4754,6 +4794,7 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="92726062-D62B-4736-92D1-CF3F1D83832B"/>
         <code code="994661000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Parietal cell autoantibodies">
+    <originalText>Parietal cell autoantibodies</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5079,6 +5120,7 @@ See FATS/Healthy Hearts guidelines for interpretation of lipids</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="531EED3E-6C41-46B6-8B0B-570E421D52F6"/>
         <code code="1005681000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum high density lipoprotein cholesterol level">
+    <originalText>Serum high density lipoprotein cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5130,6 +5172,7 @@ Range Text: &gt; 1.000 mmol/L</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="381D7D39-7FB8-49C2-B042-F15A48B019EB"/>
         <code code="1022791000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum TSH (thyroid stimulating hormone) level">
+    <originalText>Serum TSH (thyroid stimulating hormone) level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>

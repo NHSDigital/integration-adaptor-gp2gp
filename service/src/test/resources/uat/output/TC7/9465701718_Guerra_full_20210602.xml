@@ -876,7 +876,7 @@ Received Date: 2002-03-30 12:21
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
         <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>International normalised ratio</originalText>
+    <originalText>INR - international normalised ratio</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1225,6 +1225,7 @@ Participants: MessageRecipient-B86123, LaboratoryServiceProvider-ST JAMES&apos;S
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46"/>
         <code code="1006701000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum paracetamol level">
+    <originalText>Serum paracetamol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5111,6 +5112,7 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E"/>
         <code code="995851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Double stranded deoxyribonucleic acid binding autoantibody level">
+    <originalText>Double stranded deoxyribonucleic acid binding autoantibody level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5146,7 +5148,7 @@ Oligoclonals detected in both sera and CSF</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="4264DD9C-01B2-4F68-A222-E3B48540496D"/>
         <code code="1016761000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mitochondrial antibody screening test">
-    <originalText>Mitochondrial antibody level</originalText>
+    <originalText>Mitochondrial antibody screening test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5182,6 +5184,7 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="3AC188FA-B46E-465B-9614-37F234BEB494"/>
         <code code="1005501000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver autoantibody level">
+    <originalText>Liver autoantibody level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5217,7 +5220,7 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="981B6B2F-EAA2-4454-8BA6-C5B2FDAE946C"/>
         <code code="994601000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti smooth muscle antibody titre">
-    <originalText>Anti smooth muscle autoantibod</originalText>
+    <originalText>Anti smooth muscle antibody titre</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5253,6 +5256,7 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="0A4B8365-FEE6-4352-B941-5CCC40F3AE63"/>
         <code code="992101000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adrenal autoantibodies">
+    <originalText>Adrenal autoantibodies</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5360,6 +5364,7 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="302EDB55-A65C-4216-BB8A-E54C7E5EC39E"/>
         <code code="994661000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Parietal cell autoantibodies">
+    <originalText>Parietal cell autoantibodies</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5802,6 +5807,7 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="599D6A2F-B001-4E52-A09D-1113D43FA4A0"/>
         <code code="1022791000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum TSH (thyroid stimulating hormone) level">
+    <originalText>Serum TSH (thyroid stimulating hormone) level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>

@@ -1794,7 +1794,7 @@ Interpretation: HI - Above high reference limit</text>
         <availabilityTime value="20101216081700" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
+                <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
                 <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
     <originalText>Adverse reaction to drug</originalText>
 </code>
@@ -2664,7 +2664,7 @@ Interpretation: HI - Above high reference limit</text>
         <availabilityTime value="20110307000000" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
+                <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
                 <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
     <originalText>H/O: drug allergy Palonosetron 250micrograms/5ml solution for injection vials</originalText>
 </code>

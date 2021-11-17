@@ -5959,7 +5959,7 @@ test Transformed AllergyIntolerance problem header Originally coded: Allergy to 
         <availabilityTime value="20200724" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="3FE921FD-5A7C-49A7-BF85-591FC6C8933C"/>
+                <id root="5911B7CE-B5E2-4E8A-8703-E3407548DB24"/>
                 <code code="294647003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to Influenza virus vaccine">
     <originalText>Allergy to Influenza virus vaccine</originalText>
 </code>
@@ -6021,7 +6021,7 @@ test Transformed AllergyIntolerance problem header Originally coded: Allergy to 
         <availabilityTime value="20200724" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="C09FA44E-2285-4917-8C72-25031091D0F7"/>
+                <id root="B6C6FCA4-DC3D-474E-8E20-117460144AFE"/>
                 <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
     <originalText>Allergy to penicillin</originalText>
 </code>

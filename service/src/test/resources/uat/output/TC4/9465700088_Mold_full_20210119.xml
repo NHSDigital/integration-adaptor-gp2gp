@@ -254,7 +254,7 @@ Received Date: 2010-02-24 15:41
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
         <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>International normalised ratio</originalText>
+    <originalText>INR - international normalised ratio</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -979,6 +979,7 @@ Received Date: 2010-02-24 15:41
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA"/>
         <code code="1029271000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid arthritis latex test">
+    <originalText>Rheumatoid arthritis latex test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1211,6 +1212,7 @@ Received Date: 2010-02-24 15:41
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="356F257A-A7D7-45DD-8B76-09C1DB97B40B"/>
         <code code="1010371000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Calculus analysis">
+    <originalText>Calculus analysis</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1340,7 +1342,7 @@ Received Date: 2010-02-24 15:41
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="73CE838C-AB98-4BB2-8C69-4F6508BE99A0"/>
         <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>International normalised ratio</originalText>
+    <originalText>INR - international normalised ratio</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1709,6 +1711,7 @@ Status: unknown</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
         <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
+    <originalText>Eosinophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1758,6 +1761,7 @@ Range Text: &lt; 0.600 10*9/L</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="E3ABD9D7-736E-47DB-A9A6-97D9898983D8"/>
         <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
+    <originalText>Basophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2407,6 +2411,7 @@ Status: unknown</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
         <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
+    <originalText>Eosinophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2456,6 +2461,7 @@ Range Text: &lt; 0.600 10*9/L</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="09DAA58F-63BB-4B07-AD44-40F8C3E0109B"/>
         <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
+    <originalText>Basophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3611,6 +3617,7 @@ Status: unknown</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B1310011-B620-48D7-A381-2BF0335C5B3D"/>
         <code code="1006691000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum digoxin level">
+    <originalText>Serum digoxin level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3723,6 +3730,7 @@ Status: unknown</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="FEA86ABB-8413-4535-ACF8-3EA476B39B53"/>
         <code code="1006701000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum paracetamol level">
+    <originalText>Serum paracetamol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4131,6 +4139,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="D888F20F-2B36-469C-BAEC-E710A0D46FAA"/>
         <code code="993571000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
+    <originalText>Infectious mononucleosis test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5192,6 +5201,7 @@ Received Date: 2010-02-24 15:41
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="FB313646-3FC3-49D0-8277-D11CEA14641D"/>
         <code code="997071000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
+    <originalText>RAST test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6764,6 +6774,7 @@ Received Date: 2010-02-24 15:41
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="07759EED-0A0E-4C8E-906D-832CB079DC78"/>
         <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
+    <originalText>Glucose tolerance test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
