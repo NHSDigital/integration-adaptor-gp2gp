@@ -376,6 +376,7 @@ red blood cell seen, Note low platelets</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
         <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
+    <originalText>Basophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -447,6 +448,7 @@ red blood cell seen, Note low platelets</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
         <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
+    <originalText>Haematocrit</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -470,6 +472,7 @@ red blood cell seen, Note low platelets</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35"/>
         <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
+    <originalText>Lymphocyte count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -493,7 +496,7 @@ red blood cell seen, Note low platelets</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
         <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>Mean cell haemoglobin</originalText>
+    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -541,7 +544,7 @@ red blood cell seen, Note low platelets</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
         <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>Mean cell volume</originalText>
+    <originalText>MCV - Mean corpuscular volume</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -589,6 +592,7 @@ red blood cell seen, Note low platelets</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
         <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
+    <originalText>Neutrophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -599,6 +603,7 @@ red blood cell seen, Note low platelets</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
         <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
+    <originalText>Neutrophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -727,7 +732,7 @@ Interpretation: LO - Below low reference limit</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white blood count</originalText>
+    <originalText>Total white cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -738,7 +743,7 @@ Interpretation: LO - Below low reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white blood count</originalText>
+    <originalText>Total white cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -785,6 +790,7 @@ Interpretation: HI - Above high reference limit</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
         <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
+    <originalText>Plasma viscosity</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -795,6 +801,7 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
         <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
+    <originalText>Plasma viscosity</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1208,6 +1215,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088" />
         <code code="704502000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Partner pregnant">
+    <originalText>Partner pregnant</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1233,6 +1241,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="432103E4-651E-417C-97ED-37E4E8649C89" />
         <code code="407645004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dizziness on standing up">
+    <originalText>Dizziness on standing up</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1322,6 +1331,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F" />
         <code code="162950006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - breath sounds normal">
+    <originalText>O/E - breath sounds normal</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1347,6 +1357,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F" />
         <code code="32398004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bronchitis">
+    <originalText>Bronchitis</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1424,6 +1435,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46" />
         <code code="407645004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dizziness on standing up">
+    <originalText>Dizziness on standing up</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1475,6 +1487,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD" />
         <code code="704502000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Partner pregnant">
+    <originalText>Partner pregnant</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1578,6 +1591,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C" />
         <code code="169828005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Twins - both live born">
+    <originalText>Twins - both live born</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1733,6 +1747,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA" />
         <code code="169828005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Twins - both live born">
+    <originalText>Twins - both live born</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1817,7 +1832,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
         <code code="367391008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Malaise">
-    <originalText>Feels unwell</originalText>
+    <originalText>Malaise</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1843,6 +1858,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C" />
         <code code="164045002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - eye movements normal">
+    <originalText>O/E - eye movements normal</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1903,6 +1919,7 @@ Status: unknown</text>
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
                 <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
+    <originalText>Adverse reaction to drug</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2353,7 +2370,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="730F742C-1164-45BF-9139-8484074E5995" />
         <code code="509341000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Petit-mal epilepsy">
-    <originalText>Petit mal (minor) epilepsy</originalText>
+    <originalText>Petit-mal epilepsy</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2811,6 +2828,7 @@ Status: unknown</text>
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="D32F7C6C-D220-42A1-8028-610E3DEBD991"/>
                 <code code="300916003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Latex allergy">
+    <originalText>Latex allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2951,6 +2969,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="867553AF-2B39-48F7-BE0B-DE854814CED5" />
         <code code="163074001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - heart sounds normal">
+    <originalText>O/E - heart sounds normal</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3002,6 +3021,7 @@ Status: unknown</text>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3012,6 +3032,7 @@ Status: unknown</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="B118583D-C4B6-40DE-A3CE-E0C73F55406A"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3025,6 +3046,7 @@ Status: unknown</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3170,6 +3192,7 @@ Status: unknown</text>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="B184ACE9-DC5C-45B1-B65A-A8B38DF27863"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3180,6 +3203,7 @@ Status: unknown</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="6CD96448-3DD9-4E6D-857A-798F79824F26"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3193,6 +3217,7 @@ Status: unknown</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="3368F5B6-5CC7-456B-95AE-EC498D49245A"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3297,6 +3322,7 @@ Status: unknown</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="44598FC3-DB57-4303-8B26-7D058F2B3510" />
         <code code="162811006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - cataract present">
+    <originalText>O/E - cataract present</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3497,6 +3523,7 @@ Status: unknown</text>
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64" />
         <code code="183444007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
+    <originalText>Referral for further care</originalText>
 </code>
         <text>Recipient Org: Fictional Hospital Annotation: Referral for manual lymphatic drainage Referrer: David McAvenue at Testvale Surgery (New Forest PCT)
 Referral Type: Hospital
@@ -3577,6 +3604,7 @@ Sent: 07 Mar 2011 16:58</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9689E7D7-DD8B-4981-89D4-A2CA6C26DBE5" />
         <code code="394995008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hospital prescription">
+    <originalText>Hospital prescription</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4033,6 +4061,7 @@ Dosage: 0.5 ml</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3D1CF6C4-8BF0-4698-BB02-F0864EBDC8AB" />
         <code code="81934005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Black hairy tongue">
+    <originalText>Black hairy tongue</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4162,6 +4191,7 @@ Dosage: 0.5 ml</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CC9ACAD0-C9F0-46ED-9B85-DEB7D5CB885B" />
         <code code="81934005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Black hairy tongue">
+    <originalText>Black hairy tongue</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5991,6 +6021,7 @@ Dosage: 0.5 ml</text>
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="1D9ACACA-A3EB-43B5-8844-F0E305E67098" />
         <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+    <originalText>Influenza vaccination</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
