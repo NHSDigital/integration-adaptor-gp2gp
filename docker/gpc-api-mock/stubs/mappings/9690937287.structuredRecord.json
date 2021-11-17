@@ -1,5 +1,4 @@
 {
-  "id": "00000000-0000-0000-0000-000000000001",
   "priority": 1,
   "request": {
     "method": "POST",
@@ -8,12 +7,12 @@
       "matchesJsonPath" : "$.parameter[?(@.name == 'patientNHSNumber')]"
     },
     {
-      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9690937286')]"
+      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9690937287')]"
     }]
   },
   "response": {
     "status": 200,
-    "bodyFileName": "getStructuredRecordResponse.json",
+    "bodyFileName": "9690937287.structuredRecord.json",
     "headers": {
       "Server": "nginx",
       "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",
