@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
@@ -32,6 +33,7 @@ public class InputBundleTest {
     private static final String ENCOUNTER_LIST_EXISTING_REFERENCE = "Encounter/43536547";
     private static final String ENCOUNTER_LIST_NOT_EXISTING_REFERENCE = "Encounter/123456";
     private static final String EXISTING_LIST_REFERENCE = "List/0123456";
+    private static final String EXISTING_DIAGNOSTIC_REPORT_REFERENCE_1 = "DiagnosticReport/54321";
     private static final String INVALID_CODE = "not-valid-code";
     private static final String VALID_CODE = "valid-code";
 
@@ -41,6 +43,16 @@ public class InputBundleTest {
     public void setUp() throws IOException {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_PATH);
         bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+    }
+
+    @Test
+    public void When_GettingListOfResourcesOfType_Expect_ListReturned() {
+        final var className = DiagnosticReport.class;
+        final var resourcesList = new InputBundle(bundle).getResourcesOfType(className);
+
+        assertThat(resourcesList).isNotEmpty();
+        assertThat(resourcesList.get(0).getId()).isEqualTo(EXISTING_DIAGNOSTIC_REPORT_REFERENCE_1);
+        assertThat(resourcesList.get(0).getResourceType()).isEqualTo(ResourceType.valueOf(className.getSimpleName()));
     }
 
     @Test

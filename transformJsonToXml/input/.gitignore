@@ -1,0 +1,9 @@
+#Ignore everything
+*
+
+#In subdirectories too
+*/
+
+#But leave these files
+!.gitignore
+!sampleJson.json

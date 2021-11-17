@@ -102,6 +102,17 @@
         </effectiveTime>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="test-id-3"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+CommentDate:20030221115000
+
+Status: unknown</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030221115000"/>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="test-id-3"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -125,26 +136,27 @@
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-CommentDate:20030221115000
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+CommentDate:20030109000000
 
-EMPTY REPORT</text>
+Received Date: 2003-01-09 13:54
+</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030221115000"/>
     </NarrativeStatement>
-</component>
-    </CompoundStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-CommentDate:20030221115000
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+CommentDate:UNK
 
-Status: unknown</text>
+EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime nullFlavor="UNK"/>
     </NarrativeStatement>
+</component>
+    </CompoundStatement>
 </component>
     </CompoundStatement>
 </component>
@@ -214,15 +226,15 @@ Status: unknown</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime nullFlavor="UNK"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
