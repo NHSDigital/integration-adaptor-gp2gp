@@ -15,11 +15,11 @@ public class AbsentAttachmentFileMapper {
 
     private static final Mustache ABSENT_ATTACHMENT_TEMPLATE = TemplateUtils.loadTemplate("absent_attachment_template.mustache");
 
-    public static String mapDataToAbsentAttachment() {
+    public static String mapDataToAbsentAttachment(String title, String odsCode, String conversationId) {
         var absentAttachment = AbsentAttachment.builder()
-            .title("Missing file") //pass the value of content.attachment.title got from Emis
-            .sourcePracticeOrganisationCode("A81001")  //transaction or wrapper layer
-            .ebXMLConversationId("6F4ECB85-43E4-41CD-A1BB-330C06D8FC99") //transaction or wrapper layer
+            .title(title) //pass the value of content.attachment.title got from Emis
+            .odsCode(odsCode)  //transaction or wrapper layer
+            .conversationId(conversationId) //transaction or wrapper layer
             .build();
         return TemplateUtils.fillTemplate(ABSENT_ATTACHMENT_TEMPLATE, absentAttachment);
     }
@@ -30,8 +30,8 @@ public class AbsentAttachmentFileMapper {
     @Builder
     private static class AbsentAttachment {
         private String title; //content.attachment.title
-        private String sourcePracticeOrganisationCode;
-        private String ebXMLConversationId;
+        private String odsCode;
+        private String conversationId;
     }
 
 }

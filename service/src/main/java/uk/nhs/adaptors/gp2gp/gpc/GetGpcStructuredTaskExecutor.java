@@ -6,6 +6,8 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.DocumentReference;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
@@ -18,6 +20,7 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AbsentAttachmentFileMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
@@ -25,6 +28,7 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -69,6 +73,26 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             messageContext.initialize(structuredRecord);
 
             externalAttachments = structuredRecordMappingService.getExternalAttachments(structuredRecord);
+
+            //Here the change begins
+            String fileContent = "";
+            if(externalAttachments.stream().anyMatch(e -> e.getFilename().contains("AbsentAttachment"))){
+                var documentReferences = structuredRecord.getEntry()
+                    .stream()
+                    .map(Bundle.BundleEntryComponent::getResource)
+                    .filter(e -> e.getResourceType().equals(ResourceType.DocumentReference))
+                    .map(DocumentReference.class::cast).collect(Collectors.toList());
+
+                final List<OutboundMessage.ExternalAttachment> externalAttachmentList = externalAttachments;
+
+                var title= Optional.ofNullable(documentReferences.stream()
+                    .filter(e -> e.getContentFirstRep().getAttachment().getUrl().equals(externalAttachmentList.get(0).getUrl()))
+                    .findFirst().get().getContentFirstRep().getAttachment().getTitle()).orElse(StringUtils.EMPTY);
+
+                fileContent = AbsentAttachmentFileMapper.mapDataToAbsentAttachment(title, structuredTaskDefinition.getToOdsCode(), structuredTaskDefinition.getConversationId());
+            }
+            //@TODO: Fix the template not being filled for some reason
+            //Here the change ends (for now)
 
             var documentReferencesWithoutUrl = externalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isBlank(documentMetadata.getUrl()))
