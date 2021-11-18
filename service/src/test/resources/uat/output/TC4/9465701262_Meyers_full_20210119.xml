@@ -279,6 +279,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="263B2A9F-0B1D-4697-943A-328F70E068DE" />
         <code code="240534005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hand wart">
+    <originalText>Hand wart</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -337,7 +338,7 @@
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06" />
         <code code="285365001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pain in toe">
-    <originalText>Toe pain</originalText>
+    <originalText>Pain in toe</originalText>
 </code>
         <text>
             Part of a consultation
@@ -435,6 +436,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843" />
         <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
+    <originalText>Ischaemic heart disease</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -460,6 +462,7 @@
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
         <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
+    <originalText>Ischaemic heart disease</originalText>
 </code>
         <text>
             Added from a problem within a consultation
@@ -479,6 +482,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B" />
         <code code="57177007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family history with explicit context">
+    <originalText>Family history with explicit context</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -624,6 +628,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99" />
         <code code="60621009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Body mass index">
+    <originalText>Body mass index</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -829,6 +834,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="99792B9D-0715-4F2A-9934-1D5D4E975284" />
         <code code="93311000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Medication review of medical notes">
+    <originalText>Medication review of medical notes</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -854,7 +860,7 @@
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="DB7C94B1-01A6-491F-AC41-A36D88023069" />
         <code code="182836005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Review of medication">
-    <originalText>Medication review</originalText>
+    <originalText>Review of medication</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -904,6 +910,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
         <code code="314414007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First meningitis C vaccination">
+    <originalText>First meningitis C vaccination</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1082,6 +1089,7 @@
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904" />
         <code code="305230000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by GP">
+    <originalText>Admission by GP</originalText>
 </code>
         <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -1138,6 +1146,7 @@
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD" />
         <code code="183835003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer for angiogram">
+    <originalText>Refer for angiogram</originalText>
 </code>
         <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -1194,6 +1203,7 @@
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="432103E4-651E-417C-97ED-37E4E8649C89" />
         <code code="390884006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Heart failure follow-up">
+    <originalText>Heart failure follow-up</originalText>
 </code>
         <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required linked to a problem</text>
         <statusCode code="COMPLETE"/>
@@ -5034,6 +5044,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36" />
         <code code="314415008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Second meningitis C vaccination">
+    <originalText>Second meningitis C vaccination</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5080,6 +5091,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9EC5CD05-9875-4F82-AC04-19B706D79BC0" />
         <code code="414259000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First diphtheria tetanus and five component acellular pertussis, haemophilus influenzae type b, inactivated polio vaccination">
+    <originalText>First diphtheria tetanus and five component acellular pertussis, haemophilus influenzae type b, inactivated polio vaccination</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5126,6 +5138,7 @@
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48" />
         <code code="183450002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to burn unit">
+    <originalText>Admission to burn unit</originalText>
 </code>
         <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:Required Reason for referral comments field</text>
         <statusCode code="COMPLETE"/>
@@ -5172,6 +5185,7 @@
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA" />
         <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+    <originalText>Influenza vaccination</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5254,6 +5268,7 @@
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="4F02ED83-3153-4786-96C2-200FE456A1E4" />
         <code code="385954004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Foot care assessment">
+    <originalText>Foot care assessment</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5293,6 +5308,7 @@
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15" />
         <code code="134186004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Over 75 health check">
+    <originalText>Over 75 health check</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5332,6 +5348,7 @@
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE" />
         <code code="279039007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Low back pain">
+    <originalText>Low back pain</originalText>
 </code>
         <text>
             Current dated diary entry - snomed code
@@ -5414,6 +5431,7 @@
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="03245FA5-238F-4857-878F-975411328E56" />
         <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+    <originalText>Asthma</originalText>
 </code>
         <text>
             Diary entry created by Patient age of 99 years - special characters!&apos;£$%^7*()-={}][|&quot;:/.,
@@ -5456,7 +5474,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6" />
         <code code="34227000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Computerised axial tomography of brain">
-    <originalText>CT of brain</originalText>
+    <originalText>Computerised axial tomography of brain</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5505,6 +5523,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C5676D58-9600-424A-BE35-3DDAE0CAC622" />
         <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
+    <originalText>Red blood cell count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5602,6 +5621,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EFEDF8E9-7834-4B32-A29C-64AB597DFC53" />
         <code code="38341003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disorder">
+    <originalText>Hypertensive disorder</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5650,6 +5670,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2F07A8F4-8A59-4A31-A906-4E1CE5033124" />
         <code code="49727002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cough">
+    <originalText>Cough</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5698,6 +5719,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7673B115-7151-4F48-AC9C-5E89AD6C04D5" />
         <code code="29857009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Chest pain">
+    <originalText>Chest pain</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5746,7 +5768,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CC9ACAD0-C9F0-46ED-9B85-DEB7D5CB885B" />
         <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
-    <originalText>Heart attack</originalText>
+    <originalText>Myocardial infarction</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5795,6 +5817,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D651DDAA-03BA-4723-960A-FD13C13CE367" />
         <code code="50417007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lower respiratory tract infection">
+    <originalText>Lower respiratory tract infection</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5843,6 +5866,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9" />
         <code code="38341003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disorder">
+    <originalText>Hypertensive disorder</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5891,6 +5915,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ECF49E18-DB40-4001-954B-2666006B598B" />
         <code code="233604007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pneumonia">
+    <originalText>Pneumonia</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5939,6 +5964,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BD93D264-B651-4FE9-98D1-D3E3E96648B5" />
         <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
+    <originalText>Ischaemic heart disease</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5987,6 +6013,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE" />
         <code code="185660003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adult abnormal - 2nd recall">
+    <originalText>Adult abnormal - 2nd recall</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
