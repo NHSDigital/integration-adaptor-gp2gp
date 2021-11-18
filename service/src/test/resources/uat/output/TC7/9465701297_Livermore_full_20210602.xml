@@ -418,6 +418,7 @@
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -428,6 +429,7 @@
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -441,6 +443,7 @@
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -558,7 +561,7 @@
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
         <code code="32485007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hospital admission">
-    <originalText>Admission to hospital</originalText>
+    <originalText>Hospital admission</originalText>
 </code>
         <text>Recipient Healthcare Service: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Investigation, Annotation: NHS / Private:NHS, Annotation: Transport:Required, Annotation: Priority:Soon follow up investigation.</text>
         <statusCode code="COMPLETE"/>
@@ -609,6 +612,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D" />
         <code code="270442000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma monitoring check done">
+    <originalText>Asthma monitoring check done</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -634,6 +638,7 @@
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -644,6 +649,7 @@
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -657,6 +663,7 @@
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -709,6 +716,7 @@
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5" />
         <code code="183446009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to cardiac intensive care unit">
+    <originalText>Admission to cardiac intensive care unit</originalText>
 </code>
         <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Alliance Surgical, Annotation: Purpose:Performance of a Procedure or Operation, Annotation: NHS / Private:NHS, Annotation: Transport:None Required, Annotation: Priority:Soon This referral will be rejected</text>
         <statusCode code="COMPLETE"/>
@@ -764,7 +772,7 @@
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="5BB18E92-DABB-4C22-838A-410B4A278060" />
         <code code="305226003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by Accident and Emergency doctor">
-    <originalText>Admission by A &amp; E doctor</originalText>
+    <originalText>Admission by Accident and Emergency doctor</originalText>
 </code>
         <text>Priority: ASAP Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Assessment &amp; Education, Annotation: NHS / Private:NHS, Annotation: Transport:Required Special characters !@£$%^&amp;*()_+-={}[]:&quot;;&apos;&lt;&gt;?,./~`...</text>
         <statusCode code="COMPLETE"/>
@@ -865,7 +873,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="99792B9D-0715-4F2A-9934-1D5D4E975284" />
         <code code="160303001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family history of diabetes mellitus">
-    <originalText>FH: Diabetes mellitus</originalText>
+    <originalText>Family history of diabetes mellitus</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -891,7 +899,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DB7C94B1-01A6-491F-AC41-A36D88023069" />
         <code code="160303001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family history of diabetes mellitus">
-    <originalText>FH: Diabetes mellitus</originalText>
+    <originalText>Family history of diabetes mellitus</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1151,6 +1159,7 @@ Episodicity : Review</text>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="BD418AAA-36ED-476E-967C-7CCBA1D0AAED"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1161,6 +1170,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="7CB9F236-03CB-4AAD-BB0D-534201961315"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1174,6 +1184,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="90AB2301-DC3C-4A37-8EAB-AA171DB2B88E"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1235,6 +1246,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5F44FD1C-BC5B-4B5F-8861-79F254D0D969"/>
                 <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
+    <originalText>Allergy to penicillin</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1297,7 +1309,7 @@ Episodicity : Review</text>
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="DF996C91-D888-4D2D-9D3A-5523480337B1" />
         <code code="308448008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to counsellor">
-    <originalText>Refer to counsellor</originalText>
+    <originalText>Referral to counsellor</originalText>
 </code>
         <text>Recipient Org: Armitage Bridge Hospital Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:Required Too close to fire
 </text>
@@ -1420,6 +1432,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8DD1BB6C-F391-4E1F-B68F-A427448828CA" />
         <code code="270442000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma monitoring check done">
+    <originalText>Asthma monitoring check done</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1445,6 +1458,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46" />
         <code code="15033003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peritonsillar abscess">
+    <originalText>Peritonsillar abscess</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1646,6 +1660,7 @@ Episodicity : Review</text>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1656,6 +1671,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1669,6 +1685,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="9A4CF638-ABA1-4CF9-8055-C5846EE42542"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1688,7 +1705,7 @@ Episodicity : Review</text>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
         <code code="163034007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing blood pressure">
-    <originalText>Standing blood pressure reading</originalText>
+    <originalText>Standing blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1699,6 +1716,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
                 <code code="400974009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing systolic blood pressure">
+    <originalText>Standing systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1712,6 +1730,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C"/>
                 <code code="400975005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing diastolic blood pressure">
+    <originalText>Standing diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1738,7 +1757,7 @@ Episodicity : Review</text>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450"/>
         <code code="163034007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing blood pressure">
-    <originalText>Standing blood pressure reading</originalText>
+    <originalText>Standing blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1749,6 +1768,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0"/>
                 <code code="400974009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing systolic blood pressure">
+    <originalText>Standing systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1761,6 +1781,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7"/>
                 <code code="400975005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing diastolic blood pressure">
+    <originalText>Standing diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1814,7 +1835,7 @@ Episodicity : Review</text>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C"/>
         <code code="163035008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting blood pressure">
-    <originalText>Sitting blood pressure reading</originalText>
+    <originalText>Sitting blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1825,6 +1846,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
                 <code code="407554009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting systolic blood pressure">
+    <originalText>Sitting systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1838,6 +1860,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="7AAC20C0-654A-446A-903F-2DFC0AA8B3F8"/>
                 <code code="407555005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting diastolic blood pressure">
+    <originalText>Sitting diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1864,6 +1887,7 @@ Episodicity : Review</text>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1874,6 +1898,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="86B82A72-9739-4517-8485-F15FF97CE21A"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1886,6 +1911,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1913,7 +1939,7 @@ Episodicity : Review</text>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>
         <code code="163033001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure">
-    <originalText>Lying blood pressure reading</originalText>
+    <originalText>Lying blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1924,6 +1950,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63"/>
                 <code code="407556006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
+    <originalText>Lying systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1937,6 +1964,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
                 <code code="407557002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
+    <originalText>Lying diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1963,7 +1991,7 @@ Episodicity : Review</text>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="87102979-C329-4194-819B-D057AAEA625B"/>
         <code code="163033001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure">
-    <originalText>Lying blood pressure reading</originalText>
+    <originalText>Lying blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1974,6 +2002,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="10720133-30C3-4145-9184-8713284C5A90"/>
                 <code code="407556006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
+    <originalText>Lying systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1986,6 +2015,7 @@ Episodicity : Review</text>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
                 <code code="407557002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
+    <originalText>Lying diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2100,6 +2130,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17" />
         <code code="523051000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Personal care plan completed">
+    <originalText>Personal care plan completed</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2125,6 +2156,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F05B94B-999F-4699-AB93-EB90C79886B6" />
         <code code="871021000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prescription of palliative care anticipatory medication">
+    <originalText>Prescription of palliative care anticipatory medication</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2150,6 +2182,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7" />
         <code code="443761007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anticipatory palliative care">
+    <originalText>Anticipatory palliative care</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2175,6 +2208,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7359502E-8EE3-416C-BD59-A298285418E6" />
         <code code="395092004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Specialist palliative care">
+    <originalText>Specialist palliative care</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2200,6 +2234,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="938365F3-8C68-4189-A550-FAB37F4F59C8" />
         <code code="395695001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Specialist palliative care treatment - outpatient">
+    <originalText>Specialist palliative care treatment - outpatient</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2225,6 +2260,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91" />
         <code code="243114000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Support">
+    <originalText>Support</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2250,6 +2286,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F" />
         <code code="376201000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Issue of palliative care anticipatory medication box">
+    <originalText>Issue of palliative care anticipatory medication box</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2275,6 +2312,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
         <code code="505401000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of care - home">
+    <originalText>Preferred place of care - home</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2300,6 +2338,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D" />
         <code code="518901000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gold standards framework supportive care stage 1 - advancing disease">
+    <originalText>Gold standards framework supportive care stage 1 - advancing disease</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2325,6 +2364,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
         <code code="845721000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gold standards framework prognostic indicator stage B (green) - months prognosis">
+    <originalText>Gold standards framework prognostic indicator stage B (green) - months prognosis</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2350,6 +2390,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A9F79684-3214-41E9-A642-A4542875E62B" />
         <code code="395687000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of death discussed with patient">
+    <originalText>Preferred place of death discussed with patient</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2375,6 +2416,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B" />
         <code code="110481000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of death: home">
+    <originalText>Preferred place of death: home</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2400,6 +2442,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920" />
         <code code="109401000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of death: hospital">
+    <originalText>Preferred place of death: hospital</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2437,6 +2480,7 @@ Episodicity : Review</text>
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0" />
         <code code="196121000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Palliative care plan review">
+    <originalText>Palliative care plan review</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2486,6 +2530,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE" />
         <code code="160654005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Willing to be donor">
+    <originalText>Willing to be donor</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2511,6 +2556,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BB8DEB7C-BE1B-4639-8213-D94E8FEFA0F6" />
         <code code="160683008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Needs walking aid in home">
+    <originalText>Needs walking aid in home</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2536,6 +2582,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="162EF189-0270-449D-8FE0-BB82E6FF051F" />
         <code code="914271000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Impaired ability to recognise safety risks">
+    <originalText>Impaired ability to recognise safety risks</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2561,6 +2608,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF" />
         <code code="162568000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family not aware of diagnosis">
+    <originalText>Family not aware of diagnosis</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2586,6 +2634,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518" />
         <code code="473302008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aware of diagnosis">
+    <originalText>Aware of diagnosis</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2611,6 +2660,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824" />
         <code code="450475007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="For attempted cardiopulmonary resuscitation">
+    <originalText>For attempted cardiopulmonary resuscitation</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2636,6 +2686,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9" />
         <code code="306237005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to palliative care service">
+    <originalText>Referral to palliative care service</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2661,6 +2712,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF" />
         <code code="160725005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lives alone - help available">
+    <originalText>Lives alone - help available</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2686,6 +2738,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27" />
         <code code="161152002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Social problem">
+    <originalText>Social problem</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2711,6 +2764,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF" />
         <code code="161083000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Help by relatives">
+    <originalText>Help by relatives</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2736,6 +2790,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="49259291-5B92-4C0B-BE40-C299A8B02677" />
         <code code="64379006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Decrease in appetite">
+    <originalText>Decrease in appetite</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2761,6 +2816,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800" />
         <code code="161832001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Weight decreasing">
+    <originalText>Weight decreasing</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2786,6 +2842,7 @@ Episodicity : Review</text>
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="21F23DE7-D702-4DB4-AD0D-F8A0D56D7537" />
         <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
+    <originalText>Referral to Social Services</originalText>
 </code>
         <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -2809,6 +2866,7 @@ Episodicity : Review</text>
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="D32F7C6C-D220-42A1-8028-610E3DEBD991" />
         <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
+    <originalText>Referral to Social Services</originalText>
 </code>
         <text>Recipient Healthcare Service: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -4126,7 +4184,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342" />
         <code code="170433008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of second dose of measles and mumps and rubella vaccine">
-    <originalText>Measles mumps and rubella vaccination - second dose</originalText>
+    <originalText>Administration of second dose of measles and mumps and rubella vaccine</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4218,6 +4276,7 @@ Episodicity : First
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="9546D5D9-6DB6-47F5-93EE-D7B2F9E63936" />
         <code code="306312003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to hand surgeon">
+    <originalText>Referral to hand surgeon</originalText>
 </code>
         <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Patient Reassurance, Annotation: NHS / Private:NHS, Annotation: Transport:None Required Referral from a consultation</text>
         <statusCode code="COMPLETE"/>
@@ -4264,6 +4323,7 @@ Episodicity : First
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="C86076C5-C69D-45EB-BEC4-1F1B310E80FC" />
         <code code="281098006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer to appliance officer">
+    <originalText>Refer to appliance officer</originalText>
 </code>
         <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required adas</text>
         <statusCode code="COMPLETE"/>
@@ -4359,6 +4419,7 @@ Episodicity : First
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AB036B53-E42B-4397-B888-320370EAB440" />
         <code code="36031001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Burning feet">
+    <originalText>Burning feet</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4409,6 +4470,7 @@ Burning feet description Problem Info: Problem Notes: Burning feet description</
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D888F20F-2B36-469C-BAEC-E710A0D46FAA" />
         <code code="416409005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refused consent for upload to local shared electronic record">
+    <originalText>Refused consent for upload to local shared electronic record</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4457,6 +4519,7 @@ Burning feet description Problem Info: Problem Notes: Burning feet description</
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8" />
         <code code="777441000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Express dissent for Summary Care Record dataset upload">
+    <originalText>Express dissent for Summary Care Record dataset upload</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4505,6 +4568,7 @@ Burning feet description Problem Info: Problem Notes: Burning feet description</
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C" />
         <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
+    <originalText>Consent given for upload to local shared electronic record</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4553,6 +4617,7 @@ Burning feet description Problem Info: Problem Notes: Burning feet description</
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A" />
         <code code="416409005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refused consent for upload to local shared electronic record">
+    <originalText>Refused consent for upload to local shared electronic record</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4601,6 +4666,7 @@ Burning feet description Problem Info: Problem Notes: Burning feet description</
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48" />
         <code code="773031000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Express consent for core Summary Care Record dataset upload">
+    <originalText>Express consent for core Summary Care Record dataset upload</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4649,6 +4715,7 @@ Burning feet description Problem Info: Problem Notes: Burning feet description</
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA" />
         <code code="773031000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Express consent for core Summary Care Record dataset upload">
+    <originalText>Express consent for core Summary Care Record dataset upload</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4697,6 +4764,7 @@ Burning feet description Problem Info: Problem Notes: Burning feet description</
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05" />
         <code code="160377001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family history of asthma">
+    <originalText>Family history of asthma</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4745,6 +4813,7 @@ Burning feet description Problem Info: Problem Notes: Burning feet description</
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F02ED83-3153-4786-96C2-200FE456A1E4" />
         <code code="18491006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peak expiratory flow rate">
+    <originalText>Peak expiratory flow rate</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4793,6 +4862,7 @@ Burning feet description Problem Info: Problem Notes: Burning feet description</
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15" />
         <code code="270442000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma monitoring check done">
+    <originalText>Asthma monitoring check done</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4891,6 +4961,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="136A1423-A6AC-448C-921C-8991ADF93C92" />
         <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
+    <originalText>Consent given for upload to local shared electronic record</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4939,6 +5010,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC" />
         <code code="15033003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peritonsillar abscess">
+    <originalText>Peritonsillar abscess</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4989,6 +5061,7 @@ Episodicity : First Problem Info: Related Problem: Parent of Tonsillitis</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CB704DB5-C03E-4AFB-BCE4-C3E8C6BB27E7" />
         <code code="90176007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tonsillitis">
+    <originalText>Tonsillitis</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5039,6 +5112,7 @@ Episodicity : First
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A555DD62-B352-45A2-A601-C21F28340B1D" />
         <code code="162397003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pain in throat">
+    <originalText>Pain in throat</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5089,6 +5163,7 @@ Episodicity : First
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57" />
         <code code="93961000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Italian - ethnic category 2001 census">
+    <originalText>Italian - ethnic category 2001 census</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5137,6 +5212,7 @@ Episodicity : First
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="62ED3F01-2041-4DAC-B4ED-22EA5DA36907"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5147,6 +5223,7 @@ Episodicity : First
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="56B35114-6813-469B-AD36-F9E4944E7866"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -5160,6 +5237,7 @@ Episodicity : First
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -5202,7 +5280,7 @@ Episodicity : First
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB"/>
         <code code="163033001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure">
-    <originalText>Lying blood pressure reading</originalText>
+    <originalText>Lying blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5213,6 +5291,7 @@ Episodicity : First
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38"/>
                 <code code="407556006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
+    <originalText>Lying systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -5226,6 +5305,7 @@ Episodicity : First
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="A7C55C1F-89CB-4D88-BD1C-F7E520B44A02"/>
                 <code code="407557002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
+    <originalText>Lying diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -5268,7 +5348,7 @@ Episodicity : First
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="1B1B2854-A658-4764-875B-49CBD3C516EB"/>
         <code code="163035008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting blood pressure">
-    <originalText>Sitting blood pressure reading</originalText>
+    <originalText>Sitting blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5279,6 +5359,7 @@ Episodicity : First
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="2A78ED10-1E12-4703-B370-54FBFC4483FB"/>
                 <code code="407554009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting systolic blood pressure">
+    <originalText>Sitting systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -5292,6 +5373,7 @@ Episodicity : First
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="1048A69B-71E7-4D03-9E2E-2DD27F172295"/>
                 <code code="407555005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting diastolic blood pressure">
+    <originalText>Sitting diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -5334,6 +5416,7 @@ Episodicity : First
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E6D3941E-4BB5-415A-8177-DAB155EB5FF6" />
         <code code="310868002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Informing patient of prognosis">
+    <originalText>Informing patient of prognosis</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5382,7 +5465,7 @@ Episodicity : First
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="17DC8229-FB0E-4811-A8D0-FAB7D7A05A8C" />
         <code code="704035003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Caregiver unaware of prognosis">
-    <originalText>Carer unaware of prognosis</originalText>
+    <originalText>Caregiver unaware of prognosis</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5431,6 +5514,7 @@ Episodicity : First
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0DE0EAF6-6AA2-4421-9509-145674A6EC51" />
         <code code="225343006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Assessment of needs">
+    <originalText>Assessment of needs</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5479,6 +5563,7 @@ Episodicity : First
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9" />
         <code code="787381000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lack of mental capacity to make decision (Mental Capacity Act 2005)">
+    <originalText>Lack of mental capacity to make decision (Mental Capacity Act 2005)</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5528,6 +5613,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3FEF7BAD-BDFE-4AFB-818C-74FBD2A6206C" />
         <code code="968211000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Last months of life">
+    <originalText>Last months of life</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5576,6 +5662,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BDAD8BDB-770E-4B44-8EEE-79CF187B91A8" />
         <code code="103735009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Palliative care">
+    <originalText>Palliative care</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5625,6 +5712,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="42ED63A5-B678-4C66-A6C8-D6A6E88C652B" />
         <code code="341051000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lasting power of attorney personal welfare">
+    <originalText>Lasting power of attorney personal welfare</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5673,6 +5761,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B6C6FCA4-DC3D-474E-8E20-117460144AFE" />
         <code code="975291000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family member informed of cardiopulmonary resuscitation clinical decision">
+    <originalText>Family member informed of cardiopulmonary resuscitation clinical decision</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5721,6 +5810,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3FE921FD-5A7C-49A7-BF85-591FC6C8933C" />
         <code code="162702000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - mentally confused">
+    <originalText>O/E - mentally confused</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5769,6 +5859,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="69C88E7E-45C4-4D52-9BB9-AAB4E62F13FB" />
         <code code="440583007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sexual orientation unknown">
+    <originalText>Sexual orientation unknown</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5817,6 +5908,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9EEAB807-FDB5-494E-B83A-77AD10EF7EEE" />
         <code code="315570003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Main spoken language English">
+    <originalText>Main spoken language English</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5865,6 +5957,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="451B0A75-8B34-4580-81E6-717831D3C236" />
         <code code="33553000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Widowed">
+    <originalText>Widowed</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5913,6 +6006,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64CA6C9B-7BBE-474A-824C-43A7BD5B90F7" />
         <code code="160567004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Agnostic">
+    <originalText>Agnostic</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5961,6 +6055,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ED202B1D-FD90-4477-95D1-539374CA06ED" />
         <code code="315450007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Born in Italy">
+    <originalText>Born in Italy</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
