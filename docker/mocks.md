@@ -6,17 +6,21 @@
 
    `./docker-compose up wiremock`
 
-2. For the gpc-api-mock (:8112)
+2. For the integration-wiremock (:8111)
+
+   `./docker-compose up integration-wiremock`
+
+3. For the gpc-api-mock (:8112)
 
    `./docker-compose up gpc-api-mock`
 
-3. For the gpcc-mock (:8113)
+4. For the gpcc-mock (:8113)
 
    `./docker-compose up gpcc-mock`
 
 
 
-## Requests for gpc-api-mock and gpcc-mock
+## Requests for integration-wiremock, gpc-api-mock and gpcc-mock
 
 ### Post requests (*/STU3/1/gpconnect/fhir/Patient/$gpc.migratestructuredrecord)
 
@@ -42,8 +46,11 @@
 }
 ```
 
-1. 9690937286 - Response contains 27 Document references
-2. 9690937287 - Response contains 1 Document reference that is missing
+1. 9690937286 - Response contains 27 Document references (gpc-api-mock and gpcc-mock)
+2. 9690937287 - Response contains 1 Document reference that is missing (gpc-api-mock and gpcc-mock)
+3. 9388098431 - Response contains 10 Document references with valid attachment types (integration-wiremock)
+4. 9388098432 - Response contains 1 Document reference with a placeholder attachment (integration-wiremock)
+5. 9388098433 - Response contains 1 Document reference with an invalid attachment type (integration-wiremock)
 
 
 

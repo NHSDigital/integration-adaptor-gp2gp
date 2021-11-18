@@ -7,12 +7,12 @@
       "matchesJsonPath" : "$.parameter[?(@.name == 'patientNHSNumber')]"
     },
     {
-      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '8461243346')]"
+      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9388098431')]"
     }]
   },
   "response": {
     "status": 200,
-    "bodyFileName": "8461243346.structuredRecord.json",
+    "bodyFileName": "9388098431.structuredRecord.json",
     "headers": {
       "Server": "nginx",
       "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",

@@ -2,11 +2,11 @@
   "priority": 1,
   "request": {
     "method": "GET",
-    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/documents\/fhir\/Binary\/07a6483f-732b-461e-86b6-edb665c45510-31"
+    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/documents\/fhir\/Binary\/07a6483f-732b-461e-86b6-edb665c45510-29"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "9690937286.document-text-rtf.json",
+    "bodyFileName": "9388098431.document-text-plain.json",
     "headers": {
       "Server":"nginx",
       "Date":"Tue, 12 Jan 2021 11:36:57 GMT",
