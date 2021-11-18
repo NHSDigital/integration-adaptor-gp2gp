@@ -1,13 +1,12 @@
 {
-  "id": "00000000-0000-0000-0000-000000000002",
   "priority": 1,
   "request": {
     "method": "GET",
-    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/documents\/fhir\/Binary\/07a6483f-732b-461e-86b6-edb665c45510"
+    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/documents\/fhir\/Binary\/missing"
   },
   "response": {
-    "status": 200,
-    "bodyFileName": "getDocumentResponse.json",
+    "status": 404,
+    "bodyFileName": "NO_RECORD_FOUND.operationOutcome.json",
     "headers": {
       "Server":"nginx",
       "Date":"Tue, 12 Jan 2021 11:36:57 GMT",
