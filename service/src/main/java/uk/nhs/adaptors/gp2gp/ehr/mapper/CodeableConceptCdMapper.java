@@ -78,7 +78,7 @@ public class CodeableConceptCdMapper {
             } else {
                 var extension = retrieveDisplayExtension(coding.get());
                 Optional<String> originalText = extension.stream()
-                    .filter(extension1 -> extension1.getUrl().equals(DESCRIPTION_DISPLAY))
+                    .filter(extension1 -> DESCRIPTION_DISPLAY.equals(extension1.getUrl()))
                     .map(extension1 -> extension1.getValue().toString())
                     .findFirst();
 
