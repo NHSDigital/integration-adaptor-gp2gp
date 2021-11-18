@@ -279,6 +279,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="263B2A9F-0B1D-4697-943A-328F70E068DE" />
         <code code="240534005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hand wart">
+    <originalText>Hand wart</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -382,6 +383,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
         <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
+    <originalText>Ischaemic heart disease</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -408,6 +410,7 @@ Episodicity : First Problem Info: Related Problem: Parent of Acute myocardial in
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400" />
         <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
+    <originalText>Ischaemic heart disease</originalText>
 </code>
         <text>
             Added from a problem within a consultation
@@ -427,6 +430,7 @@ Episodicity : First Problem Info: Related Problem: Parent of Acute myocardial in
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5" />
         <code code="57177007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family history with explicit context">
+    <originalText>Family history with explicit context</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -573,6 +577,7 @@ manually added text within consultation</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
         <code code="60621009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Body mass index">
+    <originalText>Body mass index</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -733,6 +738,7 @@ manually added text within consultation</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5BB18E92-DABB-4C22-838A-410B4A278060" />
         <code code="93311000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Medication review of medical notes">
+    <originalText>Medication review of medical notes</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -758,7 +764,7 @@ manually added text within consultation</text>
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594" />
         <code code="182836005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Review of medication">
-    <originalText>Medication review</originalText>
+    <originalText>Review of medication</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -808,7 +814,7 @@ manually added text within consultation</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355" />
         <code code="314414007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of first dose of meningitis C vaccine">
-    <originalText>First meningitis C vaccination</originalText>
+    <originalText>Administration of first dose of meningitis C vaccine</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -856,6 +862,7 @@ manually added text within consultation</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED" />
         <code code="161939006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Breathless - moderate exertion">
+    <originalText>Breathless - moderate exertion</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -964,6 +971,7 @@ Episodicity : Flare Up</text>
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00" />
         <code code="305230000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by GP">
+    <originalText>Admission by GP</originalText>
 </code>
         <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -1020,6 +1028,7 @@ Episodicity : Flare Up</text>
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E" />
         <code code="183835003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer for angiogram">
+    <originalText>Refer for angiogram</originalText>
 </code>
         <text>Supporting Information: { Document: 2020-11-17 Postoperative urine specimen collection Postoperative urine specimen collection (17-Nov-2020) } Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -1076,6 +1085,7 @@ Episodicity : Flare Up</text>
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904" />
         <code code="390884006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Heart failure follow-up">
+    <originalText>Heart failure follow-up</originalText>
 </code>
         <text>Supporting Information: { Document: 2019-09-04 Clinical report Clinical report (04-Sep-2019) } Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required linked to a problem</text>
         <statusCode code="COMPLETE"/>
@@ -1244,6 +1254,7 @@ Episodicity : Flare Up</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DF996C91-D888-4D2D-9D3A-5523480337B1" />
         <code code="400097005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ingrowing nail">
+    <originalText>Ingrowing nail</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1909,6 +1920,7 @@ This problem was created whilst Adding a Document Problem Info: Problem Notes: T
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63" />
         <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
+    <originalText>Ischaemic heart disease</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1945,6 +1957,7 @@ Some additional notes about the heart disease review</text>
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
                 <code code="292044008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin adverse reaction">
+    <originalText>Aspirin adverse reaction</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1974,6 +1987,7 @@ Some additional notes about the heart disease review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF" />
         <code code="275955005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - allergic rash">
+    <originalText>O/E - allergic rash</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2277,6 +2291,7 @@ Some additional notes about the heart disease review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
         <code code="400097005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ingrowing nail">
+    <originalText>Ingrowing nail</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2304,6 +2319,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D" />
         <code code="371186005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amputation of toe">
+    <originalText>Amputation of toe</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2330,6 +2346,7 @@ unnecessary</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
         <code code="38341003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disorder">
+    <originalText>Hypertensive disorder</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2368,6 +2385,7 @@ Episodicity : Review</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B" />
         <code code="163691003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - limping gait">
+    <originalText>O/E - limping gait</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6756,7 +6774,7 @@ historical date Transformed Immunization problem header Originally coded: First 
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="64CA6C9B-7BBE-474A-824C-43A7BD5B90F7"/>
                 <code code="300916003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to latex">
-    <originalText>Latex allergy</originalText>
+    <originalText>Allergy to latex</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -6810,7 +6828,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="60484FAA-43BB-494E-A00F-977364A464BC" />
         <code code="314415008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of second dose of meningitis C vaccine">
-    <originalText>Second meningitis C vaccination</originalText>
+    <originalText>Administration of second dose of meningitis C vaccine</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6857,7 +6875,7 @@ Episodicity : First</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E5C085B1-363D-49BB-86E7-8283D4D0DD56" />
         <code code="414259000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of first dose of diphtheria and Haemophilus influenza B and five component acellular pertussis and inactivated poliomyelitis and tetanus vaccine">
-    <originalText>First diphtheria tetanus and five component acellular pertussis, haemophilus influenzae type b, inactivated polio vaccination</originalText>
+    <originalText>Administration of first dose of diphtheria and Haemophilus influenza B and five component acellular pertussis and inactivated poliomyelitis and tetanus vaccine</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6909,7 +6927,7 @@ historical date</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="74FFD762-0391-492E-94FC-9B825E906898" />
         <code code="281658005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of tick-borne encephalitis vaccine">
-    <originalText>Tick-borne encephalitis vaccination</originalText>
+    <originalText>Administration of tick-borne encephalitis vaccine</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6956,6 +6974,7 @@ historical date</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4BC88DA3-3D71-4F3F-ADF5-04B43191AEA6" />
         <code code="822851000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Seasonal influenza vaccination">
+    <originalText>Seasonal influenza vaccination</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7002,7 +7021,7 @@ historical date</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BCF39DFD-A6ED-43F7-A9BE-5A25EB970C8B" />
         <code code="170370000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of first dose of hepatitis B vaccine">
-    <originalText>First hepatitis B vaccination</originalText>
+    <originalText>Administration of first dose of hepatitis B vaccine</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7049,6 +7068,7 @@ historical date</text>
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="06FF59A7-8E53-4653-BBD9-D5D4350186F0" />
         <code code="183450002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to burn unit">
+    <originalText>Admission to burn unit</originalText>
 </code>
         <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:Required Reason for referral comments field</text>
         <statusCode code="COMPLETE"/>
@@ -7095,6 +7115,7 @@ historical date</text>
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="708B65EF-B92A-40B1-B7B8-2E3357F98B8B" />
         <code code="134186004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Over 75 health check">
+    <originalText>Over 75 health check</originalText>
 </code>
         <text>
             This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This has a longer diary entry text description. This is the end of the longer text.
@@ -7137,6 +7158,7 @@ historical date</text>
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="EDB6C384-5849-4918-BC2D-35C774EC1964" />
         <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+    <originalText>Asthma</originalText>
 </code>
         <text>
             Diary entry created by Patient age of 99 years - special characters!&apos;£$%^7*()-={}][|&quot;:/.,
@@ -7179,7 +7201,7 @@ historical date</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="65E669A1-21AD-4DBE-B241-4340C6AF4A0E" />
         <code code="34227000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Computerised axial tomography of brain">
-    <originalText>CT of brain</originalText>
+    <originalText>Computerised axial tomography of brain</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7281,6 +7303,7 @@ patient reports these have been ongoing for 3 to 4 weeks
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="92726062-D62B-4736-92D1-CF3F1D83832B" />
         <code code="161939006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Breathless - moderate exertion">
+    <originalText>Breathless - moderate exertion</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7335,6 +7358,7 @@ The descriptive text includes special characters!&apos;Â£$%^7*()-={}][|&quot;:
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="81E9F560-F447-4E94-836A-970DAF5D9D52" />
         <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
+    <originalText>Red blood cell count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7432,6 +7456,7 @@ The descriptive text includes special characters!&apos;Â£$%^7*()-={}][|&quot;:
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3AC188FA-B46E-465B-9614-37F234BEB494" />
         <code code="38341003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disorder">
+    <originalText>Hypertensive disorder</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7484,6 +7509,7 @@ First entry</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CE6D306C-F337-43B9-AB9E-B96457A36CBD" />
         <code code="29857009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Chest pain">
+    <originalText>Chest pain</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7534,7 +7560,7 @@ Episodicity : First
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A039C513-4426-49A9-B9AE-8624A64D6397" />
         <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
-    <originalText>Heart attack</originalText>
+    <originalText>Myocardial infarction</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7585,6 +7611,7 @@ Episodicity : First
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7E6793DD-AE28-4A2A-B123-74A13AB45323" />
         <code code="50417007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lower respiratory tract infection">
+    <originalText>Lower respiratory tract infection</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7637,6 +7664,7 @@ To be evolved
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FB01369F-2A94-4D0B-AC2F-843879B69915" />
         <code code="38341003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disorder">
+    <originalText>Hypertensive disorder</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7687,6 +7715,7 @@ second entry</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DBF633AC-A255-4E0D-B1AA-B601AFE3E516" />
         <code code="233604007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pneumonia">
+    <originalText>Pneumonia</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7740,6 +7769,7 @@ To be evolved</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DF2D442F-9706-41A3-ACE0-A0C06AB49A8A" />
         <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
+    <originalText>Ischaemic heart disease</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7789,6 +7819,7 @@ Episodicity : New Problem Info: Related Problem: Parent of Myocardial infarction
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B6B35921-F45E-4397-8732-A37433A523B5" />
         <code code="49727002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cough">
+    <originalText>Cough</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7842,6 +7873,7 @@ Some entered text To be evolved
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C2CFB5B2-D6CF-4532-AB4F-3C980DD488DC" />
         <code code="57054005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Acute myocardial infarction">
+    <originalText>Acute myocardial infarction</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7892,6 +7924,7 @@ Episodicity : First
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9C549A51-4365-42A1-871A-F8A76F69B0B9" />
         <code code="183936003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contraindication to live immunisation">
+    <originalText>Contraindication to live immunisation</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>

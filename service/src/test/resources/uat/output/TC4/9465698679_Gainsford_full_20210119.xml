@@ -394,6 +394,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
                 <code code="292534001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Atropine adverse reaction">
+    <originalText>Atropine adverse reaction</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -491,7 +492,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
                 <code code="292419005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Beta-adrenoceptor blocking drug adverse reaction">
-    <originalText>[X]Beta-adrenorecep antag caus advers eff in ther use, NEC</originalText>
+    <originalText>Beta-adrenoceptor blocking drug adverse reaction</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1531,7 +1532,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="4CF7DECB-3AE2-42C3-97F0-BB440F28D385"/>
                 <code code="292971006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pivampicillin adverse reaction">
-    <originalText>Adverse reaction to pivampicillin</originalText>
+    <originalText>Pivampicillin adverse reaction</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1593,7 +1594,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
                 <code code="292967008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxycillin adverse reaction">
-    <originalText>Adverse reaction to amoxycillin</originalText>
+    <originalText>Amoxycillin adverse reaction</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1655,7 +1656,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F"/>
                 <code code="292967008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxycillin adverse reaction">
-    <originalText>Adverse reaction to amoxycillin</originalText>
+    <originalText>Amoxycillin adverse reaction</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1717,7 +1718,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B"/>
                 <code code="109991000119100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
-    <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
+    <originalText>Allergy to antibiotic</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1779,6 +1780,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465"/>
                 <code code="704280005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Combined calcium and vitamin D3 preparation allergy">
+    <originalText>Combined calcium and vitamin D3 preparation allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1840,7 +1842,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
                 <code code="294833000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Biphosphonates allergy">
-    <originalText>[V]Personal history of bisphosphonate allergy</originalText>
+    <originalText>Biphosphonates allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1902,7 +1904,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B"/>
                 <code code="294833000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Biphosphonates allergy">
-    <originalText>[V]Personal history of bisphosphonate allergy</originalText>
+    <originalText>Biphosphonates allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1964,6 +1966,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
                 <code code="300909004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic reaction to wasp sting">
+    <originalText>Allergic reaction to wasp sting</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2025,7 +2028,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
                 <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
-    <originalText>Drug hypersensitivity NOS</originalText>
+    <originalText>Adverse reaction to drug</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2087,7 +2090,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
                 <code code="109991000119100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
-    <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
+    <originalText>Allergy to antibiotic</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2149,6 +2152,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="04AAA10E-3D26-4C86-8932-4BB384C94253"/>
                 <code code="91930004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to eggs">
+    <originalText>Allergy to eggs</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2210,6 +2214,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="85E19135-F780-437D-9633-24BF6C7E5D82"/>
                 <code code="109991000119100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
+    <originalText>Allergy to antibiotic</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2395,6 +2400,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17"/>
                 <code code="91931000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to erythromycin">
+    <originalText>Allergy to erythromycin</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2518,6 +2524,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91"/>
                 <code code="292939004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Trimethoprim adverse reaction">
+    <originalText>Trimethoprim adverse reaction</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2579,6 +2586,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
                 <code code="293433001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction caused by simvastatin">
+    <originalText>Adverse reaction caused by simvastatin</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2640,7 +2648,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
                 <code code="292854006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Chloroquine adverse reaction">
-    <originalText>Adverse reaction to chloroquine</originalText>
+    <originalText>Chloroquine adverse reaction</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2702,7 +2710,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="F972CFDF-B4D7-4392-A96A-4D1BD8D14F14"/>
                 <code code="292954005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Penicillin adverse reaction">
-    <originalText>Adverse reaction to penicillins</originalText>
+    <originalText>Penicillin adverse reaction</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2860,6 +2868,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="162EF189-0270-449D-8FE0-BB82E6FF051F" />
         <code code="408522002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Main spoken language Gaelic">
+    <originalText>Main spoken language Gaelic</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2908,7 +2917,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F" />
         <code code="160540005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Roman Catholic, follower of religion">
-    <originalText>Roman Catholic</originalText>
+    <originalText>Roman Catholic, follower of religion</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2957,6 +2966,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824" />
         <code code="494161000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="White Irish - ethnic category 2001 census">
+    <originalText>White Irish - ethnic category 2001 census</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3005,6 +3015,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3F170377-2DE6-45D3-90EE-9EC23EDB4F59" />
         <code code="38070000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cohabiting">
+    <originalText>Cohabiting</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3053,6 +3064,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F80F3DA3-0728-4880-BE71-C71251A49D08" />
         <code code="202307002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ankylosis of the elbow joint">
+    <originalText>Ankylosis of the elbow joint</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3150,7 +3162,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08" />
         <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
-    <originalText>Happy puppet syndrome</originalText>
+    <originalText>Angelman syndrome</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
