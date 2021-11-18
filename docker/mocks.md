@@ -56,5 +56,7 @@
 
 ### Get requests (*/STU3/1/gpconnect/documents/fhir/Binary/{{id}})
 
-1. id's 1-27 contain binaries provided for performance testing
-2. Missing - operation outcome record not found
+1. id's 1-27 contain binaries provided for performance testing (gpc-api-mock and gpcc-mock)
+2. Missing - operation outcome record not found (gpc-api-mock and gpcc-mock)
+3. 07a6483f-732b-461e-86b6-edb665c45510-\[1-10] - contains binaries for valid attachment types (integration-wiremock)
+4. 07a6483f-732b-461e-86b6-edb665c45510-0 - contains binaries for invalid attachment type (integration-wiremock)
