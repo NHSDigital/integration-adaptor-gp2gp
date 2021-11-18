@@ -16437,7 +16437,7 @@
                 "custodian": {
                     "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
                 },
-                "description": "Referral for further care (22-Dec-2020). Attachment of type audio/x-au",
+                "description": "Referral for further care (22-Dec-2020). Attachment of type text/plain",
                 "content": [
                     {
                         "attachment": {
