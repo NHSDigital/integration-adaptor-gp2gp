@@ -183,6 +183,8 @@ services:
       - "8080:8080"
     command:
       - -global-response-templating
+    profiles:
+      - donotstart
 
   gpc-api-mock:
     networks: 
@@ -192,6 +194,8 @@ services:
       - "8080:8080"
     command:
       - -global-response-templating
+    profiles:
+      - donotstart
 networks:
   commonforgp2gp:
     external: true
