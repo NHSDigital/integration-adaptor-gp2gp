@@ -174,28 +174,6 @@ services:
       context: ./nginx
     ports:
       - "5555:80"
-
-  gpcc-mock:
-    networks: 
-      - commonforgp2gp
-    build: ./gpcc-mock
-    ports:
-      - "8080:8080"
-    command:
-      - -global-response-templating
-    profiles:
-      - donotstart
-
-  gpc-api-mock:
-    networks: 
-      - commonforgp2gp
-    build: ./gpc-api-mock
-    ports:
-      - "8080:8080"
-    command:
-      - -global-response-templating
-    profiles:
-      - donotstart
 networks:
   commonforgp2gp:
     external: true
