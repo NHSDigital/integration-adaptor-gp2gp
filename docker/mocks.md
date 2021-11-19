@@ -48,7 +48,7 @@
 
 1. 9690937286 - Response contains 27 Document references (gpc-api-mock and gpcc-mock)
 2. 9690937287 - Response contains 1 Document reference that is missing (gpc-api-mock and gpcc-mock)
-3. 9388098431 - Response contains 10 Document references with valid attachment types (integration-wiremock)
+3. 9388098431 - Response contains 11 Document references with valid attachment types (integration-wiremock)
 4. 9388098432 - Response contains 1 Document reference with a placeholder attachment (integration-wiremock)
 5. 9388098433 - Response contains 1 Document reference with an invalid attachment type (integration-wiremock)
 
@@ -58,5 +58,5 @@
 
 1. id's 1-27 contain binaries provided for performance testing (gpc-api-mock and gpcc-mock)
 2. Missing - operation outcome record not found (gpc-api-mock and gpcc-mock)
-3. 07a6483f-732b-461e-86b6-edb665c45510-\[1-10] - contains binaries for valid attachment types (integration-wiremock)
+3. 07a6483f-732b-461e-86b6-edb665c45510-\[1-11] - contains binaries for valid attachment types (integration-wiremock)
 4. 07a6483f-732b-461e-86b6-edb665c45510-0 - contains binaries for invalid attachment type (integration-wiremock)
