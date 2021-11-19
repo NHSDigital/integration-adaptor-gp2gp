@@ -77,12 +77,16 @@ public class CodeableConceptCdMapper {
                 return Optional.of(codeableConcept.getText());
             } else {
                 var extension = retrieveDisplayExtension(coding.get());
-                return extension.map(value -> value
-                    .getExtension()
-                    .stream()
-                    .filter(extension1 -> extension1.getUrl().equals(DESCRIPTION_DISPLAY))
+                Optional<String> originalText = extension.stream()
+                    .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
                     .map(extension1 -> extension1.getValue().toString())
-                    .findFirst()).orElseGet(() -> Optional.of(coding.get().getDisplay()));
+                    .findFirst();
+
+                if (originalText.isEmpty() && coding.get().hasDisplay()) {
+                    originalText = Optional.of(coding.get().getDisplay());
+                }
+
+                return originalText;
             }
         } else {
             return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);

@@ -2,7 +2,7 @@
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="random-unmapped-id"/>
         <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>International normalised ratio</originalText>
+    <originalText>INR - international normalised ratio</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -13,7 +13,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
         <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>International normalised ratio</originalText>
+    <originalText>INR - international normalised ratio</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>

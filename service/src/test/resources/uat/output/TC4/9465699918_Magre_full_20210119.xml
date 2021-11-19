@@ -278,6 +278,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="263B2A9F-0B1D-4697-943A-328F70E068DE" />
         <code code="18165001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Jaundice">
+    <originalText>Jaundice</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -303,6 +304,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
         <code code="422587007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nausea">
+    <originalText>Nausea</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -328,6 +330,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF" />
         <code code="422400008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Vomiting">
+    <originalText>Vomiting</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -353,6 +356,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
         <code code="206373002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Congenital hepatitis A infection">
+    <originalText>Congenital hepatitis A infection</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -390,6 +394,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
         <code code="162740002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - jaundiced colour">
+    <originalText>O/E - jaundiced colour</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -415,6 +420,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400" />
         <code code="43364001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal discomfort">
+    <originalText>Abdominal discomfort</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2039,6 +2045,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F" />
         <code code="1240761000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Suspected COVID-19">
+    <originalText>Suspected COVID-19</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2064,6 +2071,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61" />
         <code code="84229001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fatigue">
+    <originalText>Fatigue</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2089,6 +2097,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD" />
         <code code="49727002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cough">
+    <originalText>Cough</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2114,6 +2123,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D" />
         <code code="386661006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fever">
+    <originalText>Fever</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2139,6 +2149,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="46A43153-7A96-44D4-A14A-A63284061767" />
         <code code="304386008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - itchy rash">
+    <originalText>O/E - itchy rash</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2164,6 +2175,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4" />
         <code code="2611000119103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sensory disorder of smell and/or taste">
+    <originalText>Sensory disorder of smell and/or taste</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2189,6 +2201,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998" />
         <code code="267036007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dyspnoea">
+    <originalText>Dyspnoea</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2247,7 +2260,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
         <code code="183520008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to clinical immunology service">
-    <originalText>Immunological referral</originalText>
+    <originalText>Referral to clinical immunology service</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2306,6 +2319,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="730F742C-1164-45BF-9139-8484074E5995" />
         <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+    <originalText>Asthma</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2331,6 +2345,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="54AC4831-6E33-4BB9-BC17-33D47E3C8251" />
         <code code="127783003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Spirometry">
+    <originalText>Spirometry</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2368,6 +2383,7 @@
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56" />
         <code code="406162001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma management">
+    <originalText>Asthma management</originalText>
 </code>
         <text>
             Standard check up
@@ -5831,6 +5847,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="187FE111-F030-41DC-AC81-4BF13E79AA2F"/>
                 <code code="294647003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccine allergy">
+    <originalText>Influenza vaccine allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -5892,6 +5909,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="EC913E83-7610-4FBD-9A60-1769D42E9DEB"/>
                 <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
+    <originalText>Allergy to penicillin</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -5944,6 +5962,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="36856199-326A-443D-A97B-F744C6A09D10" />
         <code code="170370000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First hepatitis B vaccination">
+    <originalText>First hepatitis B vaccination</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5990,6 +6009,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F" />
         <code code="822851000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Seasonal influenza vaccination">
+    <originalText>Seasonal influenza vaccination</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6036,6 +6056,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3CE584C8-D749-4FE4-9FC4-B5B050B82681" />
         <code code="810511000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Episodic dry cough">
+    <originalText>Episodic dry cough</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6084,6 +6105,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9096D5A1-7370-4C51-AE78-52A89E2F6B63" />
         <code code="56018004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Wheezing">
+    <originalText>Wheezing</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6132,6 +6154,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CFED96FD-7E48-4E34-A3CC-4DD0814C84C4" />
         <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+    <originalText>Asthma</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6229,6 +6252,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3390559A-D17E-4D30-9A51-B4459E1515EF" />
         <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
+    <originalText>Consent given for upload to local shared electronic record</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
