@@ -10,11 +10,11 @@
 
    `./docker-compose up integration-wiremock`
 
-3. For the gpc-api-mock (:8112)
+3. For the gpc-api-mock (:8080)
 
    `./docker-compose up gpc-api-mock`
 
-4. For the gpcc-mock (:8113)
+4. For the gpcc-mock (:8080)
 
    `./docker-compose up gpcc-mock`
 

@@ -180,7 +180,7 @@ services:
       - commonforgp2gp
     build: ./gpcc-mock
     ports:
-      - "8112:8080"
+      - "8080:8080"
     command:
       - -global-response-templating
 
@@ -189,7 +189,7 @@ services:
       - commonforgp2gp
     build: ./gpc-api-mock
     ports:
-      - "8113:8080"
+      - "8080:8080"
     command:
       - -global-response-templating
 networks:
