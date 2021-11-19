@@ -129,9 +129,12 @@ public class GpcRequestBuilder {
     }
 
     private RequestBodySpec buildRequestWithHeaders(RequestBodySpec uri, TaskDefinition taskDefinition, String interactionId) {
+        /*
+         * SSP_FROM must be set to GP2GP ASID which is stored in the toAsid property of the task
+         * SSP_TO is left blank as it will be set in the GPC Consumer Proxy
+         */
         return uri.accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
-            .header(SSP_FROM, getFromAsid(taskDefinition.getFromAsid()))
-            .header(SSP_TO, getToAsid(taskDefinition.getToAsid()))
+            .header(SSP_FROM, getToAsid(taskDefinition.getToAsid()))
             .header(SSP_INTERACTION_ID, interactionId)
             .header(SSP_TRACE_ID, taskDefinition.getConversationId())
             .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode()))
