@@ -17447,6 +17447,51 @@
         {
             "resource": {
                 "resourceType": "DocumentReference",
+                "id": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-20",
+                "meta": {
+                    "versionId": "8017752596891037527",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-20"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "text": "Referral for further care"
+                },
+                "subject": {
+                    "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
+                },
+                "created": "2020-12-22T14:53:00+00:00",
+                "indexed": "2020-12-22T14:55:58.567+00:00",
+                "custodian": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "description": "Referral for further care (22-Dec-2020). Attachment of type application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510-20",
+                            "size": 13
+                        }
+                    }
+                ],
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/A44B64EA-172B-4EF5-8809-3FF24F5613C1"
+                    }
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
                 "id": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC-24",
                 "meta": {
                     "versionId": "8017752596891037527",
