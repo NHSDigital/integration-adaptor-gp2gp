@@ -76,20 +76,17 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
             //Here the change begins
             String fileContent = "";
-            if(externalAttachments.stream().anyMatch(e -> e.getFilename().contains("AbsentAttachment"))){
-                var documentReferences = structuredRecord.getEntry()
-                    .stream()
-                    .map(Bundle.BundleEntryComponent::getResource)
-                    .filter(e -> e.getResourceType().equals(ResourceType.DocumentReference))
-                    .map(DocumentReference.class::cast).collect(Collectors.toList());
+            if(externalAttachmentsContainAbsentAttachment(externalAttachments)){
+                var documentReferences = extractDocumentReferences(structuredRecord);
 
-                final List<OutboundMessage.ExternalAttachment> externalAttachmentList = externalAttachments;
-
+                final var externalAttachmentList = externalAttachments; //lambda has to refer to final values
                 var title= Optional.ofNullable(documentReferences.stream()
                     .filter(e -> e.getContentFirstRep().getAttachment().getUrl().equals(externalAttachmentList.get(0).getUrl()))
                     .findFirst().get().getContentFirstRep().getAttachment().getTitle()).orElse(StringUtils.EMPTY);
 
-                fileContent = AbsentAttachmentFileMapper.mapDataToAbsentAttachment(title, structuredTaskDefinition.getToOdsCode(), structuredTaskDefinition.getConversationId());
+                fileContent = AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
+                    title, structuredTaskDefinition.getToOdsCode(), structuredTaskDefinition.getConversationId()
+                );
             }
             //@TODO: Fix the template not being filled for some reason
             //Here the change ends (for now)
@@ -173,6 +170,18 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         );
 
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
+    }
+
+    private List<DocumentReference> extractDocumentReferences(Bundle bundle) {
+        return bundle.getEntry()
+            .stream()
+            .map(Bundle.BundleEntryComponent::getResource)
+            .filter(e -> e.getResourceType().equals(ResourceType.DocumentReference))
+            .map(DocumentReference.class::cast).collect(Collectors.toList());
+    }
+
+    private boolean externalAttachmentsContainAbsentAttachment(List<OutboundMessage.ExternalAttachment> externalAttachments) {
+        return externalAttachments.stream().anyMatch(e -> e.getFilename().contains("AbsentAttachment"));
     }
 
     private Bundle getStructuredRecord(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
