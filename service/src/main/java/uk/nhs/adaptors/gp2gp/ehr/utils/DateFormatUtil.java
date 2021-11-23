@@ -18,11 +18,13 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 public class DateFormatUtil {
     private static final int MONTH_PADDING = 1;
     private static final ZoneId UK_ZONE_ID = ZoneId.of("Europe/London");
+    private static final ZoneId UTC_ZONE_ID = ZoneId.of("UTC");
     private static final String COULD_NOT_FORMAT_DATE = "Could not format date";
     private static final String HL7_DATETIME_FORMAT = "yyyyMMddHHmmss";
     private static final String HL7_DATE_FORMAT = "yyyyMMdd";
     private static final String HL7_DATE_MONTH_FORMAT = "yyyyMM";
     private static final String HL7_DATE_YEAR_FORMAT = "yyyy";
+    private static final DateTimeFormatter HL7_WITH_TIME_HUMAN_READABLE = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter HL7_SECONDS_COMPUTER_READABLE = DateTimeFormatter.ofPattern(HL7_DATETIME_FORMAT);
     private static final DateTimeFormatter HL7_SECONDS_HUMAN_READABLE = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final String FORMAT_TWO_DIGITS = "%02d";
@@ -74,6 +76,10 @@ public class DateFormatUtil {
                 return baseDateTimeType.toCalendar().toInstant().atZone(UK_ZONE_ID)
                     .format(HL7_SECONDS_HUMAN_READABLE);
         }
+    }
+
+    public static String toTextFormatStraight(Date date) {
+        return date.toInstant().atZone(UTC_ZONE_ID).format(HL7_WITH_TIME_HUMAN_READABLE);
     }
 
     public static DateTimeType toDateTypeTime(String effectiveTimeHl7Format) {

@@ -2,6 +2,7 @@
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="Mapped-From-Observation/6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78"/>
         <code code="1010521000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum oestradiol level">
+    <originalText>Serum oestradiol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -12,6 +13,7 @@
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
         <code code="1010521000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum oestradiol level">
+    <originalText>Serum oestradiol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -25,33 +27,18 @@
     </referenceInterpretationRange>
 </referenceRange>
 
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
-    </agentRef>
-</Participant>
     </ObservationStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="Mapped-From-Observation/6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78-COMM"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
 CommentDate:20201215151713
 
 (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
-    </agentRef>
-</Participant>
     </NarrativeStatement>
 </component>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
-    </agentRef>
-</Participant>
     </CompoundStatement>
 </component>

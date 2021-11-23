@@ -18,6 +18,7 @@ import uk.nhs.adaptors.gp2gp.utils.TestArgumentsLoaderUtil;
 public class CodeableConceptCdMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/codeableconcept/";
     private static final String TEST_FILE_DIRECTORY_NULL_FLAVOR = "/ehr/mapper/codeableconcept/nullFlavor/";
+    private static final String TEST_FILE_DIRECTORY_ACTUAL_PROBLEM = "/ehr/mapper/codeableconcept/actualProblem/";
 
     private FhirParseService fhirParseService;
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -28,6 +29,10 @@ public class CodeableConceptCdMapperTest {
 
     private static Stream<Arguments> getTestArgumentsNullFlavor() {
         return TestArgumentsLoaderUtil.readTestCases(TEST_FILE_DIRECTORY_NULL_FLAVOR);
+    }
+
+    private static Stream<Arguments> getTestArgumentsActualProblem() {
+        return TestArgumentsLoaderUtil.readTestCases(TEST_FILE_DIRECTORY_ACTUAL_PROBLEM);
     }
 
     @BeforeEach
@@ -47,6 +52,20 @@ public class CodeableConceptCdMapperTest {
         assertThat(outputMessage)
             .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
             .isEqualToIgnoringWhitespace(expectedOutput);
+    }
+
+    @ParameterizedTest
+    @MethodSource("getTestArgumentsActualProblem")
+    public void When_MappingStubbedCodeableConceptForActualProblemHeader_Expect_HL7CdObjectXml(String inputJson, String outputXml)
+            throws IOException {
+        var observationCodeableConcept = ResourceTestFileUtils.getFileContent(inputJson);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
+        var codeableConcept = fhirParseService.parseResource(observationCodeableConcept, Observation.class).getCode();
+
+        var outputMessage = codeableConceptCdMapper.mapCodeableConceptToCdForTransformedActualProblemHeader(codeableConcept);
+        assertThat(outputMessage)
+                .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
+                .isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     @ParameterizedTest

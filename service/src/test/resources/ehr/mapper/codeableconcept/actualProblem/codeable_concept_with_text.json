@@ -1,0 +1,35 @@
+{
+    "resourceType" : "Observation",
+    "code": {
+        "coding": [
+            {
+                "system": "http://blah.info/blahsomecodesystem",
+                "code": "X%^^%",
+                "display": "Display for invalid code/system",
+                "userSelected": true
+            },
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "126835018"
+                            },
+                            {
+                                "url": "descriptionDisplay",
+                                "valueString": "Endometriosis of uterus"
+                            }
+                        ]
+                    }
+                ],
+                "system": "http://snomed.info/sct",
+                "code": "76376003",
+                "display": "Endometriosis of uterus"
+            }
+        ],
+        "text": "Blah di Blah"
+    }
+
+}

@@ -50,6 +50,7 @@ public class AllergyStructureMapper {
     private static final String PATIENT_RECORDER = "Recorded By Patient";
     private static final String ENVIRONMENT_CATEGORY = "environment";
     private static final String MEDICATION_CATEGORY = "medication";
+    private static final String RESOLVED_CLINICAL_STATUS = "resolved";
     private static final String UNSPECIFIED_ALLERGY_CODE = "<code code=\"SN53.00\" codeSystem=\"2.16.840.1.113883.2.1.6.2\" "
         + "displayName=\"Allergy, unspecified\"/>";
     private static final String DRUG_ALLERGY_CODE = "<code code=\"14L..00\" codeSystem=\"2.16.840.1.113883.2.1.6.2\" displayName=\"H/O: "
@@ -93,21 +94,28 @@ public class AllergyStructureMapper {
     }
 
     private String buildCode(AllergyIntolerance allergyIntolerance) {
-        if (allergyIntolerance.hasCode()) {
-            var category = allergyIntolerance.getCategory()
-                .stream()
-                .map(PrimitiveType::getValueAsString)
-                .filter(value -> value.equals(ENVIRONMENT_CATEGORY) || value.equals(MEDICATION_CATEGORY))
-                .findFirst()
-                .orElse(StringUtils.EMPTY);
+        if (allergyIntolerance.hasClinicalStatus()) {
+            if (RESOLVED_CLINICAL_STATUS.equals(allergyIntolerance.getClinicalStatus().toCode())) {
+                if (allergyIntolerance.hasCode()) {
+                    var category = allergyIntolerance.getCategory()
+                        .stream()
+                        .map(PrimitiveType::getValueAsString)
+                        .filter(value -> value.equals(ENVIRONMENT_CATEGORY) || value.equals(MEDICATION_CATEGORY))
+                        .findFirst()
+                        .orElse(StringUtils.EMPTY);
 
-            if (category.equals(ENVIRONMENT_CATEGORY)) {
-                return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
-            } else if (category.equals(MEDICATION_CATEGORY)) {
-                return codeableConceptCdMapper.mapToNullFlavorCodeableConcept(allergyIntolerance.getCode());
-            } else {
-                throw new EhrMapperException("Category could not be mapped");
+                    if (category.equals(ENVIRONMENT_CATEGORY)) {
+                        return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
+                    } else if (category.equals(MEDICATION_CATEGORY)) {
+                        return codeableConceptCdMapper.mapToNullFlavorCodeableConcept(allergyIntolerance.getCode());
+                    } else {
+                        throw new EhrMapperException("Category could not be mapped");
+                    }
+                }
             }
+        }
+        if (allergyIntolerance.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
         }
         throw new EhrMapperException("Allergy code not present");
     }
@@ -190,6 +198,9 @@ public class AllergyStructureMapper {
 
     private String buildClinicalStatusPertinentInformation(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasClinicalStatus()) {
+            if (allergyIntolerance.hasNote()) {
+                return STATUS + StringUtils.capitalize(allergyIntolerance.getClinicalStatus().toCode());
+            }
             return STATUS + allergyIntolerance.getClinicalStatus().getDisplay();
         }
         return StringUtils.EMPTY;

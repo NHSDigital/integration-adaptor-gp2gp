@@ -4,6 +4,7 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType.LABORATORY_RESULT_COMMENT;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 
@@ -11,13 +12,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.dstu3.model.InstantType;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Organization;
+import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Specimen;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +58,11 @@ public class DiagnosticReportMapper {
     private static final String PREPENDED_TEXT_FOR_CONCLUSION_COMMENT = "Interpretation: ";
     private static final String PREPENDED_TEXT_FOR_CODED_DIAGNOSIS = "Lab Diagnosis: ";
     private static final String PREPENDED_TEXT_FOR_STATUS = "Status: ";
+    private static final String PREPENDED_TEXT_FOR_FILLING_DATE = "Filing Date: ";
+    private static final String PREPENDED_TEXT_FOR_PARTICIPANTS = "Participants: ";
+
+    private static final String EXTENSION_ID_SYSTEM_ID = "2.16.840.1.113883.2.1.4.5.5";
+    private static final String COMMENT_NOTE = "37331000000100";
 
     private final MessageContext messageContext;
     private final SpecimenMapper specimenMapper;
@@ -59,17 +72,18 @@ public class DiagnosticReportMapper {
     public String mapDiagnosticReportToCompoundStatement(DiagnosticReport diagnosticReport) {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport);
         List<Observation> observations = fetchObservations(diagnosticReport);
+        final IdMapper idMapper = messageContext.getIdMapper();
+        markObservationsAsProcessed(idMapper, observations);
 
         String mappedSpecimens = specimens.stream()
             .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport))
             .collect(Collectors.joining());
 
-        final IdMapper idMapper = messageContext.getIdMapper();
-
-        String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport);
+        String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, observations);
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getIdElement()))
+            .extensionId(fetchExtensionId(diagnosticReport.getIdentifier()))
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()))
             .narrativeStatements(reportLevelNarrativeStatements)
             .specimens(mappedSpecimens);
@@ -85,6 +99,14 @@ public class DiagnosticReportMapper {
             DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE,
             diagnosticReportCompoundStatementTemplateParameters.build()
         );
+    }
+
+    private String fetchExtensionId(List<Identifier> identifiers) {
+        return identifiers.stream()
+            .filter(identifier -> EXTENSION_ID_SYSTEM_ID.equals(identifier.getSystem()))
+            .map(Identifier::getValue)
+            .findFirst()
+            .orElse(StringUtils.EMPTY);
     }
 
     private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport) {
@@ -136,14 +158,14 @@ public class DiagnosticReportMapper {
             .setComment("EMPTY REPORT");
     }
 
-    private String prepareReportLevelNarrativeStatements(DiagnosticReport diagnosticReport) {
+    private String prepareReportLevelNarrativeStatements(DiagnosticReport diagnosticReport, List<Observation> observations) {
         StringBuilder reportLevelNarrativeStatements = new StringBuilder();
 
         if (diagnosticReport.hasConclusion()) {
             String comment = PREPENDED_TEXT_FOR_CONCLUSION_COMMENT + diagnosticReport.getConclusion();
 
             String narrativeStatementFromConclusion = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), comment
+                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), comment
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromConclusion);
@@ -158,7 +180,7 @@ public class DiagnosticReportMapper {
             String comment = PREPENDED_TEXT_FOR_CODED_DIAGNOSIS + codedDiagnosisText;
 
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), comment
+                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), comment
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
@@ -167,36 +189,136 @@ public class DiagnosticReportMapper {
         if (diagnosticReport.hasStatus()) {
             String status = PREPENDED_TEXT_FOR_STATUS + diagnosticReport.getStatus().toCode();
             String statusNarrativeStatement = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), status);
+                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), status);
 
             reportLevelNarrativeStatements.append(statusNarrativeStatement);
         }
 
         buildNarrativeStatementForMissingResults(diagnosticReport, reportLevelNarrativeStatements);
+        buildNarrativeStatementForObservationTimes(observations, reportLevelNarrativeStatements, diagnosticReport.getIssuedElement());
+        buildNarrativeStatementForParticipants(diagnosticReport, reportLevelNarrativeStatements);
+        buildNarrativeStatementForObservationComments(diagnosticReport.getIssuedElement(), observations, reportLevelNarrativeStatements);
 
         return reportLevelNarrativeStatements.toString();
+    }
+
+    private void buildNarrativeStatementForObservationTimes(
+            List<Observation> observations,
+            StringBuilder reportLevelNarrativeStatements,
+            InstantType diagnosticReportIssued) {
+        observations.stream()
+            .filter(observation -> observation.hasEffectiveDateTimeType() || observation.hasEffectivePeriod())
+            .filter(this::hasCommentNote)
+            .findFirst()
+            .map(this::extractDateFromObservation)
+            .map(dateString -> buildNarrativeStatementForDiagnosticReport(
+                diagnosticReportIssued, CommentType.AGGREGATE_COMMENT_SET.getCode(), dateString))
+            .ifPresent(reportLevelNarrativeStatements::append);
+    }
+
+    private String extractDateFromObservation(Observation observation) {
+        if (observation.hasEffectiveDateTimeType()) {
+            return PREPENDED_TEXT_FOR_FILLING_DATE
+                + DateFormatUtil.toTextFormat(observation.getEffectiveDateTimeType());
+        }
+        if (observation.hasEffectivePeriod()) {
+            return PREPENDED_TEXT_FOR_FILLING_DATE
+                + DateFormatUtil.toTextFormat(observation.getEffectivePeriod().getStartElement());
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private void buildNarrativeStatementForObservationComments(
+        InstantType issuedElement,
+        List<Observation> observations,
+        StringBuilder reportLevelNarrativeStatements) {
+
+        var narrativeStatementObservationComments = observations.stream()
+            .filter(Observation::hasCode)
+            .filter(this::hasCommentNote)
+            .map(Observation::getComment)
+            .filter(StringUtils::isNotBlank)
+            .map(observationComment -> buildNarrativeStatementForDiagnosticReport(
+                issuedElement, CommentType.AGGREGATE_COMMENT_SET.getCode(), observationComment
+            ))
+            .collect(Collectors.joining(System.lineSeparator()));
+
+        reportLevelNarrativeStatements.append(narrativeStatementObservationComments);
+    }
+
+    private boolean hasCommentNote(Observation observation) {
+        return observation.getCode().hasCoding()
+            && observation.getCode().getCoding().stream()
+            .filter(Coding::hasCode)
+            .anyMatch(coding -> COMMENT_NOTE.equals(coding.getCode()));
     }
 
     private void buildNarrativeStatementForMissingResults(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
         if (reportLevelNarrativeStatements.length() == 0 && !diagnosticReport.hasResult()) {
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT"
+                diagnosticReport.getIssuedElement(), CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT"
             );
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
         }
     }
 
-    private String buildNarrativeStatementForDiagnosticReport(DiagnosticReport diagnosticReport, String commentType, String comment) {
+    private void buildNarrativeStatementForParticipants(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
+        if (diagnosticReport.hasPerformer()) {
+            var humanNames = buildListOfHumanReadableNames(diagnosticReport.getPerformer());
+            String performerNarrativeStatement = buildNarrativeStatementForDiagnosticReport(
+                diagnosticReport.getIssuedElement(), CommentType.AGGREGATE_COMMENT_SET.getCode(),
+                PREPENDED_TEXT_FOR_PARTICIPANTS + humanNames
+            );
+            reportLevelNarrativeStatements.append(performerNarrativeStatement);
+        }
+    }
+
+    private String buildNarrativeStatementForDiagnosticReport(InstantType issuedElement, String commentType, String comment) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(randomIdGeneratorService.createNewId())
             .commentType(commentType)
-            .commentDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement()))
+            .commentDate(DateFormatUtil.toHl7Format(issuedElement))
             .comment(comment)
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(issuedElement));
 
         return TemplateUtils.fillTemplate(
             NARRATIVE_STATEMENT_TEMPLATE,
             narrativeStatementTemplateParameters.build()
         );
+    }
+
+    private String buildListOfHumanReadableNames(List<DiagnosticReport.DiagnosticReportPerformerComponent> performers) {
+        return performers.stream()
+            .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
+            .map(this::fetchResource)
+            .flatMap(Optional::stream)
+            .map(this::fetchHumanNames)
+            .collect(Collectors.joining(", "));
+    }
+
+    private Optional<Resource> fetchResource(Reference reference) {
+        return messageContext.getInputBundleHolder().getResource(reference.getReferenceElement());
+    }
+
+    private String fetchHumanNames(Resource resource) {
+        if (ResourceType.Practitioner.equals(resource.getResourceType())) {
+            var practitionerName = ((Practitioner) resource).getNameFirstRep();
+            return Stream.of(
+                    practitionerName.getPrefixAsSingleString(),
+                    practitionerName.getGivenAsSingleString(),
+                    practitionerName.getFamily())
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.joining(StringUtils.SPACE));
+        }
+        if (ResourceType.Organization.equals(resource.getResourceType())) {
+            return ((Organization) resource).getName();
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private void markObservationsAsProcessed(IdMapper idMapper, List<Observation> observations) {
+        observations.stream()
+            .map(Observation::getIdElement)
+            .forEach(idMapper::markObservationAsMapped);
     }
 }

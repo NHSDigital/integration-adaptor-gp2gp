@@ -83,6 +83,8 @@ public class ConditionLinkSetMapperTest {
         + "condition_suppressed_related_medication_request.json";
     private static final String INPUT_JSON_RELATED_CLINICAL_CONTENT_ALLERGY = CONDITION_FILE_LOCATIONS
         + "condition_related_clinical_content_allergy.json";
+    private static final String INPUT_JSON_WITH_ACTUAL_PROBLEM_MEDICATION_REQUEST = CONDITION_FILE_LOCATIONS
+        + "condition_actual_problem_medication_request.json";
 
     private static final String EXPECTED_OUTPUT_LINKSET = CONDITION_FILE_LOCATIONS + "expected_output_linkset_";
     private static final String OUTPUT_XML_WITH_IS_NESTED = EXPECTED_OUTPUT_LINKSET + "1.xml";
@@ -104,6 +106,7 @@ public class ConditionLinkSetMapperTest {
     private static final String OUTPUT_XML_IMMUNIZATION_ACTUAL_PROBLEM = EXPECTED_OUTPUT_LINKSET + "17.xml";
     private static final String OUTPUT_XML_WITH_NULL_FLAVOR_OBSERVATION_STATEMENT_AVAILABILITY_TIME = EXPECTED_OUTPUT_LINKSET + "18.xml";
     private static final String OUTPUT_XML_WITH_STATEMENT_REF_LINK_ALLERGY_OBSERVATION = EXPECTED_OUTPUT_LINKSET + "19.xml";
+    private static final String OUTPUT_XML_MEDICATION_REQUEST_ACTUAL_PROBLEM = EXPECTED_OUTPUT_LINKSET + "20.xml";
 
     @Mock
     private IdMapper idMapper;
@@ -130,6 +133,8 @@ public class ConditionLinkSetMapperTest {
 
         lenient().when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        lenient().when(codeableConceptCdMapper.mapCodeableConceptToCdForTransformedActualProblemHeader(any(CodeableConcept.class)))
+                .thenReturn(CodeableConceptMapperMockUtil.ACTUAL_PROBLEM_CODE);
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
@@ -211,7 +216,8 @@ public class ConditionLinkSetMapperTest {
             Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_LIST_REFERENCE, OUTPUT_XML_WITH_NO_RELATED_CLINICAL_CONTENT, false),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_ALLERGY_INTOLERANCE, OUTPUT_XML_ALLERGY_INTOLERANCE_ACTUAL_PROBLEM, false),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_IMMUNIZATION, OUTPUT_XML_IMMUNIZATION_ACTUAL_PROBLEM, false),
-            Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_ALLERGY, OUTPUT_XML_WITH_STATEMENT_REF_LINK_ALLERGY_OBSERVATION, false)
+            Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_ALLERGY, OUTPUT_XML_WITH_STATEMENT_REF_LINK_ALLERGY_OBSERVATION, false),
+            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_MEDICATION_REQUEST, OUTPUT_XML_MEDICATION_REQUEST_ACTUAL_PROBLEM, false)
         );
     }
 

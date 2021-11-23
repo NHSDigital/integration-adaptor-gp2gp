@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.IdType;
@@ -86,6 +87,7 @@ public class ConditionLinkSetMapper {
                 buildObservationStatementAvailabilityTime(condition).ifPresent(builder::observationStatementAvailabilityTime);
                 new ConditionWrapper(condition, messageContext, codeableConceptCdMapper)
                     .buildProblemInfo().ifPresent(builder::pertinentInfo);
+                builder.actualProblemLinkId(buildActualProblemLinkId(condition));
             });
 
         builder.code(buildCode(condition));
@@ -132,12 +134,16 @@ public class ConditionLinkSetMapper {
         return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
             .map(Extension::getValue)
             .map(value -> (Reference) value)
-            .filter(reference ->
-                checkIfReferenceIsObservation(reference)
-                    || checkIfReferenceIsAllergyIntolerance(reference)
-                    || checkIfReferenceIsImmunization(reference)
-            )
+            .filter(reference -> checkIfReferenceIsObservation(reference))
             .map(this::mapLinkedId);
+    }
+
+    private boolean isTransformedActualProblemHeader(Condition condition) {
+        return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
+            .map(Extension::getValue)
+            .map(value -> (Reference) value)
+            .filter(reference -> checkIfReferenceIsAllergyIntolerance(reference) || checkIfReferenceIsImmunization(reference)
+                    || checkIfReferenceIsMedicationRequest(reference)).isPresent();
     }
 
     private Optional<String> buildQualifier(Condition condition) {
@@ -223,8 +229,16 @@ public class ConditionLinkSetMapper {
         return reference.getReferenceElement().getResourceType().equals(ResourceType.Immunization.name());
     }
 
+    private boolean checkIfReferenceIsMedicationRequest(Reference reference) {
+        return reference.getReferenceElement().getResourceType().equals(ResourceType.MedicationRequest.name());
+    }
+
     private String buildCode(Condition condition) {
         if (condition.hasCode()) {
+            if (isTransformedActualProblemHeader(condition)) {
+                return codeableConceptCdMapper.mapCodeableConceptToCdForTransformedActualProblemHeader(condition.getCode());
+            }
+
             return codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode());
         }
         throw new EhrMapperException("Condition code not present");
@@ -257,5 +271,17 @@ public class ConditionLinkSetMapper {
         }
 
         return messageContext.getIdMapper().getOrNew(reference);
+    }
+
+    private String buildActualProblemLinkId(Condition condition) {
+        return ExtensionMappingUtils.filterAllExtensionsByUrl(condition, ACTUAL_PROBLEM_URL)
+            .stream()
+            .map(Extension::getValue)
+            .map(Reference.class::cast)
+            .filter(this::nonExistentResourceFilter)
+            .filter(this::suppressedLinkageResourcesFilter)
+            .map(this::mapLinkedId)
+            .findFirst()
+            .orElse(StringUtils.EMPTY);
     }
 }
