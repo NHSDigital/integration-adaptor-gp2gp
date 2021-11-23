@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.github.mustachejava.Mustache;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -27,6 +28,7 @@ public class AbsentAttachmentFileMapper {
 
     //TODO: Create a uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AbsentAttachmentParameters class if needed
     // This one's only draft
+    @Getter
     @Builder
     private static class AbsentAttachment {
         private String title; //content.attachment.title
