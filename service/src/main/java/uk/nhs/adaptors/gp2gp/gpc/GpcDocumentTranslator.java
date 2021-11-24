@@ -42,7 +42,7 @@ public class GpcDocumentTranslator {
         var attachments = Collections.singletonList(
             OutboundMessage.Attachment.builder()
                 .contentType(binary.getContentType())
-                .isBase64(Boolean.TRUE.toString())
+                .isBase64(Boolean.TRUE)
                 .description(taskDefinition.getDocumentId())
                 .payload(binary.getContentAsBase64())
                 .build());

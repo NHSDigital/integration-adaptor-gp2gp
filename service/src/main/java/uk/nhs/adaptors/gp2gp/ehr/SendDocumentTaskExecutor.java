@@ -120,7 +120,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
             .payload(chunkPayload)
             .attachments(List.of(OutboundMessage.Attachment.builder()
                 .contentType(contentType)
-                .isBase64(Boolean.TRUE.toString())
+                .isBase64(Boolean.TRUE)
                 .description("Attachment")
                 .payload(chunk)
                 .build()))
