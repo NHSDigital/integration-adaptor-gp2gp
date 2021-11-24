@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Extension;
@@ -13,6 +14,7 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.CodeableConceptCdTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -30,6 +32,7 @@ public class CodeableConceptCdMapper {
     private static final String DESCRIPTION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid";
     private static final String FIXED_ACTUAL_PROBLEM_CODE = "55607006";
     private static final String PROBLEM_DISPLAY_NAME = "Problem";
+    private static final String ACTIVE_CLINICAL_STATUS = "active";
 
     public String mapCodeableConceptToCd(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
@@ -37,6 +40,26 @@ public class CodeableConceptCdMapper {
 
         builder.nullFlavor(mainCode.isEmpty());
         var originalText = findOriginalText(codeableConcept, mainCode);
+        originalText.ifPresent(builder::mainOriginalText);
+
+        if (mainCode.isPresent()) {
+            builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
+            var code = extractCode(mainCode.get());
+            var displayText = findDisplayText(mainCode.get());
+
+            code.ifPresent(builder::mainCode);
+            displayText.ifPresent(builder::mainDisplayName);
+        }
+
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
+    }
+
+    public String mapCodeableConceptToCdForAllergy(CodeableConcept codeableConcept, AllergyIntolerance allergyIntolerance) {
+        var builder = CodeableConceptCdTemplateParameters.builder();
+        var mainCode = findMainCode(codeableConcept);
+
+        builder.nullFlavor(mainCode.isEmpty());
+        var originalText = findOriginalTextForAllergy(codeableConcept, mainCode, allergyIntolerance);
         originalText.ifPresent(builder::mainOriginalText);
 
         if (mainCode.isPresent()) {
@@ -76,21 +99,69 @@ public class CodeableConceptCdMapper {
             if (codeableConcept.hasText()) {
                 return Optional.of(codeableConcept.getText());
             } else {
-                var extension = retrieveDisplayExtension(coding.get());
-                Optional<String> originalText = extension.stream()
-                    .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
-                    .map(extension1 -> extension1.getValue().toString())
-                    .findFirst();
-
-                if (originalText.isEmpty() && coding.get().hasDisplay()) {
-                    originalText = Optional.of(coding.get().getDisplay());
+                if (coding.get().hasDisplay()) {
+                    Optional<String> originalText = Optional.of(coding.get().getDisplay());
+                    return originalText;
+                } else {
+                    var extension = retrieveDisplayExtension(coding.get());
+                    Optional<String> originalText = extension.stream()
+                        .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
+                        .map(extension1 -> extension1.getValue().toString())
+                        .findFirst();
+                    return originalText;
                 }
-
-                return originalText;
             }
         } else {
             return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
         }
+    }
+
+    private Optional<String> findOriginalTextForAllergy(CodeableConcept codeableConcept, Optional<Coding> coding,
+        AllergyIntolerance allergyIntolerance) {
+
+        if (allergyIntolerance.hasClinicalStatus()) {
+            if (!ACTIVE_CLINICAL_STATUS.equals(allergyIntolerance.getClinicalStatus().toCode())) {
+                if (coding.isPresent()) {
+                    if (codeableConcept.hasText()) {
+                        return Optional.of(codeableConcept.getText());
+                    } else {
+                        var extension = retrieveDisplayExtension(coding.get());
+                        Optional<String> originalText = extension.stream()
+                            .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
+                            .map(extension1 -> extension1.getValue().toString())
+                            .findFirst();
+
+                        if (originalText.isEmpty() && coding.get().hasDisplay()) {
+                            originalText = Optional.of(coding.get().getDisplay());
+                        }
+
+                        return originalText;
+                    }
+                }
+                else {
+                    return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
+                }
+            } else {
+                if (coding.isPresent()) {
+                    if (codeableConcept.hasText()) {
+                        return Optional.of(codeableConcept.getText());
+                    } else {
+                        var extension = retrieveDisplayExtension(coding.get());
+                        Optional<String> originalText = extension.stream()
+                            .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
+                            .map(extension1 -> extension1.getValue().toString())
+                            .findFirst();
+
+                        if (originalText.isEmpty()) {
+                            return Optional.empty();
+                        }
+                    }
+                } else {
+                    return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
+                }
+            }
+        }
+        throw new EhrMapperException("Allergy code not present");
     }
 
     private Optional<String> extractCode(Coding coding) {

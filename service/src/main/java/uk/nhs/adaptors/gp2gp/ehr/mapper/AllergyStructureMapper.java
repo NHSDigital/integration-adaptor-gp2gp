@@ -105,9 +105,9 @@ public class AllergyStructureMapper {
                         .orElse(StringUtils.EMPTY);
 
                     if (category.equals(ENVIRONMENT_CATEGORY)) {
-                        return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
+                        return codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(allergyIntolerance.getCode(), allergyIntolerance);
                     } else if (category.equals(MEDICATION_CATEGORY)) {
-                        return codeableConceptCdMapper.mapToNullFlavorCodeableConcept(allergyIntolerance.getCode());
+                        return codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(allergyIntolerance.getCode(), allergyIntolerance);
                     } else {
                         throw new EhrMapperException("Category could not be mapped");
                     }
@@ -115,7 +115,7 @@ public class AllergyStructureMapper {
             }
         }
         if (allergyIntolerance.hasCode()) {
-            return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
+            return codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(allergyIntolerance.getCode(), allergyIntolerance);
         }
         throw new EhrMapperException("Allergy code not present");
     }
