@@ -42,6 +42,7 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_2 = "9690937841";
     private static final String NHS_NUMBER_TWO_DOCUMENTS = "9690937789";
     private static final String NHS_NUMBER_THREE_SMALL_DOCUMENTS = "9690937419";
+    private static final String NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT = "9388098434";
     private static final String FROM_PARTY_ID = "N82668-820670";
     private static final String TO_PARTY_ID = "B86041-822103";
     private static final String FROM_ASID = "200000000359";
@@ -212,6 +213,16 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, DOCUMENT_ID_LARGE, 1);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedWithUnsupportedDocumentLargerThanThreshold_Expect_LargeDocumentIsSplit() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, DOCUMENT_ID_LARGE_2, 3);
     }
 
     @Test
