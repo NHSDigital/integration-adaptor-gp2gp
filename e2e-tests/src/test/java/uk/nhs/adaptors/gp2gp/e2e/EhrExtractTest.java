@@ -216,15 +216,15 @@ public class EhrExtractTest {
         assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, DOCUMENT_ID_LARGE, 1);
     }
 
-//    @Test
-//    public void When_ExtractRequestReceivedWithUnsupportedDocumentLargerThanThreshold_Expect_LargeDocumentIsSplit() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, FROM_ODS_CODE_1);
-//
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, DOCUMENT_ID_LARGE_UNSUPPORTED);
-//    }
+    @Test
+    public void When_ExtractRequestReceivedWithUnsupportedDocumentLargerThanThreshold_Expect_LargeDocumentIsSplit() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, DOCUMENT_ID_LARGE_UNSUPPORTED);
+    }
 
     @Test
     public void When_ExtractRequestReceivedWithDocumentSizeLargerThanThreshold_Expect_LargeDocumentIsSplit() throws Exception {
