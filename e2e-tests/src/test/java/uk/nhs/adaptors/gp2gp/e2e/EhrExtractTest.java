@@ -222,7 +222,12 @@ public class EhrExtractTest {
 
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertMultipleDocsSent(conversationId, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, DOCUMENT_ID_LARGE_2, 3);
+
+        assertEhrExtractSentAsAttachment(conversationId);
+
+        //assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER, DOCUMENT_ID_NORMAL);
+
+        //assertMultipleDocsSent(conversationId, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, DOCUMENT_ID_LARGE_2, 3);
     }
 
     @Test
