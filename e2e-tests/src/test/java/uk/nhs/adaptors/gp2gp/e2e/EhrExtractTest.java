@@ -17,6 +17,7 @@ import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.bson.Document;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.StringUtils;
@@ -217,6 +218,7 @@ public class EhrExtractTest {
     }
 
     @Test
+    @Disabled(value = "Crashes the pipeline due to processing a large file")
     public void When_ExtractRequestReceivedWithUnsupportedDocumentLargerThanThreshold_Expect_LargeDocumentIsSplit() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, FROM_ODS_CODE_1);
