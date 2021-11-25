@@ -62,6 +62,7 @@ public class EhrExtractTest {
     private static final String DOCUMENT_ID_LARGE = "11737b22-8cff-47e2-b741-e7f27c8c61a8";
     private static final String DOCUMENT_ID_LARGE_2 = "29c434d6-ad47-415f-b5f5-fd1dc2941d8d";
     private static final String DOCUMENT_ID_LARGE_3 = "29f6e02e-59e5-4e84-9944-0996260d0c2f";
+    private static final String DOCUMENT_ID_LARGE_UNSUPPORTED = "07a6483f-732b-461e-86b6-edb665c45511-1";
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
     private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
     private static final String CONVERSATION_ID_PLACEHOLDER = "%%ConversationId%%";
@@ -222,12 +223,7 @@ public class EhrExtractTest {
 
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-
-        assertEhrExtractSentAsAttachment(conversationId);
-
-        //assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER, DOCUMENT_ID_NORMAL);
-
-        //assertMultipleDocsSent(conversationId, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, DOCUMENT_ID_LARGE_2, 3);
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_UNSUPPORTED_CONTENTTYPE_LARGE_DOCUMENT, DOCUMENT_ID_LARGE_UNSUPPORTED);
     }
 
     @Test
