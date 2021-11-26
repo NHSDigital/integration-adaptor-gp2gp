@@ -54,16 +54,22 @@ public class CodeableConceptCdMapper {
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
 
-    public String mapCodeableConceptToCdForAllergy(CodeableConcept codeableConcept, AllergyIntolerance allergyIntolerance) {
+    public String mapCodeableConceptToCdForAllergy(CodeableConcept codeableConcept, AllergyIntolerance.AllergyIntoleranceClinicalStatus
+        allergyIntoleranceClinicalStatus) {
         var builder = CodeableConceptCdTemplateParameters.builder();
         var mainCode = findMainCode(codeableConcept);
 
         builder.nullFlavor(mainCode.isEmpty());
-        var originalText = findOriginalTextForAllergy(codeableConcept, mainCode, allergyIntolerance);
+        var originalText = findOriginalTextForAllergy(codeableConcept, mainCode, allergyIntoleranceClinicalStatus);
         originalText.ifPresent(builder::mainOriginalText);
 
         if (mainCode.isPresent()) {
-            builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
+            if (ACTIVE_CLINICAL_STATUS.equals(allergyIntoleranceClinicalStatus.toCode())) {
+                builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
+            } else {
+                builder.nullFlavor(true);
+            }
+
             var code = extractCode(mainCode.get());
             var displayText = findDisplayText(mainCode.get());
 
@@ -117,16 +123,16 @@ public class CodeableConceptCdMapper {
     }
 
     private Optional<String> findOriginalTextForAllergy(CodeableConcept codeableConcept, Optional<Coding> coding,
-        AllergyIntolerance allergyIntolerance) {
+        AllergyIntolerance.AllergyIntoleranceClinicalStatus allergyIntoleranceClinicalStatus) {
 
-        if (allergyIntolerance.hasClinicalStatus()) {
-            if (!ACTIVE_CLINICAL_STATUS.equals(allergyIntolerance.getClinicalStatus().toCode())) {
+        if (!allergyIntoleranceClinicalStatus.toCode().isEmpty()) {
+            if (!ACTIVE_CLINICAL_STATUS.equals(allergyIntoleranceClinicalStatus.toCode())) {
                 if (coding.isPresent()) {
                     if (codeableConcept.hasText()) {
                         return Optional.of(codeableConcept.getText());
                     } else {
                         var extension = retrieveDisplayExtension(coding.get());
-                        Optional<String> originalText = extension.stream()
+                        Optional<String> originalText = extension.get().getExtension().stream()
                             .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
                             .map(extension1 -> extension1.getValue().toString())
                             .findFirst();
@@ -137,28 +143,21 @@ public class CodeableConceptCdMapper {
 
                         return originalText;
                     }
-                }
-                else {
-                    return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
-                }
-            } else {
-                if (coding.isPresent()) {
-                    if (codeableConcept.hasText()) {
-                        return Optional.of(codeableConcept.getText());
-                    } else {
-                        var extension = retrieveDisplayExtension(coding.get());
-                        Optional<String> originalText = extension.stream()
-                            .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
-                            .map(extension1 -> extension1.getValue().toString())
-                            .findFirst();
-
-                        if (originalText.isEmpty()) {
-                            return Optional.empty();
-                        }
-                    }
                 } else {
                     return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
                 }
+            } else {
+                var extension = retrieveDisplayExtension(coding.get());
+                Optional<String> originalText = extension.get().getExtension().stream()
+                    .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
+                    .map(extension1 -> extension1.getValue().toString())
+                    .findFirst();
+
+                if (originalText.isEmpty()) {
+                    return Optional.empty();
+                }
+
+                return originalText;
             }
         }
         throw new EhrMapperException("Allergy code not present");
