@@ -117,8 +117,7 @@ public class AllergyStructureMapper {
             }
         }
         if (allergyIntolerance.hasCode()) {
-            return codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(allergyIntolerance.getCode(),
-                allergyIntolerance.getClinicalStatus());
+            return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
         }
         throw new EhrMapperException("Allergy code not present");
     }
