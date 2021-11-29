@@ -1838,7 +1838,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7"/>
-                <code code="716186003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No known allergy">
+                <code code="3304950010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No known allergy">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1890,7 +1890,7 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C" />
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+        <code code="142934010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1929,7 +1929,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7AAC20C0-654A-446A-903F-2DFC0AA8B3F8" />
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
+        <code code="1990681000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
