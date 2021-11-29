@@ -417,7 +417,6 @@ EMPTY REPORT</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039" />
         <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
-    <originalText>Angelman syndrome</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -876,7 +875,6 @@ Received Date: 2002-03-30 12:21
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
         <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>INR - international normalised ratio</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -887,7 +885,6 @@ Received Date: 2002-03-30 12:21
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
         <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>INR - international normalised ratio</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1128,7 +1125,6 @@ Received Date: 2002-03-30 12:21
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6A894B1B-F266-415C-83E6-375A4296C1C4"/>
         <code code="1016051000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="24 hour urine protein output">
-    <originalText>24 hour urine protein output</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1225,7 +1221,6 @@ Participants: MessageRecipient-B86123, LaboratoryServiceProvider-ST JAMES&apos;S
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46"/>
         <code code="1006701000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum paracetamol level">
-    <originalText>Serum paracetamol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1236,7 +1231,6 @@ Participants: MessageRecipient-B86123, LaboratoryServiceProvider-ST JAMES&apos;S
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230"/>
         <code code="1006701000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum paracetamol level">
-    <originalText>Serum paracetamol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1347,7 +1341,6 @@ Participants: MessageRecipient-B86123, LaboratoryServiceProvider-ST JAMES&apos;S
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
         <code code="993391000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum vitamin B12 level">
-    <originalText>Serum vitamin B12 level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1366,7 +1359,6 @@ Participants: MessageRecipient-B86123, LaboratoryServiceProvider-ST JAMES&apos;S
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D"/>
         <code code="993401000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell folate level">
-    <originalText>Red blood cell folate level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1485,7 +1477,6 @@ Received Date: 2003-01-09 13:54
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0"/>
         <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
-    <originalText>Glucose tolerance test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1780,7 +1771,6 @@ Received Date: 2003-01-09 13:54
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C"/>
         <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
-    <originalText>Glucose tolerance test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2065,7 +2055,6 @@ Received Date: 2003-01-09 13:54
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="730F742C-1164-45BF-9139-8484074E5995"/>
         <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
-    <originalText>Glucose tolerance test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2351,7 +2340,6 @@ Received Date: 2003-06-02 13:55
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9"/>
         <code code="1015971000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Renal function tests">
-    <originalText>Renal function tests</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2362,7 +2350,6 @@ Received Date: 2003-06-02 13:55
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="43B37138-F5A0-4F6F-8CEE-5B9A5632878B"/>
         <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
-    <originalText>Serum sodium level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2400,7 +2387,6 @@ Received Date: 2003-06-02 13:55
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
         <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
-    <originalText>Serum creatinine level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2421,7 +2407,6 @@ Received Date: 2003-06-02 13:55
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="3F170377-2DE6-45D3-90EE-9EC23EDB4F59"/>
         <code code="1005661000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum lipids level">
-    <originalText>Serum lipids level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2443,7 +2428,6 @@ Interpretation: Abnormal</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="2DCB9D56-5929-467F-A5DF-AA87FF457720"/>
         <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
-    <originalText>Serum cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2454,7 +2438,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4B96C02F-9167-4CCB-AB78-5FFEE087A049"/>
         <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
-    <originalText>Serum cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2505,7 +2488,6 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F"/>
         <code code="1005681000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum high density lipoprotein cholesterol level">
-    <originalText>Serum high density lipoprotein cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2524,7 +2506,6 @@ Interpretation: HI - Above high reference limit</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="A7E9FEF8-71BC-4A6E-B3D7-94638E59E6B7"/>
         <code code="1022191000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum low density lipoprotein cholesterol level">
-    <originalText>Serum low density lipoprotein cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2535,7 +2516,6 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
         <code code="1022191000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum low density lipoprotein cholesterol level">
-    <originalText>Serum low density lipoprotein cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2609,7 +2589,6 @@ Received Date: 2003-06-02 13:55
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
         <code code="997681000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fasting blood glucose level">
-    <originalText>Fasting blood glucose level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2663,7 +2642,6 @@ Received Date: 2003-06-02 13:55
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571"/>
         <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2685,7 +2663,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7F80410A-6158-43C4-9E5E-0CFB1F25E781"/>
         <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2704,7 +2681,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="452AFD1A-B615-4E2C-A733-544A3426DA24"/>
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2723,7 +2699,6 @@ Interpretation: Abnormal</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="300330A9-5389-444B-A23E-6402355AB06C"/>
         <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2734,7 +2709,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6D62CF66-D522-4412-A2CB-3134819B46A0"/>
         <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2766,7 +2740,6 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF"/>
         <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2785,7 +2758,6 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B118583D-C4B6-40DE-A3CE-E0C73F55406A"/>
         <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2804,7 +2776,6 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
         <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2823,7 +2794,6 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
         <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2861,7 +2831,6 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D27E4A12-8EA6-44D7-AB94-821503546B45"/>
         <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2899,7 +2868,6 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25"/>
         <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2918,7 +2886,6 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D20DC48D-2202-4E6A-A1A0-1C6A27C50CAC"/>
         <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3050,7 +3017,6 @@ Received Date: 2003-06-17 13:21
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="1C844462-40B7-403D-A8EB-F1344DCEB6A0"/>
         <code code="1006761000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bone profile">
-    <originalText>Bone profile</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3072,7 +3038,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4617268B-1554-4618-8D2D-69A808C0A48D"/>
         <code code="1000811000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total protein">
-    <originalText>Serum total protein</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3091,7 +3056,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="155122E0-3D9B-4784-8E29-622A941D8FFC"/>
         <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
-    <originalText>Serum albumin level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3110,7 +3074,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="84A89C2F-8A0F-4588-88CD-A0EA0301E8BC"/>
         <code code="1000691000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum calcium level">
-    <originalText>Serum calcium level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3129,7 +3092,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E74F00A1-5189-4806-979F-5A57701BFF13"/>
         <code code="935051000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum adjusted calcium concentration">
-    <originalText>Serum adjusted calcium concentration</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3148,7 +3110,6 @@ Interpretation: Abnormal</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="716B2A02-D779-45A0-812C-B2376C8E6F75"/>
         <code code="1000701000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum inorganic phosphate level">
-    <originalText>Serum inorganic phosphate level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3159,7 +3120,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="37BE01D1-CF5B-470A-8D40-C5212AD6A78C"/>
         <code code="1000701000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum inorganic phosphate level">
-    <originalText>Serum inorganic phosphate level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3185,7 +3145,6 @@ U=Unsuitable for analysis</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EC34765C-88BF-42B1-9958-6AF09499FE8C"/>
         <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
-    <originalText>Serum alkaline phosphatase level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3216,7 +3175,6 @@ CommentDate:20100326134544
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="49C185EE-784C-497C-A7E0-C63A25C057B7"/>
         <code code="1000971000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urea and electrolytes level">
-    <originalText>Urea and electrolytes level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3227,7 +3185,6 @@ CommentDate:20100326134544
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FEB76FD7-EA3E-47AE-9D92-DDB7EB866A99"/>
         <code code="1000951000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum urea level">
-    <originalText>Serum urea level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3246,7 +3203,6 @@ CommentDate:20100326134544
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DBC49D87-08A5-4E9B-A0DB-88F53EEAD89F"/>
         <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
-    <originalText>Serum sodium level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3265,7 +3221,6 @@ CommentDate:20100326134544
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="DA602250-41DB-4A8D-B5CB-70863AAF0F2D"/>
         <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
-    <originalText>Serum potassium level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3276,7 +3231,6 @@ CommentDate:20100326134544
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="503999C4-17C3-4B14-8085-A995DBC80286"/>
         <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
-    <originalText>Serum potassium level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3302,7 +3256,6 @@ U=Unsuitable,due to delay in delivery.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64"/>
         <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
-    <originalText>Serum creatinine level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3333,7 +3286,6 @@ CommentDate:20100326134545
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D"/>
         <code code="1001371000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum CRP (C reactive protein) level">
-    <originalText>Serum CRP (C reactive protein) level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3344,7 +3296,6 @@ CommentDate:20100326134545
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9689E7D7-DD8B-4981-89D4-A2CA6C26DBE5"/>
         <code code="1001371000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum CRP (C reactive protein) level">
-    <originalText>Serum CRP (C reactive protein) level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3387,7 +3338,6 @@ CommentDate:20100326134545
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="44598FC3-DB57-4303-8B26-7D058F2B3510"/>
         <code code="1019351000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum iron level">
-    <originalText>Serum iron level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3398,7 +3348,6 @@ CommentDate:20100326134545
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D89620CF-84A5-4FB9-9399-571685EF6275"/>
         <code code="1019351000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum iron level">
-    <originalText>Serum iron level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3441,7 +3390,6 @@ CommentDate:20100326134545
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="3287DABC-6A46-4DD6-B99F-DB53886E7898"/>
         <code code="1015451000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
-    <originalText>Serum total iron binding capacity</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3452,7 +3400,6 @@ CommentDate:20100326134545
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="46218E0A-240A-47A3-9793-2CA43C848EDB"/>
         <code code="1015451000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
-    <originalText>Serum total iron binding capacity</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3595,7 +3542,6 @@ Received Date: 2003-06-27 18:24
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="72585281-F548-4159-8AAE-A372CFC2567E"/>
         <code code="997531000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
-    <originalText>Liver function test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3617,7 +3563,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FEA86ABB-8413-4535-ACF8-3EA476B39B53"/>
         <code code="1013041000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma alkaline phosphatase level">
-    <originalText>Plasma alkaline phosphatase level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3636,7 +3581,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="934E832B-C556-4B87-AE10-0ABE1295FFAA"/>
         <code code="1013361000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma albumin level">
-    <originalText>Plasma albumin level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3655,7 +3599,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A555DD62-B352-45A2-A601-C21F28340B1D"/>
         <code code="1005651000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma total protein">
-    <originalText>Plasma total protein</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3674,7 +3617,6 @@ Interpretation: Abnormal</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="134493CA-754D-4DDA-A520-20643C17BAF5"/>
         <code code="1013211000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma alanine aminotransferase level">
-    <originalText>Plasma alanine aminotransferase level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3685,7 +3627,6 @@ Interpretation: Abnormal</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EFD99868-BD82-4213-9586-11755332A60D"/>
         <code code="1013211000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma alanine aminotransferase level">
-    <originalText>Plasma alanine aminotransferase level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3717,7 +3658,6 @@ Interpretation: HI - Above high reference limit</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2CC07C55-8D38-43D0-B3BE-40BCFEC015AA"/>
         <code code="997561000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma total bilirubin level">
-    <originalText>Plasma total bilirubin level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3748,7 +3688,6 @@ CommentDate:20100209122106
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="692FAEB8-5071-400B-B689-689F871F58DE"/>
         <code code="1000851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma GGT (gamma-glutamyl transferase) level">
-    <originalText>Plasma GGT (gamma-glutamyl transferase) level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3759,7 +3698,6 @@ CommentDate:20100209122106
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2F07A8F4-8A59-4A31-A906-4E1CE5033124"/>
         <code code="1000851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma GGT (gamma-glutamyl transferase) level">
-    <originalText>Plasma GGT (gamma-glutamyl transferase) level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3802,7 +3740,6 @@ CommentDate:20100209122106
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="37FC8CBD-D503-4725-8325-D454F24BF48B"/>
         <code code="999651000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma C reactive protein">
-    <originalText>Plasma C reactive protein</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3813,7 +3750,6 @@ CommentDate:20100209122106
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7673B115-7151-4F48-AC9C-5E89AD6C04D5"/>
         <code code="999651000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma C reactive protein">
-    <originalText>Plasma C reactive protein</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4002,7 +3938,6 @@ Received Date: 2003-06-30 15:19
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="200FC1C9-6A9F-47CE-A4F7-50199281322D"/>
         <code code="1022841000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma free T4 level">
-    <originalText>Plasma free T4 level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4021,7 +3956,6 @@ Received Date: 2003-06-30 15:19
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8"/>
         <code code="1022801000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma TSH (thyroid stimulating hormone) level">
-    <originalText>Plasma TSH (thyroid stimulating hormone) level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4150,7 +4084,6 @@ Received Date: 2003-07-03 14:14
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C"/>
         <code code="993571000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
-    <originalText>Infectious mononucleosis test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4161,7 +4094,6 @@ Received Date: 2003-07-03 14:14
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F02ED83-3153-4786-96C2-200FE456A1E4"/>
         <code code="993571000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
-    <originalText>Infectious mononucleosis test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4199,7 +4131,6 @@ CommentDate:20100201093313
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="D7B28194-89DC-452E-ACE8-74CC752A2F18"/>
         <code code="1015421000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Differential white cell count">
-    <originalText>Differential white cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4210,7 +4141,6 @@ CommentDate:20100201093313
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
         <code code="1015421000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Differential white cell count">
-    <originalText>Differential white cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4269,7 +4199,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="56B35114-6813-469B-AD36-F9E4944E7866"/>
         <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4280,7 +4209,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="70EACDF9-9F82-4111-BD75-F0263D662431"/>
         <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4312,7 +4240,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2"/>
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4323,7 +4250,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43"/>
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4355,7 +4281,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB"/>
         <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4366,7 +4291,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="136A1423-A6AC-448C-921C-8991ADF93C92"/>
         <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4398,7 +4322,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="A7C55C1F-89CB-4D88-BD1C-F7E520B44A02"/>
         <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4409,7 +4332,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9"/>
         <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4484,7 +4406,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="2A78ED10-1E12-4703-B370-54FBFC4483FB"/>
         <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4495,7 +4416,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="03245FA5-238F-4857-878F-975411328E56"/>
         <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4527,7 +4447,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="CD0DE06B-A109-4037-AC72-9E83D2327E6E"/>
         <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4538,7 +4457,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="513CD61B-67B1-4E57-A2E5-AD928C7890B0"/>
         <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4570,7 +4488,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="E6D3941E-4BB5-415A-8177-DAB155EB5FF6"/>
         <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4581,7 +4498,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="20C2F7CC-5CF2-4966-8981-80C0E670C316"/>
         <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4613,7 +4529,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="8F3B744A-93D9-433C-8D46-6EF68AC95052"/>
         <code code="993501000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell distribution width">
-    <originalText>Red blood cell distribution width</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4624,7 +4539,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6"/>
         <code code="993501000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell distribution width">
-    <originalText>Red blood cell distribution width</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4699,7 +4613,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="0DE0EAF6-6AA2-4421-9509-145674A6EC51"/>
         <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4710,7 +4623,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="19B160E4-9406-4642-B202-4BDCF073BE76"/>
         <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4742,7 +4654,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="38324DDE-7ABE-4039-BF78-8E9D334FCA8F"/>
         <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
-    <originalText>Monocyte count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4753,7 +4664,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C5676D58-9600-424A-BE35-3DDAE0CAC622"/>
         <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
-    <originalText>Monocyte count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4785,7 +4695,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="EC913E83-7610-4FBD-9A60-1769D42E9DEB"/>
         <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4796,7 +4705,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7"/>
         <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4866,7 +4774,6 @@ Range Text: &lt; 0.100 10*9/L</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="187FE111-F030-41DC-AC81-4BF13E79AA2F"/>
         <code code="1022461000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nucleated red blood cell count">
-    <originalText>Nucleated red blood cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4877,7 +4784,6 @@ Range Text: &lt; 0.100 10*9/L</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57"/>
         <code code="1022461000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nucleated red blood cell count">
-    <originalText>Nucleated red blood cell count</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5015,7 +4921,6 @@ Received Date: 2005-02-25 14:46
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="69C88E7E-45C4-4D52-9BB9-AAB4E62F13FB"/>
         <code code="996911000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Autoimmune profile">
-    <originalText>Autoimmune profile</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5038,7 +4943,6 @@ rheumatoid factor tests.</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="543443CB-EFAA-4D57-8D06-9FDC5A34FD6A"/>
         <code code="993591000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti-nuclear factor">
-    <originalText>Anti-nuclear factor</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5049,7 +4953,6 @@ rheumatoid factor tests.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ED202B1D-FD90-4477-95D1-539374CA06ED"/>
         <code code="993591000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti-nuclear factor">
-    <originalText>Anti-nuclear factor</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5074,7 +4977,6 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="07378FF7-547B-4A4E-9C58-3553095BA37E"/>
         <code code="992081000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
-    <originalText>Rheumatoid factor</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5085,7 +4987,6 @@ NEGATIVE</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="337FF7FD-DA23-4EA4-9ED5-D44E1B06E605"/>
         <code code="992081000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
-    <originalText>Rheumatoid factor</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5112,7 +5013,6 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E"/>
         <code code="995851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Double stranded deoxyribonucleic acid binding autoantibody level">
-    <originalText>Double stranded deoxyribonucleic acid binding autoantibody level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5123,7 +5023,6 @@ NEGATIVE</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FB313646-3FC3-49D0-8277-D11CEA14641D"/>
         <code code="995851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Double stranded deoxyribonucleic acid binding autoantibody level">
-    <originalText>Double stranded deoxyribonucleic acid binding autoantibody level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5148,7 +5047,6 @@ Oligoclonals detected in both sera and CSF</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="4264DD9C-01B2-4F68-A222-E3B48540496D"/>
         <code code="1016761000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mitochondrial antibody screening test">
-    <originalText>Mitochondrial antibody screening test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5159,7 +5057,6 @@ Oligoclonals detected in both sera and CSF</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FB01369F-2A94-4D0B-AC2F-843879B69915"/>
         <code code="1016761000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mitochondrial antibody screening test">
-    <originalText>Mitochondrial antibody screening test</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5184,7 +5081,6 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="3AC188FA-B46E-465B-9614-37F234BEB494"/>
         <code code="1005501000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver autoantibody level">
-    <originalText>Liver autoantibody level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5195,7 +5091,6 @@ NEGATIVE</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="75DD574F-0CE6-4B2F-88FE-1CF7606B50AC"/>
         <code code="1005501000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver autoantibody level">
-    <originalText>Liver autoantibody level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5220,7 +5115,6 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="981B6B2F-EAA2-4454-8BA6-C5B2FDAE946C"/>
         <code code="994601000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti smooth muscle antibody titre">
-    <originalText>Anti smooth muscle antibody titre</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5231,7 +5125,6 @@ NEGATIVE</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CE6D306C-F337-43B9-AB9E-B96457A36CBD"/>
         <code code="994601000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti smooth muscle antibody titre">
-    <originalText>Anti smooth muscle antibody titre</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5256,7 +5149,6 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="0A4B8365-FEE6-4352-B941-5CCC40F3AE63"/>
         <code code="992101000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adrenal autoantibodies">
-    <originalText>Adrenal autoantibodies</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5267,7 +5159,6 @@ NEGATIVE</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A039C513-4426-49A9-B9AE-8624A64D6397"/>
         <code code="992101000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adrenal autoantibodies">
-    <originalText>Adrenal autoantibodies</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5364,7 +5255,6 @@ NEGATIVE</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="302EDB55-A65C-4216-BB8A-E54C7E5EC39E"/>
         <code code="994661000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Parietal cell autoantibodies">
-    <originalText>Parietal cell autoantibodies</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5375,7 +5265,6 @@ NEGATIVE</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DF2D442F-9706-41A3-ACE0-A0C06AB49A8A"/>
         <code code="994661000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Parietal cell autoantibodies">
-    <originalText>Parietal cell autoantibodies</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5582,7 +5471,6 @@ Received Date: 2005-03-15 15:15
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="AFAF69CF-48F7-44C2-AAE1-F97BFD3A7889"/>
         <code code="1000971000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urea and electrolytes level">
-    <originalText>Urea and electrolytes level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5593,7 +5481,6 @@ Received Date: 2005-03-15 15:15
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8E54B9BE-2FB3-4975-B9E7-6C9CC991FDDB"/>
         <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
-    <originalText>Serum sodium level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5612,7 +5499,6 @@ Received Date: 2005-03-15 15:15
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5D69F207-B9F7-48EB-BDE9-F42CED45357F"/>
         <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
-    <originalText>Serum potassium level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5631,7 +5517,6 @@ Received Date: 2005-03-15 15:15
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4BC88DA3-3D71-4F3F-ADF5-04B43191AEA6"/>
         <code code="1000951000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum urea level">
-    <originalText>Serum urea level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5650,7 +5535,6 @@ Received Date: 2005-03-15 15:15
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DFEA995B-2BF0-4CBB-AF6C-FDC482EE5B7A"/>
         <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
-    <originalText>Serum creatinine level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5693,7 +5577,6 @@ See FATS/Healthy Hearts guidelines for interpretation of lipids</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="76157FAC-9527-42B5-8851-68A38C18C402"/>
         <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
-    <originalText>Serum cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5704,7 +5587,6 @@ See FATS/Healthy Hearts guidelines for interpretation of lipids</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BCF39DFD-A6ED-43F7-A9BE-5A25EB970C8B"/>
         <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
-    <originalText>Serum cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5730,7 +5612,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="708B65EF-B92A-40B1-B7B8-2E3357F98B8B"/>
         <code code="1005681000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum high density lipoprotein cholesterol level">
-    <originalText>Serum high density lipoprotein cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5741,7 +5622,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="39FA9EE7-9D5D-411A-8AB7-C329BE10192F"/>
         <code code="1005681000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum high density lipoprotein cholesterol level">
-    <originalText>Serum high density lipoprotein cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5768,7 +5648,6 @@ Range Text: &gt; 1.000 mmol/L</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="F3D9CD05-FBDA-473A-8FEA-37B31D0DACA9"/>
         <code code="1028551000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total cholesterol:HDL (high density lipoprotein) ratio">
-    <originalText>Total cholesterol:HDL (high density lipoprotein) ratio</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5779,7 +5658,6 @@ Range Text: &gt; 1.000 mmol/L</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DDC66ED1-E97F-4705-A551-F07A513C2A60"/>
         <code code="1028551000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total cholesterol:HDL (high density lipoprotein) ratio">
-    <originalText>Total cholesterol:HDL (high density lipoprotein) ratio</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5807,7 +5685,6 @@ ReportStatus: Supplementary result</text>
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="599D6A2F-B001-4E52-A09D-1113D43FA4A0"/>
         <code code="1022791000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum TSH (thyroid stimulating hormone) level">
-    <originalText>Serum TSH (thyroid stimulating hormone) level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5818,7 +5695,6 @@ ReportStatus: Supplementary result</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="65E669A1-21AD-4DBE-B241-4340C6AF4A0E"/>
         <code code="1022791000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum TSH (thyroid stimulating hormone) level">
-    <originalText>Serum TSH (thyroid stimulating hormone) level</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5892,7 +5768,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BA1C874F-AD0E-4738-BC9B-7885A20EC89A" />
         <code code="1006761000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bone profile">
-    <originalText>Bone profile</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5918,7 +5793,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2897DE2C-4F80-423B-A871-F60824B65DD2" />
         <code code="1000811000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total protein">
-    <originalText>Serum total protein</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5944,7 +5818,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B833E39B-3E99-475D-99C0-C25E3FA5FB1B" />
         <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
-    <originalText>Serum albumin level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5970,7 +5843,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B05717E3-422D-4198-9CFA-4CD398376D2B" />
         <code code="1000691000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum calcium level">
-    <originalText>Serum calcium level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5996,7 +5868,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EB8754C6-ECF4-48D4-BA9B-E70F72149DB7" />
         <code code="935051000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum adjusted calcium concentration">
-    <originalText>Serum adjusted calcium concentration</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6022,7 +5893,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CC739FC8-B370-4E05-A33F-338BFAD0B5C4" />
         <code code="1000701000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum inorganic phosphate level">
-    <originalText>Serum inorganic phosphate level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6048,7 +5918,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="420089C5-B410-4600-B769-1605C1BD2F18" />
         <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
-    <originalText>Serum alkaline phosphatase level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6074,7 +5943,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BE070786-1F10-4752-87AD-85C2AA01D9FD" />
         <code code="166627004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase raised">
-    <originalText>Serum alkaline phosphatase raised</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6100,7 +5968,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="23D422EC-8C25-4303-99FD-E39DFEF209B2" />
         <code code="1000971000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urea and electrolytes level">
-    <originalText>Urea and electrolytes level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6126,7 +5993,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="51CBEE3D-0661-4B94-84D6-28B3030FC258" />
         <code code="1000951000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum urea level">
-    <originalText>Serum urea level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6152,7 +6018,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ED30F999-14CA-41B9-93EE-334F60049174" />
         <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
-    <originalText>Serum sodium level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6178,7 +6043,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BDDA9543-E6C5-4083-A8EA-115B9AAE5FE1" />
         <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
-    <originalText>Serum potassium level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6204,7 +6068,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6030B451-E3D8-40EC-8CDB-1CFAF88F535D" />
         <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
-    <originalText>Serum creatinine level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6230,7 +6093,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F166E5E2-2F8B-4528-A892-34E6073F4403" />
         <code code="1001371000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum CRP (C reactive protein) level">
-    <originalText>Serum CRP (C reactive protein) level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6256,7 +6118,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="119CBC70-D99D-4C07-AA26-EBE05249A0D8" />
         <code code="1019351000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum iron level">
-    <originalText>Serum iron level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6282,7 +6143,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B1F21EA9-37F8-4D34-950E-9FD3C9B33337" />
         <code code="1015451000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
-    <originalText>Serum total iron binding capacity</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6341,7 +6201,6 @@ Euthyroid picture (including satisfactory thyroxine replacement)</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="07A13996-C13B-45B6-8493-1C4C691ACB98" />
         <code code="1018251000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alanine aminotransferase level">
-    <originalText>Serum alanine aminotransferase level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6498,7 +6357,6 @@ EMPTY REPORT</text>
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="8ECDA0B4-E06F-4882-8D35-255F6BB79187" />
         <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of influenza vaccine">
-    <originalText>Administration of influenza vaccine</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6538,7 +6396,6 @@ EMPTY REPORT</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A6F063DA-EC87-45B6-B511-45ECC6CB989E" />
         <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
-    <originalText>Serum albumin level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6592,7 +6449,6 @@ EMPTY REPORT</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D9DDE959-B129-4F80-B9AE-D5D0E287910B" />
         <code code="1018251000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alanine aminotransferase level">
-    <originalText>Serum alanine aminotransferase level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6646,7 +6502,6 @@ EMPTY REPORT</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2C266175-D484-4554-B5D2-46664E36BBF3" />
         <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
-    <originalText>Serum alkaline phosphatase level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6700,7 +6555,6 @@ EMPTY REPORT</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D32A62E9-5F11-4042-9249-9E4CEEC04333" />
         <code code="999691000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
-    <originalText>Serum bilirubin level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6754,7 +6608,6 @@ EMPTY REPORT</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="616257C9-D034-4DB7-9E71-41CE4CCF7399" />
         <code code="997531000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
-    <originalText>Liver function test</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6803,7 +6656,6 @@ EMPTY REPORT</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C61DF18D-5DD7-4934-8248-CCF80E0514E8" />
         <code code="1005691000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum triglycerides level">
-    <originalText>Serum triglycerides level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6852,7 +6704,6 @@ EMPTY REPORT</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EF07CCC4-EB35-4993-92E9-4C1C1934C7F2" />
         <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
-    <originalText>Serum cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6950,7 +6801,6 @@ EMPTY REPORT</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64E58B3C-733C-4F69-84F3-2D96B34498F6" />
         <code code="1005661000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum lipids level">
-    <originalText>Serum lipids level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7003,7 +6853,6 @@ Triglyceride reference range
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64CA0480-0446-4C36-8B63-AACCA437787F" />
         <code code="993421000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma folate level">
-    <originalText>Plasma folate level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7057,7 +6906,6 @@ Triglyceride reference range
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="986950DF-9245-40D9-BE24-B0A9132EA679" />
         <code code="993391000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum vitamin B12 level">
-    <originalText>Serum vitamin B12 level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7161,7 +7009,6 @@ Low plasma Folate</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8E5FDD72-0063-4082-A3F8-3DF354A0D14A" />
         <code code="1015411000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microscopy, culture and sensitivities">
-    <originalText>Microscopy, culture and sensitivities</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7222,7 +7069,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F36DC49B-E56C-49F1-A121-26D01772A4F5" />
         <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7276,7 +7122,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9E6FD81D-184B-485E-A4BC-559DC0769472" />
         <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7330,7 +7175,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="22E2F211-DE10-4DEE-920B-FC9A8163DD66" />
         <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
-    <originalText>Monocyte count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7384,7 +7228,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BE04E276-DCB5-4057-96F5-DFF51B288BD5" />
         <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7438,7 +7281,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8EE34ED1-EDAD-412E-89D5-467AE9B7982A" />
         <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
-    <originalText>Neutrophil count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7492,7 +7334,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E15AC1AD-D621-4E3B-80C1-5804273014C3" />
         <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7546,7 +7387,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7CA41716-4846-4F94-A9D9-D5E0BD0A82F9" />
         <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7600,7 +7440,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="45F39D0E-6266-4155-9E73-9C7B1D808DF9" />
         <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7654,7 +7493,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="60BF5F6B-B456-458F-AE20-E0644F03B843" />
         <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7708,7 +7546,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0C2FAF03-F66A-4831-B9BA-733C008DC8D6" />
         <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7762,7 +7599,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C097A760-A532-4898-BE7E-F457AF74A96B" />
         <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7816,7 +7652,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C88C2637-682A-44EA-A467-A9F0A2C3E92E" />
         <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7870,7 +7705,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7A7C0152-536F-4958-B243-7EA93032ABBA" />
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7924,7 +7758,6 @@ Other bacteria of doubtful significance</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4DE72620-E452-4CC3-95C8-59337F3B890C" />
         <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8033,7 +7866,6 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6D81CDFD-0A0B-49CE-9C8B-1C438E4B80CA" />
         <code code="1010601000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma triglyceride level">
-    <originalText>Plasma triglyceride level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8090,7 +7922,6 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BC52FA50-4D96-4A4F-A321-21EFE52644F0" />
         <code code="1010581000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma HDL (high density lipoprotein) cholesterol level">
-    <originalText>Plasma HDL (high density lipoprotein) cholesterol level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8144,7 +7975,6 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4DCC7F96-D134-40CD-86DE-870F7C9CEBCB" />
         <code code="1013211000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma alanine aminotransferase level">
-    <originalText>Plasma alanine aminotransferase level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8198,7 +8028,6 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A4FF5CDB-FD31-4C11-AB90-2205935377EF" />
         <code code="1018251000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alanine aminotransferase level">
-    <originalText>Serum alanine aminotransferase level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8252,7 +8081,6 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6C19325E-0B3B-45F1-8ECE-6AAF87ED5EE0" />
         <code code="997681000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fasting blood glucose level">
-    <originalText>Fasting blood glucose level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8309,7 +8137,6 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="513D7148-C947-44E5-8CAB-E197E1F6F310" />
         <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
-    <originalText>Plasma viscosity</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8363,7 +8190,6 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="113A27BB-3C07-43CF-941D-13EE95988909" />
         <code code="1017401000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma potassium level">
-    <originalText>Plasma potassium level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8417,7 +8243,6 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="03D1310D-7E07-4EF8-8C1E-274064340A1A" />
         <code code="999691000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
-    <originalText>Serum bilirubin level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8469,7 +8294,6 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F8E056AD-A4C5-415F-977B-DB51B5B99413" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
