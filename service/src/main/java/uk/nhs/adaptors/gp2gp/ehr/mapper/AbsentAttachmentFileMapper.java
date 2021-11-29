@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
 
-import lombok.Builder;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AbsentAttachmentParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
