@@ -179,8 +179,9 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return bundle.getEntry()
             .stream()
             .map(Bundle.BundleEntryComponent::getResource)
-            .filter(e -> e.getResourceType().equals(ResourceType.DocumentReference))
-            .map(DocumentReference.class::cast).collect(Collectors.toList());
+            .filter(resource -> resource.getResourceType().equals(ResourceType.DocumentReference))
+            .map(DocumentReference.class::cast)
+            .collect(Collectors.toList());
     }
 
     private boolean externalAttachmentsContainAbsentAttachment(List<OutboundMessage.ExternalAttachment> externalAttachments) {
