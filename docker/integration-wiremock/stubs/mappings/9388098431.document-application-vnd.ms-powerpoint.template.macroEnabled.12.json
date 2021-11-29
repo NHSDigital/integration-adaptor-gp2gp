@@ -2,11 +2,11 @@
   "priority": 1,
   "request": {
     "method": "GET",
-    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/documents\/fhir\/Binary\/07a6483f-732b-461e-86b6-edb665c45510-25"
+    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/documents\/fhir\/Binary\/07a6483f-732b-461e-86b6-edb665c45510-10"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "9388098431.document-image-png.json",
+    "bodyFileName": "9388098431.document-application-vnd.ms-powerpoint.template.macroEnabled.12.json",
     "headers": {
       "Server":"nginx",
       "Date":"Tue, 12 Jan 2021 11:36:57 GMT",
