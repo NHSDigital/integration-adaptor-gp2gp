@@ -77,18 +77,21 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             //Here the change begins
             String fileContent = "";
             if(externalAttachmentsContainAbsentAttachment(externalAttachments)){
+                LOGGER.debug("Found AbsentAttachments candidates");
                 var documentReferences = extractDocumentReferences(structuredRecord);
 
                 final var externalAttachmentList = externalAttachments; //lambda has to refer to final values
-                var title= Optional.ofNullable(documentReferences.stream()
-                    .filter(e -> e.getContentFirstRep().getAttachment().getUrl().equals(externalAttachmentList.get(0).getUrl()))
-                    .findFirst().get().getContentFirstRep().getAttachment().getTitle()).orElse(StringUtils.EMPTY);
+                var title= Optional.ofNullable(
+                    documentReferences.stream()
+                        .filter(documentReference -> documentReference.getContentFirstRep().getAttachment().getUrl()
+                            .equals(externalAttachmentList.get(0).getUrl())
+                        ).findFirst().get().getContentFirstRep().getAttachment().getTitle()
+                    ).orElse(StringUtils.EMPTY);
 
                 fileContent = AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
                     title, structuredTaskDefinition.getToOdsCode(), structuredTaskDefinition.getConversationId()
                 );
             }
-            //@TODO: Fix the template not being filled for some reason
             //Here the change ends (for now)
 
             var documentReferencesWithoutUrl = externalAttachments.stream()
