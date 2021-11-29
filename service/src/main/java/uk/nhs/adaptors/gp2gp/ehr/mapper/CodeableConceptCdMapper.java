@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -39,12 +40,14 @@ public class CodeableConceptCdMapper {
         builder.nullFlavor(mainCode.isEmpty());
 
         if (mainCode.isPresent()) {
-            var extension = retrieveDescriptionExtension(mainCode.get());
+            var extension = retrieveDescriptionExtension(mainCode.get())
+                .map(Extension::getExtension)
+                .orElse(Collections.emptyList());
 
             builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
 
             Optional<String> code = extension.stream()
-                .filter(displayExtension -> DESCRIPTION_ID.equals(displayExtension.getUrl()))
+                .filter(descriptionExt -> DESCRIPTION_ID.equals(descriptionExt.getUrl()))
                 .map(description -> description.getValue().toString())
                 .findFirst()
                 .or(() -> Optional.of(mainCode.get().getCode()));
