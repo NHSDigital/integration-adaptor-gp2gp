@@ -62,7 +62,6 @@ public class StructuredRecordMappingService {
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
-            .filename(fileName) //check if it's allowed to add this field, done for checking equality purposes (a little bit cleaner way)
             .description(OutboundMessage.AttachmentDescription.builder()
                 .fileName(fileName)
                 .contentType(contentType)
