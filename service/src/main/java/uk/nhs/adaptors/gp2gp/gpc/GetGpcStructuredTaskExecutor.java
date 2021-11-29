@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
@@ -28,7 +27,6 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -66,6 +64,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         String hl7TranslatedResponse;
         List<OutboundMessage.Attachment> attachments = new ArrayList<>();
         List<OutboundMessage.ExternalAttachment> externalAttachments;
+        List<DocumentReference> absentAttachmentDocumentReferences;
+        List<String> absentAttachmentFilesContents;
 
         var structuredRecord = getStructuredRecord(structuredTaskDefinition);
 
@@ -73,26 +73,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             messageContext.initialize(structuredRecord);
 
             externalAttachments = structuredRecordMappingService.getExternalAttachments(structuredRecord);
+            absentAttachmentDocumentReferences = structuredRecordMappingService.getAbsentAttachmentDocumentReferences(structuredRecord);
 
-            //Here the change begins
-            String fileContent = "";
-            if(externalAttachmentsContainAbsentAttachment(externalAttachments)){
-                LOGGER.debug("Found AbsentAttachments candidates");
-                var documentReferences = extractDocumentReferences(structuredRecord);
-
-                final var externalAttachmentList = externalAttachments; //lambda has to refer to final values
-                var title= Optional.ofNullable(
-                    documentReferences.stream()
-                        .filter(documentReference -> documentReference.getContentFirstRep().getAttachment().getUrl()
-                            .equals(externalAttachmentList.get(0).getUrl())
-                        ).findFirst().get().getContentFirstRep().getAttachment().getTitle()
-                    ).orElse(StringUtils.EMPTY);
-
-                fileContent = AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
-                    title, structuredTaskDefinition.getToOdsCode(), structuredTaskDefinition.getConversationId()
-                );
-            }
-            //Here the change ends (for now)
+            absentAttachmentFilesContents = absentAttachmentDocumentReferences.isEmpty()
+                ? List.of()
+                : getAbsentAttachmentData(absentAttachmentDocumentReferences, structuredTaskDefinition);
 
             var documentReferencesWithoutUrl = externalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isBlank(documentMetadata.getUrl()))
@@ -175,17 +160,15 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
-    private List<DocumentReference> extractDocumentReferences(Bundle bundle) {
-        return bundle.getEntry()
-            .stream()
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> resource.getResourceType().equals(ResourceType.DocumentReference))
-            .map(DocumentReference.class::cast)
-            .collect(Collectors.toList());
-    }
-
-    private boolean externalAttachmentsContainAbsentAttachment(List<OutboundMessage.ExternalAttachment> externalAttachments) {
-        return externalAttachments.stream().anyMatch(e -> e.getFilename().contains("AbsentAttachment"));
+    private List<String> getAbsentAttachmentData(List<DocumentReference> documentReferences,
+        GetGpcStructuredTaskDefinition structuredTaskDefinition) {
+        return documentReferences.stream().map(
+            dr -> AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
+                dr.getContentFirstRep().getAttachment().getTitle(),
+                structuredTaskDefinition.getToOdsCode(),
+                structuredTaskDefinition.getConversationId()
+            )
+        ).collect(Collectors.toList());
     }
 
     private Bundle getStructuredRecord(GetGpcStructuredTaskDefinition structuredTaskDefinition) {

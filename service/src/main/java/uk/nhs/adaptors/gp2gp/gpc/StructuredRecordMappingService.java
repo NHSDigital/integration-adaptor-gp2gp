@@ -39,6 +39,12 @@ public class StructuredRecordMappingService {
             .collect(Collectors.toList());
     }
 
+    public List<DocumentReference> getAbsentAttachmentDocumentReferences(Bundle bundle) {
+        return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
+            .filter(this::qualifiesAsAbsentAttachment)
+            .collect(Collectors.toList());
+    }
+
     private OutboundMessage.ExternalAttachment buildExternalAttachment(DocumentReference documentReference) {
         var attachment = DocumentReferenceUtils.extractAttachment(documentReference);
         var documentId = extractUrl(documentReference).map(GetGpcDocumentTaskDefinition::extractIdFromUrl).orElse(null);
@@ -69,6 +75,13 @@ public class StructuredRecordMappingService {
             )
             .url(extractUrl(documentReference).orElse(null))
             .build();
+    }
+
+    private boolean qualifiesAsAbsentAttachment(DocumentReference documentReference) {
+        var attachment = DocumentReferenceUtils.extractAttachment(documentReference);
+        String contentType = DocumentReferenceUtils.extractContentType(attachment);
+
+        return !supportedContentTypes.isContentTypeSupported(contentType) || attachment.hasTitle();
     }
 
     private static Optional<String> extractUrl(DocumentReference documentReference) {
