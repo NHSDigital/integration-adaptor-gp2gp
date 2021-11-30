@@ -71,7 +71,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             messageContext.initialize(structuredRecord);
 
             externalAttachments = structuredRecordMappingService.getExternalAttachments(structuredRecord);
-            absentAttachments = structuredRecordMappingService.getAbsentAttachmentDocumentReferences(structuredRecord);
+            absentAttachments = structuredRecordMappingService.getAbsentAttachments(structuredRecord);
 
             var documentReferencesWithoutUrl = externalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isBlank(documentMetadata.getUrl()))
