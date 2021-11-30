@@ -35,13 +35,15 @@ public class StructuredRecordMappingService {
 
     public List<OutboundMessage.ExternalAttachment> getExternalAttachments(Bundle bundle) {
         return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
+            .filter(documentReference -> !qualifiesAsAbsentAttachment(documentReference))
             .map(this::buildExternalAttachment)
             .collect(Collectors.toList());
     }
 
-    public List<DocumentReference> getAbsentAttachmentDocumentReferences(Bundle bundle) {
+    public List<OutboundMessage.ExternalAttachment> getAbsentAttachmentDocumentReferences(Bundle bundle) {
         return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
             .filter(this::qualifiesAsAbsentAttachment)
+            .map(this::buildExternalAttachment)
             .collect(Collectors.toList());
     }
 
@@ -73,6 +75,7 @@ public class StructuredRecordMappingService {
                 .toString()
             )
             .url(extractUrl(documentReference).orElse(null))
+            .title(documentReference.getContentFirstRep().getAttachment().getTitle())
             .build();
     }
 

@@ -16,7 +16,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final GpcClient gpcClient;
-    private final GpcDocumentTranslator gpcDocumentTranslator;
+    private final DocumentToMHSTranslator gpcDocumentTranslator;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Override
@@ -35,7 +35,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
             taskDefinition.getConversationId(), taskDefinition.getDocumentId()
         );
 
-        var mhsOutboundRequestData = gpcDocumentTranslator.translateToMhsOutboundRequestData(taskDefinition, response);
+        var mhsOutboundRequestData = gpcDocumentTranslator.translateGpcResponseToMhsOutboundRequestData(taskDefinition, response);
         var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
             .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
 

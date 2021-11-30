@@ -67,6 +67,7 @@ public class OutboundMessage {
         @JsonIgnore
         private String filename;
         private String description;
+        private String title;
         @JsonIgnore
         private String url;
     }

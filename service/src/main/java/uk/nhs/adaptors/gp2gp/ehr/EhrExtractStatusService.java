@@ -130,7 +130,7 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocument(
-            GetGpcDocumentTaskDefinition documentTaskDefinition,
+            DocumentTaskDefinition documentTaskDefinition,
             String documentName,
             String taskId,
             String messageId) {

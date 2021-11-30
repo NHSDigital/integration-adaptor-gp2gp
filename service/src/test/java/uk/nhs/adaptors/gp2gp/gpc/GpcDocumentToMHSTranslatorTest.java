@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class GpcDocumentTranslatorTest {
+public class GpcDocumentToMHSTranslatorTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/request/fhir/";
     private static final String INPUT_DIRECTORY = "input/";
     private static final String OUTPUT_DIRECTORY = "output/";
@@ -43,7 +43,7 @@ public class GpcDocumentTranslatorTest {
     @Mock
     private TimestampService timestampService;
 
-    private GpcDocumentTranslator gpcDocumentTranslator;
+    private DocumentToMHSTranslator gpcDocumentTranslator;
 
     @BeforeAll
     public static void initialize() throws IOException {
@@ -56,7 +56,7 @@ public class GpcDocumentTranslatorTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
-        gpcDocumentTranslator = new GpcDocumentTranslator(new FhirParseService(),
+        gpcDocumentTranslator = new DocumentToMHSTranslator(new FhirParseService(),
             new EhrDocumentMapper(timestampService, randomIdGeneratorService));
     }
 
@@ -66,7 +66,7 @@ public class GpcDocumentTranslatorTest {
             .messageId(MESSAGE_ID)
             .documentId(TEST_DOCUMENT_ID)
             .build();
-        String payload = gpcDocumentTranslator.translateToMhsOutboundRequestData(taskDefinition, jsonBinaryContent);
+        String payload = gpcDocumentTranslator.translateGpcResponseToMhsOutboundRequestData(taskDefinition, jsonBinaryContent);
 
         assertThat(payload).isEqualToIgnoringWhitespace(expectedMhsOutboundRequest);
     }
