@@ -24,22 +24,18 @@ public class DocumentToMHSTranslator {
     private final FhirParseService fhirParseService;
     private final EhrDocumentMapper ehrDocumentMapper;
     
-    public String translateGpcResponseToMhsOutboundRequestData(
-        DocumentTaskDefinition taskDefinition, String response) {
-
+    public String translateGpcResponseToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String response) {
         var binary = fhirParseService.parseResource(response, Binary.class);
-
-        return prepare(taskDefinition, binary.getContent(), binary.getContentType());
+        return createOutboundMessage(taskDefinition, binary.getContent(), binary.getContentType());
     }
     
-    public String translateFileContentToMhsOutboundRequestData(
-        DocumentTaskDefinition taskDefinition, String fileContent) {
-        return prepare(taskDefinition, fileContent.getBytes(StandardCharsets.UTF_8), MediaType.TEXT_PLAIN_VALUE);
+    public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String fileContent) {
+        return createOutboundMessage(
+            taskDefinition, fileContent.getBytes(StandardCharsets.UTF_8), MediaType.TEXT_PLAIN_VALUE
+        );
     }
 
-    //TODO: change prepare
-
-    private String prepare(DocumentTaskDefinition taskDefinition, byte[] bytes, String textPlainValue) {
+    private String createOutboundMessage(DocumentTaskDefinition taskDefinition, byte[] bytes, String textPlainValue) {
         var ehrDocumentTemplateParameters = ehrDocumentMapper
             .mapToMhsPayloadTemplateParameters(taskDefinition);
         var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
