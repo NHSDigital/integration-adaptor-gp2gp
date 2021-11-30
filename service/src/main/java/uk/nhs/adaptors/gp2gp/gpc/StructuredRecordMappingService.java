@@ -40,7 +40,7 @@ public class StructuredRecordMappingService {
             .collect(Collectors.toList());
     }
 
-    public List<OutboundMessage.ExternalAttachment> getAbsentAttachmentDocumentReferences(Bundle bundle) {
+    public List<OutboundMessage.ExternalAttachment> getAbsentAttachments(Bundle bundle) {
         return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
             .filter(this::qualifiesAsAbsentAttachment)
             .map(this::buildExternalAttachment)
