@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
-import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
@@ -20,7 +19,6 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.AbsentAttachmentFileMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
@@ -66,7 +64,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         List<OutboundMessage.Attachment> attachments = new ArrayList<>();
         List<OutboundMessage.ExternalAttachment> externalAttachments;
         List<OutboundMessage.ExternalAttachment> absentAttachments;
-        List<String> absentAttachmentFilesContents;
 
         var structuredRecord = getStructuredRecord(structuredTaskDefinition);
 
@@ -158,17 +155,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
-    private List<String> getAbsentAttachmentData(List<DocumentReference> documentReferences,
-        GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        return documentReferences.stream().map(
-            dr -> AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
-                dr.getContentFirstRep().getAttachment().getTitle(),
-                structuredTaskDefinition.getToOdsCode(),
-                structuredTaskDefinition.getConversationId()
-            )
-        ).collect(Collectors.toList());
-    }
-
     private Bundle getStructuredRecord(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return fhirParseService.parseResource(gpcClient.getStructuredRecord(structuredTaskDefinition), Bundle.class);
     }
@@ -183,11 +169,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private void queueSendAbsentAttachmentTask(TaskDefinition taskDefinition,
         List<OutboundMessage.ExternalAttachment> absentAttachments) {
         absentAttachments.stream()
-            .map(absentAttachment -> buildHandleAbsentAttachmentTask(taskDefinition, absentAttachment)) //buildSend
+            .map(absentAttachment -> buildSendAbsentAttachmentTask(taskDefinition, absentAttachment))
             .forEach(taskDispatcher::createTask);
     }
 
-    private SendAbsentAttachmentTaskDefinition buildHandleAbsentAttachmentTask(TaskDefinition taskDefinition,
+    private SendAbsentAttachmentTaskDefinition buildSendAbsentAttachmentTask(TaskDefinition taskDefinition,
         OutboundMessage.ExternalAttachment absentAttachment) {
         return SendAbsentAttachmentTaskDefinition.builder()
             .documentId(absentAttachment.getDocumentId())
