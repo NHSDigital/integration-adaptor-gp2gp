@@ -300,8 +300,7 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06" />
-        <code code="76376003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Endometriosis of uterus">
-    <originalText>Endometriosis of uterus</originalText>
+        <code code="126835018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Endometriosis of uterus">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -327,8 +326,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
-        <code code="21522001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal pain">
-    <originalText>Abdominal pain</originalText>
+        <code code="36112013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal pain">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -353,8 +351,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
-        <code code="80182007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Irregular periods">
-    <originalText>Irregular periods</originalText>
+        <code code="133033014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Irregular menstrual cycle">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -391,8 +388,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345" />
-        <code code="161779006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: menstrual disorder">
-    <originalText>H/O: menstrual disorder</originalText>
+        <code code="252082012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: menstrual disorder">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -417,8 +413,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843" />
-        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
-    <originalText>FH: Menstrual disorder</originalText>
+        <code code="250049017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -443,8 +438,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
-        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
-    <originalText>FH: Menstrual disorder</originalText>
+        <code code="250049017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -593,8 +587,7 @@ note - this is obviously wrong?</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D"/>
-        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-    <originalText>O/E - blood pressure reading</originalText>
+        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -604,7 +597,7 @@ note - this is obviously wrong?</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
-                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
     <originalText>Systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -618,7 +611,7 @@ note - this is obviously wrong?</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B"/>
-                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
     <originalText>Diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -679,8 +672,7 @@ note - this is obviously wrong?</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E" />
-        <code code="197480006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anxiety disorder">
-    <originalText>Anxiety disorder</originalText>
+        <code code="303689015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anxiety disorder">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3546,7 +3538,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3493211000001100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mirena 20micrograms/24hours intrauterine device (Bayer Plc)">
-    <originalText>Mirena 20micrograms/24hours intrauterine device (Bayer Plc)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3619,7 +3610,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3493211000001100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mirena 20micrograms/24hours intrauterine device (Bayer Plc)">
-    <originalText>Mirena 20micrograms/24hours intrauterine device (Bayer Plc)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3693,7 +3683,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3766,7 +3755,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3840,7 +3828,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3914,7 +3901,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3988,7 +3974,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4062,7 +4047,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4136,7 +4120,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4210,7 +4193,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4284,7 +4266,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4358,7 +4339,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4432,7 +4412,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4506,7 +4485,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4580,7 +4558,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4654,7 +4631,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4728,7 +4704,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4802,7 +4777,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5763,7 +5737,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5836,7 +5809,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5910,7 +5882,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5984,7 +5955,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6058,7 +6028,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6132,7 +6101,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6206,7 +6174,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3493211000001100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mirena 20micrograms/24hours intrauterine device (Bayer Plc)">
-    <originalText>Mirena 20micrograms/24hours intrauterine device (Bayer Plc)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6279,7 +6246,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3493211000001100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mirena 20micrograms/24hours intrauterine device (Bayer Plc)">
-    <originalText>Mirena 20micrograms/24hours intrauterine device (Bayer Plc)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6353,7 +6319,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6426,7 +6391,6 @@ note - this is obviously wrong?</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="13331511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)">
-    <originalText>Gygel 2% contraceptive jelly (Marlborough Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -7150,8 +7114,7 @@ note - this is obviously wrong?</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E"/>
-                <code code="294881007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to warfarin">
-    <originalText>Allergy to warfarin</originalText>
+                <code code="435198016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Warfarin allergy">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -7214,8 +7177,7 @@ This is text for a warfarin allergy</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="4264DD9C-01B2-4F68-A222-E3B48540496D"/>
-                <code code="91935009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanut">
-    <originalText>Allergy to peanut</originalText>
+                <code code="152306018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -7280,8 +7242,7 @@ This is a peanut allergy
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3AC188FA-B46E-465B-9614-37F234BEB494"/>
-                <code code="293586001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to aspirin">
-    <originalText>Allergy to aspirin</originalText>
+                <code code="433808014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin allergy">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -7344,8 +7305,7 @@ Drug Allergy - Apsrin</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="CB0B5DEA-25E6-4F23-8EAD-19EE8705CED4"/>
-                <code code="91935009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanut">
-    <originalText>Allergy to peanut</originalText>
+                <code code="152306018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -7398,8 +7358,7 @@ Drug Allergy - Apsrin</text>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="381D7D39-7FB8-49C2-B042-F15A48B019EB" />
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of influenza vaccine">
-    <originalText>Administration of influenza vaccine</originalText>
+        <code code="142934010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7438,8 +7397,7 @@ Drug Allergy - Apsrin</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C2CFB5B2-D6CF-4532-AB4F-3C980DD488DC" />
-        <code code="265943003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Etcher/engraver">
-    <originalText>Etcher/engraver</originalText>
+        <code code="395173015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Etcher/engraver">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7487,8 +7445,7 @@ Drug Allergy - Apsrin</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1D9ACACA-A3EB-43B5-8844-F0E305E67098" />
-        <code code="266894000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Cardiovascular disease">
-    <originalText>FH: Cardiovascular disease</originalText>
+        <code code="397693011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Cardiovascular disease">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7536,8 +7493,7 @@ Drug Allergy - Apsrin</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ED202B1D-FD90-4477-95D1-539374CA06ED" />
-        <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
-    <originalText>Myocardial infarction</originalText>
+        <code code="37443015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Heart attack">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7587,8 +7543,7 @@ Synonym &quot;Heart Attack&quot; selected Problem Info: Problem Notes: Synonym &
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="543443CB-EFAA-4D57-8D06-9FDC5A34FD6A" />
-        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
-    <originalText>Angelman syndrome</originalText>
+        <code code="127639017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Happy puppet syndrome">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7638,8 +7593,7 @@ Happy Puppet Problem Info: Problem Notes: Happy Puppet</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BEC3C3E8-54C8-45EA-9DD4-11BB4C2F3967" />
-        <code code="21719001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic rhinitis due to pollen">
-    <originalText>Allergic rhinitis due to pollen</originalText>
+        <code code="481104016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic rhinitis due to pollens">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7688,8 +7642,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AFAF69CF-48F7-44C2-AAE1-F97BFD3A7889" />
-        <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
-    <originalText>Consent given for upload to local shared electronic record</originalText>
+        <code code="2548578015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7737,8 +7690,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2B4D282E-E237-4290-A6B7-640192183C20" />
-        <code code="359814004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monkeypox">
-    <originalText>Monkeypox</originalText>
+        <code code="475210013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monkeypox">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7788,8 +7740,7 @@ This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4BC88DA3-3D71-4F3F-ADF5-04B43191AEA6" />
-        <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
-    <originalText>Tired all the time</originalText>
+        <code code="102731000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7837,8 +7788,7 @@ This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="BCF39DFD-A6ED-43F7-A9BE-5A25EB970C8B"/>
-        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-    <originalText>O/E - blood pressure reading</originalText>
+        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7848,7 +7798,7 @@ This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="39FA9EE7-9D5D-411A-8AB7-C329BE10192F"/>
-                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
     <originalText>Systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -7862,7 +7812,7 @@ This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="DDC66ED1-E97F-4705-A551-F07A513C2A60"/>
-                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
     <originalText>Diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -7913,8 +7863,7 @@ This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C918FC98-44B0-4445-865C-B787D1AD0E1E" />
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
+        <code code="1990681000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>

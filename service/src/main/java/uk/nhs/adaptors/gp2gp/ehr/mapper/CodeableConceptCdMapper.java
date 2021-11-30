@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +27,7 @@ public class CodeableConceptCdMapper {
         .loadTemplate("codeable_concept_cd_template.mustache");
     private static final String SNOMED_SYSTEM = "http://snomed.info/sct";
     private static final String SNOMED_SYSTEM_CODE = "2.16.840.1.113883.2.1.3.2.4.15";
+    private static final String DESCRIPTION_ID = "descriptionId";
     private static final String DESCRIPTION_DISPLAY = "descriptionDisplay";
     private static final String DESCRIPTION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid";
     private static final String FIXED_ACTUAL_PROBLEM_CODE = "55607006";
@@ -36,16 +38,34 @@ public class CodeableConceptCdMapper {
         var mainCode = findMainCode(codeableConcept);
 
         builder.nullFlavor(mainCode.isEmpty());
-        var originalText = findOriginalText(codeableConcept, mainCode);
-        originalText.ifPresent(builder::mainOriginalText);
 
         if (mainCode.isPresent()) {
-            builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
-            var code = extractCode(mainCode.get());
-            var displayText = findDisplayText(mainCode.get());
+            var extension = retrieveDescriptionExtension(mainCode.get())
+                .map(Extension::getExtension)
+                .orElse(Collections.emptyList());
 
+            builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
+
+            Optional<String> code = extension.stream()
+                .filter(descriptionExt -> DESCRIPTION_ID.equals(descriptionExt.getUrl()))
+                .map(description -> description.getValue().toString())
+                .findFirst()
+                .or(() -> Optional.of(mainCode.get().getCode()));
             code.ifPresent(builder::mainCode);
-            displayText.ifPresent(builder::mainDisplayName);
+
+            Optional<String> displayName = extension.stream()
+                .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
+                .map(description -> description.getValue().toString())
+                .findFirst()
+                .or(() -> Optional.of(mainCode.get().getDisplay()));
+            displayName.ifPresent(builder::mainDisplayName);
+
+            if (codeableConcept.hasText()) {
+                builder.mainOriginalText(codeableConcept.getText());
+            }
+        } else {
+            var originalText = findOriginalText(codeableConcept, mainCode);
+            originalText.ifPresent(builder::mainOriginalText);
         }
 
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
@@ -76,7 +96,7 @@ public class CodeableConceptCdMapper {
             if (codeableConcept.hasText()) {
                 return Optional.of(codeableConcept.getText());
             } else {
-                var extension = retrieveDisplayExtension(coding.get());
+                var extension = retrieveDescriptionExtension(coding.get());
                 Optional<String> originalText = extension.stream()
                     .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
                     .map(extension1 -> extension1.getValue().toString())
@@ -93,10 +113,6 @@ public class CodeableConceptCdMapper {
         }
     }
 
-    private Optional<String> extractCode(Coding coding) {
-        return Optional.of(coding.getCode());
-    }
-
     private Optional<String> findDisplayText(Coding coding) {
         return Optional.of(coding.getDisplay());
     }
@@ -105,7 +121,7 @@ public class CodeableConceptCdMapper {
         return coding.hasSystem() && coding.getSystem().equals(SNOMED_SYSTEM);
     }
 
-    private Optional<Extension> retrieveDisplayExtension(Coding coding) {
+    private Optional<Extension> retrieveDescriptionExtension(Coding coding) {
         return coding
             .getExtension()
             .stream()
