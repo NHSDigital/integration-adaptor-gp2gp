@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,6 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
 
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
-    private final GpcClient gpcClient;
     private final DocumentToMHSTranslator gpcDocumentTranslator;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
 
@@ -30,8 +28,6 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
 
     @Override
     public void execute(SendAbsentAttachmentTaskDefinition taskDefinition) {
-       // var response = gpcClient.getDocumentRecord(taskDefinition);
-
         var taskId = taskDefinition.getTaskId();
         var messageId = taskDefinition.getMessageId();
 
@@ -44,7 +40,7 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
         var mhsOutboundRequestData = gpcDocumentTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, fileContent);
 
         var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
-            .buildStorageDataWrapper(taskDefinition, StringUtils.EMPTY, taskId);
+            .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
 
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, fileContent);
 
