@@ -198,4 +198,15 @@ public class CodeableConceptCdMapper {
         originalText.ifPresent(builder::mainOriginalText);
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
+
+    public String mapToNullFlavorCodeableConceptForAllergy(CodeableConcept codeableConcept,
+        AllergyIntolerance.AllergyIntoleranceClinicalStatus allergyIntoleranceClinicalStatus) {
+
+        var builder = CodeableConceptCdTemplateParameters.builder().nullFlavor(true);
+        var mainCode = findMainCode(codeableConcept);
+
+        var originalText = findOriginalTextForAllergy(codeableConcept, mainCode, allergyIntoleranceClinicalStatus);
+        originalText.ifPresent(builder::mainOriginalText);
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
+    }
 }

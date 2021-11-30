@@ -104,25 +104,21 @@ public class AllergyStructureMapper {
                         .findFirst()
                         .orElse(StringUtils.EMPTY);
 
-                    if (!category.isEmpty()) {
-                        return codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(allergyIntolerance.getCode(),
-                                allergyIntolerance.getClinicalStatus());
-                    } else {
-                        throw new EhrMapperException("Category could not be mapped");
-                    }
+                    if (category.equals(ENVIRONMENT_CATEGORY)) {
                         return codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(allergyIntolerance.getCode(),
                             allergyIntolerance.getClinicalStatus());
                     } else if (category.equals(MEDICATION_CATEGORY)) {
-                        return codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(allergyIntolerance.getCode(),
+                        return codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(allergyIntolerance.getCode(),
                             allergyIntolerance.getClinicalStatus());
                     } else {
                         throw new EhrMapperException("Category could not be mapped");
                     }
                 }
             }
-        }
-        if (allergyIntolerance.hasCode()) {
-            return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
+            if (allergyIntolerance.hasCode()) {
+                return codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(allergyIntolerance.getCode(),
+                    allergyIntolerance.getClinicalStatus());
+            }
         }
         throw new EhrMapperException("Allergy code not present");
     }
