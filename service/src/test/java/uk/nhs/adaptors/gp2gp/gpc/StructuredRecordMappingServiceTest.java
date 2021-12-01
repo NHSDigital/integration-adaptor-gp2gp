@@ -5,7 +5,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.ResourceType;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,6 +24,7 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -57,30 +58,30 @@ class StructuredRecordMappingServiceTest {
         ID_1, null, "some title", ATTACHMENT_1_SIZE, "text/plain");
 
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_1 = buildExternalAttachment(
-        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
+        NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
         buildAttachmentDescription(
-            "111_new_doc_ref_id_111_new_doc_ref_id.txt", "text/plain", false,
+            "111_new_doc_manifest_id_111_new_doc_manifest_id.txt", "text/plain", false,
             false, true, ATTACHMENT_1_SIZE
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_2 = buildExternalAttachment(
-        NEW_DOC_REF_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, null,
+        NEW_DOC_MANIFEST_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, null,
         buildAttachmentDescription(
-            "222_new_doc_ref_id_222_new_doc_ref_id.html", "text/html", false,
+            "222_new_doc_manifest_id_222_new_doc_manifest_id.html", "text/html", false,
             false, true, ATTACHMENT_2_SIZE
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_1 = buildExternalAttachment(
-        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, "some title",
+        NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, null, "some title",
         buildAttachmentDescription(
-            "AbsentAttachment111_new_doc_ref_id.txt", "text/plain", false,
+            "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
             false, true, ATTACHMENT_1_SIZE
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_2 = buildExternalAttachment(
-        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
+        NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
         buildAttachmentDescription(
-            "AbsentAttachment111_new_doc_ref_id.txt", "text/plain", false,
+            "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
             false, true, ATTACHMENT_1_SIZE
         )
     );
@@ -90,22 +91,28 @@ class StructuredRecordMappingServiceTest {
     @Mock
     private EhrExtractMapper ehrExtractMapper;
     @Mock
-    private MessageContext messageContext;
-    @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private MessageContext messageContext;
     @Mock
     private Gp2gpConfiguration gp2gpConfiguration;
     @Mock
     private SupportedContentTypes supportedContentTypes;
 
-    private IdMapper idMapper;
-
     @InjectMocks
     private StructuredRecordMappingService structuredRecordMappingService;
 
+    @BeforeEach
+    void setup(){
+        lenient().when(messageContext.getIdMapper()).thenReturn(new IdMapper(randomIdGeneratorService));
+    }
+
     @Test
     void When_GettingExternalAttachments_Expect_AllDocumentReferenceResourcesAreMapped() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_2);
+        when(randomIdGeneratorService.createNewId()).thenReturn(
+            NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1,
+            NEW_DOC_MANIFEST_ID_2, NEW_DOC_MANIFEST_ID_2
+        );
         when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
         when(supportedContentTypes.isContentTypeSupported(any())).thenReturn(true);
 
@@ -129,7 +136,6 @@ class StructuredRecordMappingServiceTest {
     }
 
     @Test
-    @Disabled(value = "Will fail on description's title until NIAD-1933 is fixed")
     public void When_GettingExternalAttachment_WithTitleAndNoUrl_Expect_AbsentAttachmentMapped() {
         when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1);
         when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
