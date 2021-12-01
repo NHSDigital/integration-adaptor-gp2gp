@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static uk.nhs.adaptors.gp2gp.common.task.TaskType.*;
+import static uk.nhs.adaptors.gp2gp.common.task.TaskType.SEND_ABSENT_ATTACHMENT;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

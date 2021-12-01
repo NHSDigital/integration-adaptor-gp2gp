@@ -26,7 +26,6 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
