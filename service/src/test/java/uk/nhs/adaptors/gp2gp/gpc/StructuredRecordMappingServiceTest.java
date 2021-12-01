@@ -5,6 +5,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -47,21 +48,23 @@ class StructuredRecordMappingServiceTest {
     private static final String TEST_UNSUPPORTED_CONTENTTYPE = "application/text";
 
     private static final DocumentReference DOCUMENT_REFERENCE_TYPE_1_TEXTPLAIN = buildDocumentReference(
-        ID_1, "/" + NEW_DOC_REF_ID_1, "some title", ATTACHMENT_1_SIZE, "text/plain");
+        ID_1, "/" + NEW_DOC_REF_ID_1, null, ATTACHMENT_1_SIZE, "text/plain");
     private static final DocumentReference DOCUMENT_REFERENCE_TYPE_2_TEXTHTML = buildDocumentReference(
         ID_2, "/" + NEW_DOC_REF_ID_2, null, ATTACHMENT_2_SIZE, "text/html");
     private static final DocumentReference DOCUMENT_REFERENCE_TYPE_1_UNSUPPORTED_CONTENTTYPE = buildDocumentReference(
-        ID_1, "/" + NEW_DOC_REF_ID_1, "some title", ATTACHMENT_1_SIZE, TEST_UNSUPPORTED_CONTENTTYPE);
+        ID_1, "/" + NEW_DOC_REF_ID_1, null, ATTACHMENT_1_SIZE, TEST_UNSUPPORTED_CONTENTTYPE);
+    private static final DocumentReference DOCUMENT_REFERENCE_TYPE_1_NO_URL = buildDocumentReference(
+        ID_1, null, "some title", ATTACHMENT_1_SIZE, "text/plain");
 
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_1 = buildExternalAttachment(
-        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, "some title",
+        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
         buildAttachmentDescription(
             "111_new_doc_ref_id_111_new_doc_ref_id.txt", "text/plain", false,
             false, true, ATTACHMENT_1_SIZE
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_2 = buildExternalAttachment(
-        NEW_DOC_REF_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, "some title",
+        NEW_DOC_REF_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, null,
         buildAttachmentDescription(
             "222_new_doc_ref_id_222_new_doc_ref_id.html", "text/html", false,
             false, true, ATTACHMENT_2_SIZE
@@ -69,6 +72,13 @@ class StructuredRecordMappingServiceTest {
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_1 = buildExternalAttachment(
         NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, "some title",
+        buildAttachmentDescription(
+            "AbsentAttachment111_new_doc_ref_id.txt", "text/plain", false,
+            false, true, ATTACHMENT_1_SIZE
+        )
+    );
+    private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_2 = buildExternalAttachment(
+        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_ref_id.txt", "text/plain", false,
             false, true, ATTACHMENT_1_SIZE
@@ -110,10 +120,21 @@ class StructuredRecordMappingServiceTest {
 
     @Test
     void When_GettingExternalAttachment_WithWrongContentType_Expect_AbsentAttachmentMapped() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_2);
+        when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1);
         when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
 
         var mappedExternalAttachments = getMappedAbsentAttachments(DOCUMENT_REFERENCE_TYPE_1_UNSUPPORTED_CONTENTTYPE);
+
+        assertThat(mappedExternalAttachments.get(0)).usingRecursiveComparison().isEqualTo(EXPECTED_ATTACHMENT_ABSENT_2);
+    }
+
+    @Test
+    @Disabled(value = "Will fail on description's title until NIAD-1933 is fixed")
+    public void When_GettingExternalAttachment_WithTitleAndNoUrl_Expect_AbsentAttachmentMapped() {
+        when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1);
+        when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
+
+        var mappedExternalAttachments = getMappedAbsentAttachments(DOCUMENT_REFERENCE_TYPE_1_NO_URL);
 
         assertThat(mappedExternalAttachments.get(0)).usingRecursiveComparison().isEqualTo(EXPECTED_ATTACHMENT_ABSENT_1);
     }
