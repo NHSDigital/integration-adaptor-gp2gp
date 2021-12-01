@@ -103,7 +103,7 @@ class StructuredRecordMappingServiceTest {
     private StructuredRecordMappingService structuredRecordMappingService;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         lenient().when(messageContext.getIdMapper()).thenReturn(new IdMapper(randomIdGeneratorService));
     }
 
