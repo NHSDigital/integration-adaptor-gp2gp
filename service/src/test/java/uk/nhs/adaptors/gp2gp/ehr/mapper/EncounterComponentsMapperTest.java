@@ -83,6 +83,9 @@ public class EncounterComponentsMapperTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(any(CodeableConcept.class),
             any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(any(CodeableConcept.class),
+            any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(bloodPressureValidator.isValidBloodPressure(argThat(observation ->
             CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(
                 "bloodPressureCode1", "bloodPressureCode2", "bloodPressureCode3"

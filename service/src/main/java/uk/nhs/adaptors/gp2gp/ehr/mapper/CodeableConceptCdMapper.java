@@ -102,21 +102,16 @@ public class CodeableConceptCdMapper {
                 .or(() -> Optional.of(mainCode.get().getCode()));
             code.ifPresent(builder::mainCode);
 
-            Optional<String> displayName = extension.stream()
-                .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
-                .map(description -> description.getValue().toString())
-                .findFirst()
-                .or(() -> Optional.of(mainCode.get().getDisplay()));
+            Optional<String> displayName = Optional.of(mainCode.get().getDisplay());
             displayName.ifPresent(builder::mainDisplayName);
 
             if (codeableConcept.hasText()) {
                 builder.mainOriginalText(codeableConcept.getText());
+            } else {
+                var originalText = findOriginalTextForAllergy(codeableConcept, mainCode, allergyIntoleranceClinicalStatus);
+                originalText.ifPresent(builder::mainOriginalText);
             }
-        } else {
-            var originalText = findOriginalText(codeableConcept, mainCode);
-            originalText.ifPresent(builder::mainOriginalText);
         }
-
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
 
@@ -188,7 +183,7 @@ public class CodeableConceptCdMapper {
                 }
             } else {
                 var extension = retrieveDescriptionExtension(coding.get());
-                Optional<String> originalText = extension.stream()
+                Optional<String> originalText = extension.get().getExtension().stream()
                     .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
                     .map(extension1 -> extension1.getValue().toString())
                     .findFirst();

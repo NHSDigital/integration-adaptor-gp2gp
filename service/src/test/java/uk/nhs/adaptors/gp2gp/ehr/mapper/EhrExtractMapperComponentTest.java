@@ -116,8 +116,12 @@ public class EhrExtractMapperComponentTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(any(CodeableConcept.class),
             any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(any(CodeableConcept.class),
+            any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(codeableConceptCdMapper.getDisplayFromCodeableConcept(any(CodeableConcept.class)))
             .thenCallRealMethod();
+
 
         messageContext = new MessageContext(randomIdGeneratorService);
 
