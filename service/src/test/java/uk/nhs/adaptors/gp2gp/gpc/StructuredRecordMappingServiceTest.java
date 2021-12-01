@@ -54,21 +54,21 @@ class StructuredRecordMappingServiceTest {
         ID_1, "/" + NEW_DOC_REF_ID_1, "some title", ATTACHMENT_1_SIZE, TEST_UNSUPPORTED_CONTENTTYPE);
 
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_1 = buildExternalAttachment(
-        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1,
+        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, "some title",
         buildAttachmentDescription(
             "111_new_doc_ref_id_111_new_doc_ref_id.txt", "text/plain", false,
             false, true, ATTACHMENT_1_SIZE
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_2 = buildExternalAttachment(
-        NEW_DOC_REF_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2,
+        NEW_DOC_REF_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, "some title",
         buildAttachmentDescription(
             "222_new_doc_ref_id_222_new_doc_ref_id.html", "text/html", false,
             false, true, ATTACHMENT_2_SIZE
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_1 = buildExternalAttachment(
-        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1,
+        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, "some title",
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_ref_id.txt", "text/plain", false,
             false, true, ATTACHMENT_1_SIZE
@@ -113,7 +113,7 @@ class StructuredRecordMappingServiceTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_2);
         when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
 
-        var mappedExternalAttachments = getMappedExternalAttachments(DOCUMENT_REFERENCE_TYPE_1_UNSUPPORTED_CONTENTTYPE);
+        var mappedExternalAttachments = getMappedAbsentAttachments(DOCUMENT_REFERENCE_TYPE_1_UNSUPPORTED_CONTENTTYPE);
 
         assertThat(mappedExternalAttachments.get(0)).usingRecursiveComparison().isEqualTo(EXPECTED_ATTACHMENT_ABSENT_1);
     }
@@ -142,18 +142,26 @@ class StructuredRecordMappingServiceTest {
     }
 
     private List<OutboundMessage.ExternalAttachment> getMappedExternalAttachments(DocumentReference... documentReferences) {
+        return structuredRecordMappingService.getExternalAttachments(getBundleWith(documentReferences));
+    }
+
+    private List<OutboundMessage.ExternalAttachment> getMappedAbsentAttachments(DocumentReference... documentReferences) {
+        return structuredRecordMappingService.getAbsentAttachments(getBundleWith(documentReferences));
+    }
+
+    private Bundle getBundleWith(DocumentReference... documentReferences) {
         var bundle = new Bundle().addEntry(new Bundle.BundleEntryComponent().setResource(new Patient()));
 
         Arrays.stream(documentReferences).forEach(
             documentReference -> bundle.addEntry(new Bundle.BundleEntryComponent().setResource(documentReference))
         );
-
-        return structuredRecordMappingService.getExternalAttachments(bundle);
+        return bundle;
     }
 
-    private static OutboundMessage.ExternalAttachment buildExternalAttachment(String documentID, String messageID, String url,
+    private static OutboundMessage.ExternalAttachment buildExternalAttachment(String documentID, String messageID, String url, String title,
         OutboundMessage.AttachmentDescription description) {
         return OutboundMessage.ExternalAttachment.builder()
+            .title(title)
             .documentId(documentID)
             .messageId(messageID)
             .description(description.toString())
