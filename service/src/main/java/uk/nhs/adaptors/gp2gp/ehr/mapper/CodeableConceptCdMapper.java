@@ -34,6 +34,7 @@ public class CodeableConceptCdMapper {
     private static final String FIXED_ACTUAL_PROBLEM_CODE = "55607006";
     private static final String PROBLEM_DISPLAY_NAME = "Problem";
     private static final String ACTIVE_CLINICAL_STATUS = "active";
+    private static final String RESOLVED_CLINICAL_STATUS = "resolved";
 
     public String mapCodeableConceptToCd(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
@@ -72,9 +73,6 @@ public class CodeableConceptCdMapper {
 
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
-
-
-
 
     public String mapCodeableConceptToCdForAllergy(CodeableConcept codeableConcept, AllergyIntolerance.AllergyIntoleranceClinicalStatus
         allergyIntoleranceClinicalStatus) {
@@ -160,42 +158,43 @@ public class CodeableConceptCdMapper {
         AllergyIntolerance.AllergyIntoleranceClinicalStatus allergyIntoleranceClinicalStatus) {
 
         if (!allergyIntoleranceClinicalStatus.toCode().isEmpty()) {
-            if (!ACTIVE_CLINICAL_STATUS.equals(allergyIntoleranceClinicalStatus.toCode())) {
+            if (RESOLVED_CLINICAL_STATUS.equals(allergyIntoleranceClinicalStatus.toCode())) {
                 if (coding.isPresent()) {
                     if (codeableConcept.hasText()) {
                         return Optional.of(codeableConcept.getText());
                     } else {
                         var extension = retrieveDescriptionExtension(coding.get());
-                        Optional<String> originalText = extension.get().getExtension().stream()
-                            .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
-                            .map(extension1 -> extension1.getValue().toString())
-                            .findFirst();
+                        if (extension.isPresent()) {
+                            Optional<String> originalText = extension.get().getExtension().stream()
+                                .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
+                                .map(extension1 -> extension1.getValue().toString())
+                                .findFirst();
 
-                        if (originalText.isEmpty() && coding.get().hasDisplay()) {
-                            originalText = Optional.of(coding.get().getDisplay());
+                            return originalText;
+                        } else if (coding.get().hasDisplay()) {
+                            return Optional.of(coding.get().getDisplay());
                         }
-
+                    }
+                }
+            } else if (ACTIVE_CLINICAL_STATUS.equals(allergyIntoleranceClinicalStatus.toCode())) {
+                Optional<Extension> extension = retrieveDescriptionExtension(coding.get());
+                if (extension.isPresent()) {
+                    Optional<String> originalText = extension
+                        .get()
+                        .getExtension().stream()
+                        .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
+                        .map(extension1 -> extension1.getValue().toString())
+                        .findFirst();
+                    if (originalText.isPresent() && StringUtils.isNotBlank(originalText.get())) {
                         return originalText;
                     }
-                } else {
-                    return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
-                }
-            } else {
-                var extension = retrieveDescriptionExtension(coding.get());
-                Optional<String> originalText = extension.get().getExtension().stream()
-                    .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
-                    .map(extension1 -> extension1.getValue().toString())
-                    .findFirst();
-
-                if (originalText.isEmpty()) {
-                    return Optional.empty();
                 }
 
-                return originalText;
+                return Optional.empty();
             }
-        } else {
-            return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
         }
+
+        return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
     }
 
     private Optional<String> findDisplayText(Coding coding) {
