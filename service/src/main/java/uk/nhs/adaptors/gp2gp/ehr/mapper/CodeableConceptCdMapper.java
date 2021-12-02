@@ -15,7 +15,6 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.CodeableConceptCdTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -194,8 +193,9 @@ public class CodeableConceptCdMapper {
 
                 return originalText;
             }
+        } else {
+            return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
         }
-        throw new EhrMapperException("Allergy code not present");
     }
 
     private Optional<String> findDisplayText(Coding coding) {

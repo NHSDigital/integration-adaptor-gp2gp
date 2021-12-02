@@ -1,6 +1,7 @@
 {
     "resourceType": "AllergyIntolerance",
     "id": "04288662-8B7A-4350-B69B-CE155E992A7C",
+    "clinicalStatus": "resolved",
     "meta": {
         "profile": [
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
