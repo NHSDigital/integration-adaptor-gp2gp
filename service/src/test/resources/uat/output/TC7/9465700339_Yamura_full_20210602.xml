@@ -265,8 +265,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="263B2A9F-0B1D-4697-943A-328F70E068DE" />
-        <code code="162218007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stress-related problem">
-    <originalText>Stress-related problem</originalText>
+        <code code="252963017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stress-related problem">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -291,8 +290,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-        <code code="162512009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dietary history">
-    <originalText>Dietary history</originalText>
+        <code code="253393014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dietary history">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -317,8 +315,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF" />
-        <code code="160628002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Exercise grading">
-    <originalText>Exercise grading</originalText>
+        <code code="250388012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Exercise grading">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -382,8 +379,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-        <code code="266918002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tobacco smoking consumption">
-    <originalText>Tobacco smoking consumption</originalText>
+        <code code="397730015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tobacco smoking consumption">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -420,8 +416,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5" />
-        <code code="230056004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigarette consumption">
-    <originalText>Cigarette consumption</originalText>
+        <code code="344793011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigarette consumption">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -446,8 +441,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
-        <code code="315613000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Target diastolic blood pressure">
-    <originalText>Target diastolic blood pressure</originalText>
+        <code code="460132010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Target diastolic blood pressure">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -486,8 +480,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80" />
-        <code code="315613000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Target diastolic blood pressure">
-    <originalText>Target diastolic blood pressure</originalText>
+        <code code="460132010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Target diastolic blood pressure">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -512,8 +505,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E4FAE359-1369-41C1-B39E-F54BB55E307A" />
-        <code code="315612005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Target systolic blood pressure">
-    <originalText>Target systolic blood pressure</originalText>
+        <code code="460131015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Target systolic blood pressure">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -538,8 +530,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
-        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-    <originalText>O/E - blood pressure reading</originalText>
+        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -549,8 +540,7 @@ Line breaks in the notes</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
-                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
-    <originalText>Systolic arterial pressure</originalText>
+                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -563,8 +553,7 @@ Line breaks in the notes</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="D81D22B7-5216-44E8-B306-DD542F214792"/>
-                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
-    <originalText>Diastolic arterial pressure</originalText>
+                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -591,8 +580,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D" />
-        <code code="160573003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake">
-    <originalText>Alcohol intake</originalText>
+        <code code="1221271018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol consumption">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -641,8 +629,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DE743503-08D0-4381-903F-8C5691360B54" />
-        <code code="160573003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake">
-    <originalText>Alcohol intake</originalText>
+        <code code="1221271018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol consumption">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -667,8 +654,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854" />
-        <code code="27113001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Body weight">
-    <originalText>Body weight</originalText>
+        <code code="45352010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Body weight">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -693,7 +679,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5" />
-        <code code="60621009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Body mass index">
+        <code code="100716012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Body mass index">
     <originalText>Body Mass Index</originalText>
 </code>
         <statusCode code="COMPLETE" />
@@ -719,8 +705,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806" />
-        <code code="248333004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing height">
-    <originalText>Standing height</originalText>
+        <code code="370729019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing height">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -745,8 +730,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189" />
-        <code code="53524009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ophthalmoscopy">
-    <originalText>Ophthalmoscopy</originalText>
+        <code code="496689010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fundoscopy">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -771,8 +755,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5BB18E92-DABB-4C22-838A-410B4A278060" />
-        <code code="38341003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disorder">
-    <originalText>Hypertensive disorder</originalText>
+        <code code="64168014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disease">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -833,8 +816,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B" />
-        <code code="225323000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation education">
-    <originalText>Smoking cessation education</originalText>
+        <code code="2575784012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation education">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -859,8 +841,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="99792B9D-0715-4F2A-9934-1D5D4E975284" />
-        <code code="1103841000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
-    <originalText>Health education offered</originalText>
+        <code code="818161000006110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -885,8 +866,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DB7C94B1-01A6-491F-AC41-A36D88023069" />
-        <code code="1103841000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
-    <originalText>Health education offered</originalText>
+        <code code="818161000006110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -911,8 +891,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86" />
-        <code code="1103841000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
-    <originalText>Health education offered</originalText>
+        <code code="818161000006110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -937,8 +916,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="884E7627-796C-4C70-870A-D61B88AD2E57" />
-        <code code="1103841000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
-    <originalText>Health education offered</originalText>
+        <code code="818161000006110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -963,8 +941,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
-        <code code="1103841000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
-    <originalText>Health education offered</originalText>
+        <code code="818161000006110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -989,8 +966,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
-        <code code="409073007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Education">
-    <originalText>Education</originalText>
+        <code code="2470893014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Education">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1015,8 +991,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B" />
-        <code code="1052591000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health visitor attends">
-    <originalText>Health visitor attends</originalText>
+        <code code="2651571000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health visitor visits">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1041,8 +1016,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90" />
-        <code code="1103841000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
-    <originalText>Health education offered</originalText>
+        <code code="818161000006110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Health education offered">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1067,8 +1041,7 @@ Line breaks in the notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4209A033-4F0C-490E-8753-607E2799C3D8" />
-        <code code="268509003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cardiac disease monitoring">
-    <originalText>Cardiac disease monitoring</originalText>
+        <code code="401515016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cardiac disease monitoring">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1118,8 +1091,7 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310" />
-        <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
-    <originalText>Serum alkaline phosphatase level</originalText>
+        <code code="2560271000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1150,8 +1122,7 @@ Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C59316B2-2578-412C-8D00-5040C86BF306" />
-        <code code="997241000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alpha foetoprotein level">
-    <originalText>Serum alpha foetoprotein level</originalText>
+        <code code="2581781000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alpha foetoprotein level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1182,8 +1153,7 @@ Weeks: 4. Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904" />
-        <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
-    <originalText>Serum albumin level</originalText>
+        <code code="2571781000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1214,8 +1184,7 @@ Abnormal Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7CB9F236-03CB-4AAD-BB0D-534201961315" />
-        <code code="997431000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum acid phosphatase level">
-    <originalText>Serum acid phosphatase level</originalText>
+        <code code="2555371000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum acid phosphatase level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1246,8 +1215,7 @@ High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="09A882DA-C219-4146-97EF-3FD9A57135B0" />
-        <code code="1006731000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Blood ethanol level">
-    <originalText>Blood ethanol level</originalText>
+        <code code="2573661000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Blood ethanol level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1277,8 +1245,7 @@ High</text>
 </component><component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08" />
-        <code code="183444007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
-    <originalText>Referral for further care</originalText>
+        <code code="283512014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
 </code>
         <text>Annotation: Back pain without radiation NOS Source: GP Referral, Referral Type: Out Patient, Annotation: Mode:Written, Annotation: Purpose:Unknown, Annotation: NHS / Private:Private, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -1321,8 +1288,7 @@ High</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B4C0FCD1-D4B2-40F8-9B18-7B4C0AF946DB" />
-        <code code="1026691000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium valproate level">
-    <originalText>Serum sodium valproate level</originalText>
+        <code code="2598871000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium valproate level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1353,8 +1319,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6A894B1B-F266-415C-83E6-375A4296C1C4" />
-        <code code="1006761000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bone profile">
-    <originalText>Bone profile</originalText>
+        <code code="2585971000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bone profile">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1380,8 +1345,7 @@ Normal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="356F257A-A7D7-45DD-8B76-09C1DB97B40B" />
-        <code code="365749008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Blood drug levels - finding">
-    <originalText>Blood drug levels - finding</originalText>
+        <code code="489148011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Blood drug levels">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1407,8 +1371,7 @@ Normal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F972CFDF-B4D7-4392-A96A-4D1BD8D14F14" />
-        <code code="46825001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Electrocardiographic monitoring">
-    <originalText>Electrocardiographic monitoring</originalText>
+        <code code="78049019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Electrocardiographic monitoring">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1433,8 +1396,7 @@ Normal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC" />
-        <code code="265371001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diagnostic fibreoptic endoscopic examination of upper gastrointestinal tract">
-    <originalText>Diagnostic fibreoptic endoscopic examination of upper gastrointestinal tract</originalText>
+        <code code="394144014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diagnostic fibreoptic endoscopic examination of upper gastrointestinal tract">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1459,8 +1421,7 @@ Normal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4CF7DECB-3AE2-42C3-97F0-BB440F28D385" />
-        <code code="1015401000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Faecal occult blood test">
-    <originalText>Faecal occult blood test</originalText>
+        <code code="2574791000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Faecal occult blood test">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1485,8 +1446,7 @@ Normal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6ACD49D4-7514-436A-93C3-6BCE26D8E3EA" />
-        <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
+        <code code="2566641000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1512,8 +1472,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B88A5FEC-A207-4E2A-93C4-04402D84C1BE" />
-        <code code="993571000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
-    <originalText>Infectious mononucleosis test</originalText>
+        <code code="2572281000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1538,8 +1497,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="71F21980-0BAB-4831-944C-365717037140" />
-        <code code="32265006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Intravenous pyelogram">
-    <originalText>Intravenous pyelogram</originalText>
+        <code code="53895012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Intravenous pyelogram">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1564,8 +1522,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230" />
-        <code code="1031081000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function tests">
-    <originalText>Liver function tests</originalText>
+        <code code="739661000006115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function tests - general">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1591,8 +1548,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BDA5C09F-6C0D-4E7D-9732-9533F4FAE45E" />
-        <code code="430823004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Examination of midstream urine specimen">
-    <originalText>Examination of midstream urine specimen</originalText>
+        <code code="2770953019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Examination of midstream urine specimen">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1617,8 +1573,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0AB4B3C4-6F23-45FF-955D-35BB6E6D239B" />
-        <code code="168215000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sample sent for mycology">
-    <originalText>Sample sent for mycology</originalText>
+        <code code="261271013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sample sent for mycology">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1643,8 +1598,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21" />
-        <code code="1010281000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Semen examination">
-    <originalText>Semen examination</originalText>
+        <code code="2582361000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Semen examination">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1669,8 +1623,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="268EFBF2-65A8-4B1C-8490-85A0528F86E3" />
-        <code code="365590009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serology: organism - finding">
-    <originalText>Serology: organism - finding</originalText>
+        <code code="488829019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serology: organism">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1696,8 +1649,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C3A25ECF-E2B2-4861-A649-DC429738F252" />
-        <code code="269941009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eye swab taken">
-    <originalText>Eye swab taken</originalText>
+        <code code="404598019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eye swab taken">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1722,8 +1674,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540" />
-        <code code="269944001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nasal swab taken">
-    <originalText>Nasal swab taken</originalText>
+        <code code="404601012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nasal swab taken">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1748,8 +1699,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2" />
-        <code code="168305009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Skin swab taken">
-    <originalText>Skin swab taken</originalText>
+        <code code="111311000006114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Swab - skin">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1774,8 +1724,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4067DD8E-2B9B-4270-A382-CE035D7D352D" />
-        <code code="269946004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Throat swab taken">
-    <originalText>Throat swab taken</originalText>
+        <code code="404603010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Throat swab taken">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1800,8 +1749,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A" />
-        <code code="168342002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urethral swab taken">
-    <originalText>Urethral swab taken</originalText>
+        <code code="261442010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urethral swab taken">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1826,8 +1774,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9A4CF638-ABA1-4CF9-8055-C5846EE42542" />
-        <code code="241153001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Barium meal">
-    <originalText>Barium meal</originalText>
+        <code code="503321000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Barium meal - general">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1852,8 +1799,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA" />
-        <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
-    <originalText>Glucose tolerance test</originalText>
+        <code code="2585781000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1878,8 +1824,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C" />
-        <code code="997671000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Blood glucose level">
-    <originalText>Blood glucose level</originalText>
+        <code code="517791000006115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Blood glucose result">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1909,8 +1854,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6" />
-        <code code="1006751000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum fructosamine level">
-    <originalText>Serum fructosamine level</originalText>
+        <code code="2573671000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum fructosamine level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1942,8 +1886,7 @@ And more stuff</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0" />
-        <code code="1015451000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
-    <originalText>Serum total iron binding capacity</originalText>
+        <code code="2580111000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1973,8 +1916,7 @@ And more stuff</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92" />
-        <code code="997161000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum testosterone level">
-    <originalText>Serum testosterone level</originalText>
+        <code code="2571281000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum testosterone level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2004,8 +1946,7 @@ And more stuff</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
-        <code code="1003441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum VLDL (very low density lipoprotein) cholesterol level">
-    <originalText>Serum VLDL (very low density lipoprotein) cholesterol level</originalText>
+        <code code="2607471000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum VLDL (very low density lipoprotein) cholesterol level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2036,8 +1977,7 @@ Year only test result Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C" />
-        <code code="1017381000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma sodium level">
-    <originalText>Plasma sodium level</originalText>
+        <code code="2557921000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma sodium level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2067,8 +2007,7 @@ Year only test result Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7AAC20C0-654A-446A-903F-2DFC0AA8B3F8" />
-        <code code="1010511000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum T4 level">
-    <originalText>Serum T4 level</originalText>
+        <code code="2582381000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum T4 level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2099,8 +2038,7 @@ Very High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9276C255-1641-4B9B-AD42-1A0FAD9189D3" />
-        <code code="993441000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Reticulocyte count">
-    <originalText>Reticulocyte count</originalText>
+        <code code="2570671000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Reticulocyte count">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2125,8 +2063,7 @@ Very High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="86B82A72-9739-4517-8485-F15FF97CE21A" />
-        <code code="1010501000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum T3 level">
-    <originalText>Serum T3 level</originalText>
+        <code code="2551961000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum T3 level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2230,8 +2167,8 @@ This should be normal according to the range High</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="10720133-30C3-4145-9184-8713284C5A90"/>
-                <code code="300916003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to latex">
-    <originalText>Allergy to latex</originalText>
+                <code code="442112014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to latex">
+    <originalText>Latex allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2285,8 +2222,7 @@ This should be normal according to the range High</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A01A1FB8-39F5-45D9-AF56-B8C480115AF2" />
-        <code code="74506000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bereavement">
-    <originalText>Bereavement</originalText>
+        <code code="502726016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bereavement">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2311,8 +2247,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14" />
-        <code code="57054005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Acute myocardial infarction">
-    <originalText>Acute myocardial infarction</originalText>
+        <code code="94884017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Acute myocardial infarction">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2362,8 +2297,7 @@ This should be normal according to the range High</text>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD" />
-        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-    <originalText>O/E - blood pressure reading</originalText>
+        <code code="254065014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - BP reading">
 </code>
         <text>
             Recall Status:Outstanding. NOTES: These are the recall notes.
@@ -2407,8 +2341,7 @@ This should be normal according to the range High</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7359502E-8EE3-416C-BD59-A298285418E6" />
-        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
-    <originalText>Angelman syndrome</originalText>
+        <code code="127639017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Happy puppet syndrome">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2458,8 +2391,7 @@ This should be normal according to the range High</text>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="4CF9262A-2676-4973-A45C-2538E5CC93E2" />
-        <code code="73211009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diabetes mellitus">
-    <originalText>Diabetes mellitus</originalText>
+        <code code="772161000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Insulin dependent diabetes mellitus">
 </code>
         <text>
             Trigger for recall: Follow-up diabetic assessment [66A2.00], Recall Status:Outstanding. NOTES: Recall with no set-up date.
@@ -2478,8 +2410,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="54BF1314-A4AF-4A19-9BB9-32290AA6718B" />
-        <code code="243787009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Antenatal screening">
-    <originalText>Antenatal screening</originalText>
+        <code code="364616017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Antenatal screening">
 </code>
         <text>
             Recall Status:Outstanding. NOTES: Partial set up date.
@@ -2523,8 +2454,7 @@ This should be normal according to the range High</text>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
-        <code code="193031009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cluster headache">
-    <originalText>Cluster headache</originalText>
+        <code code="297340016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Migrainous neuralgia">
 </code>
         <text>
             Recall Status:Outstanding.
@@ -2568,8 +2498,7 @@ This should be normal according to the range High</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="896104C7-9DC7-4E44-B77D-DB771691C344" />
-        <code code="162513004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dietary fat intake">
-    <originalText>Dietary fat intake</originalText>
+        <code code="253394015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dietary fat intake">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2594,8 +2523,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56" />
-        <code code="160630000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Avoids even trivial exercise">
-    <originalText>Avoids even trivial exercise</originalText>
+        <code code="250390013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Avoids even trivial exercise">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2620,8 +2548,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8" />
-        <code code="416727009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Reads Farsi">
-    <originalText>Reads Farsi</originalText>
+        <code code="2549253010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Reads Farsi">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2646,8 +2573,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7374E13A-D408-460C-A021-3441347C5027" />
-        <code code="416727009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Reads Farsi">
-    <originalText>Reads Farsi</originalText>
+        <code code="2549253010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Reads Farsi">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2672,8 +2598,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7314452F-9848-403F-8684-D7E0B2163F88" />
-        <code code="416727009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Reads Farsi">
-    <originalText>Reads Farsi</originalText>
+        <code code="2549253010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Reads Farsi">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2698,8 +2623,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE" />
-        <code code="416727009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Reads Farsi">
-    <originalText>Reads Farsi</originalText>
+        <code code="2549253010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Reads Farsi">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2724,8 +2648,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BB8DEB7C-BE1B-4639-8213-D94E8FEFA0F6" />
-        <code code="266919005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Never smoked tobacco">
-    <originalText>Never smoked tobacco</originalText>
+        <code code="397732011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Never smoked tobacco">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2750,8 +2673,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="162EF189-0270-449D-8FE0-BB82E6FF051F" />
-        <code code="77176002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoker">
-    <originalText>Smoker</originalText>
+        <code code="128130017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoker">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2788,8 +2710,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518" />
-        <code code="266929003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking started">
-    <originalText>Smoking started</originalText>
+        <code code="2669652019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking started">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2814,8 +2735,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824" />
-        <code code="266918002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tobacco smoking consumption">
-    <originalText>Tobacco smoking consumption</originalText>
+        <code code="397730015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tobacco smoking consumption">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2840,8 +2760,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9" />
-        <code code="230056004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigarette consumption">
-    <originalText>Cigarette consumption</originalText>
+        <code code="344793011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigarette consumption">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2866,8 +2785,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF" />
-        <code code="230057008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigar consumption">
-    <originalText>Cigar consumption</originalText>
+        <code code="344794017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigar consumption">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2892,8 +2810,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27" />
-        <code code="8517006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ex-smoker">
-    <originalText>Ex-smoker</originalText>
+        <code code="15047015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ex-smoker">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2930,8 +2847,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="49259291-5B92-4C0B-BE40-C299A8B02677" />
-        <code code="266929003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking started">
-    <originalText>Smoking started</originalText>
+        <code code="2669652019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking started">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2956,8 +2872,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800" />
-        <code code="230056004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigarette consumption">
-    <originalText>Cigarette consumption</originalText>
+        <code code="344793011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigarette consumption">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2982,8 +2897,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3" />
-        <code code="230057008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigar consumption">
-    <originalText>Cigar consumption</originalText>
+        <code code="344794017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigar consumption">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3008,8 +2922,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4" />
-        <code code="8517006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ex-smoker">
-    <originalText>Ex-smoker</originalText>
+        <code code="15047015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ex-smoker">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3046,8 +2959,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798" />
-        <code code="160617001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stopped smoking">
-    <originalText>Stopped smoking</originalText>
+        <code code="250373019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stopped smoking">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3072,8 +2984,7 @@ This should be normal according to the range High</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42" />
-        <code code="266929003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking started">
-    <originalText>Smoking started</originalText>
+        <code code="2669652019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking started">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3123,8 +3034,7 @@ This should be normal according to the range High</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DFC8A57D-1B0C-4EC8-8453-CB7A42A019BD" />
-        <code code="997231000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum erythropoietin level">
-    <originalText>Serum erythropoietin level</originalText>
+        <code code="2569171000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum erythropoietin level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3180,8 +3090,7 @@ Abnormal</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="452AFD1A-B615-4E2C-A733-544A3426DA24" />
-        <code code="163023009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - BP reading low">
-    <originalText>O/E - BP reading low</originalText>
+        <code code="254068011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - BP reading low">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3218,8 +3127,7 @@ Abnormal</text>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
-        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-    <originalText>O/E - blood pressure reading</originalText>
+        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3229,8 +3137,7 @@ Abnormal</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
-                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
-    <originalText>Systolic arterial pressure</originalText>
+                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3242,8 +3149,7 @@ Abnormal</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60"/>
-                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
-    <originalText>Diastolic arterial pressure</originalText>
+                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3270,8 +3176,7 @@ Abnormal</text>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25"/>
-        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-    <originalText>O/E - blood pressure reading</originalText>
+        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3281,8 +3186,7 @@ Abnormal</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="D20DC48D-2202-4E6A-A1A0-1C6A27C50CAC"/>
-                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
-    <originalText>Systolic arterial pressure</originalText>
+                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3295,8 +3199,7 @@ Abnormal</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="6567C77F-08E8-4994-B30D-D06B63A6E184"/>
-                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
-    <originalText>Diastolic arterial pressure</originalText>
+                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3322,8 +3225,7 @@ Abnormal</text>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
-        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-    <originalText>O/E - blood pressure reading</originalText>
+        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3333,8 +3235,7 @@ Abnormal</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="67DE330E-EDFA-462F-8732-1E91E6DAED9C"/>
-                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
-    <originalText>Systolic arterial pressure</originalText>
+                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3347,8 +3248,7 @@ Abnormal</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="89D5E9D7-C45A-4977-A1C9-4B2AB4EC1047"/>
-                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
-    <originalText>Diastolic arterial pressure</originalText>
+                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3375,8 +3275,7 @@ Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3368F5B6-5CC7-456B-95AE-EC498D49245A" />
-        <code code="163023009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - BP reading low">
-    <originalText>O/E - BP reading low</originalText>
+        <code code="254068011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - BP reading low">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3415,8 +3314,7 @@ and extending onto other lines as well.</text>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="9A36A504-E9A3-4FC0-AE0A-B58CD444731B"/>
-        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-    <originalText>O/E - blood pressure reading</originalText>
+        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3426,8 +3324,7 @@ and extending onto other lines as well.</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="B16209E7-8BA5-4533-B801-8A82645C6D04"/>
-                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
-    <originalText>Systolic arterial pressure</originalText>
+                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3439,8 +3336,7 @@ and extending onto other lines as well.</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="1C844462-40B7-403D-A8EB-F1344DCEB6A0"/>
-                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
-    <originalText>Diastolic arterial pressure</originalText>
+                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3467,8 +3363,7 @@ and extending onto other lines as well.</text>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="44598FC3-DB57-4303-8B26-7D058F2B3510"/>
-        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-    <originalText>O/E - blood pressure reading</originalText>
+        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3478,8 +3373,7 @@ and extending onto other lines as well.</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="3287DABC-6A46-4DD6-B99F-DB53886E7898"/>
-                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
-    <originalText>Systolic arterial pressure</originalText>
+                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3492,8 +3386,7 @@ and extending onto other lines as well.</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="F586B623-14FE-4F2B-80D9-953DC28B9828"/>
-                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
-    <originalText>Diastolic arterial pressure</originalText>
+                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -3544,8 +3437,7 @@ and extending onto other lines as well.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EC34765C-88BF-42B1-9958-6AF09499FE8C" />
-        <code code="265157000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total prosthetic replacement of hip joint using cement">
-    <originalText>Total prosthetic replacement of hip joint using cement</originalText>
+        <code code="125261000006111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stanmore total replacement of hip joint using cement">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3595,8 +3487,7 @@ and extending onto other lines as well.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C91E4DCE-520B-4073-82EF-A7A9991FB5DE" />
-        <code code="674191000119109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="History of syncope">
-    <originalText>History of syncope</originalText>
+        <code code="2496031000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O syncope">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3667,8 +3558,7 @@ with special characters
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DA602250-41DB-4A8D-B5CB-70863AAF0F2D" />
-        <code code="103281005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sensation of blocked ear">
-    <originalText>Sensation of blocked ear</originalText>
+        <code code="201882016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sensation of blocked ears">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3718,8 +3608,7 @@ with special characters
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AB036B53-E42B-4397-B888-320370EAB440" />
-        <code code="103281005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sensation of blocked ear">
-    <originalText>Sensation of blocked ear</originalText>
+        <code code="201882016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sensation of blocked ears">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3744,8 +3633,7 @@ with special characters
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D89620CF-84A5-4FB9-9399-571685EF6275" />
-        <code code="896351000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Advised to apply for prescription prepayment certificate">
-    <originalText>Advised to apply for prescription prepayment certificate</originalText>
+        <code code="2306331000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Advised to apply for prescription prepayment certificate">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3795,8 +3683,7 @@ with special characters
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651" />
-        <code code="997231000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum erythropoietin level">
-    <originalText>Serum erythropoietin level</originalText>
+        <code code="2569171000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum erythropoietin level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3821,8 +3708,7 @@ with special characters
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C" />
-        <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
-    <originalText>Serum sodium level</originalText>
+        <code code="2560861000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3847,8 +3733,7 @@ with special characters
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B1310011-B620-48D7-A381-2BF0335C5B3D" />
-        <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
-    <originalText>Serum potassium level</originalText>
+        <code code="2573011000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3878,8 +3763,7 @@ with special characters
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B" />
-        <code code="852471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prothrombin time">
-    <originalText>Prothrombin time</originalText>
+        <code code="2207951000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prothrombin time">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3905,8 +3789,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA" />
-        <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
-    <originalText>Serum creatinine level</originalText>
+        <code code="2577271000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3931,8 +3814,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4B331DB8-AC77-4438-A646-56E500E73885" />
-        <code code="1022511000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="ESR - erythrocyte sedimentation rate">
-    <originalText>ESR - erythrocyte sedimentation rate</originalText>
+        <code code="2570091000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Erythrocyte sedimentation rate">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3962,8 +3844,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC" />
-        <code code="1006691000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum digoxin level">
-    <originalText>Serum digoxin level</originalText>
+        <code code="621311000006118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Digoxin: blood level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4018,8 +3899,7 @@ abnormality only Very Low</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F62CFE59-5303-4C90-AF30-2437D4ED20AF" />
-        <code code="992081000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
-    <originalText>Rheumatoid factor</originalText>
+        <code code="2559091000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4049,8 +3929,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="934E832B-C556-4B87-AE10-0ABE1295FFAA" />
-        <code code="197480006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anxiety disorder">
-    <originalText>Anxiety disorder</originalText>
+        <code code="303689015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anxiety disorder">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4112,8 +3991,7 @@ abnormality only Very Low</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="134493CA-754D-4DDA-A520-20643C17BAF5" />
-        <code code="105542008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Non - drinker">
-    <originalText>Non - drinker</originalText>
+        <code code="291355016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Teetotaller">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4138,8 +4016,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BDAD8BDB-770E-4B44-8EEE-79CF187B91A8" />
-        <code code="160579004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stopped drinking alcohol">
-    <originalText>Stopped drinking alcohol</originalText>
+        <code code="250317010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stopped drinking alcohol">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4176,8 +4053,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4CDE4CDA-36BE-47A3-B6E8-D6BE8C87F394" />
-        <code code="160579004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stopped drinking alcohol">
-    <originalText>Stopped drinking alcohol</originalText>
+        <code code="250317010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stopped drinking alcohol">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4214,8 +4090,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="85522AAC-80B6-4F73-BD34-50825EF0E45C" />
-        <code code="160573003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake">
-    <originalText>Alcohol intake</originalText>
+        <code code="1221271018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol consumption">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4329,8 +4204,7 @@ abnormality only Very Low</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7BBAEAC9-0079-4A8C-9CF7-53335BF684E9" />
-        <code code="1321000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MED3 - doctor&apos;s statement">
-    <originalText>MED3 - doctor&apos;s statement</originalText>
+        <code code="11551000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MED3 - doctor&apos;s statement">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4380,8 +4254,7 @@ abnormality only Very Low</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE" />
-        <code code="1321000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MED3 - doctor&apos;s statement">
-    <originalText>MED3 - doctor&apos;s statement</originalText>
+        <code code="11551000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MED3 - doctor&apos;s statement">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4431,8 +4304,7 @@ abnormality only Very Low</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="43F68F4A-CF96-49AF-8BFD-2B89AAD86E4E" />
-        <code code="1321000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MED3 - doctor&apos;s statement">
-    <originalText>MED3 - doctor&apos;s statement</originalText>
+        <code code="11551000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MED3 - doctor&apos;s statement">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4457,8 +4329,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A" />
-        <code code="1351000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Med3 certificate not issued to patient">
-    <originalText>Med3 certificate not issued to patient</originalText>
+        <code code="1596241000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Med3 certificate not issued to patient">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4508,8 +4379,7 @@ abnormality only Very Low</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3E9C68B8-AB3F-4114-B67B-1174CB327195" />
-        <code code="288834001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Agreeing on care plan">
-    <originalText>Agreeing on care plan</originalText>
+        <code code="2476135013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Agreement of care plan">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4534,8 +4404,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C" />
-        <code code="288834001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Agreeing on care plan">
-    <originalText>Agreeing on care plan</originalText>
+        <code code="2476135013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Agreement of care plan">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4560,8 +4429,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05" />
-        <code code="417680009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cancer home care pack given">
-    <originalText>Cancer home care pack given</originalText>
+        <code code="2549900011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cancer home care pack given">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4586,8 +4454,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14" />
-        <code code="417680009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cancer home care pack given">
-    <originalText>Cancer home care pack given</originalText>
+        <code code="2549900011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cancer home care pack given">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4612,8 +4479,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5EA65C4A-D999-4E1D-BB3B-19F9606EF1E3" />
-        <code code="180421000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="General practitioner out of hours service notified of cancer care plan">
-    <originalText>General practitioner out of hours service notified of cancer care plan</originalText>
+        <code code="258131000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="GP out of hours service notified of cancer care plan">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4638,8 +4504,7 @@ abnormality only Very Low</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15" />
-        <code code="180421000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="General practitioner out of hours service notified of cancer care plan">
-    <originalText>General practitioner out of hours service notified of cancer care plan</originalText>
+        <code code="258131000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="GP out of hours service notified of cancer care plan">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4689,8 +4554,7 @@ abnormality only Very Low</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43" />
-        <code code="364712009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Laboratory test observable">
-    <originalText>Laboratory test observable</originalText>
+        <code code="487879019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Laboratory test observable">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4721,8 +4585,7 @@ This is an empty one Abnormal</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9" />
-        <code code="1014241000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hepatitis B e antibody level">
-    <originalText>Hepatitis B e antibody level</originalText>
+        <code code="2574681000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hepatitis B e antibody level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4773,8 +4636,7 @@ This is the HepB antutbody notes Absent</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6" />
-        <code code="14734007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administrative procedure">
-    <originalText>Administrative procedure</originalText>
+        <code code="25032013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administrative procedure">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4831,7 +4693,6 @@ This is the HepB antutbody notes Absent</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="38896711000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Loratadine 5mg/5ml oral solution">
-    <originalText>Loratadine 5mg/5ml oral solution</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4895,8 +4756,7 @@ This is the HepB antutbody notes Absent</text>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="56B35114-6813-469B-AD36-F9E4944E7866" />
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of influenza vaccine">
-    <originalText>Administration of influenza vaccine</originalText>
+        <code code="142934010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4935,8 +4795,7 @@ This is the HepB antutbody notes Absent</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="33982E06-1791-45BA-9531-2F6FBE2246CE" />
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
+        <code code="1990681000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>

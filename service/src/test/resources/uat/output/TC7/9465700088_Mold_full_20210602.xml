@@ -318,8 +318,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="263B2A9F-0B1D-4697-943A-328F70E068DE"/>
-        <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
+        <code code="2566641000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -340,8 +339,7 @@ Interpretation: Abnormal</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
+        <code code="2566651000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -359,8 +357,7 @@ Interpretation: Abnormal</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-        <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
+        <code code="2553471000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -378,8 +375,7 @@ Interpretation: Abnormal</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
+        <code code="2575711000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -389,8 +385,7 @@ Interpretation: Abnormal</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
+        <code code="2575711000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -421,8 +416,7 @@ Interpretation: LO - Below low reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C"/>
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
+        <code code="2575741000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -432,8 +426,7 @@ Interpretation: LO - Below low reference limit</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
+        <code code="2575741000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -464,8 +457,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80"/>
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
+        <code code="2583921000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -475,8 +467,7 @@ Interpretation: HI - Above high reference limit</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35"/>
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
+        <code code="2583921000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -507,8 +498,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
-        <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
+        <code code="2553491000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -526,8 +516,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
-        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
+        <code code="2553501000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -545,8 +534,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
-        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
-    <originalText>Neutrophil count</originalText>
+        <code code="2583941000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -564,8 +552,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
+        <code code="2566671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -583,8 +570,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
-        <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
-    <originalText>Monocyte count</originalText>
+        <code code="2583951000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -602,8 +588,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
-        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
+        <code code="2566661000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -621,8 +606,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
+        <code code="2567301000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -760,8 +744,7 @@ Low plasma Folate</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B"/>
-        <code code="993391000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum vitamin B12 level">
-    <originalText>Serum vitamin B12 level</originalText>
+        <code code="2572251000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum vitamin B12 level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -779,8 +762,7 @@ Low plasma Folate</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
-        <code code="993421000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma folate level">
-    <originalText>Plasma folate level</originalText>
+        <code code="2559321000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma folate level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -909,8 +891,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
-        <code code="1029271000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid arthritis latex test">
-    <originalText>Rheumatoid arthritis latex test</originalText>
+        <code code="2602631000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid arthritis latex test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -920,8 +901,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
-        <code code="1029271000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid arthritis latex test">
-    <originalText>Rheumatoid arthritis latex test</originalText>
+        <code code="2602631000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid arthritis latex test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1055,8 +1035,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00"/>
-        <code code="993381000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum ferritin level">
-    <originalText>Serum ferritin level</originalText>
+        <code code="2576261000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum ferritin level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1174,8 +1153,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
-        <code code="1010371000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Calculus analysis">
-    <originalText>Calculus analysis</originalText>
+        <code code="2564941000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Calculus analysis">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1185,8 +1163,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1A4049B6-A065-4CB1-B222-77FBE702EA14"/>
-        <code code="1010371000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Calculus analysis">
-    <originalText>Calculus analysis</originalText>
+        <code code="2564941000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Calculus analysis">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1320,8 +1297,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="4CF7DECB-3AE2-42C3-97F0-BB440F28D385"/>
-        <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>INR - international normalised ratio</originalText>
+        <code code="257472014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="International normalised ratio">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1331,8 +1307,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F"/>
-        <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>INR - international normalised ratio</originalText>
+        <code code="257472014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="International normalised ratio">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1446,8 +1421,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
-        <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
+        <code code="2566641000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1457,8 +1431,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
+        <code code="2566651000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1476,8 +1449,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C3A25ECF-E2B2-4861-A649-DC429738F252"/>
-        <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
+        <code code="2567261000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1495,8 +1467,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
-        <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
+        <code code="2553471000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1514,8 +1485,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540"/>
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
+        <code code="2575711000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1533,8 +1503,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C"/>
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
+        <code code="2575741000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1552,8 +1521,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
+        <code code="2583921000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1571,8 +1539,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
-        <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
+        <code code="2553491000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1590,8 +1557,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4067DD8E-2B9B-4270-A382-CE035D7D352D"/>
-        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
+        <code code="2553501000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1609,8 +1575,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D"/>
-        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
-    <originalText>Neutrophil count</originalText>
+        <code code="2583941000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1628,8 +1593,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A"/>
-        <code code="1015471000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage neutrophils">
-    <originalText>Percentage neutrophils</originalText>
+        <code code="2565641000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage neutrophils">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1641,8 +1605,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
-        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
+        <code code="2566671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1660,8 +1623,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9A4CF638-ABA1-4CF9-8055-C5846EE42542"/>
-        <code code="1015481000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage lymphocytes">
-    <originalText>Percentage lymphocytes</originalText>
+        <code code="2552661000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage lymphocytes">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1673,8 +1635,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="47D7EE76-9938-4063-9007-E74B6E92581E"/>
-        <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
-    <originalText>Monocyte count</originalText>
+        <code code="2583951000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1692,8 +1653,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
-        <code code="1015491000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage monocytes">
-    <originalText>Percentage monocytes</originalText>
+        <code code="2574821000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage monocytes">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1705,8 +1665,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0"/>
-        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
+        <code code="2566661000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1716,8 +1675,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
-        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
+        <code code="2566661000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1742,8 +1700,7 @@ Range Text: &lt; 0.600 10*9/L</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C"/>
-        <code code="1015561000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage eosinophils">
-    <originalText>Percentage eosinophils</originalText>
+        <code code="2574831000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage eosinophils">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1755,8 +1712,7 @@ Range Text: &lt; 0.600 10*9/L</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92"/>
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
+        <code code="2567301000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1766,8 +1722,7 @@ Range Text: &lt; 0.600 10*9/L</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
+        <code code="2567301000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1792,8 +1747,7 @@ Range Text: &lt; 0.300 10*9/L</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
-        <code code="1015501000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage basophils">
-    <originalText>Percentage basophils</originalText>
+        <code code="2562641000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage basophils">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1905,8 +1859,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2"/>
-        <code code="1005661000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum lipids level">
-    <originalText>Serum lipids level</originalText>
+        <code code="2573511000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum lipids level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1966,8 +1919,7 @@ TURBID</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63"/>
-        <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
-    <originalText>Serum cholesterol level</originalText>
+        <code code="2551271000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1979,8 +1931,7 @@ TURBID</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
-        <code code="1005691000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum triglycerides level">
-    <originalText>Serum triglycerides level</originalText>
+        <code code="2551281000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum triglycerides level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1994,8 +1945,7 @@ TURBID</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="DECAA29B-D65A-45B0-805D-EC0BDE3DA971"/>
-        <code code="997531000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
-    <originalText>Liver function test</originalText>
+        <code code="2572661000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2005,8 +1955,7 @@ TURBID</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
-        <code code="999691000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
-    <originalText>Serum bilirubin level</originalText>
+        <code code="2577161000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2024,8 +1973,7 @@ TURBID</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="77EE1EA7-135F-4541-99A5-F8D63433AE7D"/>
-        <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
-    <originalText>Serum alkaline phosphatase level</originalText>
+        <code code="2560271000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2043,8 +1991,7 @@ TURBID</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF"/>
-        <code code="1018251000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alanine aminotransferase level">
-    <originalText>Serum alanine aminotransferase level</originalText>
+        <code code="478551000006117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="ALT/SGPT serum level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2062,8 +2009,7 @@ TURBID</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E2E18EA0-392E-43AD-8386-A3D94B2A9235"/>
-        <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
-    <originalText>Serum albumin level</originalText>
+        <code code="2571781000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2178,8 +2124,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
-        <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
+        <code code="2566641000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2189,8 +2134,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7359502E-8EE3-416C-BD59-A298285418E6"/>
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
+        <code code="2566651000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2208,8 +2152,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4"/>
-        <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
+        <code code="2567261000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2227,8 +2170,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="938365F3-8C68-4189-A550-FAB37F4F59C8"/>
-        <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
+        <code code="2553471000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2246,8 +2188,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998"/>
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
+        <code code="2575711000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2265,8 +2206,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91"/>
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
+        <code code="2575741000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2284,8 +2224,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4CF9262A-2676-4973-A45C-2538E5CC93E2"/>
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
+        <code code="2583921000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2303,8 +2242,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
-        <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
+        <code code="2553491000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2322,8 +2260,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="54BF1314-A4AF-4A19-9BB9-32290AA6718B"/>
-        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
+        <code code="2553501000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2341,8 +2278,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="886A145B-1825-4E79-B1DB-596666AE208A"/>
-        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
-    <originalText>Neutrophil count</originalText>
+        <code code="2583941000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2360,8 +2296,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E"/>
-        <code code="1015471000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage neutrophils">
-    <originalText>Percentage neutrophils</originalText>
+        <code code="2565641000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage neutrophils">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2373,8 +2308,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
-        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
+        <code code="2566671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2392,8 +2326,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A826995B-AB7B-4A63-9B89-FDA16209D357"/>
-        <code code="1015481000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage lymphocytes">
-    <originalText>Percentage lymphocytes</originalText>
+        <code code="2552661000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage lymphocytes">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2405,8 +2338,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17"/>
-        <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
-    <originalText>Monocyte count</originalText>
+        <code code="2583951000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2424,8 +2356,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="730F742C-1164-45BF-9139-8484074E5995"/>
-        <code code="1015491000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage monocytes">
-    <originalText>Percentage monocytes</originalText>
+        <code code="2574821000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage monocytes">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2437,8 +2368,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56"/>
-        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
+        <code code="2566661000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2448,8 +2378,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
-        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
+        <code code="2566661000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2474,8 +2403,7 @@ Range Text: &lt; 0.600 10*9/L</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="54AC4831-6E33-4BB9-BC17-33D47E3C8251"/>
-        <code code="1015561000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage eosinophils">
-    <originalText>Percentage eosinophils</originalText>
+        <code code="2574831000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage eosinophils">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2487,8 +2415,7 @@ Range Text: &lt; 0.600 10*9/L</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8"/>
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
+        <code code="2567301000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2498,8 +2425,7 @@ Range Text: &lt; 0.600 10*9/L</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B"/>
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
+        <code code="2567301000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2524,8 +2450,7 @@ Range Text: &lt; 0.300 10*9/L</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="896104C7-9DC7-4E44-B77D-DB771691C344"/>
-        <code code="1015501000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage basophils">
-    <originalText>Percentage basophils</originalText>
+        <code code="2562641000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage basophils">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2636,8 +2561,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF"/>
-        <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
+        <code code="2566641000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2661,8 +2585,7 @@ red blood cell seen, Note low platelets</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="72C029E9-FF73-4303-AEF6-0574F0FB26C0"/>
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
+        <code code="2567301000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2680,8 +2603,7 @@ red blood cell seen, Note low platelets</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824"/>
-        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
+        <code code="2566661000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2699,8 +2621,7 @@ red blood cell seen, Note low platelets</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB"/>
-        <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
+        <code code="2553471000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2718,8 +2639,7 @@ red blood cell seen, Note low platelets</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9"/>
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
+        <code code="2575711000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2737,8 +2657,7 @@ red blood cell seen, Note low platelets</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3F170377-2DE6-45D3-90EE-9EC23EDB4F59"/>
-        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
+        <code code="2566671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2756,8 +2675,7 @@ red blood cell seen, Note low platelets</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF"/>
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
+        <code code="2583921000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2775,8 +2693,7 @@ red blood cell seen, Note low platelets</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571"/>
-        <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
+        <code code="2553491000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2794,8 +2711,7 @@ red blood cell seen, Note low platelets</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27"/>
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
+        <code code="2575741000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2813,8 +2729,7 @@ red blood cell seen, Note low platelets</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="43B37138-F5A0-4F6F-8CEE-5B9A5632878B"/>
-        <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
-    <originalText>Monocyte count</originalText>
+        <code code="2583951000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2832,8 +2747,7 @@ red blood cell seen, Note low platelets</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="21F23DE7-D702-4DB4-AD0D-F8A0D56D7537"/>
-        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
-    <originalText>Neutrophil count</originalText>
+        <code code="2583941000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2843,8 +2757,7 @@ red blood cell seen, Note low platelets</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF"/>
-        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
-    <originalText>Neutrophil count</originalText>
+        <code code="2583941000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2875,8 +2788,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="2DCB9D56-5929-467F-A5DF-AA87FF457720"/>
-        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
+        <code code="2553501000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2886,8 +2798,7 @@ Interpretation: HI - Above high reference limit</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
-        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
+        <code code="2553501000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2918,8 +2829,7 @@ Interpretation: LO - Below low reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="49259291-5B92-4C0B-BE40-C299A8B02677"/>
-        <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
+        <code code="2567261000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2937,8 +2847,7 @@ Interpretation: LO - Below low reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="A7E9FEF8-71BC-4A6E-B3D7-94638E59E6B7"/>
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
+        <code code="2566651000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2948,8 +2857,7 @@ Interpretation: LO - Below low reference limit</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4B96C02F-9167-4CCB-AB78-5FFEE087A049"/>
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
+        <code code="2566651000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2992,8 +2900,7 @@ CommentDate:20201215151830
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F"/>
-        <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
-    <originalText>Plasma viscosity</originalText>
+        <code code="2580951000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3003,8 +2910,7 @@ CommentDate:20201215151830
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42"/>
-        <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
-    <originalText>Plasma viscosity</originalText>
+        <code code="2580951000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3134,8 +3040,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="B118583D-C4B6-40DE-A3CE-E0C73F55406A"/>
-        <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
+        <code code="2566641000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3156,8 +3061,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
+        <code code="2566651000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3169,8 +3073,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60"/>
-        <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
+        <code code="2567261000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3182,8 +3085,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D27E4A12-8EA6-44D7-AB94-821503546B45"/>
-        <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
+        <code code="2553471000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3195,8 +3097,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="51468E27-23A2-4E47-A341-61A29F1EA4AE"/>
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
+        <code code="2575711000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3208,8 +3109,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25"/>
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
+        <code code="2575741000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3221,8 +3121,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D20DC48D-2202-4E6A-A1A0-1C6A27C50CAC"/>
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
+        <code code="2583921000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3234,8 +3133,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6567C77F-08E8-4994-B30D-D06B63A6E184"/>
-        <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
+        <code code="2553491000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3247,8 +3145,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2DAE1ADC-4B4F-4081-84C4-E93E78346185"/>
-        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
+        <code code="2553501000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3260,8 +3157,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="300330A9-5389-444B-A23E-6402355AB06C"/>
-        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
-    <originalText>Neutrophil count</originalText>
+        <code code="2583941000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3273,8 +3169,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
-        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
+        <code code="2566671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3286,8 +3181,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="67DE330E-EDFA-462F-8732-1E91E6DAED9C"/>
-        <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
-    <originalText>Monocyte count</originalText>
+        <code code="2583951000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3299,8 +3193,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="89D5E9D7-C45A-4977-A1C9-4B2AB4EC1047"/>
-        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
+        <code code="2566661000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3312,8 +3205,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B184ACE9-DC5C-45B1-B65A-A8B38DF27863"/>
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
+        <code code="2567301000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3412,8 +3304,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="155122E0-3D9B-4784-8E29-622A941D8FFC"/>
-        <code code="993391000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum vitamin B12 level">
-    <originalText>Serum vitamin B12 level</originalText>
+        <code code="2572251000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum vitamin B12 level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3431,8 +3322,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E74F00A1-5189-4806-979F-5A57701BFF13"/>
-        <code code="993401000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell folate level">
-    <originalText>Red blood cell folate level</originalText>
+        <code code="2568651000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell folate level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3551,8 +3441,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64"/>
-        <code code="1016051000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="24 hour urine protein output">
-    <originalText>24 hour urine protein output</originalText>
+        <code code="2583141000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="24 hour urine protein output">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3562,8 +3451,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DA602250-41DB-4A8D-B5CB-70863AAF0F2D"/>
-        <code code="1016051000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="24 hour urine protein output">
-    <originalText>24 hour urine protein output</originalText>
+        <code code="2583141000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="24 hour urine protein output">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3672,8 +3560,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="A8B2DE9A-C1CA-4534-9B30-7783301F6BAA"/>
-        <code code="1006691000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum digoxin level">
-    <originalText>Serum digoxin level</originalText>
+        <code code="2556561000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum digoxin level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3683,8 +3570,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B1310011-B620-48D7-A381-2BF0335C5B3D"/>
-        <code code="1006691000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum digoxin level">
-    <originalText>Serum digoxin level</originalText>
+        <code code="2556561000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum digoxin level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3801,8 +3687,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="934E832B-C556-4B87-AE10-0ABE1295FFAA"/>
-        <code code="1006701000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum paracetamol level">
-    <originalText>Serum paracetamol level</originalText>
+        <code code="2551461000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum paracetamol level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3812,8 +3697,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A555DD62-B352-45A2-A601-C21F28340B1D"/>
-        <code code="1006701000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum paracetamol level">
-    <originalText>Serum paracetamol level</originalText>
+        <code code="2551461000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum paracetamol level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3936,8 +3820,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="4CDE4CDA-36BE-47A3-B6E8-D6BE8C87F394"/>
-        <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
+        <code code="2566641000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3958,8 +3841,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="85522AAC-80B6-4F73-BD34-50825EF0E45C"/>
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
+        <code code="2566651000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3977,8 +3859,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CC9ACAD0-C9F0-46ED-9B85-DEB7D5CB885B"/>
-        <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
+        <code code="2567261000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3996,8 +3877,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9546D5D9-6DB6-47F5-93EE-D7B2F9E63936"/>
-        <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
+        <code code="2553471000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4015,8 +3895,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="855869E7-17B8-42BE-84FE-E3EB14492478"/>
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
+        <code code="2575711000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4034,8 +3913,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2C320962-D06D-4852-92BC-E474887B0434"/>
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
+        <code code="2575741000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4053,8 +3931,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D651DDAA-03BA-4723-960A-FD13C13CE367"/>
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
+        <code code="2583921000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4072,8 +3949,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C86076C5-C69D-45EB-BEC4-1F1B310E80FC"/>
-        <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
+        <code code="2553491000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4091,8 +3967,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="438199E9-C87F-406F-AEB8-E4E330A4D1AD"/>
-        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
+        <code code="2553501000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4110,8 +3985,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D3041FE6-2820-4938-8024-1FC80F2A694F"/>
-        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
-    <originalText>Neutrophil count</originalText>
+        <code code="2583941000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4129,8 +4003,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ECF49E18-DB40-4001-954B-2666006B598B"/>
-        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
+        <code code="2566671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4148,8 +4021,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E62732A2-87EB-4B91-B61D-BCA1BDC66AB7"/>
-        <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
-    <originalText>Monocyte count</originalText>
+        <code code="2583951000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4167,8 +4039,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C0D0904E-CBCF-42E6-A9C8-5ED28DECBD46"/>
-        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
+        <code code="2566661000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4186,8 +4057,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7BBAEAC9-0079-4A8C-9CF7-53335BF684E9"/>
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
+        <code code="2567301000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4207,8 +4077,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D888F20F-2B36-469C-BAEC-E710A0D46FAA"/>
-        <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
-    <originalText>Plasma viscosity</originalText>
+        <code code="2580951000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4226,8 +4095,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8"/>
-        <code code="993571000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
-    <originalText>Infectious mononucleosis test</originalText>
+        <code code="2572281000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4237,8 +4105,7 @@ Neutropaenia, Occasional atypical lymphocyte seen</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0814FE49-058E-4B3C-9F74-040922A26099"/>
-        <code code="993571000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
-    <originalText>Infectious mononucleosis test</originalText>
+        <code code="2572281000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4372,8 +4239,7 @@ CommentDate:20100223000000
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="D7B28194-89DC-452E-ACE8-74CC752A2F18"/>
-        <code code="1010671000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma glucose level">
-    <originalText>Plasma glucose level</originalText>
+        <code code="2582401000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma glucose level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4383,8 +4249,7 @@ CommentDate:20100223000000
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="619D08A7-F6DA-449B-8609-FF129D688943"/>
-        <code code="1010671000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma glucose level">
-    <originalText>Plasma glucose level</originalText>
+        <code code="2582401000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma glucose level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4415,8 +4280,7 @@ CommentDate:20201215151742
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05"/>
-        <code code="997491000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum amylase level">
-    <originalText>Serum amylase level</originalText>
+        <code code="2571321000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum amylase level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4426,8 +4290,7 @@ CommentDate:20201215151742
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
-        <code code="997491000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum amylase level">
-    <originalText>Serum amylase level</originalText>
+        <code code="2571321000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum amylase level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4458,8 +4321,7 @@ CommentDate:20201215151742
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03"/>
-        <code code="1000641000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum electrolytes level">
-    <originalText>Serum electrolytes level</originalText>
+        <code code="2571731000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum electrolytes level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4480,8 +4342,7 @@ Interpretation: Abnormal</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="70EACDF9-9F82-4111-BD75-F0263D662431"/>
-        <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
-    <originalText>Serum sodium level</originalText>
+        <code code="2560861000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4499,8 +4360,7 @@ Interpretation: Abnormal</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="20C2F7CC-5CF2-4966-8981-80C0E670C316"/>
-        <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
-    <originalText>Serum potassium level</originalText>
+        <code code="2573011000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4510,8 +4370,7 @@ Interpretation: Abnormal</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43"/>
-        <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
-    <originalText>Serum potassium level</originalText>
+        <code code="2573011000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4542,8 +4401,7 @@ Interpretation: LO - Below low reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="136A1423-A6AC-448C-921C-8991ADF93C92"/>
-        <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
-    <originalText>Serum creatinine level</originalText>
+        <code code="2577271000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4561,8 +4419,7 @@ Interpretation: LO - Below low reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9"/>
-        <code code="1000951000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum urea level">
-    <originalText>Serum urea level</originalText>
+        <code code="2560931000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum urea level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4592,8 +4449,7 @@ CommentDate:20201215151742
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14"/>
-        <code code="997531000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
-    <originalText>Liver function test</originalText>
+        <code code="2572661000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4614,8 +4470,7 @@ Interpretation: Abnormal</text>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4"/>
-        <code code="999691000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
-    <originalText>Serum bilirubin level</originalText>
+        <code code="2577161000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4625,8 +4480,7 @@ Interpretation: Abnormal</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="862C50B8-6E37-40A1-BB4B-97CBC6E6B4B5"/>
-        <code code="999691000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
-    <originalText>Serum bilirubin level</originalText>
+        <code code="2577161000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4657,8 +4511,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="56B35114-6813-469B-AD36-F9E4944E7866"/>
-        <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
-    <originalText>Serum alkaline phosphatase level</originalText>
+        <code code="2560271000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4668,8 +4521,7 @@ Interpretation: HI - Above high reference limit</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="19B160E4-9406-4642-B202-4BDCF073BE76"/>
-        <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
-    <originalText>Serum alkaline phosphatase level</originalText>
+        <code code="2560271000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4700,8 +4552,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2"/>
-        <code code="1018251000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alanine aminotransferase level">
-    <originalText>Serum alanine aminotransferase level</originalText>
+        <code code="478551000006117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="ALT/SGPT serum level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4711,8 +4562,7 @@ Interpretation: HI - Above high reference limit</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C5676D58-9600-424A-BE35-3DDAE0CAC622"/>
-        <code code="1018251000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alanine aminotransferase level">
-    <originalText>Serum alanine aminotransferase level</originalText>
+        <code code="478551000006117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="ALT/SGPT serum level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4743,8 +4593,7 @@ Interpretation: HI - Above high reference limit</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB"/>
-        <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
-    <originalText>Serum albumin level</originalText>
+        <code code="2571781000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4754,8 +4603,7 @@ Interpretation: HI - Above high reference limit</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7"/>
-        <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
-    <originalText>Serum albumin level</originalText>
+        <code code="2571781000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4898,8 +4746,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="17DC8229-FB0E-4811-A8D0-FAB7D7A05A8C"/>
-        <code code="991871000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Clotting screening test">
-    <originalText>Clotting screening test</originalText>
+        <code code="2568401000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Clotting screening test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4909,8 +4756,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CFED96FD-7E48-4E34-A3CC-4DD0814C84C4"/>
-        <code code="852471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prothrombin time">
-    <originalText>Prothrombin time</originalText>
+        <code code="2207951000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prothrombin time">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4928,8 +4774,7 @@ Received Date: 2010-02-24 15:41
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="38324DDE-7ABE-4039-BF78-8E9D334FCA8F"/>
-        <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>INR - international normalised ratio</originalText>
+        <code code="257472014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="International normalised ratio">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4939,8 +4784,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0DE0EAF6-6AA2-4421-9509-145674A6EC51"/>
-        <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio">
-    <originalText>INR - international normalised ratio</originalText>
+        <code code="257472014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="International normalised ratio">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5070,8 +4914,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="C09FA44E-2285-4917-8C72-25031091D0F7"/>
-        <code code="997041000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="IgE">
-    <originalText>IgE</originalText>
+        <code code="2555331000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="IgE">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5081,8 +4924,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3FE921FD-5A7C-49A7-BF85-591FC6C8933C"/>
-        <code code="997041000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="IgE">
-    <originalText>IgE</originalText>
+        <code code="2555331000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="IgE">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5118,8 +4960,7 @@ CommentDate:20201215151733
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B6C6FCA4-DC3D-474E-8E20-117460144AFE"/>
-        <code code="997071000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
-    <originalText>RAST test</originalText>
+        <code code="2581761000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5129,8 +4970,7 @@ CommentDate:20201215151733
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="28C6781D-98B6-4182-8A5B-907CF616D0AF"/>
-        <code code="997071000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
-    <originalText>RAST test</originalText>
+        <code code="2581761000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5266,8 +5106,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="53847A06-6B81-4A50-BF84-C5588990485A"/>
-        <code code="997041000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="IgE">
-    <originalText>IgE</originalText>
+        <code code="2555331000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="IgE">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5279,8 +5118,7 @@ Received Date: 2010-02-24 15:41
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="92601097-8AE8-45DA-8D17-927B4727866C"/>
-        <code code="997071000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
-    <originalText>RAST test</originalText>
+        <code code="2581761000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5290,8 +5128,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E"/>
-        <code code="997071000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
-    <originalText>RAST test</originalText>
+        <code code="2581761000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5418,8 +5255,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="EF7BFB69-2694-46AE-8845-A49B83A88F16"/>
-        <code code="1003161000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urine pregnancy test">
-    <originalText>Urine pregnancy test</originalText>
+        <code code="2564081000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urine pregnancy test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5429,8 +5265,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2B4D282E-E237-4290-A6B7-640192183C20"/>
-        <code code="1003161000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urine pregnancy test">
-    <originalText>Urine pregnancy test</originalText>
+        <code code="2564081000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urine pregnancy test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5502,8 +5337,7 @@ Received Date: 2001-03-30 11:21
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="BEC3C3E8-54C8-45EA-9DD4-11BB4C2F3967"/>
-        <code code="1010521000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum oestradiol level">
-    <originalText>Serum oestradiol level</originalText>
+        <code code="2551971000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum oestradiol level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5513,8 +5347,7 @@ Received Date: 2001-03-30 11:21
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9413AD16-1088-40A3-B531-5D2B053C9897"/>
-        <code code="1010521000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum oestradiol level">
-    <originalText>Serum oestradiol level</originalText>
+        <code code="2551971000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum oestradiol level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5580,8 +5413,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="981B6B2F-EAA2-4454-8BA6-C5B2FDAE946C"/>
-        <code code="997201000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum ACTH (adrenocorticotrophic hormone) level">
-    <originalText>Serum ACTH (adrenocorticotrophic hormone) level</originalText>
+        <code code="2563401000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum ACTH (adrenocorticotrophic hormone) level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5591,8 +5423,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6F3E8A7A-7C40-4ACF-AD97-43A2E5DA6B29"/>
-        <code code="997201000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum ACTH (adrenocorticotrophic hormone) level">
-    <originalText>Serum ACTH (adrenocorticotrophic hormone) level</originalText>
+        <code code="2563401000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum ACTH (adrenocorticotrophic hormone) level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5715,8 +5546,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="21C8ABA5-6215-4623-A84C-F735B2A26CA6"/>
-        <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
+        <code code="2566641000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5726,8 +5556,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9C549A51-4365-42A1-871A-F8A76F69B0B9"/>
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
+        <code code="2566651000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5745,8 +5574,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7EDB9B26-B61A-4EA7-A383-2A6C4CAEC66D"/>
-        <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
+        <code code="2567261000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5764,8 +5592,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C3A07431-50A0-445F-B216-6103EEF1F040"/>
-        <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
+        <code code="2553471000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5783,8 +5610,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3ECDEBAA-FABE-433E-8CA4-B4E16EC88E55"/>
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
+        <code code="2575711000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5802,8 +5628,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="57AC6A03-EBEE-4C3C-8901-DED3E0BFFF31"/>
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
+        <code code="2575741000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5821,8 +5646,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F1EAA625-0C39-466C-9B01-FF902C5BD8C4"/>
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
+        <code code="2583921000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5840,8 +5664,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9DCC6C3F-6425-4D0E-9431-80E5E0647531"/>
-        <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
+        <code code="2553491000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5859,8 +5682,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1AF091D7-4603-437F-93AD-5A2D32EC1E68"/>
-        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
+        <code code="2553501000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5878,8 +5700,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="60484FAA-43BB-494E-A00F-977364A464BC"/>
-        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
-    <originalText>Neutrophil count</originalText>
+        <code code="2583941000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5897,8 +5718,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="893FC961-8B4A-46A2-9051-B075970F3D38"/>
-        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-    <originalText>Lymphocyte count</originalText>
+        <code code="2566671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5916,8 +5736,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5E638C90-569A-4801-9B01-942097A5E2FA"/>
-        <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
-    <originalText>Monocyte count</originalText>
+        <code code="2583951000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5935,8 +5754,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AFAF69CF-48F7-44C2-AAE1-F97BFD3A7889"/>
-        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
-    <originalText>Eosinophil count</originalText>
+        <code code="2566661000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -5954,8 +5772,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="218AFE98-B787-45CC-A132-4B281E029F48"/>
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-    <originalText>Basophil count</originalText>
+        <code code="2567301000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6070,8 +5887,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="06FF59A7-8E53-4653-BBD9-D5D4350186F0"/>
-        <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
-    <originalText>FBC - full blood count</originalText>
+        <code code="2566641000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6081,8 +5897,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C918FC98-44B0-4445-865C-B787D1AD0E1E"/>
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white cell count</originalText>
+        <code code="2566651000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6100,8 +5915,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="708B65EF-B92A-40B1-B7B8-2E3357F98B8B"/>
-        <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
-    <originalText>Red blood cell count</originalText>
+        <code code="2567261000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6119,8 +5933,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EBFC9E3E-BF6A-4D10-9134-E89BD09006C4"/>
-        <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
-    <originalText>Haemoglobin estimation</originalText>
+        <code code="2553471000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6138,8 +5951,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F3D9CD05-FBDA-473A-8FEA-37B31D0DACA9"/>
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-    <originalText>Haematocrit</originalText>
+        <code code="2575711000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6157,8 +5969,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EDB6C384-5849-4918-BC2D-35C774EC1964"/>
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>MCV - Mean corpuscular volume</originalText>
+        <code code="2575741000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6176,8 +5987,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EE943220-7139-48DF-9996-29A55497597D"/>
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>MCH - Mean corpuscular haemoglobin</originalText>
+        <code code="2583921000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6195,8 +6005,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="599D6A2F-B001-4E52-A09D-1113D43FA4A0"/>
-        <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
-    <originalText>MCHC - Mean corpuscular haemoglobin concentration</originalText>
+        <code code="2553491000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6214,8 +6023,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="65E669A1-21AD-4DBE-B241-4340C6AF4A0E"/>
-        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
-    <originalText>Platelet count</originalText>
+        <code code="2553501000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6233,8 +6041,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="76ADC78D-6114-4862-9342-73C129ACE9A8"/>
-        <code code="1015471000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage neutrophils">
-    <originalText>Percentage neutrophils</originalText>
+        <code code="2565641000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage neutrophils">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6246,8 +6053,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="100FAB31-CFAD-4AC4-945D-44930E2A5946"/>
-        <code code="1015481000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage lymphocytes">
-    <originalText>Percentage lymphocytes</originalText>
+        <code code="2552661000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage lymphocytes">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6259,8 +6065,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FFC39E77-6B59-4747-A07C-3A610AFABD22"/>
-        <code code="1015491000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage monocytes">
-    <originalText>Percentage monocytes</originalText>
+        <code code="2574821000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage monocytes">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6272,8 +6077,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A4F06BB8-C8D6-4070-9860-8617CF38DBE7"/>
-        <code code="1015561000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage eosinophils">
-    <originalText>Percentage eosinophils</originalText>
+        <code code="2574831000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage eosinophils">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6285,8 +6089,7 @@ Participants: MessageRecipient-D82015, LaboratoryServiceProvider-ST JAMES&apos;S
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B6EBD5AE-DA6C-4DD7-A22E-28879AE2D886"/>
-        <code code="1015501000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage basophils">
-    <originalText>Percentage basophils</originalText>
+        <code code="2562641000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Percentage basophils">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6410,8 +6213,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="2897DE2C-4F80-423B-A871-F60824B65DD2"/>
-        <code code="1003141000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma fasting glucose level">
-    <originalText>Plasma fasting glucose level</originalText>
+        <code code="2560571000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma fasting glucose level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6421,8 +6223,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="90CDA895-C708-4A1D-B880-57DDA978F565"/>
-        <code code="1003141000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma fasting glucose level">
-    <originalText>Plasma fasting glucose level</originalText>
+        <code code="2560571000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma fasting glucose level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6564,8 +6365,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ED30F999-14CA-41B9-93EE-334F60049174"/>
-        <code code="1010671000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma glucose level">
-    <originalText>Plasma glucose level</originalText>
+        <code code="2582401000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma glucose level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6693,7 +6493,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="FF97AC5C-4ABB-4DDB-AE76-DBDEF8A1D452"/>
-        <code code="1015411000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microscopy, culture and sensitivities">
+        <code code="2579131000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microscopy, culture and sensitivities">
     <originalText>Micro, culture &amp; sensitivities</originalText>
 </code>
         <statusCode code="COMPLETE"/>
@@ -6704,7 +6504,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F64CCBEB-A90B-421A-88E8-49B624695441"/>
-        <code code="1015411000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microscopy, culture and sensitivities">
+        <code code="2579131000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microscopy, culture and sensitivities">
     <originalText>Micro, culture &amp; sensitivities</originalText>
 </code>
         <statusCode code="COMPLETE"/>
@@ -6862,8 +6662,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="BD4B3AF8-7A36-48B3-B589-881FDC03C47A"/>
-        <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
-    <originalText>Glucose tolerance test</originalText>
+        <code code="2585781000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6873,8 +6672,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="876133BE-1895-49FC-8D1C-7B4018463B8D"/>
-        <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
-    <originalText>Glucose tolerance test</originalText>
+        <code code="2585781000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7150,8 +6948,7 @@ Received Date: 2003-01-09 13:54
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="986950DF-9245-40D9-BE24-B0A9132EA679"/>
-        <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
-    <originalText>Glucose tolerance test</originalText>
+        <code code="2585781000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7445,8 +7242,7 @@ Received Date: 2011-02-19 15:53
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="7CA41716-4846-4F94-A9D9-D5E0BD0A82F9"/>
-        <code code="996911000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Autoimmune profile">
-    <originalText>Autoimmune profile</originalText>
+        <code code="2571241000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Autoimmune profile">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7468,8 +7264,7 @@ rheumatoid factor tests.</text>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="0E71DDF8-036B-46D1-8D80-3C644BEE7792"/>
-        <code code="993591000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti-nuclear factor">
-    <originalText>Anti-nuclear factor</originalText>
+        <code code="2568681000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti-nuclear factor">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7479,8 +7274,7 @@ rheumatoid factor tests.</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C097A760-A532-4898-BE7E-F457AF74A96B"/>
-        <code code="993591000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti-nuclear factor">
-    <originalText>Anti-nuclear factor</originalText>
+        <code code="2568681000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti-nuclear factor">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7504,8 +7298,7 @@ NEGATIVE</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="45F66E46-C95E-4117-BB91-11717E4B735F"/>
-        <code code="992081000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
-    <originalText>Rheumatoid factor</originalText>
+        <code code="2559091000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7515,8 +7308,7 @@ NEGATIVE</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8D247369-629C-4CED-9736-DCF121897A41"/>
-        <code code="992081000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
-    <originalText>Rheumatoid factor</originalText>
+        <code code="2559091000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7552,7 +7344,7 @@ CommentDate:20210108152501
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="0739C9F9-C296-49CD-846B-99680445F3E4"/>
-        <code code="995851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Double stranded deoxyribonucleic acid binding autoantibody level">
+        <code code="2555181000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Double stranded deoxyribonucleic acid binding autoantibody level">
     <originalText>dsDNA binding autoantibody lev</originalText>
 </code>
         <statusCode code="COMPLETE"/>
@@ -7563,7 +7355,7 @@ CommentDate:20210108152501
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C0C093CD-E806-48FC-92FD-5E62FA330F3A"/>
-        <code code="995851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Double stranded deoxyribonucleic acid binding autoantibody level">
+        <code code="2555181000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Double stranded deoxyribonucleic acid binding autoantibody level">
     <originalText>dsDNA binding autoantibody lev</originalText>
 </code>
         <statusCode code="COMPLETE"/>
@@ -7599,8 +7391,7 @@ CommentDate:20210108152502
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B11F0378-2A43-4B34-9A68-7298AE8D8A8C"/>
-        <code code="1016761000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mitochondrial antibody screening test">
-    <originalText>Mitochondrial antibody screening test</originalText>
+        <code code="701461000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mitochondrial antibody level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7610,8 +7401,7 @@ CommentDate:20210108152502
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FABD548E-3F9D-43BB-A83F-A316EB66582A"/>
-        <code code="1016761000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mitochondrial antibody screening test">
-    <originalText>Mitochondrial antibody screening test</originalText>
+        <code code="701461000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mitochondrial antibody level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7646,8 +7436,7 @@ CommentDate:20210108152502
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="45F39D0E-6266-4155-9E73-9C7B1D808DF9"/>
-        <code code="1005501000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver autoantibody level">
-    <originalText>Liver autoantibody level</originalText>
+        <code code="2561411000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver autoantibody level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7657,8 +7446,7 @@ CommentDate:20210108152502
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BC52FA50-4D96-4A4F-A321-21EFE52644F0"/>
-        <code code="1005501000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver autoantibody level">
-    <originalText>Liver autoantibody level</originalText>
+        <code code="2561411000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver autoantibody level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7693,8 +7481,7 @@ CommentDate:20210108152502
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="E7DD048C-D4FE-4CCF-8CFE-CEC4D87645A7"/>
-        <code code="994601000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti smooth muscle antibody titre">
-    <originalText>Anti smooth muscle antibody titre</originalText>
+        <code code="486751000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti smooth muscle autoantibod">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7704,8 +7491,7 @@ CommentDate:20210108152502
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="81344BD1-09B7-43D4-91E0-23280F3EE5C7"/>
-        <code code="994601000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti smooth muscle antibody titre">
-    <originalText>Anti smooth muscle antibody titre</originalText>
+        <code code="486751000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti smooth muscle autoantibod">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7740,8 +7526,7 @@ CommentDate:20210108152503
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="C37A13EB-156D-4AC5-B6B5-BDC6B59DC955"/>
-        <code code="992101000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adrenal autoantibodies">
-    <originalText>Adrenal autoantibodies</originalText>
+        <code code="2567621000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adrenal autoantibodies">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7751,8 +7536,7 @@ CommentDate:20210108152503
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="489774D7-1062-42AA-A12A-7D9A8B53CCEC"/>
-        <code code="992101000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adrenal autoantibodies">
-    <originalText>Adrenal autoantibodies</originalText>
+        <code code="2567621000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adrenal autoantibodies">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7881,8 +7665,7 @@ CommentDate:20210108152503
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="33F32EF0-5D03-4C4F-801F-C45A12F37ED2"/>
-        <code code="994661000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Parietal cell autoantibodies">
-    <originalText>Parietal cell autoantibodies</originalText>
+        <code code="2559451000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Parietal cell autoantibodies">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7892,8 +7675,7 @@ CommentDate:20210108152503
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D37ED068-62F9-4872-95B0-4B8B219C1DE7"/>
-        <code code="994661000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Parietal cell autoantibodies">
-    <originalText>Parietal cell autoantibodies</originalText>
+        <code code="2559451000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Parietal cell autoantibodies">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8155,8 +7937,7 @@ Interpretation: Abnormal</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E0E656E9-997C-49C3-A318-F9D72296A27A"/>
-        <code code="1000811000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total protein">
-    <originalText>Serum total protein</originalText>
+        <code code="2577291000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total protein">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8174,8 +7955,7 @@ Interpretation: Abnormal</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="490ECF23-CCC1-4091-90C1-BCD549D9AD9F"/>
-        <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
-    <originalText>Serum albumin level</originalText>
+        <code code="2571781000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8193,8 +7973,7 @@ Interpretation: Abnormal</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="12BE1BF6-E3A1-4191-9D37-B1DBA579FF41"/>
-        <code code="1000691000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum calcium level">
-    <originalText>Serum calcium level</originalText>
+        <code code="2560881000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum calcium level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8212,8 +7991,7 @@ Interpretation: Abnormal</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="95126292-4EE9-4BAE-8EF2-A58773635AB2"/>
-        <code code="935051000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum adjusted calcium concentration">
-    <originalText>Serum adjusted calcium concentration</originalText>
+        <code code="596161000006111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Corrected serum calcium level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8231,8 +8009,7 @@ Interpretation: Abnormal</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="0DB69A17-78EE-4772-AAF7-290B3AB031F4"/>
-        <code code="1000701000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum inorganic phosphate level">
-    <originalText>Serum inorganic phosphate level</originalText>
+        <code code="2573021000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum inorganic phosphate level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8242,8 +8019,7 @@ Interpretation: Abnormal</text>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="19593D72-0F8C-48CE-B3E3-D186D6141DD2"/>
-        <code code="1000701000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum inorganic phosphate level">
-    <originalText>Serum inorganic phosphate level</originalText>
+        <code code="2573021000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum inorganic phosphate level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8268,8 +8044,7 @@ U=Unsuitable for analysis</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9D31DF08-2D93-461C-B3EB-171CBC8DE317"/>
-        <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
-    <originalText>Serum alkaline phosphatase level</originalText>
+        <code code="2560271000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8299,8 +8074,7 @@ CommentDate:20210108152445
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="5E55B187-65DD-447E-902A-AD73AF142A02"/>
-        <code code="1000971000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urea and electrolytes level">
-    <originalText>Urea and electrolytes level</originalText>
+        <code code="2571841000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urea and electrolytes level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8329,8 +8103,7 @@ CommentDate:20210108152445
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8A11A952-650A-4C2B-9F66-E9A0BD7B72A8"/>
-        <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
-    <originalText>Serum sodium level</originalText>
+        <code code="2560861000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8348,8 +8121,7 @@ CommentDate:20210108152445
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="C007E0F8-CE63-4D83-BE18-4B438B9D8D35"/>
-        <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
-    <originalText>Serum potassium level</originalText>
+        <code code="2573011000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8359,8 +8131,7 @@ CommentDate:20210108152445
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64EE9F15-9718-4738-8187-455BE2A44C29"/>
-        <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
-    <originalText>Serum potassium level</originalText>
+        <code code="2573011000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8385,8 +8156,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A5371E90-1A5E-47CA-8E4E-D46137750B9F"/>
-        <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
-    <originalText>Serum creatinine level</originalText>
+        <code code="2577271000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8416,8 +8186,7 @@ CommentDate:20210108152449
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="D169FE37-50B8-4589-95AC-1842C9D1CE52"/>
-        <code code="1001371000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum CRP (C reactive protein) level">
-    <originalText>Serum CRP (C reactive protein) level</originalText>
+        <code code="2607141000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum CRP (C reactive protein) level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8427,8 +8196,7 @@ CommentDate:20210108152449
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B71F3669-565D-4B7A-BB5C-E29E6498B269"/>
-        <code code="1001371000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum CRP (C reactive protein) level">
-    <originalText>Serum CRP (C reactive protein) level</originalText>
+        <code code="2607141000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum CRP (C reactive protein) level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8470,8 +8238,7 @@ CommentDate:20210108152450
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="160C35BC-35D8-4B84-8DD5-4A01F9A7D433"/>
-        <code code="1019351000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum iron level">
-    <originalText>Serum iron level</originalText>
+        <code code="2558201000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum iron level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8481,8 +8248,7 @@ CommentDate:20210108152450
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D0852560-A8D0-4B51-BF75-2BFD582BC166"/>
-        <code code="1019351000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum iron level">
-    <originalText>Serum iron level</originalText>
+        <code code="2558201000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum iron level">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8524,8 +8290,7 @@ CommentDate:20210108152450
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="1F08ED47-E5BF-4959-ABAC-FAB3FFAA2B02"/>
-        <code code="1015451000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
-    <originalText>Serum total iron binding capacity</originalText>
+        <code code="2580111000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8535,8 +8300,7 @@ CommentDate:20210108152450
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ECED2795-6E5C-4BEC-B576-4BE3591B60D7"/>
-        <code code="1015451000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
-    <originalText>Serum total iron binding capacity</originalText>
+        <code code="2580111000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8873,8 +8637,7 @@ Received Date: 2010-02-24 15:41
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4126BA6C-47FD-468C-873D-ADFB7B855F89"/>
-        <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="INR - international normalised ratio 1549">
-    <originalText>INR - international normalised ratio 1549</originalText>
+        <code code="257472014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="International normalised ratio 1549">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8917,8 +8680,7 @@ Received Date: 2010-02-24 15:41
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="B64BFA7D-861B-4F69-BC7B-E77E545BB880" />
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of influenza vaccine">
-    <originalText>Administration of influenza vaccine</originalText>
+        <code code="142934010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8957,8 +8719,7 @@ Received Date: 2010-02-24 15:41
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D623A941-D069-4164-B911-3D36F4E10583" />
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
+        <code code="1990681000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9006,8 +8767,7 @@ Received Date: 2010-02-24 15:41
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9D64B2AD-D332-4948-8F2C-88BD233C3871" />
-        <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count 1549">
-    <originalText>Red blood cell count 1549</originalText>
+        <code code="2567261000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count 1549">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>

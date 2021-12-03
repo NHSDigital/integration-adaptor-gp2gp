@@ -252,8 +252,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="263B2A9F-0B1D-4697-943A-328F70E068DE" />
-        <code code="88551000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Medication review with patient">
-    <originalText>Medication review with patient</originalText>
+        <code code="137851000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Medication review with patient">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -324,8 +323,7 @@ Medication review</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
-        <code code="182836005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Review of medication">
-    <originalText>Review of medication</originalText>
+        <code code="282653015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Medication review">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -350,8 +348,7 @@ Medication review</text>
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
-        <code code="182836005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Review of medication">
-    <originalText>Review of medication</originalText>
+        <code code="282653015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Medication review">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -400,8 +397,7 @@ Medication review</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5" />
-        <code code="90560007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gout">
-    <originalText>Gout</originalText>
+        <code code="150085018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gout">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -437,7 +433,6 @@ This is problem Problem Info: Problem Notes: This is problem</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="330062008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allopurinol 300mg tablets">
-    <originalText>Allopurinol 300mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -512,8 +507,7 @@ This is problem Problem Info: Problem Notes: This is problem</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42" />
-        <code code="90560007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gout">
-    <originalText>Gout</originalText>
+        <code code="150085018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gout">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -548,7 +542,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325443009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prednisolone 5mg gastro-resistant tablets">
-    <originalText>Prednisolone 5mg gastro-resistant tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -644,7 +637,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="324059006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doxycycline 100mg capsules">
-    <originalText>Doxycycline 100mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -728,7 +720,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="319773006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin 75mg dispersible tablets">
-    <originalText>Aspirin 75mg dispersible tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -816,7 +807,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="573711000001104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol SR 80mg capsules (Sandoz Ltd)">
-    <originalText>Bedranol SR 80mg capsules (Sandoz Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -883,8 +873,7 @@ Episodicity : Review</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
-        <code code="190460008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemorrhage of parathyroid">
-    <originalText>Haemorrhage of parathyroid</originalText>
+        <code code="292686019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemorrhage of parathyroid">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -918,7 +907,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322225002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin 300mg gastro-resistant tablets">
-    <originalText>Aspirin 300mg gastro-resistant tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -992,7 +980,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="319773006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin 75mg dispersible tablets">
-    <originalText>Aspirin 75mg dispersible tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1065,7 +1052,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="319773006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin 75mg dispersible tablets">
-    <originalText>Aspirin 75mg dispersible tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1138,7 +1124,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="316011000001100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Micropore tape 5cm (3M Health Care Ltd)">
-    <originalText>Micropore tape 5cm (3M Health Care Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1211,7 +1196,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="38897011000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Insulin glargine 100units/ml solution for injection 3ml pre-filled disposable devices">
-    <originalText>Insulin glargine 100units/ml solution for injection 3ml pre-filled disposable devices</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1284,7 +1268,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="38897011000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Insulin glargine 100units/ml solution for injection 3ml pre-filled disposable devices">
-    <originalText>Insulin glargine 100units/ml solution for injection 3ml pre-filled disposable devices</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1358,7 +1341,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="38897011000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Insulin glargine 100units/ml solution for injection 3ml pre-filled disposable devices">
-    <originalText>Insulin glargine 100units/ml solution for injection 3ml pre-filled disposable devices</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1579,7 +1561,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318783003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doxazosin 4mg tablets">
-    <originalText>Doxazosin 4mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1652,7 +1633,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7111411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adjustable ostomy belt NSI 23 25mm (A H Shaw and Partners Ltd)">
-    <originalText>Adjustable ostomy belt NSI 23 25mm (A H Shaw and Partners Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1725,7 +1705,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7111411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adjustable ostomy belt NSI 23 25mm (A H Shaw and Partners Ltd)">
-    <originalText>Adjustable ostomy belt NSI 23 25mm (A H Shaw and Partners Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1946,7 +1925,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="38754011000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamsulosin 400microgram modified-release capsules">
-    <originalText>Tamsulosin 400microgram modified-release capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2019,7 +1997,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="545211000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="E45 cream (Forum Health Products Ltd)">
-    <originalText>E45 cream (Forum Health Products Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2092,7 +2069,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327550006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Folic acid 5mg tablets">
-    <originalText>Folic acid 5mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2165,7 +2141,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327550006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Folic acid 5mg tablets">
-    <originalText>Folic acid 5mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2239,7 +2214,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="800511000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angettes 75 tablets (Bristol-Myers Squibb Pharmaceuticals Ltd)">
-    <originalText>Angettes 75 tablets (Bristol-Myers Squibb Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2332,7 +2306,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="800511000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angettes 75 tablets (Bristol-Myers Squibb Pharmaceuticals Ltd)">
-    <originalText>Angettes 75 tablets (Bristol-Myers Squibb Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2406,7 +2379,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="800511000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angettes 75 tablets (Bristol-Myers Squibb Pharmaceuticals Ltd)">
-    <originalText>Angettes 75 tablets (Bristol-Myers Squibb Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2480,7 +2452,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="800511000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angettes 75 tablets (Bristol-Myers Squibb Pharmaceuticals Ltd)">
-    <originalText>Angettes 75 tablets (Bristol-Myers Squibb Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2554,7 +2525,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322311000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-dydramol 10mg/500mg tablets">
-    <originalText>Co-dydramol 10mg/500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2647,7 +2617,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322366004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-codamol 30mg/500mg capsules">
-    <originalText>Co-codamol 30mg/500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2720,7 +2689,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322366004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-codamol 30mg/500mg capsules">
-    <originalText>Co-codamol 30mg/500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2794,7 +2762,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322366004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-codamol 30mg/500mg capsules">
-    <originalText>Co-codamol 30mg/500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2868,7 +2835,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322366004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-codamol 30mg/500mg capsules">
-    <originalText>Co-codamol 30mg/500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3109,7 +3075,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321197008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diazepam 5mg tablets">
-    <originalText>Diazepam 5mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3182,7 +3147,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321197008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diazepam 5mg tablets">
-    <originalText>Diazepam 5mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3256,7 +3220,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318421004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Atenolol 100mg tablets">
-    <originalText>Atenolol 100mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3349,7 +3312,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="42111000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microgynon 30 tablets (Bayer Plc)">
-    <originalText>Microgynon 30 tablets (Bayer Plc)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3422,7 +3384,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="42111000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microgynon 30 tablets (Bayer Plc)">
-    <originalText>Microgynon 30 tablets (Bayer Plc)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3496,7 +3457,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317971007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 20mg tablets">
-    <originalText>Furosemide 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3569,7 +3529,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317971007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 20mg tablets">
-    <originalText>Furosemide 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3643,7 +3602,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321745007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amitriptyline 10mg tablets">
-    <originalText>Amitriptyline 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3716,7 +3674,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321745007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amitriptyline 10mg tablets">
-    <originalText>Amitriptyline 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3937,7 +3894,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="319284000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amlodipine 10mg tablets">
-    <originalText>Amlodipine 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4010,7 +3966,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="319284000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amlodipine 10mg tablets">
-    <originalText>Amlodipine 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4084,7 +4039,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325278007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Metformin 500mg tablets">
-    <originalText>Metformin 500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4157,7 +4111,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325278007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Metformin 500mg tablets">
-    <originalText>Metformin 500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4231,7 +4184,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321989000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Citalopram 10mg tablets">
-    <originalText>Citalopram 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4304,7 +4256,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321989000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Citalopram 10mg tablets">
-    <originalText>Citalopram 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4378,7 +4329,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321989000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Citalopram 10mg tablets">
-    <originalText>Citalopram 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4452,7 +4402,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321989000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Citalopram 10mg tablets">
-    <originalText>Citalopram 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4526,7 +4475,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4599,7 +4547,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4673,7 +4620,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4747,7 +4693,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4821,7 +4766,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4895,7 +4839,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4969,7 +4912,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5043,7 +4985,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5117,7 +5058,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5191,7 +5131,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5265,7 +5204,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5339,7 +5277,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321177003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Zopiclone 3.75mg tablets">
-    <originalText>Zopiclone 3.75mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5412,7 +5349,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321177003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Zopiclone 3.75mg tablets">
-    <originalText>Zopiclone 3.75mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5486,7 +5422,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="319773006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin 75mg dispersible tablets">
-    <originalText>Aspirin 75mg dispersible tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5559,7 +5494,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="319773006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin 75mg dispersible tablets">
-    <originalText>Aspirin 75mg dispersible tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5633,7 +5567,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="636011000001100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="PostMI 75 dispersible tablets (Ashbourne Pharmaceuticals Ltd)">
-    <originalText>PostMI 75 dispersible tablets (Ashbourne Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5706,7 +5639,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5779,7 +5711,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5853,7 +5784,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5927,7 +5857,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6001,7 +5930,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6075,7 +6003,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6149,7 +6076,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318923005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cilazapril 5mg tablets">
-    <originalText>Cilazapril 5mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6222,7 +6148,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318923005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cilazapril 5mg tablets">
-    <originalText>Cilazapril 5mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6811,7 +6736,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320818006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cetirizine 10mg tablets">
-    <originalText>Cetirizine 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6904,7 +6828,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="323358004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Methylphenidate 5mg tablets">
-    <originalText>Methylphenidate 5mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -6977,7 +6900,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="323358004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Methylphenidate 5mg tablets">
-    <originalText>Methylphenidate 5mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -7051,7 +6973,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321989000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Citalopram 10mg tablets">
-    <originalText>Citalopram 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -7081,7 +7002,7 @@ Episodicity : Review</text>
         <component typeCode="COMP">
             <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
                 <id root="BEC3C3E8-54C8-45EA-9DD4-11BB4C2F3967"/>
-                <code code="1012851000006104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Central Nervous System Drugs">
+                <code code="1012851000006115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Central Nervous System Drugs">
     <originalText>Adverse reaction to Central Nervous System Drugs (allergy)</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -7144,7 +7065,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321989000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Citalopram 10mg tablets">
-    <originalText>Citalopram 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -7218,7 +7138,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321989000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Citalopram 10mg tablets">
-    <originalText>Citalopram 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -7365,7 +7284,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39113611000001102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Salbutamol 100micrograms/dose inhaler CFC free">
-    <originalText>Salbutamol 100micrograms/dose inhaler CFC free</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -7458,7 +7376,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="549611000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol SR 160mg capsules (Sandoz Ltd)">
-    <originalText>Bedranol SR 160mg capsules (Sandoz Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -7531,7 +7448,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="549611000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol SR 160mg capsules (Sandoz Ltd)">
-    <originalText>Bedranol SR 160mg capsules (Sandoz Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -7604,7 +7520,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317161009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mebeverine 135mg tablets">
-    <originalText>Mebeverine 135mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -7677,7 +7592,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317161009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mebeverine 135mg tablets">
-    <originalText>Mebeverine 135mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -8139,7 +8053,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="330295009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Chloramphenicol 1% eye ointment">
-    <originalText>Chloramphenicol 1% eye ointment</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -8212,7 +8125,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="330295009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Chloramphenicol 1% eye ointment">
-    <originalText>Chloramphenicol 1% eye ointment</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -8286,7 +8198,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325443009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prednisolone 5mg gastro-resistant tablets">
-    <originalText>Prednisolone 5mg gastro-resistant tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -8316,7 +8227,7 @@ Episodicity : Review</text>
         <component typeCode="COMP">
             <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
                 <id root="6F64F0E7-34FD-429D-9C04-7E1C2E02B307"/>
-                <code code="1030121000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Prednisolone">
+                <code code="1030121000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Prednisolone">
     <originalText>Adverse reaction to Prednisolone (Fat, John said)</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -8379,7 +8290,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="324059006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doxycycline 100mg capsules">
-    <originalText>Doxycycline 100mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -8452,7 +8362,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="324059006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doxycycline 100mg capsules">
-    <originalText>Doxycycline 100mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -8820,7 +8729,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="549611000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol SR 160mg capsules (Sandoz Ltd)">
-    <originalText>Bedranol SR 160mg capsules (Sandoz Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -8893,7 +8801,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="549611000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol SR 160mg capsules (Sandoz Ltd)">
-    <originalText>Bedranol SR 160mg capsules (Sandoz Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -8967,7 +8874,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="330062008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allopurinol 300mg tablets">
-    <originalText>Allopurinol 300mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -9040,7 +8946,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="330062008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allopurinol 300mg tablets">
-    <originalText>Allopurinol 300mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -9113,7 +9018,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="330062008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allopurinol 300mg tablets">
-    <originalText>Allopurinol 300mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -9187,7 +9091,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="38751211000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Propranolol 160mg modified-release capsules">
-    <originalText>Propranolol 160mg modified-release capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -9260,7 +9163,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="38751211000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Propranolol 160mg modified-release capsules">
-    <originalText>Propranolol 160mg modified-release capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -9334,7 +9236,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="643911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lipitor 10mg tablets (Upjohn UK Ltd)">
-    <originalText>Lipitor 10mg tablets (Upjohn UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -9701,7 +9602,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320537007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Beclometasone 100micrograms/dose inhaler">
-    <originalText>Beclometasone 100micrograms/dose inhaler</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -9774,7 +9674,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320537007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Beclometasone 100micrograms/dose inhaler">
-    <originalText>Beclometasone 100micrograms/dose inhaler</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -9848,7 +9747,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39024511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diclofenac sodium 75mg modified-release tablets">
-    <originalText>Diclofenac sodium 75mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -9921,7 +9819,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39024511000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diclofenac sodium 75mg modified-release tablets">
-    <originalText>Diclofenac sodium 75mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -9995,7 +9892,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="326583009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Propiverine 15mg tablets">
-    <originalText>Propiverine 15mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10068,7 +9964,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="326583009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Propiverine 15mg tablets">
-    <originalText>Propiverine 15mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10142,7 +10037,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="374667004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Perindopril erbumine 8mg tablets">
-    <originalText>Perindopril erbumine 8mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10215,7 +10109,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="374667004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Perindopril erbumine 8mg tablets">
-    <originalText>Perindopril erbumine 8mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10289,7 +10182,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="323358004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Methylphenidate 5mg tablets">
-    <originalText>Methylphenidate 5mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10362,7 +10254,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="323358004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Methylphenidate 5mg tablets">
-    <originalText>Methylphenidate 5mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10436,7 +10327,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10509,7 +10399,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318906001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 10mg capsules">
-    <originalText>Ramipril 10mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10583,7 +10472,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3048811000001105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Femodene tablets (Bayer Plc)">
-    <originalText>Femodene tablets (Bayer Plc)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10656,7 +10544,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3048811000001105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Femodene tablets (Bayer Plc)">
-    <originalText>Femodene tablets (Bayer Plc)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10730,7 +10617,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="42111000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microgynon 30 tablets (Bayer Plc)">
-    <originalText>Microgynon 30 tablets (Bayer Plc)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10803,7 +10689,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="42111000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microgynon 30 tablets (Bayer Plc)">
-    <originalText>Microgynon 30 tablets (Bayer Plc)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10877,7 +10762,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="323510009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxicillin 500mg capsules">
-    <originalText>Amoxicillin 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -10950,7 +10834,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321949006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fluoxetine 20mg capsules">
-    <originalText>Fluoxetine 20mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11023,7 +10906,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="319773006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin 75mg dispersible tablets">
-    <originalText>Aspirin 75mg dispersible tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11096,7 +10978,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="374296008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Levothyroxine sodium 100microgram tablets">
-    <originalText>Levothyroxine sodium 100microgram tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11169,7 +11050,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="374296008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Levothyroxine sodium 100microgram tablets">
-    <originalText>Levothyroxine sodium 100microgram tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11243,7 +11123,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11316,7 +11195,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11390,7 +11268,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11464,7 +11341,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11538,7 +11414,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11612,7 +11487,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11686,7 +11560,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11760,7 +11633,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325444003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prednisolone 5mg soluble tablets">
-    <originalText>Prednisolone 5mg soluble tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11833,7 +11705,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325444003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prednisolone 5mg soluble tablets">
-    <originalText>Prednisolone 5mg soluble tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11907,7 +11778,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325444003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prednisolone 5mg soluble tablets">
-    <originalText>Prednisolone 5mg soluble tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -11981,7 +11851,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12054,7 +11923,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12128,7 +11996,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12202,7 +12069,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12276,7 +12142,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12350,7 +12215,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12424,7 +12288,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12498,7 +12361,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12572,7 +12434,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12646,7 +12507,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12720,7 +12580,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="327313009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tamoxifen 20mg tablets">
-    <originalText>Tamoxifen 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12794,7 +12653,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12887,7 +12745,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318136009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-amilofruse 5mg/40mg tablets">
-    <originalText>Co-amilofruse 5mg/40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -12960,7 +12817,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318136009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-amilofruse 5mg/40mg tablets">
-    <originalText>Co-amilofruse 5mg/40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13034,7 +12890,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318859000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lisinopril 10mg tablets">
-    <originalText>Lisinopril 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13107,7 +12962,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318859000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lisinopril 10mg tablets">
-    <originalText>Lisinopril 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13181,7 +13035,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322623000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tramadol 50mg capsules">
-    <originalText>Tramadol 50mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13254,7 +13107,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322623000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tramadol 50mg capsules">
-    <originalText>Tramadol 50mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13475,7 +13327,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317896006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Digoxin 125microgram tablets">
-    <originalText>Digoxin 125microgram tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13548,7 +13399,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317896006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Digoxin 125microgram tablets">
-    <originalText>Digoxin 125microgram tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13622,7 +13472,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="319799004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Clopidogrel 75mg tablets">
-    <originalText>Clopidogrel 75mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13695,7 +13544,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="319799004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Clopidogrel 75mg tablets">
-    <originalText>Clopidogrel 75mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13769,7 +13617,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321152004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Temazepam 10mg tablets">
-    <originalText>Temazepam 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13842,7 +13689,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317249006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ranitidine 150mg tablets">
-    <originalText>Ranitidine 150mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13915,7 +13761,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317249006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ranitidine 150mg tablets">
-    <originalText>Ranitidine 150mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -13989,7 +13834,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317291008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Omeprazole 20mg gastro-resistant capsules">
-    <originalText>Omeprazole 20mg gastro-resistant capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14062,7 +13906,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317291008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Omeprazole 20mg gastro-resistant capsules">
-    <originalText>Omeprazole 20mg gastro-resistant capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14136,7 +13979,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325242002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gliclazide 80mg tablets">
-    <originalText>Gliclazide 80mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14209,7 +14051,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325242002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gliclazide 80mg tablets">
-    <originalText>Gliclazide 80mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14283,7 +14124,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="374296008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Levothyroxine sodium 100microgram tablets">
-    <originalText>Levothyroxine sodium 100microgram tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14356,7 +14196,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14449,7 +14288,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14523,7 +14361,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14597,7 +14434,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14671,7 +14507,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14745,7 +14580,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14818,7 +14652,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14892,7 +14725,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -14966,7 +14798,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15040,7 +14871,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15114,7 +14944,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15188,7 +15017,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15262,7 +15090,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15336,7 +15163,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15410,7 +15236,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15484,7 +15309,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15558,7 +15382,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320006003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Simvastatin 80mg tablets">
-    <originalText>Simvastatin 80mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15631,7 +15454,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="321949006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fluoxetine 20mg capsules">
-    <originalText>Fluoxetine 20mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15724,7 +15546,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15797,7 +15618,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15871,7 +15691,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39112411000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dihydrocodeine 60mg modified-release tablets">
-    <originalText>Dihydrocodeine 60mg modified-release tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -15945,7 +15764,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39113611000001102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Salbutamol 100micrograms/dose inhaler CFC free">
-    <originalText>Salbutamol 100micrograms/dose inhaler CFC free</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16038,7 +15856,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320023007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fluvastatin 40mg capsules">
-    <originalText>Fluvastatin 40mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16111,7 +15928,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320023007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fluvastatin 40mg capsules">
-    <originalText>Fluvastatin 40mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16185,7 +16001,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320023007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fluvastatin 40mg capsules">
-    <originalText>Fluvastatin 40mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16259,7 +16074,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320023007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fluvastatin 40mg capsules">
-    <originalText>Fluvastatin 40mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16333,7 +16147,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320023007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fluvastatin 40mg capsules">
-    <originalText>Fluvastatin 40mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16407,7 +16220,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320023007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fluvastatin 40mg capsules">
-    <originalText>Fluvastatin 40mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16481,7 +16293,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320023007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fluvastatin 40mg capsules">
-    <originalText>Fluvastatin 40mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16555,7 +16366,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320023007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fluvastatin 40mg capsules">
-    <originalText>Fluvastatin 40mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16629,7 +16439,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="573711000001104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol SR 80mg capsules (Sandoz Ltd)">
-    <originalText>Bedranol SR 80mg capsules (Sandoz Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16702,7 +16511,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="38751111000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Propranolol 80mg modified-release capsules">
-    <originalText>Propranolol 80mg modified-release capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16795,7 +16603,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="38751111000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Propranolol 80mg modified-release capsules">
-    <originalText>Propranolol 80mg modified-release capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16869,7 +16676,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322225002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin 300mg gastro-resistant tablets">
-    <originalText>Aspirin 300mg gastro-resistant tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -16942,7 +16748,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="183311000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nu-Seals 300 gastro-resistant tablets (Alliance Pharmaceuticals Ltd)">
-    <originalText>Nu-Seals 300 gastro-resistant tablets (Alliance Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -17035,7 +16840,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="183311000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nu-Seals 300 gastro-resistant tablets (Alliance Pharmaceuticals Ltd)">
-    <originalText>Nu-Seals 300 gastro-resistant tablets (Alliance Pharmaceuticals Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -17109,7 +16913,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="324607004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ciprofloxacin 250mg tablets">
-    <originalText>Ciprofloxacin 250mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -17182,7 +16985,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="324607004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ciprofloxacin 250mg tablets">
-    <originalText>Ciprofloxacin 250mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -17256,7 +17058,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="178011000001104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Zimovane LS 3.75mg tablets (Sanofi)">
-    <originalText>Zimovane LS 3.75mg tablets (Sanofi)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -17329,7 +17130,6 @@ Episodicity : Review</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="178011000001104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Zimovane LS 3.75mg tablets (Sanofi)">
-    <originalText>Zimovane LS 3.75mg tablets (Sanofi)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -17483,7 +17283,7 @@ Episodicity : Review</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="AD632056-105E-4AFF-9FE6-CE0046808311"/>
-                <code code="1058571000006103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Cetirizine Hydrochloride">
+                <code code="1058571000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Cetirizine Hydrochloride">
     <originalText>Adverse reaction to Cetirizine Hydrochloride</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -17545,7 +17345,7 @@ Episodicity : Review</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="BBB69294-9C3E-43CD-8A91-D4767E7CE4C8"/>
-                <code code="1020821000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Mebeverine Hydrochloride">
+                <code code="1020821000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Mebeverine Hydrochloride">
     <originalText>Adverse reaction to Mebeverine Hydrochloride</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -17607,7 +17407,7 @@ Episodicity : Review</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="F30D7F90-6FC7-463B-981C-F42C315B6F7E"/>
-                <code code="1062001000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Lustral">
+                <code code="1062001000006111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Lustral">
     <originalText>Adverse reaction to Lustral</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -17669,7 +17469,7 @@ Episodicity : Review</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="511808C9-61A9-43F7-A686-FF70507A8D57"/>
-                <code code="1030121000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Prednisolone">
+                <code code="1030121000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Prednisolone">
     <originalText>Adverse reaction to Prednisolone</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -17731,7 +17531,7 @@ Episodicity : Review</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="1EF85A89-A4BA-475B-9F1F-02935396DA36"/>
-                <code code="1012851000006104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Central Nervous System Drugs">
+                <code code="1012851000006115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Central Nervous System Drugs">
     <originalText>Adverse reaction to Central Nervous System Drugs</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -17784,8 +17584,7 @@ Episodicity : Review</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="84982E21-BD37-4CD3-8DD4-83B2D574E1ED" />
-        <code code="160504008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Marital state unknown">
-    <originalText>Marital state unknown</originalText>
+        <code code="250208012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Civil state unknown">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -17833,8 +17632,7 @@ Episodicity : Review</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="71E6F6E8-F2D4-4DD2-8A87-E1C95F14111D" />
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
+        <code code="1990681000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
