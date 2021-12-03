@@ -97,7 +97,7 @@ public class CodeableConceptCdMapperTest {
         var codeableConcept = fhirParseService.parseResource(allergyCodeableConcept, AllergyIntolerance.class).getCode();
 
         var outputMessage = codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(codeableConcept,
-            AllergyIntolerance.AllergyIntoleranceClinicalStatus.ACTIVE);
+            AllergyIntolerance.AllergyIntoleranceClinicalStatus.RESOLVED);
         assertThat(outputMessage)
             .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
             .isEqualToIgnoringWhitespace(expectedOutput);
