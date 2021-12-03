@@ -165,12 +165,18 @@ public class CodeableConceptCdMapper {
                     } else {
                         var extension = retrieveDescriptionExtension(coding.get());
                         if (extension.isPresent()) {
-                            Optional<String> originalText = extension.get().getExtension().stream()
+                            Optional<String> originalText = extension
+                                .get()
+                                .getExtension().stream()
                                 .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
                                 .map(extension1 -> extension1.getValue().toString())
                                 .findFirst();
 
-                            return originalText;
+                            if (originalText.isPresent()) {
+                                return originalText;
+                            } else if (coding.get().hasDisplay()) {
+                                return Optional.of(coding.get().getDisplay());
+                            }
                         } else if (coding.get().hasDisplay()) {
                             return Optional.of(coding.get().getDisplay());
                         }
