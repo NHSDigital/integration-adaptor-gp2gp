@@ -61,7 +61,7 @@ public class StructuredRecordMappingService {
                 .contentType(contentType)
                 .compressed(false) // always false for GPC documents
                 .largeAttachment(isLargeAttachment(attachment))
-                .originalBase64(true) // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
+                .originalBase64(false)
                 .length(attachment.getSize())
                 .build()
                 .toString()
