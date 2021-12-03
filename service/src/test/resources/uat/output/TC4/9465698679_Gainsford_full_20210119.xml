@@ -259,6 +259,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
                 <code code="1010061000006112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reactions">
+    <originalText>Adverse reactions</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -483,7 +484,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
-                <code code="367041000006110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[X]Beta-adrenorecep antag caus advers eff in ther use, NEC">
+                <code code="367041000006110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Beta-adrenoceptor blocking drug adverse reaction">
+    <originalText>[X]Beta-adrenorecep antag caus advers eff in ther use, NEC</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1521,7 +1523,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="4CF7DECB-3AE2-42C3-97F0-BB440F28D385"/>
-                <code code="2164497013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to pivampicillin">
+                <code code="2164497013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pivampicillin adverse reaction">
+    <originalText>Adverse reaction to pivampicillin</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1582,7 +1585,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
-                <code code="464511000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to amoxycillin">
+                <code code="464511000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxycillin adverse reaction">
+    <originalText>Adverse reaction to amoxycillin</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1643,7 +1647,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F"/>
-                <code code="464511000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to amoxycillin">
+                <code code="464511000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxycillin adverse reaction">
+    <originalText>Adverse reaction to amoxycillin</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1704,7 +1709,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B"/>
-                <code code="420281000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[X]Personal history of allergy to other antibiotic agents">
+                <code code="420281000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
+    <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1826,7 +1832,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
-                <code code="987271000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[V]Personal history of bisphosphonate allergy">
+                <code code="987271000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Biphosphonates allergy">
+    <originalText>[V]Personal history of bisphosphonate allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1887,7 +1894,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B"/>
-                <code code="987271000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[V]Personal history of bisphosphonate allergy">
+                <code code="987271000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Biphosphonates allergy">
+    <originalText>[V]Personal history of bisphosphonate allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2009,7 +2017,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
-                <code code="630421000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Drug hypersensitivity NOS">
+                <code code="630421000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
+    <originalText>Drug hypersensitivity NOS</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2070,7 +2079,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
-                <code code="420281000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[X]Personal history of allergy to other antibiotic agents">
+                <code code="420281000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
+    <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2254,6 +2264,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="77EE1EA7-135F-4541-99A5-F8D63433AE7D"/>
                 <code code="1076241000006111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Ethyol">
+    <originalText>Adverse reaction to Ethyol</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2315,6 +2326,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
                 <code code="1105181000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Erythromid">
+    <originalText>Adverse reaction to Erythromid</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2437,6 +2449,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="46A43153-7A96-44D4-A14A-A63284061767"/>
                 <code code="1010131000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to EMIS Drug Groups/Constituents and Approved Names">
+    <originalText>Adverse reaction to EMIS Drug Groups/Constituents and Approved Names</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2619,7 +2632,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
-                <code code="2164479017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to chloroquine">
+                <code code="2164479017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Chloroquine adverse reaction">
+    <originalText>Adverse reaction to chloroquine</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2680,7 +2694,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="F972CFDF-B4D7-4392-A96A-4D1BD8D14F14"/>
-                <code code="2164496016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to penicillins">
+                <code code="2164496016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Penicillin adverse reaction">
+    <originalText>Adverse reaction to penicillins</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2742,6 +2757,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="09DAA58F-63BB-4B07-AD44-40F8C3E0109B"/>
                 <code code="1011841000006111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Beta-Adrenoceptor Blocking Drugs">
+    <originalText>Adverse reaction to Beta-Adrenoceptor Blocking Drugs</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>

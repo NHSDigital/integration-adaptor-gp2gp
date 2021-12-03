@@ -19,7 +19,7 @@
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text>Asserted By: Related Person Mr Related Person</text>
+                        <text>Status: Resolved Asserted By: Related Person Mr Related Person</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
             </ObservationStatement>

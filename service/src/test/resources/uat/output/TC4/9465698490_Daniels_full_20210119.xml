@@ -17279,6 +17279,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="AD632056-105E-4AFF-9FE6-CE0046808311"/>
                 <code code="1058571000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Cetirizine Hydrochloride">
+    <originalText>Adverse reaction to Cetirizine Hydrochloride</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -17340,6 +17341,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="BBB69294-9C3E-43CD-8A91-D4767E7CE4C8"/>
                 <code code="1020821000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Mebeverine Hydrochloride">
+    <originalText>Adverse reaction to Mebeverine Hydrochloride</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -17401,6 +17403,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="F30D7F90-6FC7-463B-981C-F42C315B6F7E"/>
                 <code code="1062001000006111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Lustral">
+    <originalText>Adverse reaction to Lustral</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -17462,6 +17465,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="511808C9-61A9-43F7-A686-FF70507A8D57"/>
                 <code code="1030121000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Prednisolone">
+    <originalText>Adverse reaction to Prednisolone</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -17523,6 +17527,7 @@
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="1EF85A89-A4BA-475B-9F1F-02935396DA36"/>
                 <code code="1012851000006115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Central Nervous System Drugs">
+    <originalText>Adverse reaction to Central Nervous System Drugs</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
