@@ -183,14 +183,14 @@ public class BloodPressureMapper {
 
     private String buildBloodPressureCode(Observation observation) {
         if (observation.hasCode()) {
-            return codeableConceptCdMapper.mapCodeableConceptToCd(observation.getCode());
+            return codeableConceptCdMapper.mapCodeableConceptToCdForBloodPressure(observation.getCode());
         }
         throw new EhrMapperException("Blood Pressure Compound Statement code could not be mapped");
     }
 
     private String buildBloodPressureComponentCode(Observation.ObservationComponentComponent observationComponent) {
         if (observationComponent.hasCode()) {
-            return codeableConceptCdMapper.mapCodeableConceptToCd(observationComponent.getCode());
+            return codeableConceptCdMapper.mapCodeableConceptToCdForBloodPressure(observationComponent.getCode());
         }
         throw new EhrMapperException("Blood Pressure Observation Statement code could not be mapped");
     }
