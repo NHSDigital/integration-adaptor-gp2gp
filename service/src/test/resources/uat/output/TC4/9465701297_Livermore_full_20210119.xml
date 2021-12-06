@@ -416,7 +416,8 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -426,7 +427,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
-                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -439,7 +441,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
-                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -630,7 +633,8 @@
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
-        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -640,7 +644,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D"/>
-                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -653,7 +658,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
-                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1142,7 +1148,8 @@
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="BD418AAA-36ED-476E-967C-7CCBA1D0AAED"/>
-        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1152,7 +1159,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="7CB9F236-03CB-4AAD-BB0D-534201961315"/>
-                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1165,7 +1173,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="90AB2301-DC3C-4A37-8EAB-AA171DB2B88E"/>
-                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1632,7 +1641,8 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A"/>
-        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1642,7 +1652,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
-                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1655,7 +1666,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="9A4CF638-ABA1-4CF9-8055-C5846EE42542"/>
-                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1674,7 +1686,8 @@
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
-        <code code="254080015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing blood pressure reading">
+        <code code="163034007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing blood pressure">
+    <originalText>Standing blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1684,7 +1697,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
-                <code code="1780182014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing systolic blood pressure">
+                <code code="400974009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing systolic blood pressure">
+    <originalText>Standing systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1697,7 +1711,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C"/>
-                <code code="1780183016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing diastolic blood pressure">
+                <code code="400975005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing diastolic blood pressure">
+    <originalText>Standing diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1723,7 +1738,8 @@
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450"/>
-        <code code="254080015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing blood pressure reading">
+        <code code="163034007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing blood pressure">
+    <originalText>Standing blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1733,7 +1749,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0"/>
-                <code code="1780182014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing systolic blood pressure">
+                <code code="400974009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing systolic blood pressure">
+    <originalText>Standing systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1745,7 +1762,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7"/>
-                <code code="1780183016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing diastolic blood pressure">
+                <code code="400975005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing diastolic blood pressure">
+    <originalText>Standing diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1797,7 +1815,8 @@
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C"/>
-        <code code="254083018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting blood pressure reading">
+        <code code="163035008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting blood pressure">
+    <originalText>Sitting blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1807,7 +1826,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
-                <code code="2159155011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting systolic blood pressure">
+                <code code="407554009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting systolic blood pressure">
+    <originalText>Sitting systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1820,7 +1840,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="7AAC20C0-654A-446A-903F-2DFC0AA8B3F8"/>
-                <code code="2159156012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting diastolic blood pressure">
+                <code code="407555005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting diastolic blood pressure">
+    <originalText>Sitting diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1846,7 +1867,8 @@
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
-        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1856,7 +1878,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="86B82A72-9739-4517-8485-F15FF97CE21A"/>
-                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1868,7 +1891,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2"/>
-                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1895,7 +1919,8 @@
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>
-        <code code="254079018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure reading">
+        <code code="163033001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure">
+    <originalText>Lying blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1905,7 +1930,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63"/>
-                <code code="2159157015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
+                <code code="407556006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
+    <originalText>Lying systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1918,7 +1944,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
-                <code code="2159158013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
+                <code code="407557002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
+    <originalText>Lying diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1944,7 +1971,8 @@
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="87102979-C329-4194-819B-D057AAEA625B"/>
-        <code code="254079018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure reading">
+        <code code="163033001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure">
+    <originalText>Lying blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1954,7 +1982,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="10720133-30C3-4145-9184-8713284C5A90"/>
-                <code code="2159157015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
+                <code code="407556006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
+    <originalText>Lying systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1966,7 +1995,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
-                <code code="2159158013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
+                <code code="407557002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
+    <originalText>Lying diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -4583,7 +4613,8 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C"/>
-        <code code="254063019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - blood pressure reading</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4593,7 +4624,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="43F68F4A-CF96-49AF-8BFD-2B89AAD86E4E"/>
-                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -4606,7 +4638,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="9EC5CD05-9875-4F82-AC04-19B706D79BC0"/>
-                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -4648,7 +4681,8 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="2317993E-315F-4AED-B9A7-65D00D23C35D"/>
-        <code code="254079018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure reading">
+        <code code="163033001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure">
+    <originalText>Lying blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4658,7 +4692,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48"/>
-                <code code="2159157015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
+                <code code="407556006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
+    <originalText>Lying systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -4671,7 +4706,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
-                <code code="2159158013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
+                <code code="407557002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
+    <originalText>Lying diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -4713,7 +4749,8 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C"/>
-        <code code="254083018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting blood pressure reading">
+        <code code="163035008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting blood pressure">
+    <originalText>Sitting blood pressure</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -4723,7 +4760,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="D7B28194-89DC-452E-ACE8-74CC752A2F18"/>
-                <code code="2159155011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting systolic blood pressure">
+                <code code="407554009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting systolic blood pressure">
+    <originalText>Sitting systolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -4736,7 +4774,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05"/>
-                <code code="2159156012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting diastolic blood pressure">
+                <code code="407555005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting diastolic blood pressure">
+    <originalText>Sitting diastolic blood pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
