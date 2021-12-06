@@ -125,6 +125,26 @@ public class CodeableConceptCdMapper {
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
 
+    public String mapCodeableConceptToCdForBloodPressure(CodeableConcept codeableConcept) {
+        var builder = CodeableConceptCdTemplateParameters.builder();
+        var mainCode = findMainCode(codeableConcept);
+
+        builder.nullFlavor(mainCode.isEmpty());
+        var originalText = findOriginalText(codeableConcept, mainCode);
+        originalText.ifPresent(builder::mainOriginalText);
+
+        if (mainCode.isPresent()) {
+            builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
+            var code = Optional.of(mainCode.get().getCode());
+            var displayText = findDisplayText(mainCode.get());
+
+            code.ifPresent(builder::mainCode);
+            displayText.ifPresent(builder::mainDisplayName);
+        }
+
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
+    }
+
     private Optional<Coding> findMainCode(CodeableConcept codeableConcept) {
         return codeableConcept.getCoding()
             .stream()

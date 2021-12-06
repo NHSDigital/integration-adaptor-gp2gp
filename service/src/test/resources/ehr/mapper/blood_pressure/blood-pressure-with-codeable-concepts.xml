@@ -1,7 +1,8 @@
 <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-        <code code="2207951000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prothrombin time">
+        <code code="852471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prothrombin time">
+    <originalText>Prothrombin time</originalText>
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -11,7 +12,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-                <code code="120159016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -31,7 +33,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-                <code code="2734671000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic arterial pressure</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
