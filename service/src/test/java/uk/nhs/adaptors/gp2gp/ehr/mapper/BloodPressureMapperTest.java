@@ -83,7 +83,7 @@ public class BloodPressureMapperTest {
 
     @Test
     public void When_MappingEmptyObservation_Expect_CompoundStatementXmlReturned() throws IOException {
-        when(mockCodeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+        when(mockCodeableConceptCdMapper.mapCodeableConceptToCdForBloodPressure(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_EMPTY_OBSERVATION);
@@ -97,7 +97,7 @@ public class BloodPressureMapperTest {
 
     @Test
     public void When_MappingBloodPressureWithNestedTrue_Expect_CompoundStatementXmlReturned() throws IOException {
-        when(mockCodeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+        when(mockCodeableConceptCdMapper.mapCodeableConceptToCdForBloodPressure(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_BLOOD_PRESSURE_WITH_DATA);
@@ -112,7 +112,7 @@ public class BloodPressureMapperTest {
     @ParameterizedTest
     @MethodSource("testArguments")
     public void When_MappingBloodPressure_Expect_CompoundStatementXmlReturned(String inputJson, String outputXml) throws IOException {
-        when(mockCodeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+        when(mockCodeableConceptCdMapper.mapCodeableConceptToCdForBloodPressure(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + inputJson);
