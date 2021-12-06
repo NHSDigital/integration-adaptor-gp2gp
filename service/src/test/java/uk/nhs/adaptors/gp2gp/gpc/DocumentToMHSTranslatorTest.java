@@ -12,6 +12,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
+import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
@@ -28,15 +29,25 @@ public class DocumentToMHSTranslatorTest {
     private static final String OUTPUT_DIRECTORY = "output/";
     private static final String INPUT_PATH = TEST_FILE_DIRECTORY + INPUT_DIRECTORY;
     private static final String OUTPUT_PATH = TEST_FILE_DIRECTORY + OUTPUT_DIRECTORY;
-    private static final String BINARY_INPUT_FILE = "test-binary.json";
-    private static final String EXPECTED_MHS_OUTBOUND_REQUEST_FILE = "expected-mhs-outbound-request-payload.json";
+
     private static final String TEST_DOCUMENT_ID = "test-document-id";
     private static final String MESSAGE_ID = "message-id";
     private static final String TEST_ID = "test-id";
     private static final String TEST_DATE_TIME = "2020-01-01T01:01:01.01Z";
+    private static final String TEST_TASK_ID = "test-task-id";
+    private static final String TEST_CONVERSATION_ID = "test-conversation-id";
+    private static final String TEST_TO_ODS = "test-to-ods-code";
+    private static final String TEST_TO_ASID = "test-to-asid";
+    private static final String TEST_TITLE = "Test DocumentReference.content.attachment.title";
+
+    private static final String BINARY_INPUT_FILE = "test-binary.json";
+
+    private static final String EXPECTED_MHS_OUTBOUND_REQUEST_FILE = "expected-mhs-outbound-request-payload.json";
+    private static final String EXPECTED_MHS_OUTBOUND_ABSENTATTACHMENT_FILE = "expected-mhs-outbound-absentattachment-payload.json";
 
     private static String jsonBinaryContent;
     private static String expectedMhsOutboundRequest;
+    private static String expectedAbsentAttachmentPayload;
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -49,6 +60,7 @@ public class DocumentToMHSTranslatorTest {
     public static void initialize() throws IOException {
         jsonBinaryContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + BINARY_INPUT_FILE);
         expectedMhsOutboundRequest = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_MHS_OUTBOUND_REQUEST_FILE);
+        expectedAbsentAttachmentPayload = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_MHS_OUTBOUND_ABSENTATTACHMENT_FILE);
     }
 
     @BeforeEach
@@ -69,5 +81,22 @@ public class DocumentToMHSTranslatorTest {
         String payload = gpcDocumentTranslator.translateGpcResponseToMhsOutboundRequestData(taskDefinition, jsonBinaryContent);
 
         assertThat(payload).isEqualToIgnoringWhitespace(expectedMhsOutboundRequest);
+    }
+
+    @Test
+    public void When_TranslatingFileContentData_Expect_ProperMhsOutboundRequestPayload() {
+        final SendAbsentAttachmentTaskDefinition taskDefinition = SendAbsentAttachmentTaskDefinition.builder()
+            .title(TEST_TITLE)
+            .messageId(MESSAGE_ID)
+            .documentId(TEST_DOCUMENT_ID)
+            .taskId(TEST_TASK_ID)
+            .conversationId(TEST_CONVERSATION_ID)
+            .toOdsCode(TEST_TO_ODS)
+            .toAsid(TEST_TO_ASID)
+            .build();
+
+        String payload = gpcDocumentTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, jsonBinaryContent);
+
+        assertThat(payload).isEqualToIgnoringWhitespace(expectedAbsentAttachmentPayload);
     }
 }
