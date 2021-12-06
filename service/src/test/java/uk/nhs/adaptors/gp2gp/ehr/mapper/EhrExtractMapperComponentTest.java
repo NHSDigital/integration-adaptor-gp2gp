@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.junit.jupiter.api.AfterEach;
@@ -112,10 +113,17 @@ public class EhrExtractMapperComponentTest {
             .thenReturn(CodeableConceptMapperMockUtil.ACTUAL_PROBLEM_CODE);
         when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(any(CodeableConcept.class),
+            any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(any(CodeableConcept.class),
+            any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(codeableConceptCdMapper.getDisplayFromCodeableConcept(any(CodeableConcept.class)))
             .thenCallRealMethod();
         when(codeableConceptCdMapper.mapCodeableConceptToCdForBloodPressure(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+
 
         messageContext = new MessageContext(randomIdGeneratorService);
 

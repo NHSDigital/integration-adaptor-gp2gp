@@ -6706,7 +6706,8 @@ historical date Transformed Immunization problem header Originally coded: First 
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="64CA6C9B-7BBE-474A-824C-43A7BD5B90F7"/>
-                <code code="442112014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Latex allergy">
+                <code code="442112014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to latex">
+    <originalText>Latex allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>

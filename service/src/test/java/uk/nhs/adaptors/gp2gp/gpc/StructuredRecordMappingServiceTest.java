@@ -57,21 +57,21 @@ class StructuredRecordMappingServiceTest {
         NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1,
         buildAttachmentDescription(
             "111_new_doc_ref_id_111_new_doc_ref_id.txt", "text/plain", false,
-            false, true, ATTACHMENT_1_SIZE
+            false, false, ATTACHMENT_1_SIZE
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_2 = buildExternalAttachment(
         NEW_DOC_REF_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2,
         buildAttachmentDescription(
             "222_new_doc_ref_id_222_new_doc_ref_id.html", "text/html", false,
-            false, true, ATTACHMENT_2_SIZE
+            false, false, ATTACHMENT_2_SIZE
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_1 = buildExternalAttachment(
         NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1,
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_ref_id.txt", "text/plain", false,
-            false, true, ATTACHMENT_1_SIZE
+            false, false, ATTACHMENT_1_SIZE
         )
     );
 

@@ -7115,7 +7115,8 @@ note - this is obviously wrong?</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E"/>
-                <code code="435198016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Warfarin allergy">
+                <code code="435198016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to warfarin">
+    <originalText>Warfarin allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -7178,7 +7179,8 @@ This is text for a warfarin allergy</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="4264DD9C-01B2-4F68-A222-E3B48540496D"/>
-                <code code="152306018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
+                <code code="152306018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanut">
+    <originalText>Allergy to peanuts</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -7243,7 +7245,8 @@ This is a peanut allergy
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3AC188FA-B46E-465B-9614-37F234BEB494"/>
-                <code code="433808014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin allergy">
+                <code code="433808014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to aspirin">
+    <originalText>Aspirin allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -7306,7 +7309,8 @@ Drug Allergy - Apsrin</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="CB0B5DEA-25E6-4F23-8EAD-19EE8705CED4"/>
-                <code code="152306018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
+                <code code="152306018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanut">
+    <originalText>Allergy to peanuts</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>

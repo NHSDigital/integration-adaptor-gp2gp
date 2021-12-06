@@ -96,7 +96,7 @@
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text></text>
+                        <text>Status: Resolved</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
             </ObservationStatement>
