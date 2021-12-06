@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
+import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfString;
 
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -60,7 +60,4 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
-    private int getBytesLengthOfString(String input) {
-        return input.getBytes(UTF_8).length;
-    }
 }

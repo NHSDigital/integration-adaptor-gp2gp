@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 public class OutboundMessage {
     private static final int ATTACHMENT_DESCRIPTION_INDENTATION_12 = 12;
     private static final int ATTACHMENT_DESCRIPTION_INDENTATION_16 = 16;
-    public static final String LENGTH_PLACEHOLDER = "LENGTH_PLACEHOLDER_ID=";
+    private static final String LENGTH_PLACEHOLDER = "LENGTH_PLACEHOLDER_ID=";
 
     private String payload;
     @JsonInclude(JsonInclude.Include.NON_NULL)

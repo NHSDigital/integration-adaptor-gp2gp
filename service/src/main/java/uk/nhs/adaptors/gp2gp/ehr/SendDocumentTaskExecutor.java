@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
+import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfString;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -172,11 +172,6 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     }
 
     private boolean isLargeAttachment(String binary) {
-        var bytes = binary.getBytes(StandardCharsets.UTF_8);
-        return bytes.length > gp2gpConfiguration.getLargeAttachmentThreshold();
-    }
-
-    private int getBytesLengthOfString(String input) {
-        return input.getBytes(UTF_8).length;
+        return getBytesLengthOfString(binary) > gp2gpConfiguration.getLargeAttachmentThreshold();
     }
 }

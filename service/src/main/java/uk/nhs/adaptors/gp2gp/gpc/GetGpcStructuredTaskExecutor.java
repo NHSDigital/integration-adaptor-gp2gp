@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+
+import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfString;
 import static uk.nhs.adaptors.gp2gp.common.utils.Gzip.compress;
 
 @Slf4j
@@ -245,9 +247,5 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .buildStorageDataWrapper(taskDefinition, outboundMessageString, taskId);
 
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
-    }
-
-    private int getBytesLengthOfString(String input) {
-        return input.getBytes(UTF_8).length;
     }
 }

@@ -4,8 +4,6 @@ import static java.lang.String.format;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
-import static uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage.LENGTH_PLACEHOLDER;
-
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +105,7 @@ public class EhrExtractStatusService {
     private static final String ERROR_CODE_PATH = ERROR + DOT + CODE;
     private static final String ERROR_MESSAGE_PATH = ERROR + DOT + MESSAGE;
     private static final String ERROR_TASK_TYPE_PATH = ERROR + DOT + TASK_TYPE;
+    private static final String LENGTH_PLACEHOLDER = "LENGTH_PLACEHOLDER_ID=";
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
