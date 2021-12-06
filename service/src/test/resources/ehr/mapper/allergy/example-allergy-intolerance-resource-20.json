@@ -1,6 +1,7 @@
 {
     "resourceType": "AllergyIntolerance",
     "id": "230D3D37-99E3-450A-AE88-3BC42C0DF432",
+    "clinicalStatus": "resolved",
     "category": [
         "medication"
     ],

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Extension;
@@ -32,6 +33,8 @@ public class CodeableConceptCdMapper {
     private static final String DESCRIPTION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid";
     private static final String FIXED_ACTUAL_PROBLEM_CODE = "55607006";
     private static final String PROBLEM_DISPLAY_NAME = "Problem";
+    private static final String ACTIVE_CLINICAL_STATUS = "active";
+    private static final String RESOLVED_CLINICAL_STATUS = "resolved";
 
     public String mapCodeableConceptToCd(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
@@ -71,6 +74,44 @@ public class CodeableConceptCdMapper {
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
 
+    public String mapCodeableConceptToCdForAllergy(CodeableConcept codeableConcept, AllergyIntolerance.AllergyIntoleranceClinicalStatus
+        allergyIntoleranceClinicalStatus) {
+        var builder = CodeableConceptCdTemplateParameters.builder();
+        var mainCode = findMainCode(codeableConcept);
+
+        builder.nullFlavor(mainCode.isEmpty());
+
+        if (mainCode.isPresent()) {
+            var extension = retrieveDescriptionExtension(mainCode.get())
+                .map(Extension::getExtension)
+                .orElse(Collections.emptyList());
+
+            if (ACTIVE_CLINICAL_STATUS.equals(allergyIntoleranceClinicalStatus.toCode())) {
+                builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
+            } else {
+                builder.nullFlavor(true);
+            }
+
+            Optional<String> code = extension.stream()
+                .filter(descriptionExt -> DESCRIPTION_ID.equals(descriptionExt.getUrl()))
+                .map(description -> description.getValue().toString())
+                .findFirst()
+                .or(() -> Optional.of(mainCode.get().getCode()));
+            code.ifPresent(builder::mainCode);
+
+            Optional<String> displayName = Optional.of(mainCode.get().getDisplay());
+            displayName.ifPresent(builder::mainDisplayName);
+
+            if (codeableConcept.hasText()) {
+                builder.mainOriginalText(codeableConcept.getText());
+            } else {
+                var originalText = findOriginalTextForAllergy(codeableConcept, mainCode, allergyIntoleranceClinicalStatus);
+                originalText.ifPresent(builder::mainOriginalText);
+            }
+        }
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
+    }
+
     public String mapCodeableConceptToCdForTransformedActualProblemHeader(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
 
@@ -96,21 +137,70 @@ public class CodeableConceptCdMapper {
             if (codeableConcept.hasText()) {
                 return Optional.of(codeableConcept.getText());
             } else {
-                var extension = retrieveDescriptionExtension(coding.get());
-                Optional<String> originalText = extension.stream()
-                    .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
-                    .map(extension1 -> extension1.getValue().toString())
-                    .findFirst();
-
-                if (originalText.isEmpty() && coding.get().hasDisplay()) {
-                    originalText = Optional.of(coding.get().getDisplay());
+                if (coding.get().hasDisplay()) {
+                    Optional<String> originalText = Optional.of(coding.get().getDisplay());
+                    return originalText;
+                } else {
+                    var extension = retrieveDescriptionExtension(coding.get());
+                    Optional<String> originalText = extension.stream()
+                        .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
+                        .map(extension1 -> extension1.getValue().toString())
+                        .findFirst();
+                    return originalText;
                 }
-
-                return originalText;
             }
         } else {
             return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
         }
+    }
+
+    private Optional<String> findOriginalTextForAllergy(CodeableConcept codeableConcept, Optional<Coding> coding,
+        AllergyIntolerance.AllergyIntoleranceClinicalStatus allergyIntoleranceClinicalStatus) {
+
+        if (!allergyIntoleranceClinicalStatus.toCode().isEmpty()) {
+            if (RESOLVED_CLINICAL_STATUS.equals(allergyIntoleranceClinicalStatus.toCode())) {
+                if (coding.isPresent()) {
+                    if (codeableConcept.hasText()) {
+                        return Optional.of(codeableConcept.getText());
+                    } else {
+                        var extension = retrieveDescriptionExtension(coding.get());
+                        if (extension.isPresent()) {
+                            Optional<String> originalText = extension
+                                .get()
+                                .getExtension().stream()
+                                .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
+                                .map(extension1 -> extension1.getValue().toString())
+                                .findFirst();
+
+                            if (originalText.isPresent()) {
+                                return originalText;
+                            } else if (coding.get().hasDisplay()) {
+                                return Optional.of(coding.get().getDisplay());
+                            }
+                        } else if (coding.get().hasDisplay()) {
+                            return Optional.of(coding.get().getDisplay());
+                        }
+                    }
+                }
+            } else if (ACTIVE_CLINICAL_STATUS.equals(allergyIntoleranceClinicalStatus.toCode())) {
+                Optional<Extension> extension = retrieveDescriptionExtension(coding.get());
+                if (extension.isPresent()) {
+                    Optional<String> originalText = extension
+                        .get()
+                        .getExtension().stream()
+                        .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
+                        .map(extension1 -> extension1.getValue().toString())
+                        .findFirst();
+                    if (originalText.isPresent() && StringUtils.isNotBlank(originalText.get())) {
+                        return originalText;
+                    }
+                }
+
+                return Optional.empty();
+            }
+        }
+
+        return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
     }
 
     private Optional<String> findDisplayText(Coding coding) {
@@ -141,6 +231,17 @@ public class CodeableConceptCdMapper {
         var mainCode = findMainCode(codeableConcept);
 
         var originalText = findOriginalText(codeableConcept, mainCode);
+        originalText.ifPresent(builder::mainOriginalText);
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
+    }
+
+    public String mapToNullFlavorCodeableConceptForAllergy(CodeableConcept codeableConcept,
+        AllergyIntolerance.AllergyIntoleranceClinicalStatus allergyIntoleranceClinicalStatus) {
+
+        var builder = CodeableConceptCdTemplateParameters.builder().nullFlavor(true);
+        var mainCode = findMainCode(codeableConcept);
+
+        var originalText = findOriginalTextForAllergy(codeableConcept, mainCode, allergyIntoleranceClinicalStatus);
         originalText.ifPresent(builder::mainOriginalText);
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }

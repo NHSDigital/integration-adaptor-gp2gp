@@ -1,7 +1,6 @@
 {
     "resourceType": "AllergyIntolerance",
-    "id": "04288662-8B7A-4350-B69B-CE155E992A7C",
-    "clinicalStatus": "resolved",
+    "id": "0C1232CF-D34B-4C16-A5F4-0F6461C51A41",
     "meta": {
         "profile": [
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
@@ -10,10 +9,10 @@
     "identifier": [
         {
             "system": "https://EMISWeb/A82038",
-            "value": "04288662-8B7A-4350-B69B-CE155E992A7C"
+            "value": "55D2363D57A248F49A745B2E03F5E93D0C1232CFD34B4C16A5F40F6461C51A41"
         }
     ],
-    "clinicalStatus": "active",
+    "clinicalStatus": "resolved",
     "verificationStatus": "unconfirmed",
     "category": [
         "medication"
@@ -22,8 +21,8 @@
         "coding": [
             {
                 "system": "http://read.info/readv2",
-                "code": "14LK.00",
-                "display": "H/O: aspirin allergy",
+                "code": "TJ00800",
+                "display": "Adverse reaction to pivampicillin rt",
                 "userSelected": true
             },
             {
@@ -33,32 +32,27 @@
                         "extension": [
                             {
                                 "url": "descriptionId",
-                                "valueId": "433808014"
-                            },
-                            {
-                                "url": "descriptionDisplay",
-                                "valueString": "Aspirin allergy"
+                                "valueId": "2164497013"
                             }
                         ]
                     }
                 ],
-              "system": "http://snomed.info/sct",
-              "code": "293586001",
-              "display": "Aspirin allergy"
+                "system": "http://snomed.info/sct",
+                "code": "292971006",
+                "display": "Pivampicillin adverse reaction pt"
             }
         ]
     },
     "patient": {
-       "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+        "reference": "Patient/55D2363D-57A2-48F4-9A74-5B2E03F5E93D"
     },
-    "onsetDateTime": "2010-01-13",
-    "assertedDate": "2010-01-13T11:41:26.583+00:00",
+    "assertedDate": "2019-01-28T13:43:36.107+00:00",
     "recorder": {
-        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+        "reference": "Practitioner/2DB481A3-306A-4133-9491-1558161D6A2B"
     },
     "note": [
         {
-            "text": "Significance : Minor - Episodicity : First - Drug Allergy - Apsrin"
+            "text": "allergy with no date recorded"
         }
     ]
 }
