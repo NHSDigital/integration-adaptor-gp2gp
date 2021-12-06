@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import org.hl7.fhir.dstu3.model.Binary;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ public class GpcDocumentTranslatorTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
-        gpcDocumentTranslator = new GpcDocumentTranslator(new FhirParseService(),
+        gpcDocumentTranslator = new GpcDocumentTranslator(
             new EhrDocumentMapper(timestampService, randomIdGeneratorService));
     }
 
@@ -66,7 +67,9 @@ public class GpcDocumentTranslatorTest {
             .messageId(MESSAGE_ID)
             .documentId(TEST_DOCUMENT_ID)
             .build();
-        String payload = gpcDocumentTranslator.translateToMhsOutboundRequestData(taskDefinition, jsonBinaryContent);
+        Binary binary = new FhirParseService().parseResource(jsonBinaryContent, Binary.class);
+        String payload = gpcDocumentTranslator.translateToMhsOutboundRequestData(
+            taskDefinition, binary.getContentAsBase64(), binary.getContentType());
 
         assertThat(payload).isEqualToIgnoringWhitespace(expectedMhsOutboundRequest);
     }

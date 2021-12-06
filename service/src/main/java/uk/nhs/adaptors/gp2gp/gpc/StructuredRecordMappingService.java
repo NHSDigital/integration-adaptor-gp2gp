@@ -62,7 +62,7 @@ public class StructuredRecordMappingService {
                 .compressed(false) // always false for GPC documents
                 .largeAttachment(isLargeAttachment(attachment))
                 .originalBase64(false)
-                .length(attachment.getSize())
+                .documentId(documentId)
                 .build()
                 .toString()
             )
