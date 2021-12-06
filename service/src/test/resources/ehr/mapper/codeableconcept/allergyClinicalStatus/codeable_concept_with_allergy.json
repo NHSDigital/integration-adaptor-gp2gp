@@ -12,7 +12,7 @@
             "value": "55D2363D57A248F49A745B2E03F5E93D0C1232CFD34B4C16A5F40F6461C51A41"
         }
     ],
-    "clinicalStatus": "active",
+    "clinicalStatus": "resolved",
     "verificationStatus": "unconfirmed",
     "category": [
         "medication"
@@ -33,10 +33,6 @@
                             {
                                 "url": "descriptionId",
                                 "valueId": "2164497013"
-                            },
-                            {
-                                "url": "descriptionDisplay",
-                                "valueString": "Adverse reaction to pivampicillin syn"
                             }
                         ]
                     }
