@@ -303,6 +303,34 @@ public class EhrExtractStatusService {
                 .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
+        return getEhrExtractStatus(query, docs, updateBuilder, returningUpdatedRecordOption);
+    }
+
+    public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferencesAbsent(
+        GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
+        Map<String, String> titles) {
+        Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
+
+        var docs = new ArrayList<>();
+
+        Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
+        Instant now = Instant.now();
+        titles.forEach((documentId, fileName) ->
+            docs.add(EhrExtractStatus.GpcDocument.builder()
+                .documentId(documentId)
+                .fileName(fileName)
+                .accessDocumentUrl(null)
+                .objectName(null)
+                .accessedAt(now)
+                .taskId(documentReferencesTaskDefinition.getTaskId())
+                .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+
+        return getEhrExtractStatus(query, docs, updateBuilder, returningUpdatedRecordOption);
+    }
+
+    private EhrExtractStatus getEhrExtractStatus(Query query, ArrayList<Object> docs, Update.AddToSetBuilder updateBuilder,
+        FindAndModifyOptions returningUpdatedRecordOption) {
         Update update = updateBuilder.each(docs);
 
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
