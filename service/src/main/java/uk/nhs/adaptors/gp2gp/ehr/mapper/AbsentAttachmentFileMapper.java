@@ -17,9 +17,9 @@ public class AbsentAttachmentFileMapper {
 
     public static String mapDataToAbsentAttachment(String title, String odsCode, String conversationId) {
         var absentAttachment = AbsentAttachmentParameters.builder()
-            .title(title) //pass the value of content.attachment.title got from Emis
-            .odsCode(odsCode)  //transaction or wrapper layer
-            .conversationId(conversationId) //transaction or wrapper layer
+            .title(title)
+            .odsCode(odsCode)
+            .conversationId(conversationId)
             .build();
         return TemplateUtils.fillTemplate(ABSENT_ATTACHMENT_TEMPLATE, absentAttachment);
     }

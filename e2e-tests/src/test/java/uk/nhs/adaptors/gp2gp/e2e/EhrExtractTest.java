@@ -237,9 +237,6 @@ public class EhrExtractTest {
         assertThat(documentList.size()).isEqualTo(documentCount);
     }
 
-    //TODO: Figure happy path for AbsentAttachments
-    // Test cases for non-absent attachments
-
     private void assertMultipleDocsSent(String conversationId, String nhsNumber, String documentId, int arraySize) {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, FROM_ODS_CODE_1);
@@ -248,50 +245,10 @@ public class EhrExtractTest {
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
         var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-        //assertThatAccessAbsentDocumentWasFetched(conversationId, singleDocument, documentId);
         assertThatAccessDocumentWasFetched(conversationId, singleDocument, documentId);
 
         var messageIds = waitFor(() -> getTheSplitDocumentIds(conversationId));
         softly.assertThat(messageIds.size()).isEqualTo(arraySize);
-    }
-
-    private void assertMultipleDocsSentAbsent(String conversationId, String nhsNumber, String documentId, int arraySize) {
-        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, FROM_ODS_CODE_1);
-
-        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
-        assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
-
-        var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-        assertThatAccessAbsentDocumentWasFetched(conversationId, singleDocument, documentId);
-
-        var messageIds = waitFor(() -> getTheSplitDocumentIds(conversationId));
-        softly.assertThat(messageIds.size()).isEqualTo(arraySize);
-    }
-
-    private void assertHappyPathWithDocs(String conversationId, String fromODSCode, String nhsNumber, String documentId) {
-        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, fromODSCode);
-
-        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
-        assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
-
-        var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-        assertThatAccessDocumentWasFetched(conversationId, singleDocument, documentId);
-
-        var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
-        assertThatExtractCoreMessageWasSent(ehrExtractCore);
-
-        var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
-        assertThatExtractContinueMessageWasSent(ehrContinue);
-
-        var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
-        assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
-
-        var sentToMhs = (Document) waitFor(() -> fetchSentToMhsForDocuments(conversationId));
-        assertThat(sentToMhs.get("messageId")).isNotNull();
-        assertThat(sentToMhs.get("sentAt")).isNotNull();
-        assertThat(sentToMhs.get("taskId")).isNotNull();
     }
 
     private void assertHappyPathWithAbsentAttachments(String conversationId, String fromODSCode, String nhsNumber, String documentId) {
@@ -300,8 +257,7 @@ public class EhrExtractTest {
 
         var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
-
-        // Test cases for non-absent attachments
+        
         var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
         assertThatAccessAbsentDocumentWasFetched(conversationId, singleDocument, documentId);
 
