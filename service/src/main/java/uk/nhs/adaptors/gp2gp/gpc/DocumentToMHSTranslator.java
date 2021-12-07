@@ -7,12 +7,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+
+import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.Collections;
 
 @Component
@@ -31,7 +31,7 @@ public class DocumentToMHSTranslator {
 
     public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String fileContent) {
         return createOutboundMessage(
-            taskDefinition, new String(Base64.getEncoder().encode(fileContent.getBytes(StandardCharsets.UTF_8))), MediaType.TEXT_PLAIN_VALUE
+            taskDefinition, Base64Utils.toBase64String(fileContent), MediaType.TEXT_PLAIN_VALUE
         );
     }
 
