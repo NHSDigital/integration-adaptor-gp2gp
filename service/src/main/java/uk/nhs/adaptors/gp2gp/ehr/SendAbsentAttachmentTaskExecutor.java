@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.AbsentAttachmentUtils.buildAbsentAttachmentFileName;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +33,7 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
     public void execute(SendAbsentAttachmentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
         var messageId = taskDefinition.getMessageId();
+        var documentId = taskDefinition.getDocumentId();
 
         var fileContent = AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
             taskDefinition.getTitle(),
@@ -38,16 +41,20 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
             taskDefinition.getConversationId()
         );
 
+        var fileName = buildAbsentAttachmentFileName(taskDefinition.getConversationId(), documentId);
+
         var mhsOutboundRequestData = gpcDocumentTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, fileContent);
 
         var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
             .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
 
-        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, fileContent);
+        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, fileName);
 
         var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, taskDefinition.getTitle(), taskId, messageId
+            taskDefinition, fileName, taskId, messageId
         );
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
+
+
 }
