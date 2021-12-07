@@ -52,7 +52,7 @@ public class StructuredRecordMappingService {
 
     private OutboundMessage.ExternalAttachment buildExternalAttachment(DocumentReference documentReference) {
         var attachment = DocumentReferenceUtils.extractAttachment(documentReference);
-        var documentId = messageContext.getIdMapper().getOrNew(ResourceType.DocumentReference, documentReference.getIdElement());
+        var documentId = documentReference.getIdElement().getIdPart();
         var messageId = randomIdGeneratorService.createNewId();
 
         String contentType = DocumentReferenceUtils.extractContentType(attachment);
