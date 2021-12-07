@@ -24,7 +24,7 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
 
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
-    private final DocumentToMHSTranslator gpcDocumentTranslator;
+    private final DocumentToMHSTranslator documentToMHSTranslator;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Override
@@ -46,7 +46,7 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
 
         var fileName = buildAbsentAttachmentFileName(taskDefinition.getConversationId(), documentId);
 
-        var mhsOutboundRequestData = gpcDocumentTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, fileContent);
+        var mhsOutboundRequestData = documentToMHSTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, fileContent);
 
         var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
             .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);

@@ -95,10 +95,14 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             var absentAttachmentFileNames = absentAttachments.stream()
                 .collect(Collectors.toMap(
                     OutboundMessage.ExternalAttachment::getDocumentId,
-                    absentAttachment -> buildAbsentAttachmentFileName(structuredTaskDefinition.getConversationId(), absentAttachment.getDocumentId()))
+                    absentAttachment -> buildAbsentAttachmentFileName(
+                        structuredTaskDefinition.getConversationId(), absentAttachment.getDocumentId()
+                    ))
                 );
-            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferencesAbsent(structuredTaskDefinition, absentAttachmentFileNames);
 
+            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferencesAbsent(
+                structuredTaskDefinition, absentAttachmentFileNames
+            );
 
             hl7TranslatedResponse = structuredRecordMappingService.getHL7(structuredTaskDefinition, structuredRecord);
 

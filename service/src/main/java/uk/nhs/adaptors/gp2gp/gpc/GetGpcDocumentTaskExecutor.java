@@ -2,8 +2,6 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfString;
 
-import java.nio.charset.StandardCharsets;
-
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +22,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final GpcClient gpcClient;
-    private final DocumentToMHSTranslator gpcDocumentTranslator;
+    private final DocumentToMHSTranslator documentToMHSTranslator;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
     private final FhirParseService fhirParseService;
 
@@ -46,7 +44,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
             taskDefinition.getConversationId(), taskDefinition.getDocumentId()
         );
 
-        var mhsOutboundRequestData = gpcDocumentTranslator.translateGpcResponseToMhsOutboundRequestData(
+        var mhsOutboundRequestData = documentToMHSTranslator.translateGpcResponseToMhsOutboundRequestData(
             taskDefinition,
             base64Content,
             binary.getContentType()

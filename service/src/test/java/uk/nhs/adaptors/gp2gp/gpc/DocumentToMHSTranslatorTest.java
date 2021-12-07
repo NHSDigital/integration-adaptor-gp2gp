@@ -17,7 +17,6 @@ import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,7 +57,7 @@ public class DocumentToMHSTranslatorTest {
     @Mock
     private TimestampService timestampService;
 
-    private DocumentToMHSTranslator gpcDocumentTranslator;
+    private DocumentToMHSTranslator documentToMHSTranslator;
 
     @BeforeAll
     public static void initialize() throws IOException {
@@ -73,7 +72,7 @@ public class DocumentToMHSTranslatorTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
-        gpcDocumentTranslator = new DocumentToMHSTranslator(
+        documentToMHSTranslator = new DocumentToMHSTranslator(
             new EhrDocumentMapper(timestampService, randomIdGeneratorService));
     }
 
@@ -84,7 +83,7 @@ public class DocumentToMHSTranslatorTest {
             .documentId(TEST_DOCUMENT_ID)
             .build();
         Binary binary = new FhirParseService().parseResource(jsonBinaryContent, Binary.class);
-        String payload = gpcDocumentTranslator.translateGpcResponseToMhsOutboundRequestData(
+        String payload = documentToMHSTranslator.translateGpcResponseToMhsOutboundRequestData(
             taskDefinition, binary.getContentAsBase64(), binary.getContentType());
 
         assertThat(payload).isEqualToIgnoringWhitespace(expectedMhsOutboundRequest);
@@ -102,7 +101,9 @@ public class DocumentToMHSTranslatorTest {
             .toAsid(TEST_TO_ASID)
             .build();
 
-        String mhsOutboundRequestData = gpcDocumentTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, absentAttachmentTxtContent);
+        String mhsOutboundRequestData = documentToMHSTranslator.translateFileContentToMhsOutboundRequestData(
+            taskDefinition, absentAttachmentTxtContent
+        );
         assertThat(mhsOutboundRequestData).isEqualToIgnoringWhitespace(expectedAbsentAttachmentPayload);
     }
 }
