@@ -22,9 +22,20 @@ public class DocumentToMHSTranslator {
 
     private final EhrDocumentMapper ehrDocumentMapper;
 
-    public String translateToMhsOutboundRequestData(
-        DocumentTaskDefinition taskDefinition, byte[] base64Content, String contentType) {
+    public String translateGpcResponseToMhsOutboundRequestData(
+        DocumentTaskDefinition taskDefinition, String base64Content, String contentType) {
+        return createOutboundMessage(
+            taskDefinition, base64Content, contentType
+        );
+    }
 
+    public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String fileContent) {
+        return createOutboundMessage(
+            taskDefinition, new String(Base64.getEncoder().encode(fileContent.getBytes(StandardCharsets.UTF_8))), MediaType.TEXT_PLAIN_VALUE
+        );
+    }
+
+    private String createOutboundMessage(DocumentTaskDefinition taskDefinition, String base64Content, String contentType) {
         var ehrDocumentTemplateParameters = ehrDocumentMapper
             .mapToMhsPayloadTemplateParameters(taskDefinition);
         var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
@@ -36,25 +47,7 @@ public class DocumentToMHSTranslator {
         }
     }
 
-    public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String fileContent) {
-        return createOutboundMessage(
-            taskDefinition, fileContent.getBytes(StandardCharsets.UTF_8), MediaType.TEXT_PLAIN_VALUE
-        );
-    }
-
-    private String createOutboundMessage(DocumentTaskDefinition taskDefinition, byte[] bytes, String textPlainValue) {
-        var ehrDocumentTemplateParameters = ehrDocumentMapper
-            .mapToMhsPayloadTemplateParameters(taskDefinition);
-        var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
-
-        try {
-            return prepareOutboundMessage(taskDefinition, bytes, textPlainValue, xmlContent);
-        } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException(e);
-        }
-    }
-
-    private String prepareOutboundMessage(DocumentTaskDefinition taskDefinition, byte[] fileContent, String contentType,
+    private String prepareOutboundMessage(DocumentTaskDefinition taskDefinition, String fileContent, String contentType,
         String xmlContent)
         throws JsonProcessingException {
         var attachments = Collections.singletonList(
@@ -62,7 +55,7 @@ public class DocumentToMHSTranslator {
                 .contentType(contentType)
                 .isBase64(Boolean.TRUE.toString())
                 .description(taskDefinition.getDocumentId())
-                .payload(Base64.getEncoder().encodeToString(fileContent))
+                .payload(fileContent)
                 .build());
         var outboundMessage = OutboundMessage.builder()
             .payload(xmlContent)

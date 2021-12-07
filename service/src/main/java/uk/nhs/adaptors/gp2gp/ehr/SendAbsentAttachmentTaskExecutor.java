@@ -2,6 +2,9 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.AbsentAttachmentUtils.buildAbsentAttachmentFileName;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,10 +54,13 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, fileName);
 
         var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, fileName, taskId, messageId
+            taskDefinition, fileName, taskId, messageId, getLengthOfBase64EncodedFileContent(fileContent)
         );
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
+    private int getLengthOfBase64EncodedFileContent(String fileContent) {
+        return Base64.getEncoder().encode(fileContent.getBytes(StandardCharsets.UTF_8)).length;
+    }
 
 }

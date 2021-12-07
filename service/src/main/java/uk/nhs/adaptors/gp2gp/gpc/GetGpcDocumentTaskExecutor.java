@@ -46,9 +46,9 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
             taskDefinition.getConversationId(), taskDefinition.getDocumentId()
         );
 
-        var mhsOutboundRequestData = gpcDocumentTranslator.translateToMhsOutboundRequestData(
+        var mhsOutboundRequestData = gpcDocumentTranslator.translateGpcResponseToMhsOutboundRequestData(
             taskDefinition,
-            base64Content.getBytes(StandardCharsets.UTF_8),
+            base64Content,
             binary.getContentType()
         );
 

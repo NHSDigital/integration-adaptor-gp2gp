@@ -43,11 +43,13 @@ public class DocumentToMHSTranslatorTest {
     private static final String TEST_TITLE = "Test DocumentReference.content.attachment.title";
 
     private static final String BINARY_INPUT_FILE = "test-binary.json";
+    private static final String ABSENT_ATTACHMENT_INPUT_FILE = "absent-attachment-test.txt";
 
     private static final String EXPECTED_MHS_OUTBOUND_REQUEST_FILE = "expected-mhs-outbound-request-payload.json";
     private static final String EXPECTED_MHS_OUTBOUND_ABSENTATTACHMENT_FILE = "expected-mhs-outbound-absentattachment-payload.json";
 
     private static String jsonBinaryContent;
+    private static String absentAttachmentTxtContent;
     private static String expectedMhsOutboundRequest;
     private static String expectedAbsentAttachmentPayload;
 
@@ -61,6 +63,7 @@ public class DocumentToMHSTranslatorTest {
     @BeforeAll
     public static void initialize() throws IOException {
         jsonBinaryContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + BINARY_INPUT_FILE);
+        absentAttachmentTxtContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + ABSENT_ATTACHMENT_INPUT_FILE);
         expectedMhsOutboundRequest = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_MHS_OUTBOUND_REQUEST_FILE);
         expectedAbsentAttachmentPayload = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_MHS_OUTBOUND_ABSENTATTACHMENT_FILE);
     }
@@ -81,8 +84,8 @@ public class DocumentToMHSTranslatorTest {
             .documentId(TEST_DOCUMENT_ID)
             .build();
         Binary binary = new FhirParseService().parseResource(jsonBinaryContent, Binary.class);
-        String payload = gpcDocumentTranslator.translateToMhsOutboundRequestData(
-            taskDefinition, binary.getContentAsBase64().getBytes(StandardCharsets.UTF_8), binary.getContentType());
+        String payload = gpcDocumentTranslator.translateGpcResponseToMhsOutboundRequestData(
+            taskDefinition, binary.getContentAsBase64(), binary.getContentType());
 
         assertThat(payload).isEqualToIgnoringWhitespace(expectedMhsOutboundRequest);
     }
@@ -99,8 +102,7 @@ public class DocumentToMHSTranslatorTest {
             .toAsid(TEST_TO_ASID)
             .build();
 
-        String payload = gpcDocumentTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, jsonBinaryContent);
-
-        assertThat(payload).isEqualToIgnoringWhitespace(expectedAbsentAttachmentPayload);
+        String mhsOutboundRequestData = gpcDocumentTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, absentAttachmentTxtContent);
+        assertThat(mhsOutboundRequestData).isEqualToIgnoringWhitespace(expectedAbsentAttachmentPayload);
     }
 }
