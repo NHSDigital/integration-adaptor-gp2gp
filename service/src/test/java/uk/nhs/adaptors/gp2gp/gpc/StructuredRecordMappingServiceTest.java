@@ -58,31 +58,31 @@ class StructuredRecordMappingServiceTest {
         ID_1, null, "some title", ATTACHMENT_1_SIZE, "text/plain");
 
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_1 = buildExternalAttachment(
-        NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
+        NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
         buildAttachmentDescription(
             "111_new_doc_manifest_id_111_new_doc_manifest_id.txt", "text/plain", false,
-            false, false, ATTACHMENT_1_SIZE
+            false, false, NEW_DOC_REF_ID_1
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_2 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, null,
         buildAttachmentDescription(
             "222_new_doc_manifest_id_222_new_doc_manifest_id.html", "text/html", false,
-            false, false, ATTACHMENT_2_SIZE
+            false, false, NEW_DOC_REF_ID_2
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_1 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, null, "some title",
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
-            false, false, ATTACHMENT_1_SIZE
+            false, false, NEW_DOC_REF_ID_1
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_2 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
-            false, false, ATTACHMENT_1_SIZE
+            false, false, NEW_DOC_REF_ID_1
         )
     );
 
@@ -197,14 +197,14 @@ class StructuredRecordMappingServiceTest {
     }
 
     private static OutboundMessage.AttachmentDescription buildAttachmentDescription(String fileName, String contentType,
-        boolean isCompressed, boolean isLargeAttachment, boolean isOriginalBase64, int length) {
+        boolean isCompressed, boolean isLargeAttachment, boolean isOriginalBase64, String documentId) {
         return OutboundMessage.AttachmentDescription.builder()
             .fileName(fileName)
             .contentType(contentType)
             .compressed(isCompressed)
             .largeAttachment(isLargeAttachment)
             .originalBase64(isOriginalBase64)
-            .length(length)
+            .documentId(documentId)
             .build();
     }
 

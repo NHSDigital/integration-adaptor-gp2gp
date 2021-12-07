@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -69,6 +70,7 @@ public class EhrExtractStatusService {
     private static final String MESSAGE = "message";
     private static final String TASK_TYPE = "taskType";
     private static final String ATTACHMENT = "attachment";
+    private static final String BASE64_CONTENT_LENGTH = "contentLength";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
@@ -79,6 +81,7 @@ public class EhrExtractStatusService {
     private static final String DOCUMENT_TASK_ID_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + TASK_ID;
     private static final String DOCUMENT_OBJECT_NAME_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + OBJECT_NAME;
     private static final String DOCUMENT_MESSAGE_ID_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + MESSAGE_ID;
+    private static final String DOCUMENT_BASE64_CONTENT_LENGTH = GPC_DOCUMENTS + ARRAY_REFERENCE + BASE64_CONTENT_LENGTH;
     private static final String EXTRACT_CORE_TASK_ID_PATH = EHR_EXTRACT_CORE + DOT + TASK_ID;
     private static final String EXTRACT_CORE_SENT_AT_PATH = EHR_EXTRACT_CORE + DOT + SENT_AT;
     private static final String EXTRACT_CORE_PENDING_TASK_ID_PATH = EHR_EXTRACT_CORE_PENDING + DOT + TASK_ID;
@@ -101,9 +104,23 @@ public class EhrExtractStatusService {
     private static final String ERROR_CODE_PATH = ERROR + DOT + CODE;
     private static final String ERROR_MESSAGE_PATH = ERROR + DOT + MESSAGE;
     private static final String ERROR_TASK_TYPE_PATH = ERROR + DOT + TASK_TYPE;
+    private static final String LENGTH_PLACEHOLDER = "LENGTH_PLACEHOLDER_ID=";
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
+
+    public Map<String, String> fetchDocumentObjectNameAndSize(String conversationId) {
+        Optional<EhrExtractStatus> ehrExtractStatusSearch = ehrExtractStatusRepository.findByConversationId(conversationId);
+        if (ehrExtractStatusSearch.isPresent()) {
+            var ehrExtractStatus = ehrExtractStatusSearch.get();
+            var ehrDocuments = ehrExtractStatus.getGpcAccessDocument().getDocuments();
+            return ehrDocuments.stream()
+                .collect(Collectors.toMap(
+                    (document) -> LENGTH_PLACEHOLDER + document.getDocumentId(),
+                    (document) -> document.getContentLength() + ""));
+        }
+        return null;
+    }
 
     public EhrExtractStatus updateEhrExtractStatusAccessStructured(
         GetGpcStructuredTaskDefinition structuredTaskDefinition, String structuredRecordJsonFilename
@@ -132,7 +149,8 @@ public class EhrExtractStatusService {
             DocumentTaskDefinition documentTaskDefinition,
             String documentName,
             String taskId,
-            String messageId) {
+            String messageId,
+            int base64ContentLength) {
 
         Query query = new Query();
         query.addCriteria(Criteria
@@ -145,6 +163,7 @@ public class EhrExtractStatusService {
         update.set(DOCUMENT_TASK_ID_PATH, taskId);
         update.set(DOCUMENT_OBJECT_NAME_PATH, documentName);
         update.set(DOCUMENT_MESSAGE_ID_PATH, messageId);
+        update.set(DOCUMENT_BASE64_CONTENT_LENGTH, base64ContentLength);
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query, update, returningUpdatedRecordOption,

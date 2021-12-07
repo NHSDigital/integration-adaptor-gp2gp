@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import org.hl7.fhir.dstu3.model.Binary;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,7 +70,7 @@ public class DocumentToMHSTranslatorTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
-        gpcDocumentTranslator = new DocumentToMHSTranslator(new FhirParseService(),
+        gpcDocumentTranslator = new DocumentToMHSTranslator(
             new EhrDocumentMapper(timestampService, randomIdGeneratorService));
     }
 
@@ -78,7 +80,9 @@ public class DocumentToMHSTranslatorTest {
             .messageId(MESSAGE_ID)
             .documentId(TEST_DOCUMENT_ID)
             .build();
-        String payload = gpcDocumentTranslator.translateGpcResponseToMhsOutboundRequestData(taskDefinition, jsonBinaryContent);
+        Binary binary = new FhirParseService().parseResource(jsonBinaryContent, Binary.class);
+        String payload = gpcDocumentTranslator.translateToMhsOutboundRequestData(
+            taskDefinition, binary.getContentAsBase64().getBytes(StandardCharsets.UTF_8), binary.getContentType());
 
         assertThat(payload).isEqualToIgnoringWhitespace(expectedMhsOutboundRequest);
     }

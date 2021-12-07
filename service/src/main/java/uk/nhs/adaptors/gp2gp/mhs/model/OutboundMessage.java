@@ -28,6 +28,7 @@ import java.util.stream.Stream;
 public class OutboundMessage {
     private static final int ATTACHMENT_DESCRIPTION_INDENTATION_12 = 12;
     private static final int ATTACHMENT_DESCRIPTION_INDENTATION_16 = 16;
+    private static final String LENGTH_PLACEHOLDER = "LENGTH_PLACEHOLDER_ID=";
 
     private String payload;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -89,6 +90,7 @@ public class OutboundMessage {
         private final boolean originalBase64;
         private final Integer length;
         private final String domainData;
+        private final String documentId;
 
         @Override
         public String toString() {
@@ -98,7 +100,10 @@ public class OutboundMessage {
                 "Compressed=" + booleanToYesNo(compressed),
                 "LargeAttachment=" + booleanToYesNo(largeAttachment),
                 "OriginalBase64=" + booleanToYesNo(originalBase64),
-                Optional.ofNullable(length).map(value -> "Length=" + value).orElse(StringUtils.EMPTY),
+                Optional.ofNullable(length).map(value -> "Length=" + value).orElse(
+                        Optional.ofNullable(documentId)
+                        .map(docId -> "Length=${" + LENGTH_PLACEHOLDER + docId + "}")
+                        .orElse(StringUtils.EMPTY)),
                 Optional.ofNullable(domainData).map(value -> "DomainData=" + value).orElse(StringUtils.EMPTY));
             // all this below to pretty indent on MHS side
             var descriptionWithIndentation = descriptionElements

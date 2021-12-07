@@ -3,11 +3,10 @@ package uk.nhs.adaptors.gp2gp.gpc;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import org.hl7.fhir.dstu3.model.Binary;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
@@ -21,12 +20,20 @@ import java.util.Collections;
 public class DocumentToMHSTranslator {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    private final FhirParseService fhirParseService;
     private final EhrDocumentMapper ehrDocumentMapper;
 
-    public String translateGpcResponseToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String response) {
-        var binary = fhirParseService.parseResource(response, Binary.class);
-        return createOutboundMessage(taskDefinition, binary.getContent(), binary.getContentType());
+    public String translateToMhsOutboundRequestData(
+        DocumentTaskDefinition taskDefinition, byte[] base64Content, String contentType) {
+
+        var ehrDocumentTemplateParameters = ehrDocumentMapper
+            .mapToMhsPayloadTemplateParameters(taskDefinition);
+        var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
+
+        try {
+            return prepareOutboundMessage(taskDefinition, base64Content, contentType, xmlContent);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String fileContent) {
