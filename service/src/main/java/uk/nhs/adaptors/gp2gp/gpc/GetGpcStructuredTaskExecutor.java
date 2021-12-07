@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static uk.nhs.adaptors.gp2gp.common.utils.Gzip.compress;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.AbsentAttachmentUtils.buildAbsentAttachmentFileName;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -88,6 +89,14 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             var urls = externalAttachments.stream()
                 .collect(Collectors.toMap(OutboundMessage.ExternalAttachment::getDocumentId, OutboundMessage.ExternalAttachment::getUrl));
             ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(structuredTaskDefinition, urls);
+
+            var absentAttachmentFileNames = absentAttachments.stream()
+                .collect(Collectors.toMap(
+                    OutboundMessage.ExternalAttachment::getDocumentId,
+                    absentAttachment -> buildAbsentAttachmentFileName(structuredTaskDefinition.getConversationId(), absentAttachment.getDocumentId()))
+                );
+            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferencesAbsent(structuredTaskDefinition, absentAttachmentFileNames);
+
 
             hl7TranslatedResponse = structuredRecordMappingService.getHL7(structuredTaskDefinition, structuredRecord);
 
@@ -158,7 +167,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private Bundle getStructuredRecord(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return fhirParseService.parseResource(gpcClient.getStructuredRecord(structuredTaskDefinition), Bundle.class);
     }
-    //TODO: MAnually add bundleentrycomponents to check changes
 
     private void queueGetDocumentsTask(TaskDefinition taskDefinition, List<OutboundMessage.ExternalAttachment> externalAttachments) {
         externalAttachments.stream()
