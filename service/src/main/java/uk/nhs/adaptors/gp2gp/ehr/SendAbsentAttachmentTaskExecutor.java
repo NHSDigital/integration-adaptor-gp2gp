@@ -2,9 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.AbsentAttachmentUtils.buildAbsentAttachmentFileName;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AbsentAttachmentFileMapper;
 import uk.nhs.adaptors.gp2gp.gpc.DetectTranslationCompleteService;
 import uk.nhs.adaptors.gp2gp.gpc.DocumentToMHSTranslator;
@@ -54,13 +52,9 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, fileName);
 
         var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, fileName, taskId, messageId, getLengthOfBase64EncodedFileContent(fileContent)
+            taskDefinition, fileName, taskId, messageId, Base64Utils.toBase64ByteLength(fileContent)
         );
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
-    }
-
-    private int getLengthOfBase64EncodedFileContent(String fileContent) {
-        return Base64.getEncoder().encode(fileContent.getBytes(StandardCharsets.UTF_8)).length;
     }
 
 }

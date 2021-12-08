@@ -7,7 +7,15 @@ import java.util.Base64;
 public class Base64Utils {
 
     public static String toBase64String(String nonBase64FileContent) {
-        return new String(Base64.getEncoder().encode(nonBase64FileContent.getBytes(UTF_8)), UTF_8);
+        return new String(encodeToBase64(nonBase64FileContent), UTF_8);
+    }
+
+    public static int toBase64ByteLength(String nonBase64FileContent) {
+        return encodeToBase64(nonBase64FileContent).length;
+    }
+
+    private static byte[] encodeToBase64(String nonBase64FileContent) {
+        return Base64.getEncoder().encode(nonBase64FileContent.getBytes(UTF_8));
     }
 
 }

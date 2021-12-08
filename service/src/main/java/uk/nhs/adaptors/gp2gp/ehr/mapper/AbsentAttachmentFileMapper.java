@@ -24,6 +24,4 @@ public class AbsentAttachmentFileMapper {
         return TemplateUtils.fillTemplate(ABSENT_ATTACHMENT_TEMPLATE, absentAttachment);
     }
 
-
-
 }
