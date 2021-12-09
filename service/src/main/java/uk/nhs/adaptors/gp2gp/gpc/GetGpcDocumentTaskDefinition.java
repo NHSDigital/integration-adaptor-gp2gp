@@ -26,6 +26,11 @@ public class GetGpcDocumentTaskDefinition extends DocumentTaskDefinition {
      */
     private final String accessDocumentUrl;
 
+    /**
+     * Original filename of the external attachment
+     */
+    private final String fileName;
+
     @Override
     public TaskType getTaskType() {
         return GET_GPC_DOCUMENT;

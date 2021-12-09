@@ -216,6 +216,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .fromOdsCode(taskDefinition.getFromOdsCode())
             .accessDocumentUrl(externalAttachment.getUrl())
             .messageId(externalAttachment.getMessageId())
+            .fileName("TestFileName.doc")
             .build();
     }
 
