@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class StructuredRecordMappingService {
+    private final MessageContext messageContext;
     private final OutputMessageWrapperMapper outputMessageWrapperMapper;
     private final EhrExtractMapper ehrExtractMapper;
     private final Gp2gpConfiguration gp2gpConfiguration;
@@ -35,13 +37,21 @@ public class StructuredRecordMappingService {
 
     public List<OutboundMessage.ExternalAttachment> getExternalAttachments(Bundle bundle) {
         return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
+            .filter(documentReference -> !qualifiesAsAbsentAttachment(documentReference))
+            .map(this::buildExternalAttachment)
+            .collect(Collectors.toList());
+    }
+
+    public List<OutboundMessage.ExternalAttachment> getAbsentAttachments(Bundle bundle) {
+        return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
+            .filter(this::qualifiesAsAbsentAttachment)
             .map(this::buildExternalAttachment)
             .collect(Collectors.toList());
     }
 
     private OutboundMessage.ExternalAttachment buildExternalAttachment(DocumentReference documentReference) {
         var attachment = DocumentReferenceUtils.extractAttachment(documentReference);
-        var documentId = extractUrl(documentReference).map(GetGpcDocumentTaskDefinition::extractIdFromUrl).orElse(null);
+        var documentId = documentReference.getIdElement().getIdPart();
         var messageId = randomIdGeneratorService.createNewId();
 
         String contentType = DocumentReferenceUtils.extractContentType(attachment);
@@ -67,7 +77,15 @@ public class StructuredRecordMappingService {
                 .toString()
             )
             .url(extractUrl(documentReference).orElse(null))
+            .title(documentReference.getContentFirstRep().getAttachment().getTitle())
             .build();
+    }
+
+    private boolean qualifiesAsAbsentAttachment(DocumentReference documentReference) {
+        var attachment = DocumentReferenceUtils.extractAttachment(documentReference);
+        String contentType = DocumentReferenceUtils.extractContentType(attachment);
+
+        return !supportedContentTypes.isContentTypeSupported(contentType) || attachment.hasTitle();
     }
 
     private static Optional<String> extractUrl(DocumentReference documentReference) {
