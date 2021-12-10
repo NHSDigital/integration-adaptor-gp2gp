@@ -56,10 +56,10 @@ public class EhrExtractTest {
     private static final String MESSAGE_ID = "messageId";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
     private static final String EHR_CONTINUE = "ehrContinue";
-    private static final String DOCUMENT_ID_NORMAL = "07a6483f-732b-461e-86b6-edb665c45510";
-    private static final String DOCUMENT_ID_NORMAL_ABSENT = "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC";
-    private static final String DOCUMENT_ID_NORMAL_2 = "43913840-7979-4554-9ab5-55a7a42f1852";
-    private static final String DOCUMENT_ID_LARGE = "27863182736";
+//    private static final String DOCUMENT_ID_NORMAL = "07a6483f-732b-461e-86b6-edb665c45510";
+//    private static final String DOCUMENT_ID_NORMAL_ABSENT = "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC";
+//    private static final String DOCUMENT_ID_NORMAL_2 = "43913840-7979-4554-9ab5-55a7a42f1852";
+//    private static final String DOCUMENT_ID_LARGE = "27863182736";
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
     private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
     private static final String CONVERSATION_ID_PLACEHOLDER = "%%ConversationId%%";
@@ -85,13 +85,13 @@ public class EhrExtractTest {
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER, DOCUMENT_ID_NORMAL_ABSENT);
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER);
 
         String conversationId2 = UUID.randomUUID().toString();
         String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, NHS_NUMBER, FROM_ODS_CODE_2);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest2);
 
-        assertHappyPathWithAbsentAttachments(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER, DOCUMENT_ID_NORMAL_ABSENT);
+        assertHappyPathWithAbsentAttachments(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class EhrExtractTest {
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_TWO_DOCUMENTS, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_TWO_DOCUMENTS, DOCUMENT_ID_NORMAL_ABSENT);
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_TWO_DOCUMENTS);
         assertMultipleDocumentsRetrieved(conversationId, 2);
     }
 
@@ -110,7 +110,7 @@ public class EhrExtractTest {
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_DOCUMENTS, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_DOCUMENTS, DOCUMENT_ID_NORMAL_2);
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_DOCUMENTS);
         assertMultipleDocumentsRetrieved(conversationId, 3);
     }
 
@@ -122,7 +122,7 @@ public class EhrExtractTest {
 
         assertEhrExtractSentAsAttachment(conversationId);
 
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER, DOCUMENT_ID_NORMAL_ABSENT);
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER);
     }
 
     @Test
@@ -210,7 +210,7 @@ public class EhrExtractTest {
 
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, DOCUMENT_ID_LARGE, 1);
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, 1);
     }
 
     @Test
@@ -221,7 +221,7 @@ public class EhrExtractTest {
 
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, DOCUMENT_ID_LARGE, 3);
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, 3);
     }
 
     private void assertMultipleDocumentsRetrieved(String conversationId, int documentCount) {
@@ -237,7 +237,7 @@ public class EhrExtractTest {
         assertThat(documentList.size()).isEqualTo(documentCount);
     }
 
-    private void assertMultipleDocsSent(String conversationId, String nhsNumber, String documentId, int arraySize) {
+    private void assertMultipleDocsSent(String conversationId, String nhsNumber, int arraySize) {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, FROM_ODS_CODE_1);
 
@@ -245,13 +245,13 @@ public class EhrExtractTest {
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
         var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-        assertThatAccessDocumentWasFetched(conversationId, singleDocument, documentId);
+        assertThatAccessDocumentWasFetched(singleDocument);
 
         var messageIds = waitFor(() -> getTheSplitDocumentIds(conversationId));
         softly.assertThat(messageIds.size()).isEqualTo(arraySize);
     }
 
-    private void assertHappyPathWithAbsentAttachments(String conversationId, String fromODSCode, String nhsNumber, String documentId) {
+    private void assertHappyPathWithAbsentAttachments(String conversationId, String fromODSCode, String nhsNumber) {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, fromODSCode);
 
@@ -259,7 +259,7 @@ public class EhrExtractTest {
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
         
         var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-        assertThatAccessAbsentDocumentWasFetched(conversationId, singleDocument, documentId);
+        assertThatAccessAbsentDocumentWasFetched(singleDocument);
 
         var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
         assertThatExtractCoreMessageWasSent(ehrExtractCore);
@@ -398,14 +398,16 @@ public class EhrExtractTest {
         softly.assertThat(accessStructured.get("taskId")).isNotNull();
     }
 
-    private void assertThatAccessDocumentWasFetched(String conversationId, Document document, String documentId) {
-        softly.assertThat(document.get("objectName")).isEqualTo(conversationId.concat("/").concat(documentId).concat(".json"));
+    private void assertThatAccessDocumentWasFetched(Document document) {
+        softly.assertThat(nameEndsWith(document.get("objectName").toString(), ".json")).isEqualTo(true);
+
+            //.isEqualTo(conversationId.concat("/").concat(documentId).concat(".json"));
         softly.assertThat(document.get("accessedAt")).isNotNull();
         softly.assertThat(document.get("taskId")).isNotNull();
     }
 
-    private void assertThatAccessAbsentDocumentWasFetched(String conversationId, Document document, String documentId) {
-        softly.assertThat(document.get("objectName")).isEqualTo(buildAbsentAttachmentFileName(conversationId, documentId));
+    private void assertThatAccessAbsentDocumentWasFetched(Document document) {
+        softly.assertThat(nameHas(document.get("objectName"), "AbsentAttachment", ".txt")).isEqualTo(true);
         softly.assertThat(document.get("accessedAt")).isNotNull();
         softly.assertThat(document.get("taskId")).isNotNull();
     }
@@ -415,6 +417,7 @@ public class EhrExtractTest {
         softly.assertThat(extractCore.get("taskId")).isNotNull();
     }
 
+
     private static String getEnvVar(String name, String defaultValue) {
         var value = System.getenv(name);
         if (StringUtils.isBlank(value)) {
@@ -423,7 +426,17 @@ public class EhrExtractTest {
         return value;
     }
 
-    private String buildAbsentAttachmentFileName(String conversationId, String documentId) {
-        return "AbsentAttachment" + conversationId + "/" + documentId + ".txt";
+    private boolean nameHas(Object name, String startingValue, String endingValue){
+        return nameStartsWith(name.toString(), startingValue)
+            && nameEndsWith(name.toString(), endingValue);
     }
+
+    private boolean nameStartsWith(String name, String startingValue) {
+        return name.startsWith(startingValue);
+    }
+
+    private boolean nameEndsWith(String name, String endingValue) {
+        return name.endsWith(endingValue);
+    }
+
 }
