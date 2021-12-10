@@ -397,13 +397,12 @@ public class EhrExtractTest {
     private void assertThatAccessDocumentWasFetched(Document document) {
         softly.assertThat(nameEndsWith(document.get("objectName").toString(), ".json")).isEqualTo(true);
 
-            //.isEqualTo(conversationId.concat("/").concat(documentId).concat(".json"));
         softly.assertThat(document.get("accessedAt")).isNotNull();
         softly.assertThat(document.get("taskId")).isNotNull();
     }
 
     private void assertThatAccessAbsentDocumentWasFetched(Document document) {
-        softly.assertThat(nameHas(document.get("objectName"), "AbsentAttachment", ".txt")).isEqualTo(true);
+        softly.assertThat(nameStartsEndsWith(document.get("objectName"), "AbsentAttachment", ".txt")).isEqualTo(true);
         softly.assertThat(document.get("accessedAt")).isNotNull();
         softly.assertThat(document.get("taskId")).isNotNull();
     }
@@ -422,7 +421,7 @@ public class EhrExtractTest {
         return value;
     }
 
-    private boolean nameHas(Object name, String startingValue, String endingValue){
+    private boolean nameStartsEndsWith(Object name, String startingValue, String endingValue){
         return nameStartsWith(name.toString(), startingValue)
             && nameEndsWith(name.toString(), endingValue);
     }
