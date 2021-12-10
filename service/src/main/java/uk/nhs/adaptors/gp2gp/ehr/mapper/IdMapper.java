@@ -31,6 +31,10 @@ public class IdMapper {
         return getOrNew(buildReference(resourceType, id), true);
     }
 
+    public String newId(ResourceType unmappedResource, IdType id) {
+        return getOrNew(buildReference(unmappedResource, id), false);
+    }
+
     public String getOrNew(Reference reference) {
         return getOrNew(reference, false);
     }
