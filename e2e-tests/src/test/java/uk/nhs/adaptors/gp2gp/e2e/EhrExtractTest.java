@@ -56,10 +56,6 @@ public class EhrExtractTest {
     private static final String MESSAGE_ID = "messageId";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
     private static final String EHR_CONTINUE = "ehrContinue";
-//    private static final String DOCUMENT_ID_NORMAL = "07a6483f-732b-461e-86b6-edb665c45510";
-//    private static final String DOCUMENT_ID_NORMAL_ABSENT = "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC";
-//    private static final String DOCUMENT_ID_NORMAL_2 = "43913840-7979-4554-9ab5-55a7a42f1852";
-//    private static final String DOCUMENT_ID_LARGE = "27863182736";
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
     private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
     private static final String CONVERSATION_ID_PLACEHOLDER = "%%ConversationId%%";
