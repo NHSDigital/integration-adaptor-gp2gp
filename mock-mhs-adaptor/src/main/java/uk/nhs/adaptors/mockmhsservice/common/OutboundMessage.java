@@ -55,6 +55,7 @@ public class OutboundMessage {
         private String documentId;
         @JsonProperty("message_id")
         private String messageId;
+        private String title;
         private String description;
     }
 }

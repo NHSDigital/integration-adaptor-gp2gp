@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfString;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -75,6 +77,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                 requestDataToSend.put(randomIdGeneratorService.createNewId(), chunkedOutboundMessage);
                 var externalAttachment = OutboundMessage.ExternalAttachment.builder()
                     .description(OutboundMessage.AttachmentDescription.builder()
+                        .length(getBytesLengthOfString(chunk)) //calculate size for chunk
                         .fileName(filename)
                         .contentType(contentType)
                         .compressed(false) //const
@@ -169,7 +172,6 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     }
 
     private boolean isLargeAttachment(String binary) {
-        var bytes = binary.getBytes(StandardCharsets.UTF_8);
-        return bytes.length > gp2gpConfiguration.getLargeAttachmentThreshold();
+        return getBytesLengthOfString(binary) > gp2gpConfiguration.getLargeAttachmentThreshold();
     }
 }

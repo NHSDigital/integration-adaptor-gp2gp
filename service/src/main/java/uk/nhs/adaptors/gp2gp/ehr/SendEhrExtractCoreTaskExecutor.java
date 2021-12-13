@@ -3,6 +3,8 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+
+import org.apache.commons.text.StringSubstitutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
@@ -12,6 +14,7 @@ import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 
 import java.time.Instant;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -34,9 +37,13 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         String structuredRecordFilename = GpcFilenameUtils.generateStructuredRecordFilename(
             sendEhrExtractCoreTaskDefinition.getConversationId());
         var storageDataWrapper = storageConnectorService.downloadFile(structuredRecordFilename);
+
+        var documentObjectNameAndSize = ehrExtractStatusService
+            .fetchDocumentObjectNameAndSize(sendEhrExtractCoreTaskDefinition.getConversationId());
+
         var requestData = mhsRequestBuilder
             .buildSendEhrExtractCoreRequest(
-                storageDataWrapper.getData(),
+                replacePlaceholders(documentObjectNameAndSize, storageDataWrapper.getData()),
                 sendEhrExtractCoreTaskDefinition.getConversationId(),
                 sendEhrExtractCoreTaskDefinition.getFromOdsCode()
             );
@@ -51,5 +58,11 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         if (ehrExtractStatus.getGpcAccessDocument().getDocuments().isEmpty()) {
             sendAcknowledgementTaskDispatcher.sendPositiveAcknowledgement(ehrExtractStatus);
         }
+    }
+
+    private String replacePlaceholders(Map<String, String> replacements, String data) {
+        StringSubstitutor sub = new StringSubstitutor(replacements);
+
+        return sub.replace(data);
     }
 }

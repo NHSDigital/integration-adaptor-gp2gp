@@ -502,8 +502,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B" />
-        <code code="831271000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - colorectal">
-    <originalText>2 week rule referral - colorectal</originalText>
+        <code code="831271000006110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - colorectal">
 </code>
         <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Alliance Surgical, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required Referring patient for investigation</text>
         <statusCode code="COMPLETE"/>
@@ -559,8 +558,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
-        <code code="32485007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hospital admission">
-    <originalText>Hospital admission</originalText>
+        <code code="1227951014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to hospital">
 </code>
         <text>Recipient Org: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Investigation, Annotation: NHS / Private:NHS, Annotation: Transport:Required, Annotation: Priority:Soon follow up investigation.</text>
         <statusCode code="COMPLETE"/>
@@ -610,8 +608,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D" />
-        <code code="270442000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma monitoring check done">
-    <originalText>Asthma monitoring check done</originalText>
+        <code code="405055018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma monitoring check done">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -714,8 +711,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5" />
-        <code code="183446009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to cardiac intensive care unit">
-    <originalText>Admission to cardiac intensive care unit</originalText>
+        <code code="2901401018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to cardiac intensive care unit">
 </code>
         <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Alliance Surgical, Annotation: Purpose:Performance of a Procedure or Operation, Annotation: NHS / Private:NHS, Annotation: Transport:None Required, Annotation: Priority:Soon This referral will be rejected</text>
         <statusCode code="COMPLETE"/>
@@ -770,8 +766,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="5BB18E92-DABB-4C22-838A-410B4A278060" />
-        <code code="305226003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by Accident and Emergency doctor">
-    <originalText>Admission by Accident and Emergency doctor</originalText>
+        <code code="447582015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by A &amp; E doctor">
 </code>
         <text>Priority: ASAP Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Assessment &amp; Education, Annotation: NHS / Private:NHS, Annotation: Transport:Required Special characters !@£$%^&amp;*()_+-={}[]:&quot;;&apos;&lt;&gt;?,./~`...</text>
         <statusCode code="COMPLETE"/>
@@ -871,8 +866,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="99792B9D-0715-4F2A-9934-1D5D4E975284" />
-        <code code="160303001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Diabetes mellitus">
-    <originalText>FH: Diabetes mellitus</originalText>
+        <code code="249794016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Diabetes mellitus">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -897,8 +891,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DB7C94B1-01A6-491F-AC41-A36D88023069" />
-        <code code="160303001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Diabetes mellitus">
-    <originalText>FH: Diabetes mellitus</originalText>
+        <code code="249794016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Diabetes mellitus">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1130,8 +1123,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F80F3DA3-0728-4880-BE71-C71251A49D08" />
-        <code code="907511000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[RFC] Chest infection">
-    <originalText>[RFC] Chest infection</originalText>
+        <code code="907511000006114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[RFC] Chest infection">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1243,8 +1235,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5F44FD1C-BC5B-4B5F-8861-79F254D0D969"/>
-                <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
-    <originalText>Allergy to penicillin</originalText>
+                <code code="152307010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1306,8 +1297,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="DF996C91-D888-4D2D-9D3A-5523480337B1" />
-        <code code="308448008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to counsellor">
-    <originalText>Referral to counsellor</originalText>
+        <code code="451783014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer to counsellor">
 </code>
         <text>Recipient Org: Armitage Bridge Hospital Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:Required Too close to fire
 </text>
@@ -1429,8 +1419,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8DD1BB6C-F391-4E1F-B68F-A427448828CA" />
-        <code code="270442000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma monitoring check done">
-    <originalText>Asthma monitoring check done</originalText>
+        <code code="405055018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma monitoring check done">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1455,8 +1444,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46" />
-        <code code="15033003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peritonsillar abscess">
-    <originalText>Peritonsillar abscess</originalText>
+        <code code="25521017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peritonsillar abscess">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1514,8 +1502,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="82376D4D-0A24-4B25-9A8A-CC84BEFFDE0D" />
-        <code code="831311000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - lung">
-    <originalText>2 week rule referral - lung</originalText>
+        <code code="831311000006110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - lung">
 </code>
         <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -1580,7 +1567,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317972000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 40mg tablets">
-    <originalText>Furosemide 40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1804,8 +1790,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
-        <code code="856311000006103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting and standing BP">
-    <originalText>Sitting and standing BP</originalText>
+        <code code="856311000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting and standing BP">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2125,8 +2110,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17" />
-        <code code="523051000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Personal care plan completed">
-    <originalText>Personal care plan completed</originalText>
+        <code code="1167961000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Personal care plan completed">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2151,8 +2135,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F05B94B-999F-4699-AB93-EB90C79886B6" />
-        <code code="871021000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prescription of palliative care anticipatory medication">
-    <originalText>Prescription of palliative care anticipatory medication</originalText>
+        <code code="2250601000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prescription of palliative care anticipatory medication">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2177,8 +2160,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7" />
-        <code code="443761007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anticipatory palliative care">
-    <originalText>Anticipatory palliative care</originalText>
+        <code code="2842021011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anticipatory palliative care">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2203,8 +2185,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7359502E-8EE3-416C-BD59-A298285418E6" />
-        <code code="395092004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Specialist palliative care">
-    <originalText>Specialist palliative care</originalText>
+        <code code="1488791013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Specialist palliative care">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2229,8 +2210,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="938365F3-8C68-4189-A550-FAB37F4F59C8" />
-        <code code="395695001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Specialist palliative care treatment - outpatient">
-    <originalText>Specialist palliative care treatment - outpatient</originalText>
+        <code code="1489350019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Specialist palliative care treatment - outpatient">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2255,8 +2235,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91" />
-        <code code="243114000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Support">
-    <originalText>Support</originalText>
+        <code code="363598015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Support">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2281,8 +2260,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F" />
-        <code code="376201000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Issue of palliative care anticipatory medication box">
-    <originalText>Issue of palliative care anticipatory medication box</originalText>
+        <code code="740111000000114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Issue of palliative care anticipatory medication box">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2307,8 +2285,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
-        <code code="505401000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of care - home">
-    <originalText>Preferred place of care - home</originalText>
+        <code code="1123171000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of care - home">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2333,8 +2310,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D" />
-        <code code="518901000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gold standards framework supportive care stage 1 - advancing disease">
-    <originalText>Gold standards framework supportive care stage 1 - advancing disease</originalText>
+        <code code="1158651000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gold standards framework supportive care stage 1 - advancing disease">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2359,8 +2335,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
-        <code code="845721000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gold standards framework prognostic indicator stage B (green) - months prognosis">
-    <originalText>Gold standards framework prognostic indicator stage B (green) - months prognosis</originalText>
+        <code code="2193611000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gold standards framework prognostic indicator stage B (green) - months prognosis">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2385,8 +2360,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A9F79684-3214-41E9-A642-A4542875E62B" />
-        <code code="395687000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of death discussed with patient">
-    <originalText>Preferred place of death discussed with patient</originalText>
+        <code code="1489343018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of death discussed with patient">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2411,8 +2385,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B" />
-        <code code="110481000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of death: home">
-    <originalText>Preferred place of death: home</originalText>
+        <code code="157001000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of death: home">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2437,8 +2410,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920" />
-        <code code="109401000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of death: hospital">
-    <originalText>Preferred place of death: hospital</originalText>
+        <code code="155981000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred place of death: hospital">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2475,8 +2447,7 @@
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0" />
-        <code code="196121000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Palliative care plan review">
-    <originalText>Palliative care plan review</originalText>
+        <code code="294031000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Palliative care plan review">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2525,8 +2496,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE" />
-        <code code="160654005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Willing to be donor">
-    <originalText>Willing to be donor</originalText>
+        <code code="2839971013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Willing to be donor">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2551,8 +2521,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BB8DEB7C-BE1B-4639-8213-D94E8FEFA0F6" />
-        <code code="160683008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Needs walking aid in home">
-    <originalText>Needs walking aid in home</originalText>
+        <code code="250470015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Needs walking aid in home">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2577,8 +2546,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="162EF189-0270-449D-8FE0-BB82E6FF051F" />
-        <code code="914271000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Impaired ability to recognise safety risks">
-    <originalText>Impaired ability to recognise safety risks</originalText>
+        <code code="2349201000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Impaired ability to recognise safety risks">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2603,8 +2571,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF" />
-        <code code="162568000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family not aware of diagnosis">
-    <originalText>Family not aware of diagnosis</originalText>
+        <code code="253462012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family not aware of diagnosis">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2629,8 +2596,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518" />
-        <code code="473302008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aware of diagnosis">
-    <originalText>Aware of diagnosis</originalText>
+        <code code="2956647012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aware of diagnosis">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2655,8 +2621,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824" />
-        <code code="450475007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="For attempted cardiopulmonary resuscitation">
-    <originalText>For attempted cardiopulmonary resuscitation</originalText>
+        <code code="2212981000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="For attempted cardiopulmonary resuscitation">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2681,8 +2646,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9" />
-        <code code="306237005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to palliative care service">
-    <originalText>Referral to palliative care service</originalText>
+        <code code="449190016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to palliative care service">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2707,8 +2671,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF" />
-        <code code="160725005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lives alone - help available">
-    <originalText>Lives alone - help available</originalText>
+        <code code="250547013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lives alone - help available">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2733,8 +2696,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27" />
-        <code code="161152002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Social problem">
-    <originalText>Social problem</originalText>
+        <code code="251261013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Social problem">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2759,8 +2721,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF" />
-        <code code="161083000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Help by relatives">
-    <originalText>Help by relatives</originalText>
+        <code code="251162014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Help by relatives">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2785,8 +2746,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="49259291-5B92-4C0B-BE40-C299A8B02677" />
-        <code code="64379006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Decrease in appetite">
-    <originalText>Decrease in appetite</originalText>
+        <code code="499834011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Decrease in appetite">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2811,8 +2771,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800" />
-        <code code="161832001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Weight decreasing">
-    <originalText>Weight decreasing</originalText>
+        <code code="252192019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Weight decreasing">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2837,8 +2796,7 @@
 </component><component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="21F23DE7-D702-4DB4-AD0D-F8A0D56D7537" />
-        <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
-    <originalText>Referral to Social Services</originalText>
+        <code code="449191017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
 </code>
         <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -2861,8 +2819,7 @@
 </component><component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="D32F7C6C-D220-42A1-8028-610E3DEBD991" />
-        <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
-    <originalText>Referral to Social Services</originalText>
+        <code code="449191017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
 </code>
         <text>Recipient Org: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -2912,7 +2869,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2985,7 +2941,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317972000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 40mg tablets">
-    <originalText>Furosemide 40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3058,7 +3013,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317972000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 40mg tablets">
-    <originalText>Furosemide 40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3131,7 +3085,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317971007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 20mg tablets">
-    <originalText>Furosemide 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3204,7 +3157,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317971007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 20mg tablets">
-    <originalText>Furosemide 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3277,7 +3229,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317971007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 20mg tablets">
-    <originalText>Furosemide 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3811,8 +3762,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="44598FC3-DB57-4303-8B26-7D058F2B3510" />
-        <code code="170433008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Measles mumps and rubella vaccination - second dose">
-    <originalText>Measles mumps and rubella vaccination - second dose</originalText>
+        <code code="264274018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Measles mumps and rubella vaccination - second dose">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3858,8 +3808,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="AEF25847-B67A-408C-8D62-316C63ABC6B9" />
-        <code code="831251000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
-    <originalText>2 week rule referral - brain</originalText>
+        <code code="831251000006117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
 </code>
         <text>Recipient Org: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Unknown, Annotation: NHS / Private:NHS, Annotation: Transport:None Required To mark as &apos;Dormant&apos;</text>
         <statusCode code="COMPLETE"/>
@@ -3900,8 +3849,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA" />
-        <code code="306312003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to hand surgeon">
-    <originalText>Referral to hand surgeon</originalText>
+        <code code="449292019" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to hand surgeon">
 </code>
         <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Patient Reassurance, Annotation: NHS / Private:NHS, Annotation: Transport:None Required Referral from a consultation</text>
         <statusCode code="COMPLETE"/>
@@ -3947,8 +3895,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC" />
-        <code code="281098006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer to appliance officer">
-    <originalText>Refer to appliance officer</originalText>
+        <code code="419020018" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer to appliance officer">
 </code>
         <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required adas</text>
         <statusCode code="COMPLETE"/>
@@ -3994,8 +3941,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="37FC8CBD-D503-4725-8325-D454F24BF48B" />
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
+        <code code="1990681000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4043,8 +3989,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9A36A504-E9A3-4FC0-AE0A-B58CD444731B" />
-        <code code="36031001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Burning feet">
-    <originalText>Burning feet</originalText>
+        <code code="60126016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Burning feet">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4092,8 +4037,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EFD99868-BD82-4213-9586-11755332A60D" />
-        <code code="416409005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refused consent for upload to local shared electronic record">
-    <originalText>Refused consent for upload to local shared electronic record</originalText>
+        <code code="2548920016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refused consent for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4141,8 +4085,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9" />
-        <code code="777441000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Express dissent for Summary Care Record dataset upload">
-    <originalText>Express dissent for Summary Care Record dataset upload</originalText>
+        <code code="1736841000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Express dissent for Summary Care Record dataset upload">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4190,8 +4133,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3D1CF6C4-8BF0-4698-BB02-F0864EBDC8AB" />
-        <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
-    <originalText>Consent given for upload to local shared electronic record</originalText>
+        <code code="2548578015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4239,8 +4181,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="79926A25-009B-4D91-BD45-36A87F772FE3" />
-        <code code="416409005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refused consent for upload to local shared electronic record">
-    <originalText>Refused consent for upload to local shared electronic record</originalText>
+        <code code="2548920016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refused consent for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4288,8 +4229,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7673B115-7151-4F48-AC9C-5E89AD6C04D5" />
-        <code code="773031000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Express consent for core Summary Care Record dataset upload">
-    <originalText>Express consent for core Summary Care Record dataset upload</originalText>
+        <code code="1726171000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Express consent for core Summary Care Record dataset upload">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4337,8 +4277,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="85522AAC-80B6-4F73-BD34-50825EF0E45C" />
-        <code code="773031000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Express consent for core Summary Care Record dataset upload">
-    <originalText>Express consent for core Summary Care Record dataset upload</originalText>
+        <code code="1726171000000117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Express consent for core Summary Care Record dataset upload">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4386,8 +4325,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="37BE01D1-CF5B-470A-8D40-C5212AD6A78C" />
-        <code code="907511000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[RFC] Chest infection">
-    <originalText>[RFC] Chest infection</originalText>
+        <code code="907511000006114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[RFC] Chest infection">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4435,8 +4373,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C86076C5-C69D-45EB-BEC4-1F1B310E80FC" />
-        <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
-    <originalText>Consent given for upload to local shared electronic record</originalText>
+        <code code="2548578015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4484,8 +4421,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FEB76FD7-EA3E-47AE-9D92-DDB7EB866A99" />
-        <code code="15033003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peritonsillar abscess">
-    <originalText>Peritonsillar abscess</originalText>
+        <code code="25521017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peritonsillar abscess">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4533,8 +4469,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8169ED1C-68A3-410D-B538-BC5AC42C77DA" />
-        <code code="90176007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tonsillitis">
-    <originalText>Tonsillitis</originalText>
+        <code code="149482010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tonsillitis">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4582,8 +4517,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B" />
-        <code code="162397003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pain in throat">
-    <originalText>Pain in throat</originalText>
+        <code code="253240010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pain in throat">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4631,8 +4565,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8" />
-        <code code="93961000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Italian - ethnic category 2001 census">
-    <originalText>Italian - ethnic category 2001 census</originalText>
+        <code code="158481000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Italian - ethnic category 2001 census">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4884,8 +4817,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F02ED83-3153-4786-96C2-200FE456A1E4" />
-        <code code="310868002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Informing patient of prognosis">
-    <originalText>Informing patient of prognosis</originalText>
+        <code code="454386017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Informing patient of prognosis">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4933,8 +4865,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15" />
-        <code code="704035003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Caregiver unaware of prognosis">
-    <originalText>Caregiver unaware of prognosis</originalText>
+        <code code="3011661013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Carer unaware of prognosis">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4982,8 +4913,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE" />
-        <code code="225343006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Assessment of needs">
-    <originalText>Assessment of needs</originalText>
+        <code code="338630012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Assessment of needs">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5031,8 +4961,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0748F11B-5E47-4F16-A71A-A692EEEA9F45" />
-        <code code="787381000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lack of mental capacity to make decision (Mental Capacity Act 2005)">
-    <originalText>Lack of mental capacity to make decision (Mental Capacity Act 2005)</originalText>
+        <code code="1760551000000113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lack of mental capacity to make decision (Mental Capacity Act 2005)">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5080,8 +5009,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="03245FA5-238F-4857-878F-975411328E56" />
-        <code code="968211000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Last months of life">
-    <originalText>Last months of life</originalText>
+        <code code="2465821000000115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Last months of life">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5129,8 +5057,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342" />
-        <code code="103735009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Palliative care">
-    <originalText>Palliative care</originalText>
+        <code code="167523015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Palliative care">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5178,8 +5105,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C5676D58-9600-424A-BE35-3DDAE0CAC622" />
-        <code code="341051000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lasting power of attorney personal welfare">
-    <originalText>Lasting power of attorney personal welfare</originalText>
+        <code code="635331000000116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lasting power of attorney personal welfare">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5227,8 +5153,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57" />
-        <code code="975291000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family member informed of cardiopulmonary resuscitation clinical decision">
-    <originalText>Family member informed of cardiopulmonary resuscitation clinical decision</originalText>
+        <code code="2481081000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Family member informed of cardiopulmonary resuscitation clinical decision">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5276,8 +5201,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="62ED3F01-2041-4DAC-B4ED-22EA5DA36907" />
-        <code code="162702000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - mentally confused">
-    <originalText>O/E - mentally confused</originalText>
+        <code code="253591012" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - mentally confused">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5325,8 +5249,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2" />
-        <code code="440583007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sexual orientation unknown">
-    <originalText>Sexual orientation unknown</originalText>
+        <code code="2793879015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sexual orientation unknown">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5374,8 +5297,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38" />
-        <code code="315570003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Main spoken language English">
-    <originalText>Main spoken language English</originalText>
+        <code code="460087014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Main spoken language English">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5423,8 +5345,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F668B1E-10E7-4771-8395-F1BA8D1A745A" />
-        <code code="33553000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Widowed">
-    <originalText>Widowed</originalText>
+        <code code="485552011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Widowed">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5472,8 +5393,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1048A69B-71E7-4D03-9E2E-2DD27F172295" />
-        <code code="160567004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Agnostic">
-    <originalText>Agnostic</originalText>
+        <code code="250299011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Agnostic">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5521,8 +5441,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E6D3941E-4BB5-415A-8177-DAB155EB5FF6" />
-        <code code="315450007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Born in Italy">
-    <originalText>Born in Italy</originalText>
+        <code code="459965011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Born in Italy">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
