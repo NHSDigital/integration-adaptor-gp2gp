@@ -53,7 +53,7 @@ public class DocumentToMHSTranslator {
         var attachments = Collections.singletonList(
             OutboundMessage.Attachment.builder()
                 .contentType(contentType)
-                .isBase64(Boolean.TRUE.toString())
+                .isBase64(Boolean.TRUE)
                 .description(taskDefinition.getDocumentId())
                 .payload(fileContent)
                 .build());
