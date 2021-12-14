@@ -48,7 +48,7 @@ public class OutboundMessage {
         @JsonProperty("content_type")
         private String contentType;
         @JsonProperty("is_base64")
-        private String isBase64;
+        private Boolean isBase64;
         private String description;
         private String payload;
     }
