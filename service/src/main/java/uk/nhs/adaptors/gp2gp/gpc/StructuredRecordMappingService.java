@@ -66,7 +66,6 @@ public class StructuredRecordMappingService {
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
-            .filename(fileName)
             .description(OutboundMessage.AttachmentDescription.builder()
                 .fileName(fileName)
                 .contentType(contentType)
