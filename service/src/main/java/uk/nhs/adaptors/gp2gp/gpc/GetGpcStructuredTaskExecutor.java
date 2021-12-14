@@ -207,15 +207,30 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .build();
     }
 
+    private String getFileName(OutboundMessage.ExternalAttachment externalAttachment, Bundle bundle) {
+        if (bundle.hasEntry()) {
+            var documentReference = bundle.getEntry()
+                .stream()
+                .filter(Bundle.BundleEntryComponent::hasResource)
+                .map(Bundle.BundleEntryComponent::getResource)
+                .filter(resource -> resource.getResourceType().equals(ResourceType.DocumentReference))
+                .map(DocumentReference.class::cast)
+                .filter(docRef -> docRef.getContentFirstRep().getAttachment().hasUrl())
+                .filter(docRef -> docRef.getContentFirstRep().getAttachment().getUrl().endsWith(externalAttachment.getDocumentId()))
+                .findFirst();
+
+            if (documentReference.isPresent()) {
+                final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference.get());
+                final String narrativeStatementId = messageContext.getIdMapper()
+                        .getOrNew(ResourceType.DocumentReference, documentReference.get().getIdElement());
+                return DocumentReferenceUtils.buildAttachmentFileName(narrativeStatementId, attachment);
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
     private GetGpcDocumentTaskDefinition buildGetDocumentTask(TaskDefinition taskDefinition,
         OutboundMessage.ExternalAttachment externalAttachment, Bundle bundle) {
-
-        var documentReference = (DocumentReference) bundle.getEntry().get(3).getResource();
-        final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference);
-        final String narrativeStatementId = messageContext.getIdMapper()
-                .getOrNew(ResourceType.DocumentReference, documentReference.getIdElement());
-        final String fileName = DocumentReferenceUtils.buildAttachmentFileName(narrativeStatementId, attachment);
-
         return GetGpcDocumentTaskDefinition.builder()
             .documentId(externalAttachment.getDocumentId())
             .taskId(taskDefinition.getTaskId())
@@ -227,7 +242,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .fromOdsCode(taskDefinition.getFromOdsCode())
             .accessDocumentUrl(externalAttachment.getUrl())
             .messageId(externalAttachment.getMessageId())
-            .fileName(fileName)
+            .fileName(getFileName(externalAttachment, bundle))
             .build();
     }
 
