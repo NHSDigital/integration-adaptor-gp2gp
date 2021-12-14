@@ -25,8 +25,6 @@ import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
-import uk.nhs.adaptors.gp2gp.ehr.utils.AbsentAttachmentUtils;
-import uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.util.ArrayList;
@@ -217,20 +215,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         final String narrativeStatementId = messageContext.getIdMapper()
                 .getOrNew(ResourceType.DocumentReference, documentReference.getIdElement());
         final String fileName = DocumentReferenceUtils.buildAttachmentFileName(narrativeStatementId, attachment);
-
-        //        var entry = bundle.getEntry();
-//
-//        for (Bundle.BundleEntryComponent entryItem : entry) {
-//            if (entryItem.hasResource()) {
-//                if (!entryItem.getResource().isEmpty() && entryItem.getResource().getResourceType().equals("DocumentReference")) {
-//                    if(entryItem.getResource().getIdElement().toString().contains(externalAttachment.getDocumentId())) {
-//                        var docu
-//                    };
-//                }
-//            }
-//            continue;
-//        }
-
 
         return GetGpcDocumentTaskDefinition.builder()
             .documentId(externalAttachment.getDocumentId())

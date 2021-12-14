@@ -27,7 +27,7 @@ public class GetGpcDocumentTaskDefinition extends DocumentTaskDefinition {
     private final String accessDocumentUrl;
 
     /**
-     * Original filename of the external attachment
+     * Reference title (including extension) of the DocumentReference generated in the EHR narrative statement
      */
     private final String fileName;
 
