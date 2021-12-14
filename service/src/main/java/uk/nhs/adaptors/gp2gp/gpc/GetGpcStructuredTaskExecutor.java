@@ -30,6 +30,7 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -209,15 +210,32 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
     private String getFileName(OutboundMessage.ExternalAttachment externalAttachment, Bundle bundle) {
         if (bundle.hasEntry()) {
-            var documentReference = bundle.getEntry()
-                .stream()
-                .filter(Bundle.BundleEntryComponent::hasResource)
-                .map(Bundle.BundleEntryComponent::getResource)
-                .filter(resource -> resource.getResourceType().equals(ResourceType.DocumentReference))
-                .map(DocumentReference.class::cast)
-                .filter(docRef -> docRef.getContentFirstRep().getAttachment().hasUrl())
-                .filter(docRef -> docRef.getContentFirstRep().getAttachment().getUrl().endsWith(externalAttachment.getDocumentId()))
-                .findFirst();
+            Optional<DocumentReference> documentReference = null;
+
+            // list of DocumentReferences present in the bundle
+            var documentReferenceList = bundle.getEntry()
+                    .stream()
+                    .filter(Bundle.BundleEntryComponent::hasResource)
+                    .map(Bundle.BundleEntryComponent::getResource)
+                    .filter(resource -> resource.getResourceType().equals(ResourceType.DocumentReference))
+                    .map(DocumentReference.class::cast).collect(Collectors.toList());
+
+            if (externalAttachment.getTitle() != StringUtils.EMPTY) {
+                // placeholder attachment, so we must search based on the mappable id
+                for (DocumentReference docRef : documentReferenceList) {
+                    var docRefId = messageContext.getIdMapper().newId(ResourceType.DocumentReference, docRef.getIdElement());
+                    if (docRefId == externalAttachment.getDocumentId()) {
+                        documentReference = Optional.of(docRef);
+                        break;
+                    }
+                }
+            } else {
+                // not a placeholder attachment, so we can find the DocumentReference through the URL
+                documentReference = documentReferenceList.stream()
+                    .filter(docRef -> docRef.getContentFirstRep().getAttachment().hasUrl())
+                    .filter(docRef -> docRef.getContentFirstRep().getAttachment().getUrl().endsWith(externalAttachment.getDocumentId()))
+                    .findFirst();
+            }
 
             if (documentReference.isPresent()) {
                 final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference.get());
