@@ -25,6 +25,7 @@ import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.util.ArrayList;
@@ -179,7 +180,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return fhirParseService.parseResource(gpcClient.getStructuredRecord(structuredTaskDefinition), Bundle.class);
     }
 
-    private void queueGetDocumentsTask(TaskDefinition taskDefinition, List<OutboundMessage.ExternalAttachment> externalAttachments, Bundle bundle) {
+    private void queueGetDocumentsTask(TaskDefinition taskDefinition, List<OutboundMessage.ExternalAttachment> externalAttachments,
+                                       Bundle bundle) {
         externalAttachments.stream()
             .map(externalAttachment -> buildGetDocumentTask(taskDefinition, externalAttachment, bundle))
             .forEach(taskDispatcher::createTask);
@@ -212,15 +214,10 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private String getFileNameForAbsentAttachment(OutboundMessage.ExternalAttachment absentAttachment, Bundle bundle) {
         if (bundle.hasEntry()) {
 
-            Optional<DocumentReference> documentReference = null;
+            Optional<DocumentReference> documentReference;
 
-            var documentReferenceList = bundle.getEntry()
-                .stream()
-                .filter(Bundle.BundleEntryComponent::hasResource)
-                .map(Bundle.BundleEntryComponent::getResource)
-                .filter(resource -> resource.getResourceType().equals(ResourceType.DocumentReference))
-                .map(DocumentReference.class::cast)
-                .collect(Collectors.toList());
+            var documentReferenceList = ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
+                    .collect(Collectors.toList());
 
             if (StringUtils.isNotEmpty(absentAttachment.getUrl())) {
                 documentReference = documentReferenceList.stream()
@@ -228,14 +225,10 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .filter(docRef -> docRef.getContentFirstRep().getAttachment().getUrl().endsWith(absentAttachment.getDocumentId()))
                     .findFirst();
             } else {
-                for (DocumentReference docRef : documentReferenceList) {
-                    var docRefId = messageContext.getIdMapper()
-                            .newId(ResourceType.DocumentReference, docRef.getIdElement());
-                    if (docRefId.equals(absentAttachment.getDocumentId())) {
-                        documentReference = Optional.of(docRef);
-                        break;
-                    }
-                }
+                documentReference = documentReferenceList.stream()
+                    .filter(this::getPlaceHolderAttachments)
+                    .filter(docRef -> matchingDocumentId(docRef, absentAttachment))
+                    .findFirst();
             }
 
             if (documentReference.isPresent()) {
@@ -247,14 +240,19 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return StringUtils.EMPTY;
     }
 
+    private boolean getPlaceHolderAttachments(DocumentReference documentReference) {
+        return documentReference.getContentFirstRep().getAttachment().hasTitle();
+    }
+
+    private boolean matchingDocumentId(DocumentReference documentReference, OutboundMessage.ExternalAttachment absentAttachment) {
+        var docRefId = messageContext.getIdMapper()
+                .newId(ResourceType.DocumentReference, documentReference.getIdElement());
+        return docRefId.equals(absentAttachment.getDocumentId());
+    }
+
     private String getFileNameForExternalAttachment(OutboundMessage.ExternalAttachment externalAttachment, Bundle bundle) {
         if (bundle.hasEntry()) {
-            var documentReference = bundle.getEntry()
-                .stream()
-                .filter(Bundle.BundleEntryComponent::hasResource)
-                .map(Bundle.BundleEntryComponent::getResource)
-                .filter(resource -> resource.getResourceType().equals(ResourceType.DocumentReference))
-                .map(DocumentReference.class::cast)
+            var documentReference = ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
                 .filter(docRef -> docRef.getContentFirstRep().getAttachment().hasUrl())
                 .filter(docRef -> docRef.getContentFirstRep().getAttachment().getUrl().endsWith(externalAttachment.getDocumentId()))
                 .findFirst();
@@ -263,7 +261,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference.get());
                 final String narrativeStatementId = messageContext.getIdMapper()
                         .getOrNew(ResourceType.DocumentReference, documentReference.get().getIdElement());
-                return DocumentReferenceUtils.buildAttachmentFileName(narrativeStatementId, attachment);
+                return DocumentReferenceUtils.buildPresentAttachmentFileName(narrativeStatementId, attachment.getContentType());
             }
         }
         return StringUtils.EMPTY;
