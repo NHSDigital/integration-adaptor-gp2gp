@@ -112,7 +112,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             hl7TranslatedResponse = structuredRecordMappingService.getHL7(structuredTaskDefinition, structuredRecord);
 
             queueGetDocumentsTask(structuredTaskDefinition, externalAttachments, structuredRecord);
-            queueSendAbsentAttachmentTask(structuredTaskDefinition, absentAttachments);
+            queueSendAbsentAttachmentTask(structuredTaskDefinition, absentAttachments, structuredRecord);
         } finally {
             messageContext.resetMessageContext();
         }
@@ -186,14 +186,14 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     }
 
     private void queueSendAbsentAttachmentTask(TaskDefinition taskDefinition,
-        List<OutboundMessage.ExternalAttachment> absentAttachments) {
+        List<OutboundMessage.ExternalAttachment> absentAttachments, Bundle bundle) {
         absentAttachments.stream()
-            .map(absentAttachment -> buildSendAbsentAttachmentTask(taskDefinition, absentAttachment))
+            .map(absentAttachment -> buildSendAbsentAttachmentTask(taskDefinition, absentAttachment, bundle))
             .forEach(taskDispatcher::createTask);
     }
 
     private SendAbsentAttachmentTaskDefinition buildSendAbsentAttachmentTask(TaskDefinition taskDefinition,
-        OutboundMessage.ExternalAttachment absentAttachment) {
+        OutboundMessage.ExternalAttachment absentAttachment, Bundle bundle) {
         return SendAbsentAttachmentTaskDefinition.builder()
             .documentId(absentAttachment.getDocumentId())
             .title(absentAttachment.getTitle())
@@ -205,37 +205,59 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .toOdsCode(taskDefinition.getToOdsCode())
             .fromOdsCode(taskDefinition.getFromOdsCode())
             .messageId(absentAttachment.getMessageId())
+            .fileName(getFileNameForAbsentAttachment(absentAttachment, bundle))
             .build();
     }
 
-    private String getFileName(OutboundMessage.ExternalAttachment externalAttachment, Bundle bundle) {
+    private String getFileNameForAbsentAttachment(OutboundMessage.ExternalAttachment absentAttachment, Bundle bundle) {
         if (bundle.hasEntry()) {
+
             Optional<DocumentReference> documentReference = null;
 
-            // list of DocumentReferences present in the bundle
             var documentReferenceList = bundle.getEntry()
-                    .stream()
-                    .filter(Bundle.BundleEntryComponent::hasResource)
-                    .map(Bundle.BundleEntryComponent::getResource)
-                    .filter(resource -> resource.getResourceType().equals(ResourceType.DocumentReference))
-                    .map(DocumentReference.class::cast).collect(Collectors.toList());
+                .stream()
+                .filter(Bundle.BundleEntryComponent::hasResource)
+                .map(Bundle.BundleEntryComponent::getResource)
+                .filter(resource -> resource.getResourceType().equals(ResourceType.DocumentReference))
+                .map(DocumentReference.class::cast)
+                .collect(Collectors.toList());
 
-            if (externalAttachment.getTitle() != StringUtils.EMPTY) {
-                // placeholder attachment, so we must search based on the mappable id
+            if (StringUtils.isNotEmpty(absentAttachment.getUrl())) {
+                documentReference = documentReferenceList.stream()
+                    .filter(docRef -> docRef.getContentFirstRep().getAttachment().hasUrl())
+                    .filter(docRef -> docRef.getContentFirstRep().getAttachment().getUrl().endsWith(absentAttachment.getDocumentId()))
+                    .findFirst();
+            } else {
                 for (DocumentReference docRef : documentReferenceList) {
-                    var docRefId = messageContext.getIdMapper().newId(ResourceType.DocumentReference, docRef.getIdElement());
-                    if (docRefId == externalAttachment.getDocumentId()) {
+                    var docRefId = messageContext.getIdMapper()
+                            .newId(ResourceType.DocumentReference, docRef.getIdElement());
+                    if (docRefId.equals(absentAttachment.getDocumentId())) {
                         documentReference = Optional.of(docRef);
                         break;
                     }
                 }
-            } else {
-                // not a placeholder attachment, so we can find the DocumentReference through the URL
-                documentReference = documentReferenceList.stream()
-                    .filter(docRef -> docRef.getContentFirstRep().getAttachment().hasUrl())
-                    .filter(docRef -> docRef.getContentFirstRep().getAttachment().getUrl().endsWith(externalAttachment.getDocumentId()))
-                    .findFirst();
             }
+
+            if (documentReference.isPresent()) {
+                final String narrativeStatementId = messageContext.getIdMapper()
+                        .getOrNew(ResourceType.DocumentReference, documentReference.get().getIdElement());
+                return DocumentReferenceUtils.buildMissingAttachmentFileName(narrativeStatementId);
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String getFileNameForExternalAttachment(OutboundMessage.ExternalAttachment externalAttachment, Bundle bundle) {
+        if (bundle.hasEntry()) {
+            var documentReference = bundle.getEntry()
+                .stream()
+                .filter(Bundle.BundleEntryComponent::hasResource)
+                .map(Bundle.BundleEntryComponent::getResource)
+                .filter(resource -> resource.getResourceType().equals(ResourceType.DocumentReference))
+                .map(DocumentReference.class::cast)
+                .filter(docRef -> docRef.getContentFirstRep().getAttachment().hasUrl())
+                .filter(docRef -> docRef.getContentFirstRep().getAttachment().getUrl().endsWith(externalAttachment.getDocumentId()))
+                .findFirst();
 
             if (documentReference.isPresent()) {
                 final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference.get());
@@ -260,7 +282,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .fromOdsCode(taskDefinition.getFromOdsCode())
             .accessDocumentUrl(externalAttachment.getUrl())
             .messageId(externalAttachment.getMessageId())
-            .fileName(getFileName(externalAttachment, bundle))
+            .fileName(getFileNameForExternalAttachment(externalAttachment, bundle))
             .build();
     }
 
