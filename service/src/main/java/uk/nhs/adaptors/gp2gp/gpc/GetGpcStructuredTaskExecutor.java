@@ -224,8 +224,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return getBytesLengthOfString(ehrExtract) > gp2gpConfiguration.getLargeEhrExtractThreshold();
     }
 
-    private List<OutboundMessage.ExternalAttachment> mapPrefixesToDocumentIds(List<OutboundMessage.ExternalAttachment> externalAttachments) {
-        return externalAttachments.stream()
+    private List<OutboundMessage.ExternalAttachment> mapPrefixesToDocumentIds(List<OutboundMessage.ExternalAttachment> extAttachments) {
+        return extAttachments.stream()
             .peek(externalAttachment -> externalAttachment.setDocumentId(
                 LEADING_UNDERSCORE_CHAR.concat(externalAttachment.getDocumentId())
             ))
