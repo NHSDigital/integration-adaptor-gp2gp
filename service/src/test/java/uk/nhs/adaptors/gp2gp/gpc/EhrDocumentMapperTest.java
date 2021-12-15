@@ -36,6 +36,7 @@ public class EhrDocumentMapperTest {
     private static final String TEST_DOCUMENT_ID = "test-document-id";
     private static final String TEST_ID = "test-id";
     private static final String TEST_DATE_TIME = "2020-01-01T01:01:01.01Z";
+    private static final String DOC_EXTENSION = ".doc";
 
     private static String expectedJsonToXmlContent;
     private static GetGpcDocumentTaskDefinition getGpcDocumentTaskDefinition;
@@ -59,6 +60,7 @@ public class EhrDocumentMapperTest {
             .fromOdsCode(TEST_FROM_ODS_CODE)
             .toOdsCode(TEST_TO_ODS_CODE)
             .documentId(TEST_DOCUMENT_ID)
+            .fileName(TEST_DOCUMENT_ID + DOC_EXTENSION)
             .build();
     }
 

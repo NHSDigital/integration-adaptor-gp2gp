@@ -40,6 +40,10 @@ public class DocumentToMHSTranslatorTest {
     private static final String TEST_TO_ODS = "test-to-ods-code";
     private static final String TEST_TO_ASID = "test-to-asid";
     private static final String TEST_TITLE = "Test DocumentReference.content.attachment.title";
+    private static final String ABSENT_ATTACHMENT_PREFIX = "AbsentAttachment";
+    private static final String TXT_EXTENSION = ".txt";
+    private static final String DOC_EXTENSION = ".doc";
+
 
     private static final String BINARY_INPUT_FILE = "test-binary.json";
     private static final String ABSENT_ATTACHMENT_INPUT_FILE = "absent-attachment-test.txt";
@@ -81,6 +85,7 @@ public class DocumentToMHSTranslatorTest {
         GetGpcDocumentTaskDefinition taskDefinition = GetGpcDocumentTaskDefinition.builder()
             .messageId(MESSAGE_ID)
             .documentId(TEST_DOCUMENT_ID)
+            .fileName(TEST_DOCUMENT_ID + DOC_EXTENSION)
             .build();
         Binary binary = new FhirParseService().parseResource(jsonBinaryContent, Binary.class);
         String payload = documentToMHSTranslator.translateGpcResponseToMhsOutboundRequestData(
@@ -99,6 +104,7 @@ public class DocumentToMHSTranslatorTest {
             .conversationId(TEST_CONVERSATION_ID)
             .toOdsCode(TEST_TO_ODS)
             .toAsid(TEST_TO_ASID)
+            .fileName(ABSENT_ATTACHMENT_PREFIX + TEST_DOCUMENT_ID + TXT_EXTENSION)
             .build();
 
         String mhsOutboundRequestData = documentToMHSTranslator.translateFileContentToMhsOutboundRequestData(
