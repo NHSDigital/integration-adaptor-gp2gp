@@ -32,16 +32,20 @@ public class EhrExtractTest {
     @InjectSoftAssertions
     private SoftAssertions softly;
 
-    private static final String NHS_NUMBER = "9690937286";
-    private static final String NOT_EXISTING_PATIENT_NHS_NUMBER = "9876543210";
-    private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
-    private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE = "/ehrExtractRequestWithNoDocuments.json";
-    private static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
+    //AA-DR = AbsentAttachment DocumentReference
+    //NORMAL-DR = Non-AbsentAttachment DocumentReference
+    private static final String NHS_NUMBER_WITH_AA_DR = "9690937286";
+    private static final String NHS_NUMBER_WITH_NORMAL_DR = "9690937287";
+    private static final String NHS_NUMBER_NOT_EXISTING_PATIENT = "9876543210";
     private static final String NHS_NUMBER_NO_DOCUMENTS = "9690937294";
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_1 = "9690937819";
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_2 = "9690937841";
     private static final String NHS_NUMBER_TWO_DOCUMENTS = "9690937789";
     private static final String NHS_NUMBER_THREE_SMALL_DOCUMENTS = "9690937419";
+
+    private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
+    private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE = "/ehrExtractRequestWithNoDocuments.json";
+    private static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
     private static final String FROM_PARTY_ID = "N82668-820670";
     private static final String TO_PARTY_ID = "B86041-822103";
     private static final String FROM_ASID = "200000000359";
@@ -76,18 +80,27 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceivedFromNormal_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER, FROM_ODS_CODE_1);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_NORMAL_DR, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER);
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_NORMAL_DR);
+    }
+
+    @Test
+    public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR);
 
         String conversationId2 = UUID.randomUUID().toString();
-        String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, NHS_NUMBER, FROM_ODS_CODE_2);
+        String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_2);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest2);
 
-        assertHappyPathWithAbsentAttachments(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER);
+        assertHappyPathWithAbsentAttachments(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER_WITH_AA_DR);
     }
 
     @Test
@@ -113,12 +126,12 @@ public class EhrExtractTest {
     @Test
     public void When_ExtractRequestReceivedForLargeEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER, FROM_ODS_CODE_1);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         assertEhrExtractSentAsAttachment(conversationId);
 
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER);
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR);
     }
 
     @Test
@@ -186,12 +199,12 @@ public class EhrExtractTest {
     @Test
     public void When_ExtractRequestReceivedForNotExistingPatient_Expect_ErrorUpdatedInDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NOT_EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_1);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_NOT_EXISTING_PATIENT, FROM_ODS_CODE_1);
 
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NOT_EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_1);
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NOT_EXISTING_PATIENT, FROM_ODS_CODE_1);
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_REQUESTER));
         assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
@@ -368,6 +381,31 @@ public class EhrExtractTest {
     private void assertThatExtractContinueMessageWasSent(Document ehrContinue) {
         softly.assertThat(ehrContinue).isNotEmpty().isNotEmpty();
         softly.assertThat(ehrContinue.get("received")).isNotNull();
+    }
+
+    private void assertHappyPathWithDocs(String conversationId, String fromODSCode, String nhsNumber) {
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, fromODSCode);
+
+        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+        assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
+
+        var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
+        assertThatAccessDocumentWasFetched(singleDocument);
+
+        var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
+        assertThatExtractCoreMessageWasSent(ehrExtractCore);
+
+        var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
+        assertThatExtractContinueMessageWasSent(ehrContinue);
+
+        var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+
+        var sentToMhs = (Document) waitFor(() -> fetchSentToMhsForDocuments(conversationId));
+        assertThat(sentToMhs.get("messageId")).isNotNull();
+        assertThat(sentToMhs.get("sentAt")).isNotNull();
+        assertThat(sentToMhs.get("taskId")).isNotNull();
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber, String fromODSCode) {
