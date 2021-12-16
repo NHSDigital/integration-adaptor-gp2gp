@@ -89,7 +89,7 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceivedFromAbsent_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
