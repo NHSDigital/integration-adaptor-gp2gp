@@ -48,6 +48,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     public static final String SKELETON_ATTACHMENT = "X-GP2GP-Skeleton: Yes";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     public static final String XML_CONTENT_TYPE = "application/xml";
+    private static final String LEADING_UNDERSCORE_CHAR = "_";
 
     private final GpcClient gpcClient;
     private final StorageConnectorService storageConnectorService;
@@ -152,7 +153,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var outboundMessage = OutboundMessage.builder()
             .payload(hl7TranslatedResponse)
             .attachments(attachments)
-            .externalAttachments(externalAttachments)
+            .externalAttachments(mapPrefixesToDocumentIds(externalAttachments))
             .build();
 
         var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
@@ -286,6 +287,14 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
     private boolean isLargeEhrExtract(String ehrExtract) {
         return getBytesLengthOfString(ehrExtract) > gp2gpConfiguration.getLargeEhrExtractThreshold();
+    }
+
+    private List<OutboundMessage.ExternalAttachment> mapPrefixesToDocumentIds(List<OutboundMessage.ExternalAttachment> extAttachments) {
+        return extAttachments.stream()
+            .peek(externalAttachment -> externalAttachment.setDocumentId(
+                LEADING_UNDERSCORE_CHAR.concat(externalAttachment.getDocumentId())
+            ))
+            .collect(Collectors.toList());
     }
 
     private OutboundMessage.Attachment buildAttachment(String content, String filename) {
