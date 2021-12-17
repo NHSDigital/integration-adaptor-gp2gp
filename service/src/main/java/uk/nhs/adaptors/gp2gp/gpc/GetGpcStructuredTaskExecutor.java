@@ -146,14 +146,13 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         }
 
         var allExternalAttachments = Stream.concat(
-                mapPrefixesToDocumentIds(externalAttachments).stream(),
-                mapPrefixesToDocumentIds(absentAttachments).stream()
+                externalAttachments.stream(), absentAttachments.stream()
             ).collect(Collectors.toList());
 
         var outboundMessage = OutboundMessage.builder()
             .payload(hl7TranslatedResponse)
             .attachments(attachments)
-            .externalAttachments(allExternalAttachments)
+            .externalAttachments(mapPrefixesToDocumentIds(allExternalAttachments))
             .build();
 
         var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
