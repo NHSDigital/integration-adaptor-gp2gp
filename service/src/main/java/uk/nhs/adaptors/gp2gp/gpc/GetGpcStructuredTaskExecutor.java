@@ -33,6 +33,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -150,10 +151,14 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             }
         }
 
+        var allExternalAttachments = Stream.concat(
+                externalAttachments.stream(), absentAttachments.stream()
+            ).collect(Collectors.toList());
+
         var outboundMessage = OutboundMessage.builder()
             .payload(hl7TranslatedResponse)
             .attachments(attachments)
-            .externalAttachments(mapPrefixesToDocumentIds(externalAttachments))
+            .externalAttachments(mapPrefixesToDocumentIds(allExternalAttachments))
             .build();
 
         var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
