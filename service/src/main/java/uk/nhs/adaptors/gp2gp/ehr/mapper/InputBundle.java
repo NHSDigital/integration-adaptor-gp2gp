@@ -54,7 +54,7 @@ public class InputBundle {
         ResourceType.RelatedPerson,
         ResourceType.Specimen
         );
-    private static boolean called = false;
+    private boolean called = false;
 
     private final Bundle bundle;
 
