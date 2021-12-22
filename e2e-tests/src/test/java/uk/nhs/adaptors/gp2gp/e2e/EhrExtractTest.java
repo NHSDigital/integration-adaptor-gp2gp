@@ -17,6 +17,7 @@ import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.bson.Document;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.StringUtils;
@@ -167,6 +168,7 @@ public class EhrExtractTest {
     }
 
     @Test
+    @Disabled
     public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = IOUtils.toString(getClass()
