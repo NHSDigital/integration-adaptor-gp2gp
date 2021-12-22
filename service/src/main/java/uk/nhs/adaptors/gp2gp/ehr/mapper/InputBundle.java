@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.formats.IParser;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Extension;
@@ -55,7 +54,7 @@ public class InputBundle {
         ResourceType.RelatedPerson,
         ResourceType.Specimen
         );
-    private static boolean called = false; 
+    private static boolean called = false;
 
     private final Bundle bundle;
 
@@ -93,15 +92,15 @@ public class InputBundle {
     }
 
     public Resource getRequiredResource(IIdType reference) {
-        if(!called){
+        if (!called) {
             FhirContext ctx = FhirContext.forDstu3();
-            
+
             String serialized = ctx.newJsonParser().encodeResourceToString(bundle);
             //System.out.println(serialized);
-            LOGGER.info("\n\n"+serialized+"\n\n");
+            LOGGER.info("\n\n" + serialized + "\n\n");
             called = true;
         }
-        
+
         return extractResourceByReference(this.bundle, reference)
             .orElseThrow(() -> new EhrMapperException("Resource not found: " + reference));
     }
