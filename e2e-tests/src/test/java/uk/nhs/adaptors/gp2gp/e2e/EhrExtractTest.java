@@ -102,7 +102,6 @@ public class EhrExtractTest {
     }
 
     @Test
-    @Disabled
     public void When_ExtractRequestReceivedWithLargeAttachment_Expect_LargeDocumentIsSplit() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_ATTACHMENT_DOCX, FROM_ODS_CODE_1);
@@ -138,6 +137,7 @@ public class EhrExtractTest {
     }
 
     @Test
+    @Disabled
     public void When_ExtractRequestReceived3NormalDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS, FROM_ODS_CODE_1);
@@ -158,7 +158,6 @@ public class EhrExtractTest {
     }
 
     @Test
-    @Disabled
     public void When_ExtractRequestReceivedForLargeEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
