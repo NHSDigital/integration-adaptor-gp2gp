@@ -110,31 +110,31 @@ public class EhrExtractTest {
         assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_LARGE_ATTACHMENT_DOCX);
     }
 
-//    @Test
-//    public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR);
-//
-//        String conversationId2 = UUID.randomUUID().toString();
-//        String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_2);
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest2);
-//
-//        assertHappyPathWithAbsentAttachments(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER_WITH_AA_DR);
-//    }
-//
-//    @Test
-//    public void When_ExtractRequestReceivedForPatientWith2Docs1Large_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_TWO_DOCUMENTS, FROM_ODS_CODE_1);
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_TWO_DOCUMENTS);
-//        assertMultipleDocumentsRetrieved(conversationId, 2);
-//    }
-//
+    @Test
+    public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR);
+
+        String conversationId2 = UUID.randomUUID().toString();
+        String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_2);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest2);
+
+        assertHappyPathWithAbsentAttachments(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER_WITH_AA_DR);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedForPatientWith2Docs1Large_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_TWO_DOCUMENTS, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_TWO_DOCUMENTS);
+        assertMultipleDocumentsRetrieved(conversationId, 2);
+    }
+
     @Test
     public void When_ExtractRequestReceived3NormalDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
@@ -144,17 +144,17 @@ public class EhrExtractTest {
         assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS);
         assertMultipleDocumentsRetrieved(conversationId, 3);
     }
-//
-//    @Test
-//    public void When_ExtractRequestReceived3AbsentAttachmentDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS, FROM_ODS_CODE_1);
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS);
-//        assertMultipleDocumentsRetrieved(conversationId, 3);
-//    }
-//
+
+    @Test
+    public void When_ExtractRequestReceived3AbsentAttachmentDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS);
+        assertMultipleDocumentsRetrieved(conversationId, 3);
+    }
+
     @Test
     public void When_ExtractRequestReceivedForLargeEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
@@ -165,105 +165,105 @@ public class EhrExtractTest {
 
         assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR);
     }
-//
-//    @Test
-//    public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = IOUtils.toString(getClass()
-//            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), StandardCharsets.UTF_8)
-//            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-//        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
-//
-//        var documentList = waitFor(() -> {
-//            var extractStatus = ((Document) Mongo.findEhrExtractStatus(conversationId)
-//                .get(GPC_ACCESS_DOCUMENT));
-//            if (extractStatus == null) {
-//                return null;
-//            }
-//            return extractStatus.get("documents", Collections.emptyList());
-//        });
-//
-//        assertThat(documentList.size()).isEqualTo(0);
-//
-//        var ackToPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
-//        assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
-//        assertThatNoErrorInfoIsStored(conversationId);
-//
-//        var mhsMockRequests = mhsMockRequestsJournal.getRequestsJournal();
-//        assertThat(mhsMockRequests).hasSize(2);
-//        var ehrExtractMhsRequest = mhsMockRequests.get(0);
-//
-//        assertThat(ehrExtractMhsRequest.getAttachments()).hasSize(1);
-//        assertThat(ehrExtractMhsRequest.getExternalAttachments()).hasSize(0);
-//
-//        var payload = ehrExtractMhsRequest.getPayload();
-//        var attachment = ehrExtractMhsRequest.getAttachments().get(0);
-//
-//        assertThat(attachment.getPayload()).isNotBlank();
-//        assertThat(attachment.getContentType()).isEqualTo("application/xml");
-//        assertThat(attachment.getIsBase64()).isEqualTo("false");
-//
-//        var description = attachment.getDescription();
-//        var descriptionElements = Arrays.stream(description.split("\n"))
-//            .filter(StringUtils::isNotBlank)
-//            .map(value -> value.split("="))
-//            .collect(Collectors.toMap(x -> x[0].trim(), x -> x[1]));
-//
-//        assertThat(descriptionElements).containsEntry("ContentType", "application/xml");
-//        assertThat(descriptionElements).containsEntry("Compressed", "Yes");
-//        assertThat(descriptionElements).containsEntry("LargeAttachment", "Yes");
-//        assertThat(descriptionElements).containsEntry("OriginalBase64", "No");
-//        assertThat(descriptionElements).hasEntrySatisfying("Length", lengthAsString -> {
-//            var lengthAsInt = Integer.parseInt(lengthAsString);
-//            assertThat(lengthAsInt).isGreaterThan(0);
-//        });
-//        assertThat(descriptionElements).containsEntry("DomainData", "X-GP2GP-Skeleton: Yes");
-//        assertThat(descriptionElements).containsKey("Filename");
-//        var fileName = descriptionElements.get("Filename");
-//
-//        var documentReferenceXPath = String.format(DOCUMENT_REFERENCE_XPATH_TEMPLATE, fileName);
-//        XmlAssert.assertThat(payload).hasXPath(documentReferenceXPath);
-//    }
-//
-//    @Test
-//    public void When_ExtractRequestReceivedForNotExistingPatient_Expect_ErrorUpdatedInDatabase() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_NOT_EXISTING_PATIENT, FROM_ODS_CODE_1);
-//
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-//        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NOT_EXISTING_PATIENT, FROM_ODS_CODE_1);
-//
-//        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_REQUESTER));
-//        assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
-//        assertThatErrorInfoIsStored(conversationId, GET_GPC_STRUCTURED_TASK_NAME);
-//    }
-//
-//    @Test
-//    public void When_ExtractRequestReceivedWithDocumentSizeEqualThreshold_Expect_LargeDocumentIsSentAsOne() throws Exception {
-//        // file size: 31216
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, FROM_ODS_CODE_1);
-//
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, 1);
-//    }
-//
-//    @Test
-//    public void When_ExtractRequestReceivedWithDocumentSizeLargerThanThreshold_Expect_LargeDocumentIsSplit() throws Exception {
-//        // file size: 62428
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, FROM_ODS_CODE_1);
-//
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, 3);
-//    }
+
+    @Test
+    public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = IOUtils.toString(getClass()
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), StandardCharsets.UTF_8)
+            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
+
+        var documentList = waitFor(() -> {
+            var extractStatus = ((Document) Mongo.findEhrExtractStatus(conversationId)
+                .get(GPC_ACCESS_DOCUMENT));
+            if (extractStatus == null) {
+                return null;
+            }
+            return extractStatus.get("documents", Collections.emptyList());
+        });
+
+        assertThat(documentList.size()).isEqualTo(0);
+
+        var ackToPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+        assertThatNoErrorInfoIsStored(conversationId);
+
+        var mhsMockRequests = mhsMockRequestsJournal.getRequestsJournal();
+        assertThat(mhsMockRequests).hasSize(2);
+        var ehrExtractMhsRequest = mhsMockRequests.get(0);
+
+        assertThat(ehrExtractMhsRequest.getAttachments()).hasSize(1);
+        assertThat(ehrExtractMhsRequest.getExternalAttachments()).hasSize(0);
+
+        var payload = ehrExtractMhsRequest.getPayload();
+        var attachment = ehrExtractMhsRequest.getAttachments().get(0);
+
+        assertThat(attachment.getPayload()).isNotBlank();
+        assertThat(attachment.getContentType()).isEqualTo("application/xml");
+        assertThat(attachment.getIsBase64()).isEqualTo("false");
+
+        var description = attachment.getDescription();
+        var descriptionElements = Arrays.stream(description.split("\n"))
+            .filter(StringUtils::isNotBlank)
+            .map(value -> value.split("="))
+            .collect(Collectors.toMap(x -> x[0].trim(), x -> x[1]));
+
+        assertThat(descriptionElements).containsEntry("ContentType", "application/xml");
+        assertThat(descriptionElements).containsEntry("Compressed", "Yes");
+        assertThat(descriptionElements).containsEntry("LargeAttachment", "Yes");
+        assertThat(descriptionElements).containsEntry("OriginalBase64", "No");
+        assertThat(descriptionElements).hasEntrySatisfying("Length", lengthAsString -> {
+            var lengthAsInt = Integer.parseInt(lengthAsString);
+            assertThat(lengthAsInt).isGreaterThan(0);
+        });
+        assertThat(descriptionElements).containsEntry("DomainData", "X-GP2GP-Skeleton: Yes");
+        assertThat(descriptionElements).containsKey("Filename");
+        var fileName = descriptionElements.get("Filename");
+
+        var documentReferenceXPath = String.format(DOCUMENT_REFERENCE_XPATH_TEMPLATE, fileName);
+        XmlAssert.assertThat(payload).hasXPath(documentReferenceXPath);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedForNotExistingPatient_Expect_ErrorUpdatedInDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_NOT_EXISTING_PATIENT, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NOT_EXISTING_PATIENT, FROM_ODS_CODE_1);
+
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_REQUESTER));
+        assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
+        assertThatErrorInfoIsStored(conversationId, GET_GPC_STRUCTURED_TASK_NAME);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedWithDocumentSizeEqualThreshold_Expect_LargeDocumentIsSentAsOne() throws Exception {
+        // file size: 31216
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, 1);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedWithDocumentSizeLargerThanThreshold_Expect_LargeDocumentIsSplit() throws Exception {
+        // file size: 62428
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, 3);
+    }
 
     private void assertMultipleDocumentsRetrieved(String conversationId, int documentCount) {
         var documentList = waitFor(() -> {
