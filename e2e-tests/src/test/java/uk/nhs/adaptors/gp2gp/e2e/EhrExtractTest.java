@@ -17,7 +17,6 @@ import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.bson.Document;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.StringUtils;
@@ -137,7 +136,6 @@ public class EhrExtractTest {
     }
 
     @Test
-    @Disabled
     public void When_ExtractRequestReceived3NormalDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS, FROM_ODS_CODE_1);
