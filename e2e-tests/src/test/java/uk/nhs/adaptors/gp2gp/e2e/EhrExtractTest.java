@@ -82,23 +82,23 @@ public class EhrExtractTest {
         mhsMockRequestsJournal.deleteRequestsJournal();
     }
 
-//    @Test
-//    public void When_ExtractRequestReceivedFromNormal_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_NORMAL_DR, FROM_ODS_CODE_1);
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_NORMAL_DR);
-//    }
-//
-//    @Test
-//    public void When_LargeExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_PAYLOAD, FROM_ODS_CODE_1);
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_LARGE_PAYLOAD);
-//    }
+    @Test
+    public void When_ExtractRequestReceivedFromNormal_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_NORMAL_DR, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_NORMAL_DR);
+    }
+
+    @Test
+    public void When_LargeExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_PAYLOAD, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_LARGE_PAYLOAD);
+    }
 
     @Test
     public void When_ExtractRequestReceivedWithLargeAttachment_Expect_LargeDocumentIsSplit() throws Exception {
