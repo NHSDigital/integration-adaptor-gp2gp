@@ -152,7 +152,7 @@ pipeline {
                                     // Check if TF deployment environment needs to be redirected
                                     if (GIT_BRANCH == redirectBranch) { tfEnvironment = redirectEnv }
                                     
-                                    String tfCodeBranch  = "develop"
+                                    String tfCodeBranch  = "GP2GP-NIAD-1935-Messaging-cases"
                                     String tfCodeRepo    = "https://github.com/nhsconnect/integration-adaptors"
                                     String tfRegion      = "${TF_STATE_BUCKET_REGION}"
                                     List<String> tfParams = []
