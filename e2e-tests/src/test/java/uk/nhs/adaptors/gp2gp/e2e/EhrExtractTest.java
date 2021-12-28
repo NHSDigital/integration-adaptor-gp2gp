@@ -96,7 +96,7 @@ public class EhrExtractTest {
         Document d = waitFor(Mongo::getStats);
 
         log.info("Database cleared after test: {}", isClear);
-        log.info("Database stats: {}", d.toString());
+        log.info("Database document count: {}", d.get("count"));
     }
 
     @Test
