@@ -48,7 +48,6 @@ public class GpcRequestBuilder {
     private static final String NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number";
     private static final String FHIR_CONTENT_TYPE = "application/fhir+json";
     private static final String SSP_FROM = "Ssp-From";
-    private static final String SSP_TO = "Ssp-To";
     private static final String SSP_INTERACTION_ID = "Ssp-InteractionID";
     private static final String SSP_TRACE_ID = "Ssp-TraceID";
     private static final String AUTHORIZATION = "Authorization";
