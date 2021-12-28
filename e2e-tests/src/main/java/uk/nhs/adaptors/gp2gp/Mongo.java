@@ -4,6 +4,7 @@ import static com.mongodb.client.MongoClients.create;
 
 import org.bson.Document;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
@@ -28,5 +29,10 @@ public class Mongo {
             sharedDatabaseConnection = client.getDatabase(database);
         }
         return sharedDatabaseConnection;
+    }
+
+    public static boolean clearDb(){
+        getCollection().deleteMany(new BasicDBObject());
+        return getCollection().countDocuments() == 0;
     }
 }

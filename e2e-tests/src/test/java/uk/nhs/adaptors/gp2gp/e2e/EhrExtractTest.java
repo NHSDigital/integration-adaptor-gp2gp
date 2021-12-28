@@ -16,6 +16,7 @@ import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.bson.Document;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -84,6 +85,11 @@ public class EhrExtractTest {
     @BeforeEach
     void setUp() {
         mhsMockRequestsJournal.deleteRequestsJournal();
+    }
+
+    @AfterEach
+    void cleanDb() {
+        boolean isClear = waitFor(Mongo::clearDb);
     }
 
     @Test
