@@ -86,6 +86,36 @@ public class EhrExtractTest {
     }
 
     @Test
+    public void When_ExtractRequestReceivedWithLargeAttachment_Expect_LargeDocumentIsSplit() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_ATTACHMENT_DOCX, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_LARGE_ATTACHMENT_DOCX);
+    }
+
+    @Test
+    public void When_ExtractRequestReceived3NormalDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS);
+        assertMultipleDocumentsRetrieved(conversationId, 3);
+    }
+    @Test
+    public void When_ExtractRequestReceivedForLargeEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertEhrExtractSentAsAttachment(conversationId);
+
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR);
+    }
+
+    @Test
     public void When_ExtractRequestReceivedFromNormal_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_NORMAL_DR, FROM_ODS_CODE_1);
@@ -101,16 +131,6 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_LARGE_PAYLOAD);
-    }
-
-    @Test
-    public void When_ExtractRequestReceivedWithLargeAttachment_Expect_LargeDocumentIsSplit() throws Exception {
-        String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_ATTACHMENT_DOCX, FROM_ODS_CODE_1);
-
-        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-
-        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_LARGE_ATTACHMENT_DOCX);
     }
 
     @Test
@@ -139,16 +159,6 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceived3NormalDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
-        String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS, FROM_ODS_CODE_1);
-        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-
-        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS);
-        assertMultipleDocumentsRetrieved(conversationId, 3);
-    }
-
-    @Test
     public void When_ExtractRequestReceived3AbsentAttachmentDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS, FROM_ODS_CODE_1);
@@ -156,17 +166,6 @@ public class EhrExtractTest {
 
         assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS);
         assertMultipleDocumentsRetrieved(conversationId, 3);
-    }
-
-    @Test
-    public void When_ExtractRequestReceivedForLargeEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
-        String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
-        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-
-        assertEhrExtractSentAsAttachment(conversationId);
-
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR);
     }
 
     @Test
