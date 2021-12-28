@@ -35,4 +35,8 @@ public class Mongo {
         getCollection().deleteMany(new BasicDBObject());
         return getCollection().countDocuments() == 0;
     }
+
+    public static Document getStats(){
+        return sharedDatabaseConnection.runCommand(new Document("collStats", "ehrExtractStatus"));
+    }
 }
