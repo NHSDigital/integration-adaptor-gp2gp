@@ -45,100 +45,100 @@ pipeline {
     stages {
         stage('Build') {
             stages {
-                stage('Tests') {
-                    steps {
-                        script {
-                            sh '''
-                                source docker/vars.local.tests.sh
-                                docker network create commonforgp2gp || true
-                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml stop
-                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml rm -f
-                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
-                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
-                            '''
-                        }
-                    }
-                    post {
-                        always {
-                            sh "docker cp tests:/home/gradle/service/build ."
-                            archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
-                            junit '**/build/test-results/**/*.xml'
-                            recordIssues(
-                                enabledForFailure: true,
-                                tools: [
-                                    checkStyle(pattern: 'build/reports/checkstyle/*.xml'),
-                                    spotBugs(pattern: 'build/reports/spotbugs/*.xml')
-                                ]
-                            )
-                            step([
-                                $class : 'JacocoPublisher',
-                                execPattern : '**/build/jacoco/*.exec',
-                                classPattern : '**/build/classes/java',
-                                sourcePattern : 'src/main/java',
-                                exclusionPattern : '**/*Test.class'
-                            ])
-                            sh "rm -rf build"
-                            sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
-                            sh "docker network rm commonforgp2gp"
-                        }
-                    }
-                }
-
-                stage('Build Docker Images') {
-                    steps {
-                        script {
-                            if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
-
-                            if (publishWiremockImage) {
-                                if (sh(label: "Running ${WIREMOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/wiremock/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} docker/wiremock', returnStatus: true) != 0) {error("Failed to build ${WIREMOCK_ECR_REPO_DIR} Docker image")}
-                            }
-                            if (publishMhsMockImage) {
-                                if (sh(label: "Running ${MHS_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/mock-mhs-adaptor/Dockerfile -t ${MHS_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build ${MHS_MOCK_ECR_REPO_DIR} Docker image")}
-                            }
-                            if (publishGpccMockImage) {
-                                if (sh(label: "Running ${GPCC_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/gpcc-mock/Dockerfile -t ${GPCC_MOCK_DOCKER_IMAGE} docker/gpcc-mock', returnStatus: true) != 0) {error("Failed to build ${GPCC_MOCK_ECR_REPO_DIR} Docker image")}
-                            }
-                            if (publishGpcApiMockImage) {
-                                if (sh(label: "Running ${GPC_API_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/gpc-api-mock/Dockerfile -t ${GPC_API_MOCK_DOCKER_IMAGE} docker/gpc-api-mock', returnStatus: true) != 0) {error("Failed to build ${GPC_API_MOCK_ECR_REPO_DIR} Docker image")}
-                            }
-                            if (publishSdsApiMockImage) {
-                                if (sh(label: "Running ${SDS_API_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/sds-api-mock/Dockerfile -t ${SDS_API_MOCK_DOCKER_IMAGE} docker/sds-api-mock', returnStatus: true) != 0) {error("Failed to build ${SDS_API_MOCK_ECR_REPO_DIR} Docker image")}
-                            }
-                        }
-                    }
-                }
-
-                stage('Push Image') {
-                    when {
-                        expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
-                    }
-                    steps {
-                        script {
-                            if (ecrLogin(TF_STATE_BUCKET_REGION) != 0 )  { error("Docker login to ECR failed") }
-                            if (sh (label: "Pushing image", script: "docker push ${DOCKER_IMAGE}", returnStatus: true) !=0) { error("Docker push gp2gp image failed") }
-
-                            if (publishWiremockImage) {
-                                if (sh (label: "Pushing Wiremock image", script: "docker push ${WIREMOCK_DOCKER_IMAGE}", returnStatus: true) !=0) { error("Docker push ${WIREMOCK_ECR_REPO_DIR} image failed") }
-                            }
-
-                            if (publishMhsMockImage) {
-                                if (sh(label: "Pushing MHS Mock image", script: "docker push ${MHS_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${MHS_MOCK_ECR_REPO_DIR} image failed") }
-                            }
-
-                            if (publishGpccMockImage) {
-                                if (sh(label: "Pushing GPCC Mock image", script: "docker push ${GPCC_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${GPCC_MOCK_ECR_REPO_DIR} image failed") }
-                            }
-
-                            if (publishGpcApiMockImage) {
-                                if (sh(label: "Pushing GPC API Mock image", script: "docker push ${GPC_API_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${GPC_API_MOCK_ECR_REPO_DIR} image failed") }
-                            }
-
-                            if (publishSdsApiMockImage) {
-                                if (sh(label: "Pushing SDS API Mock image", script: "docker push ${SDS_API_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${SDS_API_MOCK_ECR_REPO_DIR} image failed") }
-                            }
-                        }
-                    }
-                }
+//                 stage('Tests') {
+//                     steps {
+//                         script {
+//                             sh '''
+//                                 source docker/vars.local.tests.sh
+//                                 docker network create commonforgp2gp || true
+//                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml stop
+//                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml rm -f
+//                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
+//                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
+//                             '''
+//                         }
+//                     }
+//                     post {
+//                         always {
+//                             sh "docker cp tests:/home/gradle/service/build ."
+//                             archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
+//                             junit '**/build/test-results/**/*.xml'
+//                             recordIssues(
+//                                 enabledForFailure: true,
+//                                 tools: [
+//                                     checkStyle(pattern: 'build/reports/checkstyle/*.xml'),
+//                                     spotBugs(pattern: 'build/reports/spotbugs/*.xml')
+//                                 ]
+//                             )
+//                             step([
+//                                 $class : 'JacocoPublisher',
+//                                 execPattern : '**/build/jacoco/*.exec',
+//                                 classPattern : '**/build/classes/java',
+//                                 sourcePattern : 'src/main/java',
+//                                 exclusionPattern : '**/*Test.class'
+//                             ])
+//                             sh "rm -rf build"
+//                             sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
+//                             sh "docker network rm commonforgp2gp"
+//                         }
+//                     }
+//                 }
+//
+//                 stage('Build Docker Images') {
+//                     steps {
+//                         script {
+//                             if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
+//
+//                             if (publishWiremockImage) {
+//                                 if (sh(label: "Running ${WIREMOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/wiremock/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} docker/wiremock', returnStatus: true) != 0) {error("Failed to build ${WIREMOCK_ECR_REPO_DIR} Docker image")}
+//                             }
+//                             if (publishMhsMockImage) {
+//                                 if (sh(label: "Running ${MHS_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/mock-mhs-adaptor/Dockerfile -t ${MHS_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build ${MHS_MOCK_ECR_REPO_DIR} Docker image")}
+//                             }
+//                             if (publishGpccMockImage) {
+//                                 if (sh(label: "Running ${GPCC_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/gpcc-mock/Dockerfile -t ${GPCC_MOCK_DOCKER_IMAGE} docker/gpcc-mock', returnStatus: true) != 0) {error("Failed to build ${GPCC_MOCK_ECR_REPO_DIR} Docker image")}
+//                             }
+//                             if (publishGpcApiMockImage) {
+//                                 if (sh(label: "Running ${GPC_API_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/gpc-api-mock/Dockerfile -t ${GPC_API_MOCK_DOCKER_IMAGE} docker/gpc-api-mock', returnStatus: true) != 0) {error("Failed to build ${GPC_API_MOCK_ECR_REPO_DIR} Docker image")}
+//                             }
+//                             if (publishSdsApiMockImage) {
+//                                 if (sh(label: "Running ${SDS_API_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/sds-api-mock/Dockerfile -t ${SDS_API_MOCK_DOCKER_IMAGE} docker/sds-api-mock', returnStatus: true) != 0) {error("Failed to build ${SDS_API_MOCK_ECR_REPO_DIR} Docker image")}
+//                             }
+//                         }
+//                     }
+//                 }
+//
+//                 stage('Push Image') {
+//                     when {
+//                         expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
+//                     }
+//                     steps {
+//                         script {
+//                             if (ecrLogin(TF_STATE_BUCKET_REGION) != 0 )  { error("Docker login to ECR failed") }
+//                             if (sh (label: "Pushing image", script: "docker push ${DOCKER_IMAGE}", returnStatus: true) !=0) { error("Docker push gp2gp image failed") }
+//
+//                             if (publishWiremockImage) {
+//                                 if (sh (label: "Pushing Wiremock image", script: "docker push ${WIREMOCK_DOCKER_IMAGE}", returnStatus: true) !=0) { error("Docker push ${WIREMOCK_ECR_REPO_DIR} image failed") }
+//                             }
+//
+//                             if (publishMhsMockImage) {
+//                                 if (sh(label: "Pushing MHS Mock image", script: "docker push ${MHS_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${MHS_MOCK_ECR_REPO_DIR} image failed") }
+//                             }
+//
+//                             if (publishGpccMockImage) {
+//                                 if (sh(label: "Pushing GPCC Mock image", script: "docker push ${GPCC_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${GPCC_MOCK_ECR_REPO_DIR} image failed") }
+//                             }
+//
+//                             if (publishGpcApiMockImage) {
+//                                 if (sh(label: "Pushing GPC API Mock image", script: "docker push ${GPC_API_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${GPC_API_MOCK_ECR_REPO_DIR} image failed") }
+//                             }
+//
+//                             if (publishSdsApiMockImage) {
+//                                 if (sh(label: "Pushing SDS API Mock image", script: "docker push ${SDS_API_MOCK_DOCKER_IMAGE}", returnStatus: true) != 0) {error("Docker push ${SDS_API_MOCK_ECR_REPO_DIR} image failed") }
+//                             }
+//                         }
+//                     }
+//                 }
                 stage('Deploy & Test') {
                     options {
                         lock("${tfProject}-${tfEnvironment}-${tfComponent}")

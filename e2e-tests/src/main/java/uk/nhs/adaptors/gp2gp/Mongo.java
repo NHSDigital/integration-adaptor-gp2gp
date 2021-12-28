@@ -8,6 +8,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Mongo {
     private static MongoDatabase sharedDatabaseConnection = null;
 
@@ -17,6 +20,8 @@ public class Mongo {
 
     public static Document findEhrExtractStatus(String conversationId) {
         var collection = getCollection();
+        log.info("MongoCollection's Documents: {}", collection);
+        log.info("MongoCollection's first by conversationId: {}", collection.find(Filters.eq("conversationId", conversationId)).first());
         return collection.find(Filters.eq("conversationId", conversationId)).first();
     }
 
