@@ -270,8 +270,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-        <code code="904771000006104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Audiological medicine referral">
-    <originalText>Audiological medicine referral</originalText>
+        <code code="904771000006115" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Audiological medicine referral">
 </code>
         <text>Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Unknown, Annotation: NHS / Private:Private, Annotation: Transport:None Required This is going to be a long description with blank lines included.  This referral has a Routine Urgency for a Purpose Unknown.  The Referral Mode is Written
 
@@ -331,7 +330,7 @@ It is also linked to the problem Suspected Covid-19</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
-        <code code="18165001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Jaundice">
+        <code code="30676010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Jaundice">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -357,7 +356,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC" />
-        <code code="422587007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nausea">
+        <code code="2643930014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nausea">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -382,7 +381,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-        <code code="422400008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Vomiting">
+        <code code="2643931013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Vomiting">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -407,7 +406,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400" />
-        <code code="206373002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Congenital hepatitis A infection">
+        <code code="316475015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Congenital hepatitis A infection">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -444,7 +443,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
-        <code code="162740002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - jaundiced colour">
+        <code code="253649017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - jaundiced colour">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -469,7 +468,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C" />
-        <code code="43364001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal discomfort">
+        <code code="72350017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal discomfort">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -548,7 +547,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320030001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Atorvastatin 20mg tablets">
-    <originalText>Atorvastatin 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -632,7 +630,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317291008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Omeprazole 20mg gastro-resistant capsules">
-    <originalText>Omeprazole 20mg gastro-resistant capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -683,7 +680,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39113611000001102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Salbutamol 100micrograms/dose inhaler CFC free">
-    <originalText>Salbutamol 100micrograms/dose inhaler CFC free</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -767,7 +763,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317972000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 40mg tablets">
-    <originalText>Furosemide 40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -851,7 +846,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="408037007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rosuvastatin 20mg tablets">
-    <originalText>Rosuvastatin 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -947,7 +941,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1076,7 +1069,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1205,7 +1197,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="8306811000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bendroflumethiazide 2.5mg/5ml oral suspension">
-    <originalText>Bendroflumethiazide 2.5mg/5ml oral suspension</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1289,7 +1280,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="329316006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ascorbic acid 100mg tablets">
-    <originalText>Ascorbic acid 100mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1424,7 +1414,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3805611000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-codamol 15mg/500mg tablets">
-    <originalText>Co-codamol 15mg/500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1508,7 +1497,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1559,7 +1547,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="565011000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Priadel 200mg modified-release tablets (Essential Pharma M)">
-    <originalText>Priadel 200mg modified-release tablets (Essential Pharma M)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1610,7 +1597,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="330720009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Timolol 0.25% eye drops">
-    <originalText>Timolol 0.25% eye drops</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1661,7 +1647,6 @@ Episodicity : First</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1736,8 +1721,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C" />
-        <code code="831281000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - urology">
-    <originalText>2 week rule referral - urology</originalText>
+        <code code="831281000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - urology">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1795,7 +1779,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F" />
-        <code code="183444007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
+        <code code="283512014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
 </code>
         <text>Supporting Information: { Document: 2020-09-21 Referral Letter (21-Sep-2020) for 2 week rule referral - brain }, { Document: 2021-02-25 Letter sent to patient Letter sent to patient (25-Feb-2021) } Recipient Healthcare Service: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Assessment, Annotation: NHS / Private:NHS, Annotation: Transport:None Required 12</text>
         <statusCode code="COMPLETE"/>
@@ -1862,8 +1846,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
-        <code code="831241000006103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral">
-    <originalText>2 week rule referral</originalText>
+        <code code="831241000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1921,8 +1904,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="10720133-30C3-4145-9184-8713284C5A90" />
-        <code code="831331000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - skin">
-    <originalText>2 week rule referral - skin</originalText>
+        <code code="831331000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - skin">
 </code>
         <text>Supporting Information: { Document: 2020-09-21 Referral Letter (21-Sep-2020) for 2 week rule referral - skin } Recipient Healthcare Service: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required skin</text>
         <statusCode code="COMPLETE"/>
@@ -1989,8 +1971,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="A01A1FB8-39F5-45D9-AF56-B8C480115AF2" />
-        <code code="2008431000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Advice and guidance request sent">
-    <originalText>Advice and guidance request sent</originalText>
+        <code code="2008431000006114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Advice and guidance request sent">
 </code>
         <text>Recipient Healthcare Service: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Performance of a Procedure or Operation, Annotation: NHS / Private:Private, Annotation: Transport:Required, Annotation: Priority:Soon </text>
         <statusCode code="COMPLETE"/>
@@ -2040,7 +2021,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EC6C913D-2276-43DF-B3C9-B13094B1EC26" />
-        <code code="1240761000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Suspected COVID-19">
+        <code code="2827381000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Suspected COVID-19">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2066,7 +2047,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17" />
-        <code code="84229001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fatigue">
+        <code code="139690015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fatigue">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2091,7 +2072,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F05B94B-999F-4699-AB93-EB90C79886B6" />
-        <code code="49727002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cough">
+        <code code="82824016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cough">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2116,7 +2097,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7" />
-        <code code="386661006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fever">
+        <code code="1480803010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fever">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2141,7 +2122,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7359502E-8EE3-416C-BD59-A298285418E6" />
-        <code code="304386008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - itchy rash">
+        <code code="446685017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - itchy rash">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2166,7 +2147,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="938365F3-8C68-4189-A550-FAB37F4F59C8" />
-        <code code="2611000119103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sensory disorder of smell and/or taste">
+        <code code="2959578015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sensory disorder of smell and/or taste">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2191,7 +2172,7 @@ Episodicity : First</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91" />
-        <code code="267036007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dyspnoea">
+        <code code="397886014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dyspnoea">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2249,8 +2230,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E" />
-        <code code="183520008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to clinical immunology service">
-    <originalText>Immunological referral</originalText>
+        <code code="283602014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Immunological referral">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2308,7 +2288,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A9F79684-3214-41E9-A642-A4542875E62B" />
-        <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+        <code code="301485011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2334,7 +2314,7 @@ Episodicity : Flare Up</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B" />
-        <code code="127783003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Spirometry">
+        <code code="1070016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Spirometry">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2371,7 +2351,7 @@ Episodicity : Flare Up</text>
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E" />
-        <code code="406162001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma management">
+        <code code="2157868010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma management">
 </code>
         <text>
             Standard check up
@@ -2525,7 +2505,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320030001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Atorvastatin 20mg tablets">
-    <originalText>Atorvastatin 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2598,7 +2577,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317291008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Omeprazole 20mg gastro-resistant capsules">
-    <originalText>Omeprazole 20mg gastro-resistant capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2671,7 +2649,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39113611000001102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Salbutamol 100micrograms/dose inhaler CFC free">
-    <originalText>Salbutamol 100micrograms/dose inhaler CFC free</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2744,7 +2721,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39113611000001102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Salbutamol 100micrograms/dose inhaler CFC free">
-    <originalText>Salbutamol 100micrograms/dose inhaler CFC free</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2818,7 +2794,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317291008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Omeprazole 20mg gastro-resistant capsules">
-    <originalText>Omeprazole 20mg gastro-resistant capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2891,7 +2866,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317972000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 40mg tablets">
-    <originalText>Furosemide 40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2964,7 +2938,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317972000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 40mg tablets">
-    <originalText>Furosemide 40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3038,7 +3011,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="408037007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rosuvastatin 20mg tablets">
-    <originalText>Rosuvastatin 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3131,7 +3103,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3204,7 +3175,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3805611000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-codamol 15mg/500mg tablets">
-    <originalText>Co-codamol 15mg/500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3277,7 +3247,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3350,7 +3319,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3424,7 +3392,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3498,7 +3465,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3572,7 +3538,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3646,7 +3611,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3720,7 +3684,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="8306811000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bendroflumethiazide 2.5mg/5ml oral suspension">
-    <originalText>Bendroflumethiazide 2.5mg/5ml oral suspension</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3793,7 +3756,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="329316006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ascorbic acid 100mg tablets">
-    <originalText>Ascorbic acid 100mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3866,7 +3828,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="329316006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ascorbic acid 100mg tablets">
-    <originalText>Ascorbic acid 100mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3940,7 +3901,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3805611000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-codamol 15mg/500mg tablets">
-    <originalText>Co-codamol 15mg/500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4086,7 +4046,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="565011000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Priadel 200mg modified-release tablets (Essential Pharma M)">
-    <originalText>Priadel 200mg modified-release tablets (Essential Pharma M)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4159,7 +4118,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4232,7 +4190,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4306,7 +4263,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4380,7 +4336,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4454,7 +4409,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4528,7 +4482,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4602,7 +4555,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4675,7 +4627,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="330720009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Timolol 0.25% eye drops">
-    <originalText>Timolol 0.25% eye drops</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4748,7 +4699,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="323509004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxicillin 250mg capsules">
-    <originalText>Amoxicillin 250mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4821,7 +4771,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="323509004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxicillin 250mg capsules">
-    <originalText>Amoxicillin 250mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4895,7 +4844,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="4053411000001103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lansoprazole 15mg orodispersible tablets">
-    <originalText>Lansoprazole 15mg orodispersible tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4968,7 +4916,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318900007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 1.25mg capsules">
-    <originalText>Ramipril 1.25mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5041,7 +4988,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325278007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Metformin 500mg tablets">
-    <originalText>Metformin 500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5114,7 +5060,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325278007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Metformin 500mg tablets">
-    <originalText>Metformin 500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5188,7 +5133,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318352004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Propranolol 10mg tablets">
-    <originalText>Propranolol 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5261,7 +5205,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="36106311000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol 10mg tablets (Ennogen Pharma Ltd)">
-    <originalText>Bedranol 10mg tablets (Ennogen Pharma Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5334,7 +5277,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="36106311000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol 10mg tablets (Ennogen Pharma Ltd)">
-    <originalText>Bedranol 10mg tablets (Ennogen Pharma Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5408,7 +5350,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325278007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Metformin 500mg tablets">
-    <originalText>Metformin 500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5481,7 +5422,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325278007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Metformin 500mg tablets">
-    <originalText>Metformin 500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5555,7 +5495,6 @@ Episodicity : Flare Up</text>
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5943,7 +5882,7 @@ test Transformed AllergyIntolerance problem header Originally coded: Allergy to 
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5911B7CE-B5E2-4E8A-8703-E3407548DB24"/>
-                <code code="294647003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to Influenza virus vaccine">
+                <code code="434938013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to Influenza virus vaccine">
     <originalText>Influenza vaccine allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -6005,7 +5944,7 @@ test Transformed AllergyIntolerance problem header Originally coded: Allergy to 
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B6C6FCA4-DC3D-474E-8E20-117460144AFE"/>
-                <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
+                <code code="152307010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -6061,8 +6000,7 @@ test</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="06B60CD3-465D-4AEA-A0A8-4A69EA7744CE" />
-        <code code="170370000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration of first dose of hepatitis B vaccine">
-    <originalText>First hepatitis B vaccination</originalText>
+        <code code="264160017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First hepatitis B vaccination">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6108,7 +6046,7 @@ test</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AE72CCBA-F60B-46D1-B875-57746102E3A7" />
-        <code code="822851000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Seasonal influenza vaccination">
+        <code code="2142081000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Seasonal influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6154,8 +6092,7 @@ test</text>
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="3390559A-D17E-4D30-9A51-B4459E1515EF" />
-        <code code="305226003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by Accident and Emergency doctor">
-    <originalText>Admission by A &amp; E doctor</originalText>
+        <code code="447582015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by A &amp; E doctor">
 </code>
         <text>Priority: ASAP Recipient Healthcare Service: TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Assessment &amp; Education, Annotation: NHS / Private:NHS, Annotation: Transport:Required Special Characters !&apos;@£$%^&amp;*()_+-={}[]:&quot;|;&apos;\&lt;&gt;?,./</text>
         <statusCode code="COMPLETE"/>
@@ -6200,7 +6137,7 @@ test</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="53847A06-6B81-4A50-BF84-C5588990485A" />
-        <code code="810511000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Episodic dry cough">
+        <code code="2114811000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Episodic dry cough">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6248,7 +6185,7 @@ test</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="92601097-8AE8-45DA-8D17-927B4727866C" />
-        <code code="56018004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Wheezing">
+        <code code="93172014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Wheezing">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6297,7 +6234,7 @@ Only happens, when has a cold but not with exercise could be asthmatic</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9B331CF2-F4AD-45CE-86B8-5B4EEE7D1317" />
-        <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+        <code code="301485011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6346,8 +6283,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4264DD9C-01B2-4F68-A222-E3B48540496D" />
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
+        <code code="1990681000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6395,7 +6331,7 @@ Episodicity : First</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="26E8B010-9ACB-4EB5-BEAC-C34C9D2A51CE" />
-        <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
+        <code code="2548578015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>

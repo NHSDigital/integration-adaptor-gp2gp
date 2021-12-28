@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
 import lombok.Getter;
+import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
@@ -12,7 +13,8 @@ public enum TaskType {
     GET_GPC_STRUCTURED(GetGpcStructuredTaskDefinition.class),
     SEND_EHR_EXTRACT_CORE(SendEhrExtractCoreTaskDefinition.class),
     SEND_EHR_CONTINUE(SendDocumentTaskDefinition.class),
-    SEND_ACKNOWLEDGEMENT(SendAcknowledgementTaskDefinition.class);
+    SEND_ACKNOWLEDGEMENT(SendAcknowledgementTaskDefinition.class),
+    SEND_ABSENT_ATTACHMENT(SendAbsentAttachmentTaskDefinition.class);
 
     @Getter
     private final Class<? extends TaskDefinition> classOfTaskDefinition;

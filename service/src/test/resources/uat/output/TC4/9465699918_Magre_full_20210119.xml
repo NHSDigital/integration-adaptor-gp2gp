@@ -277,7 +277,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="263B2A9F-0B1D-4697-943A-328F70E068DE" />
-        <code code="18165001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Jaundice">
+        <code code="30676010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Jaundice">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -302,7 +302,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-        <code code="422587007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nausea">
+        <code code="2643930014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nausea">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -327,7 +327,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF" />
-        <code code="422400008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Vomiting">
+        <code code="2643931013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Vomiting">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -352,7 +352,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
-        <code code="206373002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Congenital hepatitis A infection">
+        <code code="316475015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Congenital hepatitis A infection">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -389,7 +389,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-        <code code="162740002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - jaundiced colour">
+        <code code="253649017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - jaundiced colour">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -414,7 +414,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400" />
-        <code code="43364001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal discomfort">
+        <code code="72350017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal discomfort">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -493,7 +493,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320030001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Atorvastatin 20mg tablets">
-    <originalText>Atorvastatin 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -577,7 +576,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317291008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Omeprazole 20mg gastro-resistant capsules">
-    <originalText>Omeprazole 20mg gastro-resistant capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -628,7 +626,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39113611000001102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Salbutamol 100micrograms/dose inhaler CFC free">
-    <originalText>Salbutamol 100micrograms/dose inhaler CFC free</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -712,7 +709,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317972000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 40mg tablets">
-    <originalText>Furosemide 40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -796,7 +792,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="408037007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rosuvastatin 20mg tablets">
-    <originalText>Rosuvastatin 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -892,7 +887,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1021,7 +1015,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1150,7 +1143,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="8306811000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bendroflumethiazide 2.5mg/5ml oral suspension">
-    <originalText>Bendroflumethiazide 2.5mg/5ml oral suspension</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1234,7 +1226,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="329316006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ascorbic acid 100mg tablets">
-    <originalText>Ascorbic acid 100mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1369,7 +1360,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3805611000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-codamol 15mg/500mg tablets">
-    <originalText>Co-codamol 15mg/500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1453,7 +1443,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1504,7 +1493,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="565011000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Priadel 200mg modified-release tablets (Essential Pharma M)">
-    <originalText>Priadel 200mg modified-release tablets (Essential Pharma M)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1555,7 +1543,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="330720009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Timolol 0.25% eye drops">
-    <originalText>Timolol 0.25% eye drops</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1606,7 +1593,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -1681,8 +1667,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0" />
-        <code code="905091000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mental illness referral">
-    <originalText>Mental illness referral</originalText>
+        <code code="905091000006117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mental illness referral">
 </code>
         <text>Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required </text>
         <statusCode code="COMPLETE"/>
@@ -1733,8 +1718,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
-        <code code="831281000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - urology">
-    <originalText>2 week rule referral - urology</originalText>
+        <code code="831281000006113" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - urology">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1792,8 +1776,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="9276C255-1641-4B9B-AD42-1A0FAD9189D3" />
-        <code code="831251000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
-    <originalText>2 week rule referral - brain</originalText>
+        <code code="831251000006117" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
 </code>
         <text>Supporting Information: { Document: 2020-09-21 Referral Letter (21-Sep-2020) for 2 week rule referral - brain } Recipient Org: NHS e-Referral Service Annotation: Mode:Written, Annotation: Purpose:Assessment, Annotation: NHS / Private:NHS, Annotation: Transport:None Required 12</text>
         <statusCode code="COMPLETE"/>
@@ -1860,8 +1843,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AEB66D16-E1FA-462A-BC70-FBD16000E308" />
-        <code code="831241000006103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral">
-    <originalText>2 week rule referral</originalText>
+        <code code="831241000006119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1919,8 +1901,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="87102979-C329-4194-819B-D057AAEA625B" />
-        <code code="831331000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - skin">
-    <originalText>2 week rule referral - skin</originalText>
+        <code code="831331000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - skin">
 </code>
         <text>Supporting Information: { Document: 2020-09-21 Referral Letter (21-Sep-2020) for 2 week rule referral - skin } Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Management Advice, Annotation: NHS / Private:NHS, Annotation: Transport:None Required skin</text>
         <statusCode code="COMPLETE"/>
@@ -1987,8 +1968,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C" />
-        <code code="2008431000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Advice and guidance request sent">
-    <originalText>Advice and guidance request sent</originalText>
+        <code code="2008431000006114" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Advice and guidance request sent">
 </code>
         <text>Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation: Mode:Written, Annotation: Purpose:Performance of a Procedure or Operation, Annotation: NHS / Private:Private, Annotation: Transport:Required, Annotation: Priority:Soon </text>
         <statusCode code="COMPLETE"/>
@@ -2038,7 +2018,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F" />
-        <code code="1240761000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Suspected COVID-19">
+        <code code="2827381000000119" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Suspected COVID-19">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2063,7 +2043,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61" />
-        <code code="84229001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fatigue">
+        <code code="139690015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fatigue">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2088,7 +2068,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD" />
-        <code code="49727002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cough">
+        <code code="82824016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cough">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2113,7 +2093,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D" />
-        <code code="386661006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fever">
+        <code code="1480803010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fever">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2138,7 +2118,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="46A43153-7A96-44D4-A14A-A63284061767" />
-        <code code="304386008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - itchy rash">
+        <code code="446685017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - itchy rash">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2163,7 +2143,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4" />
-        <code code="2611000119103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sensory disorder of smell and/or taste">
+        <code code="2959578015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sensory disorder of smell and/or taste">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2188,7 +2168,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998" />
-        <code code="267036007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dyspnoea">
+        <code code="397886014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dyspnoea">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2246,8 +2226,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
-        <code code="183520008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to clinical immunology service">
-    <originalText>Immunological referral</originalText>
+        <code code="283602014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Immunological referral">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2305,7 +2284,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="730F742C-1164-45BF-9139-8484074E5995" />
-        <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+        <code code="301485011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2330,7 +2309,7 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="54AC4831-6E33-4BB9-BC17-33D47E3C8251" />
-        <code code="127783003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Spirometry">
+        <code code="1070016" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Spirometry">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -2367,7 +2346,7 @@
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56" />
-        <code code="406162001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma management">
+        <code code="2157868010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma management">
 </code>
         <text>
             Standard check up
@@ -2418,7 +2397,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="320030001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Atorvastatin 20mg tablets">
-    <originalText>Atorvastatin 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2491,7 +2469,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317291008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Omeprazole 20mg gastro-resistant capsules">
-    <originalText>Omeprazole 20mg gastro-resistant capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2564,7 +2541,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39113611000001102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Salbutamol 100micrograms/dose inhaler CFC free">
-    <originalText>Salbutamol 100micrograms/dose inhaler CFC free</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2637,7 +2613,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="39113611000001102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Salbutamol 100micrograms/dose inhaler CFC free">
-    <originalText>Salbutamol 100micrograms/dose inhaler CFC free</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2711,7 +2686,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317291008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Omeprazole 20mg gastro-resistant capsules">
-    <originalText>Omeprazole 20mg gastro-resistant capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2784,7 +2758,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317972000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 40mg tablets">
-    <originalText>Furosemide 40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2857,7 +2830,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="317972000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 40mg tablets">
-    <originalText>Furosemide 40mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -2931,7 +2903,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="408037007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rosuvastatin 20mg tablets">
-    <originalText>Rosuvastatin 20mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3024,7 +2995,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3097,7 +3067,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3805611000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-codamol 15mg/500mg tablets">
-    <originalText>Co-codamol 15mg/500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3170,7 +3139,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3243,7 +3211,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3317,7 +3284,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3391,7 +3357,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3465,7 +3430,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3539,7 +3503,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="7267911000001107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Contour testing strips (Ascensia Diabetes Care UK Ltd)">
-    <originalText>Contour testing strips (Ascensia Diabetes Care UK Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3613,7 +3576,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="8306811000001101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bendroflumethiazide 2.5mg/5ml oral suspension">
-    <originalText>Bendroflumethiazide 2.5mg/5ml oral suspension</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3686,7 +3648,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="329316006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ascorbic acid 100mg tablets">
-    <originalText>Ascorbic acid 100mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3759,7 +3720,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="329316006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ascorbic acid 100mg tablets">
-    <originalText>Ascorbic acid 100mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3833,7 +3793,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="3805611000001109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Co-codamol 15mg/500mg tablets">
-    <originalText>Co-codamol 15mg/500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -3979,7 +3938,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="565011000001106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Priadel 200mg modified-release tablets (Essential Pharma M)">
-    <originalText>Priadel 200mg modified-release tablets (Essential Pharma M)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4052,7 +4010,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4125,7 +4082,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4199,7 +4155,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4273,7 +4228,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4347,7 +4301,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4421,7 +4374,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="654911000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cocois ointment (RPH Pharmaceuticals AB)">
-    <originalText>Cocois ointment (RPH Pharmaceuticals AB)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4495,7 +4447,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4568,7 +4519,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="330720009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Timolol 0.25% eye drops">
-    <originalText>Timolol 0.25% eye drops</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4641,7 +4591,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="323509004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxicillin 250mg capsules">
-    <originalText>Amoxicillin 250mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4714,7 +4663,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="323509004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxicillin 250mg capsules">
-    <originalText>Amoxicillin 250mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4788,7 +4736,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="4053411000001103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lansoprazole 15mg orodispersible tablets">
-    <originalText>Lansoprazole 15mg orodispersible tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4861,7 +4808,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318900007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ramipril 1.25mg capsules">
-    <originalText>Ramipril 1.25mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -4934,7 +4880,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325278007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Metformin 500mg tablets">
-    <originalText>Metformin 500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5007,7 +4952,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325278007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Metformin 500mg tablets">
-    <originalText>Metformin 500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5081,7 +5025,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="318352004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Propranolol 10mg tablets">
-    <originalText>Propranolol 10mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5154,7 +5097,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="36106311000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol 10mg tablets (Ennogen Pharma Ltd)">
-    <originalText>Bedranol 10mg tablets (Ennogen Pharma Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5227,7 +5169,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="36106311000001108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol 10mg tablets (Ennogen Pharma Ltd)">
-    <originalText>Bedranol 10mg tablets (Ennogen Pharma Ltd)</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5301,7 +5242,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325278007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Metformin 500mg tablets">
-    <originalText>Metformin 500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5374,7 +5314,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="325278007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Metformin 500mg tablets">
-    <originalText>Metformin 500mg tablets</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5448,7 +5387,6 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="322280009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Paracetamol 500mg capsules">
-    <originalText>Paracetamol 500mg capsules</originalText>
 </code>
                 </manufacturedMaterial>
             </manufacturedProduct>
@@ -5830,7 +5768,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="187FE111-F030-41DC-AC81-4BF13E79AA2F"/>
-                <code code="294647003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccine allergy">
+                <code code="434938013" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccine allergy">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -5891,7 +5829,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="EC913E83-7610-4FBD-9A60-1769D42E9DEB"/>
-                <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
+                <code code="152307010" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -5943,7 +5881,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="36856199-326A-443D-A97B-F744C6A09D10" />
-        <code code="170370000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First hepatitis B vaccination">
+        <code code="264160017" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First hepatitis B vaccination">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5989,7 +5927,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F" />
-        <code code="822851000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Seasonal influenza vaccination">
+        <code code="2142081000000112" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Seasonal influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6035,7 +5973,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3CE584C8-D749-4FE4-9FC4-B5B050B82681" />
-        <code code="810511000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Episodic dry cough">
+        <code code="2114811000000111" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Episodic dry cough">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6083,7 +6021,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9096D5A1-7370-4C51-AE78-52A89E2F6B63" />
-        <code code="56018004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Wheezing">
+        <code code="93172014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Wheezing">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6131,7 +6069,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CFED96FD-7E48-4E34-A3CC-4DD0814C84C4" />
-        <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+        <code code="301485011" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6179,8 +6117,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D714A840-2256-4BDD-8B3A-8DD783A5E709" />
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
+        <code code="1990681000006116" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6228,7 +6165,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3390559A-D17E-4D30-9A51-B4459E1515EF" />
-        <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
+        <code code="2548578015" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>

@@ -6,12 +6,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
@@ -24,37 +27,67 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class StructuredRecordMappingService {
+    private final MessageContext messageContext;
     private final OutputMessageWrapperMapper outputMessageWrapperMapper;
     private final EhrExtractMapper ehrExtractMapper;
     private final Gp2gpConfiguration gp2gpConfiguration;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final SupportedContentTypes supportedContentTypes;
+
+    private static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
 
     public List<OutboundMessage.ExternalAttachment> getExternalAttachments(Bundle bundle) {
         return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
+            .filter(documentReference -> !qualifiesAsAbsentAttachment(documentReference))
+            .map(this::buildExternalAttachment)
+            .collect(Collectors.toList());
+    }
+
+    public List<OutboundMessage.ExternalAttachment> getAbsentAttachments(Bundle bundle) {
+        return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
+            .filter(this::qualifiesAsAbsentAttachment)
             .map(this::buildExternalAttachment)
             .collect(Collectors.toList());
     }
 
     private OutboundMessage.ExternalAttachment buildExternalAttachment(DocumentReference documentReference) {
         var attachment = DocumentReferenceUtils.extractAttachment(documentReference);
-        var documentId = extractUrl(documentReference).map(GetGpcDocumentTaskDefinition::extractIdFromUrl).orElse(null);
+        var documentId = messageContext.getIdMapper()
+            .newId(ResourceType.DocumentReference, documentReference.getIdElement());
         var messageId = randomIdGeneratorService.createNewId();
+
+        String contentType = DocumentReferenceUtils.extractContentType(attachment);
+        String fileName;
+        if (supportedContentTypes.isContentTypeSupported(contentType)) {
+            fileName = DocumentReferenceUtils.buildPresentAttachmentFileName(documentId, contentType);
+        } else {
+            fileName = DocumentReferenceUtils.buildMissingAttachmentFileName(documentId);
+            contentType = DEFAULT_ATTACHMENT_CONTENT_TYPE;
+        }
 
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
             .description(OutboundMessage.AttachmentDescription.builder()
-                .fileName(DocumentReferenceUtils.buildAttachmentFileName(documentId, attachment))
-                .contentType(DocumentReferenceUtils.extractContentType(attachment))
+                .fileName(fileName)
+                .contentType(contentType)
                 .compressed(false) // always false for GPC documents
                 .largeAttachment(isLargeAttachment(attachment))
-                .originalBase64(true) // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
-                .length(attachment.getSize())
+                .originalBase64(false)
+                .documentId(documentId)
                 .build()
                 .toString()
             )
             .url(extractUrl(documentReference).orElse(null))
+            .title(documentReference.getContentFirstRep().getAttachment().getTitle())
             .build();
+    }
+
+    private boolean qualifiesAsAbsentAttachment(DocumentReference documentReference) {
+        var attachment = DocumentReferenceUtils.extractAttachment(documentReference);
+        String contentType = DocumentReferenceUtils.extractContentType(attachment);
+
+        return !supportedContentTypes.isContentTypeSupported(contentType) || attachment.hasTitle();
     }
 
     private static Optional<String> extractUrl(DocumentReference documentReference) {

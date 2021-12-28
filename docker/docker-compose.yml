@@ -85,6 +85,15 @@ services:
     command:
       - -global-response-templating
 
+  integration-wiremock:
+    networks:
+      - commonforgp2gp
+    build: ./integration-wiremock
+    ports:
+      - "8111:8080"
+    command:
+      - -global-response-templating
+
   gpcc:
     image: nhsdev/nia-gpc-consumer-adaptor:0.1.5
     networks: 
@@ -165,6 +174,24 @@ services:
       context: ./nginx
     ports:
       - "5555:80"
+
+  gpcc-mock:
+    networks: 
+      - commonforgp2gp
+    build: ./gpcc-mock
+    ports:
+      - "8112:8080"
+    command:
+      - -global-response-templating
+
+  gpc-api-mock:
+    networks: 
+      - commonforgp2gp
+    build: ./gpc-api-mock
+    ports:
+      - "8113:8080"
+    command:
+      - -global-response-templating
 networks:
   commonforgp2gp:
     external: true
