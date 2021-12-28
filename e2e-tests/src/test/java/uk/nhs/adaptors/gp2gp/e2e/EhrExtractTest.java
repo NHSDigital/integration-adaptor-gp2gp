@@ -16,6 +16,7 @@ import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.bson.Document;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -24,6 +25,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.StringUtils;
 import org.xmlunit.assertj.XmlAssert;
+
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
@@ -32,6 +35,7 @@ import java.util.stream.Collectors;
 
 @ExtendWith(SoftAssertionsExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Slf4j
 public class EhrExtractTest {
     @InjectSoftAssertions
     private SoftAssertions softly;
@@ -84,6 +88,15 @@ public class EhrExtractTest {
     @BeforeEach
     void setUp() {
         mhsMockRequestsJournal.deleteRequestsJournal();
+    }
+
+    @AfterEach
+    void cleanDb() {
+        boolean isClear = waitFor(Mongo::clearDb);
+        Document d = waitFor(Mongo::getStats);
+
+        log.info("Database cleared after test: {}", isClear);
+        log.info("Database document count: {}", d.get("count"));
     }
 
     @Test
