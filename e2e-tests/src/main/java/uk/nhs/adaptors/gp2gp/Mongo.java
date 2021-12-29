@@ -8,6 +8,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Mongo {
     private static MongoDatabase sharedDatabaseConnection = null;
 
@@ -18,6 +21,12 @@ public class Mongo {
     public static Document findEhrExtractStatus(String conversationId) {
         var collection = getCollection();
         return collection.find(Filters.eq("conversationId", conversationId)).first();
+    }
+
+    public static boolean closeConnection() {
+        sharedDatabaseConnection.drop();
+        log.info("Database's connection: {}", sharedDatabaseConnection.getName());
+        return true;
     }
 
     private static MongoDatabase prepareDatabaseConnection() {
