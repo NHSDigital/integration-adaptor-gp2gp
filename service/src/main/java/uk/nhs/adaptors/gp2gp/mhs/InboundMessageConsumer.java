@@ -40,5 +40,6 @@ public class InboundMessageConsumer {
         }
 
         LOGGER.info("Start to finish of message [{}]: {}", message.getJMSMessageID(), System.currentTimeMillis() - st);
+        LOGGER.info("Runtime XMX: {}", Runtime.getRuntime().maxMemory());
     }
 }
