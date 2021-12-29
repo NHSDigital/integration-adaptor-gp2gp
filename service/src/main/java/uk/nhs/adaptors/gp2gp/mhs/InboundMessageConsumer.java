@@ -23,7 +23,7 @@ public class InboundMessageConsumer {
 
     @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}", concurrency = "${gp2gp.amqp.inboundQueueConsumerConcurrency}")
     public void receive(Message message) throws JMSException {
-        LOGGER.info("TIMEMEASURE >> Message got from the queue on timestamp: [{}]", OffsetDateTime.now());
+        LOGGER.error("TIMEMEASURE >> Message with id [{}] got from the queue on timestamp: [{}]",message.getJMSMessageID(), OffsetDateTime.now());
         var messageID = message.getJMSMessageID();
         var messageTimestamp = getJmsMessageTimestamp(message);
         LOGGER.info("Received inbound MHS message_id: {} timestamp: {}", messageID, messageTimestamp);

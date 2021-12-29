@@ -39,12 +39,13 @@ public class MessageQueue {
         message.setText(messageContent);
         producer.send(message);
 
-        log.info("TIMEMEASURE >> Message put in the queue on timestamp: [{}]", OffsetDateTime.now());
+        log.info("TIMEMEASURE >> Message of id [{}] put in the queue on timestamp: [{}]",message.getJMSMessageID(), OffsetDateTime.now());
 
         producer.close();
         session.close();
         connection.close();
     }
+
 
     private static String prepareBroker() {
         return System.getenv().getOrDefault("GP2GP_AMQP_BROKERS", "amqp://localhost:5672");
