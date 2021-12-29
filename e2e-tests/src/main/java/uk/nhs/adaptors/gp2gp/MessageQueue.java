@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp;
 
+import java.time.OffsetDateTime;
 import java.util.Hashtable;
 
 import javax.jms.Connection;
@@ -13,6 +14,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class MessageQueue {
     public static void sendToMhsInboundQueue(String messageContent) throws NamingException, JMSException {
         Context context = prepareContext(System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "inbound"));
@@ -34,6 +38,8 @@ public class MessageQueue {
         TextMessage message = session.createTextMessage();
         message.setText(messageContent);
         producer.send(message);
+
+        log.info("TIMEMEASURE >> Message put in the queue on timestamp: [{}]", OffsetDateTime.now());
 
         producer.close();
         session.close();
