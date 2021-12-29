@@ -93,11 +93,6 @@ public class EhrExtractTest {
         mhsMockRequestsJournal.deleteRequestsJournal();
     }
 
-    @AfterEach
-    void closePreviousMongoConnections() {
-        waitFor(Mongo::closeConnection);
-    }
-
     @Test
     @Order(1)
     public void When_ExtractRequestReceivedWithLargeAttachment_Expect_LargeDocumentIsSplit() throws Exception {
