@@ -24,8 +24,8 @@ public class Mongo {
     }
 
     public static boolean closeConnection() {
-        sharedDatabaseConnection.drop();
-        log.info("Database's connection: {}", sharedDatabaseConnection.getName());
+        sharedDatabaseConnection = null;
+        log.info("Closed gp2gp connection?");
         return true;
     }
 
