@@ -93,15 +93,6 @@ public class EhrExtractTest {
         mhsMockRequestsJournal.deleteRequestsJournal();
     }
 
-    @AfterEach
-    void cleanDb() {
-        //boolean isClear = waitFor(Mongo::clearDb);
-        //Document d = waitFor(Mongo::getStats);
-
-      //  log.info("Database cleared after test: {}", isClear);
-      //  log.info("Database document count: {}", d.get("count"));
-    }
-
     @Test
     @Order(1)
     public void When_ExtractRequestReceivedWithLargeAttachment_Expect_LargeDocumentIsSplit() throws Exception {
@@ -454,28 +445,13 @@ public class EhrExtractTest {
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
-        //Document doc = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        //doc.get(ACK_TO_PENDING);
-
-        checkCode(waitForEhrExtractStatus(conversationId), ACK_TO_PENDING);
-
-        //var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
-        //assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+        var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
 
         var sentToMhs = (Document) waitFor(() -> fetchSentToMhsForDocuments(conversationId));
         assertThat(sentToMhs.get("messageId")).isNotNull();
         assertThat(sentToMhs.get("sentAt")).isNotNull();
         assertThat(sentToMhs.get("taskId")).isNotNull();
-    }
-
-    private void checkCode(Document d, String code){
-        if(d.get(code) == null){
-            throw new ExtractFieldNotFoundException("Field [" + code + "] has not been found in EhrExtractStatus of document \n" + d);
-        }
-    }
-
-    private Document waitForEhrExtractStatus(String conversationId){
-        return waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber, String fromODSCode) {

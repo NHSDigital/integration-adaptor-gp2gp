@@ -380,6 +380,17 @@ public class EhrExtractStatusService {
 
     public void updateEhrExtractStatusAcknowledgement(SendAcknowledgementTaskDefinition taskDefinition, String ackMessageId,
         String updatedAt) {
+        LOGGER.info("Updating EhrExtractStatusAcknowledgement with data:\n" +
+            "{} - {}\n" +
+            "{} - {}\n" +
+            "{} - {}\n" +
+            "{} - {}",
+            ACK_PENDING_TASK_ID_PATH, taskDefinition.getTaskId(),
+            ACK_PENDING_MESSAGE_ID_PATH, ackMessageId,
+            ACK_PENDING_TYPE_CODE_PATH, taskDefinition.getTypeCode(),
+            ACK_PENDING_UPDATED_AT, updatedAt
+            );
+
         Update update = createUpdateWithUpdatedAt();
         update.set(ACK_PENDING_TASK_ID_PATH, taskDefinition.getTaskId());
         update.set(ACK_PENDING_MESSAGE_ID_PATH, ackMessageId);
