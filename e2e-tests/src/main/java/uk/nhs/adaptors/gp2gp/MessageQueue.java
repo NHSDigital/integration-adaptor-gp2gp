@@ -36,10 +36,11 @@ public class MessageQueue {
 
         MessageProducer producer = session.createProducer(queue);
         TextMessage message = session.createTextMessage();
+
+        log.info("TIMEMEASURE >> Message with id [{}] put on the queue on timestamp: [{}]",message.getJMSMessageID(), OffsetDateTime.now());
+
         message.setText(messageContent);
         producer.send(message);
-
-        log.info("TIMEMEASURE >> Message of id [{}] put in the queue on timestamp: [{}]",message.getJMSMessageID(), OffsetDateTime.now());
 
         producer.close();
         session.close();
