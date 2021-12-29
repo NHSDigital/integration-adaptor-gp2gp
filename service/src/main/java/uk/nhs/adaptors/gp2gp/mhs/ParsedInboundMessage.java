@@ -3,6 +3,8 @@ package uk.nhs.adaptors.gp2gp.mhs;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
+
 import org.w3c.dom.Document;
 
 import java.time.Instant;
@@ -10,6 +12,7 @@ import java.time.Instant;
 @Getter
 @AllArgsConstructor
 @Builder
+@ToString
 public class ParsedInboundMessage {
     private final Document ebXMLDocument;
     private final Document payloadDocument;

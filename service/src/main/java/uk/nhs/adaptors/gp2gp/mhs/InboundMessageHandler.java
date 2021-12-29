@@ -48,7 +48,7 @@ public class InboundMessageHandler {
         var messageID = message.getJMSMessageID();
         try {
             parsedMessage = parseMessage(message);
-            LOGGER.debug("Decoded inbound MHS message: {}", parsedMessage);
+            LOGGER.debug("Decoded inbound MHS message: {}", parsedMessage.toString());
             if (!processFailureHandlingService.hasProcessFailed(parsedMessage.getConversationId())) {
                 handleInboundMessage(parsedMessage);
             } else {
