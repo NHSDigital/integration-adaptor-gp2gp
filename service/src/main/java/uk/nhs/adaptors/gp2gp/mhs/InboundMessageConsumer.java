@@ -21,6 +21,8 @@ public class InboundMessageConsumer {
 
     @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}", concurrency = "${gp2gp.amqp.inboundQueueConsumerConcurrency}")
     public void receive(Message message) throws JMSException {
+        LOGGER.info("Starting measuring time for message {}", message.getJMSMessageID());
+        long st = System.currentTimeMillis();
         var messageID = message.getJMSMessageID();
         var messageTimestamp = getJmsMessageTimestamp(message);
         LOGGER.info("Received inbound MHS message_id: {} timestamp: {}", messageID, messageTimestamp);
@@ -36,5 +38,7 @@ public class InboundMessageConsumer {
         } finally {
             mdcService.resetAllMdcKeys();
         }
+
+        LOGGER.info("Start to finish of message [{}]: {}", message.getJMSMessageID(), System.currentTimeMillis() - st);
     }
 }
