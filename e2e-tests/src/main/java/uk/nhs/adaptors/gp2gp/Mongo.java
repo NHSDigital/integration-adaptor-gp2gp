@@ -4,14 +4,10 @@ import static com.mongodb.client.MongoClients.create;
 
 import org.bson.Document;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class Mongo {
     private static MongoDatabase sharedDatabaseConnection = null;
 
@@ -21,8 +17,6 @@ public class Mongo {
 
     public static Document findEhrExtractStatus(String conversationId) {
         var collection = getCollection();
-        log.info("MongoCollection's Documents: {}", collection);
-        log.info("MongoCollection's first by conversationId: {}", collection.find(Filters.eq("conversationId", conversationId)).first());
         return collection.find(Filters.eq("conversationId", conversationId)).first();
     }
 
@@ -34,14 +28,5 @@ public class Mongo {
             sharedDatabaseConnection = client.getDatabase(database);
         }
         return sharedDatabaseConnection;
-    }
-
-    public static boolean clearDb(){
-        getCollection().deleteMany(new BasicDBObject());
-        return getCollection().countDocuments() == 0;
-    }
-
-    public static Document getStats(){
-        return sharedDatabaseConnection.runCommand(new Document("collStats", "ehrExtractStatus"));
     }
 }
