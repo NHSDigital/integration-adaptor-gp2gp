@@ -54,7 +54,7 @@ public class MhsMockController {
             String correlationId = Optional.ofNullable(headers.get("correlation-id")).orElse(StringUtils.EMPTY);
             mdcService.applyConversationId(correlationId);
 
-            if(isRequestJournalEnabled()) {
+            if(isRequestJournalEnabled() && !correlationId.isEmpty()) {
                 if(REQUEST_JOURNALS_MAP.containsKey(correlationId)) {
                     REQUEST_JOURNALS_MAP.get(correlationId).add(mockMhsMessage);
                     LOGGER.info("Updated RequestJournal entry -> correlationId=[{}] with new message", correlationId);
