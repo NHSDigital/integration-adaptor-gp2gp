@@ -59,8 +59,6 @@ services:
       - GP2GP_AMQP_USERNAME
       - GP2GP_AMQP_PASSWORD
       - GP2GP_AMQP_MAX_REDELIVERIES
-    command:
-      - -no-request-journal
 
   mongodb:
     networks: 
