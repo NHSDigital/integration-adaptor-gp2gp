@@ -192,7 +192,7 @@ public class EhrExtractTest {
         assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
         assertThatNoErrorInfoIsStored(conversationId);
 
-        var mhsMockRequests = mhsMockRequestsJournal.getRequestsJournal();
+        var mhsMockRequests = mhsMockRequestsJournal.getRequestsJournal(conversationId);
         assertThat(mhsMockRequests).hasSize(2);
         var ehrExtractMhsRequest = mhsMockRequests.get(0);
 
