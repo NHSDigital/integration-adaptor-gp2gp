@@ -20,4 +20,4 @@ COPY --from=package /home/gradle/mock-mhs-adaptor/build/libs/mock-mhs-service.ja
 
 USER 65534
 
-ENTRYPOINT ["java", "-jar", "/app/mock-mhs-service.jar", "-Xmx4096M"]
+ENTRYPOINT ["java", "-jar", "/app/mock-mhs-service.jar", "-Xms4096m", "-Xmx8128m", "-Dorg.gradle.logging.level=info"]
