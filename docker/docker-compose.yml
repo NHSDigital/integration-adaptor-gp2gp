@@ -84,6 +84,7 @@ services:
       - "8110:8080"
     command:
       - -global-response-templating
+      - -no-request-journal
 
   integration-wiremock:
     networks:
@@ -183,6 +184,7 @@ services:
       - "8112:8080"
     command:
       - -global-response-templating
+      - -no-request-journal
 
   gpc-api-mock:
     networks: 
@@ -192,6 +194,7 @@ services:
       - "8113:8080"
     command:
       - -global-response-templating
+      - -no-request-journal
 networks:
   commonforgp2gp:
     external: true
