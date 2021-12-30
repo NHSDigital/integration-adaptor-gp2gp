@@ -3,7 +3,7 @@ server:
 
 logging:
   level:
-    uk.nhs.adaptors.mockmhsservice: DEBUG
+    uk.nhs.adaptors.mockmhsservice: INFO
 
 management:
   endpoints:
