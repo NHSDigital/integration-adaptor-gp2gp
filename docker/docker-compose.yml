@@ -59,6 +59,8 @@ services:
       - GP2GP_AMQP_USERNAME
       - GP2GP_AMQP_PASSWORD
       - GP2GP_AMQP_MAX_REDELIVERIES
+    command:
+      - -no-request-journal
 
   mongodb:
     networks: 
@@ -84,6 +86,7 @@ services:
       - "8110:8080"
     command:
       - -global-response-templating
+      - -no-request-journal
 
   integration-wiremock:
     networks:
@@ -93,6 +96,7 @@ services:
       - "8111:8080"
     command:
       - -global-response-templating
+      - -no-request-journal
 
   gpcc:
     image: nhsdev/nia-gpc-consumer-adaptor:0.1.5
@@ -115,6 +119,8 @@ services:
       - GPC_CONSUMER_SDS_URL
       - GPC_CONSUMER_SDS_APIKEY
       - GPC_ENABLE_SDS
+    command:
+      - -no-request-journal
 
   gpconnect-db:
     image: mariadb
@@ -127,6 +133,7 @@ services:
       - MYSQL_DATABASE=gpconnect1_5
     command: [
         '--wait_timeout=28800',
+        '--no-request-journal'
     ]
 
   gpconnect-api:
@@ -183,6 +190,7 @@ services:
       - "8112:8080"
     command:
       - -global-response-templating
+      - -no-request-journal
 
   gpc-api-mock:
     networks: 
@@ -192,6 +200,7 @@ services:
       - "8113:8080"
     command:
       - -global-response-templating
+      - -no-request-journal
 networks:
   commonforgp2gp:
     external: true
