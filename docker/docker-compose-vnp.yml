@@ -33,11 +33,11 @@ services:
       - "8092:8080"
       - "8080"
     environment:
-      - GPC_CONSUMER_OVERRIDE_GPC_PROVIDER_URL
+      - SDS_MOCK_GPC_URL
     command:
       - -global-response-templating
       - --verbose
-      - --permitted-system-keys=GPC_CONSUMER_OVERRIDE_GPC_PROVIDER_URL
+      - --permitted-system-keys=SDS_MOCK_GPC_URL
     networks:
       - commonforgp2gp
 

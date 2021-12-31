@@ -32,7 +32,7 @@
                         ]
                     }
                 ],
-                "address": "{{systemValue type='ENVIRONMENT' key='GPC_CONSUMER_OVERRIDE_GPC_PROVIDER_URL'}}/{{regexExtract request.query.organization '\|(.+)' 'odsCode'}}{{odsCode.0}}/STU3/1/gpconnect/documents/fhir",
+                "address": "{{systemValue type='ENVIRONMENT' key='SDS_MOCK_GPC_URL'}}/{{regexExtract request.query.organization '\|(.+)' 'odsCode'}}{{odsCode.0}}/STU3/1/gpconnect/documents/fhir",
                 "managingOrganization": {
                     "identifier": {
                         "system": "https://fhir.nhs.uk/Id/ods-organization-code",
