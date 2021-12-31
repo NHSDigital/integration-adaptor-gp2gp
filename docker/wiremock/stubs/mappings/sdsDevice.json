@@ -2,7 +2,7 @@
   "priority": 2,
   "request": {
     "method": "GET",
-    "urlPath": "/Device",
+    "urlPath": "/spine-directory/Device",
     "queryParameters": {
       "organization": {
         "matches": "https:\/\/fhir[.]nhs[.]uk\/Id\/ods-organization-code[|].*"
