@@ -48,7 +48,6 @@ public class GpcRequestBuilder {
     private static final String NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number";
     private static final String FHIR_CONTENT_TYPE = "application/fhir+json";
     private static final String SSP_FROM = "Ssp-From";
-    private static final String SSP_TO = "Ssp-To";
     private static final String SSP_INTERACTION_ID = "Ssp-InteractionID";
     private static final String SSP_TRACE_ID = "Ssp-TraceID";
     private static final String AUTHORIZATION = "Authorization";
@@ -129,9 +128,12 @@ public class GpcRequestBuilder {
     }
 
     private RequestBodySpec buildRequestWithHeaders(RequestBodySpec uri, TaskDefinition taskDefinition, String interactionId) {
+        /*
+         * SSP_FROM must be set to GP2GP ASID which is stored in the toAsid property of the task
+         * SSP_TO is left blank as it will be set in the GPC Consumer Proxy
+         */
         return uri.accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
-            .header(SSP_FROM, getFromAsid(taskDefinition.getFromAsid()))
-            .header(SSP_TO, getToAsid(taskDefinition.getToAsid()))
+            .header(SSP_FROM, getToAsid(taskDefinition.getToAsid()))
             .header(SSP_INTERACTION_ID, interactionId)
             .header(SSP_TRACE_ID, taskDefinition.getConversationId())
             .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode()))
