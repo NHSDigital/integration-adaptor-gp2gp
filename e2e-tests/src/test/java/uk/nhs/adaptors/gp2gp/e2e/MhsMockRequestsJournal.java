@@ -12,6 +12,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MhsMockRequestsJournal {
@@ -25,21 +26,29 @@ public class MhsMockRequestsJournal {
         this.mhsMockBaseUrl = mhsMockBaseUrl;
     }
 
-    public List<OutboundMessage> getRequestsJournal() throws IOException, InterruptedException {
+    private Map<String, List<String>> getRequestJournalMap() throws IOException, InterruptedException {
         var responseBody = client
             .send(buildGetRequest(), HttpResponse.BodyHandlers.ofString())
             .body();
 
-        List<String> requestsAsStrings = OBJECT_MAPPER.readerForListOf(String.class).readValue(responseBody);
-        return requestsAsStrings.stream()
-            .map(str -> {
-                try {
-                    return OBJECT_MAPPER.readValue(str,OutboundMessage.class);
-                } catch (JsonProcessingException e) {
-                    throw new UncheckedIOException(e);
-                }
-            })
-            .collect(Collectors.toList());
+        return OBJECT_MAPPER.readerForMapOf(List.class).readValue(responseBody);
+    }
+
+    public List<OutboundMessage> getRequestsJournal(String conversationId) throws IOException, InterruptedException {
+        var map = getRequestJournalMap();
+        if(map.containsKey(conversationId)) {
+            return map.get(conversationId).stream()
+                .map(str -> {
+                    try {
+                        return OBJECT_MAPPER.readValue(str,OutboundMessage.class);
+                    } catch (JsonProcessingException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                })
+                .collect(Collectors.toList());
+        } else {
+            throw new RuntimeException("Request Journal contains no key [" + conversationId + "]!");
+        }
     }
 
     @SneakyThrows
