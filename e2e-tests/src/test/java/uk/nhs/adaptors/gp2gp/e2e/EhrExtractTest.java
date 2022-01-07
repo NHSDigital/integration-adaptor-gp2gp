@@ -41,7 +41,10 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_1 = "9690937819";
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_2 = "9690937841";
     private static final String NHS_NUMBER_TWO_DOCUMENTS = "9690937789";
-    private static final String NHS_NUMBER_THREE_SMALL_DOCUMENTS = "9690937419";
+    private static final String NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS = "9690937419";
+    private static final String NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS = "9690937420";
+    private static final String NHS_NUMBER_LARGE_PAYLOAD = "9690937421";
+    private static final String NHS_NUMBER_LARGE_ATTACHMENT_DOCX = "9388098434";
 
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE = "/ehrExtractRequestWithNoDocuments.json";
@@ -72,7 +75,7 @@ public class EhrExtractTest {
     private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/EhrExtract/component/ehrFolder/component/ehrComposition/component/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='file://localhost/%s']";
 
     private final MhsMockRequestsJournal mhsMockRequestsJournal =
-        new MhsMockRequestsJournal(getEnvVar("GP2GP_MHS_MOCK_BASE_URL", "http://localhost:8081"));
+            new MhsMockRequestsJournal(getEnvVar("GP2GP_MHS_MOCK_BASE_URL", "http://localhost:8081"));
 
     @BeforeEach
     void setUp() {
@@ -89,7 +92,26 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedFromAbsent_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_LargeExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_PAYLOAD, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_LARGE_PAYLOAD);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedWithLargeAttachment_Expect_LargeDocumentIsSplit() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_ATTACHMENT_DOCX, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_LARGE_ATTACHMENT_DOCX);
+    }
+
+    @Test
+    public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
@@ -114,12 +136,22 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedForPatientWith3Docs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceived3NormalDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_DOCUMENTS, FROM_ODS_CODE_1);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_DOCUMENTS);
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS);
+        assertMultipleDocumentsRetrieved(conversationId, 3);
+    }
+
+    @Test
+    public void When_ExtractRequestReceived3AbsentAttachmentDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS);
         assertMultipleDocumentsRetrieved(conversationId, 3);
     }
 
@@ -138,8 +170,8 @@ public class EhrExtractTest {
     public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), StandardCharsets.UTF_8)
-            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
+                        .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), StandardCharsets.UTF_8)
+                .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
@@ -147,7 +179,7 @@ public class EhrExtractTest {
 
         var documentList = waitFor(() -> {
             var extractStatus = ((Document) Mongo.findEhrExtractStatus(conversationId)
-                .get(GPC_ACCESS_DOCUMENT));
+                    .get(GPC_ACCESS_DOCUMENT));
             if (extractStatus == null) {
                 return null;
             }
@@ -160,7 +192,7 @@ public class EhrExtractTest {
         assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
         assertThatNoErrorInfoIsStored(conversationId);
 
-        var mhsMockRequests = mhsMockRequestsJournal.getRequestsJournal();
+        var mhsMockRequests = mhsMockRequestsJournal.getRequestsJournal(conversationId);
         assertThat(mhsMockRequests).hasSize(2);
         var ehrExtractMhsRequest = mhsMockRequests.get(0);
 
@@ -176,9 +208,9 @@ public class EhrExtractTest {
 
         var description = attachment.getDescription();
         var descriptionElements = Arrays.stream(description.split("\n"))
-            .filter(StringUtils::isNotBlank)
-            .map(value -> value.split("="))
-            .collect(Collectors.toMap(x -> x[0].trim(), x -> x[1]));
+                .filter(StringUtils::isNotBlank)
+                .map(value -> value.split("="))
+                .collect(Collectors.toMap(x -> x[0].trim(), x -> x[1]));
 
         assertThat(descriptionElements).containsEntry("ContentType", "application/xml");
         assertThat(descriptionElements).containsEntry("Compressed", "Yes");
@@ -236,7 +268,7 @@ public class EhrExtractTest {
     private void assertMultipleDocumentsRetrieved(String conversationId, int documentCount) {
         var documentList = waitFor(() -> {
             var extractStatus = ((Document) Mongo.findEhrExtractStatus(conversationId)
-                .get(GPC_ACCESS_DOCUMENT));
+                    .get(GPC_ACCESS_DOCUMENT));
             if (extractStatus == null) {
                 return null;
             }
@@ -266,7 +298,7 @@ public class EhrExtractTest {
 
         var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
-        
+
         var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
         assertThatAccessAbsentDocumentWasFetched(singleDocument);
 
@@ -319,10 +351,10 @@ public class EhrExtractTest {
 
     private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber, String fromODSCode) throws IOException {
         return IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), StandardCharsets.UTF_8)
-            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId)
-            .replace(NHS_NUMBER_PLACEHOLDER, notExistingPatientNhsNumber)
-            .replace(FROM_ODS_CODE_PLACEHOLDER, fromODSCode);
+                        .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), StandardCharsets.UTF_8)
+                .replace(CONVERSATION_ID_PLACEHOLDER, conversationId)
+                .replace(NHS_NUMBER_PLACEHOLDER, notExistingPatientNhsNumber)
+                .replace(FROM_ODS_CODE_PLACEHOLDER, fromODSCode);
     }
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
@@ -426,7 +458,7 @@ public class EhrExtractTest {
 
     private void assertThatAccessStructuredWasFetched(String conversationId, Document accessStructured) {
         softly.assertThat(accessStructured.get("objectName")).isEqualTo(
-            conversationId.concat("/").concat(conversationId).concat("_gpc_structured.json")
+                conversationId.concat("/").concat(conversationId).concat("_gpc_structured.json")
         );
         softly.assertThat(accessStructured.get("accessedAt")).isNotNull();
         softly.assertThat(accessStructured.get("taskId")).isNotNull();
@@ -461,7 +493,7 @@ public class EhrExtractTest {
 
     private boolean nameStartsEndsWith(Object name, String startingValue, String endingValue){
         return nameStartsWith(name.toString(), startingValue)
-            && nameEndsWith(name.toString(), endingValue);
+                && nameEndsWith(name.toString(), endingValue);
     }
 
     private boolean nameStartsWith(String name, String startingValue) {
