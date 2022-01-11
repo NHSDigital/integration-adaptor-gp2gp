@@ -16,7 +16,7 @@
             <id root="1.2.826.0.1285.0.2.0.107" extension="test-to-asid-code"/>
         </device>
     </communicationFunctionSnd>
-    <ControlActEvent>
+    <ControlActEvent classCode="CACT" moodCode="EVN">
         <author1>
             <AgentSystemSDS>
                 <agentSystemSDS>
@@ -24,8 +24,8 @@
                 </agentSystemSDS>
             </AgentSystemSDS>
         </author1>
-        <subject>
-            <PayloadInformation xmlns="urn:hl7-org:v3" xmlns:npfitlc="NPFIT:HL7:Localisation">
+        <subject contextConductionInd="false" typeCode="SUBJ">
+            <PayloadInformation xmlns="urn:hl7-org:v3" xmlns:npfitlc="NPFIT:HL7:Localisation" classCode="OBS" moodCode="EVN">
                 <code code="GP2GPLMATTACHMENTINFO" codeSystem="2.16.840.1.113883.2.1.3.2.4.17.202" displayName="GP2GP Large Message Attachment Information"/>
                 <id root="test-message-id"/>
                 <npfitlc:messageType root="2.16.840.1.113883.2.1.3.2.4.18.17" extension="COPC_MT000001UK01"/>
@@ -40,9 +40,9 @@
                         <message-id>test-message-id</message-id>
                     </Gp2gpfragment>
                 </value>
-                <pertinentInformation>
+                <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="1"/>
-                    <pertinentPayloadBody>
+                    <pertinentPayloadBody classCode="OBS" moodCode="EVN">
                         <code code="GP2GPLMATTACHMENT" codeSystem="2.16.840.1.113883.2.1.3.2.4.17.202" displayName="GP2GP Large Message Attachment"/>
                         <id root="test-id"/>
                         <value><reference value="test-document-id"/></value>
