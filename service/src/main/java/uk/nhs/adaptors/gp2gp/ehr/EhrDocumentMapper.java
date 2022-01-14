@@ -30,7 +30,6 @@ public class EhrDocumentMapper {
             .toOdsCode(taskDefinition.getToOdsCode())
             .fromOdsCode(taskDefinition.getFromOdsCode())
             .pertinentPayloadId(randomIdGeneratorService.createNewId())
-            .fileName(taskDefinition.getFileName())
             .build();
     }
 
