@@ -26,11 +26,6 @@ public class GetGpcDocumentTaskDefinition extends DocumentTaskDefinition {
      */
     private final String accessDocumentUrl;
 
-    /**
-     * Reference title (including extension) of the DocumentReference generated in the EHR narrative statement
-     */
-    private final String fileName;
-
     @Override
     public TaskType getTaskType() {
         return GET_GPC_DOCUMENT;

@@ -18,8 +18,4 @@ public abstract class DocumentTaskDefinition extends TaskDefinition {
      * TODO same as Conversation Id ??? need to check
      */
     private final String messageId;
-    /**
-     * Reference title (including extension) of the DocumentReference generated in the EHR narrative statement
-     */
-    private final String fileName;
 }
