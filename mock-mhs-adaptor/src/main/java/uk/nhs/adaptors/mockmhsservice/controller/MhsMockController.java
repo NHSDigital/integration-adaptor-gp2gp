@@ -23,10 +23,12 @@ import uk.nhs.adaptors.mockmhsservice.service.MockMhsService;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
@@ -40,7 +42,7 @@ public class MhsMockController {
     private final MDCService mdcService;
     private final HttpHeaders responseHeaders = new HttpHeaders();
 
-    private static final List<String> REQUEST_JOURNAL = new ArrayList<>();
+    private static final Map<String, List<String>> REQUEST_JOURNALS_MAP = new HashMap<>();
 
     @PostMapping(value = "/mock-mhs-endpoint",
         consumes = APPLICATION_JSON_VALUE
@@ -50,14 +52,12 @@ public class MhsMockController {
         @RequestHeader Map<String, String> headers,
         @RequestBody(required=false) String mockMhsMessage) {
 
-        if (isRequestJournalEnabled()) {
-            LOGGER.info("Logging request in journal");
-            REQUEST_JOURNAL.add(mockMhsMessage);
-        }
-
         try {
             String correlationId = Optional.ofNullable(headers.get("correlation-id")).orElse(StringUtils.EMPTY);
             mdcService.applyConversationId(correlationId);
+
+            addToJournal(correlationId, mockMhsMessage);
+
             String interactionId = Optional.ofNullable(headers.get("interaction-id")).orElse(StringUtils.EMPTY);
             String waitForResponse = Optional.ofNullable(headers.get("wait-for-response")).orElse(StringUtils.EMPTY);
             String odsCode = Optional.ofNullable(headers.get("ods-code")).orElse(StringUtils.EMPTY);
@@ -80,17 +80,36 @@ public class MhsMockController {
 
     @DeleteMapping(value = "/__admin/requests")
     public ResponseEntity<String> deleteRequestJournal() {
-        REQUEST_JOURNAL.clear();
+        REQUEST_JOURNALS_MAP.clear();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/__admin/requests")
-    public ResponseEntity<List> getRequestJournal() {
-        return new ResponseEntity<>(REQUEST_JOURNAL, HttpStatus.OK);
+    public ResponseEntity<Map<String, List<String>>> getRequestJournal() {
+        return new ResponseEntity<>(REQUEST_JOURNALS_MAP, HttpStatus.OK);
     }
 
     private boolean isRequestJournalEnabled() {
         var requestJournalEnabled = System.getenv("MHS_MOCK_REQUEST_JOURNAL_ENABLED");
         return Boolean.TRUE.toString().equalsIgnoreCase(requestJournalEnabled);
     }
+
+    private void addToJournal(String correlationId, String mockMhsMessage) {
+        if(isRequestJournalEnabled() && !correlationId.isEmpty()) {
+            if(REQUEST_JOURNALS_MAP.containsKey(correlationId)) {
+                REQUEST_JOURNALS_MAP.replace(
+                    correlationId,
+                    Stream.concat(
+                        REQUEST_JOURNALS_MAP.get(correlationId).stream(),
+                        Stream.of(mockMhsMessage)
+                    ).collect(Collectors.toList())
+                );
+                LOGGER.info("Updated RequestJournal entry of correlationId=[{}] with new message", correlationId);
+            } else {
+                REQUEST_JOURNALS_MAP.put(correlationId, List.of(mockMhsMessage));
+                LOGGER.info("Added new RequestJournal entry with correlationId=[{}]", correlationId);
+            }
+        }
+    }
+
 }
