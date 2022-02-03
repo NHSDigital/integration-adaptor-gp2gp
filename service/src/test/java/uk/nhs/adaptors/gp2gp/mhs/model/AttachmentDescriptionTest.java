@@ -11,7 +11,7 @@ class AttachmentDescriptionTest {
     @Test
     void When_BuildingAttachmentDescriptionUsingMandatoryParameters_Expect_ProperDescriptionIsCreated() {
         var result = OutboundMessage.AttachmentDescription.builder()
-            .fileName("\"some_file_name\"")
+            .fileName("some_file_name")
             .contentType("some_content_type")
             .compressed(false)
             .largeAttachment(false)
@@ -20,7 +20,7 @@ class AttachmentDescriptionTest {
             .toString();
 
         assertThat(result).isEqualTo("\n"
-            + "                Filename=some_file_name\n"
+            + "                Filename=\"some_file_name\"\n"
             + "                ContentType=some_content_type\n"
             + "                Compressed=No\n"
             + "                LargeAttachment=No\n"
@@ -31,7 +31,7 @@ class AttachmentDescriptionTest {
     @Test
     void When_BuildingAttachmentDescriptionUsingAllParameters_Expect_ProperDescriptionIsCreated() {
         var result = OutboundMessage.AttachmentDescription.builder()
-            .fileName("\"some_other_file_name\"")
+            .fileName("some_other_file_name")
             .contentType("some_other_content_type")
             .compressed(true)
             .largeAttachment(true)
@@ -42,7 +42,7 @@ class AttachmentDescriptionTest {
             .toString();
 
         assertThat(result).isEqualTo("\n"
-            + "                Filename=some_other_file_name\n"
+            + "                Filename=\"some_other_file_name\"\n"
             + "                ContentType=some_other_content_type\n"
             + "                Compressed=Yes\n"
             + "                LargeAttachment=Yes\n"
