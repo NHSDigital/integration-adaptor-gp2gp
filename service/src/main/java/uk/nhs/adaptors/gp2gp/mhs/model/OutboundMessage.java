@@ -96,7 +96,7 @@ public class OutboundMessage {
         @Override
         public String toString() {
             var descriptionElements = Stream.of(
-                "Filename=" + fileName,
+                "Filename=\"" + fileName+"\"",
                 "ContentType=" + contentType,
                 "Compressed=" + booleanToYesNo(compressed),
                 "LargeAttachment=" + booleanToYesNo(largeAttachment),
