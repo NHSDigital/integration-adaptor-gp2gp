@@ -101,7 +101,7 @@ public class InputBundle {
             LOGGER.info("\n\n" + serialized + "\n\n");
             called = true;
         }
-        
+
         return extractResourceByReference(this.bundle, reference)
             .orElseThrow(() -> new EhrMapperException("Resource not found: " + reference));
     }
