@@ -114,6 +114,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             messageContext.resetMessageContext();
         }
 
+        LOGGER.info("Checking EHR Extract size");
         if (isLargeEhrExtract(hl7TranslatedResponse)) {
             var compressedBytes = compress(hl7TranslatedResponse);
             if (compressedBytes == null) {
@@ -121,7 +122,9 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             }
             hl7TranslatedResponse = new String(compressedBytes, UTF_8);
 
+            LOGGER.info("Checking Compressed EHR Extract size");
             if (!isLargeEhrExtract(hl7TranslatedResponse)) {
+                LOGGER.info("Compressed EHR extract is NOT large");
                 var filename = GpcFilenameUtils.generateDocumentFilename(
                     structuredTaskDefinition.getConversationId(), randomIdGeneratorService.createNewId()
                 );
@@ -129,6 +132,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 attachments.add(attachment);
                 hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, filename);
             } else {
+                LOGGER.info("Compressed EHR extract is large!!");
                 var documentId = randomIdGeneratorService.createNewId();
                 var documentName = GpcFilenameUtils.generateDocumentFilename(
                     structuredTaskDefinition.getConversationId(), documentId
