@@ -43,4 +43,17 @@ class SendDocumentTaskExecutorTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("SizeThreshold must be larger 4 to hold at least 1 UTF-16 character");
     }
+
+//    @Test
+//    void When_ChunkingLarge_Expect_NoError() throws IOException {
+//        var filePath = "/Users/bartoszs/Downloads/chromedriver";
+////        String binary = Files.readString(Path.of("/Users/bartoszs/Downloads/ngrok"));
+//
+//        String binary = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+//
+//
+//
+//        var chunks = SendDocumentTaskExecutor.chunkBinary(binary, 4_500_000);
+//        var a = 1;
+//    }
 }

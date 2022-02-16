@@ -22,8 +22,10 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -171,26 +173,54 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
             throw new IllegalArgumentException("SizeThreshold must be larger 4 to hold at least 1 UTF-16 character");
         }
 
-        List<String> chunks = new ArrayList<>();
+        LOGGER.info("Getting bytes");
+        var bytes = binary.getBytes(StandardCharsets.UTF_8);
+        var chunksCount = (int) Math.ceil(bytes.length / sizeThreshold) + 1;
+        LOGGER.info("Chunking string with lenght={} bytes_count={} into {} chunks", binary.length(), bytes.length, chunksCount);
+        var chunks = new byte[chunksCount][];
 
-        StringBuilder chunk = new StringBuilder();
-        for (int i = 0; i < binary.length(); i++) {
-            var c = binary.charAt(i);
-            var chunkBytesSize = chunk.toString().getBytes(StandardCharsets.UTF_8).length;
-            var charBytesSize = Character.toString(c).getBytes(StandardCharsets.UTF_8).length;
-            if (chunkBytesSize + charBytesSize > sizeThreshold) {
-                LOGGER.info("Adding chunk number={} size={}", chunks.size() + 1, chunkBytesSize);
-                chunks.add(chunk.toString());
-                chunk = new StringBuilder();
+        var chunk = new byte[sizeThreshold];
+        var chunkIndex = 0;
+        var chunkNumber = 0;
+
+        for (byte c : bytes) {
+            if (chunkIndex >= sizeThreshold) {
+                LOGGER.info("Adding chunk to chunks");
+                chunks[chunkNumber] = chunk;
+                chunkNumber++;
+                chunk = new byte[sizeThreshold];
+                chunkIndex = 0;
             }
-            chunk.append(c);
+
+            chunk[chunkIndex] = c;
+            chunkIndex++;
         }
-        if (chunk.length() != 0) {
-            LOGGER.info("Adding last chunk number={}", chunks.size() + 1);
-            chunks.add(chunk.toString());
+        if (chunkIndex != 0) {
+            LOGGER.info("Adding last chunk");
+            chunks[chunkNumber] = Arrays.copyOf(chunk, chunkIndex);
         }
 
-        return chunks;
+//        StringBuilder chunk = new StringBuilder();
+//        for (int i = 0; i < bytes.length; i++) {
+//            var c = bytes[i];
+//            var chunkBytesSize = chunk.toString().getBytes(StandardCharsets.UTF_8).length;
+//            var charBytesSize = Character.toString(c).getBytes(StandardCharsets.UTF_8).length;
+//            if (chunkBytesSize + charBytesSize > sizeThreshold) {
+//                LOGGER.info("Adding chunk number={} size={}", chunks.size() + 1, chunkBytesSize);
+//                chunks.add(chunk.toString());
+//                chunk = new StringBuilder();
+//            }
+//            chunk.append(c);
+//        }
+//        if (chunk.length() != 0) {
+//            LOGGER.info("Adding last chunk number={}", chunks.size() + 1);
+//            chunks.add(chunk.toString());
+//        }
+
+        LOGGER.info("Converting chunks into strings");
+        var result = Arrays.stream(chunks).map(byteArray -> new String(byteArray, StandardCharsets.UTF_8)).collect(Collectors.toList());
+        LOGGER.info("Returning chunks as strings");
+        return result;
     }
 
     private boolean isLargeAttachment(String binary) {
