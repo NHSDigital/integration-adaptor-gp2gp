@@ -175,7 +175,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
 
         LOGGER.info("Getting bytes");
         var bytes = binary.getBytes(StandardCharsets.UTF_8);
-        var chunksCount = (int) Math.ceil(bytes.length / sizeThreshold) + 1;
+        var chunksCount = (int) Math.ceil((double) bytes.length / sizeThreshold) + 1;
         LOGGER.info("Chunking string with lenght={} bytes_count={} into {} chunks", binary.length(), bytes.length, chunksCount);
         var chunks = new byte[chunksCount][];
 
