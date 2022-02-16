@@ -62,19 +62,28 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
         }
 
         var binary = outboundMessage.getAttachments().get(0).getPayload();
+        LOGGER.info("Attachment size=" + getBytesLengthOfString(binary));
         if (isLargeAttachment(binary)) {
+            LOGGER.info("Attachment is large");
             var contentType = outboundMessage.getAttachments().get(0).getContentType();
             outboundMessage.getAttachments().clear(); // since it's a large message, chunks will be sent as external attachments
             outboundMessage.setExternalAttachments(new ArrayList<>());
 
             var chunks = chunkBinary(binary, gp2gpConfiguration.getLargeAttachmentThreshold());
+            LOGGER.info("Attachment split into {} chunks", chunks.size());
             for (int i = 0; i < chunks.size(); i++) {
+                LOGGER.info("Handling chunk {}", i);
                 var chunk = chunks.get(i);
                 var messageId = randomIdGeneratorService.createNewId();
                 var filename = mainDocumentId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
+                LOGGER.info("Building chunk payload");
                 var chunkPayload = generateChunkPayload(taskDefinition, messageId, filename);
+                LOGGER.info("Building chunk outbound message");
                 var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, contentType);
-                requestDataToSend.put(randomIdGeneratorService.createNewId(), chunkedOutboundMessage);
+                var id = randomIdGeneratorService.createNewId();
+                LOGGER.info("Adding requestDataToSend key={} value={}", id, chunkedOutboundMessage);
+                requestDataToSend.put(id, chunkedOutboundMessage);
+                LOGGER.info("Building external attachment");
                 var externalAttachment = OutboundMessage.ExternalAttachment.builder()
                     .description(OutboundMessage.AttachmentDescription.builder()
                         .length(getBytesLengthOfString(chunk)) //calculate size for chunk
@@ -87,26 +96,36 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                         .toString())
                     .messageId(messageId)
                     .build();
+                LOGGER.info("Adding external attachment");
                 outboundMessage.getExternalAttachments().add(externalAttachment);
             }
-
-            requestDataToSend.put(mainMessageId, objectMapper.writeValueAsString(outboundMessage));
+            var outboundMessageAsString = objectMapper.writeValueAsString(outboundMessage);
+            LOGGER.info("Finished handling chunks. Adding requestDataToSend key={} value={}", mainMessageId, outboundMessageAsString);
+            requestDataToSend.put(mainMessageId, outboundMessageAsString);
         } else {
             requestDataToSend.put(mainMessageId, storageDataWrapper.getData());
         }
 
+        LOGGER.info("Sending all requestDataToSend");
         requestDataToSend.entrySet().stream()
-            .map(kv -> mhsRequestBuilder
-                .buildSendEhrExtractCommonRequest(
-                    kv.getValue(),
-                    taskDefinition.getConversationId(),
-                    taskDefinition.getFromOdsCode(),
-                    kv.getKey()))
-            .forEach(mhsClient::sendMessageToMHS);
+            .map(kv -> {
+                LOGGER.info("Building request");
+                return mhsRequestBuilder
+                    .buildSendEhrExtractCommonRequest(
+                        kv.getValue(),
+                        taskDefinition.getConversationId(),
+                        taskDefinition.getFromOdsCode(),
+                        kv.getKey());
+            })
+            .forEach(request -> {
+                LOGGER.info("Sending request");
+                mhsClient.sendMessageToMHS(request);
+            });
 
-        EhrExtractStatus ehrExtractStatus = null;
+        EhrExtractStatus ehrExtractStatus;
 
         if (taskDefinition.isExternalEhrExtract()) {
+            LOGGER.info("Is external ehr extract");
             ehrExtractStatus = ehrExtractStatusService
                 .updateEhrExtractStatusCommonForExternalEhrExtract(taskDefinition, new ArrayList<>(requestDataToSend.keySet()));
         } else {
@@ -114,6 +133,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                 .updateEhrExtractStatusCommonForDocuments(taskDefinition, new ArrayList<>(requestDataToSend.keySet()));
         }
 
+        LOGGER.info("Executing beginSendingPositiveAcknowledgement");
         detectDocumentsSentService.beginSendingPositiveAcknowledgement(ehrExtractStatus);
     }
 
@@ -159,12 +179,14 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
             var chunkBytesSize = chunk.toString().getBytes(StandardCharsets.UTF_8).length;
             var charBytesSize = Character.toString(c).getBytes(StandardCharsets.UTF_8).length;
             if (chunkBytesSize + charBytesSize > sizeThreshold) {
+                LOGGER.info("Adding chunk number={} size={}", chunks.size() + 1, chunkBytesSize);
                 chunks.add(chunk.toString());
                 chunk = new StringBuilder();
             }
             chunk.append(c);
         }
         if (chunk.length() != 0) {
+            LOGGER.info("Adding last chunk number={}", chunks.size() + 1);
             chunks.add(chunk.toString());
         }
 
