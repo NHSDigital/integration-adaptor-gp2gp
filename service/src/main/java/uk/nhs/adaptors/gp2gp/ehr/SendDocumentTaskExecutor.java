@@ -101,10 +101,10 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
         requestDataToSend.stream()
             .map(pair -> mhsRequestBuilder
                 .buildSendEhrExtractCommonRequest(
-                    pair.getFirst(),
+                    pair.getSecond(),
                     taskDefinition.getConversationId(),
                     taskDefinition.getFromOdsCode(),
-                    pair.getSecond()))
+                    pair.getFirst()))
             .forEach(mhsClient::sendMessageToMHS);
 
         EhrExtractStatus ehrExtractStatus;
