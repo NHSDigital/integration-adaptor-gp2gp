@@ -123,8 +123,8 @@ public class SendAcknowledgementComponentTest {
 
         sendAcknowledgementExecutor.execute(taskDefinition);
 
-        verify(mhsRequestBuilder).buildSendAcknowledgement(asString(expectedNackMessage), FROM_ODS_CODE, EhrStatusConstants.CONVERSATION_ID,
-            GENERATED_RANDOM_ID);
+        verify(mhsRequestBuilder).buildSendAcknowledgementRequest(
+            asString(expectedNackMessage), FROM_ODS_CODE, EhrStatusConstants.CONVERSATION_ID, GENERATED_RANDOM_ID);
 
         EhrExtractStatus updatedEhrExtractStatus =
             ehrExtractStatusRepository.findByConversationId(EhrStatusConstants.CONVERSATION_ID).get();
@@ -152,8 +152,8 @@ public class SendAcknowledgementComponentTest {
 
         sendAcknowledgementExecutor.execute(taskDefinition);
 
-        verify(mhsRequestBuilder).buildSendAcknowledgement(asString(expectedAckMessage), FROM_ODS_CODE, EhrStatusConstants.CONVERSATION_ID,
-            GENERATED_RANDOM_ID);
+        verify(mhsRequestBuilder).buildSendAcknowledgementRequest(
+            asString(expectedAckMessage), FROM_ODS_CODE, EhrStatusConstants.CONVERSATION_ID, GENERATED_RANDOM_ID);
 
         EhrExtractStatus updatedEhrExtractStatus =
             ehrExtractStatusRepository.findByConversationId(EhrStatusConstants.CONVERSATION_ID).get();

@@ -61,6 +61,7 @@ public class OutboundMessage {
     @Builder
     @EqualsAndHashCode
     public static class ExternalAttachment {
+        @JsonIgnore
         @JsonProperty("document_id")
         private String documentId;
         @JsonProperty("message_id")

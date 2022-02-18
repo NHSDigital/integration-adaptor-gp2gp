@@ -69,7 +69,7 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
         LOGGER.info("Sending ACK message to MHS. ACK message_id: {} conversation_id: {} ehrRequest_id: {} ",
             ackMessageId, taskDefinition.getConversationId(), taskDefinition.getEhrRequestMessageId());
 
-        var request = mhsRequestBuilder.buildSendAcknowledgement(
+        var request = mhsRequestBuilder.buildSendAcknowledgementRequest(
             requestBody, taskDefinition.getFromOdsCode(), taskDefinition.getConversationId(), ackMessageId);
 
         mhsClient.sendMessageToMHS(request);

@@ -1,15 +1,14 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
+import com.google.common.collect.ImmutableMap;
 import io.netty.handler.ssl.SslContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ReactiveHttpOutputMessage;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
@@ -40,25 +39,50 @@ public class MhsRequestBuilder {
     private final MhsConfiguration mhsConfiguration;
     private final RequestBuilderService requestBuilderService;
 
-    public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(String extractCoreMessage, String conversationId, String fromOdsCode) {
+    public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(
+            String extractCoreMessage, String conversationId, String fromOdsCode) {
+        return buildRequest(extractCoreMessage, fromOdsCode, conversationId, MHS_OUTBOUND_EXTRACT_CORE_INTERACTION_ID, null);
+    }
+
+    public RequestHeadersSpec<?> buildSendAcknowledgementRequest(
+            String requestBody, String fromOdsCode, String conversationId, String positiveAckMessageId) {
+        return buildRequest(requestBody, fromOdsCode, conversationId, MHS_OUTBOUND_ACKNOWLEDGEMENT_INTERACTION_ID, positiveAckMessageId);
+    }
+
+    public RequestHeadersSpec<?> buildSendEhrExtractCommonRequest(
+            String requestBody, String conversationId, String fromOdsCode, String messageId) {
+        return buildRequest(requestBody, fromOdsCode, conversationId, MHS_OUTBOUND_COMMON_INTERACTION_ID, messageId);
+    }
+
+    private RequestHeadersSpec<?> buildRequest(
+        String requestBody, String fromOdsCode, String conversationId, String interactionId, String messageId) {
+
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
 
-        WebClient.RequestBodySpec uri = client
-            .method(HttpMethod.POST)
-            .uri(mhsConfiguration.getUrl());
+        var requestMethod = HttpMethod.POST;
+        var headersBuilder = ImmutableMap.<String, String>builder()
+            .put("Accept", APPLICATION_JSON.toString())
+            .put(ODS_CODE, fromOdsCode)
+            .put(CONTENT_TYPE, APPLICATION_JSON_VALUE)
+            .put(INTERACTION_ID, interactionId)
+            .put(WAIT_FOR_RESPONSE, FALSE)
+            .put(CORRELATION_ID, conversationId);
+        if (messageId != null) {
+            headersBuilder.put(MESSAGE_ID, messageId);
+        }
+        var headers = headersBuilder.build();
 
-        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(extractCoreMessage);
+        LOGGER.debug("Request: {} {}", requestMethod, mhsConfiguration.getUrl());
+        headers.forEach((k, v) -> LOGGER.debug("Header: {}={}", k, v));
+        LOGGER.debug("Body: {}", requestBody);
 
-        return uri
-            .accept(APPLICATION_JSON)
-            .header(ODS_CODE, fromOdsCode)
-            .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-            .header(INTERACTION_ID, MHS_OUTBOUND_EXTRACT_CORE_INTERACTION_ID)
-            .header(WAIT_FOR_RESPONSE, FALSE)
-            .header(CORRELATION_ID, conversationId)
-            .body(bodyInserter);
+        return client
+            .method(requestMethod)
+            .uri(mhsConfiguration.getUrl())
+            .headers(requestHeaders -> headers.forEach(requestHeaders::add))
+            .body(BodyInserters.fromValue(requestBody));
     }
 
     private WebClient buildWebClient(HttpClient httpClient) {
@@ -71,53 +95,5 @@ public class MhsRequestBuilder {
             .baseUrl(mhsConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", mhsConfiguration.getUrl()))
             .build();
-    }
-
-    public RequestHeadersSpec<?> buildSendAcknowledgement(
-            String requestBody, String fromOdsCode, String conversationId, String positiveAckMessageId) {
-
-        SslContext sslContext = requestBuilderService.buildSSLContext();
-        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
-        WebClient client = buildWebClient(httpClient);
-
-        WebClient.RequestBodySpec uri = client
-            .method(HttpMethod.POST)
-            .uri(mhsConfiguration.getUrl());
-
-        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(requestBody);
-
-        return uri
-            .accept(APPLICATION_JSON)
-            .header(ODS_CODE, fromOdsCode)
-            .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-            .header(INTERACTION_ID, MHS_OUTBOUND_ACKNOWLEDGEMENT_INTERACTION_ID)
-            .header(WAIT_FOR_RESPONSE, FALSE)
-            .header(CORRELATION_ID, conversationId)
-            .header(MESSAGE_ID, positiveAckMessageId)
-            .body(bodyInserter);
-    }
-
-    public RequestHeadersSpec<?> buildSendEhrExtractCommonRequest(
-            String requestBody, String conversationId, String fromOdsCode, String messageId) {
-
-        SslContext sslContext = requestBuilderService.buildSSLContext();
-        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
-        WebClient client = buildWebClient(httpClient);
-
-        WebClient.RequestBodySpec uri = client
-            .method(HttpMethod.POST)
-            .uri(mhsConfiguration.getUrl());
-
-        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(requestBody);
-
-        return uri
-            .accept(APPLICATION_JSON)
-            .header(ODS_CODE, fromOdsCode)
-            .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-            .header(INTERACTION_ID, MHS_OUTBOUND_COMMON_INTERACTION_ID)
-            .header(WAIT_FOR_RESPONSE, FALSE)
-            .header(CORRELATION_ID, conversationId)
-            .header(MESSAGE_ID, messageId)
-            .body(bodyInserter);
     }
 }

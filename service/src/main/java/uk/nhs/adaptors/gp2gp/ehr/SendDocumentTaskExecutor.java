@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -20,10 +21,7 @@ import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +29,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDefinition> {
-    private static final int THRESHOLD_MINIMUM = 4;
     private static final String MESSAGE_ATTACHMENT_EXTENSION = ".messageattachment";
 
     private final StorageConnectorService storageConnectorService;
@@ -56,7 +53,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
         var storageDataWrapper = storageConnectorService.downloadFile(taskDefinition.getDocumentName());
         var mainMessageId = taskDefinition.getMessageId();
         var mainDocumentId = taskDefinition.getDocumentId();
-        var requestDataToSend = new HashMap<String, String>();
+        var requestDataToSend = new ArrayList<Pair<String, String>>();
 
         var outboundMessage = objectMapper.readValue(storageDataWrapper.getData(), OutboundMessage.class);
         if (outboundMessage.getAttachments().size() != 1) {
@@ -64,28 +61,23 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
         }
 
         var binary = outboundMessage.getAttachments().get(0).getPayload();
-        LOGGER.info("Attachment size=" + getBytesLengthOfString(binary));
+        LOGGER.debug("Attachment size=" + getBytesLengthOfString(binary));
         if (isLargeAttachment(binary)) {
-            LOGGER.info("Attachment is large");
             var contentType = outboundMessage.getAttachments().get(0).getContentType();
             outboundMessage.getAttachments().clear(); // since it's a large message, chunks will be sent as external attachments
             outboundMessage.setExternalAttachments(new ArrayList<>());
 
             var chunks = chunkBinary(binary, gp2gpConfiguration.getLargeAttachmentThreshold());
-            LOGGER.info("Attachment split into {} chunks", chunks.size());
+            LOGGER.debug("Attachment split into {} chunks", chunks.size());
             for (int i = 0; i < chunks.size(); i++) {
-                LOGGER.info("Handling chunk {}", i);
+                LOGGER.debug("Handling chunk {}", i);
                 var chunk = chunks.get(i);
                 var messageId = randomIdGeneratorService.createNewId();
                 var filename = mainDocumentId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
-                LOGGER.info("Building chunk payload");
                 var chunkPayload = generateChunkPayload(taskDefinition, messageId, filename);
-                LOGGER.info("Building chunk outbound message");
                 var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, contentType);
                 var id = randomIdGeneratorService.createNewId();
-                LOGGER.info("Adding requestDataToSend key={} value={}", id, chunkedOutboundMessage);
-                requestDataToSend.put(id, chunkedOutboundMessage);
-                LOGGER.info("Building external attachment");
+                requestDataToSend.add(Pair.of(id, chunkedOutboundMessage));
                 var externalAttachment = OutboundMessage.ExternalAttachment.builder()
                     .description(OutboundMessage.AttachmentDescription.builder()
                         .length(getBytesLengthOfString(chunk)) //calculate size for chunk
@@ -98,41 +90,33 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                         .toString())
                     .messageId(messageId)
                     .build();
-                LOGGER.info("Adding external attachment");
                 outboundMessage.getExternalAttachments().add(externalAttachment);
             }
             var outboundMessageAsString = objectMapper.writeValueAsString(outboundMessage);
-            LOGGER.info("Finished handling chunks. Adding requestDataToSend key={} value={}", mainMessageId, outboundMessageAsString);
-            requestDataToSend.put(mainMessageId, outboundMessageAsString);
+            requestDataToSend.add(0, Pair.of(mainMessageId, outboundMessageAsString));
         } else {
-            requestDataToSend.put(mainMessageId, storageDataWrapper.getData());
+            requestDataToSend.add(Pair.of(mainMessageId, storageDataWrapper.getData()));
         }
 
-        LOGGER.info("Sending all requestDataToSend");
-        requestDataToSend.entrySet().stream()
-            .map(kv -> {
-                LOGGER.info("Building request");
-                return mhsRequestBuilder
-                    .buildSendEhrExtractCommonRequest(
-                        kv.getValue(),
-                        taskDefinition.getConversationId(),
-                        taskDefinition.getFromOdsCode(),
-                        kv.getKey());
-            })
-            .forEach(request -> {
-                LOGGER.info("Sending request");
-                mhsClient.sendMessageToMHS(request);
-            });
+        requestDataToSend.stream()
+            .map(pair -> mhsRequestBuilder
+                .buildSendEhrExtractCommonRequest(
+                    pair.getFirst(),
+                    taskDefinition.getConversationId(),
+                    taskDefinition.getFromOdsCode(),
+                    pair.getSecond()))
+            .forEach(mhsClient::sendMessageToMHS);
 
         EhrExtractStatus ehrExtractStatus;
 
+        var sentIds = requestDataToSend.stream()
+            .map(Pair::getFirst)
+            .collect(Collectors.toList());
+
         if (taskDefinition.isExternalEhrExtract()) {
-            LOGGER.info("Is external ehr extract");
-            ehrExtractStatus = ehrExtractStatusService
-                .updateEhrExtractStatusCommonForExternalEhrExtract(taskDefinition, new ArrayList<>(requestDataToSend.keySet()));
+            ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCommonForExternalEhrExtract(taskDefinition, sentIds);
         } else {
-            ehrExtractStatus = ehrExtractStatusService
-                .updateEhrExtractStatusCommonForDocuments(taskDefinition, new ArrayList<>(requestDataToSend.keySet()));
+            ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCommonForDocuments(taskDefinition, sentIds);
         }
 
         LOGGER.info("Executing beginSendingPositiveAcknowledgement");
@@ -169,37 +153,44 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     }
 
     public static List<String> chunkBinary(String binary, int sizeThreshold) {
-        if (sizeThreshold <= THRESHOLD_MINIMUM) {
-            throw new IllegalArgumentException("SizeThreshold must be larger 4 to hold at least 1 UTF-16 character");
+        // assuming that the "binary" is Base64 so 1 char == 1 byte
+        var chunksCount = (int) Math.ceil((double) binary.length() / sizeThreshold);
+        var chunks = new ArrayList<String>(chunksCount);
+
+        for (int i = 0; i < chunksCount; i++) {
+            chunks.add(binary.substring(i * sizeThreshold, Math.min((i + 1) * sizeThreshold, binary.length())));
         }
 
-        LOGGER.info("Getting bytes");
-        var bytes = binary.getBytes(StandardCharsets.UTF_8);
-        var chunksCount = (int) Math.ceil((double) bytes.length / sizeThreshold);
-        LOGGER.info("Chunking string with lenght={} bytes_count={} into {} chunks", binary.length(), bytes.length, chunksCount);
-        var chunks = new byte[chunksCount][];
+        return chunks;
+        //V2
+//        LOGGER.info("Getting bytes");
+//        var bytes = binary.getBytes(StandardCharsets.UTF_8);
+//        var chunksCount = (int) Math.ceil((double) bytes.length / sizeThreshold);
+//        LOGGER.info("Chunking string with lenght={} bytes_count={} into {} chunks", binary.length(), bytes.length, chunksCount);
+//        var chunks = new byte[chunksCount][];
+//
+//        var chunk = new byte[sizeThreshold];
+//        var chunkIndex = 0;
+//        var chunkNumber = 0;
+//
+//        for (byte c : bytes) {
+//            if (chunkIndex >= sizeThreshold) {
+//                LOGGER.info("Adding chunk to chunks");
+//                chunks[chunkNumber] = chunk;
+//                chunkNumber++;
+//                chunk = new byte[sizeThreshold];
+//                chunkIndex = 0;
+//            }
+//
+//            chunk[chunkIndex] = c;
+//            chunkIndex++;
+//        }
+//        if (chunkIndex != 0) {
+//            LOGGER.info("Adding last chunk");
+//            chunks[chunkNumber] = Arrays.copyOf(chunk, chunkIndex);
+//        }
 
-        var chunk = new byte[sizeThreshold];
-        var chunkIndex = 0;
-        var chunkNumber = 0;
-
-        for (byte c : bytes) {
-            if (chunkIndex >= sizeThreshold) {
-                LOGGER.info("Adding chunk to chunks");
-                chunks[chunkNumber] = chunk;
-                chunkNumber++;
-                chunk = new byte[sizeThreshold];
-                chunkIndex = 0;
-            }
-
-            chunk[chunkIndex] = c;
-            chunkIndex++;
-        }
-        if (chunkIndex != 0) {
-            LOGGER.info("Adding last chunk");
-            chunks[chunkNumber] = Arrays.copyOf(chunk, chunkIndex);
-        }
-
+        // V1
 //        StringBuilder chunk = new StringBuilder();
 //        for (int i = 0; i < bytes.length; i++) {
 //            var c = bytes[i];
@@ -216,11 +207,11 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
 //            LOGGER.info("Adding last chunk number={}", chunks.size() + 1);
 //            chunks.add(chunk.toString());
 //        }
-
-        LOGGER.info("Converting chunks into strings");
-        var result = Arrays.stream(chunks).map(byteArray -> new String(byteArray, StandardCharsets.UTF_8)).collect(Collectors.toList());
-        LOGGER.info("Returning chunks as strings");
-        return result;
+//
+//        LOGGER.info("Converting chunks into strings");
+//        var result = Arrays.stream(chunks).map(byteArray -> new String(byteArray, StandardCharsets.UTF_8)).collect(Collectors.toList());
+//        LOGGER.info("Returning chunks as strings");
+//        return result;
     }
 
     private boolean isLargeAttachment(String binary) {

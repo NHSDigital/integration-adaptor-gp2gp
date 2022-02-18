@@ -12,7 +12,6 @@ import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Slf4j
 public class WebClientFilterService {
@@ -29,7 +28,7 @@ public class WebClientFilterService {
 
         // filters are executed in reversed order
         filters.add(errorHandling(requestType, expectedSuccessHttpStatus));
-        filters.add(logRequest());
+        filters.add(logResponse());
         filters.add(mdc()); // this will be executed as the first one - always needs to come first
     }
 
@@ -55,18 +54,6 @@ public class WebClientFilterService {
         });
     }
 
-    private static ExchangeFilterFunction logRequest() {
-        return (clientRequest, next) -> {
-            if (LOGGER.isDebugEnabled()) {
-                var headers = clientRequest.headers().entrySet().stream()
-                    .map(e -> e.getKey() + ": " + e.getValue())
-                    .collect(Collectors.joining(System.lineSeparator()));
-                LOGGER.debug("Request {} {} \n{}", clientRequest.method(), clientRequest.url(), headers);
-            }
-            return next.exchange(clientRequest);
-        };
-    }
-
     private static Mono<ClientResponse> getResponseError(ClientResponse clientResponse, RequestType requestType) {
         var exceptionBuilder = REQUEST_TYPE_TO_EXCEPTION_MAP
             .getOrDefault(requestType, InvalidOutboundMessageException::new);
@@ -75,5 +62,42 @@ public class WebClientFilterService {
             .flatMap(operationalOutcome -> Mono.error(
                 exceptionBuilder.apply(
                     "The following error occurred during " + requestType + " request: " + operationalOutcome)));
+    }
+
+    public static ExchangeFilterFunction logResponse() {
+        return ExchangeFilterFunction.ofResponseProcessor(response -> {
+            logStatus(response);
+            logHeaders(response);
+
+            return logResponseBody(response);
+        });
+    }
+
+    private static void logStatus(ClientResponse response) {
+        HttpStatus status = response.statusCode();
+        LOGGER.debug("Response: {} ({})", status.value(), status.getReasonPhrase());
+    }
+
+    private static Mono<ClientResponse> logResponseBody(ClientResponse response) {
+        response.statusCode();
+        if (response.statusCode().is4xxClientError() || response.statusCode().is5xxServerError()) {
+            return response.bodyToMono(String.class)
+                .flatMap(body -> {
+                    LOGGER.debug("Body: {}", body);
+                    return Mono.just(response);
+                });
+        } else {
+            return Mono.just(response);
+        }
+    }
+
+    private static void logHeaders(ClientResponse response) {
+        response.headers().asHttpHeaders().forEach((name, values) -> {
+            values.forEach(value -> logNameAndValuePair(name, value));
+        });
+    }
+
+    private static void logNameAndValuePair(String name, String value) {
+        LOGGER.debug("Header: {}={}", name, value);
     }
 }
