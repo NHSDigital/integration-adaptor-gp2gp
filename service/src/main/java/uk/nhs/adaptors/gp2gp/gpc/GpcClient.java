@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
@@ -48,9 +49,12 @@ public class GpcClient {
     }
 
     private String performRequest(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request) {
-        return request.retrieve()
-            .bodyToMono(String.class)
-            .block();
+        var response = request.retrieve();
+        var responseBody = response.bodyToMono(String.class).block();
+
+        LOGGER.debug("Body: {}", responseBody);
+
+        return responseBody;
     }
 
     private String buildGpcBaseUrl(TaskDefinition taskDefinition) {

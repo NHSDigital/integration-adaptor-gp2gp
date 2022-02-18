@@ -69,26 +69,13 @@ public class WebClientFilterService {
             logStatus(response);
             logHeaders(response);
 
-            return logResponseBody(response);
+            return Mono.just(response);
         });
     }
 
     private static void logStatus(ClientResponse response) {
         HttpStatus status = response.statusCode();
         LOGGER.debug("Response: {} ({})", status.value(), status.getReasonPhrase());
-    }
-
-    private static Mono<ClientResponse> logResponseBody(ClientResponse response) {
-        response.statusCode();
-        if (response.statusCode().is4xxClientError() || response.statusCode().is5xxServerError()) {
-            return response.bodyToMono(String.class)
-                .flatMap(body -> {
-                    LOGGER.debug("Body: {}", body);
-                    return Mono.just(response);
-                });
-        } else {
-            return Mono.just(response);
-        }
     }
 
     private static void logHeaders(ClientResponse response) {
