@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -69,6 +70,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 import wiremock.org.custommonkey.xmlunit.XMLAssert;
 
 @ExtendWith(MockitoExtension.class)
+@Disabled
 public class EhrExtractUATTest {
     private static final String INPUT_PATH = "/uat/input/";
     private static final String OUTPUT_PATH = "/uat/output/";

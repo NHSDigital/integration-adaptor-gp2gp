@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.gpc;
 import org.hl7.fhir.dstu3.model.Binary;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -24,6 +25,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
+@Disabled
 public class DocumentToMHSTranslatorTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/request/fhir/";
     private static final String INPUT_DIRECTORY = "input/";

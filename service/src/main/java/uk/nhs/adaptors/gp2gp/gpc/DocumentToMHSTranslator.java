@@ -37,7 +37,7 @@ public class DocumentToMHSTranslator {
 
     private String createOutboundMessage(DocumentTaskDefinition taskDefinition, String base64Content, String contentType) {
         var ehrDocumentTemplateParameters = ehrDocumentMapper
-            .mapToMhsPayloadTemplateParameters(taskDefinition);
+            .mapToMhsPayloadTemplateParameters(taskDefinition, contentType);
         var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
 
         try {

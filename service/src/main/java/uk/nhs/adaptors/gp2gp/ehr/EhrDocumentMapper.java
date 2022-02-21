@@ -8,6 +8,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -19,12 +20,12 @@ public class EhrDocumentMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
 
     public EhrDocumentTemplateParameters mapToMhsPayloadTemplateParameters(
-            DocumentTaskDefinition taskDefinition) {
+            DocumentTaskDefinition taskDefinition, String contentType) {
 
         return EhrDocumentTemplateParameters.builder()
             .resourceCreated(DateFormatUtil.toHl7Format(timestampService.now()))
             .messageId(taskDefinition.getMessageId())
-            .accessDocumentId(taskDefinition.getDocumentId())
+            .filename(DocumentReferenceUtils.buildPresentAttachmentFileName(taskDefinition.getDocumentId(), contentType))
             .fromAsid(taskDefinition.getFromAsid())
             .toAsid(taskDefinition.getToAsid())
             .toOdsCode(taskDefinition.getToOdsCode())

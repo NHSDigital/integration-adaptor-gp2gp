@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import org.apache.tika.mime.MimeTypeException;
 import org.hl7.fhir.dstu3.model.Attachment;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -10,6 +11,7 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@Disabled
 class DocumentReferenceUtilsTest {
     private static final String TEXT_PLAIN_CONTENT_TYPE = "text/plain";
     private static final String NARRATIVE_STATEMENT_ID = "3b24b89b-fd14-49f9-ba12-3b4212b60080";

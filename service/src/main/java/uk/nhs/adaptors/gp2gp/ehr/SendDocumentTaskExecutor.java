@@ -73,11 +73,10 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                 LOGGER.debug("Handling chunk {}", i);
                 var chunk = chunks.get(i);
                 var messageId = randomIdGeneratorService.createNewId();
-                var filename = mainDocumentId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
+                var filename = mainMessageId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
                 var chunkPayload = generateChunkPayload(taskDefinition, messageId, filename);
                 var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, contentType);
-                var id = randomIdGeneratorService.createNewId();
-                requestDataToSend.add(Pair.of(id, chunkedOutboundMessage));
+                requestDataToSend.add(Pair.of(messageId, chunkedOutboundMessage));
                 var externalAttachment = OutboundMessage.ExternalAttachment.builder()
                     .description(OutboundMessage.AttachmentDescription.builder()
                         .length(getBytesLengthOfString(chunk)) //calculate size for chunk
@@ -141,7 +140,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
         var templateParameters = EhrDocumentTemplateParameters.builder()
             .resourceCreated(DateFormatUtil.toHl7Format(timestampService.now()))
             .messageId(messageId)
-            .accessDocumentId(filename)
+            .filename(filename)
             .fromAsid(taskDefinition.getFromAsid())
             .toAsid(taskDefinition.getToAsid())
             .toOdsCode(taskDefinition.getToOdsCode())
@@ -152,66 +151,16 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
         return ehrDocumentMapper.mapMhsPayloadTemplateToXml(templateParameters);
     }
 
-    public static List<String> chunkBinary(String binary, int sizeThreshold) {
-        // assuming that the "binary" is Base64 so 1 char == 1 byte
-        var chunksCount = (int) Math.ceil((double) binary.length() / sizeThreshold);
+    public static List<String> chunkBinary(String str, int sizeThreshold) {
+        // assuming that the "str" is always in base64 so 1 char == 1 byte
+        var chunksCount = (int) Math.ceil((double) str.length() / sizeThreshold);
         var chunks = new ArrayList<String>(chunksCount);
 
         for (int i = 0; i < chunksCount; i++) {
-            chunks.add(binary.substring(i * sizeThreshold, Math.min((i + 1) * sizeThreshold, binary.length())));
+            chunks.add(str.substring(i * sizeThreshold, Math.min((i + 1) * sizeThreshold, str.length())));
         }
 
         return chunks;
-        //V2
-//        LOGGER.info("Getting bytes");
-//        var bytes = binary.getBytes(StandardCharsets.UTF_8);
-//        var chunksCount = (int) Math.ceil((double) bytes.length / sizeThreshold);
-//        LOGGER.info("Chunking string with lenght={} bytes_count={} into {} chunks", binary.length(), bytes.length, chunksCount);
-//        var chunks = new byte[chunksCount][];
-//
-//        var chunk = new byte[sizeThreshold];
-//        var chunkIndex = 0;
-//        var chunkNumber = 0;
-//
-//        for (byte c : bytes) {
-//            if (chunkIndex >= sizeThreshold) {
-//                LOGGER.info("Adding chunk to chunks");
-//                chunks[chunkNumber] = chunk;
-//                chunkNumber++;
-//                chunk = new byte[sizeThreshold];
-//                chunkIndex = 0;
-//            }
-//
-//            chunk[chunkIndex] = c;
-//            chunkIndex++;
-//        }
-//        if (chunkIndex != 0) {
-//            LOGGER.info("Adding last chunk");
-//            chunks[chunkNumber] = Arrays.copyOf(chunk, chunkIndex);
-//        }
-
-        // V1
-//        StringBuilder chunk = new StringBuilder();
-//        for (int i = 0; i < bytes.length; i++) {
-//            var c = bytes[i];
-//            var chunkBytesSize = chunk.toString().getBytes(StandardCharsets.UTF_8).length;
-//            var charBytesSize = Character.toString(c).getBytes(StandardCharsets.UTF_8).length;
-//            if (chunkBytesSize + charBytesSize > sizeThreshold) {
-//                LOGGER.info("Adding chunk number={} size={}", chunks.size() + 1, chunkBytesSize);
-//                chunks.add(chunk.toString());
-//                chunk = new StringBuilder();
-//            }
-//            chunk.append(c);
-//        }
-//        if (chunk.length() != 0) {
-//            LOGGER.info("Adding last chunk number={}", chunks.size() + 1);
-//            chunks.add(chunk.toString());
-//        }
-//
-//        LOGGER.info("Converting chunks into strings");
-//        var result = Arrays.stream(chunks).map(byteArray -> new String(byteArray, StandardCharsets.UTF_8)).collect(Collectors.toList());
-//        LOGGER.info("Returning chunks as strings");
-//        return result;
     }
 
     private boolean isLargeAttachment(String binary) {
