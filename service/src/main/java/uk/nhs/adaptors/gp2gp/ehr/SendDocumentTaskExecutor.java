@@ -52,7 +52,6 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     public void execute(SendDocumentTaskDefinition taskDefinition) {
         var storageDataWrapper = storageConnectorService.downloadFile(taskDefinition.getDocumentName());
         var mainMessageId = taskDefinition.getMessageId();
-        var mainDocumentId = taskDefinition.getDocumentId();
         var requestDataToSend = new ArrayList<Pair<String, String>>();
 
         var outboundMessage = objectMapper.readValue(storageDataWrapper.getData(), OutboundMessage.class);
