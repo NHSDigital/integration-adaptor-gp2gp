@@ -28,14 +28,4 @@ class SendDocumentTaskExecutorTest {
             Arguments.of("QWER12", SIZE_THRESHOLD_FOUR, List.of("QWER", "12"))
         );
     }
-
-//    @Test
-//    void When_ChunkingLarge_Expect_NoError() throws IOException {
-//        var filePath = "/Users/bartoszs/Downloads/FA983859-6271-4B56-9897-EE013047676E.txt";
-//
-//        String binary = new String(Files.readAllBytes( Paths.get(filePath)));
-//
-//        var chunks = SendDocumentTaskExecutor.chunkBinary(binary, 4_500_000);
-//        var a = 1;
-//    }
 }

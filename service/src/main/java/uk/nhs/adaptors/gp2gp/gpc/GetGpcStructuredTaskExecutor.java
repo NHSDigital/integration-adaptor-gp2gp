@@ -124,7 +124,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
             LOGGER.info("Checking Compressed EHR Extract size");
             if (!isLargeEhrExtract(hl7TranslatedResponse)) {
-                LOGGER.info("Compressed EHR extract is NOT large");
+                LOGGER.info("Compressed EHR extract IS NOT large");
                 var filename = GpcFilenameUtils.generateDocumentFilename(
                     structuredTaskDefinition.getConversationId(), randomIdGeneratorService.createNewId()
                 );
@@ -132,7 +132,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 attachments.add(attachment);
                 hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, filename);
             } else {
-                LOGGER.info("Compressed EHR extract is large!!");
+                LOGGER.info("Compressed EHR extract IS large");
                 var documentId = randomIdGeneratorService.createNewId();
                 var documentName = GpcFilenameUtils.generateDocumentFilename(
                     structuredTaskDefinition.getConversationId(), documentId
