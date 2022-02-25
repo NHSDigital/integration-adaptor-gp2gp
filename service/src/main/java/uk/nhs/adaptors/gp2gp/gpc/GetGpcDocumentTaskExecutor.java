@@ -15,6 +15,8 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 
+import java.nio.charset.StandardCharsets;
+
 @Slf4j
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -36,7 +38,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
         var response = gpcClient.getDocumentRecord(taskDefinition);
         var binary = fhirParseService.parseResource(response, Binary.class);
-        var base64Content = binary.getContentAsBase64();
+        var base64Content = new String(binary.getContent(), StandardCharsets.UTF_8);
 
         var taskId = taskDefinition.getTaskId();
         var messageId = taskDefinition.getMessageId();

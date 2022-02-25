@@ -16,6 +16,7 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
@@ -65,7 +66,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     @SneakyThrows
     @Override
     public void execute(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        String hl7TranslatedResponse;
+        String ehrExtract;
         List<OutboundMessage.Attachment> attachments = new ArrayList<>();
         List<OutboundMessage.ExternalAttachment> externalAttachments;
         List<OutboundMessage.ExternalAttachment> absentAttachments;
@@ -106,7 +107,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 structuredTaskDefinition, absentAttachmentFileNames
             );
 
-            hl7TranslatedResponse = structuredRecordMappingService.getHL7(structuredTaskDefinition, structuredRecord);
+            ehrExtract = structuredRecordMappingService.getHL7(structuredTaskDefinition, structuredRecord);
 
             queueGetDocumentsTask(structuredTaskDefinition, externalAttachments);
             queueSendAbsentAttachmentTask(structuredTaskDefinition, absentAttachments);
@@ -115,46 +116,43 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         }
 
         LOGGER.info("Checking EHR Extract size");
-        if (isLargeEhrExtract(hl7TranslatedResponse)) {
-            var compressedBytes = compress(hl7TranslatedResponse);
-            if (compressedBytes == null) {
-                throw new RuntimeException();
-            }
-            hl7TranslatedResponse = new String(compressedBytes, UTF_8);
+        if (isLargeEhrExtract(ehrExtract)) {
+            LOGGER.info("EHR extract IS large");
+            ehrExtract = Base64Utils.toBase64String(compress(ehrExtract));
 
             LOGGER.info("Checking Compressed EHR Extract size");
-            if (!isLargeEhrExtract(hl7TranslatedResponse)) {
-                LOGGER.info("Compressed EHR extract IS NOT large");
-                var filename = GpcFilenameUtils.generateDocumentFilename(
-                    structuredTaskDefinition.getConversationId(), randomIdGeneratorService.createNewId()
-                );
-                var attachment = buildAttachment(hl7TranslatedResponse, filename);
-                attachments.add(attachment);
-                hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, filename);
-            } else {
+            if (isLargeEhrExtract(ehrExtract)) {
                 LOGGER.info("Compressed EHR extract IS large");
                 var documentId = randomIdGeneratorService.createNewId();
                 var documentName = GpcFilenameUtils.generateDocumentFilename(
                     structuredTaskDefinition.getConversationId(), documentId
                 );
-                var externalAttachment = buildExternalAttachment(hl7TranslatedResponse, structuredTaskDefinition, documentId, documentName);
+                var externalAttachment = buildExternalAttachment(ehrExtract, structuredTaskDefinition, documentId, documentName);
                 externalAttachments.add(externalAttachment);
 
                 var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
-                uploadToStorage(hl7TranslatedResponse, documentName, taskDefinition);
+                uploadToStorage(ehrExtract, documentName, taskDefinition);
                 ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
 
-                hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition,
-                    externalAttachment.getFilename());
+                ehrExtract = structuredRecordMappingService.getHL7ForLargeEhrExtract(
+                    structuredTaskDefinition, externalAttachment.getFilename());
+            } else {
+                LOGGER.info("Compressed EHR extract IS NOT large");
+                var filename = GpcFilenameUtils.generateDocumentFilename(
+                    structuredTaskDefinition.getConversationId(), randomIdGeneratorService.createNewId()
+                );
+                var attachment = buildAttachment(ehrExtract, filename);
+                attachments.add(attachment);
+                ehrExtract = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, filename);
             }
         }
 
-        var allExternalAttachments = Stream.concat(
-                externalAttachments.stream(), absentAttachments.stream()
-            ).collect(Collectors.toList());
+        var allExternalAttachments = Stream
+            .concat(externalAttachments.stream(), absentAttachments.stream())
+            .collect(Collectors.toList());
 
         var outboundMessage = OutboundMessage.builder()
-            .payload(hl7TranslatedResponse)
+            .payload(ehrExtract)
             .attachments(attachments)
             .externalAttachments(mapPrefixesToDocumentIds(allExternalAttachments))
             .build();

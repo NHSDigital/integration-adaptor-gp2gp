@@ -15,6 +15,8 @@ import uk.nhs.adaptors.gp2gp.gpc.DetectTranslationCompleteService;
 import uk.nhs.adaptors.gp2gp.gpc.DocumentToMHSTranslator;
 import uk.nhs.adaptors.gp2gp.gpc.StorageDataWrapperProvider;
 
+import java.nio.charset.StandardCharsets;
+
 @Slf4j
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -36,11 +38,11 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
         var messageId = taskDefinition.getMessageId();
         var documentId = taskDefinition.getDocumentId();
 
-        var fileContent = AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
+        var fileContent = Base64Utils.toBase64String(AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
             taskDefinition.getTitle(),
             taskDefinition.getToOdsCode(),
             taskDefinition.getConversationId()
-        );
+        ));
 
         var fileName = buildAbsentAttachmentFileName(taskDefinition.getConversationId(), documentId);
 
@@ -52,7 +54,7 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, fileName);
 
         var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, fileName, taskId, messageId, Base64Utils.toBase64ByteLength(fileContent)
+            taskDefinition, fileName, taskId, messageId, fileContent.getBytes(StandardCharsets.UTF_8).length
         );
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
