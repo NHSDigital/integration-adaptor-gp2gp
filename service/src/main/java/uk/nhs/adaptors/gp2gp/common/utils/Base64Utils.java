@@ -11,6 +11,6 @@ public class Base64Utils {
     }
 
     public static String toBase64String(byte[] nonBase64FileContent) {
-        return new String(Base64.getEncoder().encode(nonBase64FileContent));
+        return new String(Base64.getEncoder().encode(nonBase64FileContent), UTF_8);
     }
 }
