@@ -46,7 +46,7 @@ class AttachmentDescriptionTest {
             + "                ContentType=some_other_content_type\n"
             + "                Compressed=Yes\n"
             + "                LargeAttachment=Yes\n"
-            + "                OriginalBase64=Yes\n"
+            + "                OriginalBase64=No\n"
             + "                Length=123\n"
             + "                DomainData=some_other_domain_data\n"
             + "            ");
