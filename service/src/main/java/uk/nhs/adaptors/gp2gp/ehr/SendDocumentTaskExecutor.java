@@ -83,7 +83,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                         .contentType(contentType)
                         .compressed(false) //const
                         .largeAttachment(false) // const - chunks are not large attachments themself
-                        .originalBase64(true) //const
+                        .originalBase64(false) //const
                         .build()
                         .toString())
                     .messageId(messageId)

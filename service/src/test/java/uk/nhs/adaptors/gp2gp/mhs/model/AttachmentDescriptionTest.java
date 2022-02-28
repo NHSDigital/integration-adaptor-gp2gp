@@ -35,7 +35,7 @@ class AttachmentDescriptionTest {
             .contentType("some_other_content_type")
             .compressed(true)
             .largeAttachment(true)
-            .originalBase64(true)
+            .originalBase64(false)
             .length(LENGTH)
             .domainData("some_other_domain_data")
             .build()
