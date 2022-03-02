@@ -117,12 +117,14 @@ public class StructuredRecordMappingService {
             bundle);
         String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
-        return outputMessageWrapperMapper.map(
-            structuredTaskDefinition,
-            ehrExtractContent);
+        return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
     }
 
     public String getHL7ForLargeEhrExtract(GetGpcStructuredTaskDefinition structuredTaskDefinition, String bindingDocumentId) {
-        return ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, bindingDocumentId);
+//        var ehrExtractTemplateParameters = ehrExtractMapper
+//            .mapBundleToEhrFhirExtractParams(structuredTaskDefinition);
+        String ehrExtractContent =  ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, bindingDocumentId);
+
+        return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
     }
 }

@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import org.hl7.fhir.dstu3.model.OperationOutcome;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Disabled
 public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final String NO_RECORD_FOUND = "NO_RECORD_FOUND";
     private static final String NO_RECORD_FOUND_STRING = "No Record Found";

@@ -118,31 +118,19 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             LOGGER.info("EHR extract IS large");
             ehrExtract = Base64Utils.toBase64String(compress(ehrExtract));
 
-            LOGGER.info("Checking Compressed EHR Extract size");
-            if (isLargeEhrExtract(ehrExtract)) {
-                LOGGER.info("Compressed EHR extract IS large");
-                var documentId = randomIdGeneratorService.createNewId();
-                var documentName = GpcFilenameUtils.generateDocumentFilename(
-                    structuredTaskDefinition.getConversationId(), documentId
-                );
-                var externalAttachment = buildExternalAttachment(ehrExtract, structuredTaskDefinition, documentId, documentName);
-                externalAttachments.add(externalAttachment);
+            var documentId = randomIdGeneratorService.createNewId();
+            var documentName = GpcFilenameUtils.generateDocumentFilename(
+                structuredTaskDefinition.getConversationId(), documentId
+            );
+            var externalAttachment = buildExternalAttachment(ehrExtract, structuredTaskDefinition, documentId, documentName);
+            externalAttachments.add(externalAttachment);
 
-                var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
-                uploadToStorage(ehrExtract, documentName, taskDefinition);
-                ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
+            var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
+            uploadToStorage(ehrExtract, documentName, taskDefinition);
+            ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
 
-                ehrExtract = structuredRecordMappingService.getHL7ForLargeEhrExtract(
-                    structuredTaskDefinition, externalAttachment.getFilename());
-            } else {
-                LOGGER.info("Compressed EHR extract IS NOT large");
-                var filename = GpcFilenameUtils.generateDocumentFilename(
-                    structuredTaskDefinition.getConversationId(), randomIdGeneratorService.createNewId()
-                );
-                var attachment = buildAttachment(ehrExtract, filename);
-                attachments.add(attachment);
-                ehrExtract = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, filename);
-            }
+            ehrExtract = structuredRecordMappingService.getHL7ForLargeEhrExtract(
+                structuredTaskDefinition, externalAttachment.getFilename());
         }
 
         var allExternalAttachments = Stream
@@ -240,13 +228,13 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private OutboundMessage.Attachment buildAttachment(String content, String filename) {
         return OutboundMessage.Attachment.builder()
             .payload(content)
-            .contentType(XML_CONTENT_TYPE)
+            .contentType(XML_CONTENT_TYPE) //TODO should be text/xml not application/xml
             .isBase64(Boolean.FALSE)
             .description(OutboundMessage.AttachmentDescription.builder()
                 .fileName(filename)
                 .contentType(XML_CONTENT_TYPE)
                 .compressed(true) // always compressed at this stage
-                .largeAttachment(true)
+                .largeAttachment(false)
                 .originalBase64(false)
                 .length(getBytesLengthOfString(content))
                 .domainData(SKELETON_ATTACHMENT)

@@ -50,9 +50,9 @@ public class EhrExtractMapper {
     }
 
     public EhrExtractTemplateParameters mapBundleToEhrFhirExtractParams(
-        GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
-        Bundle bundle) {
-        EhrExtractTemplateParameters ehrExtractTemplateParameters = setSharedExtractParams(getGpcStructuredTaskDefinition);
+            GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
+            Bundle bundle) {
+        var ehrExtractTemplateParameters = setSharedExtractParams(getGpcStructuredTaskDefinition);
 
         var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle);
         var mappedComponents = mapEncounterToEhrComponents(encounters);
@@ -69,6 +69,17 @@ public class EhrExtractMapper {
 
         return ehrExtractTemplateParameters;
     }
+
+//    public EhrExtractTemplateParameters mapBundleToEhrFhirExtractParams(
+//            GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition) {
+//        var ehrExtractTemplateParameters = setSharedExtractParams(getGpcStructuredTaskDefinition);
+//
+//        ehrExtractTemplateParameters.setEffectiveTime(
+//            StatementTimeMappingUtils.prepareEffectiveTimeForEhrFolder(messageContext.getEffectiveTime())
+//        );
+//
+//        return ehrExtractTemplateParameters;
+//    }
 
     public String buildSkeletonEhrExtract(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition, String fragmentIndexDocumentId) {
         var ehrCompositionWithNarrativeStatement
