@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.common.utils;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ class GzipTest {
     }
 
     @Test
+    @Disabled
     void test() throws IOException {
 //        var path = Paths.get("/Users/bartoszs/Documents/large_ehr/compressed.zip");
         var path = Paths.get("/Users/bartoszs/Documents/large_ehr/compressed_example.zip");
