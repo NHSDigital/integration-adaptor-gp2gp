@@ -110,31 +110,32 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
             queueGetDocumentsTask(structuredTaskDefinition, externalAttachments);
             queueSendAbsentAttachmentTask(structuredTaskDefinition, absentAttachments);
+
+            LOGGER.info("Checking EHR Extract size");
+            if (isLargeEhrExtract(ehrExtract)) {
+                LOGGER.info("EHR extract IS large");
+                ehrExtract = Base64Utils.toBase64String(compress(ehrExtract));
+
+                var messageId = randomIdGeneratorService.createNewId();
+                var documentId = randomIdGeneratorService.createNewId();
+                var fileName = GpcFilenameUtils.generateLargeExrExtractFilename(documentId);
+                var compressedAndEncodedEhrExtractSize = ehrExtract.length();
+
+                var externalAttachment = buildExternalAttachmentForLargeEhrExtract(
+                    compressedAndEncodedEhrExtractSize, messageId, documentId, fileName
+                );
+
+                externalAttachments.add(externalAttachment);
+
+                var getDocumentTaskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
+                uploadToStorage(ehrExtract, fileName, getDocumentTaskDefinition);
+                ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
+
+                ehrExtract = structuredRecordMappingService
+                    .getHL7ForLargeEhrExtract(structuredTaskDefinition, structuredRecord, documentId);
+            }
         } finally {
             messageContext.resetMessageContext();
-        }
-
-        LOGGER.info("Checking EHR Extract size");
-        if (isLargeEhrExtract(ehrExtract)) {
-            LOGGER.info("EHR extract IS large");
-            ehrExtract = Base64Utils.toBase64String(compress(ehrExtract));
-
-            var messageId = randomIdGeneratorService.createNewId();
-            var documentId = randomIdGeneratorService.createNewId();
-            var fileName = GpcFilenameUtils.generateLargeExrExtractFilename(documentId);
-            var compressedAndEncodedEhrExtractSize = ehrExtract.length();
-
-            var externalAttachment = buildExternalAttachmentForLargeEhrExtract(
-                compressedAndEncodedEhrExtractSize, messageId, documentId, fileName
-            );
-
-            externalAttachments.add(externalAttachment);
-
-            var getDocumentTaskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
-            uploadToStorage(ehrExtract, fileName, getDocumentTaskDefinition);
-            ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
-
-            ehrExtract = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, structuredRecord, documentId);
         }
 
         var allExternalAttachments = Stream
