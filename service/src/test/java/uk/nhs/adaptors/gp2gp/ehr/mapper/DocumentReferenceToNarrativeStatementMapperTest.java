@@ -13,7 +13,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -188,14 +187,4 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("documentReference.content[0].attachment is missing contentType");
     }
-
-    @Test
-    public void When_BuildingFragmentIndex_Expect_CorrectUUIDReturned() throws IOException {
-        var fragmentIndex = mapper.buildFragmentIndexNarrativeStatement(UUID_FOR_FRAGMENT_INDEX);
-        var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_FOR_FRAGMENT_INDEX_BUILDING);
-
-        assertThat(fragmentIndex).isEqualTo(expectedOutput);
-
-    }
-
 }

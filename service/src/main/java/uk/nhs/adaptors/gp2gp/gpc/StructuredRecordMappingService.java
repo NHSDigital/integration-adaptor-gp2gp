@@ -112,18 +112,17 @@ public class StructuredRecordMappingService {
     }
 
     public String getHL7(GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle bundle) {
-        var ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
-            structuredTaskDefinition,
-            bundle);
+        var ehrExtractTemplateParameters = ehrExtractMapper
+            .mapBundleToEhrFhirExtractParams(structuredTaskDefinition, bundle);
         String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
         return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
     }
 
-    public String getHL7ForLargeEhrExtract(GetGpcStructuredTaskDefinition structuredTaskDefinition, String bindingDocumentId) {
-//        var ehrExtractTemplateParameters = ehrExtractMapper
-//            .mapBundleToEhrFhirExtractParams(structuredTaskDefinition);
-        String ehrExtractContent =  ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, bindingDocumentId);
+    public String getHL7ForLargeEhrExtract(
+        GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle structuredRecord, String documentId
+    ) {
+        String ehrExtractContent =  ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, structuredRecord, documentId);
 
         return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
     }

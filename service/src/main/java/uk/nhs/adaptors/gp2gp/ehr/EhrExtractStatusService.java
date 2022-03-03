@@ -1,16 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static java.lang.String.format;
-
-import static org.springframework.util.CollectionUtils.isEmpty;
-
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import com.mongodb.client.result.UpdateResult;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -18,11 +10,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-import com.mongodb.client.result.UpdateResult;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
@@ -31,6 +18,16 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.lang.String.format;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
 @Slf4j
@@ -288,6 +285,7 @@ public class EhrExtractStatusService {
             EhrExtractStatus.GpcDocument.builder()
                 .documentId(externalAttachment.getDocumentId())
                 .objectName(externalAttachment.getFilename())
+                .fileName(externalAttachment.getFilename())
                 .accessedAt(now)
                 .taskId(taskDefinition.getTaskId())
                 .messageId(taskDefinition.getConversationId()).build());

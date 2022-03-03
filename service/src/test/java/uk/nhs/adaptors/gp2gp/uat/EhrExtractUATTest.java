@@ -1,22 +1,6 @@
 package uk.nhs.adaptors.gp2gp.uat;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.when;
-
-import static uk.nhs.adaptors.gp2gp.XsdValidator.validateFileContentAgainstSchema;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+import lombok.SneakyThrows;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,8 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -68,6 +50,22 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 import wiremock.org.custommonkey.xmlunit.XMLAssert;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.when;
+import static uk.nhs.adaptors.gp2gp.XsdValidator.validateFileContentAgainstSchema;
 
 @ExtendWith(MockitoExtension.class)
 @Disabled
@@ -182,7 +180,7 @@ public class EhrExtractUATTest {
 
         final NonConsultationResourceMapper nonConsultationResourceMapper =
             new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper,
-                documentReferenceToNarrativeStatementMapper, new BloodPressureValidator());
+                new BloodPressureValidator());
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService, timestampService, encounterMapper,
             nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
     }
