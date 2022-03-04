@@ -132,6 +132,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 var getDocumentTaskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
 
                 var templateParameters = ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getDocumentTaskDefinition, XML_CONTENT_TYPE);
+                templateParameters.setMessageId(messageId);
                 var mhsPayload = ehrDocumentMapper.mapMhsPayloadTemplateToXml(templateParameters);
 
                 uploadToStorage(ehrExtract, mhsPayload, fileName, getDocumentTaskDefinition);
