@@ -18,6 +18,7 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
@@ -56,6 +57,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private final TaskDispatcher taskDispatcher;
     private final Gp2gpConfiguration gp2gpConfiguration;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final EhrDocumentMapper ehrDocumentMapper;
 
     @Override
     public Class<GetGpcStructuredTaskDefinition> getTaskType() {
@@ -128,7 +130,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 externalAttachments.add(externalAttachment);
 
                 var getDocumentTaskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
-                uploadToStorage(ehrExtract, fileName, getDocumentTaskDefinition);
+
+                var templateParameters = ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getDocumentTaskDefinition, XML_CONTENT_TYPE);
+                var mhsPayload = ehrDocumentMapper.mapMhsPayloadTemplateToXml(templateParameters);
+
+                uploadToStorage(ehrExtract, mhsPayload, fileName, getDocumentTaskDefinition);
                 ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
 
                 ehrExtract = structuredRecordMappingService
@@ -202,8 +208,10 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .build();
     }
 
-    private GetGpcDocumentTaskDefinition buildGetDocumentTask(TaskDefinition taskDefinition,
+    private GetGpcDocumentTaskDefinition buildGetDocumentTask(
+        TaskDefinition taskDefinition,
         OutboundMessage.ExternalAttachment externalAttachment) {
+
         return GetGpcDocumentTaskDefinition.builder()
             .documentId(externalAttachment.getDocumentId())
             .taskId(taskDefinition.getTaskId())
@@ -230,24 +238,24 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .collect(Collectors.toList());
     }
 
-    private OutboundMessage.Attachment buildAttachment(String content, String filename) {
-        return OutboundMessage.Attachment.builder()
-            .payload(content)
-            .contentType(XML_CONTENT_TYPE) //TODO should be text/xml not application/xml
-            .isBase64(Boolean.FALSE)
-            .description(OutboundMessage.AttachmentDescription.builder()
-                .fileName(filename)
-                .contentType(XML_CONTENT_TYPE)
-                .compressed(true) // always compressed at this stage
-                .largeAttachment(false)
-                .originalBase64(false)
-                .length(getBytesLengthOfString(content))
-                .domainData(SKELETON_ATTACHMENT)
-                .build()
-                .toString()
-            )
-            .build();
-    }
+//    private OutboundMessage.Attachment buildAttachment(String content, String filename) {
+//        return OutboundMessage.Attachment.builder()
+//            .payload(content)
+//            .contentType(XML_CONTENT_TYPE) //TODO should be text/xml not application/xml
+//            .isBase64(Boolean.FALSE)
+//            .description(OutboundMessage.AttachmentDescription.builder()
+//                .fileName(filename)
+//                .contentType(XML_CONTENT_TYPE)
+//                .compressed(true) // always compressed at this stage
+//                .largeAttachment(false)
+//                .originalBase64(false)
+//                .length(getBytesLengthOfString(content))
+//                .domainData(SKELETON_ATTACHMENT)
+//                .build()
+//                .toString()
+//            )
+//            .build();
+//    }
 
     private OutboundMessage.ExternalAttachment buildExternalAttachmentForLargeEhrExtract(
             int compressedAndEncodedEhrExtractSize, String messageId, String documentId, String fileName) {
@@ -271,19 +279,19 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     }
 
     @SneakyThrows
-    private void uploadToStorage(String ehrExtract, String fileName, DocumentTaskDefinition taskDefinition) {
+    private void uploadToStorage(String ehrExtract, String mhsPayload, String fileName, DocumentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
 
         // Building outbound message for upload to storage as that is how DocumentSender downloads and parses from storage
         var attachments = Collections.singletonList(
             OutboundMessage.Attachment.builder()
-                .contentType(XML_CONTENT_TYPE)
-                .isBase64(Boolean.FALSE)
+                .contentType(TEXT_XML_CONTENT_TYPE)
+                .isBase64(Boolean.TRUE)
                 .description(taskDefinition.getDocumentId())
                 .payload(ehrExtract)
                 .build());
         var outboundMessage = OutboundMessage.builder()
-            .payload(StringUtils.EMPTY)
+            .payload(mhsPayload)
             .attachments(attachments)
             .build();
 
