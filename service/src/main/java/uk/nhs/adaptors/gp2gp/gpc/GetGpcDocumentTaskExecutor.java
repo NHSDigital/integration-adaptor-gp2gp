@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfString;
-
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +12,6 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-
-import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Component
@@ -38,7 +34,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
         var response = gpcClient.getDocumentRecord(taskDefinition);
         var binary = fhirParseService.parseResource(response, Binary.class);
-        var base64Content = new String(binary.getContent(), StandardCharsets.UTF_8);
+//        var base64Content = new String(binary.getContent(), StandardCharsets.UTF_8);
 
         var taskId = taskDefinition.getTaskId();
         var messageId = taskDefinition.getMessageId();
@@ -48,7 +44,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
         var mhsOutboundRequestData = documentToMHSTranslator.translateGpcResponseToMhsOutboundRequestData(
             taskDefinition,
-            base64Content,
+            binary.getContentAsBase64(),
             binary.getContentType()
         );
 
@@ -58,7 +54,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
 
         var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, documentName, taskId, messageId, getBytesLengthOfString(base64Content));
+            taskDefinition, documentName, taskId, messageId, binary.getContentAsBase64().length());
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
