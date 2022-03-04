@@ -16,7 +16,6 @@ public class GpcClient {
     private static final String ODS_CODE_PLACEHOLDER = "@ODS_CODE@";
     private static final String STRUCTURED_LOG_TEMPLATE = "Gpc Access Structured Request, toASID: {}, fromASID: {}, Gpc Url: {}";
     private static final String DOCUMENT_LOG_TEMPLATE = "Gpc Access Document Request, toASID: {}, fromASID: {}, Gpc Url: {}";
-    private static final int MAX_LOG_LINE_LENGTH = 100_000;
 
     private final GpcConfiguration gpcConfiguration;
     private final GpcRequestBuilder gpcRequestBuilder;
@@ -53,9 +52,6 @@ public class GpcClient {
         var responseBody = response.bodyToMono(String.class).block();
 
         LOGGER.debug("Body: {}", responseBody);
-        if (responseBody != null) {
-            LOGGER.debug("Short body: {}", responseBody.substring(0, Math.min(responseBody.length(), MAX_LOG_LINE_LENGTH)));
-        }
 
         return responseBody;
     }
