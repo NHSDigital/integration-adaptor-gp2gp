@@ -214,14 +214,15 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         OutboundMessage.ExternalAttachment externalAttachment) {
 
         return GetGpcDocumentTaskDefinition.builder()
-            .documentId(externalAttachment.getDocumentId())
-            .taskId(taskDefinition.getTaskId())
+//            .taskId(taskDefinition.getTaskId()) //TODO should this be like this or a new random id ?
+            .taskId(randomIdGeneratorService.createNewId())
             .conversationId(taskDefinition.getConversationId())
             .requestId(taskDefinition.getRequestId())
             .toAsid(taskDefinition.getToAsid())
             .fromAsid(taskDefinition.getFromAsid())
             .toOdsCode(taskDefinition.getToOdsCode())
             .fromOdsCode(taskDefinition.getFromOdsCode())
+            .documentId(externalAttachment.getDocumentId())
             .accessDocumentUrl(externalAttachment.getUrl())
             .messageId(externalAttachment.getMessageId())
             .build();

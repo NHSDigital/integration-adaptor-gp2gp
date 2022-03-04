@@ -273,8 +273,9 @@ public class EhrExtractStatusService {
         }
     }
 
-    public void updateEhrExtractStatusWithEhrExtractChunks(GetGpcStructuredTaskDefinition taskDefinition,
-        OutboundMessage.ExternalAttachment externalAttachment) {
+    public void updateEhrExtractStatusWithEhrExtractChunks(
+            GetGpcStructuredTaskDefinition taskDefinition,
+            OutboundMessage.ExternalAttachment externalAttachment) {
 
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
 
@@ -288,7 +289,7 @@ public class EhrExtractStatusService {
                 .fileName(externalAttachment.getFilename())
                 .accessedAt(now)
                 .taskId(taskDefinition.getTaskId())
-                .messageId(taskDefinition.getConversationId()).build());
+                .messageId(externalAttachment.getMessageId()).build());
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
