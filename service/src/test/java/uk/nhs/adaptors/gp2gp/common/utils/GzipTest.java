@@ -40,7 +40,7 @@ class GzipTest {
     @Disabled
     void test() throws IOException {
 //        var path = Paths.get("/Users/bartoszs/Documents/large_ehr/compressed.zip");
-        var path = Paths.get("/Users/bartoszs/Documents/large_ehr/compressed_example.zip");
+        var path = Paths.get("/Users/bartoszs/Documents/emis - 9694113083 - DF9AE2B0-9062-46A5-ABEC-EF7857281A9C/ehr.zip");
         var bytes = Files.readAllBytes(path);
         var decoded = Base64.getDecoder().decode(bytes);
         var decompressed = Gzip.decompress(decoded);
