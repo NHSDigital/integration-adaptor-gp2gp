@@ -184,15 +184,17 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .forEach(taskDispatcher::createTask);
     }
 
-    private void queueSendAbsentAttachmentTask(TaskDefinition taskDefinition,
-        List<OutboundMessage.ExternalAttachment> absentAttachments) {
+    private void queueSendAbsentAttachmentTask(
+            TaskDefinition taskDefinition,
+            List<OutboundMessage.ExternalAttachment> absentAttachments) {
         absentAttachments.stream()
             .map(absentAttachment -> buildSendAbsentAttachmentTask(taskDefinition, absentAttachment))
             .forEach(taskDispatcher::createTask);
     }
 
-    private SendAbsentAttachmentTaskDefinition buildSendAbsentAttachmentTask(TaskDefinition taskDefinition,
-        OutboundMessage.ExternalAttachment absentAttachment) {
+    private SendAbsentAttachmentTaskDefinition buildSendAbsentAttachmentTask(
+            TaskDefinition taskDefinition,
+            OutboundMessage.ExternalAttachment absentAttachment) {
         return SendAbsentAttachmentTaskDefinition.builder()
             .documentId(absentAttachment.getDocumentId())
             .title(absentAttachment.getTitle())

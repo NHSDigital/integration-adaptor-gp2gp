@@ -20,12 +20,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.StringUtils;
-import org.xmlunit.assertj.XmlAssert;
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ExtendWith(SoftAssertionsExtension.class)
 public class EhrExtractTest {
@@ -72,7 +69,7 @@ public class EhrExtractTest {
     private static final String ACK_TO_REQUESTER = "ackToRequester";
     private static final String ACK_TO_PENDING = "ackPending";
 
-    private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/EhrExtract/component/ehrFolder/component/ehrComposition/component/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='file://localhost/%s']";
+//    private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/RCMR_IN030000UK06/ControlActEvent/subject/EhrExtract/component/ehrFolder/component/ehrComposition/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='cid:%s']";
 
     private final MhsMockRequestsJournal mhsMockRequestsJournal =
         new MhsMockRequestsJournal(getEnvVar("GP2GP_MHS_MOCK_BASE_URL", "http://localhost:8081"));
@@ -166,67 +163,61 @@ public class EhrExtractTest {
         assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR);
     }
 
-//    @Test
-//    public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = IOUtils.toString(getClass()
-//            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), StandardCharsets.UTF_8)
-//            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-//        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
-//
-//        var documentList = waitFor(() -> {
-//            var extractStatus = ((Document) Mongo.findEhrExtractStatus(conversationId)
-//                .get(GPC_ACCESS_DOCUMENT));
-//            if (extractStatus == null) {
-//                return null;
-//            }
-//            return extractStatus.get("documents", Collections.emptyList());
-//        });
-//
-//        assertThat(documentList.size()).isEqualTo(0);
-//
-//        var ackToPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
-//        assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
-//        assertThatNoErrorInfoIsStored(conversationId);
-//
-//        var mhsMockRequests = mhsMockRequestsJournal.getRequestsJournal(conversationId);
-//        assertThat(mhsMockRequests).hasSize(2);
-//        var ehrExtractMhsRequest = mhsMockRequests.get(0);
-//
-//        assertThat(ehrExtractMhsRequest.getAttachments()).hasSize(1);
-//        assertThat(ehrExtractMhsRequest.getExternalAttachments()).hasSize(0);
-//
-//        var payload = ehrExtractMhsRequest.getPayload();
-//        var attachment = ehrExtractMhsRequest.getAttachments().get(0);
-//
-//        assertThat(attachment.getPayload()).isNotBlank();
-//        assertThat(attachment.getContentType()).isEqualTo("application/xml");
-//        assertThat(attachment.getIsBase64()).isEqualTo("false");
-//
-//        var description = attachment.getDescription();
-//        var descriptionElements = Arrays.stream(description.split("\n"))
-//            .filter(StringUtils::isNotBlank)
-//            .map(value -> value.split("="))
-//            .collect(Collectors.toMap(x -> x[0].trim(), x -> x[1]));
-//
-//        assertThat(descriptionElements).containsEntry("ContentType", "application/xml");
-//        assertThat(descriptionElements).containsEntry("Compressed", "Yes");
-//        assertThat(descriptionElements).containsEntry("LargeAttachment", "Yes");
-//        assertThat(descriptionElements).containsEntry("OriginalBase64", "No");
-//        assertThat(descriptionElements).hasEntrySatisfying("Length", lengthAsString -> {
-//            var lengthAsInt = Integer.parseInt(lengthAsString);
-//            assertThat(lengthAsInt).isGreaterThan(0);
-//        });
-//        assertThat(descriptionElements).containsEntry("DomainData", "X-GP2GP-Skeleton: Yes");
-//        assertThat(descriptionElements).containsKey("Filename");
-//        var fileName = descriptionElements.get("Filename");
-//
-//        var documentReferenceXPath = String.format(DOCUMENT_REFERENCE_XPATH_TEMPLATE, fileName);
-//        XmlAssert.assertThat(payload).hasXPath(documentReferenceXPath);
-//    }
+    @Test
+    public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = IOUtils.toString(getClass()
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), StandardCharsets.UTF_8)
+            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
+
+        var documentList = waitFor(() -> {
+            var extractStatus = ((Document) Mongo.findEhrExtractStatus(conversationId)
+                .get(GPC_ACCESS_DOCUMENT));
+            if (extractStatus == null) {
+                return null;
+            }
+            return extractStatus.get("documents", Collections.emptyList());
+        });
+
+        assertThat(documentList.size()).isEqualTo(0);
+
+        var ackToPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+        assertThatNoErrorInfoIsStored(conversationId);
+
+        var mhsMockRequests = mhsMockRequestsJournal.getRequestsJournal(conversationId);
+        var ehrExtractMhsRequest = mhsMockRequests.get(0);
+
+        assertThat(ehrExtractMhsRequest.getAttachments()).hasSize(0);
+        assertThat(ehrExtractMhsRequest.getExternalAttachments()).hasSize(1);
+
+        var externalAttachment = ehrExtractMhsRequest.getExternalAttachments().get(0);
+
+        assertThat(externalAttachment.getDocumentId()).isNotBlank();
+        assertThat(externalAttachment.getMessageId()).isNotBlank();
+        assertThat(externalAttachment.getDescription()).isNotBlank();
+
+        var documentId = externalAttachment.getDocumentId().substring(1);
+        var filename = documentId + ".gzip";
+
+        assertThat(externalAttachment.getDescription()).contains(
+            String.format("Filename=\"%s\"", filename),
+            "ContentType=text/xml",
+            "Compressed=Yes",
+            "LargeAttachment=No",
+            "OriginalBase64=Yes",
+            "Length=",
+            "DomainData=X-GP2GP-Skeleton: Yes");
+
+        //TODO this doesnt work for some reason but the xpath looks to be ok in an external xpath parser
+//        var documentReferenceXPath = String.format(DOCUMENT_REFERENCE_XPATH_TEMPLATE, documentId);
+//        XmlAssert.assertThat(ehrExtractMhsRequest.getPayload()).hasXPath(documentReferenceXPath);
+        assertThat(ehrExtractMhsRequest.getPayload()).contains("cid:" + documentId);
+    }
 
     @Test
     public void When_ExtractRequestReceivedForNotExistingPatient_Expect_ErrorUpdatedInDatabase() throws Exception {
