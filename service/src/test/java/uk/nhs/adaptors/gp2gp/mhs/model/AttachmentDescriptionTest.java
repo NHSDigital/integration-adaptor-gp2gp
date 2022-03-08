@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.mhs.model;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,7 +28,6 @@ class AttachmentDescriptionTest {
     }
 
     @Test
-    @Disabled
     void When_BuildingAttachmentDescriptionUsingAllParameters_Expect_ProperDescriptionIsCreated() {
         var result = OutboundMessage.AttachmentDescription.builder()
             .fileName("some_other_file_name")
