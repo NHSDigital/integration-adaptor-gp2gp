@@ -13,7 +13,7 @@
 
     <logger name="uk.nhs.adaptors.gp2gp" level="${GP2GP_LOGGING_LEVEL:-INFO}" />
 
-	<logger name="uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService" level="DEBUG" />
+    <logger name="uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService" level="DEBUG" />
     <logger name="uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder" level="DEBUG" />
     <logger name="uk.nhs.adaptors.gp2gp.mhs.InboundMessageHandler" level="DEBUG" />
     <logger name="uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskExecutor" level="DEBUG" />

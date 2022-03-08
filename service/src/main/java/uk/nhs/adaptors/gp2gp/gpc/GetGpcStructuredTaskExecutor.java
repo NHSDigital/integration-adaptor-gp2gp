@@ -212,7 +212,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         OutboundMessage.ExternalAttachment externalAttachment) {
 
         return GetGpcDocumentTaskDefinition.builder()
-//            .taskId(taskDefinition.getTaskId()) //TODO should this be like this or a new random id ?
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(taskDefinition.getConversationId())
             .requestId(taskDefinition.getRequestId())
@@ -237,25 +236,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             ))
             .collect(Collectors.toList());
     }
-
-//    private OutboundMessage.Attachment buildAttachment(String content, String filename) {
-//        return OutboundMessage.Attachment.builder()
-//            .payload(content)
-//            .contentType(XML_CONTENT_TYPE) //TODO should be text/xml not application/xml
-//            .isBase64(Boolean.FALSE)
-//            .description(OutboundMessage.AttachmentDescription.builder()
-//                .fileName(filename)
-//                .contentType(XML_CONTENT_TYPE)
-//                .compressed(true) // always compressed at this stage
-//                .largeAttachment(false)
-//                .originalBase64(false)
-//                .length(getBytesLengthOfString(content))
-//                .domainData(SKELETON_ATTACHMENT)
-//                .build()
-//                .toString()
-//            )
-//            .build();
-//    }
 
     private OutboundMessage.ExternalAttachment buildExternalAttachmentForLargeEhrExtract(
             int compressedAndEncodedEhrExtractSize, String messageId, String documentId, String fileName) {

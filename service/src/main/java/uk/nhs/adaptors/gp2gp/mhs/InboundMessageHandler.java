@@ -47,8 +47,9 @@ public class InboundMessageHandler {
         ParsedInboundMessage parsedMessage = null;
         var messageID = message.getJMSMessageID();
         try {
-            var messagePayload = JmsReader.readMessage(message);
-            LOGGER.debug("Inbound message: {}", messagePayload);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Inbound message: {}", JmsReader.readMessage(message));
+            }
             parsedMessage = parseMessage(message);
             if (!processFailureHandlingService.hasProcessFailed(parsedMessage.getConversationId())) {
                 handleInboundMessage(parsedMessage);
