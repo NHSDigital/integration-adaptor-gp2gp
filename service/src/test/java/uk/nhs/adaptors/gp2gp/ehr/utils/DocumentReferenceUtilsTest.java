@@ -2,7 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import org.apache.tika.mime.MimeTypeException;
 import org.hl7.fhir.dstu3.model.Attachment;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
