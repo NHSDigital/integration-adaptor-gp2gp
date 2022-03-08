@@ -36,7 +36,6 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
     public void execute(SendAbsentAttachmentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
         var messageId = taskDefinition.getMessageId();
-        var documentId = taskDefinition.getDocumentId();
 
         var fileContent = Base64Utils.toBase64String(AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
             taskDefinition.getTitle(),
@@ -44,7 +43,7 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
             taskDefinition.getConversationId()
         ));
 
-        var fileName = buildAbsentAttachmentFileName(taskDefinition.getConversationId(), documentId);
+        var fileName = buildAbsentAttachmentFileName(taskDefinition.getDocumentId());
 
         var mhsOutboundRequestData = documentToMHSTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, fileContent);
 
@@ -58,5 +57,4 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
         );
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
-
 }

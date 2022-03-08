@@ -99,9 +99,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             var absentAttachmentFileNames = absentAttachments.stream()
                 .collect(Collectors.toMap(
                     OutboundMessage.ExternalAttachment::getDocumentId,
-                    absentAttachment -> buildAbsentAttachmentFileName(
-                        structuredTaskDefinition.getConversationId(), absentAttachment.getDocumentId()
-                    ))
+                    absentAttachment -> buildAbsentAttachmentFileName(absentAttachment.getDocumentId()))
                 );
 
             ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferencesAbsent(
