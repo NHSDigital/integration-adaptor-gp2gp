@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import org.hl7.fhir.dstu3.model.OperationOutcome;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,6 @@ import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@Disabled
 public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final String NO_RECORD_FOUND = "NO_RECORD_FOUND";
     private static final String NO_RECORD_FOUND_STRING = "No Record Found";
@@ -75,7 +73,9 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         var taskDefinition = buildValidAccessTask(ehrExtractStatus, DOCUMENT_ID);
         getGpcDocumentTaskExecutor.execute(taskDefinition);
 
-        var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
+        var updatedEhrExtractStatus = ehrExtractStatusRepository
+            .findByConversationId(taskDefinition.getConversationId())
+            .orElseThrow();
         assertThatAccessRecordWasUpdated(updatedEhrExtractStatus, ehrExtractStatus, taskDefinition);
 
         try (var inputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME)) {
@@ -106,7 +106,9 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         var taskDefinition = buildValidAccessTask(ehrExtractStatus, DOCUMENT_ID);
         getGpcDocumentTaskExecutor.execute(taskDefinition);
 
-        var updatedEhrExtractStatus1 = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
+        var updatedEhrExtractStatus1 = ehrExtractStatusRepository
+            .findByConversationId(taskDefinition.getConversationId())
+            .orElseThrow();
 
         try (var inputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME)) {
             var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
@@ -114,7 +116,9 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
             var newTaskDefinition = buildValidAccessTask(ehrExtractStatus, DOCUMENT_ID);
             getGpcDocumentTaskExecutor.execute(newTaskDefinition);
 
-            var updatedEhrExtractStatus2 = ehrExtractStatusRepository.findByConversationId(newTaskDefinition.getConversationId()).get();
+            var updatedEhrExtractStatus2 = ehrExtractStatusRepository
+                .findByConversationId(newTaskDefinition.getConversationId())
+                .orElseThrow();
             assertThatAccessRecordWasUpdated(updatedEhrExtractStatus2, updatedEhrExtractStatus1, newTaskDefinition);
 
             var updatedFileInputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME);
@@ -133,8 +137,9 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
 
     @Test
     public void When_AccessDocumentNotFoundError_Expect_EhrStatusNotUpdatedAndNotSavedToStorage() {
+        var conversationId = UUID.randomUUID().toString();
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
-        ehrExtractStatus.setConversationId("UUID-VALUE");
+        ehrExtractStatus.setConversationId(conversationId);
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         GetGpcDocumentTaskDefinition documentTaskDefinition = buildValidAccessTask(ehrExtractStatus, "non-existing-id");
@@ -142,14 +147,16 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         Exception exception = assertThrows(GpConnectException.class, () -> getGpcDocumentTaskExecutor.execute(documentTaskDefinition));
         assertOperationOutcome(exception);
 
-        var ehrExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-        var gpcDocuments = ehrExtract.getGpcAccessDocument().getDocuments();
+        var gpcDocuments = ehrExtractStatusRepository
+            .findByConversationId(ehrExtractStatus.getConversationId())
+            .map(x -> x.getGpcAccessDocument().getDocuments())
+            .orElseThrow();
         assertThat(gpcDocuments).hasSize(1);
         assertThat(gpcDocuments.get(0).getTaskId()).isNull();
         assertThat(gpcDocuments.get(0).getAccessedAt()).isNull();
         assertThat(gpcDocuments.get(0).getObjectName()).isNull();
 
-        String documentJsonFilename = "UUID-VALUE/non-existing-id.json";
+        String documentJsonFilename = conversationId + "/non-existing-id.json";
         assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(documentJsonFilename));
 
         verify(detectTranslationCompleteService, never()).beginSendingCompleteExtract(any());
