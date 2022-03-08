@@ -53,7 +53,6 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext
-@Disabled
 public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final String PATIENT_NOT_FOUND = "PATIENT_NOT_FOUND";
     private static final String INVALID_NHS_NUMBER = "INVALID_NHS_NUMBER";
@@ -94,7 +93,9 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         GetGpcStructuredTaskDefinition structuredTaskDefinition = buildValidStructuredTask(ehrExtractStatus);
         getGpcStructuredTaskExecutor.execute(structuredTaskDefinition);
 
-        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        var ehrExtractUpdated = ehrExtractStatusRepository
+            .findByConversationId(ehrExtractStatus.getConversationId())
+            .orElseThrow();
         assertThatInitialRecordWasUpdated(ehrExtractUpdated, ehrExtractStatus);
 
         var storageDataWrapper = getStorageDataWrapper(ehrExtractUpdated);
@@ -119,7 +120,9 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         GetGpcStructuredTaskDefinition structuredTaskDefinition2 = buildValidStructuredTask(ehrExtractStatus);
         getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2);
 
-        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        var ehrExtractUpdated = ehrExtractStatusRepository
+            .findByConversationId(ehrExtractStatus.getConversationId())
+            .orElseThrow();
 
         var storageDataWrapper = getStorageDataWrapper(ehrExtractUpdated);
         assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition2);
@@ -144,7 +147,9 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
 
         assertOperationOutcome(exception);
 
-        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        var ehrExtractUpdated = ehrExtractStatusRepository
+            .findByConversationId(ehrExtractStatus.getConversationId())
+            .orElseThrow();
         assertThat(ehrExtractUpdated.getGpcAccessStructured()).isNull();
 
         assertThrows(StorageConnectorException.class,
