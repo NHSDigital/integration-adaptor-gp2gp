@@ -11,7 +11,6 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@Disabled
 class DocumentReferenceUtilsTest {
     private static final String TEXT_PLAIN_CONTENT_TYPE = "text/plain";
     private static final String NARRATIVE_STATEMENT_ID = "3b24b89b-fd14-49f9-ba12-3b4212b60080";
@@ -98,7 +97,7 @@ class DocumentReferenceUtilsTest {
     @Test
     void When_BuildingFileNameForPresentAttachment_Expect_MissingAttachmentFileNameWithTxtExtensionGenerated() {
         assertThat(DocumentReferenceUtils.buildPresentAttachmentFileName(NARRATIVE_STATEMENT_ID, APPLICATION_XML))
-            .isEqualTo("3b24b89b-fd14-49f9-ba12-3b4212b60080_3b24b89b-fd14-49f9-ba12-3b4212b60080.xml");
+            .isEqualTo("3b24b89b-fd14-49f9-ba12-3b4212b60080.xml");
     }
 
     @Test
@@ -107,6 +106,6 @@ class DocumentReferenceUtilsTest {
             .setContentType(TEXT_PLAIN_CONTENT_TYPE);
 
         assertThat(DocumentReferenceUtils.buildAttachmentFileName(NARRATIVE_STATEMENT_ID, attachment))
-            .isEqualTo("3b24b89b-fd14-49f9-ba12-3b4212b60080_3b24b89b-fd14-49f9-ba12-3b4212b60080.txt");
+            .isEqualTo("3b24b89b-fd14-49f9-ba12-3b4212b60080.txt");
     }
 }
