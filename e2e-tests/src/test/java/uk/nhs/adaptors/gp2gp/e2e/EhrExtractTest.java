@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.StringUtils;
+import org.xmlunit.assertj.XmlAssert;
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
@@ -44,7 +46,7 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_LARGE_ATTACHMENT_DOCX = "9388098434";
 
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
-    private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE = "/ehrExtractRequestWithNoDocuments.json";
+    private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS = "/ehrExtractRequestWithNoDocuments.json";
     private static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
     private static final String FROM_PARTY_ID = "N82668-820670";
     private static final String TO_PARTY_ID = "B86041-822103";
@@ -69,7 +71,8 @@ public class EhrExtractTest {
     private static final String ACK_TO_REQUESTER = "ackToRequester";
     private static final String ACK_TO_PENDING = "ackPending";
 
-//    private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/RCMR_IN030000UK06/ControlActEvent/subject/EhrExtract/component/ehrFolder/component/ehrComposition/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='cid:%s']";
+    private static final CharSequence XML_NAMESPACE = "/urn:hl7-org:v3:";
+    private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/RCMR_IN030000UK06/ControlActEvent/subject/EhrExtract/component/ehrFolder/component/ehrComposition/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='cid:%s']";
 
     private final MhsMockRequestsJournal mhsMockRequestsJournal =
         new MhsMockRequestsJournal(getEnvVar("GP2GP_MHS_MOCK_BASE_URL", "http://localhost:8081"));
@@ -166,8 +169,8 @@ public class EhrExtractTest {
     @Test
     public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), StandardCharsets.UTF_8)
+        String ehrExtractRequest = IOUtils.toString(
+            Objects.requireNonNull(getClass().getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS)), StandardCharsets.UTF_8)
             .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
@@ -213,10 +216,10 @@ public class EhrExtractTest {
             "Length=",
             "DomainData=X-GP2GP-Skeleton: Yes");
 
-        //TODO this doesnt work for some reason but the xpath looks to be ok in an external xpath parser
-//        var documentReferenceXPath = String.format(DOCUMENT_REFERENCE_XPATH_TEMPLATE, documentId);
-//        XmlAssert.assertThat(ehrExtractMhsRequest.getPayload()).hasXPath(documentReferenceXPath);
-        assertThat(ehrExtractMhsRequest.getPayload()).contains("cid:" + documentId);
+        var documentReferenceXPath = String
+            .format(DOCUMENT_REFERENCE_XPATH_TEMPLATE, documentId)
+            .replace("/", XML_NAMESPACE);
+        XmlAssert.assertThat(ehrExtractMhsRequest.getPayload()).hasXPath(documentReferenceXPath);
     }
 
     @Test
@@ -341,8 +344,8 @@ public class EhrExtractTest {
     }
 
     private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber, String fromODSCode) throws IOException {
-        return IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), StandardCharsets.UTF_8)
+        return IOUtils.toString(
+            Objects.requireNonNull(getClass().getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE)), StandardCharsets.UTF_8)
             .replace(CONVERSATION_ID_PLACEHOLDER, conversationId)
             .replace(NHS_NUMBER_PLACEHOLDER, notExistingPatientNhsNumber)
             .replace(FROM_ODS_CODE_PLACEHOLDER, fromODSCode);
