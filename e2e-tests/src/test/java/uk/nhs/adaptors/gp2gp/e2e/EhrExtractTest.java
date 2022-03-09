@@ -72,7 +72,7 @@ public class EhrExtractTest {
     private static final String ACK_TO_PENDING = "ackPending";
 
     private static final CharSequence XML_NAMESPACE = "/urn:hl7-org:v3:";
-    private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/RCMR_IN030000UK06/ControlActEvent/subject/EhrExtract/component/ehrFolder/component/ehrComposition/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='cid:%s']";
+    private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/RCMR_IN030000UK06/ControlActEvent/subject/EhrExtract/component/ehrFolder/component/ehrComposition/component/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='cid:%s']";
 
     private final MhsMockRequestsJournal mhsMockRequestsJournal =
         new MhsMockRequestsJournal(getEnvVar("GP2GP_MHS_MOCK_BASE_URL", "http://localhost:8081"));

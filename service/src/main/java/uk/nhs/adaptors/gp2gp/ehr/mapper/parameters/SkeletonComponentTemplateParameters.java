@@ -10,4 +10,5 @@ import lombok.Setter;
 public class SkeletonComponentTemplateParameters {
     private String narrativeStatementId;
     private String availabilityTime;
+    private String effectiveTime;
 }

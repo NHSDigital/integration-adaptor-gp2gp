@@ -1,21 +1,32 @@
 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <NarrativeStatement classCode="OBS" moodCode="EVN">
-            <id root="{{narrativeStatementId}}" />
-            <text>Skeleton statement</text>
-            <statusCode code="COMPLETE"/>
-            <availabilityTime value="{{availabilityTime}}" />
-            <reference typeCode="REFR">
-                <referredToExternalDocument classCode="DOC" moodCode="EVN">
-                    <id root="{{narrativeStatementId}}"/>
-                    <code code="24891000000101" displayName="EDI messages" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
-                        <originalText>Original RCMR_IN03 EhrExtract message</originalText>
-                    </code>
-                    <text mediaType="text/xml">
-                        <reference value="cid:{{narrativeStatementId}}"/>
-                    </text>
-                </referredToExternalDocument>
-            </reference>
-        </NarrativeStatement>
+        <id root="{{narrativeStatementId}}" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="{{availabilityTime}}" />
+        {{{effectiveTime}}}
+        <author typeCode="AUT" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id nullFlavor="UNK" />
+            </agentRef>
+        </author>
+        <component>
+            <NarrativeStatement classCode="OBS" moodCode="EVN">
+                <id root="{{narrativeStatementId}}" />
+                <text>Skeleton statement</text>
+                <statusCode code="COMPLETE"/>
+                <availabilityTime value="{{availabilityTime}}" />
+                <reference typeCode="REFR">
+                    <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                        <id root="{{narrativeStatementId}}"/>
+                        <code code="24891000000101" displayName="EDI messages" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+                            <originalText>Original RCMR_IN03 EhrExtract message</originalText>
+                        </code>
+                        <text mediaType="text/xml">
+                            <reference value="cid:{{narrativeStatementId}}"/>
+                        </text>
+                    </referredToExternalDocument>
+                </reference>
+            </NarrativeStatement>
+        </component>
     </ehrComposition>
 </component>
