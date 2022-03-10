@@ -33,7 +33,7 @@ public class GpcClient {
             var responseBody = performRequest(request);
             LOGGER.debug("Get StructuredRecord full response body: {}", responseBody);
             LOGGER.debug("Get StructuredRecord trimmed response body: {}",
-                responseBody.substring(0, Math.max(LOGGER_MAX_LINE_LENGTH, responseBody.length())));
+                responseBody.substring(0, Math.min(LOGGER_MAX_LINE_LENGTH, responseBody.length())));
             return responseBody;
         }
         return performRequest(request);
@@ -49,7 +49,7 @@ public class GpcClient {
             var responseBody = performRequest(request);
             LOGGER.debug("Get Document full response body: {}", responseBody);
             LOGGER.debug("Get Document trimmed response body: {}",
-                responseBody.substring(0, Math.max(LOGGER_MAX_LINE_LENGTH, responseBody.length())));
+                responseBody.substring(0, Math.min(LOGGER_MAX_LINE_LENGTH, responseBody.length())));
             return responseBody;
         }
         return performRequest(request);
