@@ -45,44 +45,44 @@ pipeline {
     stages {
         stage('Build') {
             stages {
-                // stage('Tests') {
-                //     steps {
-                //         script {
-                //             sh '''
-                //                 source docker/vars.local.tests.sh
-                //                 docker network create commonforgp2gp || true
-                //                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml stop
-                //                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml rm -f
-                //                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
-                //                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
-                //             '''
-                //         }
-                //     }
-                //     post {
-                //         always {
-                //             sh "docker cp tests:/home/gradle/service/build ."
-                //             archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
-                //             junit '**/build/test-results/**/*.xml'
-                //             recordIssues(
-                //                 enabledForFailure: true,
-                //                 tools: [
-                //                     checkStyle(pattern: 'build/reports/checkstyle/*.xml'),
-                //                     spotBugs(pattern: 'build/reports/spotbugs/*.xml')
-                //                 ]
-                //             )
-                //             step([
-                //                 $class : 'JacocoPublisher',
-                //                 execPattern : '**/build/jacoco/*.exec',
-                //                 classPattern : '**/build/classes/java',
-                //                 sourcePattern : 'src/main/java',
-                //                 exclusionPattern : '**/*Test.class'
-                //             ])
-                //             sh "rm -rf build"
-                //             sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
-                //             sh "docker network rm commonforgp2gp"
-                //         }
-                //     }
-                // }
+                stage('Tests') {
+                    steps {
+                        script {
+                            sh '''
+                                source docker/vars.local.tests.sh
+                                docker network create commonforgp2gp || true
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml stop
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml rm -f
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
+                            '''
+                        }
+                    }
+                    post {
+                        always {
+                            sh "docker cp tests:/home/gradle/service/build ."
+                            archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
+                            junit '**/build/test-results/**/*.xml'
+                            recordIssues(
+                                enabledForFailure: true,
+                                tools: [
+                                    checkStyle(pattern: 'build/reports/checkstyle/*.xml'),
+                                    spotBugs(pattern: 'build/reports/spotbugs/*.xml')
+                                ]
+                            )
+                            step([
+                                $class : 'JacocoPublisher',
+                                execPattern : '**/build/jacoco/*.exec',
+                                classPattern : '**/build/classes/java',
+                                sourcePattern : 'src/main/java',
+                                exclusionPattern : '**/*Test.class'
+                            ])
+                            sh "rm -rf build"
+                            sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
+                            sh "docker network rm commonforgp2gp"
+                        }
+                    }
+                }
 
                 stage('Build Docker Images') {
                     steps {
@@ -139,62 +139,62 @@ pipeline {
                         }
                     }
                 }
-                // stage('Deploy & Test') {
-                //     options {
-                //         lock("${tfProject}-${tfEnvironment}-${tfComponent}")
-                //     }
-                //     stages {
+                stage('Deploy & Test') {
+                    options {
+                        lock("${tfProject}-${tfEnvironment}-${tfComponent}")
+                    }
+                    stages {
 
-                //         stage('Deploy using Terraform') {
-                //             steps {
-                //                 script {
+                        stage('Deploy using Terraform') {
+                            steps {
+                                script {
                                     
-                //                     // Check if TF deployment environment needs to be redirected
-                //                     if (GIT_BRANCH == redirectBranch) { tfEnvironment = redirectEnv }
+                                    // Check if TF deployment environment needs to be redirected
+                                    if (GIT_BRANCH == redirectBranch) { tfEnvironment = redirectEnv }
                                     
-                //                     String tfCodeBranch  = "develop"
-                //                     String tfCodeRepo    = "https://github.com/nhsconnect/integration-adaptors"
-                //                     String tfRegion      = "${TF_STATE_BUCKET_REGION}"
-                //                     List<String> tfParams = []
-                //                     Map<String,String> tfVariables = ["${tfComponent}_build_id": BUILD_TAG]
-                //                       if (gpccDeploy) {
-                //                           tfVariables.put("${tfGpccImagePrefix}_build_id", getLatestImageTag(gpccBranch, gpccEcrRepo, tfRegion))
-                //                       }
-                //                     dir ("integration-adaptors") {
-                //                       git (branch: tfCodeBranch, url: tfCodeRepo)
-                //                       dir ("terraform/aws") {
-                //                         if (terraformInit(TF_STATE_BUCKET, tfProject, tfEnvironment, tfComponent, tfRegion) !=0) { error("Terraform init failed")}
-                //                         if (terraform('apply', TF_STATE_BUCKET, tfProject, tfEnvironment, tfComponent, tfRegion, tfVariables) !=0 ) { error("Terraform Apply failed")}
-                //                       }
-                //                     }
-                //                 }  //script
-                //             } // steps
-                //         } // Stage Deploy using Terraform
+                                    String tfCodeBranch  = "develop"
+                                    String tfCodeRepo    = "https://github.com/nhsconnect/integration-adaptors"
+                                    String tfRegion      = "${TF_STATE_BUCKET_REGION}"
+                                    List<String> tfParams = []
+                                    Map<String,String> tfVariables = ["${tfComponent}_build_id": BUILD_TAG]
+                                      if (gpccDeploy) {
+                                          tfVariables.put("${tfGpccImagePrefix}_build_id", getLatestImageTag(gpccBranch, gpccEcrRepo, tfRegion))
+                                      }
+                                    dir ("integration-adaptors") {
+                                      git (branch: tfCodeBranch, url: tfCodeRepo)
+                                      dir ("terraform/aws") {
+                                        if (terraformInit(TF_STATE_BUCKET, tfProject, tfEnvironment, tfComponent, tfRegion) !=0) { error("Terraform init failed")}
+                                        if (terraform('apply', TF_STATE_BUCKET, tfProject, tfEnvironment, tfComponent, tfRegion, tfVariables) !=0 ) { error("Terraform Apply failed")}
+                                      }
+                                    }
+                                }  //script
+                            } // steps
+                        } // Stage Deploy using Terraform
 
-                //         stage('E2E Tests') {
-                //             steps {
-                //                 sh '''
-                //                     source docker/vars.local.e2e.sh
-                //                     docker network create commonforgp2gp || true
-                //                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
-                //                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
-                //                 '''
+                        stage('E2E Tests') {
+                            steps {
+                                sh '''
+                                    source docker/vars.local.e2e.sh
+                                    docker network create commonforgp2gp || true
+                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
+                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
+                                '''
 
-                //             }
-                //             post {
-                //                 always {
-                //                     sh "docker cp e2e-tests:/home/gradle/e2e-tests/build ."
-                //                     sh "mv build e2e-build"
-                //                     archiveArtifacts artifacts: 'e2e-build/reports/**/*.*', fingerprint: true
-                //                     junit '**/e2e-build/test-results/**/*.xml'
-                //                     sh "rm -rf e2e-build"
-                //                     sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
-                //                     sh "docker network rm commonforgp2gp"
-                //                 }
-                //             }
-                //         } //stage E2E Test
-                //     } //Stages Deploy & Test
-                // }  // Stage Deploy & Test
+                            }
+                            post {
+                                always {
+                                    sh "docker cp e2e-tests:/home/gradle/e2e-tests/build ."
+                                    sh "mv build e2e-build"
+                                    archiveArtifacts artifacts: 'e2e-build/reports/**/*.*', fingerprint: true
+                                    junit '**/e2e-build/test-results/**/*.xml'
+                                    sh "rm -rf e2e-build"
+                                    sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
+                                    sh "docker network rm commonforgp2gp"
+                                }
+                            }
+                        } //stage E2E Test
+                    } //Stages Deploy & Test
+                }  // Stage Deploy & Test
             }  // Stages Build
         } //Stage Build
     }  //Stages
