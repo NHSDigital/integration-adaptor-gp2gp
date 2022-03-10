@@ -33,7 +33,6 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     @SneakyThrows
     public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
         var response = gpcClient.getDocumentRecord(taskDefinition);
-        LOGGER.debug("Response body: {}", response);
         var binary = fhirParseService.parseResource(response, Binary.class);
         var taskId = taskDefinition.getTaskId();
         var messageId = taskDefinition.getMessageId();

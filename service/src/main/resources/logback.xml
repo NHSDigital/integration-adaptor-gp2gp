@@ -16,7 +16,7 @@
     <logger name="uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService" level="DEBUG" />
     <logger name="uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder" level="DEBUG" />
     <logger name="uk.nhs.adaptors.gp2gp.mhs.InboundMessageHandler" level="DEBUG" />
-    <logger name="uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskExecutor" level="DEBUG" />
+    <logger name="uk.nhs.adaptors.gp2gp.gpc.GpcClient" level="DEBUG" />
 
 	<logger name="reactor.netty.http.client" level="${GP2GP_LOGGING_LEVEL:-WARN}" />
 </configuration>
