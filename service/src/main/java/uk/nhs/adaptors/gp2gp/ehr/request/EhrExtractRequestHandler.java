@@ -126,10 +126,11 @@ public class EhrExtractRequestHandler {
         if (payload.contains(CONTINUE_ACKNOWLEDGEMENT)) {
             ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId)
                 .ifPresent(ehrExtractStatus -> {
+                    //TODO this has an empty list in case of a large ehr extract without documents
                     var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
-                    if (isEhrExtractBeingSentAsExternalAttachment(ehrExtractStatus)) {
-                        sendEhrExtractAsExternalAttachment(ehrExtractStatus, conversationId);
-                    }
+//                    if (isEhrExtractBeingSentAsExternalAttachment(ehrExtractStatus)) {
+//                        sendEhrExtractAsExternalAttachment(ehrExtractStatus, conversationId);
+//                    }
                     LOGGER.info("Sending documents for: ConversationId: " + conversationId);
                     for (int documentPosition = 0; documentPosition < documents.size(); documentPosition++) {
                         var document = documents.get(documentPosition);
@@ -138,8 +139,7 @@ public class EhrExtractRequestHandler {
                             document.getObjectName(),
                             documentPosition,
                             document.getMessageId(),
-                            document.getDocumentId(),
-                            false);
+                            document.getDocumentId());
                     }
                 });
         } else {
@@ -148,27 +148,9 @@ public class EhrExtractRequestHandler {
         }
     }
 
-    private boolean isEhrExtractBeingSentAsExternalAttachment(EhrExtractStatus ehrExtractStatus) {
-        return ehrExtractStatus.getGpcAccessStructured() != null && ehrExtractStatus.getGpcAccessStructured().getAttachment() != null;
-    }
-
-    private void sendEhrExtractAsExternalAttachment(EhrExtractStatus ehrExtractStatus, String conversationId) {
-        var ehrExtractDocument = ehrExtractStatus.getGpcAccessStructured().getAttachment();
-        LOGGER.info("Sending ehrExtract for: ConversationId: " + conversationId);
-        createSendDocumentTasks(
-            ehrExtractStatus,
-            ehrExtractDocument.getObjectName(),
-            0,
-            ehrExtractDocument.getMessageId(),
-            ehrExtractDocument.getDocumentId(),
-            true
-        );
-    }
-
     private void createSendDocumentTasks(
-            EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation, String messageId, String documentId,
-        boolean externalEhrExtract) {
-
+            EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation, String messageId, String documentId
+    ) {
         var sendDocumentTaskDefinition = SendDocumentTaskDefinition.builder()
             .documentName(documentName)
             .documentPosition(documentLocation)
@@ -181,7 +163,6 @@ public class EhrExtractRequestHandler {
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .messageId(messageId)
             .documentId(documentId)
-            .externalEhrExtract(externalEhrExtract)
             .build();
         LOGGER.info("Sending task for document_id: {} document_name: {}", documentId, documentName);
         taskDispatcher.createTask(sendDocumentTaskDefinition);

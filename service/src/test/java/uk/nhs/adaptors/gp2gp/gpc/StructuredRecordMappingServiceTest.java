@@ -159,7 +159,7 @@ class StructuredRecordMappingServiceTest {
         when(outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent))
             .thenReturn(expectedHL7);
 
-        var actualHL7 = structuredRecordMappingService.getHL7(structuredTaskDefinition, bundle);
+        var actualHL7 = structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(structuredTaskDefinition, bundle);
 
         verify(ehrExtractMapper).mapBundleToEhrFhirExtractParams(structuredTaskDefinition, bundle);
         verify(ehrExtractMapper).mapEhrExtractToXml(ehrExtractTemplateParameters);

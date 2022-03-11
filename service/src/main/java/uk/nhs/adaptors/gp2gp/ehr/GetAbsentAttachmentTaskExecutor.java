@@ -20,7 +20,7 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsentAttachmentTaskDefinition> {
+public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAttachmentTaskDefinition> {
 
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -28,12 +28,12 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
     private final DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Override
-    public Class<SendAbsentAttachmentTaskDefinition> getTaskType() {
-        return SendAbsentAttachmentTaskDefinition.class;
+    public Class<GetAbsentAttachmentTaskDefinition> getTaskType() {
+        return GetAbsentAttachmentTaskDefinition.class;
     }
 
     @Override
-    public void execute(SendAbsentAttachmentTaskDefinition taskDefinition) {
+    public void execute(GetAbsentAttachmentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
         var messageId = taskDefinition.getMessageId();
 

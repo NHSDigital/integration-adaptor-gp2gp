@@ -17,10 +17,8 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgeme
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
-import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -143,12 +141,12 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocument(
-            DocumentTaskDefinition documentTaskDefinition,
-            String documentName,
-            String taskId,
-            String messageId,
-            int base64ContentLength) {
-
+        DocumentTaskDefinition documentTaskDefinition,
+        String documentName,
+        String taskId,
+        String messageId,
+        int base64ContentLength
+    ) {
         Query query = new Query();
         query.addCriteria(Criteria
             .where(CONVERSATION_ID).is(documentTaskDefinition.getConversationId())
@@ -196,8 +194,10 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusCorePending(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
-        Instant requestSentAt) {
+    public void updateEhrExtractStatusCorePending(
+        SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+        Instant requestSentAt
+    ) {
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -273,82 +273,49 @@ public class EhrExtractStatusService {
         }
     }
 
-    public void updateEhrExtractStatusWithEhrExtractChunks(
-            GetGpcStructuredTaskDefinition taskDefinition,
-            OutboundMessage.ExternalAttachment externalAttachment) {
-
-        Query query = createQueryForConversationId(taskDefinition.getConversationId());
-
-        Update update = createUpdateWithUpdatedAt();
-        Instant now = Instant.now();
-
-        update.set(STRUCTURE_OBJECT_AS_ATTACHMENT,
-            EhrExtractStatus.GpcDocument.builder()
-                .documentId(externalAttachment.getDocumentId())
-                .objectName(externalAttachment.getFilename())
-                .fileName(externalAttachment.getFilename())
-                .accessedAt(now)
-                .taskId(taskDefinition.getTaskId())
-                .messageId(externalAttachment.getMessageId()).build());
-        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
-
-        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
-            update,
-            returningUpdatedRecordOption,
-            EhrExtractStatus.class);
-
-        if (ehrExtractStatus == null) {
-            throw new EhrExtractException("EHR Extract Status was not updated with ehrExtractChunks");
-        }
-    }
-
-    public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferences(
-            GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
-            Map<String, String> documentIdUrlMap) {
-        Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
-
-        var docs = new ArrayList<>();
-
-        Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
-        Instant now = Instant.now();
-        documentIdUrlMap.forEach((documentId, url) ->
-            docs.add(EhrExtractStatus.GpcDocument.builder()
-                .documentId(documentId)
-                .accessDocumentUrl(url)
-                .objectName(null)
-                .accessedAt(now)
-                .taskId(documentReferencesTaskDefinition.getTaskId())
-                .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
-        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
-
-        return getEhrExtractStatus(query, docs, updateBuilder, returningUpdatedRecordOption);
-    }
-
-    public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferencesAbsent(
+    public void updateEhrExtractStatusAccessDocumentDocumentReferences(
         GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
-        Map<String, String> titles) {
+        List<EhrExtractStatus.GpcDocument> documents
+    ) {
         Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
 
-        var docs = new ArrayList<>();
-
         Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
-        Instant now = Instant.now();
-        titles.forEach((documentId, fileName) ->
-            docs.add(EhrExtractStatus.GpcDocument.builder()
-                .documentId(documentId)
-                .fileName(fileName)
-                .accessDocumentUrl(null)
-                .objectName(null)
-                .accessedAt(now)
-                .taskId(documentReferencesTaskDefinition.getTaskId())
-                .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
+
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
-        return getEhrExtractStatus(query, docs, updateBuilder, returningUpdatedRecordOption);
+        getEhrExtractStatus(query, documents, updateBuilder, returningUpdatedRecordOption);
     }
 
-    private EhrExtractStatus getEhrExtractStatus(Query query, ArrayList<Object> docs, Update.AddToSetBuilder updateBuilder,
-        FindAndModifyOptions returningUpdatedRecordOption) {
+//    public void updateEhrExtractStatusAccessDocumentDocumentReferencesAbsent(
+//        GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
+//        Map<String, String> titles
+//    ) {
+//        Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
+//
+//        var docs = new ArrayList<EhrExtractStatus.GpcDocument>();
+//
+//        Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
+//        Instant now = Instant.now();
+//        titles.forEach((documentId, fileName) ->
+//            docs.add(EhrExtractStatus.GpcDocument.builder()
+//                .documentId(documentId)
+//                .fileName(fileName)
+//                .accessDocumentUrl(null)
+//                .objectName(null)
+//                .accessedAt(now)
+//                .taskId(documentReferencesTaskDefinition.getTaskId())
+//                .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
+//        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+//
+//        getEhrExtractStatus(query, docs, updateBuilder, returningUpdatedRecordOption);
+//    }
+
+    private EhrExtractStatus getEhrExtractStatus(
+        Query query,
+        List<EhrExtractStatus.GpcDocument> docs,
+        Update.AddToSetBuilder updateBuilder,
+        FindAndModifyOptions returningUpdatedRecordOption
+    ) {
         Update update = updateBuilder.each(docs);
 
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
@@ -377,8 +344,11 @@ public class EhrExtractStatusService {
         updateEhrStatus(update, taskDefinition.getConversationId());
     }
 
-    public void updateEhrExtractStatusAcknowledgement(SendAcknowledgementTaskDefinition taskDefinition, String ackMessageId,
-        String updatedAt) {
+    public void updateEhrExtractStatusAcknowledgement(
+        SendAcknowledgementTaskDefinition taskDefinition,
+        String ackMessageId,
+        String updatedAt
+    ) {
         Update update = createUpdateWithUpdatedAt();
         update.set(ACK_PENDING_TASK_ID_PATH, taskDefinition.getTaskId());
         update.set(ACK_PENDING_MESSAGE_ID_PATH, ackMessageId);
@@ -442,8 +412,11 @@ public class EhrExtractStatusService {
         return updateEhrExtractStatusCommon(taskDefinition, messageIds, STRUCTURE_OBJECT_AS_ATTACHMENT);
     }
 
-    private EhrExtractStatus updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, List<String> messageIds,
-        String rootObject) {
+    private EhrExtractStatus updateEhrExtractStatusCommon(
+        SendDocumentTaskDefinition taskDefinition,
+        List<String> messageIds,
+        String rootObject
+    ) {
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
 
         var commonSentAt = rootObject + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + SENT_AT;

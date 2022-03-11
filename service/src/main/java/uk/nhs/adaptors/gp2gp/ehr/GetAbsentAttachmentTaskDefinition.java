@@ -12,7 +12,7 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 @Getter
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-public class SendAbsentAttachmentTaskDefinition extends DocumentTaskDefinition {
+public class GetAbsentAttachmentTaskDefinition extends DocumentTaskDefinition {
 
     /**
      * content.attachment.title of DocumentReference qualified to be an AbsentAttachment

@@ -111,11 +111,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
             .map(Pair::getFirst)
             .collect(Collectors.toList());
 
-        if (taskDefinition.isExternalEhrExtract()) {
-            ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCommonForExternalEhrExtract(taskDefinition, sentIds);
-        } else {
-            ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCommonForDocuments(taskDefinition, sentIds);
-        }
+        ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCommonForDocuments(taskDefinition, sentIds);
 
         LOGGER.info("Executing beginSendingPositiveAcknowledgement");
         detectDocumentsSentService.beginSendingPositiveAcknowledgement(ehrExtractStatus);

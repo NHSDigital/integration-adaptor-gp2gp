@@ -111,7 +111,7 @@ public class StructuredRecordMappingService {
         return attachment.getSize() > gp2gpConfiguration.getLargeAttachmentThreshold();
     }
 
-    public String getHL7(GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle bundle) {
+    public String mapStructuredRecordToEhrExtractXml(GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle bundle) {
         var ehrExtractTemplateParameters = ehrExtractMapper
             .mapBundleToEhrFhirExtractParams(structuredTaskDefinition, bundle);
         String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
@@ -119,7 +119,7 @@ public class StructuredRecordMappingService {
         return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
     }
 
-    public String getHL7ForLargeEhrExtract(
+    public String buildSkeletonEhrExtractXml(
         GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle structuredRecord, String documentId
     ) {
         String ehrExtractContent =  ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, structuredRecord, documentId);

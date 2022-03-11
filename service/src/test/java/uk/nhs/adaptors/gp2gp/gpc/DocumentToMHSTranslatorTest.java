@@ -13,7 +13,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
-import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.GetAbsentAttachmentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
@@ -91,7 +91,7 @@ public class DocumentToMHSTranslatorTest {
 
     @Test
     public void When_TranslatingFileContentData_Expect_ProperMhsOutboundRequestPayload() {
-        final SendAbsentAttachmentTaskDefinition taskDefinition = SendAbsentAttachmentTaskDefinition.builder()
+        final GetAbsentAttachmentTaskDefinition taskDefinition = GetAbsentAttachmentTaskDefinition.builder()
             .title(TEST_TITLE)
             .messageId(MESSAGE_ID)
             .documentId(TEST_DOCUMENT_ID)
