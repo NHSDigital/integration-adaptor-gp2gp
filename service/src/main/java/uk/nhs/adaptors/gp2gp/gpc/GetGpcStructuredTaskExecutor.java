@@ -107,8 +107,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .objectName(fileName)
                     .fileName(fileName)
                     .accessedAt(now)
-                    .taskId(structuredTaskDefinition.getTaskId())
-                    .messageId(structuredTaskDefinition.getConversationId()).build());
+                    .taskId(getDocumentTaskDefinition.getTaskId())
+                    .messageId(messageId).build());
 
                 ehrExtractXml = structuredRecordMappingService
                     .buildSkeletonEhrExtractXml(structuredTaskDefinition, structuredRecord, documentId);
