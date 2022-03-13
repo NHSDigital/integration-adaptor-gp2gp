@@ -19,7 +19,6 @@ import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.bson.Document;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.StringUtils;
@@ -29,7 +28,6 @@ import uk.nhs.adaptors.gp2gp.Mongo;
 
 
 @ExtendWith(SoftAssertionsExtension.class)
-@Disabled
 public class EhrExtractTest {
     @InjectSoftAssertions
     private SoftAssertions softly;
@@ -119,13 +117,13 @@ public class EhrExtractTest {
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR);
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR, 1);
 
         String conversationId2 = UUID.randomUUID().toString();
         String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_2);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest2);
 
-        assertHappyPathWithAbsentAttachments(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER_WITH_AA_DR);
+        assertHappyPathWithAbsentAttachments(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER_WITH_AA_DR, 1);
     }
 
     @Test
@@ -134,7 +132,7 @@ public class EhrExtractTest {
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_TWO_DOCUMENTS, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_TWO_DOCUMENTS);
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_TWO_DOCUMENTS, 2);
         assertMultipleDocumentsRetrieved(conversationId, 3);
     }
 
@@ -145,7 +143,7 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS);
-        assertMultipleDocumentsRetrieved(conversationId, 3);
+        assertMultipleDocumentsRetrieved(conversationId, 4);
     }
 
     @Test
@@ -154,8 +152,8 @@ public class EhrExtractTest {
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS);
-        assertMultipleDocumentsRetrieved(conversationId, 3);
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS, 3);
+        assertMultipleDocumentsRetrieved(conversationId, 4);
     }
 
     @Test
@@ -164,9 +162,7 @@ public class EhrExtractTest {
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertEhrExtractSentAsAttachment(conversationId);
-
-        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR);
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_AA_DR, 1);
     }
 
     @Test
@@ -290,7 +286,7 @@ public class EhrExtractTest {
         softly.assertThat(messageIds.size()).isEqualTo(arraySize);
     }
 
-    private void assertHappyPathWithAbsentAttachments(String conversationId, String fromODSCode, String nhsNumber) {
+    private void assertHappyPathWithAbsentAttachments(String conversationId, String fromODSCode, String nhsNumber, int absentAttachmentCount) {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, fromODSCode);
 
@@ -298,8 +294,10 @@ public class EhrExtractTest {
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
         
         var documents = (List<Document>) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-        assertThatAccessAbsentDocumentWasFetched(documents.get(1));
-        assertThatAccessAbsentDocumentWasFetched(documents.get(2));
+        assertThat(documents).hasSize(absentAttachmentCount + 1); //because large ehr extract is here as well
+        for (int i = 1; i < absentAttachmentCount; i++) {
+            assertThatAccessAbsentDocumentWasFetched(documents.get(i));
+        }
 
         var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
         assertThatExtractCoreMessageWasSent(ehrExtractCore);
@@ -316,33 +314,12 @@ public class EhrExtractTest {
         assertThat(sentToMhs.get("taskId")).isNotNull();
     }
 
-    private void assertEhrExtractSentAsAttachment(String conversationId) {
-        var gpcAccessStructured = waitFor(() -> accessStructuredWithAttachmentThatHasBeenSent(conversationId));
-        assertThat(gpcAccessStructured.get("documentId")).isNotNull();
-        assertThat(gpcAccessStructured.get("objectName")).isNotNull();
-        assertThat(gpcAccessStructured.get("accessedAt")).isNotNull();
-        assertThat(gpcAccessStructured.get("taskId")).isNotNull();
-        assertThat(gpcAccessStructured.get("messageId")).isNotNull();
-        assertThat(gpcAccessStructured.get("sentToMhs")).isNotNull();
-    }
-
     private Document fetchSentToMhsForDocuments(String conversationId) {
         var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
         if (gpcAccessDocument != null && gpcAccessDocument.get("documents", Collections.emptyList()) != null ) {
             var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
             if (!documentList.isEmpty()) {
                 return (Document) ((Document) documentList.get(0)).get("sentToMhs");
-            }
-        }
-        return null;
-    }
-
-    private Document accessStructuredWithAttachmentThatHasBeenSent(String conversationId) {
-        var gpcAccessStructured = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED);
-        if (gpcAccessStructured != null) {
-            var attachment = (Document) gpcAccessStructured.get("attachment");
-            if (attachment != null && attachment.get("sentToMhs") != null) {
-                return attachment;
             }
         }
         return null;
@@ -362,6 +339,13 @@ public class EhrExtractTest {
     }
 
     private List<Document> getAllDocumentsWithObjectName(Document gpcAccessDocument) {
+        if (gpcAccessDocument.get("documents", Collections.emptyList())
+            .stream()
+            .map(Document.class::cast)
+            .anyMatch(document -> document.get("objectName") == null)) {
+            return null;
+        }
+
         return gpcAccessDocument.get("documents", Collections.emptyList())
             .stream()
             .map(Document.class::cast)
@@ -372,10 +356,23 @@ public class EhrExtractTest {
     private List<List<Object>> getTheSplitDocumentIds(String conversationId) {
         var documents = (List<Document>) theDocumentTaskUpdatesTheRecord(conversationId);
 
+        if (documents.stream()
+            .map(Document.class::cast)
+            .map(document -> document.get(SENT_TO_MHS))
+            .filter(Objects::nonNull)
+            .map(Document.class::cast)
+            .map(sentToMhs -> sentToMhs.get(MESSAGE_ID))
+            .filter(Objects::nonNull)
+            .map(List.class::cast)
+            .allMatch(List::isEmpty)
+        ) {
+            return null;
+        }
+
         return documents.stream()
             .map(Document.class::cast)
-            .map(singleDocument -> {
-                var sentToMhs = singleDocument.get(SENT_TO_MHS);
+            .map(document -> {
+                var sentToMhs = document.get(SENT_TO_MHS);
                 if (sentToMhs != null) {
                     return ((Document) sentToMhs).get(MESSAGE_ID, Collections.emptyList());
                 }
