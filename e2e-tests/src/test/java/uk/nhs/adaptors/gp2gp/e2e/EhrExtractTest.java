@@ -84,7 +84,7 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedFromNormal_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceivedForPatientWithNormalEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_NORMAL_DR, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
@@ -93,7 +93,7 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_LargeExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceivedForPatientWithLargeExtractEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_PAYLOAD, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
@@ -102,7 +102,7 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedWithLargeAttachment_Expect_LargeDocumentIsSplit() throws Exception {
+    public void When_ExtractRequestReceivedForPatientWithLargeAttachment_Expect_LargeDocumentIsSplit() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_ATTACHMENT_DOCX, FROM_ODS_CODE_1);
 
@@ -127,7 +127,7 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedForPatientWith2AbsentAttachmentsAndLargeEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceivedForPatientWithLargeEhrExtractAnd2AbsentAttachments_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_TWO_DOCUMENTS, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
@@ -137,7 +137,7 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceived3NormalDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceivedForPatientWith3NormalDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
@@ -147,7 +147,7 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceived3AbsentAttachmentDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceivedForPatientWith3AbsentAttachmentDocs_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
@@ -157,7 +157,7 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedForLargeEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceivedForPatientWithLargeEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_AA_DR, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
@@ -173,21 +173,15 @@ public class EhrExtractTest {
             .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        var ehrExtractStatus = waitFor(() -> getFinishedEhrExtractStatus(conversationId));
+
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
 
-        var documentList = waitFor(() -> {
-            var extractStatus = ((Document) Mongo.findEhrExtractStatus(conversationId)
-                .get(GPC_ACCESS_DOCUMENT));
-            if (extractStatus == null) {
-                return null;
-            }
-            return extractStatus.get("documents", Collections.emptyList());
-        });
+        var documentList = ehrExtractStatus.get(GPC_ACCESS_DOCUMENT, Document.class).get("documents", Collections.emptyList());
 
         assertThat(documentList.size()).isEqualTo(1); // large ehr as a document
 
-        var ackToPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        var ackToPending = ehrExtractStatus.get(ACK_TO_PENDING, Document.class);
         assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
         assertThatNoErrorInfoIsStored(conversationId);
 
@@ -222,8 +216,20 @@ public class EhrExtractTest {
         XmlAssert.assertThat(ehrExtractMhsRequest.getPayload()).hasXPath(documentReferenceXPath);
     }
 
+    private Document getFinishedEhrExtractStatus(String conversationId) {
+        var ehrExtractStatus = Mongo.findEhrExtractStatus(conversationId);
+        var ehrReceivedAcknowledgement = ehrExtractStatus.get("ehrReceivedAcknowledgement", Document.class);
+        if (ehrReceivedAcknowledgement != null) {
+            var conversationClosed = ehrReceivedAcknowledgement.get("conversationClosed");
+            if (conversationClosed != null) {
+                return ehrExtractStatus;
+            }
+        }
+        return null;
+    }
+
     @Test
-    public void When_ExtractRequestReceivedForNotExistingPatient_Expect_ErrorUpdatedInDatabase() throws Exception {
+    public void When_ExtractRequestReceivedForNonExistingPatient_Expect_ErrorUpdatedInDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_NOT_EXISTING_PATIENT, FROM_ODS_CODE_1);
 
@@ -238,7 +244,7 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedWithDocumentSizeEqualThreshold_Expect_LargeDocumentIsSentAsOne() throws Exception {
+    public void When_ExtractRequestReceivedForPatientWithDocumentSizeEqualThreshold_Expect_LargeDocumentIsSentAsOne() throws Exception {
         // file size: 31216
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, FROM_ODS_CODE_1);
@@ -249,7 +255,7 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedWithDocumentSizeLargerThanThreshold_Expect_LargeDocumentIsSplit() throws Exception {
+    public void When_ExtractRequestReceivedForPatientWithSmallEhrExtractAndLargeDocument_Expect_LargeDocumentIsSplit() throws Exception {
         // file size: 62428
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, FROM_ODS_CODE_1);
@@ -273,56 +279,54 @@ public class EhrExtractTest {
     }
 
     private void assertMultipleDocsSent(String conversationId, String nhsNumber, int arraySize) {
-        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        var ehrExtractStatus = waitFor(() -> getFinishedEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, FROM_ODS_CODE_1);
 
         var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
-        waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId))
+        theDocumentTaskUpdatesTheRecord(ehrExtractStatus)
             .forEach(this::assertThatAccessDocumentWasFetched);
 
-        var messageIds = waitFor(() -> getTheSplitDocumentIds(conversationId)).get(0);
-        softly.assertThat(messageIds.size()).isEqualTo(arraySize);
+        var messageIds = getTheSplitDocumentIds(ehrExtractStatus).get(0);
+        softly.assertThat(messageIds).hasSize(arraySize);
     }
 
     private void assertHappyPathWithAbsentAttachments(String conversationId, String fromODSCode, String nhsNumber, int absentAttachmentCount) {
-        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        var ehrExtractStatus = waitFor(() -> getFinishedEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, fromODSCode);
 
-        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+        var gpcAccessStructured = ehrExtractStatus.get(GPC_ACCESS_STRUCTURED, Document.class);
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
         
-        var documents = (List<Document>) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
+        var documents = (List<Document>) waitFor(() -> theDocumentTaskUpdatesTheRecord(ehrExtractStatus));
         assertThat(documents).hasSize(absentAttachmentCount + 1); //because large ehr extract is here as well
         for (int i = 1; i < absentAttachmentCount; i++) {
             assertThatAccessAbsentDocumentWasFetched(documents.get(i));
         }
 
-        var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
+        var ehrExtractCore = ehrExtractStatus.get(EHR_EXTRACT_CORE, Document.class);
         assertThatExtractCoreMessageWasSent(ehrExtractCore);
 
-        var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
+        var ehrContinue = ehrExtractStatus.get(EHR_CONTINUE, Document.class);
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
-        var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        var ackPending = ehrExtractStatus.get(ACK_TO_PENDING, Document.class);
         assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
 
-        var sentToMhs = (Document) waitFor(() -> fetchSentToMhsForDocuments(conversationId));
+        var sentToMhs = fetchSentToMhsForDocuments(ehrExtractStatus);
         assertThat(sentToMhs.get("messageId")).isNotNull();
         assertThat(sentToMhs.get("sentAt")).isNotNull();
         assertThat(sentToMhs.get("taskId")).isNotNull();
     }
 
-    private Document fetchSentToMhsForDocuments(String conversationId) {
-        var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
-        if (gpcAccessDocument != null && gpcAccessDocument.get("documents", Collections.emptyList()) != null ) {
-            var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
-            if (!documentList.isEmpty()) {
-                return (Document) ((Document) documentList.get(0)).get("sentToMhs");
-            }
+    private Document fetchSentToMhsForDocuments(Document ehrExtractStatus) {
+        var gpcAccessDocument = ehrExtractStatus.get(GPC_ACCESS_DOCUMENT, Document.class);
+        var documentList = gpcAccessDocument.get("documents", List.class);
+        if (!documentList.isEmpty()) {
+            return (Document) ((Document) documentList.get(0)).get("sentToMhs");
         }
-        return null;
+        throw new IllegalStateException();
     }
 
     private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber, String fromODSCode) throws IOException {
@@ -333,19 +337,8 @@ public class EhrExtractTest {
             .replace(FROM_ODS_CODE_PLACEHOLDER, fromODSCode);
     }
 
-    private List<Document> theDocumentTaskUpdatesTheRecord(String conversationId) {
-        var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
-        return getAllDocumentsWithObjectName(gpcAccessDocument);
-    }
-
-    private List<Document> getAllDocumentsWithObjectName(Document gpcAccessDocument) {
-        if (gpcAccessDocument.get("documents", Collections.emptyList())
-            .stream()
-            .map(Document.class::cast)
-            .anyMatch(document -> document.get("objectName") == null)) {
-            return null;
-        }
-
+    private List<Document> theDocumentTaskUpdatesTheRecord(Document ehrExtractStatus) {
+        var gpcAccessDocument = ehrExtractStatus.get(GPC_ACCESS_DOCUMENT, Document.class);
         return gpcAccessDocument.get("documents", Collections.emptyList())
             .stream()
             .map(Document.class::cast)
@@ -353,23 +346,8 @@ public class EhrExtractTest {
             .collect(Collectors.toList());
     }
 
-    private List<List<Object>> getTheSplitDocumentIds(String conversationId) {
-        var documents = (List<Document>) theDocumentTaskUpdatesTheRecord(conversationId);
-
-        if (documents.stream()
-            .map(Document.class::cast)
-            .map(document -> document.get(SENT_TO_MHS))
-            .filter(Objects::nonNull)
-            .map(Document.class::cast)
-            .map(sentToMhs -> sentToMhs.get(MESSAGE_ID))
-            .filter(Objects::nonNull)
-            .map(List.class::cast)
-            .allMatch(List::isEmpty)
-        ) {
-            return null;
-        }
-
-        return documents.stream()
+    private List<List<Object>> getTheSplitDocumentIds(Document ehrExtractStatus) {
+        return theDocumentTaskUpdatesTheRecord(ehrExtractStatus).stream()
             .map(Document.class::cast)
             .map(document -> {
                 var sentToMhs = document.get(SENT_TO_MHS);
@@ -414,25 +392,25 @@ public class EhrExtractTest {
     }
 
     private void assertHappyPathWithDocs(String conversationId, String fromODSCode, String nhsNumber) {
-        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        var ehrExtractStatus = waitFor(() -> getFinishedEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, fromODSCode);
 
-        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+        var gpcAccessStructured = ehrExtractStatus.get(GPC_ACCESS_STRUCTURED, Document.class);
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
-        waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId))
+        theDocumentTaskUpdatesTheRecord(ehrExtractStatus)
             .forEach(this::assertThatAccessDocumentWasFetched);
 
-        var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
+        var ehrExtractCore = ehrExtractStatus.get(EHR_EXTRACT_CORE, Document.class);
         assertThatExtractCoreMessageWasSent(ehrExtractCore);
 
-        var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
+        var ehrContinue = ehrExtractStatus.get(EHR_CONTINUE, Document.class);
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
-        var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        var ackPending = ehrExtractStatus.get(ACK_TO_PENDING, Document.class);
         assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
 
-        var sentToMhs = (Document) waitFor(() -> fetchSentToMhsForDocuments(conversationId));
+        var sentToMhs = fetchSentToMhsForDocuments(ehrExtractStatus);
         assertThat(sentToMhs.get("messageId")).isNotNull();
         assertThat(sentToMhs.get("sentAt")).isNotNull();
         assertThat(sentToMhs.get("taskId")).isNotNull();
@@ -499,5 +477,4 @@ public class EhrExtractTest {
     private boolean nameEndsWith(String name, String endingValue) {
         return name.endsWith(endingValue);
     }
-
 }
