@@ -11,11 +11,10 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AbsentAttachmentFileMapper;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.DetectTranslationCompleteService;
 import uk.nhs.adaptors.gp2gp.gpc.DocumentToMHSTranslator;
 import uk.nhs.adaptors.gp2gp.gpc.StorageDataWrapperProvider;
-
-import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Component
@@ -34,6 +33,11 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
 
     @Override
     public void execute(GetAbsentAttachmentTaskDefinition taskDefinition) {
+        var ehrExtractStatus = handleAbsentAttachment(taskDefinition);
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
+    }
+
+    public EhrExtractStatus handleAbsentAttachment(DocumentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
         var messageId = taskDefinition.getMessageId();
 
@@ -52,9 +56,8 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
 
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, fileName);
 
-        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, fileName, taskId, messageId, fileContent.getBytes(StandardCharsets.UTF_8).length
+        return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
+            taskDefinition, fileName, taskId, messageId, fileContent.length()
         );
-        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 }

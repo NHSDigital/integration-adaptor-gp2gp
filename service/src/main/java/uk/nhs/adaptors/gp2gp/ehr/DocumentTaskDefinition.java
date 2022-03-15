@@ -14,8 +14,9 @@ public abstract class DocumentTaskDefinition extends TaskDefinition {
      * or random UUID v4 if the task has been generated for the purpose of large messaging index fragment document.
      */
     private final String documentId;
-    /**
-     * TODO same as Conversation Id ??? need to check
-     */
     private final String messageId;
+    /**
+     * content.attachment.title of DocumentReference qualified to be an AbsentAttachment
+     */
+    private final String title;
 }

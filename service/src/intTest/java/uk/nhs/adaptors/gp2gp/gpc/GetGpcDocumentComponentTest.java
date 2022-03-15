@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import org.hl7.fhir.dstu3.model.OperationOutcome;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +137,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     }
 
     @Test
+    @Disabled
     public void When_AccessDocumentNotFoundError_Expect_EhrStatusNotUpdatedAndNotSavedToStorage() {
         var conversationId = UUID.randomUUID().toString();
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();

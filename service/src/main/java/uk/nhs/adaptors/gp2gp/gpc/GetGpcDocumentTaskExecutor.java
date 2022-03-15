@@ -12,6 +12,9 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.GetAbsentAttachmentTaskExecutor;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 
 @Slf4j
 @Component
@@ -23,6 +26,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     private final DocumentToMHSTranslator documentToMHSTranslator;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
     private final FhirParseService fhirParseService;
+    private final GetAbsentAttachmentTaskExecutor getAbsentAttachmentTaskExecutor;
 
     @Override
     public Class<GetGpcDocumentTaskDefinition> getTaskType() {
@@ -32,7 +36,19 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     @Override
     @SneakyThrows
     public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
-        var response = gpcClient.getDocumentRecord(taskDefinition);
+        EhrExtractStatus ehrExtractStatus;
+        try {
+            var response = gpcClient.getDocumentRecord(taskDefinition);
+            ehrExtractStatus = handleValidGpcDocument(response, taskDefinition);
+        } catch (GpConnectException e) {
+            LOGGER.warn("Binary request returned an unexpected response", e);
+            ehrExtractStatus = getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition);
+        }
+
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
+    }
+
+    private EhrExtractStatus handleValidGpcDocument(String response, GetGpcDocumentTaskDefinition taskDefinition) {
         var binary = fhirParseService.parseResource(response, Binary.class);
         var taskId = taskDefinition.getTaskId();
         var messageId = taskDefinition.getMessageId();
@@ -51,9 +67,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
 
-        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
+        return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
             taskDefinition, documentName, taskId, messageId, binary.getContentAsBase64().length());
-        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
-
 }

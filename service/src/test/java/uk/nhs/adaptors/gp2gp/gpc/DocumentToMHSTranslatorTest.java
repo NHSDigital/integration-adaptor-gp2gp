@@ -12,6 +12,7 @@ import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.GetAbsentAttachmentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
@@ -102,7 +103,7 @@ public class DocumentToMHSTranslatorTest {
             .build();
 
         String mhsOutboundRequestData = documentToMHSTranslator.translateFileContentToMhsOutboundRequestData(
-            taskDefinition, absentAttachmentTxtContent
+            taskDefinition, Base64Utils.toBase64String(absentAttachmentTxtContent)
         );
         assertThat(mhsOutboundRequestData).isEqualToIgnoringWhitespace(expectedAbsentAttachmentPayload);
     }

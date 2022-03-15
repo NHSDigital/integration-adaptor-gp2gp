@@ -243,6 +243,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .documentId(externalAttachment.getDocumentId())
             .accessDocumentUrl(externalAttachment.getUrl())
             .messageId(externalAttachment.getMessageId())
+            .title(externalAttachment.getTitle())
             .build();
     }
 

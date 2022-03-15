@@ -1,6 +1,12 @@
 package uk.nhs.adaptors.gp2gp.common.utils;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,5 +34,16 @@ class GzipTest {
     @Test
     void When_CompressingNull_Expect_NullIsReturned() {
         assertThat(Gzip.compress(null)).isNull();
+    }
+
+    @Test
+    @Disabled
+    void test() throws IOException {
+//        var path = Paths.get("/Users/bartoszs/Documents/large_ehr/compressed.zip");
+        var path = Paths.get("/Users/bartoszs/Documents/tpp-F4FBF190-A1D9-11EC-BA8F-238A7E655652/ehr_extract.b64");
+        var bytes = Files.readAllBytes(path);
+        var decoded = Base64.getDecoder().decode(bytes);
+        var decompressed = Gzip.decompress(decoded);
+        var a = 1;
     }
 }

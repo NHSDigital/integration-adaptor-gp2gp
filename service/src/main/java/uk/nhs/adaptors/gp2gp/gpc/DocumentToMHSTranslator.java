@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
@@ -29,10 +28,8 @@ public class DocumentToMHSTranslator {
         );
     }
 
-    public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String fileContent) {
-        return createOutboundMessage(
-            taskDefinition, Base64Utils.toBase64String(fileContent), MediaType.TEXT_PLAIN_VALUE
-        );
+    public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String fileContentInBase64) {
+        return createOutboundMessage(taskDefinition, fileContentInBase64, MediaType.TEXT_PLAIN_VALUE);
     }
 
     private String createOutboundMessage(DocumentTaskDefinition taskDefinition, String base64Content, String contentType) {
