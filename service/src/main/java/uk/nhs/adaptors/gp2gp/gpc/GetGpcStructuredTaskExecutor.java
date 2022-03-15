@@ -115,10 +115,19 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             }
 
             var documentsAsExternalAttachments = structuredRecordMappingService.getExternalAttachments(structuredRecord);
-            //TODO should those without URL be also treated as absent?
             documentsAsExternalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isBlank(documentMetadata.getUrl()))
-                .forEach(documentReferencesWithoutUrl -> LOGGER.warn("DocumentReference missing URL: {}", documentReferencesWithoutUrl));
+                .peek(absentAttachment -> LOGGER.warn("DocumentReference missing URL: {}", absentAttachment.getDocumentId()))
+                .peek(absentAttachments::add)
+                .map(absentAttachment -> EhrExtractStatus.GpcDocument.builder()
+                    .documentId(absentAttachment.getDocumentId())
+                    .fileName(buildAbsentAttachmentFileName(absentAttachment.getDocumentId()))
+                    .accessDocumentUrl(null)
+                    .objectName(null)
+                    .accessedAt(now)
+                    .taskId(structuredTaskDefinition.getTaskId())
+                    .messageId(structuredTaskDefinition.getConversationId()).build())
+                .forEach(ehrStatusGpcDocuments::add);
             documentsAsExternalAttachments = documentsAsExternalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isNotBlank(documentMetadata.getUrl()))
                 .collect(Collectors.toList());

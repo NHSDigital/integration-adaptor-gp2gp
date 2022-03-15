@@ -218,6 +218,9 @@ public class EhrExtractTest {
 
     private Document getFinishedEhrExtractStatus(String conversationId) {
         var ehrExtractStatus = Mongo.findEhrExtractStatus(conversationId);
+        if (ehrExtractStatus == null) {
+            return null;
+        }
         var ehrReceivedAcknowledgement = ehrExtractStatus.get("ehrReceivedAcknowledgement", Document.class);
         if (ehrReceivedAcknowledgement != null) {
             var conversationClosed = ehrReceivedAcknowledgement.get("conversationClosed");
