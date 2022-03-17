@@ -240,37 +240,43 @@ public class EhrExtractStatusService {
     }
 
     public void updateEhrExtractStatusAck(String conversationId, EhrReceivedAcknowledgement ack) {
-        var isDuplicate = checkForAckOutOfOrderAndDuplicate(conversationId);
-        if (!isDuplicate) {
-            Query query = createQueryForConversationId(conversationId);
-
-            Update update = createUpdateWithUpdatedAt();
-            update.set(RECEIVED_ACK_TIMESTAMP, ack.getReceived());
-            update.set(RECEIVED_ACK_CONVERSATION_CLOSED, ack.getConversationClosed());
-            update.set(RECEIVED_ACK_ROOT_ID, ack.getRootId());
-            update.set(RECEIVED_ACK_MESSAGE_REF, ack.getMessageRef());
-
-            if (!isEmpty(ack.getErrors())) {
-                ack.getErrors()
-                    .forEach(error -> update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder()
-                        .code(error.getCode())
-                        .display(error.getDisplay())
-                        .build()));
-            }
-            FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
-
-            EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
-                update,
-                returningUpdatedRecordOption,
-                EhrExtractStatus.class);
-
-            if (ehrExtractStatus == null) {
-                throw new EhrExtractException("Received an ACK message with a conversation_id '" + conversationId
-                    + "' that is not recognised");
-            }
-
-            LOGGER.info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+        if (!isEhrStatusWaitingForFinalAck(conversationId)) {
+            return;
         }
+
+        if (hasFinalAckBeenReceived(conversationId)) {
+            LOGGER.warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            return;
+        }
+
+        Query query = createQueryForConversationId(conversationId);
+
+        Update update = createUpdateWithUpdatedAt();
+        update.set(RECEIVED_ACK_TIMESTAMP, ack.getReceived());
+        update.set(RECEIVED_ACK_CONVERSATION_CLOSED, ack.getConversationClosed());
+        update.set(RECEIVED_ACK_ROOT_ID, ack.getRootId());
+        update.set(RECEIVED_ACK_MESSAGE_REF, ack.getMessageRef());
+
+        if (!isEmpty(ack.getErrors())) {
+            ack.getErrors()
+                .forEach(error -> update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder()
+                    .code(error.getCode())
+                    .display(error.getDisplay())
+                    .build()));
+        }
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+            update,
+            returningUpdatedRecordOption,
+            EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
+            throw new EhrExtractException("Received an ACK message with a conversation_id '" + conversationId
+                + "' that is not recognised");
+        }
+
+        LOGGER.info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
     }
 
     public void updateEhrExtractStatusAccessDocumentDocumentReferences(
@@ -465,21 +471,18 @@ public class EhrExtractStatusService {
         return update;
     }
 
-    private boolean checkForAckOutOfOrderAndDuplicate(String conversationId) {
+    private boolean isEhrStatusWaitingForFinalAck(String conversationId) {
         var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
             .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
 
-        if (ehrExtractStatus.getAckPending() == null) {
-            throw new MessageOutOfOrderException("ACK", conversationId);
-        }
+        return ehrExtractStatus.getAckPending() != null;
+    }
 
-        if (ehrExtractStatus.getEhrReceivedAcknowledgement() != null) {
-            LOGGER.warn("Received an ACK message with a conversation_id '" + conversationId
-                + "' that is duplicate");
-            return true;
-        }
+    private boolean hasFinalAckBeenReceived(String conversationId) {
+        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
+            .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
 
-        return false;
+        return ehrExtractStatus.getEhrReceivedAcknowledgement() != null;
     }
 
     private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {

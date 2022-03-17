@@ -45,8 +45,8 @@ public class DocumentToMHSTranslator {
 
     private String prepareOutboundMessage(
         DocumentTaskDefinition taskDefinition, String base64Content, String contentType, String xmlContent)
-        throws JsonProcessingException
-    {
+        throws JsonProcessingException {
+
         var attachments = Collections.singletonList(
             OutboundMessage.Attachment.builder()
                 .contentType(contentType)
