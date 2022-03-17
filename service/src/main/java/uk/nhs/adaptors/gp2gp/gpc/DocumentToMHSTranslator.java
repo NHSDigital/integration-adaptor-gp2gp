@@ -22,14 +22,13 @@ public class DocumentToMHSTranslator {
     private final EhrDocumentMapper ehrDocumentMapper;
 
     public String translateGpcResponseToMhsOutboundRequestData(
-        DocumentTaskDefinition taskDefinition, String base64Content, String contentType) {
-        return createOutboundMessage(
-            taskDefinition, base64Content, contentType
-        );
+        DocumentTaskDefinition taskDefinition, String base64Content, String contentType
+    ) {
+        return createOutboundMessage(taskDefinition, base64Content, contentType);
     }
 
-    public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String fileContentInBase64) {
-        return createOutboundMessage(taskDefinition, fileContentInBase64, MediaType.TEXT_PLAIN_VALUE);
+    public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String base64Content) {
+        return createOutboundMessage(taskDefinition, base64Content, MediaType.TEXT_PLAIN_VALUE);
     }
 
     private String createOutboundMessage(DocumentTaskDefinition taskDefinition, String base64Content, String contentType) {
@@ -44,15 +43,16 @@ public class DocumentToMHSTranslator {
         }
     }
 
-    private String prepareOutboundMessage(DocumentTaskDefinition taskDefinition, String fileContent, String contentType,
-        String xmlContent)
-        throws JsonProcessingException {
+    private String prepareOutboundMessage(
+        DocumentTaskDefinition taskDefinition, String base64Content, String contentType, String xmlContent)
+        throws JsonProcessingException
+    {
         var attachments = Collections.singletonList(
             OutboundMessage.Attachment.builder()
                 .contentType(contentType)
                 .isBase64(Boolean.TRUE)
                 .description(taskDefinition.getDocumentId())
-                .payload(fileContent)
+                .payload(base64Content)
                 .build());
         var outboundMessage = OutboundMessage.builder()
             .payload(xmlContent)

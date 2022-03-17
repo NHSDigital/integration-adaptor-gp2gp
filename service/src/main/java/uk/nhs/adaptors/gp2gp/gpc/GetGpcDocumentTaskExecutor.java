@@ -1,6 +1,8 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.GetAbsentAttachmentTaskExecutor;
@@ -38,8 +41,8 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
         EhrExtractStatus ehrExtractStatus;
         try {
-            var response = gpcClient.getDocumentRecord(taskDefinition);
-            ehrExtractStatus = handleValidGpcDocument(response, taskDefinition);
+            var binaryContent = getBinaryContent(taskDefinition);
+            ehrExtractStatus = handleValidGpcDocument(binaryContent, taskDefinition);
         } catch (GpConnectException e) {
             LOGGER.warn("Binary request returned an unexpected response", e);
             ehrExtractStatus = getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition);
@@ -48,26 +51,46 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
-    private EhrExtractStatus handleValidGpcDocument(String response, GetGpcDocumentTaskDefinition taskDefinition) {
-        var binary = fhirParseService.parseResource(response, Binary.class);
+    private EhrExtractStatus handleValidGpcDocument(BinaryContent binaryContent, GetGpcDocumentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
-        var messageId = taskDefinition.getMessageId();
         var documentName = GpcFilenameUtils.generateDocumentFilename(
             taskDefinition.getConversationId(), taskDefinition.getDocumentId()
         );
 
-        var mhsOutboundRequestData = documentToMHSTranslator.translateGpcResponseToMhsOutboundRequestData(
-            taskDefinition,
-            binary.getContentAsBase64(),
-            binary.getContentType()
-        );
-
-        var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
-            .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
+        var storageDataWrapperWithMhsOutboundRequest = getStorageDataWrapper(binaryContent, taskDefinition, taskId);
 
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
 
         return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, documentName, taskId, messageId, binary.getContentAsBase64().length());
+            taskDefinition, documentName, taskId, taskDefinition.getMessageId(), binaryContent.getContentAsBase64().length());
+    }
+
+    private StorageDataWrapper getStorageDataWrapper(BinaryContent binaryContent, GetGpcDocumentTaskDefinition taskDefinition, String taskId) {
+        var mhsOutboundRequestData = documentToMHSTranslator.translateGpcResponseToMhsOutboundRequestData(
+            taskDefinition,
+            binaryContent.getContentAsBase64(),
+            binaryContent.getContentType()
+        );
+
+        return StorageDataWrapperProvider
+            .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
+    }
+
+    public BinaryContent getBinaryContent(GetGpcDocumentTaskDefinition taskDefinition) {
+        var response = gpcClient.getDocumentRecord(taskDefinition);
+        var binary = fhirParseService.parseResource(response, Binary.class);
+        return BinaryContent.builder()
+            .contentType(new String(binary.getContentType())) // need a new string object to allow GC to dispose the Binary
+            .contentLength(binary.getContentAsBase64().length())
+            .contentAsBase64(binary.getContentAsBase64()) // this creates a new string object
+            .build();
+    }
+
+    @Builder
+    @Getter
+    public static class BinaryContent {
+        private final String contentAsBase64;
+        private final String contentType;
+        private final int contentLength;
     }
 }

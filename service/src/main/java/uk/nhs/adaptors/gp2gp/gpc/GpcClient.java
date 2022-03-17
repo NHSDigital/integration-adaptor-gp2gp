@@ -60,11 +60,13 @@ public class GpcClient {
 
     private String performRequest(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request) {
         var response = request.retrieve();
-        var responseBody = response.bodyToMono(String.class).block();
+        if (LOGGER.isDebugEnabled()) {
+            var responseBody = response.bodyToMono(String.class).block();
+            LOGGER.debug("Body: {}", responseBody);
+            return responseBody;
+        }
 
-        LOGGER.debug("Body: {}", responseBody);
-
-        return responseBody;
+        return response.bodyToMono(String.class).block();
     }
 
     private String buildGpcBaseUrl(TaskDefinition taskDefinition) {
