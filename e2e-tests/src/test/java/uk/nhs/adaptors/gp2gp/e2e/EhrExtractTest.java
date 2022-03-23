@@ -47,6 +47,7 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_LARGE_ATTACHMENT_DOCX = "9388098434";
 
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
+    private static final String EHR_EXTRACT_REQUEST_WITHOUT_NHS_NUMBER_TEST_FILE = "/ehrExtractRequestWithoutNhsNumber.json";
     private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS = "/ehrExtractRequestWithNoDocuments.json";
     private static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
     private static final String FROM_PARTY_ID = "N82668-820670";
@@ -81,6 +82,27 @@ public class EhrExtractTest {
     @BeforeEach
     void setUp() {
         mhsMockRequestsJournal.deleteRequestsJournal();
+    }
+
+    @Test
+    public void When_ExtractRequestWithoutNhsNumberReceived_Expect_Nack() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequestWithoutNhsNumber(conversationId, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        var requestJournal = waitFor(() -> {
+            try {
+                return mhsMockRequestsJournal.getRequestsJournal(conversationId);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        assertThat(requestJournal).hasSize(1);
+
+        XmlAssert.assertThat(requestJournal.get(0).getPayload())
+            .hasXPath("/MCCI_IN010000UK13/acknowledgement[@type='Acknowledgement' and @typeCode='AE']/acknowledgementDetail[@type='AcknowledgementDetail' and @typeCode='ER']/code[@code='18']".replace("/", XML_NAMESPACE));
+        XmlAssert.assertThat(requestJournal.get(0).getPayload())
+            .hasXPath("/MCCI_IN010000UK13/ControlActEvent/reason/justifyingDetectedIssueEvent/code[@code='18']".replace("/", XML_NAMESPACE));
     }
 
     @Test
@@ -337,6 +359,13 @@ public class EhrExtractTest {
             Objects.requireNonNull(getClass().getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE)), StandardCharsets.UTF_8)
             .replace(CONVERSATION_ID_PLACEHOLDER, conversationId)
             .replace(NHS_NUMBER_PLACEHOLDER, notExistingPatientNhsNumber)
+            .replace(FROM_ODS_CODE_PLACEHOLDER, fromODSCode);
+    }
+
+    private String buildEhrExtractRequestWithoutNhsNumber(String conversationId, String fromODSCode) throws IOException {
+        return IOUtils.toString(
+                Objects.requireNonNull(getClass().getResourceAsStream(EHR_EXTRACT_REQUEST_WITHOUT_NHS_NUMBER_TEST_FILE)), StandardCharsets.UTF_8)
+            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId)
             .replace(FROM_ODS_CODE_PLACEHOLDER, fromODSCode);
     }
 

@@ -51,7 +51,13 @@ public class EhrExtractRequestHandler {
 
     public void handleStart(Document header, Document payload, Instant messageTimestamp) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload, messageTimestamp);
-        if (saveNewExtractStatusDocument(ehrExtractStatus)) {
+        ehrExtractStatus = saveExtractStatusDocument(ehrExtractStatus);
+        if (ehrExtractStatus != null) {
+            addAdditionalInformationToEhrExtract(ehrExtractStatus.getEhrRequest(), header, payload);
+            ehrExtractStatus = saveExtractStatusDocument(ehrExtractStatus);
+            if (ehrExtractStatus == null) {
+                throw new IllegalStateException("Unable to save updated ehr extract status");
+            }
             LOGGER.info("Creating tasks to start the EHR Extract process");
             createGetGpcStructuredTask(ehrExtractStatus);
         } else {
@@ -59,10 +65,17 @@ public class EhrExtractRequestHandler {
         }
     }
 
+    private void addAdditionalInformationToEhrExtract(EhrExtractStatus.EhrRequest ehrRequest, Document header, Document payload) {
+        ehrRequest.setNhsNumber(getRequiredValue(payload, NHS_NUMBER_PATH));
+        ehrRequest.setFromPartyId(getRequiredValue(header, FROM_PARTY_ID_PATH));
+        ehrRequest.setToPartyId(getRequiredValue(header, TO_PARTY_ID_PATH));
+        ehrRequest.setToOdsCode(getRequiredValue(payload, TO_ODS_CODE_PATH));
+    }
+
     private EhrExtractStatus prepareEhrExtractStatus(Document header, Document payload, Instant messageTimestamp) {
-        EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
-        Instant now = timestampService.now();
-        String conversationId = getRequiredValue(header, CONVERSATION_ID_PATH);
+        var ehrRequest = prepareMinimalEhrRequest(header, payload);
+        var now = timestampService.now();
+        var conversationId = getRequiredValue(header, CONVERSATION_ID_PATH);
         return EhrExtractStatus.builder()
             .created(now)
             .updatedAt(now)
@@ -72,14 +85,14 @@ public class EhrExtractRequestHandler {
             .build();
     }
 
-    private boolean saveNewExtractStatusDocument(EhrExtractStatus ehrExtractStatus) {
+    private EhrExtractStatus saveExtractStatusDocument(EhrExtractStatus ehrExtractStatus) {
         try {
-            ehrExtractStatusRepository.save(ehrExtractStatus);
+            var savedEhrExtractStatus = ehrExtractStatusRepository.save(ehrExtractStatus);
             LOGGER.info("An ehr_extract_status document was added to the database for the extract request");
-            return true;
+            return savedEhrExtractStatus;
         } catch (DuplicateKeyException e) {
             LOGGER.warn("A duplicate extract request was received and ignored");
-            return false;
+            return null;
         }
     }
 
@@ -97,22 +110,18 @@ public class EhrExtractRequestHandler {
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
     }
 
-    private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {
+    private EhrExtractStatus.EhrRequest prepareMinimalEhrRequest(Document header, Document payload) {
         return EhrExtractStatus.EhrRequest.builder()
+            .messageId(getRequiredValue(header, MESSAGE_ID_PATH))
             .requestId(getRequiredValue(payload, REQUEST_ID_PATH))
-            .nhsNumber(getRequiredValue(payload, NHS_NUMBER_PATH))
-            .fromPartyId(getRequiredValue(header, FROM_PARTY_ID_PATH))
-            .toPartyId(getRequiredValue(header, TO_PARTY_ID_PATH))
             .fromAsid(getRequiredValue(payload, FROM_ASID_PATH))
             .toAsid(getRequiredValue(payload, TO_ASID_PATH))
             .fromOdsCode(getRequiredValue(payload, FROM_ODS_CODE_PATH))
-            .toOdsCode(getRequiredValue(payload, TO_ODS_CODE_PATH))
-            .messageId(getRequiredValue(header, MESSAGE_ID_PATH))
             .build();
     }
 
     private String getRequiredValue(Document xml, String xpath) {
-        String value = xPathService.getNodeValue(xml, xpath);
+        var value = xPathService.getNodeValue(xml, xpath);
         if (StringUtils.isBlank(value)) {
             throw MissingValueException.builder()
                 .interaction(SpineInteraction.EHR_EXTRACT_REQUEST)
@@ -126,11 +135,7 @@ public class EhrExtractRequestHandler {
         if (payload.contains(CONTINUE_ACKNOWLEDGEMENT)) {
             ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId)
                 .ifPresent(ehrExtractStatus -> {
-                    //TODO this has an empty list in case of a large ehr extract without documents
                     var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
-//                    if (isEhrExtractBeingSentAsExternalAttachment(ehrExtractStatus)) {
-//                        sendEhrExtractAsExternalAttachment(ehrExtractStatus, conversationId);
-//                    }
                     LOGGER.info("Sending documents for: ConversationId: " + conversationId);
                     for (int documentPosition = 0; documentPosition < documents.size(); documentPosition++) {
                         var document = documents.get(documentPosition);

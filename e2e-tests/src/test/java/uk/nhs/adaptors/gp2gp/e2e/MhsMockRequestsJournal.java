@@ -47,7 +47,7 @@ public class MhsMockRequestsJournal {
                 })
                 .collect(Collectors.toList());
         } else {
-            throw new RuntimeException("Request Journal contains no key [" + conversationId + "]!");
+            return null;
         }
     }
 
