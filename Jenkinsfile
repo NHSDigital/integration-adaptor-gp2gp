@@ -1,8 +1,3 @@
-String tfProject      = "nia"
-String tfEnvironment  = "build1"
-String tfComponent    = "gp2gp"
-String redirectEnv    = "build1"          // Name of environment where TF deployment needs to be re-directed
-String redirectBranch = "main"      // When deploying branch name matches, TF deployment gets redirected to environment defined in variable "redirectEnv"
 Boolean publishWiremockImage = true // true: To publish gp2gp wiremock image to AWS ECR gp2gp-wiremock
 Boolean publishMhsMockImage  = true // true: to publish mhs mock image to AWS ECR gp2gp-mock-mhs
 Boolean publishGpccMockImage  = true // true: to publish gpcc mock image to AWS ECR gp2gp-gpcc-mock
@@ -139,37 +134,8 @@ pipeline {
                         }
                     }
                 }
-                stage('Deploy & Test') {
-                    options {
-                        lock("${tfProject}-${tfEnvironment}-${tfComponent}")
-                    }
+                stage('Test') {
                     stages {
-
-                        stage('Deploy using Terraform') {
-                            steps {
-                                script {
-                                    
-                                    // Check if TF deployment environment needs to be redirected
-                                    if (GIT_BRANCH == redirectBranch) { tfEnvironment = redirectEnv }
-                                    
-                                    String tfCodeBranch  = "develop"
-                                    String tfCodeRepo    = "https://github.com/nhsconnect/integration-adaptors"
-                                    String tfRegion      = "${TF_STATE_BUCKET_REGION}"
-                                    List<String> tfParams = []
-                                    Map<String,String> tfVariables = ["${tfComponent}_build_id": BUILD_TAG]
-                                      if (gpccDeploy) {
-                                          tfVariables.put("${tfGpccImagePrefix}_build_id", getLatestImageTag(gpccBranch, gpccEcrRepo, tfRegion))
-                                      }
-                                    dir ("integration-adaptors") {
-                                      git (branch: tfCodeBranch, url: tfCodeRepo)
-                                      dir ("terraform/aws") {
-                                        if (terraformInit(TF_STATE_BUCKET, tfProject, tfEnvironment, tfComponent, tfRegion) !=0) { error("Terraform init failed")}
-                                        if (terraform('apply', TF_STATE_BUCKET, tfProject, tfEnvironment, tfComponent, tfRegion, tfVariables) !=0 ) { error("Terraform Apply failed")}
-                                      }
-                                    }
-                                }  //script
-                            } // steps
-                        } // Stage Deploy using Terraform
 
                         stage('E2E Tests') {
                             steps {
@@ -193,8 +159,8 @@ pipeline {
                                 }
                             }
                         } //stage E2E Test
-                    } //Stages Deploy & Test
-                }  // Stage Deploy & Test
+                    } //Stages
+                }  // Stage Test
             }  // Stages Build
         } //Stage Build
     }  //Stages
