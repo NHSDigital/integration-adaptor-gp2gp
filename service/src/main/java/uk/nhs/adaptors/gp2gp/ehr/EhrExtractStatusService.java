@@ -292,30 +292,6 @@ public class EhrExtractStatusService {
         getEhrExtractStatus(query, documents, updateBuilder, returningUpdatedRecordOption);
     }
 
-//    public void updateEhrExtractStatusAccessDocumentDocumentReferencesAbsent(
-//        GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
-//        Map<String, String> titles
-//    ) {
-//        Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
-//
-//        var docs = new ArrayList<EhrExtractStatus.GpcDocument>();
-//
-//        Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
-//        Instant now = Instant.now();
-//        titles.forEach((documentId, fileName) ->
-//            docs.add(EhrExtractStatus.GpcDocument.builder()
-//                .documentId(documentId)
-//                .fileName(fileName)
-//                .accessDocumentUrl(null)
-//                .objectName(null)
-//                .accessedAt(now)
-//                .taskId(documentReferencesTaskDefinition.getTaskId())
-//                .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
-//        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
-//
-//        getEhrExtractStatus(query, docs, updateBuilder, returningUpdatedRecordOption);
-//    }
-
     private EhrExtractStatus getEhrExtractStatus(
         Query query,
         List<EhrExtractStatus.GpcDocument> docs,
