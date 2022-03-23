@@ -4,10 +4,10 @@ String tfComponent    = "gp2gp"
 String redirectEnv    = "build1"          // Name of environment where TF deployment needs to be re-directed
 String redirectBranch = "main"      // When deploying branch name matches, TF deployment gets redirected to environment defined in variable "redirectEnv"
 Boolean publishWiremockImage = true // true: To publish gp2gp wiremock image to AWS ECR gp2gp-wiremock
-Boolean publishMhsMockImage  = true // true: to publsh mhs mock image to AWS ECR gp2gp-mock-mhs
-Boolean publishGpccMockImage  = true // true: to publsh gpcc mock image to AWS ECR gp2gp-gpcc-mock
-Boolean publishGpcApiMockImage  = true // true: to publsh gpc api mock image to AWS ECR gp2gp-gpc-api-mock
-Boolean publishSdsApiMockImage  = true // true: to publsh sds api mock image to AWS ECR gp2gp-sds-api-mock
+Boolean publishMhsMockImage  = true // true: to publish mhs mock image to AWS ECR gp2gp-mock-mhs
+Boolean publishGpccMockImage  = true // true: to publish gpcc mock image to AWS ECR gp2gp-gpcc-mock
+Boolean publishGpcApiMockImage  = true // true: to publish gpc api mock image to AWS ECR gp2gp-gpc-api-mock
+Boolean publishSdsApiMockImage  = true // true: to publish sds api mock image to AWS ECR gp2gp-sds-api-mock
 
 Boolean gpccDeploy    = true         // true: To deploy GPC-Consumer service inside gp2gp
 String gpccBranch     = "main"      // Name of branch as a prefix to image name (GPC-Consumer) stored in ECR
