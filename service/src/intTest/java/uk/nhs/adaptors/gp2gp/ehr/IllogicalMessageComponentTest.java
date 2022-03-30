@@ -140,7 +140,7 @@ public class IllogicalMessageComponentTest {
     }
 
     @Test
-    @Disabled
+    @Disabled //TODO: fix test
     public void When_AcknowledgementReceivedOutOfOrderAcknowledgmentNotSent_Expect_ErrorThrown() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(randomIdGeneratorService.createNewId());
         ehrExtractStatusRepository.save(ehrExtractStatus);

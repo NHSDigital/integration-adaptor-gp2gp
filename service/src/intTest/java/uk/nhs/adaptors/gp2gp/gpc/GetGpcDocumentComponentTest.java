@@ -137,7 +137,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     }
 
     @Test
-    @Disabled
+    @Disabled //TODO: fix test
     public void When_AccessDocumentNotFoundError_Expect_EhrStatusNotUpdatedAndNotSavedToStorage() {
         var conversationId = UUID.randomUUID().toString();
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
