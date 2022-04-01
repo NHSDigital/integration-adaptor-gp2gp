@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.2'
+	id 'org.springframework.boot' version '2.6.6'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id "checkstyle"
@@ -32,10 +32,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
+	implementation 'org.springframework:spring-jms:5.3.18'
 
 	// WebClient
-	implementation ('org.springframework.boot:spring-boot-starter-webflux:2.5.5') {
+	implementation ('org.springframework.boot:spring-boot-starter-webflux:2.6.6') {
 		exclude group: 'io.netty', module: 'netty-codec'
 	}
 	implementation('org.projectreactor:reactor-spring:1.0.1.RELEASE') {
