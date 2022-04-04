@@ -39,6 +39,7 @@ public class InboundMessageHandlingTest {
     private static final String EBXML_PATH = "/continuemessage/COPC_IN000001UK01_ebxml.txt";
     private static final String PAYLOAD_PATH = "/continuemessage/COPC_IN000001UK01_payload.txt";
     private static final String INCORRECT_PAYLOAD_PATH = "/continuemessage/COPC_IN000001UK01_incorrect_payload.txt";
+    private static final int THREE_SECONDS = 3;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -64,7 +65,8 @@ public class InboundMessageHandlingTest {
 
 //        verify(message, never()).acknowledge(); // TODO
 //        verifyNoInteractions(taskDispatcher); // TODO
-        await().until(this::conversationIsFailed); // warunek nigdy nie jest spelniony, wydaje mi sie ze to dlatego, ze obsluga bledow w gp2gp jest kiepska
+        await().until(this::conversationIsFailed);
+        // warunek nigdy nie jest spelniony, wydaje mi sie ze to dlatego, ze obsluga bledow w gp2gp jest kiepska
     }
 
     @Test
@@ -77,7 +79,8 @@ public class InboundMessageHandlingTest {
 
 //        verify(message).acknowledge(); // TODO
 //        assertThatSendNackTaskHasBeenTriggered(); // TODO
-        await().until(this::conversationIsFailed); // warunek nigdy nie jest spelniony, wydaje mi sie ze to dlatego, ze obsluga bledow w gp2gp jest kiepska
+        await().until(this::conversationIsFailed);
+        // warunek nigdy nie jest spelniony, wydaje mi sie ze to dlatego, ze obsluga bledow w gp2gp jest kiepska
     }
 
     @Test
@@ -170,6 +173,6 @@ public class InboundMessageHandlingTest {
 
     @SneakyThrows
     private void waitThreeSeconds() {
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(THREE_SECONDS);
     }
 }
