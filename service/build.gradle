@@ -41,34 +41,34 @@ dependencies {
 	implementation('org.projectreactor:reactor-spring:1.0.1.RELEASE') {
 		exclude group: 'com.jayway.jsonpath', module: 'json-path'
 	}
-	implementation('com.jayway.jsonpath:json-path:2.5.0') {
+	implementation('com.jayway.jsonpath:json-path:2.7.0') {
 		exclude group: 'net.minidev', module: 'json-smart'
 	}
-	implementation('net.minidev:json-smart:2.4.7')
+	implementation 'net.minidev:json-smart:2.4.8'
 
 	//Keystore
 	implementation 'com.heroku.sdk:env-keystore:1.1.6'
 
 	// Logging
-	implementation 'ch.qos.logback:logback-classic:1.2.3'
+	implementation 'ch.qos.logback:logback-classic:1.2.11'
 
 	// Infrastructure
-	implementation 'com.amazonaws:aws-java-sdk-s3:1.11.955'
-	implementation ('com.azure:azure-storage-blob:12.10.0') {
+	implementation ('com.amazonaws:aws-java-sdk-s3:1.12.186')
+	implementation ('com.azure:azure-storage-blob:12.15.0') {
 		exclude group: 'io.netty', module: 'netty-codec'
 	}
-	implementation ('org.apache.qpid:qpid-jms-client:1.2.0') {
+	implementation ('org.apache.qpid:qpid-jms-client:1.5.0') {
 		exclude group: 'io.netty', module: 'netty-codec-http'
 	}
 
 	// Utils
-	implementation 'org.apache.commons:commons-lang3:3.11'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
-	implementation 'com.github.spullara.mustache.java:compiler:0.9.5'
-	implementation 'org.apache.tika:tika-core:1.26'
+	implementation 'com.github.spullara.mustache.java:compiler:0.9.10'
+	implementation 'org.apache.tika:tika-core:2.3.0'
 
 	// Fhir
-	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:5.4.0'
+	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:5.7.1'
 
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
