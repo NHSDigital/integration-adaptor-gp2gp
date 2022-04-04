@@ -1,29 +1,23 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
+import static org.awaitility.Awaitility.await;
 
-import javax.jms.Message;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.io.IOUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -31,150 +25,151 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.SneakyThrows;
-import uk.nhs.adaptors.gp2gp.common.service.XPathService;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessage;
-import uk.nhs.adaptors.gp2gp.mhs.InboundMessageConsumer;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 @RunWith(SpringRunner.class)
-@ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class, MockitoExtension.class})
+@ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext
 public class InboundMessageHandlingTest {
-    private static final String CONTINUE_INTERACTION_ID = "COPC_IN000001UK01";
-    private static final String ACTION_PATH = "/Envelope/Header/MessageHeader/Action";
-    private static final String CONVERSATION_ID_PATH = "/Envelope/Header/MessageHeader/ConversationId";
-    private static final String CONTINUE_MESSAGE_PAYLOAD = "Continue Acknowledgement";
+    private static final String CONVERSATION_ID_PLACEHOLDER = "{{conversationId}}";
+    private static final String EBXML_PATH = "/continuemessage/COPC_IN000001UK01_ebxml.txt";
+    private static final String PAYLOAD_PATH = "/continuemessage/COPC_IN000001UK01_payload.txt";
+    private static final String INCORRECT_PAYLOAD_PATH = "/continuemessage/COPC_IN000001UK01_incorrect_payload.txt";
 
-    @MockBean
-    private XPathService xPathService;
-    @MockBean
-    private ObjectMapper objectMapper;
-    @MockBean
-    private TaskDispatcher taskDispatcher;
     @Autowired
-    private InboundMessageConsumer inboundMessageConsumer;
+    private ObjectMapper objectMapper;
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
-    @Mock
-    private Message message;
-    @Mock
-    private InboundMessage inboundMessage;
+    @Autowired
+    private JmsTemplate inboundJmsTemplate;
 
-    @Test
-    @SneakyThrows
-    public void When_MessageIsUnreadable_Expect_MessageProcessingToBeAborted() {
-        mockNonJsonMessage();
+    private String conversationId;
 
-        inboundMessageConsumer.receive(message);
-
-        verify(message, never()).acknowledge();
-        verifyNoInteractions(taskDispatcher);
+    @BeforeEach
+    public void setUp() {
+        inboundJmsTemplate.setDefaultDestinationName("inbound");
+        conversationId = UUID.randomUUID().toString();
     }
 
     @Test
-    @SneakyThrows
+    public void When_MessageIsUnreadable_Expect_MessageProcessingToBeAborted() {
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId);
+        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+        sendUnreadableInboundMessageToQueue();
+
+//        verify(message, never()).acknowledge(); // TODO
+//        verifyNoInteractions(taskDispatcher); // TODO
+        await().until(this::conversationIsFailed); // warunek nigdy nie jest spelniony, wydaje mi sie ze to dlatego, ze obsluga bledow w gp2gp jest kiepska
+    }
+
+    @Test
     public void When_MessageProcessingFails_Expect_WholeProcessToBeFailed() {
-        mockInboundMessage(CONTINUE_INTERACTION_ID, CONTINUE_MESSAGE_PAYLOAD);
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId);
         ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
-        doThrow(RuntimeException.class).when(taskDispatcher).createTask(any(SendDocumentTaskDefinition.class));
+        sendInboundMessageToQueue(INCORRECT_PAYLOAD_PATH);
 
-        inboundMessageConsumer.receive(message);
-
-        verify(message).acknowledge();
-        assertThatSendNackTaskHasBeenTriggered();
-        assertConversationIsFailed(ehrExtractStatus);
+//        verify(message).acknowledge(); // TODO
+//        assertThatSendNackTaskHasBeenTriggered(); // TODO
+        await().until(this::conversationIsFailed); // warunek nigdy nie jest spelniony, wydaje mi sie ze to dlatego, ze obsluga bledow w gp2gp jest kiepska
     }
 
     @Test
-    @SneakyThrows
     public void When_ProcessIsAlreadyFailed_Expect_MessageProcessingToBeAborted() {
-        mockInboundMessage(CONTINUE_INTERACTION_ID, CONTINUE_MESSAGE_PAYLOAD);
-
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId);
         ehrExtractStatus.setError(EhrExtractStatus.Error.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         var initialDbExtract = readEhrExtractStatusFromDb();
 
-        inboundMessageConsumer.receive(message);
+        sendInboundMessageToQueue(PAYLOAD_PATH);
 
-        verify(message).acknowledge();
-        verifyNoInteractions(taskDispatcher);
+//        verify(message).acknowledge(); // TODO
+//        verifyNoInteractions(taskDispatcher); // TODO
 
-        var finalDbExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        waitThreeSeconds();
+        var finalDbExtract = readEhrExtractStatusFromDb();
         assertThat(finalDbExtract).usingRecursiveComparison().isEqualTo(initialDbExtract);
     }
 
     @Test
-    @SneakyThrows
     public void When_ProcessIsNotFailed_Expect_MessageToBeProcessed() {
-        mockInboundMessage(CONTINUE_INTERACTION_ID, CONTINUE_MESSAGE_PAYLOAD);
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId);
         ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         var initialDbExtract = readEhrExtractStatusFromDb();
         assertThat(initialDbExtract.getEhrContinue()).isNull();
 
-        inboundMessageConsumer.receive(message);
+        sendInboundMessageToQueue(PAYLOAD_PATH);
 
-        verify(message).acknowledge();
-        assertSendDocumentTaskHasBeenTriggered();
+//        verify(message).acknowledge(); // TODO
+//        assertSendDocumentTaskHasBeenTriggered(); // TODO
 
+        await().until(this::ehrContinueIsNotNull);
+        assertConversationIsNotFailed();
+    }
+
+    private boolean ehrContinueIsNotNull() {
         var finalDbExtract = readEhrExtractStatusFromDb();
-        assertThat(finalDbExtract.getEhrContinue()).isNotNull();
-        assertThat(finalDbExtract.getError()).isNull();
+        return finalDbExtract.getEhrContinue() != null;
     }
 
-    private void assertConversationIsFailed(EhrExtractStatus ehrExtractStatus) {
-        var dbExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-        assertThat(dbExtract.getError()).isNotNull();
+    private boolean conversationIsFailed() {
+        var dbExtract = readEhrExtractStatusFromDb();
+        return dbExtract.getError() != null;
     }
 
-    private void assertThatSendNackTaskHasBeenTriggered() {
-        verify(taskDispatcher).createTask(
-            argThat(taskDefinition ->
-                taskDefinition instanceof SendAcknowledgementTaskDefinition
-                    && ((SendAcknowledgementTaskDefinition) taskDefinition).isNack()
-            )
-        );
-    }
-
-    private void assertSendDocumentTaskHasBeenTriggered() {
-        var sendDocumentTaskDefinitionCaptor = ArgumentCaptor.forClass(SendDocumentTaskDefinition.class);
-        verify(taskDispatcher).createTask(sendDocumentTaskDefinitionCaptor.capture());
-    }
-
-    @SneakyThrows
-    private void mockNonJsonMessage() {
-        doThrow(JsonProcessingException.class)
-            .when(objectMapper)
-            .readValue(
-                ArgumentMatchers.<String>any(),
-                ArgumentMatchers.<Class<InboundMessage>>any()
-            );
-    }
-
-    @SneakyThrows
-    private void mockInboundMessage(String interactionId, String payload) {
-        when(
-            objectMapper.readValue(ArgumentMatchers.<String>any(), ArgumentMatchers.<Class<InboundMessage>>any())
-        ).thenReturn(inboundMessage);
-
-        when(xPathService.getNodeValue(any(), eq(ACTION_PATH))).thenReturn(interactionId);
-        when(xPathService.getNodeValue(any(), eq(CONVERSATION_ID_PATH))).thenReturn(CONVERSATION_ID);
-
-        when(inboundMessage.getPayload()).thenReturn(payload);
+    private void assertConversationIsNotFailed() {
+        var dbExtract = readEhrExtractStatusFromDb();
+        assertThat(dbExtract.getError()).isNull();
     }
 
     private EhrExtractStatus readEhrExtractStatusFromDb() {
-        return ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID).get();
+        return ehrExtractStatusRepository.findByConversationId(conversationId).get();
+    }
+
+    private void sendInboundMessageToQueue(String payloadPartPath) {
+        var inboundMessage = createInboundMessage(payloadPartPath);
+        inboundJmsTemplate.send(session -> session.createTextMessage(parseMessageToString(inboundMessage)));
+    }
+
+    private InboundMessage createInboundMessage(String payloadPartPath) {
+        var inboundMessage = new InboundMessage();
+        var payload = readResourceAsString(payloadPartPath);
+        var ebXml = readResourceAsString(EBXML_PATH).replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
+        inboundMessage.setPayload(payload);
+        inboundMessage.setEbXML(ebXml);
+        return inboundMessage;
+    }
+
+    private void sendUnreadableInboundMessageToQueue() {
+        inboundJmsTemplate.send(session -> session.createTextMessage("not a json"));
+    }
+
+    @SneakyThrows
+    private String parseMessageToString(InboundMessage inboundMessage) {
+        return objectMapper.writeValueAsString(inboundMessage);
+    }
+
+    @SneakyThrows
+    private static String readResourceAsString(String path) {
+        try (InputStream is = InboundMessageHandlingTest.class.getResourceAsStream(path)) {
+            if (is == null) {
+                throw new FileNotFoundException(path);
+            }
+            return IOUtils.toString(is, UTF_8);
+        }
+    }
+
+    @SneakyThrows
+    private void waitThreeSeconds() {
+        TimeUnit.SECONDS.sleep(3);
     }
 }

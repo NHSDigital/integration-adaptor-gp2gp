@@ -53,7 +53,7 @@ dependencies {
 	implementation 'ch.qos.logback:logback-classic:1.2.11'
 
 	// Infrastructure
-	implementation ('com.amazonaws:aws-java-sdk-s3:1.12.186')
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.186'
 	implementation ('com.azure:azure-storage-blob:12.15.0') {
 		exclude group: 'io.netty', module: 'netty-codec'
 	}

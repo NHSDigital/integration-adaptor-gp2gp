@@ -264,7 +264,7 @@ public class IllogicalMessageComponentTest {
 
     @SneakyThrows
     private void mockIncomingMessage(String ebxml, String payload, String interactionId, String conversationId) {
-        String incomingMessage = "message";
+        String incomingMessage = null;
         lenient().when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
         lenient().when(inboundMessage.getEbXML()).thenReturn(ebxml);
         lenient().when(inboundMessage.getPayload()).thenReturn(payload);
