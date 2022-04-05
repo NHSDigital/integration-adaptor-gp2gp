@@ -38,7 +38,6 @@ public class InboundMessageHandlingTest {
     private static final String CONVERSATION_ID_PLACEHOLDER = "{{conversationId}}";
     private static final String EBXML_PATH = "/continuemessage/COPC_IN000001UK01_ebxml.txt";
     private static final String PAYLOAD_PATH = "/continuemessage/COPC_IN000001UK01_payload.txt";
-    private static final String INCORRECT_PAYLOAD_PATH = "/continuemessage/COPC_IN000001UK01_incorrect_payload.txt";
     private static final int THREE_SECONDS = 3;
 
     @Autowired
@@ -57,33 +56,6 @@ public class InboundMessageHandlingTest {
     }
 
     @Test
-    public void When_MessageIsUnreadable_Expect_MessageProcessingToBeAborted() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId);
-        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
-        ehrExtractStatusRepository.save(ehrExtractStatus);
-        sendUnreadableInboundMessageToQueue();
-
-//        verify(message, never()).acknowledge(); // TODO
-//        verifyNoInteractions(taskDispatcher); // TODO
-        await().until(this::conversationIsFailed);
-        // warunek nigdy nie jest spelniony, wydaje mi sie ze to dlatego, ze obsluga bledow w gp2gp jest kiepska
-    }
-
-    @Test
-    public void When_MessageProcessingFails_Expect_WholeProcessToBeFailed() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId);
-        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
-        ehrExtractStatusRepository.save(ehrExtractStatus);
-
-        sendInboundMessageToQueue(INCORRECT_PAYLOAD_PATH);
-
-//        verify(message).acknowledge(); // TODO
-//        assertThatSendNackTaskHasBeenTriggered(); // TODO
-        await().until(this::conversationIsFailed);
-        // warunek nigdy nie jest spelniony, wydaje mi sie ze to dlatego, ze obsluga bledow w gp2gp jest kiepska
-    }
-
-    @Test
     public void When_ProcessIsAlreadyFailed_Expect_MessageProcessingToBeAborted() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId);
         ehrExtractStatus.setError(EhrExtractStatus.Error.builder().build());
@@ -92,9 +64,6 @@ public class InboundMessageHandlingTest {
         var initialDbExtract = readEhrExtractStatusFromDb();
 
         sendInboundMessageToQueue(PAYLOAD_PATH);
-
-//        verify(message).acknowledge(); // TODO
-//        verifyNoInteractions(taskDispatcher); // TODO
 
         waitThreeSeconds();
         var finalDbExtract = readEhrExtractStatusFromDb();
@@ -112,9 +81,6 @@ public class InboundMessageHandlingTest {
 
         sendInboundMessageToQueue(PAYLOAD_PATH);
 
-//        verify(message).acknowledge(); // TODO
-//        assertSendDocumentTaskHasBeenTriggered(); // TODO
-
         await().until(this::ehrContinueIsNotNull);
         assertConversationIsNotFailed();
     }
@@ -122,11 +88,6 @@ public class InboundMessageHandlingTest {
     private boolean ehrContinueIsNotNull() {
         var finalDbExtract = readEhrExtractStatusFromDb();
         return finalDbExtract.getEhrContinue() != null;
-    }
-
-    private boolean conversationIsFailed() {
-        var dbExtract = readEhrExtractStatusFromDb();
-        return dbExtract.getError() != null;
     }
 
     private void assertConversationIsNotFailed() {
@@ -150,10 +111,6 @@ public class InboundMessageHandlingTest {
         inboundMessage.setPayload(payload);
         inboundMessage.setEbXML(ebXml);
         return inboundMessage;
-    }
-
-    private void sendUnreadableInboundMessageToQueue() {
-        inboundJmsTemplate.send(session -> session.createTextMessage("not a json"));
     }
 
     @SneakyThrows

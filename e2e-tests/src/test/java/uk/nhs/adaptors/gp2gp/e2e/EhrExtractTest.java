@@ -324,7 +324,7 @@ public class EhrExtractTest {
         assertThat(gpcAccessStructured.get("accessedAt")).isNotNull();
         assertThat(gpcAccessStructured.get("taskId")).isNotNull();
         assertThat(gpcAccessStructured.get("messageId")).isNotNull();
-        assertThat(gpcAccessStructured.get("sentToMhs")).isNotNull();
+        assertThat(gpcAccessStructured.get("0")).isNotNull();
     }
 
     private Document fetchSentToMhsForDocuments(String conversationId) {
@@ -342,7 +342,9 @@ public class EhrExtractTest {
         var gpcAccessStructured = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED);
         if (gpcAccessStructured != null) {
             var attachment = (Document) gpcAccessStructured.get("attachment");
-            if (attachment != null && attachment.get("sentToMhs") != null) {
+            if (attachment != null) {
+                var first = (Document) attachment.get("0");
+                if (first != null && first.get("sentToMhs") != null)
                 return attachment;
             }
         }
