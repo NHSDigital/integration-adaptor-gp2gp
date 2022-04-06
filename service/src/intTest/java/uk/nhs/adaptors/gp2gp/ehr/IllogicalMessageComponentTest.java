@@ -5,6 +5,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -19,12 +20,12 @@ import javax.jms.Message;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.Resource;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -69,13 +70,13 @@ public class IllogicalMessageComponentTest {
     private static final String ACK_OK_CODE = "AA";
     private static final XPathService SERVICE = new XPathService();
 
-    @MockBean
+    @Mock
     private XPathService xPathService;
-    @MockBean
+    @Mock
     private ObjectMapper objectMapper;
-    @MockBean
+    @Mock
     private TaskDispatcher taskDispatcher;
-    @Autowired
+    @InjectMocks
     private InboundMessageHandler inboundMessageHandler;
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -100,7 +101,7 @@ public class IllogicalMessageComponentTest {
     private Resource acknowledgementResponsePayload;
 
     @Test
-    public void When_ContinueRecievedToNonExistingEhrExtractStatus_Expect_ErrorThrown() {
+    public void When_ContinueReceivedToNonExistingEhrExtractStatus_Expect_ErrorThrown() {
         String continuePayload = asString(continueResponsePayload);
         String continueEbxml = asString(continueResponseEbxml);
 
@@ -112,7 +113,7 @@ public class IllogicalMessageComponentTest {
     }
 
     @Test
-    public void When_AcknowledgementRecievedtToNonExistingEhrExtractStatus_Expect_ErrorThrown() {
+    public void When_AcknowledgementReceivedToNonExistingEhrExtractStatus_Expect_ErrorThrown() {
         String acknowledgementPayload = asString(acknowledgementResponsePayload);
         String acknowledgementEbxml = asString(acknowledgementResponseEbxml);
 
@@ -155,7 +156,7 @@ public class IllogicalMessageComponentTest {
     }
 
     @Test
-    public void When_DuplicateEhrRequestRecieved_Expect_SkippedNoDatabaseUpdated() {
+    public void When_DuplicateEhrRequestReceived_Expect_SkippedNoDatabaseUpdated() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
@@ -174,7 +175,7 @@ public class IllogicalMessageComponentTest {
     }
 
     @Test
-    public void When_DuplicateContinueRecieved_Expect_SkippedNoDatabaseUpdated() {
+    public void When_DuplicateContinueReceived_Expect_SkippedNoDatabaseUpdated() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(randomIdGeneratorService.createNewId());
         ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
@@ -220,7 +221,7 @@ public class IllogicalMessageComponentTest {
     @SneakyThrows
     public void When_UnsupportedMessageSent_Expect_ErrorThrown() {
         String incomingMessage = null;
-        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
+        lenient().when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
 
         assertFalse(inboundMessageHandler.handle(message));
 
@@ -230,27 +231,27 @@ public class IllogicalMessageComponentTest {
     @SneakyThrows
     private void mockEhrRequest(String ebxml, String payload, String interactionId, String conversationId) {
         String incomingMessage = null;
-        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
-        when(inboundMessage.getEbXML()).thenReturn(ebxml);
-        when(inboundMessage.getPayload()).thenReturn(payload);
+        lenient().when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
+        lenient().when(inboundMessage.getEbXML()).thenReturn(ebxml);
+        lenient().when(inboundMessage.getPayload()).thenReturn(payload);
 
         var ebxmlDocument = SERVICE.parseDocumentFromXml(ebxml);
-        when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
+        lenient().when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
         var payloadDocument = SERVICE.parseDocumentFromXml(payload);
-        when(xPathService.parseDocumentFromXml(inboundMessage.getPayload())).thenReturn(payloadDocument);
+        lenient().when(xPathService.parseDocumentFromXml(inboundMessage.getPayload())).thenReturn(payloadDocument);
 
-        when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
-        when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
+        lenient().when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
+        lenient().when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
 
-        when(xPathService.getNodeValue(payloadDocument, REQUEST_ID_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(payloadDocument, NHS_NUMBER_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(ebxmlDocument, FROM_PARTY_ID_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(ebxmlDocument, TO_PARTY_ID_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(payloadDocument, FROM_ASID_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(payloadDocument, TO_ASID_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(payloadDocument, FROM_ODS_CODE_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(payloadDocument, TO_ODS_CODE_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(ebxmlDocument, MESSAGE_ID_PATH)).thenReturn("123");
+        lenient().when(xPathService.getNodeValue(payloadDocument, REQUEST_ID_PATH)).thenReturn("123");
+        lenient().when(xPathService.getNodeValue(payloadDocument, NHS_NUMBER_PATH)).thenReturn("123");
+        lenient().when(xPathService.getNodeValue(ebxmlDocument, FROM_PARTY_ID_PATH)).thenReturn("123");
+        lenient().when(xPathService.getNodeValue(ebxmlDocument, TO_PARTY_ID_PATH)).thenReturn("123");
+        lenient().when(xPathService.getNodeValue(payloadDocument, FROM_ASID_PATH)).thenReturn("123");
+        lenient().when(xPathService.getNodeValue(payloadDocument, TO_ASID_PATH)).thenReturn("123");
+        lenient().when(xPathService.getNodeValue(payloadDocument, FROM_ODS_CODE_PATH)).thenReturn("123");
+        lenient().when(xPathService.getNodeValue(payloadDocument, TO_ODS_CODE_PATH)).thenReturn("123");
+        lenient().when(xPathService.getNodeValue(ebxmlDocument, MESSAGE_ID_PATH)).thenReturn("123");
     }
 
     private static String asString(Resource resource) {
@@ -264,14 +265,14 @@ public class IllogicalMessageComponentTest {
     @SneakyThrows
     private void mockIncomingMessage(String ebxml, String payload, String interactionId, String conversationId) {
         String incomingMessage = null;
-        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
-        when(inboundMessage.getEbXML()).thenReturn(ebxml);
-        when(inboundMessage.getPayload()).thenReturn(payload);
+        lenient().when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
+        lenient().when(inboundMessage.getEbXML()).thenReturn(ebxml);
+        lenient().when(inboundMessage.getPayload()).thenReturn(payload);
 
         var ebxmlDocument = SERVICE.parseDocumentFromXml(ebxml);
-        when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
-        when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
-        when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
+        lenient().when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
+        lenient().when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
+        lenient().when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
     }
 
     @SneakyThrows
