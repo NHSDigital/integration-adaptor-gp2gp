@@ -96,7 +96,7 @@ services:
       - -global-response-templating
 
   gpcc:
-    image: nhsdev/nia-gpc-consumer-adaptor:0.3.2-prototype
+    image: nhsdev/nia-gpc-consumer-adaptor:0.3.3
     networks: 
       - commonforgp2gp
     ports:
