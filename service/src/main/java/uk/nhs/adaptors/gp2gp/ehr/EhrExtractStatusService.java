@@ -292,7 +292,7 @@ public class EhrExtractStatusService {
         getEhrExtractStatus(query, documents, updateBuilder, returningUpdatedRecordOption);
     }
 
-    private EhrExtractStatus getEhrExtractStatus(
+    private void getEhrExtractStatus(
         Query query,
         List<EhrExtractStatus.GpcDocument> docs,
         Update.AddToSetBuilder updateBuilder,
@@ -308,8 +308,6 @@ public class EhrExtractStatusService {
         if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status was not updated with document URL's");
         }
-
-        return ehrExtractStatus;
     }
 
     public void updateEhrExtractStatusAcknowledgement(
@@ -386,24 +384,21 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusCommonForDocuments(SendDocumentTaskDefinition taskDefinition, List<String> messageIds) {
-        return updateEhrExtractStatusCommon(taskDefinition, messageIds, GPC_DOCUMENTS);
+        return updateEhrExtractStatusDocumentSentToMHS(taskDefinition, messageIds);
     }
 
     public EhrExtractStatus updateEhrExtractStatusCommonForExternalEhrExtract(SendDocumentTaskDefinition taskDefinition,
         List<String> messageIds) {
-        return updateEhrExtractStatusCommon(taskDefinition, messageIds, STRUCTURE_OBJECT_AS_ATTACHMENT);
+        return updateEhrExtractStatusAttachmentSentToMhs(taskDefinition, messageIds);
     }
 
-    private EhrExtractStatus updateEhrExtractStatusCommon(
-        SendDocumentTaskDefinition taskDefinition,
-        List<String> messageIds,
-        String rootObject
-    ) {
+    private EhrExtractStatus updateEhrExtractStatusDocumentSentToMHS(SendDocumentTaskDefinition taskDefinition, List<String> messageIds) {
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
 
-        var commonSentAt = rootObject + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + SENT_AT;
-        var commonTaskId = rootObject + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + TASK_ID;
-        var commonMessageId = rootObject + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + MESSAGE_ID;
+        var commonSentAt = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + SENT_AT;
+        var commonTaskId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + TASK_ID;
+        var commonMessageId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + MESSAGE_ID;
+
 
         Update update = createUpdateWithUpdatedAt();
         update.set(commonSentAt, Instant.now());
@@ -419,7 +414,33 @@ public class EhrExtractStatusService {
         if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status document was not updated with sentToMhs.");
         }
-        LOGGER.info("Database updated for sending EHR Common document to mhs");
+        LOGGER.info("Database updated for sending EHR Common document to MHS");
+
+        return ehrExtractStatus;
+    }
+
+    private EhrExtractStatus updateEhrExtractStatusAttachmentSentToMhs(SendDocumentTaskDefinition taskDefinition, List<String> messageIds) {
+        Query query = createQueryForConversationId(taskDefinition.getConversationId());
+
+        var commonSentAt = STRUCTURE_OBJECT_AS_ATTACHMENT + DOT + SENT_TO_MHS + DOT + SENT_AT;
+        var commonTaskId = STRUCTURE_OBJECT_AS_ATTACHMENT + DOT + SENT_TO_MHS + DOT + TASK_ID;
+        var commonMessageId = STRUCTURE_OBJECT_AS_ATTACHMENT + DOT + SENT_TO_MHS + DOT + MESSAGE_ID;
+
+        Update update = createUpdateWithUpdatedAt();
+        update.set(commonSentAt, Instant.now());
+        update.set(commonTaskId, taskDefinition.getTaskId());
+        update.set(commonMessageId, messageIds);
+
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+            update,
+            returningUpdatedRecordOption,
+            EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
+            throw new EhrExtractException("EHR Extract Status attachment was not updated with sentToMhs.");
+        }
+        LOGGER.info("Database updated for sending EHR Attachment document to MHS");
 
         return ehrExtractStatus;
     }
