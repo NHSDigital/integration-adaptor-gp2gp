@@ -2,7 +2,6 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atMostOnce;
@@ -28,7 +27,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
@@ -141,7 +139,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     public void When_AccessDocumentNotFoundError_Expect_EhrStatusUpdatedAndAbsentAttachmentSavedToStorage() {
         var documentId = "non-existing-id";
         var conversationId = UUID.randomUUID().toString();
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId, documentId);
         ehrExtractStatus.setConversationId(conversationId);
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
@@ -161,8 +159,6 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(gpcDocuments.get(0).getObjectName()).isEqualTo(absentAttachmentFilename);
         assertThat(gpcDocuments.get(0).getMessageId()).isEqualTo(documentId);
 
-        String documentJsonFilename = conversationId + "/" + documentId + ".json";
-        assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(documentJsonFilename));
         assertDoesNotThrow(() -> storageConnector.downloadFromStorage(absentAttachmentFilename));
 
         verify(detectTranslationCompleteService, atMostOnce()).beginSendingCompleteExtract(any());
@@ -207,7 +203,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private List<EhrExtractStatus.GpcDocument> prepareDocuments() {
         return List.of(EhrExtractStatus.GpcDocument.builder()
             .documentId(DOCUMENT_ID)
-            .accessDocumentUrl(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL)
+            .accessDocumentUrl(String.format(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL, DOCUMENT_ID))
             .build());
     }
 
