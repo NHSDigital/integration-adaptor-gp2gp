@@ -1,13 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
-
+import com.github.mustachejava.Mustache;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
@@ -20,11 +15,6 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.github.mustachejava.Mustache;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters.EncounterTemplateParametersBuilder;
@@ -33,6 +23,14 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.XpathExtractor;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+
+import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -58,7 +56,6 @@ public class NonConsultationResourceMapper {
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final EncounterComponentsMapper encounterComponentsMapper;
-    private final DocumentReferenceToNarrativeStatementMapper narrativeStatementMapper;
     private final BloodPressureValidator bloodPressureValidator;
     private final Map<ResourceType, BiFunction<String, Resource, EncounterTemplateParametersBuilder>> resourceBuilder =
         Map.of(
@@ -107,17 +104,6 @@ public class NonConsultationResourceMapper {
     private Resource replaceId(Resource resource) {
         resource.setIdElement(new IdType(ResourceType.AllergyIntolerance.name(), randomIdGeneratorService.createNewId()));
         return resource;
-    }
-
-    public List<String> buildEhrCompositionForSkeletonEhrExtract(String bindingDocumentId) {
-        var narrativeStatement = narrativeStatementMapper.buildFragmentIndexNarrativeStatement(bindingDocumentId);
-        EncounterTemplateParameters encounterTemplateParameters = EncounterTemplateParameters.builder()
-            .components(narrativeStatement)
-            .build();
-        return List.of(TemplateUtils.fillTemplate(
-            ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
-            encounterTemplateParameters)
-        );
     }
 
     private int compareProcessingOrder(Resource resource1, Resource resource2) {

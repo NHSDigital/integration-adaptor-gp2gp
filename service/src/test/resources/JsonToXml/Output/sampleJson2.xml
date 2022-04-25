@@ -74,7 +74,7 @@
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
                         <id extension="B82617" root="2.16.840.1.113883.2.1.4.3"/>
             <name>COXWOLD SURGERY</name>
-            <telecom value="12345678" use="WP"/>
+            <telecom value="tel:12345678" use="WP"/>
             <addr use="WP">
                 <streetAddressLine>NHS NPFIT Test Data Manager</streetAddressLine>
                 <streetAddressLine>Princes Exchange</streetAddressLine>
@@ -100,7 +100,7 @@
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="R1A14" root="2.16.840.1.113883.2.1.4.3"/>
             <name>Test GP Care Trust</name>
-            <telecom value="12345678" use="WP"/>
+            <telecom value="tel:12345678" use="WP"/>
             <addr use="WP">
                 <streetAddressLine>24 Back Lane</streetAddressLine>
                 <streetAddressLine>Farsley</streetAddressLine>

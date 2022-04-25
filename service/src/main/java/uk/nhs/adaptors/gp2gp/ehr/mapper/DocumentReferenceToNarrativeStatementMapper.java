@@ -1,21 +1,18 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import com.github.mustachejava.Mustache;
-
 import lombok.RequiredArgsConstructor;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.BaseReference;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Organization;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters;
@@ -92,16 +89,6 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
     private boolean isValidAuthorReference(Reference reference) {
         return VALID_AUTHOR_RESOURCE_TYPES.contains(reference.getReferenceElement().getResourceType());
-    }
-
-    public String buildFragmentIndexNarrativeStatement(String bindingDocumentId) {
-        final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
-            .narrativeStatementId(bindingDocumentId)
-            .availabilityTime(DateFormatUtil.toHl7Format(timestampService.now()))
-            .hasReference(true)
-            .referenceTitle(bindingDocumentId)
-            .referenceContentType("application/xml");
-        return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
     }
 
     private boolean isFileAbsent(Attachment attachment) {

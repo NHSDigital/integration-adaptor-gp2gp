@@ -48,7 +48,12 @@ public final class DocumentReferenceUtils {
     public static String buildPresentAttachmentFileName(String narrativeStatementId, String contentType) {
         var fileExtension = mapContentTypeToFileExtension(contentType);
 
-        return narrativeStatementId + "_" + narrativeStatementId + fileExtension;
+        //Originally this was like this
+        //  narrativeStatementId + "_" + narrativeStatementId + fileExtension;
+        //but I can't find any documentation why so I've decided to make this
+        //  narrativeStatementId + fileExtension
+        //so that it matches examples we were given
+        return narrativeStatementId + fileExtension;
     }
 
     public static String buildMissingAttachmentFileName(String narrativeStatementId) {

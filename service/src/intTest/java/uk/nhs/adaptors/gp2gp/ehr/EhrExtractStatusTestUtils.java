@@ -23,7 +23,19 @@ public class EhrExtractStatusTestUtils {
             .updatedAt(now)
             .conversationId(conversationId)
             .ehrRequest(prepareEhrRequest())
-            .gpcAccessDocument(prepareGpcAccessDocument())
+            .gpcAccessDocument(prepareGpcAccessDocument(DOCUMENT_ID))
+            .build();
+    }
+
+    public static EhrExtractStatus prepareEhrExtractStatus(String conversationId, String documentId) {
+        Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant().truncatedTo(ChronoUnit.MILLIS);
+
+        return EhrExtractStatus.builder()
+            .created(now)
+            .updatedAt(now)
+            .conversationId(conversationId)
+            .ehrRequest(prepareEhrRequest())
+            .gpcAccessDocument(prepareGpcAccessDocument(documentId))
             .build();
     }
 
@@ -39,12 +51,12 @@ public class EhrExtractStatusTestUtils {
             EhrStatusConstants.MESSAGE_ID);
     }
 
-    private static EhrExtractStatus.GpcAccessDocument prepareGpcAccessDocument() {
+    private static EhrExtractStatus.GpcAccessDocument prepareGpcAccessDocument(String documentId) {
         return EhrExtractStatus.GpcAccessDocument.builder()
             .documents(List.of(
                 EhrExtractStatus.GpcDocument.builder()
-                    .documentId(DOCUMENT_ID)
-                    .accessDocumentUrl(GPC_ACCESS_DOCUMENT_URL)
+                    .documentId(documentId)
+                    .accessDocumentUrl(String.format(GPC_ACCESS_DOCUMENT_URL, documentId))
                     .build()
             )).build();
     }

@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -25,8 +24,6 @@ public class SendDocumentTaskDefinition extends DocumentTaskDefinition {
      * Position of the document on EhrStatus document list
      */
     private final int documentPosition;
-    @Builder.Default
-    private final boolean externalEhrExtract = false;
     @Override
     public TaskType getTaskType() {
         return SEND_EHR_CONTINUE;

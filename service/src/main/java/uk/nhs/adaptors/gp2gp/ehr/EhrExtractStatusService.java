@@ -1,16 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static java.lang.String.format;
-
-import static org.springframework.util.CollectionUtils.isEmpty;
-
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import com.mongodb.client.result.UpdateResult;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -18,11 +10,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-import com.mongodb.client.result.UpdateResult;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
@@ -30,7 +17,15 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgeme
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
-import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
+
+import java.time.Instant;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.lang.String.format;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
 @Slf4j
@@ -146,12 +141,12 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocument(
-            DocumentTaskDefinition documentTaskDefinition,
-            String documentName,
-            String taskId,
-            String messageId,
-            int base64ContentLength) {
-
+        DocumentTaskDefinition documentTaskDefinition,
+        String documentName,
+        String taskId,
+        String messageId,
+        int base64ContentLength
+    ) {
         Query query = new Query();
         query.addCriteria(Criteria
             .where(CONVERSATION_ID).is(documentTaskDefinition.getConversationId())
@@ -199,8 +194,10 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusCorePending(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
-        Instant requestSentAt) {
+    public void updateEhrExtractStatusCorePending(
+        SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+        Instant requestSentAt
+    ) {
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -243,54 +240,30 @@ public class EhrExtractStatusService {
     }
 
     public void updateEhrExtractStatusAck(String conversationId, EhrReceivedAcknowledgement ack) {
-        var isDuplicate = checkForAckOutOfOrderAndDuplicate(conversationId);
-        if (!isDuplicate) {
-            Query query = createQueryForConversationId(conversationId);
-
-            Update update = createUpdateWithUpdatedAt();
-            update.set(RECEIVED_ACK_TIMESTAMP, ack.getReceived());
-            update.set(RECEIVED_ACK_CONVERSATION_CLOSED, ack.getConversationClosed());
-            update.set(RECEIVED_ACK_ROOT_ID, ack.getRootId());
-            update.set(RECEIVED_ACK_MESSAGE_REF, ack.getMessageRef());
-
-            if (!isEmpty(ack.getErrors())) {
-                ack.getErrors()
-                    .forEach(error -> update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder()
-                        .code(error.getCode())
-                        .display(error.getDisplay())
-                        .build()));
-            }
-            FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
-
-            EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
-                update,
-                returningUpdatedRecordOption,
-                EhrExtractStatus.class);
-
-            if (ehrExtractStatus == null) {
-                throw new EhrExtractException("Received an ACK message with a conversation_id '" + conversationId
-                    + "' that is not recognised");
-            }
-
-            LOGGER.info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+        if (!isEhrStatusWaitingForFinalAck(conversationId)) {
+            return;
         }
-    }
 
-    public void updateEhrExtractStatusWithEhrExtractChunks(GetGpcStructuredTaskDefinition taskDefinition,
-        OutboundMessage.ExternalAttachment externalAttachment) {
+        if (hasFinalAckBeenReceived(conversationId)) {
+            LOGGER.warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            return;
+        }
 
-        Query query = createQueryForConversationId(taskDefinition.getConversationId());
+        Query query = createQueryForConversationId(conversationId);
 
         Update update = createUpdateWithUpdatedAt();
-        Instant now = Instant.now();
+        update.set(RECEIVED_ACK_TIMESTAMP, ack.getReceived());
+        update.set(RECEIVED_ACK_CONVERSATION_CLOSED, ack.getConversationClosed());
+        update.set(RECEIVED_ACK_ROOT_ID, ack.getRootId());
+        update.set(RECEIVED_ACK_MESSAGE_REF, ack.getMessageRef());
 
-        update.set(STRUCTURE_OBJECT_AS_ATTACHMENT,
-            EhrExtractStatus.GpcDocument.builder()
-                .documentId(externalAttachment.getDocumentId())
-                .objectName(externalAttachment.getFilename())
-                .accessedAt(now)
-                .taskId(taskDefinition.getTaskId())
-                .messageId(taskDefinition.getConversationId()).build());
+        if (!isEmpty(ack.getErrors())) {
+            ack.getErrors()
+                .forEach(error -> update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder()
+                    .code(error.getCode())
+                    .display(error.getDisplay())
+                    .build()));
+        }
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
@@ -299,57 +272,32 @@ public class EhrExtractStatusService {
             EhrExtractStatus.class);
 
         if (ehrExtractStatus == null) {
-            throw new EhrExtractException("EHR Extract Status was not updated with ehrExtractChunks");
+            throw new EhrExtractException("Received an ACK message with a conversation_id '" + conversationId
+                + "' that is not recognised");
         }
+
+        LOGGER.info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
     }
 
-    public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferences(
-            GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
-            Map<String, String> documentIdUrlMap) {
-        Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
-
-        var docs = new ArrayList<>();
-
-        Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
-        Instant now = Instant.now();
-        documentIdUrlMap.forEach((documentId, url) ->
-            docs.add(EhrExtractStatus.GpcDocument.builder()
-                .documentId(documentId)
-                .accessDocumentUrl(url)
-                .objectName(null)
-                .accessedAt(now)
-                .taskId(documentReferencesTaskDefinition.getTaskId())
-                .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
-        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
-
-        return getEhrExtractStatus(query, docs, updateBuilder, returningUpdatedRecordOption);
-    }
-
-    public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferencesAbsent(
+    public void updateEhrExtractStatusAccessDocumentDocumentReferences(
         GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
-        Map<String, String> titles) {
+        List<EhrExtractStatus.GpcDocument> documents
+    ) {
         Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
 
-        var docs = new ArrayList<>();
-
         Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
-        Instant now = Instant.now();
-        titles.forEach((documentId, fileName) ->
-            docs.add(EhrExtractStatus.GpcDocument.builder()
-                .documentId(documentId)
-                .fileName(fileName)
-                .accessDocumentUrl(null)
-                .objectName(null)
-                .accessedAt(now)
-                .taskId(documentReferencesTaskDefinition.getTaskId())
-                .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
+
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
-        return getEhrExtractStatus(query, docs, updateBuilder, returningUpdatedRecordOption);
+        getEhrExtractStatus(query, documents, updateBuilder, returningUpdatedRecordOption);
     }
 
-    private EhrExtractStatus getEhrExtractStatus(Query query, ArrayList<Object> docs, Update.AddToSetBuilder updateBuilder,
-        FindAndModifyOptions returningUpdatedRecordOption) {
+    private void getEhrExtractStatus(
+        Query query,
+        List<EhrExtractStatus.GpcDocument> docs,
+        Update.AddToSetBuilder updateBuilder,
+        FindAndModifyOptions returningUpdatedRecordOption
+    ) {
         Update update = updateBuilder.each(docs);
 
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
@@ -360,8 +308,6 @@ public class EhrExtractStatusService {
         if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status was not updated with document URL's");
         }
-
-        return ehrExtractStatus;
     }
 
     public void updateEhrExtractStatusAcknowledgement(
@@ -378,8 +324,11 @@ public class EhrExtractStatusService {
         updateEhrStatus(update, taskDefinition.getConversationId());
     }
 
-    public void updateEhrExtractStatusAcknowledgement(SendAcknowledgementTaskDefinition taskDefinition, String ackMessageId,
-        String updatedAt) {
+    public void updateEhrExtractStatusAcknowledgement(
+        SendAcknowledgementTaskDefinition taskDefinition,
+        String ackMessageId,
+        String updatedAt
+    ) {
         Update update = createUpdateWithUpdatedAt();
         update.set(ACK_PENDING_TASK_ID_PATH, taskDefinition.getTaskId());
         update.set(ACK_PENDING_MESSAGE_ID_PATH, ackMessageId);
@@ -519,21 +468,18 @@ public class EhrExtractStatusService {
         return update;
     }
 
-    private boolean checkForAckOutOfOrderAndDuplicate(String conversationId) {
+    private boolean isEhrStatusWaitingForFinalAck(String conversationId) {
         var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
             .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
 
-        if (ehrExtractStatus.getAckPending() == null) {
-            throw new MessageOutOfOrderException("ACK", conversationId);
-        }
+        return ehrExtractStatus.getAckPending() != null;
+    }
 
-        if (ehrExtractStatus.getEhrReceivedAcknowledgement() != null) {
-            LOGGER.warn("Received an ACK message with a conversation_id '" + conversationId
-                + "' that is duplicate");
-            return true;
-        }
+    private boolean hasFinalAckBeenReceived(String conversationId) {
+        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
+            .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
 
-        return false;
+        return ehrExtractStatus.getEhrReceivedAcknowledgement() != null;
     }
 
     private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {

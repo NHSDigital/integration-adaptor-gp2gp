@@ -1,5 +1,21 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.atMostOnce;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.UUID;
+
 import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,8 +25,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
@@ -19,24 +35,8 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
-import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -73,7 +73,9 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         var taskDefinition = buildValidAccessTask(ehrExtractStatus, DOCUMENT_ID);
         getGpcDocumentTaskExecutor.execute(taskDefinition);
 
-        var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
+        var updatedEhrExtractStatus = ehrExtractStatusRepository
+            .findByConversationId(taskDefinition.getConversationId())
+            .orElseThrow();
         assertThatAccessRecordWasUpdated(updatedEhrExtractStatus, ehrExtractStatus, taskDefinition);
 
         try (var inputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME)) {
@@ -104,7 +106,9 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         var taskDefinition = buildValidAccessTask(ehrExtractStatus, DOCUMENT_ID);
         getGpcDocumentTaskExecutor.execute(taskDefinition);
 
-        var updatedEhrExtractStatus1 = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
+        var updatedEhrExtractStatus1 = ehrExtractStatusRepository
+            .findByConversationId(taskDefinition.getConversationId())
+            .orElseThrow();
 
         try (var inputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME)) {
             var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
@@ -112,7 +116,9 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
             var newTaskDefinition = buildValidAccessTask(ehrExtractStatus, DOCUMENT_ID);
             getGpcDocumentTaskExecutor.execute(newTaskDefinition);
 
-            var updatedEhrExtractStatus2 = ehrExtractStatusRepository.findByConversationId(newTaskDefinition.getConversationId()).get();
+            var updatedEhrExtractStatus2 = ehrExtractStatusRepository
+                .findByConversationId(newTaskDefinition.getConversationId())
+                .orElseThrow();
             assertThatAccessRecordWasUpdated(updatedEhrExtractStatus2, updatedEhrExtractStatus1, newTaskDefinition);
 
             var updatedFileInputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME);
@@ -130,27 +136,32 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     }
 
     @Test
-    public void When_AccessDocumentNotFoundError_Expect_EhrStatusNotUpdatedAndNotSavedToStorage() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
-        ehrExtractStatus.setConversationId("UUID-VALUE");
+    public void When_AccessDocumentNotFoundError_Expect_EhrStatusUpdatedAndAbsentAttachmentSavedToStorage() {
+        var documentId = "non-existing-id";
+        var conversationId = UUID.randomUUID().toString();
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId, documentId);
+        ehrExtractStatus.setConversationId(conversationId);
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
-        GetGpcDocumentTaskDefinition documentTaskDefinition = buildValidAccessTask(ehrExtractStatus, "non-existing-id");
+        GetGpcDocumentTaskDefinition documentTaskDefinition = buildValidAccessTask(ehrExtractStatus, documentId);
 
-        Exception exception = assertThrows(GpConnectException.class, () -> getGpcDocumentTaskExecutor.execute(documentTaskDefinition));
-        assertOperationOutcome(exception);
+        getGpcDocumentTaskExecutor.execute(documentTaskDefinition);
 
-        var ehrExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-        var gpcDocuments = ehrExtract.getGpcAccessDocument().getDocuments();
+        String absentAttachmentFilename = "AbsentAttachment" + documentId + ".txt";
+
+        var gpcDocuments = ehrExtractStatusRepository
+            .findByConversationId(ehrExtractStatus.getConversationId())
+            .map(x -> x.getGpcAccessDocument().getDocuments())
+            .orElseThrow();
         assertThat(gpcDocuments).hasSize(1);
-        assertThat(gpcDocuments.get(0).getTaskId()).isNull();
-        assertThat(gpcDocuments.get(0).getAccessedAt()).isNull();
-        assertThat(gpcDocuments.get(0).getObjectName()).isNull();
+        assertThat(gpcDocuments.get(0).getTaskId()).isNotEmpty();
+        assertThat(gpcDocuments.get(0).getAccessedAt()).isNotNull();
+        assertThat(gpcDocuments.get(0).getObjectName()).isEqualTo(absentAttachmentFilename);
+        assertThat(gpcDocuments.get(0).getMessageId()).isEqualTo(documentId);
 
-        String documentJsonFilename = "UUID-VALUE/non-existing-id.json";
-        assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(documentJsonFilename));
+        assertDoesNotThrow(() -> storageConnector.downloadFromStorage(absentAttachmentFilename));
 
-        verify(detectTranslationCompleteService, never()).beginSendingCompleteExtract(any());
+        verify(detectTranslationCompleteService, atMostOnce()).beginSendingCompleteExtract(any());
     }
 
     private EhrExtractStatus addEhrStatusToDatabase() {
@@ -192,7 +203,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private List<EhrExtractStatus.GpcDocument> prepareDocuments() {
         return List.of(EhrExtractStatus.GpcDocument.builder()
             .documentId(DOCUMENT_ID)
-            .accessDocumentUrl(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL)
+            .accessDocumentUrl(String.format(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL, DOCUMENT_ID))
             .build());
     }
 

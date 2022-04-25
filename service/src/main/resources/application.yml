@@ -11,7 +11,7 @@ management:
 
 gp2gp:
   largeAttachmentThreshold: ${GP2GP_LARGE_ATTACHMENT_THRESHOLD:4500000} # value in bytes. Default value for Spine is ~4.5MB
-  largeEhrExtractThreshold: ${GP2GP_LARGE_ATTACHMENT_THRESHOLD:4500000}
+  largeEhrExtractThreshold: ${GP2GP_LARGE_EHR_EXTRACT_THRESHOLD:4500000}
   storage:
     type: ${GP2GP_STORAGE_TYPE:LocalMock}
     containerName: ${GP2GP_STORAGE_CONTAINER_NAME:}

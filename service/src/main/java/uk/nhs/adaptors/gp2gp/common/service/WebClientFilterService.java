@@ -30,6 +30,7 @@ public class WebClientFilterService {
         // filters are executed in reversed order
         filters.add(errorHandling(requestType, expectedSuccessHttpStatus));
         filters.add(logRequest());
+        filters.add(logResponse());
         filters.add(mdc()); // this will be executed as the first one - always needs to come first
     }
 
@@ -55,18 +56,6 @@ public class WebClientFilterService {
         });
     }
 
-    private static ExchangeFilterFunction logRequest() {
-        return (clientRequest, next) -> {
-            if (LOGGER.isDebugEnabled()) {
-                var headers = clientRequest.headers().entrySet().stream()
-                    .map(e -> e.getKey() + ": " + e.getValue())
-                    .collect(Collectors.joining(System.lineSeparator()));
-                LOGGER.debug("Request {} {} \n{}", clientRequest.method(), clientRequest.url(), headers);
-            }
-            return next.exchange(clientRequest);
-        };
-    }
-
     private static Mono<ClientResponse> getResponseError(ClientResponse clientResponse, RequestType requestType) {
         var exceptionBuilder = REQUEST_TYPE_TO_EXCEPTION_MAP
             .getOrDefault(requestType, InvalidOutboundMessageException::new);
@@ -75,5 +64,31 @@ public class WebClientFilterService {
             .flatMap(operationalOutcome -> Mono.error(
                 exceptionBuilder.apply(
                     "The following error occurred during " + requestType + " request: " + operationalOutcome)));
+    }
+
+    private static ExchangeFilterFunction logRequest() {
+        return (clientRequest, next) -> {
+            if (LOGGER.isDebugEnabled()) {
+                var headers = clientRequest.headers().entrySet().stream()
+                    .map(e -> e.getKey() + ": " + e.getValue())
+                    .collect(Collectors.joining(System.lineSeparator()));
+                LOGGER.debug("Request: {} {} \n{}", clientRequest.method(), clientRequest.url(), headers);
+            }
+            return next.exchange(clientRequest);
+        };
+    }
+
+    private static ExchangeFilterFunction logResponse() {
+        return ExchangeFilterFunction.ofResponseProcessor(response -> {
+            if (LOGGER.isDebugEnabled()) {
+                var headers = response.headers().asHttpHeaders().entrySet().stream()
+                    .map(e -> e.getKey() + ": " + e.getValue())
+                    .collect(Collectors.joining(System.lineSeparator()));
+                LOGGER.debug("Response: {} {} \n{}",
+                    response.statusCode().value(), response.statusCode().getReasonPhrase(), headers);
+            }
+
+            return Mono.just(response);
+        });
     }
 }

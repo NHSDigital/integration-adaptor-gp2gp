@@ -7,25 +7,25 @@
     <processingModeCode code="T"/>
     <acceptAckCode code="NE"/>
     <communicationFunctionRcv>
-        <device>
+		<device classCode="DEV" determinerCode="INSTANCE">
             <id root="1.2.826.0.1285.0.2.0.107" extension="test-from-asid-code"/>
         </device>
     </communicationFunctionRcv>
     <communicationFunctionSnd>
-        <device>
+		<device classCode="DEV" determinerCode="INSTANCE">
             <id root="1.2.826.0.1285.0.2.0.107" extension="test-to-asid-code"/>
         </device>
     </communicationFunctionSnd>
-    <ControlActEvent>
-        <author1>
-            <AgentSystemSDS>
-                <agentSystemSDS>
+	<ControlActEvent classCode="CACT" moodCode="EVN">
+		<author1 typeCode="AUT">
+			<AgentSystemSDS classCode="AGNT">
+				<agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
                     <id root="1.2.826.0.1285.0.2.0.107" extension="test-to-asid-code"/>
                 </agentSystemSDS>
             </AgentSystemSDS>
         </author1>
-        <subject>
-            <PayloadInformation xmlns="urn:hl7-org:v3" xmlns:npfitlc="NPFIT:HL7:Localisation">
+		<subject typeCode="SUBJ" contextConductionInd="false">
+			<PayloadInformation classCode="OBS" moodCode="EVN" xmlns="urn:hl7-org:v3" xmlns:npfitlc="NPFIT:HL7:Localisation">
                 <code code="GP2GPLMATTACHMENTINFO" codeSystem="2.16.840.1.113883.2.1.3.2.4.17.202" displayName="GP2GP Large Message Attachment Information"/>
                 <id root="test-message-id"/>
                 <npfitlc:messageType root="2.16.840.1.113883.2.1.3.2.4.18.17" extension="RCMR_MT000001GB01"/>
@@ -36,16 +36,16 @@
                             <Recipient>test-from-ods-code</Recipient>
                         </Recipients>
                         <From>test-to-ods-code</From>
-                        <subject>Attachment: test-document-id</subject>
+                        <subject>Attachment: test-document-id.txt</subject>
                         <message-id>test-message-id</message-id>
                     </Gp2gpfragment>
                 </value>
-                <pertinentInformation>
+				<pertinentInformation typeCode="PERT">
                     <sequenceNumber value="1"/>
-                    <pertinentPayloadBody>
+					<pertinentPayloadBody classCode="OBS" moodCode="EVN">
                         <code code="GP2GPLMATTACHMENT" codeSystem="2.16.840.1.113883.2.1.3.2.4.17.202" displayName="GP2GP Large Message Attachment"/>
                         <id root="test-id"/>
-                        <value><reference value="test-document-id"/></value>
+                        <value><reference value="file://localhost/test-document-id.txt"/></value>
                     </pertinentPayloadBody>
                 </pertinentInformation>
             </PayloadInformation>

@@ -13,9 +13,11 @@ public class MhsClient {
     public String sendMessageToMHS(RequestHeadersSpec<? extends RequestHeadersSpec<?>> request) {
         LOGGER.info("Sending MHS Outbound Request");
 
-        return request
-            .retrieve()
-            .bodyToMono(String.class)
-            .block();
+        var response = request.retrieve();
+        var responseBody = response.bodyToMono(String.class).block();
+
+        LOGGER.debug("Body: {}", responseBody);
+
+        return responseBody;
     }
 }

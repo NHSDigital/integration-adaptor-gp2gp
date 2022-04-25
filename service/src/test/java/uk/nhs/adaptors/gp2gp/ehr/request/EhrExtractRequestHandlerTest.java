@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.Answer;
 import org.springframework.dao.DuplicateKeyException;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -33,7 +34,10 @@ import java.time.Instant;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
@@ -77,10 +81,13 @@ public class EhrExtractRequestHandlerTest {
         when(timestampService.now()).thenReturn(now);
         when(randomIdGeneratorService.createNewId()).thenReturn(TASK_ID);
 
+        when(ehrExtractStatusRepository.save(any()))
+            .thenAnswer((Answer<EhrExtractStatus>) invocation -> (EhrExtractStatus) invocation.getArguments()[0]);
+
         ehrExtractRequestHandler.handleStart(soapHeader, soapBody, MESSAGE_TIMESTAMP);
 
         var expectedEhrExtractStatus = createEhrExtractStatusMatchingXmlFixture(now);
-        verify(ehrExtractStatusRepository).save(expectedEhrExtractStatus);
+        verify(ehrExtractStatusRepository, times(2)).save(expectedEhrExtractStatus);
         var expectedGetGpcStructuredTaskDefinition = createTaskMatchingXmlFixture();
         verify(taskDispatcher).createTask(expectedGetGpcStructuredTaskDefinition);
     }
@@ -92,12 +99,10 @@ public class EhrExtractRequestHandlerTest {
         Document soapBody = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
         Instant now = Instant.now();
         when(timestampService.now()).thenReturn(now);
-        EhrExtractStatus expected = createEhrExtractStatusMatchingXmlFixture(now);
-        when(ehrExtractStatusRepository.save(expected)).thenThrow(mock(DuplicateKeyException.class));
+        when(ehrExtractStatusRepository.save(any())).thenThrow(mock(DuplicateKeyException.class));
 
         ehrExtractRequestHandler.handleStart(soapHeader, soapBody, MESSAGE_TIMESTAMP);
 
-        verify(ehrExtractStatusRepository).save(expected);
         verifyNoInteractions(taskDispatcher);
     }
 
@@ -153,6 +158,9 @@ public class EhrExtractRequestHandlerTest {
         Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document body = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
 
+        lenient().when(ehrExtractStatusRepository.save(any()))
+            .thenAnswer((Answer<EhrExtractStatus>) invocation -> (EhrExtractStatus) invocation.getArguments()[0]);
+
         removeAttributeElement(xpath, body);
 
         assertThatExceptionOfType(MissingValueException.class)
@@ -167,6 +175,9 @@ public class EhrExtractRequestHandlerTest {
     public void When_RequiredValueIsBlankInBody_Expect_HandlerThrowsException(String xpath) {
         Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document body = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
+
+        lenient().when(ehrExtractStatusRepository.save(any()))
+            .thenAnswer((Answer<EhrExtractStatus>) invocation -> (EhrExtractStatus) invocation.getArguments()[0]);
 
         clearAttribute(xpath, body);
 
@@ -190,6 +201,9 @@ public class EhrExtractRequestHandlerTest {
         Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document body = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
 
+        when(ehrExtractStatusRepository.save(any()))
+            .thenAnswer((Answer<EhrExtractStatus>) invocation -> (EhrExtractStatus) invocation.getArguments()[0]);
+
         removeElement(xpath, header);
 
         assertThatExceptionOfType(MissingValueException.class)
@@ -206,6 +220,9 @@ public class EhrExtractRequestHandlerTest {
         Document body = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
 
         clearElement(xpath, header);
+
+        when(ehrExtractStatusRepository.save(any()))
+            .thenAnswer((Answer<EhrExtractStatus>) invocation -> (EhrExtractStatus) invocation.getArguments()[0]);
 
         assertThatExceptionOfType(MissingValueException.class)
             .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body, MESSAGE_TIMESTAMP))

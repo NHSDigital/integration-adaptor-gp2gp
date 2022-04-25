@@ -12,24 +12,24 @@ import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-import uk.nhs.adaptors.gp2gp.ehr.SendAbsentAttachmentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.GetAbsentAttachmentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfString;
 import static uk.nhs.adaptors.gp2gp.common.utils.Gzip.compress;
@@ -43,6 +43,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     public static final String SKELETON_ATTACHMENT = "X-GP2GP-Skeleton: Yes";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     public static final String XML_CONTENT_TYPE = "application/xml";
+    public static final String TEXT_XML_CONTENT_TYPE = "text/xml";
     private static final String LEADING_UNDERSCORE_CHAR = "_";
 
     private final GpcClient gpcClient;
@@ -56,6 +57,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private final TaskDispatcher taskDispatcher;
     private final Gp2gpConfiguration gp2gpConfiguration;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final EhrDocumentMapper ehrDocumentMapper;
 
     @Override
     public Class<GetGpcStructuredTaskDefinition> getTaskType() {
@@ -65,110 +67,126 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     @SneakyThrows
     @Override
     public void execute(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        String hl7TranslatedResponse;
-        List<OutboundMessage.Attachment> attachments = new ArrayList<>();
-        List<OutboundMessage.ExternalAttachment> externalAttachments;
-        List<OutboundMessage.ExternalAttachment> absentAttachments;
+        String ehrExtractXml;
+        Instant now = Instant.now();
+        List<OutboundMessage.ExternalAttachment> externalAttachments = new ArrayList<>();
+        List<OutboundMessage.ExternalAttachment> absentAttachments = new ArrayList<>();
+        List<EhrExtractStatus.GpcDocument> ehrStatusGpcDocuments = new ArrayList<>();
 
         var structuredRecord = getStructuredRecord(structuredTaskDefinition);
 
         try {
             messageContext.initialize(structuredRecord);
 
-            externalAttachments = structuredRecordMappingService.getExternalAttachments(structuredRecord);
-            absentAttachments = structuredRecordMappingService.getAbsentAttachments(structuredRecord);
+            ehrExtractXml = structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(structuredTaskDefinition, structuredRecord);
 
-            var documentReferencesWithoutUrl = externalAttachments.stream()
-                .filter(documentMetadata -> StringUtils.isBlank(documentMetadata.getUrl()))
-                .collect(Collectors.toList());
-            if (!documentReferencesWithoutUrl.isEmpty()) {
-                LOGGER.warn("Following DocumentReference resources does not have any Attachments with URL: {}",
-                    documentReferencesWithoutUrl);
-            }
+            LOGGER.info("Checking EHR Extract size");
+            if (isLargeEhrExtract(ehrExtractXml)) {
+                LOGGER.info("EHR extract IS large");
+                ehrExtractXml = Base64Utils.toBase64String(compress(ehrExtractXml));
 
-            externalAttachments = externalAttachments.stream()
-                .filter(documentMetadata -> StringUtils.isNotBlank(documentMetadata.getUrl()))
-                .collect(Collectors.toList());
+                var messageId = randomIdGeneratorService.createNewId();
+                var documentId = randomIdGeneratorService.createNewId();
+                var fileName = GpcFilenameUtils.generateLargeExrExtractFilename(documentId);
+                var compressedAndEncodedEhrExtractSize = ehrExtractXml.length();
 
-            var urls = externalAttachments.stream()
-                .collect(Collectors.toMap(OutboundMessage.ExternalAttachment::getDocumentId, OutboundMessage.ExternalAttachment::getUrl));
-            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(structuredTaskDefinition, urls);
-
-            var absentAttachmentFileNames = absentAttachments.stream()
-                .collect(Collectors.toMap(
-                    OutboundMessage.ExternalAttachment::getDocumentId,
-                    absentAttachment -> buildAbsentAttachmentFileName(
-                        structuredTaskDefinition.getConversationId(), absentAttachment.getDocumentId()
-                    ))
+                var largeEhrExtractXmlAsExternalAttachment = buildExternalAttachmentForLargeEhrExtract(
+                    compressedAndEncodedEhrExtractSize, messageId, documentId, fileName
                 );
 
-            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferencesAbsent(
-                structuredTaskDefinition, absentAttachmentFileNames
+                externalAttachments.add(largeEhrExtractXmlAsExternalAttachment);
+
+                var getDocumentTaskDefinition = buildGetDocumentTask(structuredTaskDefinition, largeEhrExtractXmlAsExternalAttachment);
+                var mhsPayload = ehrDocumentMapper.mapMhsPayloadTemplateToXml(
+                    ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getDocumentTaskDefinition, XML_CONTENT_TYPE));
+
+                uploadToStorage(ehrExtractXml, mhsPayload, fileName, getDocumentTaskDefinition);
+                ehrStatusGpcDocuments.add(EhrExtractStatus.GpcDocument.builder()
+                    .documentId(documentId)
+                    .accessDocumentUrl(null)
+                    .objectName(fileName)
+                    .fileName(fileName)
+                    .accessedAt(now)
+                    .taskId(getDocumentTaskDefinition.getTaskId())
+                    .messageId(messageId).build());
+
+                ehrExtractXml = structuredRecordMappingService
+                    .buildSkeletonEhrExtractXml(structuredTaskDefinition, structuredRecord, documentId);
+            }
+
+            var documentsAsExternalAttachments = structuredRecordMappingService.getExternalAttachments(structuredRecord);
+            documentsAsExternalAttachments.stream()
+                .filter(documentMetadata -> StringUtils.isBlank(documentMetadata.getUrl()))
+                .peek(absentAttachment -> LOGGER.warn("DocumentReference missing URL: {}", absentAttachment.getDocumentId()))
+                .peek(absentAttachments::add)
+                .map(absentAttachment -> EhrExtractStatus.GpcDocument.builder()
+                    .documentId(absentAttachment.getDocumentId())
+                    .fileName(buildAbsentAttachmentFileName(absentAttachment.getDocumentId()))
+                    .accessDocumentUrl(null)
+                    .objectName(null)
+                    .accessedAt(now)
+                    .taskId(structuredTaskDefinition.getTaskId())
+                    .messageId(structuredTaskDefinition.getConversationId()).build())
+                .forEach(ehrStatusGpcDocuments::add);
+            documentsAsExternalAttachments = documentsAsExternalAttachments.stream()
+                .filter(documentMetadata -> StringUtils.isNotBlank(documentMetadata.getUrl()))
+                .collect(Collectors.toList());
+            documentsAsExternalAttachments.stream()
+                .map(externalAttachment -> EhrExtractStatus.GpcDocument.builder()
+                    .documentId(externalAttachment.getDocumentId())
+                    .accessDocumentUrl(externalAttachment.getUrl())
+                    .objectName(null)
+                    .accessedAt(now)
+                    .taskId(structuredTaskDefinition.getTaskId())
+                    .messageId(structuredTaskDefinition.getConversationId()).build())
+                .forEach(ehrStatusGpcDocuments::add);
+            externalAttachments.addAll(documentsAsExternalAttachments);
+
+            absentAttachments.addAll(structuredRecordMappingService.getAbsentAttachments(structuredRecord));
+            absentAttachments.stream()
+                .map(absentAttachment -> EhrExtractStatus.GpcDocument.builder()
+                    .documentId(absentAttachment.getDocumentId())
+                    .fileName(buildAbsentAttachmentFileName(absentAttachment.getDocumentId()))
+                    .accessDocumentUrl(null)
+                    .objectName(null)
+                    .accessedAt(now)
+                    .taskId(structuredTaskDefinition.getTaskId())
+                    .messageId(structuredTaskDefinition.getConversationId()).build())
+                .forEach(ehrStatusGpcDocuments::add);
+
+            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
+                structuredTaskDefinition, ehrStatusGpcDocuments
             );
-
-            hl7TranslatedResponse = structuredRecordMappingService.getHL7(structuredTaskDefinition, structuredRecord);
-
-            queueGetDocumentsTask(structuredTaskDefinition, externalAttachments);
-            queueSendAbsentAttachmentTask(structuredTaskDefinition, absentAttachments);
+            queueGetDocumentsTask(structuredTaskDefinition, documentsAsExternalAttachments);
+            queueGetAbsentAttachmentTask(structuredTaskDefinition, absentAttachments);
         } finally {
             messageContext.resetMessageContext();
         }
 
-        if (isLargeEhrExtract(hl7TranslatedResponse)) {
-            var compressedBytes = compress(hl7TranslatedResponse);
-            if (compressedBytes == null) {
-                throw new RuntimeException();
-            }
-            hl7TranslatedResponse = new String(compressedBytes, UTF_8);
+        var allExternalAttachments = Stream
+            .concat(externalAttachments.stream(), absentAttachments.stream())
+            .collect(Collectors.toList());
 
-            if (!isLargeEhrExtract(hl7TranslatedResponse)) {
-                var filename = GpcFilenameUtils.generateDocumentFilename(
-                    structuredTaskDefinition.getConversationId(), randomIdGeneratorService.createNewId()
-                );
-                var attachment = buildAttachment(hl7TranslatedResponse, filename);
-                attachments.add(attachment);
-                hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, filename);
-            } else {
-                var documentId = randomIdGeneratorService.createNewId();
-                var documentName = GpcFilenameUtils.generateDocumentFilename(
-                    structuredTaskDefinition.getConversationId(), documentId
-                );
-                var externalAttachment = buildExternalAttachment(hl7TranslatedResponse, structuredTaskDefinition, documentId, documentName);
-                externalAttachments.add(externalAttachment);
-
-                var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
-                uploadToStorage(hl7TranslatedResponse, documentName, taskDefinition);
-                ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
-
-                hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition,
-                    externalAttachment.getFilename());
-            }
-        }
-
-        var allExternalAttachments = Stream.concat(
-                externalAttachments.stream(), absentAttachments.stream()
-            ).collect(Collectors.toList());
-
-        var outboundMessage = OutboundMessage.builder()
-            .payload(hl7TranslatedResponse)
-            .attachments(attachments)
+        var stringRequestBody = objectMapper.writeValueAsString(OutboundMessage.builder()
+            .payload(ehrExtractXml)
+            .attachments(Collections.emptyList())
             .externalAttachments(mapPrefixesToDocumentIds(allExternalAttachments))
-            .build();
+            .build()
+        );
 
-        var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
-        StorageDataWrapper storageDataWrapper = StorageDataWrapperProvider.buildStorageDataWrapper(
+        var storageDataWrapper = StorageDataWrapperProvider.buildStorageDataWrapper(
             structuredTaskDefinition,
             stringRequestBody,
             structuredTaskDefinition.getTaskId()
         );
 
-        String structuredRecordJsonFilename = GpcFilenameUtils.generateStructuredRecordFilename(
+        var structuredRecordJsonFilename = GpcFilenameUtils.generateStructuredRecordFilename(
             structuredTaskDefinition.getConversationId()
         );
 
         storageConnectorService.uploadFile(storageDataWrapper, structuredRecordJsonFilename);
 
-        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessStructured(
+        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessStructured(
             structuredTaskDefinition,
             structuredRecordJsonFilename
         );
@@ -182,20 +200,21 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
     private void queueGetDocumentsTask(TaskDefinition taskDefinition, List<OutboundMessage.ExternalAttachment> externalAttachments) {
         externalAttachments.stream()
+            .filter(externalAttachment -> StringUtils.isNotBlank(externalAttachment.getUrl()))
             .map(externalAttachment -> buildGetDocumentTask(taskDefinition, externalAttachment))
             .forEach(taskDispatcher::createTask);
     }
 
-    private void queueSendAbsentAttachmentTask(TaskDefinition taskDefinition,
-        List<OutboundMessage.ExternalAttachment> absentAttachments) {
+    private void queueGetAbsentAttachmentTask(TaskDefinition taskDefinition, List<OutboundMessage.ExternalAttachment> absentAttachments) {
         absentAttachments.stream()
-            .map(absentAttachment -> buildSendAbsentAttachmentTask(taskDefinition, absentAttachment))
+            .map(absentAttachment -> buildGetAbsentAttachmentTask(taskDefinition, absentAttachment))
             .forEach(taskDispatcher::createTask);
     }
 
-    private SendAbsentAttachmentTaskDefinition buildSendAbsentAttachmentTask(TaskDefinition taskDefinition,
-        OutboundMessage.ExternalAttachment absentAttachment) {
-        return SendAbsentAttachmentTaskDefinition.builder()
+    private GetAbsentAttachmentTaskDefinition buildGetAbsentAttachmentTask(
+            TaskDefinition taskDefinition,
+            OutboundMessage.ExternalAttachment absentAttachment) {
+        return GetAbsentAttachmentTaskDefinition.builder()
             .documentId(absentAttachment.getDocumentId())
             .title(absentAttachment.getTitle())
             .taskId(taskDefinition.getTaskId())
@@ -209,19 +228,22 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .build();
     }
 
-    private GetGpcDocumentTaskDefinition buildGetDocumentTask(TaskDefinition taskDefinition,
+    private GetGpcDocumentTaskDefinition buildGetDocumentTask(
+        TaskDefinition taskDefinition,
         OutboundMessage.ExternalAttachment externalAttachment) {
+
         return GetGpcDocumentTaskDefinition.builder()
-            .documentId(externalAttachment.getDocumentId())
-            .taskId(taskDefinition.getTaskId())
+            .taskId(randomIdGeneratorService.createNewId())
             .conversationId(taskDefinition.getConversationId())
             .requestId(taskDefinition.getRequestId())
             .toAsid(taskDefinition.getToAsid())
             .fromAsid(taskDefinition.getFromAsid())
             .toOdsCode(taskDefinition.getToOdsCode())
             .fromOdsCode(taskDefinition.getFromOdsCode())
+            .documentId(externalAttachment.getDocumentId())
             .accessDocumentUrl(externalAttachment.getUrl())
             .messageId(externalAttachment.getMessageId())
+            .title(externalAttachment.getTitle())
             .build();
     }
 
@@ -237,40 +259,20 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .collect(Collectors.toList());
     }
 
-    private OutboundMessage.Attachment buildAttachment(String content, String filename) {
-        return OutboundMessage.Attachment.builder()
-            .payload(content)
-            .contentType(XML_CONTENT_TYPE)
-            .isBase64(Boolean.FALSE)
-            .description(OutboundMessage.AttachmentDescription.builder()
-                .fileName(filename)
-                .contentType(XML_CONTENT_TYPE)
-                .compressed(true) // always compressed at this stage
-                .largeAttachment(true)
-                .originalBase64(false)
-                .length(getBytesLengthOfString(content))
-                .domainData(SKELETON_ATTACHMENT)
-                .build()
-                .toString()
-            )
-            .build();
-    }
-
-    private OutboundMessage.ExternalAttachment buildExternalAttachment(String ehrExtract, TaskDefinition taskDefinition,
-        String documentId, String documentName) {
-        var messageId = randomIdGeneratorService.createNewId();
+    private OutboundMessage.ExternalAttachment buildExternalAttachmentForLargeEhrExtract(
+            int compressedAndEncodedEhrExtractSize, String messageId, String documentId, String fileName) {
 
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
-            .filename(documentName)
+            .filename(fileName)
             .description(OutboundMessage.AttachmentDescription.builder()
-                .fileName(documentName)
-                .contentType(XML_CONTENT_TYPE) // confirm this is correct
-                .length(getBytesLengthOfString(ehrExtract))
-                .compressed(true) // always compressed at this stage
-                .largeAttachment(true)
-                .originalBase64(false)
+                .fileName(fileName)
+                .contentType(TEXT_XML_CONTENT_TYPE)
+                .length(compressedAndEncodedEhrExtractSize)
+                .compressed(true)
+                .largeAttachment(compressedAndEncodedEhrExtractSize > gp2gpConfiguration.getLargeAttachmentThreshold())
+                .originalBase64(true) // always true for compressed base64-encoded large ehr extract
                 .domainData(SKELETON_ATTACHMENT)
                 .build()
                 .toString())
@@ -279,19 +281,19 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     }
 
     @SneakyThrows
-    private void uploadToStorage(String ehrExtract, String documentName, DocumentTaskDefinition taskDefinition) {
+    private void uploadToStorage(String ehrExtract, String mhsPayload, String fileName, DocumentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
 
         // Building outbound message for upload to storage as that is how DocumentSender downloads and parses from storage
         var attachments = Collections.singletonList(
             OutboundMessage.Attachment.builder()
-                .contentType(XML_CONTENT_TYPE)
-                .isBase64(Boolean.FALSE)
+                .contentType(TEXT_XML_CONTENT_TYPE)
+                .isBase64(Boolean.TRUE)
                 .description(taskDefinition.getDocumentId())
                 .payload(ehrExtract)
                 .build());
         var outboundMessage = OutboundMessage.builder()
-            .payload(StringUtils.EMPTY)
+            .payload(mhsPayload)
             .attachments(attachments)
             .build();
 
@@ -300,6 +302,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
             .buildStorageDataWrapper(taskDefinition, outboundMessageString, taskId);
 
-        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
+        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, fileName);
     }
 }

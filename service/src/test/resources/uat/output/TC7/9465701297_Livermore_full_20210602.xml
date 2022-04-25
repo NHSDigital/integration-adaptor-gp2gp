@@ -109,7 +109,7 @@
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-            <telecom value="01133800000" use="WP"/>
+            <telecom value="tel:01133800000" use="WP"/>
             <addr use="WP">
                 <streetAddressLine>Fulford Grange</streetAddressLine>
                 <streetAddressLine>Micklefield Lane</streetAddressLine>
@@ -135,7 +135,7 @@
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-            <telecom value="01133800000" use="WP"/>
+            <telecom value="tel:01133800000" use="WP"/>
             <addr use="WP">
                 <streetAddressLine>Fulford Grange</streetAddressLine>
                 <streetAddressLine>Micklefield Lane</streetAddressLine>
@@ -161,7 +161,7 @@
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <name>Armitage Bridge Hospital</name>
-            <telecom value="0161 232 2275" use="WP"/>
+            <telecom value="tel:0161 232 2275" use="WP"/>
 
         </representedOrganization>
     </Agent>
@@ -181,7 +181,7 @@
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-            <telecom value="01133800000" use="WP"/>
+            <telecom value="tel:01133800000" use="WP"/>
             <addr use="WP">
                 <streetAddressLine>Fulford Grange</streetAddressLine>
                 <streetAddressLine>Micklefield Lane</streetAddressLine>
@@ -208,7 +208,7 @@
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-            <telecom value="01133800000" use="WP"/>
+            <telecom value="tel:01133800000" use="WP"/>
             <addr use="WP">
                 <streetAddressLine>Fulford Grange</streetAddressLine>
                 <streetAddressLine>Micklefield Lane</streetAddressLine>
@@ -235,7 +235,7 @@
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-            <telecom value="01133800000" use="WP"/>
+            <telecom value="tel:01133800000" use="WP"/>
             <addr use="WP">
                 <streetAddressLine>Fulford Grange</streetAddressLine>
                 <streetAddressLine>Micklefield Lane</streetAddressLine>
@@ -262,7 +262,7 @@
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-            <telecom value="01133800000" use="WP"/>
+            <telecom value="tel:01133800000" use="WP"/>
             <addr use="WP">
                 <streetAddressLine>Fulford Grange</streetAddressLine>
                 <streetAddressLine>Micklefield Lane</streetAddressLine>

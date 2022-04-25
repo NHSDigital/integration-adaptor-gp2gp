@@ -14,6 +14,6 @@ public class EhrDocumentTemplateParameters {
     private String toAsid;
     private String fromOdsCode;
     private String toOdsCode;
-    private String accessDocumentId;
+    private String filename;
     private String pertinentPayloadId;
 }

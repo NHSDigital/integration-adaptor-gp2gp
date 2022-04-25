@@ -1,38 +1,35 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import com.github.mustachejava.Mustache;
-
 import lombok.RequiredArgsConstructor;
-
-import org.apache.commons.lang3.StringUtils;
-
 import lombok.extern.slf4j.Slf4j;
-
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ListResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.SkeletonComponentTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.EncounterExtractor;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 @Slf4j
 public class EhrExtractMapper {
     private static final Mustache EHR_EXTRACT_TEMPLATE = TemplateUtils.loadTemplate("ehr_extract_template.mustache");
+    private static final Mustache SKELETON_COMPONENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_skeleton_component_template.mustache");
     private static final String CONSULTATION_LIST_CODE = "325851000000107";
 
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -50,9 +47,8 @@ public class EhrExtractMapper {
     }
 
     public EhrExtractTemplateParameters mapBundleToEhrFhirExtractParams(
-        GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
-        Bundle bundle) {
-        EhrExtractTemplateParameters ehrExtractTemplateParameters = setSharedExtractParams(getGpcStructuredTaskDefinition);
+            GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition, Bundle bundle) {
+        var ehrExtractTemplateParameters = setSharedExtractParams(getGpcStructuredTaskDefinition);
 
         var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle);
         var mappedComponents = mapEncounterToEhrComponents(encounters);
@@ -70,16 +66,27 @@ public class EhrExtractMapper {
         return ehrExtractTemplateParameters;
     }
 
-    public String buildSkeletonEhrExtract(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition, String fragmentIndexDocumentId) {
-        var ehrCompositionWithNarrativeStatement
-            = nonConsultationResourceMapper.buildEhrCompositionForSkeletonEhrExtract(fragmentIndexDocumentId);
+    public String buildSkeletonEhrExtract(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition, Bundle bundle, String documentId) {
+        var ehrCompositionWithNarrativeStatement = buildEhrCompositionForSkeletonEhrExtract(documentId);
         EhrExtractTemplateParameters ehrExtractTemplateParameters = setSharedExtractParams(getGpcStructuredTaskDefinition);
 
-        ehrExtractTemplateParameters.setComponents(ehrCompositionWithNarrativeStatement);
+        ehrExtractTemplateParameters.setAgentDirectory(
+            agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, getPatientNhsNumber(getGpcStructuredTaskDefinition))
+        );
+        ehrExtractTemplateParameters.setComponents(List.of(ehrCompositionWithNarrativeStatement));
         ehrExtractTemplateParameters.setEffectiveTime(
             StatementTimeMappingUtils.prepareEffectiveTimeForEhrFolder(messageContext.getEffectiveTime())
         );
         return mapEhrExtractToXml(ehrExtractTemplateParameters);
+    }
+
+    public String buildEhrCompositionForSkeletonEhrExtract(String documentId) {
+        var skeletonComponentTemplateParameters = SkeletonComponentTemplateParameters.builder()
+            .narrativeStatementId(documentId)
+            .availabilityTime(DateFormatUtil.toHl7Format(timestampService.now()))
+            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEhrFolder(messageContext.getEffectiveTime()))
+            .build();
+        return TemplateUtils.fillTemplate(SKELETON_COMPONENT_TEMPLATE, skeletonComponentTemplateParameters);
     }
 
     private EhrExtractTemplateParameters setSharedExtractParams(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition) {

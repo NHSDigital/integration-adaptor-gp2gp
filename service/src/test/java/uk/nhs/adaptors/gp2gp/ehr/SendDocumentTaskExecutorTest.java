@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,14 +8,10 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class SendDocumentTaskExecutorTest {
 
     private static final int SIZE_THRESHOLD_FOUR = 4;
-    private static final int SIZE_THRESHOLD_FIVE = 5;
-    private static final int SIZE_THRESHOLD_SEVEN = 7;
-    private static final int SIZE_THRESHOLD_EIGHT = 8;
 
     @ParameterizedTest
     @MethodSource("chunkTestData")
@@ -27,20 +22,10 @@ class SendDocumentTaskExecutorTest {
 
     static Stream<Arguments> chunkTestData() {
         return Stream.of(
-            Arguments.of("ℤ qwe asd zxc", SIZE_THRESHOLD_FIVE, List.of("ℤ q", "we as", "d zxc")),
-            Arguments.of("ℤ qwe ", SIZE_THRESHOLD_FIVE, List.of("ℤ q", "we ")),
-            Arguments.of("ℤ q ℤ", SIZE_THRESHOLD_FIVE, List.of("ℤ q", " ℤ")),
-            Arguments.of("ℤ ℤ ℤ", SIZE_THRESHOLD_FIVE, List.of("ℤ ", "ℤ ", "ℤ")),
-            Arguments.of("  ℤℤℤ  ", SIZE_THRESHOLD_FIVE, List.of("  ℤ", "ℤ", "ℤ  ")),
-            Arguments.of("ℤ  ℤ", SIZE_THRESHOLD_EIGHT, List.of("ℤ  ℤ")),
-            Arguments.of("ℤ  ℤ", SIZE_THRESHOLD_SEVEN, List.of("ℤ  ", "ℤ"))
+            Arguments.of("QWER1234", SIZE_THRESHOLD_FOUR, List.of("QWER", "1234")),
+            Arguments.of("QWER", SIZE_THRESHOLD_FOUR, List.of("QWER")),
+            Arguments.of("QWE", SIZE_THRESHOLD_FOUR, List.of("QWE")),
+            Arguments.of("QWER12", SIZE_THRESHOLD_FOUR, List.of("QWER", "12"))
         );
-    }
-
-    @Test
-    void When_ChunkingUsingLessThan5SizeThreshold_Expect_Exception() {
-        assertThatThrownBy(() -> SendDocumentTaskExecutor.chunkBinary("", SIZE_THRESHOLD_FOUR))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("SizeThreshold must be larger 4 to hold at least 1 UTF-16 character");
     }
 }

@@ -60,29 +60,29 @@ class StructuredRecordMappingServiceTest {
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_1 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
         buildAttachmentDescription(
-            "111_new_doc_manifest_id_111_new_doc_manifest_id.txt", "text/plain", false,
-            false, false, NEW_DOC_MANIFEST_ID_1
+            "111_new_doc_manifest_id.txt", "text/plain", false,
+            false, true, NEW_DOC_MANIFEST_ID_1
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_2 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, null,
         buildAttachmentDescription(
-            "222_new_doc_manifest_id_222_new_doc_manifest_id.html", "text/html", false,
-            false, false, NEW_DOC_MANIFEST_ID_2
+            "222_new_doc_manifest_id.html", "text/html", false,
+            false, true, NEW_DOC_MANIFEST_ID_2
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_1 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, null, "some title",
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
-            false, false, NEW_DOC_MANIFEST_ID_1
+            false, true, NEW_DOC_MANIFEST_ID_1
         )
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_2 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
-            false, false, NEW_DOC_MANIFEST_ID_1
+            false, true, NEW_DOC_MANIFEST_ID_1
         )
     );
 
@@ -159,7 +159,7 @@ class StructuredRecordMappingServiceTest {
         when(outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent))
             .thenReturn(expectedHL7);
 
-        var actualHL7 = structuredRecordMappingService.getHL7(structuredTaskDefinition, bundle);
+        var actualHL7 = structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(structuredTaskDefinition, bundle);
 
         verify(ehrExtractMapper).mapBundleToEhrFhirExtractParams(structuredTaskDefinition, bundle);
         verify(ehrExtractMapper).mapEhrExtractToXml(ehrExtractTemplateParameters);

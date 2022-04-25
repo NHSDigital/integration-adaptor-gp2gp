@@ -27,8 +27,7 @@ public class SendAcknowledgementTaskDispatcher {
     }
 
     public void sendNegativeAcknowledgement(EhrExtractStatus ehrExtractStatus, String reasonCode, String reasonMessage) {
-        SendAcknowledgementTaskDefinition.SendAcknowledgementTaskDefinitionBuilder<?, ?> taskDefinitionBuilder =
-            getAcknowledgementTaskDefinitionBuilder(ehrExtractStatus, NACK_TYPE_CODE);
+        var taskDefinitionBuilder = getAcknowledgementTaskDefinitionBuilder(ehrExtractStatus, NACK_TYPE_CODE);
         taskDefinitionBuilder.reasonCode(reasonCode);
         taskDefinitionBuilder.detail(reasonMessage);
 

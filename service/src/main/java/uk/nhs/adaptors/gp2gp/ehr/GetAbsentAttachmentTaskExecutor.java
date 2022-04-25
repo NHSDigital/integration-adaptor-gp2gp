@@ -11,6 +11,7 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AbsentAttachmentFileMapper;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.DetectTranslationCompleteService;
 import uk.nhs.adaptors.gp2gp.gpc.DocumentToMHSTranslator;
 import uk.nhs.adaptors.gp2gp.gpc.StorageDataWrapperProvider;
@@ -18,7 +19,7 @@ import uk.nhs.adaptors.gp2gp.gpc.StorageDataWrapperProvider;
 @Slf4j
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsentAttachmentTaskDefinition> {
+public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAttachmentTaskDefinition> {
 
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -26,23 +27,27 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
     private final DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Override
-    public Class<SendAbsentAttachmentTaskDefinition> getTaskType() {
-        return SendAbsentAttachmentTaskDefinition.class;
+    public Class<GetAbsentAttachmentTaskDefinition> getTaskType() {
+        return GetAbsentAttachmentTaskDefinition.class;
     }
 
     @Override
-    public void execute(SendAbsentAttachmentTaskDefinition taskDefinition) {
+    public void execute(GetAbsentAttachmentTaskDefinition taskDefinition) {
+        var ehrExtractStatus = handleAbsentAttachment(taskDefinition);
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
+    }
+
+    public EhrExtractStatus handleAbsentAttachment(DocumentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
         var messageId = taskDefinition.getMessageId();
-        var documentId = taskDefinition.getDocumentId();
 
-        var fileContent = AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
+        var fileContent = Base64Utils.toBase64String(AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
             taskDefinition.getTitle(),
             taskDefinition.getToOdsCode(),
             taskDefinition.getConversationId()
-        );
+        ));
 
-        var fileName = buildAbsentAttachmentFileName(taskDefinition.getConversationId(), documentId);
+        var fileName = buildAbsentAttachmentFileName(taskDefinition.getDocumentId());
 
         var mhsOutboundRequestData = documentToMHSTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, fileContent);
 
@@ -51,10 +56,8 @@ public class SendAbsentAttachmentTaskExecutor implements TaskExecutor<SendAbsent
 
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, fileName);
 
-        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, fileName, taskId, messageId, Base64Utils.toBase64ByteLength(fileContent)
+        return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
+            taskDefinition, fileName, taskId, messageId, fileContent.length()
         );
-        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
-
 }

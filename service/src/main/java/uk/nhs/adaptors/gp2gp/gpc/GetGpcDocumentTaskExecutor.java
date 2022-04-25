@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfString;
-
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -12,8 +10,12 @@ import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.GetAbsentAttachmentTaskExecutor;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 
 @Slf4j
 @Component
@@ -25,6 +27,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     private final DocumentToMHSTranslator documentToMHSTranslator;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
     private final FhirParseService fhirParseService;
+    private final GetAbsentAttachmentTaskExecutor getAbsentAttachmentTaskExecutor;
 
     @Override
     public Class<GetGpcDocumentTaskDefinition> getTaskType() {
@@ -34,30 +37,46 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     @Override
     @SneakyThrows
     public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
-        var response = gpcClient.getDocumentRecord(taskDefinition);
-        var binary = fhirParseService.parseResource(response, Binary.class);
-        var base64Content = binary.getContentAsBase64();
+        EhrExtractStatus ehrExtractStatus;
+        try {
+            var response = gpcClient.getDocumentRecord(taskDefinition);
+            ehrExtractStatus = handleValidGpcDocument(response, taskDefinition);
+        } catch (GpConnectException e) {
+            LOGGER.warn("Binary request returned an unexpected response", e);
+            ehrExtractStatus = getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition);
+        }
 
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
+    }
+
+    private EhrExtractStatus handleValidGpcDocument(String response, GetGpcDocumentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
-        var messageId = taskDefinition.getMessageId();
         var documentName = GpcFilenameUtils.generateDocumentFilename(
             taskDefinition.getConversationId(), taskDefinition.getDocumentId()
         );
 
-        var mhsOutboundRequestData = documentToMHSTranslator.translateGpcResponseToMhsOutboundRequestData(
-            taskDefinition,
-            base64Content,
-            binary.getContentType()
-        );
+        var binary = fhirParseService.parseResource(response, Binary.class);
+        var contentAsBase64 = binary.getContentAsBase64();
 
-        var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
-            .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
+        var storageDataWrapperWithMhsOutboundRequest = getStorageDataWrapper(
+            contentAsBase64, binary.getContentType(), taskDefinition, taskId);
 
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
 
-        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, documentName, taskId, messageId, getBytesLengthOfString(base64Content));
-        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
+        return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
+            taskDefinition, documentName, taskId, taskDefinition.getMessageId(), contentAsBase64.length());
     }
 
+    private StorageDataWrapper getStorageDataWrapper(
+        String contentAsBase64, String contentType, GetGpcDocumentTaskDefinition taskDefinition, String taskId
+    ) {
+        var mhsOutboundRequestData = documentToMHSTranslator.translateGpcResponseToMhsOutboundRequestData(
+            taskDefinition,
+            contentAsBase64,
+            contentType
+        );
+
+        return StorageDataWrapperProvider
+            .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
+    }
 }

@@ -92,7 +92,9 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         GetGpcStructuredTaskDefinition structuredTaskDefinition = buildValidStructuredTask(ehrExtractStatus);
         getGpcStructuredTaskExecutor.execute(structuredTaskDefinition);
 
-        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        var ehrExtractUpdated = ehrExtractStatusRepository
+            .findByConversationId(ehrExtractStatus.getConversationId())
+            .orElseThrow();
         assertThatInitialRecordWasUpdated(ehrExtractUpdated, ehrExtractStatus);
 
         var storageDataWrapper = getStorageDataWrapper(ehrExtractUpdated);
@@ -117,7 +119,9 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         GetGpcStructuredTaskDefinition structuredTaskDefinition2 = buildValidStructuredTask(ehrExtractStatus);
         getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2);
 
-        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        var ehrExtractUpdated = ehrExtractStatusRepository
+            .findByConversationId(ehrExtractStatus.getConversationId())
+            .orElseThrow();
 
         var storageDataWrapper = getStorageDataWrapper(ehrExtractUpdated);
         assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition2);
@@ -142,7 +146,9 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
 
         assertOperationOutcome(exception);
 
-        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        var ehrExtractUpdated = ehrExtractStatusRepository
+            .findByConversationId(ehrExtractStatus.getConversationId())
+            .orElseThrow();
         assertThat(ehrExtractUpdated.getGpcAccessStructured()).isNull();
 
         assertThrows(StorageConnectorException.class,

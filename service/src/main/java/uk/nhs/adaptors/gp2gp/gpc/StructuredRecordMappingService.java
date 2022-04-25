@@ -73,7 +73,7 @@ public class StructuredRecordMappingService {
                 .contentType(contentType)
                 .compressed(false) // always false for GPC documents
                 .largeAttachment(isLargeAttachment(attachment))
-                .originalBase64(false)
+                .originalBase64(true) // always true
                 .documentId(documentId)
                 .build()
                 .toString()
@@ -111,18 +111,19 @@ public class StructuredRecordMappingService {
         return attachment.getSize() > gp2gpConfiguration.getLargeAttachmentThreshold();
     }
 
-    public String getHL7(GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle bundle) {
-        var ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
-            structuredTaskDefinition,
-            bundle);
+    public String mapStructuredRecordToEhrExtractXml(GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle bundle) {
+        var ehrExtractTemplateParameters = ehrExtractMapper
+            .mapBundleToEhrFhirExtractParams(structuredTaskDefinition, bundle);
         String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
-        return outputMessageWrapperMapper.map(
-            structuredTaskDefinition,
-            ehrExtractContent);
+        return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
     }
 
-    public String getHL7ForLargeEhrExtract(GetGpcStructuredTaskDefinition structuredTaskDefinition, String bindingDocumentId) {
-        return ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, bindingDocumentId);
+    public String buildSkeletonEhrExtractXml(
+        GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle structuredRecord, String documentId
+    ) {
+        String ehrExtractContent =  ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, structuredRecord, documentId);
+
+        return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
     }
 }

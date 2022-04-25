@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -20,16 +21,14 @@ import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDefinition> {
-    private static final int THRESHOLD_MINIMUM = 4;
     private static final String MESSAGE_ATTACHMENT_EXTENSION = ".messageattachment";
 
     private final StorageConnectorService storageConnectorService;
@@ -53,8 +52,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     public void execute(SendDocumentTaskDefinition taskDefinition) {
         var storageDataWrapper = storageConnectorService.downloadFile(taskDefinition.getDocumentName());
         var mainMessageId = taskDefinition.getMessageId();
-        var mainDocumentId = taskDefinition.getDocumentId();
-        var requestDataToSend = new HashMap<String, String>();
+        var requestDataToSend = new ArrayList<Pair<String, String>>();
 
         var outboundMessage = objectMapper.readValue(storageDataWrapper.getData(), OutboundMessage.class);
         if (outboundMessage.getAttachments().size() != 1) {
@@ -62,19 +60,22 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
         }
 
         var binary = outboundMessage.getAttachments().get(0).getPayload();
+        LOGGER.debug("Attachment size=" + getBytesLengthOfString(binary));
         if (isLargeAttachment(binary)) {
             var contentType = outboundMessage.getAttachments().get(0).getContentType();
             outboundMessage.getAttachments().clear(); // since it's a large message, chunks will be sent as external attachments
             outboundMessage.setExternalAttachments(new ArrayList<>());
 
             var chunks = chunkBinary(binary, gp2gpConfiguration.getLargeAttachmentThreshold());
+            LOGGER.debug("Attachment split into {} chunks", chunks.size());
             for (int i = 0; i < chunks.size(); i++) {
+                LOGGER.debug("Handling chunk {}", i);
                 var chunk = chunks.get(i);
                 var messageId = randomIdGeneratorService.createNewId();
-                var filename = mainDocumentId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
+                var filename = mainMessageId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
                 var chunkPayload = generateChunkPayload(taskDefinition, messageId, filename);
                 var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, contentType);
-                requestDataToSend.put(randomIdGeneratorService.createNewId(), chunkedOutboundMessage);
+                requestDataToSend.add(Pair.of(messageId, chunkedOutboundMessage));
                 var externalAttachment = OutboundMessage.ExternalAttachment.builder()
                     .description(OutboundMessage.AttachmentDescription.builder()
                         .length(getBytesLengthOfString(chunk)) //calculate size for chunk
@@ -89,31 +90,30 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                     .build();
                 outboundMessage.getExternalAttachments().add(externalAttachment);
             }
-
-            requestDataToSend.put(mainMessageId, objectMapper.writeValueAsString(outboundMessage));
+            var outboundMessageAsString = objectMapper.writeValueAsString(outboundMessage);
+            requestDataToSend.add(0, Pair.of(mainMessageId, outboundMessageAsString));
         } else {
-            requestDataToSend.put(mainMessageId, storageDataWrapper.getData());
+            requestDataToSend.add(Pair.of(mainMessageId, storageDataWrapper.getData()));
         }
 
-        requestDataToSend.entrySet().stream()
-            .map(kv -> mhsRequestBuilder
+        requestDataToSend.stream()
+            .map(pair -> mhsRequestBuilder
                 .buildSendEhrExtractCommonRequest(
-                    kv.getValue(),
+                    pair.getSecond(),
                     taskDefinition.getConversationId(),
                     taskDefinition.getFromOdsCode(),
-                    kv.getKey()))
+                    pair.getFirst()))
             .forEach(mhsClient::sendMessageToMHS);
 
-        EhrExtractStatus ehrExtractStatus = null;
+        EhrExtractStatus ehrExtractStatus;
 
-        if (taskDefinition.isExternalEhrExtract()) {
-            ehrExtractStatus = ehrExtractStatusService
-                .updateEhrExtractStatusCommonForExternalEhrExtract(taskDefinition, new ArrayList<>(requestDataToSend.keySet()));
-        } else {
-            ehrExtractStatus = ehrExtractStatusService
-                .updateEhrExtractStatusCommonForDocuments(taskDefinition, new ArrayList<>(requestDataToSend.keySet()));
-        }
+        var sentIds = requestDataToSend.stream()
+            .map(Pair::getFirst)
+            .collect(Collectors.toList());
 
+        ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCommonForDocuments(taskDefinition, sentIds);
+
+        LOGGER.info("Executing beginSendingPositiveAcknowledgement");
         detectDocumentsSentService.beginSendingPositiveAcknowledgement(ehrExtractStatus);
     }
 
@@ -135,7 +135,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
         var templateParameters = EhrDocumentTemplateParameters.builder()
             .resourceCreated(DateFormatUtil.toHl7Format(timestampService.now()))
             .messageId(messageId)
-            .accessDocumentId(filename)
+            .filename(filename)
             .fromAsid(taskDefinition.getFromAsid())
             .toAsid(taskDefinition.getToAsid())
             .toOdsCode(taskDefinition.getToOdsCode())
@@ -146,26 +146,13 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
         return ehrDocumentMapper.mapMhsPayloadTemplateToXml(templateParameters);
     }
 
-    public static List<String> chunkBinary(String binary, int sizeThreshold) {
-        if (sizeThreshold <= THRESHOLD_MINIMUM) {
-            throw new IllegalArgumentException("SizeThreshold must be larger 4 to hold at least 1 UTF-16 character");
-        }
+    public static List<String> chunkBinary(String str, int sizeThreshold) {
+        // assuming that the "str" is always in base64 so 1 char == 1 byte
+        var chunksCount = (int) Math.ceil((double) str.length() / sizeThreshold);
+        var chunks = new ArrayList<String>(chunksCount);
 
-        List<String> chunks = new ArrayList<>();
-
-        StringBuilder chunk = new StringBuilder();
-        for (int i = 0; i < binary.length(); i++) {
-            var c = binary.charAt(i);
-            var chunkBytesSize = chunk.toString().getBytes(StandardCharsets.UTF_8).length;
-            var charBytesSize = Character.toString(c).getBytes(StandardCharsets.UTF_8).length;
-            if (chunkBytesSize + charBytesSize > sizeThreshold) {
-                chunks.add(chunk.toString());
-                chunk = new StringBuilder();
-            }
-            chunk.append(c);
-        }
-        if (chunk.length() != 0) {
-            chunks.add(chunk.toString());
+        for (int i = 0; i < chunksCount; i++) {
+            chunks.add(str.substring(i * sizeThreshold, Math.min((i + 1) * sizeThreshold, str.length())));
         }
 
         return chunks;

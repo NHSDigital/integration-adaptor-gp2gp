@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
@@ -23,21 +22,18 @@ public class DocumentToMHSTranslator {
     private final EhrDocumentMapper ehrDocumentMapper;
 
     public String translateGpcResponseToMhsOutboundRequestData(
-        DocumentTaskDefinition taskDefinition, String base64Content, String contentType) {
-        return createOutboundMessage(
-            taskDefinition, base64Content, contentType
-        );
+        DocumentTaskDefinition taskDefinition, String base64Content, String contentType
+    ) {
+        return createOutboundMessage(taskDefinition, base64Content, contentType);
     }
 
-    public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String fileContent) {
-        return createOutboundMessage(
-            taskDefinition, Base64Utils.toBase64String(fileContent), MediaType.TEXT_PLAIN_VALUE
-        );
+    public String translateFileContentToMhsOutboundRequestData(DocumentTaskDefinition taskDefinition, String base64Content) {
+        return createOutboundMessage(taskDefinition, base64Content, MediaType.TEXT_PLAIN_VALUE);
     }
 
     private String createOutboundMessage(DocumentTaskDefinition taskDefinition, String base64Content, String contentType) {
         var ehrDocumentTemplateParameters = ehrDocumentMapper
-            .mapToMhsPayloadTemplateParameters(taskDefinition);
+            .mapToMhsPayloadTemplateParameters(taskDefinition, contentType);
         var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
 
         try {
@@ -47,15 +43,16 @@ public class DocumentToMHSTranslator {
         }
     }
 
-    private String prepareOutboundMessage(DocumentTaskDefinition taskDefinition, String fileContent, String contentType,
-        String xmlContent)
+    private String prepareOutboundMessage(
+        DocumentTaskDefinition taskDefinition, String base64Content, String contentType, String xmlContent)
         throws JsonProcessingException {
+
         var attachments = Collections.singletonList(
             OutboundMessage.Attachment.builder()
                 .contentType(contentType)
                 .isBase64(Boolean.TRUE)
                 .description(taskDefinition.getDocumentId())
-                .payload(fileContent)
+                .payload(base64Content)
                 .build());
         var outboundMessage = OutboundMessage.builder()
             .payload(xmlContent)
