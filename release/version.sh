@@ -1,3 +1,3 @@
 #!/bin/bash
 
-export RELEASE_VERSION=1.4.0-prototype
+export RELEASE_VERSION=1.5.0

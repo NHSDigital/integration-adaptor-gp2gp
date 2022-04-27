@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2022-04-27
+
+- Large messaging bug fixes. 
+- Fixed vulnerable dependencies by updating to Spring Boot version 2.6.7.
+
+### Known Issues and Limitations
+
+- Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268]
+- Information Exposure [Low Severity][https://snyk.io/vuln/SNYK-JAVA-ORGJETBRAINSKOTLIN-2393744]
+
 ## [1.3.2] - 2021-09-29
 
 - Bug fixes
