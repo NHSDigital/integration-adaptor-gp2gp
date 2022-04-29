@@ -1,0 +1,128 @@
+@startuml
+participant "GP2GP Adaptor" as gp2gp
+participant "GPC Consumer" as gpc
+database MongoDB as mongo
+database "File storage" as storage
+queue "Task queue" as task
+queue "Inbound queue" as inbound
+participant "MHS Adaptor" as mhs
+
+group Receive EHR Extract Request
+  mhs -> inbound: Enqueue EHR Request (RCMR_IN010000UK05)
+  gp2gp -> inbound: Dequeue
+  gp2gp -> mongo: Save new transfer
+  gp2gp -> task: Enqueue GET GPC Structure task
+end
+
+group Get GPC Structure
+  gp2gp -> task: Dequeue
+  gp2gp -> gpc: POST ${gpc.migrateStructuredEndpoint}
+  gpc --> gp2gp: FHIR Bundle
+  gp2gp -> gp2gp: Translate FHIR to HL7
+
+  opt Large EHR Extract
+    gp2gp -> gp2gp: Compress EHR Extract
+    gp2gp -> storage: Upload Large EHR Extract
+  end
+
+  loop
+    gp2gp -> task: Enqueue GET GPC Documents task
+  end
+
+  loop
+    gp2gp -> task: Enqueue GET Absent Attachments task
+  end
+
+  alt Large EHR Extract
+    gp2gp -> storage: Upload EHR Extract Skeleton
+  else Regular extract
+    gp2gp -> storage: Upload EHR Extract
+  end
+
+  gp2gp -> mongo: Update transfer status
+
+  opt Record translated and no documents
+    gp2gp -> task: Enqueue Send EHR Core Extract task
+  end
+end
+
+group Get documents and absent attachments [parallel]
+  loop GET GPC Documents
+    gp2gp -> gpc: GET Document
+
+    alt success
+      gpc --> gp2gp: FHIR Binary
+      gp2gp -> storage: Upload Document
+    else failure
+      gp2gp -> gp2gp: Create Absent Attachment placeholder
+      gp2gp -> storage: Upload Absent Attachment
+    end
+
+    gp2gp -> mongo: Update transfer status
+
+    opt All documents and absent attachments ready
+      gp2gp -> task: Enqueue Send EHR Core Extract task
+    end
+  end
+
+  loop Prepare absent attachments
+    gp2gp -> gp2gp: Create Absent Attachment placeholder
+    gp2gp -> storage: Upload Absent Attachment
+    gp2gp -> mongo: Update transfer status
+
+    opt All documents and absent attachments ready
+      gp2gp -> task: Enqueue Send EHR Core Extract task
+    end
+  end
+end
+
+group Send EHR Core Extract
+  gp2gp -> storage: Download EHR Extract
+  gp2gp -> mongo: Update transfer status
+  gp2gp -> mhs: Send EHR Extract (RCMR_IN030000UK06)
+  gp2gp -> mongo: Update transfer status
+
+  opt no documents - transfer finished
+    gp2gp -> task: Enqueue Send ACK
+  end
+end
+
+group Receive Continue Request
+  mhs -> inbound: Enqueue Continue Request (COPC_IN000001UK01)
+  gp2gp -> inbound: Dequeue
+  gp2gp -> mongo: Update transfer status
+  gp2gp -> task: Enqueue Send Document tasks
+end
+
+group Send Documents
+  loop
+    gp2gp -> task: Dequeue
+    gp2gp -> storage: Download file
+
+    opt Large Document
+      gp2gp -> gp2gp: split file
+    end
+
+    gp2gp -> mhs: Send document/chunk
+    gp2gp -> mongo: Update transfer status
+
+    opt All documents sent
+      gp2gp -> task: Enqueue Send ACK
+    end
+  end
+end
+
+group Send ACK
+  gp2gp -> task: Dequeue
+  gp2gp -> mongo: Update transfer status
+  gp2gp -> mhs: Send ACK (MCCI_IN010000UK13)
+  gp2gp -> mongo: Update transfer status
+end
+
+group Receive final ACK/NACK
+  mhs -> inbound: Enqueue acknowledgement (MCCI_IN010000UK13)
+  gp2gp -> inbound: Dequeue
+  gp2gp -> mongo: Update transfer status
+end
+
+@enduml
