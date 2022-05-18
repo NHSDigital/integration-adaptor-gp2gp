@@ -22,11 +22,11 @@ public class TaskHandler {
     private final TaskExecutorFactory taskExecutorFactory;
     private final MDCService mdcService;
     private final ProcessFailureHandlingService processFailureHandlingService;
+    private final ProcessingErrorHandler processingErrorHandler;
 
     /**
      * @return True if the message has been processed. Otherwise, false.
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
     @SneakyThrows
     public boolean handle(Message message) {
         TaskDefinition taskDefinition = null;
@@ -46,10 +46,18 @@ public class TaskHandler {
             }
 
             return true;
-        } catch (Exception e) {
-            LOGGER.error("An error occurred while handing a task message_id: {}", message.getJMSMessageID(), e);
-            return handleProcessingError(taskDefinition);
+        } catch (TaskHandlerException e) {
+            logError(e, message);
+            return false;
         }
+        catch (Exception e) {
+            logError(e, message);
+            return processingErrorHandler.handleGeneralProcessingError(taskDefinition);
+        }
+    }
+    @SneakyThrows
+    private void logError(Exception e, Message message) {
+        LOGGER.error("An error occurred while handing a task message_id: {}", message.getJMSMessageID(), e);
     }
 
     private TaskDefinition readTaskDefinition(Message message) {
@@ -63,7 +71,7 @@ public class TaskHandler {
             throw new TaskHandlerException("Unable to read task definition from JMS message", e);
         }
     }
-
+    @SuppressWarnings({"unchecked"})
     private void executeTask(TaskDefinition taskDefinition) {
         mdcService.applyConversationId(taskDefinition.getConversationId());
         mdcService.applyTaskId(taskDefinition.getTaskId());
@@ -73,20 +81,6 @@ public class TaskHandler {
         LOGGER.info("Executing {}", taskExecutor.getClass().getName());
 
         taskExecutor.execute(taskDefinition);
-    }
-
-    private boolean handleProcessingError(TaskDefinition taskDefinition) {
-        if (taskDefinition != null && !isSendNackTask(taskDefinition)) {
-            return processFailureHandlingService.failProcess(
-                taskDefinition.getConversationId(),
-                // TODO: error code and message to be prepared as part of NIAD-1524
-                "18",
-                "An error occurred when executing a task",
-                taskDefinition.getTaskType().name()
-            );
-        } else {
-            return false;
-        }
     }
 
     private boolean isSendNackTask(TaskDefinition taskDefinition) {
