@@ -1,0 +1,23 @@
+{
+    "resourceType": "OperationOutcome",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1"
+        ]
+    },
+    "issue": [
+        {
+            "severity": "error",
+            "code": "value",
+            "details": {
+                "coding": [
+                    {
+                        "system": "https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1",
+                        "code": "INVALID_NHS_NUMBER",
+                        "display": "Invalid NHS number"
+                    }
+                ]
+            }
+        }
+    ]
+}
