@@ -26,8 +26,8 @@ import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.exception.EHRRequestException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.EHRTranslationException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EhrTranslationException;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ExtendWith(MockitoExtension.class)
@@ -220,7 +220,7 @@ public class TaskHandlerTest {
     @SneakyThrows
     public void When_Handle_WithExecuteThrowsEhrTranslationException_Expect_ErrorHandled() {
         setUpContinueMessage();
-        doThrow(new EHRTranslationException("test exception")).when(taskExecutor).execute(any());
+        doThrow(new EhrTranslationException("test exception")).when(taskExecutor).execute(any());
 
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();
@@ -232,7 +232,7 @@ public class TaskHandlerTest {
     @SneakyThrows
     public void When_Handle_WithExecuteThrowsEhrRequestException_Expect_ErrorHandled() {
         setUpContinueMessage();
-        doThrow(new EHRRequestException("test exception")).when(taskExecutor).execute(any());
+        doThrow(new EhrRequestException("test exception")).when(taskExecutor).execute(any());
 
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();

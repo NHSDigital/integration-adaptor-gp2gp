@@ -25,8 +25,8 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.gpc.exception.EHRRequestException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.EHRTranslationException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EhrTranslationException;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.time.Instant;
@@ -83,7 +83,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         try {
             structuredRecord = getStructuredRecord(structuredTaskDefinition);
         } catch (FhirValidationException e) {
-            throw new EHRRequestException("Unable to parse EHR Request: " + e);
+            throw new EhrRequestException("Unable to parse EHR Request: " + e);
         }
 
         try {
@@ -171,7 +171,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             queueGetDocumentsTask(structuredTaskDefinition, documentsAsExternalAttachments);
             queueGetAbsentAttachmentTask(structuredTaskDefinition, absentAttachments);
         } catch (EhrMapperException | EhrExtractException e) {
-            throw new EHRTranslationException("Unable the translate structured record to EHR Extract: " + e);
+            throw new EhrTranslationException("Unable the translate structured record to EHR Extract: " + e);
         } finally {
             messageContext.resetMessageContext();
         }
