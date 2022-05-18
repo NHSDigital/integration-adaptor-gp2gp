@@ -8,6 +8,8 @@ import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EHRRequestException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EHRTranslationException;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -49,6 +51,12 @@ public class TaskHandler {
         } catch (TaskHandlerException e) {
             logError(e, message);
             return false;
+        } catch (EHRRequestException e) {
+            logError(e, message);
+            return processingErrorHandler.handleRequestError(taskDefinition);
+        } catch (EHRTranslationException e) {
+            logError(e, message);
+            return processingErrorHandler.handleTranslationError(taskDefinition);
         }
         catch (Exception e) {
             logError(e, message);

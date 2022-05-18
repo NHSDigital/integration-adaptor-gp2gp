@@ -9,6 +9,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
+import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
@@ -20,8 +21,12 @@ import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.GetAbsentAttachmentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EHRRequestException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EHRTranslationException;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.time.Instant;
@@ -73,7 +78,13 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         List<OutboundMessage.ExternalAttachment> absentAttachments = new ArrayList<>();
         List<EhrExtractStatus.GpcDocument> ehrStatusGpcDocuments = new ArrayList<>();
 
-        var structuredRecord = getStructuredRecord(structuredTaskDefinition);
+        Bundle structuredRecord;
+
+        try {
+            structuredRecord = getStructuredRecord(structuredTaskDefinition);
+        } catch (FhirValidationException e) {
+            throw new EHRRequestException("Unable to parse EHR Request: " + e);
+        }
 
         try {
             messageContext.initialize(structuredRecord);
@@ -159,6 +170,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             );
             queueGetDocumentsTask(structuredTaskDefinition, documentsAsExternalAttachments);
             queueGetAbsentAttachmentTask(structuredTaskDefinition, absentAttachments);
+        } catch (EhrMapperException | EhrExtractException e) {
+            throw new EHRTranslationException("Unable the translate structured record to EHR Extract: " + e);
         } finally {
             messageContext.resetMessageContext();
         }
