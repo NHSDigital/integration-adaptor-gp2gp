@@ -22,12 +22,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import lombok.SneakyThrows;
+import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.EhrTranslationException;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ExtendWith(MockitoExtension.class)
@@ -218,15 +220,40 @@ public class TaskHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_Handle_WithExecuteThrowsEhrTranslationException_Expect_ErrorHandled() {
+    public void When_Handle_WithExecuteThrowsEhrExtractException_Expect_ErrorHandled() {
         setUpContinueMessage();
-        doThrow(new EhrTranslationException("test exception")).when(taskExecutor).execute(any());
+        doThrow(new EhrExtractException("test exception")).when(taskExecutor).execute(any());
 
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();
 
         verify(processingErrorHandler).handleTranslationError(any());
     }
+
+    @Test
+    @SneakyThrows
+    public void When_Handle_WithExecuteThrowsEhrMapperException_Expect_ErrorHandled() {
+        setUpContinueMessage();
+        doThrow(new EhrMapperException("test exception")).when(taskExecutor).execute(any());
+
+        var result = taskHandler.handle(message);
+        assertThat(result).isFalse();
+
+        verify(processingErrorHandler).handleTranslationError(any());
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_Handle_WithExecuteThrowFhirValidationException_Expect_ErrorHandled() {
+        setUpContinueMessage();
+        doThrow(new FhirValidationException("test exception")).when(taskExecutor).execute(any());
+
+        var result = taskHandler.handle(message);
+        assertThat(result).isFalse();
+
+        verify(processingErrorHandler).handleTranslationError(any());
+    }
+
 
     @Test
     @SneakyThrows

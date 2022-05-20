@@ -9,8 +9,9 @@ import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.EhrTranslationException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 
 import javax.jms.JMSException;
@@ -56,7 +57,7 @@ public class TaskHandler {
         } catch (EhrRequestException e) {
             logError(e, message);
             return processingErrorHandler.handleRequestError(taskDefinition);
-        } catch (EhrTranslationException | FhirValidationException e) {
+        } catch (EhrExtractException | EhrMapperException | FhirValidationException e) {
             logError(e, message);
             return processingErrorHandler.handleTranslationError(taskDefinition);
         } catch (GpConnectException e) {

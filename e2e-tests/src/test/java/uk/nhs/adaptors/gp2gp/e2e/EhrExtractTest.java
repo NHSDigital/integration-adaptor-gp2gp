@@ -79,7 +79,6 @@ public class EhrExtractTest {
     private static final String NACK_CODE_FAILED_TO_GENERATE_EHR = "10";
     private final static String NACK_CODE_REQUEST_NOT_WELL_FORMED = "18";
     private final static String NACK_CODE_GP_CONNECT_ERROR = "20";
-    private final static String NACK_CODE_UNEXPECTED_CONDITION = "99";
     private final static String NACK_MESSAGE_REQUEST_NOT_WELL_FORMED = "An error occurred processing the initial EHR request";
 
     private static final CharSequence XML_NAMESPACE = "/urn:hl7-org:v3:";
