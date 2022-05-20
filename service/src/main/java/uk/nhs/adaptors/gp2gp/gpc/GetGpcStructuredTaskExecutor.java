@@ -83,7 +83,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         try {
             structuredRecord = getStructuredRecord(structuredTaskDefinition);
         } catch (FhirValidationException e) {
-            throw new EhrRequestException("Unable to parse EHR Request: " + e);
+            throw new EhrTranslationException("Unable to parse GPC response: " + e);
         }
 
         try {

@@ -17,12 +17,12 @@ import org.assertj.core.api.SoftAssertions;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.bson.Document;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.StringUtils;
 import org.xmlunit.assertj.XmlAssert;
+
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
@@ -45,6 +45,10 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS = "9690937420";
     private static final String NHS_NUMBER_LARGE_PAYLOAD = "9690937421";
     private static final String NHS_NUMBER_LARGE_ATTACHMENT_DOCX = "9388098434";
+    private static final String NHS_NUMBER_PATIENT_NOT_FOUND = "9600000001";
+    private static final String NHS_NUMBER_INVALID_NHS_NUMBER = "123456789";
+    private static final String NHS_NUMBER_RESPONSE_HAS_MALFORMED_DATE = "9690872294";
+    private static final String NHS_NUMBER_RESPONSE_MISSING_PATIENT_RESOURCE = "2906543841";
 
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_WITHOUT_NHS_NUMBER_TEST_FILE = "/ehrExtractRequestWithoutNhsNumber.json";
@@ -72,6 +76,11 @@ public class EhrExtractTest {
     private static final String GET_GPC_STRUCTURED_TASK_NAME = "GET_GPC_STRUCTURED";
     private static final String ACK_TO_REQUESTER = "ackToRequester";
     private static final String ACK_TO_PENDING = "ackPending";
+    private static final String NACK_CODE_FAILED_TO_GENERATE_EHR = "10";
+    private final static String NACK_CODE_REQUEST_NOT_WELL_FORMED = "18";
+    private final static String NACK_CODE_GP_CONNECT_ERROR = "20";
+    private final static String NACK_CODE_UNEXPECTED_CONDITION = "99";
+    private final static String NACK_MESSAGE_REQUEST_NOT_WELL_FORMED = "An error occurred processing the initial EHR request";
 
     private static final CharSequence XML_NAMESPACE = "/urn:hl7-org:v3:";
     private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/RCMR_IN030000UK06/ControlActEvent/subject/EhrExtract/component/ehrFolder/component/ehrComposition/component/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='cid:%s']";
@@ -103,6 +112,26 @@ public class EhrExtractTest {
             .hasXPath("/MCCI_IN010000UK13/acknowledgement[@type='Acknowledgement' and @typeCode='AE']/acknowledgementDetail[@type='AcknowledgementDetail' and @typeCode='ER']/code[@code='18']".replace("/", XML_NAMESPACE));
         XmlAssert.assertThat(requestJournal.get(0).getPayload())
             .hasXPath("/MCCI_IN010000UK13/ControlActEvent/reason/justifyingDetectedIssueEvent/code[@code='18']".replace("/", XML_NAMESPACE));
+    }
+
+    @Test
+    public void When_GPCRespondsWithPatientNotFound_Expect_NackWithCode18() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_REQUEST_NOT_WELL_FORMED, NHS_NUMBER_PATIENT_NOT_FOUND);
+    }
+
+    @Test
+    public void When_GPCRespondsWithErrorNotPatientNotFound_Expect_NackWithCode20() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_GP_CONNECT_ERROR, NHS_NUMBER_INVALID_NHS_NUMBER);
+    }
+
+    @Test
+    public void When_GpcResponseCannotBeParsed_Expect_NackWithCode10() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_FAILED_TO_GENERATE_EHR, NHS_NUMBER_RESPONSE_HAS_MALFORMED_DATE);
+    }
+
+    @Test
+    public void When_GpcResponseMissingResource_Expect_NackWithCode10() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_FAILED_TO_GENERATE_EHR, NHS_NUMBER_RESPONSE_MISSING_PATIENT_RESOURCE);
     }
 
     @Test
@@ -398,10 +427,9 @@ public class EhrExtractTest {
     }
 
     private void assertThatNegativeAcknowledgementToRequesterWasSent(Document ackToRequester, String typeCode) {
-        // TODO: error code and message to be prepared as part of NIAD-1524
         assertThatAcknowledgementPending(ackToRequester, typeCode);
-        softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo("18");
-        softly.assertThat(ackToRequester.get("detail")).isEqualTo("An error occurred when executing a task");
+        softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo(NACK_CODE_REQUEST_NOT_WELL_FORMED);
+        softly.assertThat(ackToRequester.get("detail")).isEqualTo(NACK_MESSAGE_REQUEST_NOT_WELL_FORMED);
     }
 
     private void assertThatNoErrorInfoIsStored(String conversationId) {
@@ -413,8 +441,8 @@ public class EhrExtractTest {
         var error = (Document) Mongo.findEhrExtractStatus(conversationId).get("error");
 
         softly.assertThat(error.get("occurredAt")).isNotNull();
-        softly.assertThat(error.get("code")).isEqualTo("18");
-        softly.assertThat(error.get("message")).isEqualTo("An error occurred when executing a task");
+        softly.assertThat(error.get("code")).isEqualTo(NACK_CODE_REQUEST_NOT_WELL_FORMED);
+        softly.assertThat(error.get("message")).isEqualTo(NACK_MESSAGE_REQUEST_NOT_WELL_FORMED);
         softly.assertThat(error.get("taskType")).isEqualTo(expectedTaskType);
     }
 
@@ -508,5 +536,26 @@ public class EhrExtractTest {
 
     private boolean nameEndsWith(String name, String endingValue) {
         return name.endsWith(endingValue);
+    }
+
+    private void checkNhsNumberTriggersNackWithCode(String nackCode, String NhsNumber) throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NhsNumber, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        var requestJournal = waitFor(() -> {
+            try {
+                return mhsMockRequestsJournal.getRequestsJournal(conversationId);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        assertThat(requestJournal).hasSize(1);
+        XmlAssert.assertThat(requestJournal.get(0).getPayload())
+            .hasXPath("/MCCI_IN010000UK13/acknowledgement[@type='Acknowledgement' and @typeCode='AE']/acknowledgementDetail[@type='AcknowledgementDetail' and @typeCode='ER']/code[@code='%nackCode%']"
+                .replace("/", XML_NAMESPACE).replace("%nackCode%", nackCode));
+        XmlAssert.assertThat(requestJournal.get(0).getPayload())
+            .hasXPath("/MCCI_IN010000UK13/ControlActEvent/reason/justifyingDetectedIssueEvent/code[@code='%nackCode%']"
+                .replace("/", XML_NAMESPACE).replace("%nackCode%", nackCode));
     }
 }

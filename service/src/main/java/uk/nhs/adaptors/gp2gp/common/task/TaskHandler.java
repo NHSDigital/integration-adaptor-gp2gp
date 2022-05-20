@@ -10,6 +10,7 @@ import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrTranslationException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -57,8 +58,10 @@ public class TaskHandler {
         } catch (EhrTranslationException e) {
             logError(e, message);
             return processingErrorHandler.handleTranslationError(taskDefinition);
-        }
-        catch (Exception e) {
+        } catch (GpConnectException e) {
+            logError(e, message);
+            return processingErrorHandler.handleGpConnectError(taskDefinition);
+        } catch (Exception e) {
             logError(e, message);
             return processingErrorHandler.handleGeneralProcessingError(taskDefinition);
         }
