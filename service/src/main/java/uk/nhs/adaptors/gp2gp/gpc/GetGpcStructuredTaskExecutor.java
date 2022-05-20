@@ -80,11 +80,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
         Bundle structuredRecord;
 
-        try {
             structuredRecord = getStructuredRecord(structuredTaskDefinition);
-        } catch (FhirValidationException e) {
-            throw new EhrTranslationException("Unable to parse GPC response: " + e);
-        }
 
         try {
             messageContext.initialize(structuredRecord);

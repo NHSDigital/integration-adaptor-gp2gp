@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
+import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
@@ -55,7 +56,7 @@ public class TaskHandler {
         } catch (EhrRequestException e) {
             logError(e, message);
             return processingErrorHandler.handleRequestError(taskDefinition);
-        } catch (EhrTranslationException e) {
+        } catch (EhrTranslationException | FhirValidationException e) {
             logError(e, message);
             return processingErrorHandler.handleTranslationError(taskDefinition);
         } catch (GpConnectException e) {
