@@ -51,8 +51,7 @@ public class ProcessingErrorHandler {
     private boolean isNotSendNackTask(TaskDefinition taskDefinition) {
         return !(
             TaskType.SEND_ACKNOWLEDGEMENT.equals(taskDefinition.getTaskType())
-                && ((SendAcknowledgementTaskDefinition) taskDefinition).isNack()
-        );
+                && ((SendAcknowledgementTaskDefinition) taskDefinition).isNack());
     }
 
     private boolean handleFailingProcess(TaskDefinition taskDefinition, String errorCode, String errorMessage) {

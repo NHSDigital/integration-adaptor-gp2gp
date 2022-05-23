@@ -77,7 +77,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
         Bundle structuredRecord;
 
-            structuredRecord = getStructuredRecord(structuredTaskDefinition);
+        structuredRecord = getStructuredRecord(structuredTaskDefinition);
 
         try {
             messageContext.initialize(structuredRecord);

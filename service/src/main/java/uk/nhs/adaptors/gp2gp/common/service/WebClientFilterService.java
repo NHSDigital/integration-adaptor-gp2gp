@@ -64,7 +64,6 @@ public class WebClientFilterService {
             }
 
             return getResponseError(clientResponse, requestType);
-
         });
     }
 
@@ -85,10 +84,9 @@ public class WebClientFilterService {
 
                 return Mono.error(new GpConnectException(
                     "The following error occurred during " + requestType + " request: " + outcome));
-
             } catch (JsonProcessingException e) {
-               return Mono.error(new GpConnectException("The following error occurred during " + requestType + " request: " + e));
-           }
+                return Mono.error(new GpConnectException("The following error occurred during " + requestType + " request: " + e));
+            }
         });
     }
 
