@@ -75,9 +75,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         List<OutboundMessage.ExternalAttachment> absentAttachments = new ArrayList<>();
         List<EhrExtractStatus.GpcDocument> ehrStatusGpcDocuments = new ArrayList<>();
 
-        Bundle structuredRecord;
-
-        structuredRecord = getStructuredRecord(structuredTaskDefinition);
+        Bundle structuredRecord = getStructuredRecord(structuredTaskDefinition);
 
         try {
             messageContext.initialize(structuredRecord);
@@ -163,8 +161,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             );
             queueGetDocumentsTask(structuredTaskDefinition, documentsAsExternalAttachments);
             queueGetAbsentAttachmentTask(structuredTaskDefinition, absentAttachments);
-//        } catch (EhrMapperException | EhrExtractException e) {
-//            throw new EhrTranslationException("Unable the translate structured record to EHR Extract: " + e);
         } finally {
             messageContext.resetMessageContext();
         }
