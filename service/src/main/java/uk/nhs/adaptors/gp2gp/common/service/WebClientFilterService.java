@@ -25,6 +25,8 @@ import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
 @Slf4j
 public class WebClientFilterService {
 
+    private static final String REQUEST_EXCEPTION_MESSAGE = "The following error occurred during %s request: %s";
+
     private static final Map<RequestType, Function<String, Exception>> REQUEST_TYPE_TO_EXCEPTION_MAP = Map.of(
         RequestType.GPC, GpConnectException::new);
 
@@ -78,14 +80,13 @@ public class WebClientFilterService {
                     .anyMatch(code -> code.textValue().equals("PATIENT_NOT_FOUND"));
 
                 if (patientNotFound) {
-                    return Mono.error(new EhrRequestException(
-                        "The following error occurred during " + requestType + " request: " + outcome));
+                    return Mono.error(new EhrRequestException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
                 }
 
-                return Mono.error(new GpConnectException(
-                    "The following error occurred during " + requestType + " request: " + outcome));
+                return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
+
             } catch (JsonProcessingException e) {
-                return Mono.error(new GpConnectException("The following error occurred during " + requestType + " request: " + e));
+                return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
             }
         });
     }
@@ -96,8 +97,9 @@ public class WebClientFilterService {
 
         return clientResponse.bodyToMono(String.class)
             .flatMap(operationalOutcome -> Mono.error(
-                exceptionBuilder.apply(
-                    "The following error occurred during " + requestType + " request: " + operationalOutcome)));
+                exceptionBuilder.apply(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, operationalOutcome))
+                )
+            );
     }
 
     private static ExchangeFilterFunction logRequest() {
