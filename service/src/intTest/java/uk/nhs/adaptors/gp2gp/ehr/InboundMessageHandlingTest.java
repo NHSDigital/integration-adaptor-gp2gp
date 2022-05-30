@@ -57,7 +57,7 @@ public class InboundMessageHandlingTest {
 
     @Test
     public void When_ProcessIsAlreadyFailed_Expect_MessageProcessingToBeAborted() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId);
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusNoDocuments(conversationId);
         ehrExtractStatus.setError(EhrExtractStatus.Error.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
@@ -72,7 +72,7 @@ public class InboundMessageHandlingTest {
 
     @Test
     public void When_ProcessIsNotFailed_Expect_MessageToBeProcessed() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(conversationId);
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusNoDocuments(conversationId);
         ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 

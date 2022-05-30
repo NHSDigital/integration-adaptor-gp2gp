@@ -6,6 +6,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.GPC_ACCESS_DOCUMENT_U
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -24,6 +25,17 @@ public class EhrExtractStatusTestUtils {
             .conversationId(conversationId)
             .ehrRequest(prepareEhrRequest())
             .gpcAccessDocument(prepareGpcAccessDocument(DOCUMENT_ID))
+            .build();
+    }
+
+    public static EhrExtractStatus prepareEhrExtractStatusNoDocuments(String conversationId) {
+        Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant().truncatedTo(ChronoUnit.MILLIS);
+
+        return EhrExtractStatus.builder()
+            .created(now)
+            .updatedAt(now)
+            .conversationId(conversationId)
+            .gpcAccessDocument(prepareEmptyGpcAccessDocument())
             .build();
     }
 
@@ -59,5 +71,11 @@ public class EhrExtractStatusTestUtils {
                     .accessDocumentUrl(String.format(GPC_ACCESS_DOCUMENT_URL, documentId))
                     .build()
             )).build();
+    }
+
+    private static EhrExtractStatus.GpcAccessDocument prepareEmptyGpcAccessDocument() {
+        return EhrExtractStatus.GpcAccessDocument.builder()
+            .documents(new ArrayList<>())
+            .build();
     }
 }
