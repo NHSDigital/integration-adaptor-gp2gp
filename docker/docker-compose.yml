@@ -117,7 +117,7 @@ services:
       - GPC_CONSUMER_SDS_APIKEY
 
   gpconnect-db:
-    image: mariadb
+    image: mariadb:10.8.2
     networks: 
       - commonforgp2gp
     environment:
