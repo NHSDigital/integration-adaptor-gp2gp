@@ -22,16 +22,19 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import lombok.SneakyThrows;
+import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ExtendWith(MockitoExtension.class)
 public class TaskHandlerTest {
 
-    private static final String NACK_ERROR_CODE = "18";
     private static final String CONVERSATION_ID = "conversationId1";
 
     @Mock
@@ -54,6 +57,9 @@ public class TaskHandlerTest {
 
     @Mock
     private ProcessFailureHandlingService processFailureHandlingService;
+
+    @Mock
+    private ProcessingErrorHandler processingErrorHandler;
 
     private TaskDefinition taskDefinition;
     private SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition;
@@ -81,7 +87,8 @@ public class TaskHandlerTest {
             taskDefinitionFactory,
             taskExecutorFactory,
             taskExecutor,
-            processFailureHandlingService
+            processFailureHandlingService,
+            processingErrorHandler
         );
     }
 
@@ -123,6 +130,7 @@ public class TaskHandlerTest {
     public void When_NackTaskFails_Expect_ProcessNotToBeFailed() {
         setupAckMessage(SendAcknowledgementTaskDefinition.NACK_TYPE_CODE);
         doThrow(new RuntimeException("test exception")).when(taskExecutor).execute(any());
+        when(processingErrorHandler.handleGeneralProcessingError(any())).thenReturn(false);
 
         var result = taskHandler.handle(message);
 
@@ -140,21 +148,16 @@ public class TaskHandlerTest {
         taskHandler.handle(message);
 
         verify(taskExecutor).execute(taskDefinition);
-        verify(processFailureHandlingService).failProcess(
-            CONVERSATION_ID,
-            NACK_ERROR_CODE,
-            "An error occurred when executing a task",
-            TaskType.SEND_EHR_CONTINUE.name()
-        );
+        verify(processingErrorHandler).handleGeneralProcessingError(any());
     }
 
     @Test
     @SneakyThrows
-    public void When_OtherTaskFails_Expect_ResultFromFailureHandlerToBeReturned() {
+    public void When_OtherTaskFails_Expect_ResultFromErrorHandlerToBeReturned() {
         setUpContinueMessage();
         doThrow(new RuntimeException("test exception")).when(taskExecutor).execute(any());
 
-        when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
+        when(processingErrorHandler.handleGeneralProcessingError(any()))
             .thenReturn(true, false);
 
         assertThat(taskHandler.handle(message)).isTrue();
@@ -163,11 +166,11 @@ public class TaskHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_NonAckTaskFails_Expect_ResultFromFailureHandlerToBeReturned() {
+    public void When_NonAckTaskFails_Expect_ResultFromErrorHandlerToBeReturned() {
         setupAckMessage(SendAcknowledgementTaskDefinition.ACK_TYPE_CODE);
         doThrow(new RuntimeException("test exception")).when(taskExecutor).execute(any());
 
-        when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
+        when(processingErrorHandler.handleGeneralProcessingError(any()))
             .thenReturn(true, false);
 
         assertThat(taskHandler.handle(message)).isTrue();
@@ -177,12 +180,12 @@ public class TaskHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_FailureHandlerThrowsException_Expect_ExceptionToBeRethrown() {
+    public void When_ErrorHandlerThrowsException_Expect_ExceptionToBeRethrown() {
         setUpContinueMessage();
         doThrow(new RuntimeException("task executor exception")).when(taskExecutor).execute(any());
 
         var failureHandlingException = new RuntimeException("failure handler exception");
-        doThrow(failureHandlingException).when(processFailureHandlingService).failProcess(any(), any(), any(), any());
+        doThrow(failureHandlingException).when(processingErrorHandler).handleGeneralProcessingError(any());
 
         assertThatThrownBy(
             () -> taskHandler.handle(message)
@@ -213,6 +216,55 @@ public class TaskHandlerTest {
         assertThat(result).isTrue();
         verify(processFailureHandlingService).hasProcessFailed(CONVERSATION_ID);
         verify(taskExecutor).execute(sendAcknowledgementTaskDefinition);
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_Handle_WithExecuteThrowsEhrExtractException_Expect_ErrorHandled() {
+        setUpContinueMessage();
+        doThrow(new EhrExtractException("test exception")).when(taskExecutor).execute(any());
+
+        var result = taskHandler.handle(message);
+        assertThat(result).isFalse();
+
+        verify(processingErrorHandler).handleTranslationError(any());
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_Handle_WithExecuteThrowsEhrMapperException_Expect_ErrorHandled() {
+        setUpContinueMessage();
+        doThrow(new EhrMapperException("test exception")).when(taskExecutor).execute(any());
+
+        var result = taskHandler.handle(message);
+        assertThat(result).isFalse();
+
+        verify(processingErrorHandler).handleTranslationError(any());
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_Handle_WithExecuteThrowFhirValidationException_Expect_ErrorHandled() {
+        setUpContinueMessage();
+        doThrow(new FhirValidationException("test exception")).when(taskExecutor).execute(any());
+
+        var result = taskHandler.handle(message);
+        assertThat(result).isFalse();
+
+        verify(processingErrorHandler).handleTranslationError(any());
+    }
+
+
+    @Test
+    @SneakyThrows
+    public void When_Handle_WithExecuteThrowsEhrRequestException_Expect_ErrorHandled() {
+        setUpContinueMessage();
+        doThrow(new EhrRequestException("test exception")).when(taskExecutor).execute(any());
+
+        var result = taskHandler.handle(message);
+        assertThat(result).isFalse();
+
+        verify(processingErrorHandler).handleRequestError(any());
     }
 
     private void setupAckMessage(String typeCode) throws JMSException {

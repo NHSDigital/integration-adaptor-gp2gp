@@ -5,9 +5,14 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
+import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -22,11 +27,11 @@ public class TaskHandler {
     private final TaskExecutorFactory taskExecutorFactory;
     private final MDCService mdcService;
     private final ProcessFailureHandlingService processFailureHandlingService;
+    private final ProcessingErrorHandler processingErrorHandler;
 
     /**
      * @return True if the message has been processed. Otherwise, false.
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
     @SneakyThrows
     public boolean handle(Message message) {
         TaskDefinition taskDefinition = null;
@@ -46,10 +51,26 @@ public class TaskHandler {
             }
 
             return true;
+        } catch (TaskHandlerException e) {
+            logError(e, message);
+            return false;
+        } catch (EhrRequestException e) {
+            logError(e, message);
+            return processingErrorHandler.handleRequestError(taskDefinition);
+        } catch (EhrExtractException | EhrMapperException | FhirValidationException e) {
+            logError(e, message);
+            return processingErrorHandler.handleTranslationError(taskDefinition);
+        } catch (GpConnectException e) {
+            logError(e, message);
+            return processingErrorHandler.handleGpConnectError(taskDefinition);
         } catch (Exception e) {
-            LOGGER.error("An error occurred while handing a task message_id: {}", message.getJMSMessageID(), e);
-            return handleProcessingError(taskDefinition);
+            logError(e, message);
+            return processingErrorHandler.handleGeneralProcessingError(taskDefinition);
         }
+    }
+    @SneakyThrows
+    private void logError(Exception e, Message message) {
+        LOGGER.error("An error occurred while handing a task message_id: {}", message.getJMSMessageID(), e);
     }
 
     private TaskDefinition readTaskDefinition(Message message) {
@@ -63,7 +84,7 @@ public class TaskHandler {
             throw new TaskHandlerException("Unable to read task definition from JMS message", e);
         }
     }
-
+    @SuppressWarnings({"unchecked"})
     private void executeTask(TaskDefinition taskDefinition) {
         mdcService.applyConversationId(taskDefinition.getConversationId());
         mdcService.applyTaskId(taskDefinition.getTaskId());
@@ -73,20 +94,6 @@ public class TaskHandler {
         LOGGER.info("Executing {}", taskExecutor.getClass().getName());
 
         taskExecutor.execute(taskDefinition);
-    }
-
-    private boolean handleProcessingError(TaskDefinition taskDefinition) {
-        if (taskDefinition != null && !isSendNackTask(taskDefinition)) {
-            return processFailureHandlingService.failProcess(
-                taskDefinition.getConversationId(),
-                // TODO: error code and message to be prepared as part of NIAD-1524
-                "18",
-                "An error occurred when executing a task",
-                taskDefinition.getTaskType().name()
-            );
-        } else {
-            return false;
-        }
     }
 
     private boolean isSendNackTask(TaskDefinition taskDefinition) {

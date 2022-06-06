@@ -1,21 +1,31 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.reactive.function.client.ClientResponse;
-import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
-import reactor.core.publisher.Mono;
-import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
-import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.slf4j.MDC;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.reactive.function.client.ClientResponse;
+import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
+import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
+
 @Slf4j
 public class WebClientFilterService {
+
+    private static final String REQUEST_EXCEPTION_MESSAGE = "The following error occurred during %s request: %s";
 
     private static final Map<RequestType, Function<String, Exception>> REQUEST_TYPE_TO_EXCEPTION_MAP = Map.of(
         RequestType.GPC, GpConnectException::new);
@@ -50,8 +60,33 @@ public class WebClientFilterService {
             if (clientResponse.statusCode().equals(httpStatus)) {
                 LOGGER.info(requestType + " request successful status_code: {}", clientResponse.statusCode());
                 return Mono.just(clientResponse);
-            } else {
-                return getResponseError(clientResponse, requestType);
+            }
+            if (requestType.equals(RequestType.GPC) && clientResponse.statusCode().equals(NOT_FOUND)) {
+                return handleNotFoundFromGpc(clientResponse, requestType);
+            }
+
+            return getResponseError(clientResponse, requestType);
+        });
+    }
+
+    private static Mono<ClientResponse> handleNotFoundFromGpc(ClientResponse clientResponse, RequestType requestType) {
+
+        return clientResponse.bodyToMono(String.class).flatMap(outcome -> {
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                JsonNode outcomeJson = objectMapper.readTree(outcome);
+                boolean patientNotFound = outcomeJson.findValues("code").stream()
+                    .anyMatch(code -> code.textValue().equals("PATIENT_NOT_FOUND"));
+
+                if (patientNotFound) {
+                    return Mono.error(new EhrRequestException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
+                }
+
+                return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
+
+            } catch (JsonProcessingException e) {
+                return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
             }
         });
     }
@@ -62,8 +97,9 @@ public class WebClientFilterService {
 
         return clientResponse.bodyToMono(String.class)
             .flatMap(operationalOutcome -> Mono.error(
-                exceptionBuilder.apply(
-                    "The following error occurred during " + requestType + " request: " + operationalOutcome)));
+                exceptionBuilder.apply(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, operationalOutcome))
+                )
+            );
     }
 
     private static ExchangeFilterFunction logRequest() {
