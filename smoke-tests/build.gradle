@@ -21,6 +21,8 @@ task smokeTest(type: Test) {
         description = "Runs smoke tests which verify dependencies are running and availible"
         group = "verification"
         dependsOn "cleanTest"
+
+        outputs.upToDateWhen { false }
     }
 }
 

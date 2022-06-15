@@ -1,6 +1,7 @@
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.fail;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,51 +16,54 @@ import org.junit.jupiter.api.Test;
 
 public class Gp2GpAdaptorSmokeTest {
 
-    private final String SERVER_DEFAULT_HOST = "localhost";
-    private final static String SERVER_PORT_NAME = "GP2GP_SERVER_PORT";
+    private final static String SERVER_DEFAULT_HOST = "http://localhost";
+    private final static String SERVER_PORT_ENV_VARIABLE = "GP2GP_SERVER_PORT";
     private final static String SERVER_PORT_DEFAULT_VALUE = "8080";
-    private final static String HEALTHCHECK_ENDPOINT = "/healthcheack";
+    private final static String HEALTHCHECK_ENDPOINT = "/healthcheck";
+
+    private static String invalidResponseMessage;
 
     private static String serverPort;
 
     @BeforeAll
-    public static void getEnvVars() {
+    public static void setup() {
         Map<String, String> envVars = System.getenv();
 
-        Optional<String> serverPortOptional = Optional.ofNullable(envVars.get(SERVER_PORT_NAME));
+        Optional<String> serverPortOptional = Optional.ofNullable(envVars.get(SERVER_PORT_ENV_VARIABLE));
         serverPort = serverPortOptional.orElse(SERVER_PORT_DEFAULT_VALUE);
+
+        invalidResponseMessage = "Invalid response from GP2GP adaptor at " + SERVER_DEFAULT_HOST + ":" + serverPort;
     }
 
     @Test
-    public void gp2gpAdaptorIsAvailable() {
+    public void checkGp2gpAdaptorIsAvailable() {
 
-        assertThatNoException()
-            .as("Unable to connect to GP2GP Adaptor on " + SERVER_DEFAULT_HOST + ":" + serverPort)
-            .isThrownBy(() -> {
+        Optional<String> responseBody = Optional.empty();
 
-                try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
-                    HttpGet httpGet = new HttpGet(
-                        "http://" + SERVER_DEFAULT_HOST + ":" + serverPort + HEALTHCHECK_ENDPOINT
-                    );
+        try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpGet httpGet = new HttpGet(
+                SERVER_DEFAULT_HOST + ":" + serverPort + HEALTHCHECK_ENDPOINT
+            );
 
-                    final Optional<String> responseBody = httpClient.execute(httpGet, response -> {
-                        HttpEntity entity = response.getEntity();
+            responseBody = httpClient.execute(httpGet, response -> {
+                HttpEntity entity = response.getEntity();
 
-                        try {
-                            return entity != null ? Optional.of(EntityUtils.toString(entity)) : Optional.empty();
-                        } catch (ParseException e) {
-                            return Optional.empty();
-                        }
-                    });
-
-                    assertThat(responseBody.isPresent())
-                        .as("Unable to connect to GP2GP Adaptor on " + SERVER_DEFAULT_HOST + serverPort)
-                        .isTrue();
-
-                    assertThat(responseBody.get())
-                        .as("Invalid response from GP2GP Adaptor healthcheck endpoint")
-                        .isEqualTo("UP");
+                try {
+                    return entity != null ? Optional.of(EntityUtils.toString(entity)) : Optional.empty();
+                } catch (ParseException e) {
+                    return Optional.empty();
                 }
             });
+        } catch (IOException e) {
+            fail("Unable to connect to GP2GP Adaptor at " + SERVER_DEFAULT_HOST + ":" + serverPort);
+        }
+
+        assertThat(responseBody.isPresent())
+            .as(invalidResponseMessage)
+            .isTrue();
+
+        assertThat(responseBody.get())
+            .as(invalidResponseMessage)
+            .contains("UP");
     }
 }
