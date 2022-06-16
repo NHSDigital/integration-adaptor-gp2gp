@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -x -e
 
 if [ -f "../docker/vars.sh" ]; then
   cd ../smoke-tests
