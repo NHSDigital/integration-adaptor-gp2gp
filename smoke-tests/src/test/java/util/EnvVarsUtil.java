@@ -7,7 +7,7 @@ public class EnvVarsUtil {
         String dockerContainerPath = protocol + "://" + containerName;
 
         if (uri.contains(dockerContainerPath)) {
-            String regex = "^(" + protocol + "://)(" + containerName + ")(:\\d+)$";
+            String regex = "(" + protocol + "://)(" + containerName + ")(:\\d+)";
             return uri.replaceAll(regex, "$1localhost$3");
         } else {
             return uri;

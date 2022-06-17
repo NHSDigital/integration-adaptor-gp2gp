@@ -62,6 +62,10 @@ public class Gp2GpAdaptorSmokeTest {
             .as(invalidResponseMessage)
             .isTrue();
 
+        if (responseBody.get().contains("DOWN")) {
+            fail("The adaptor is running but has a healthcheck status of DOWN. Ensure the other smoke tests pass or skip." );
+        }
+
         assertThat(responseBody.get())
             .as(invalidResponseMessage)
             .contains("UP");
