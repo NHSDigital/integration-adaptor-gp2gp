@@ -9,6 +9,7 @@ import org.bson.Document;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.mongodb.MongoSecurityException;
 import com.mongodb.MongoTimeoutException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -143,6 +144,8 @@ public class MongoDbSmokeTest {
         } catch (MongoTimeoutException e) {
             fail("Unable to connect to mongoDB on " + connectionString +
                 " due to timeout, check the DB is running and the connection details are correct");
+        } catch (MongoSecurityException e) {
+            fail(e.getMessage());
         }
     }
 }
