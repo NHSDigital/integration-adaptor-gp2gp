@@ -1,6 +1,6 @@
+import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.Assumptions.assumeThat;
-import static org.assertj.core.api.Assertions.fail;
 
 import java.util.Map;
 import java.util.Optional;
@@ -9,12 +9,13 @@ import org.bson.Document;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.mongodb.MongoSecurityException;
 import com.mongodb.MongoTimeoutException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
+import util.EnvVarsUtil;
 
 public class MongoDbSmokeTest {
 
@@ -44,7 +45,7 @@ public class MongoDbSmokeTest {
 
         Optional<String> mongoUriOptional = Optional.ofNullable(envVars.get(URI_ENV_VARIABLE));
         String uri = mongoUriOptional
-            .map(MongoDbSmokeTest::replaceContainerUri)
+            .map(mongoUri -> EnvVarsUtil.replaceContainerUri(mongoUri, "mongodb", DOCKER_CONTAINER_NAME))
             .orElse(URI_DEFAULT_VALUE);
 
         connectionString = buildConnectionString(envVars).orElse(uri);
@@ -78,18 +79,6 @@ public class MongoDbSmokeTest {
         }
 
         return connectionStringOptional;
-    }
-
-    private static String replaceContainerUri(String uri) {
-
-        String dockerContainerPath = "mongodb://" + DOCKER_CONTAINER_NAME;
-
-        if (uri.contains(dockerContainerPath)) {
-            String regex = "^(mongodb://)(" + DOCKER_CONTAINER_NAME + ")(:\\d+)$";
-            return uri.replaceAll(regex, "$1localhost$3");
-        } else {
-            return uri;
-        }
     }
 
     @Test
@@ -142,10 +131,10 @@ public class MongoDbSmokeTest {
 
             collection.countDocuments();
         } catch (MongoTimeoutException e) {
-            fail("Unable to connect to mongoDB on " + connectionString +
+            fail("Unable to connect to mongoDB at " + connectionString +
                 " due to timeout, check the DB is running and the connection details are correct");
-        } catch (MongoSecurityException e) {
-            fail(e.getMessage());
+        } catch (Exception e) {
+            fail("Error connecting to mongoDB at " + connectionString + ". Due to: "+ e.getMessage());
         }
     }
 }
