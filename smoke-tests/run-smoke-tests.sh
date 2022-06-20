@@ -2,9 +2,11 @@
 
 set -x -e
 
-if [ -f "../docker/vars.sh" ]; then
-  cd ../smoke-tests
-    source ../docker/vars.sh; ./gradlew smokeTest
+if [ -f "$1" ]; then
+
+  cp "$1" smoke_vars.sh
+
+  source smoke_vars.sh; ./gradlew smokeTest
 else
-  echo "No vars.sh defined."
+  echo "Missing argument. The location of your vars.sh file should be passed as the first argument"
 fi

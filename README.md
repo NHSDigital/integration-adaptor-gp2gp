@@ -280,6 +280,17 @@ Environment variables with the same name/meaning as the application's control th
 * GP2GP_MONGO_DATABASE_NAME
 * GP2GP_MHS_INBOUND_QUEUE
 
+## How to run smoke tests
+
+Smoke tests are included to check basic connectivity and that the required resources are up and running. 
+
+To run the smoke tests: 
+
+- Navigate to: `smoke-tests`
+- Run: `./run-smoke-tests.sh <location of vars.sh>`
+
+Where the first parameter is the location of your configuration shell script.
+
 ## How to use WireMock
 
 We provide mocks of external APIs (GPC, SDS) for local development and testing.
