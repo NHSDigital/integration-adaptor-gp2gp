@@ -4,7 +4,7 @@
 
 1. Make sure the environment is set up
 2. Ensure you are in the `smoketests` directory
-3. Run `.\run-smoke-tests.sh`
+3. Run `.\run-smoke-tests.sh <path to your vars.sh script>`, where the parameter is the location of your configuration shell script.
 
 #### Troubleshooting on M1 mac
 

@@ -282,14 +282,9 @@ Environment variables with the same name/meaning as the application's control th
 
 ## How to run smoke tests
 
-Smoke tests are included to check basic connectivity and that the required resources are up and running. 
+Smoke tests are provided to check basic connectivity and the required resources are up and running. 
 
-To run the smoke tests: 
-
-- Navigate to: `smoke-tests`
-- Run: `./run-smoke-tests.sh <location of vars.sh>`
-
-Where the first parameter is the location of your configuration shell script.
+- Information on running the smoke tests can be found [here](./smoke-tests/README.md).
 
 ## How to use WireMock
 
