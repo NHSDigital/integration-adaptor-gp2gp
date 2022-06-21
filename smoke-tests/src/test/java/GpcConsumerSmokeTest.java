@@ -29,7 +29,7 @@ public class GpcConsumerSmokeTest {
     public static void setup() {
         Map<String, String> envVars = System.getenv();
 
-        url = EnvVarsUtil.replaceContainerUri(
+        url = EnvVarsUtil.replaceContainerUriAndExtractHost(
             envVars.getOrDefault(GPC_URL_ENV_VARIABLE, GPC_URL_DEFAULT_VALUE), "http", "gpcc");
 
         invalidResponseMessage = "Invalid response from GPC Consumer at " + url;
