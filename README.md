@@ -280,6 +280,12 @@ Environment variables with the same name/meaning as the application's control th
 * GP2GP_MONGO_DATABASE_NAME
 * GP2GP_MHS_INBOUND_QUEUE
 
+## How to run smoke tests
+
+Smoke tests are provided to check basic connectivity and the required resources are up and running. 
+
+- Information on running the smoke tests can be found [here](./smoke-tests/README.md).
+
 ## How to use WireMock
 
 We provide mocks of external APIs (GPC, SDS) for local development and testing.

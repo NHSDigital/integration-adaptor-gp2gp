@@ -44,6 +44,10 @@ public class MhsMockController {
 
     private static final Map<String, List<String>> REQUEST_JOURNALS_MAP = new HashMap<>();
 
+    @GetMapping(value = "/mock-mhs-endpoint/healthcheck")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void healthcheck() {}
+
     @PostMapping(value = "/mock-mhs-endpoint",
         consumes = APPLICATION_JSON_VALUE
     )
