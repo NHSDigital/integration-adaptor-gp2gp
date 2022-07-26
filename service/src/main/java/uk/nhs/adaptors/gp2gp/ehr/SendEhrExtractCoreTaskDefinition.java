@@ -19,7 +19,6 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 public class SendEhrExtractCoreTaskDefinition extends TaskDefinition {
 
     private String ehrExtractMessageId;
-
     @Override
     public TaskType getTaskType() {
         return SEND_EHR_EXTRACT_CORE;

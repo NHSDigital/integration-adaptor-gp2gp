@@ -42,6 +42,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         var documentObjectNameAndSize = ehrExtractStatusService
             .fetchDocumentObjectNameAndSize(sendEhrExtractCoreTaskDefinition.getConversationId());
 
+
         var requestData = mhsRequestBuilder
             .buildSendEhrExtractCoreRequest(
                 replacePlaceholders(documentObjectNameAndSize, storageDataWrapper.getData()),
