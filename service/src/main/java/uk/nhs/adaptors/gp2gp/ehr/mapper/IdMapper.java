@@ -46,6 +46,7 @@ public class IdMapper {
 
         MappedId defaultResourceId = new MappedId(randomIdGeneratorService.createNewId(), isResourceMapped);
         MappedId mappedId = ids.getOrDefault(reference.getReference(), defaultResourceId);
+
         if (isResourceMapped) {
             mappedId.setResourceMapped(true);
         }

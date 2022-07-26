@@ -49,14 +49,26 @@ public class EhrExtractAckHandler {
                 .rootId(rootId)
                 .received(now);
 
+        String ehrExtractMessageRef = ehrExtractStatusService.fetchEhrExtractMessageId(conversationId).orElse("");
+
+        LOGGER.debug("******* EHR Extract Message Ref = [{}]", ehrExtractMessageRef);
+
         if (ACK_OK_CODE.equals(ackTypeCode)) {
-            LOGGER.info("Application Acknowledgement Accept ({}) received, messageRef: {}", messageRef, ackTypeCode);
-            ackBuilder.conversationClosed(now);
+            LOGGER.info("Application Acknowledgement Accept ({}) received, messageRef: {}", ackTypeCode, messageRef);
+
+            if(messageRef.equals(ehrExtractMessageRef)) {
+                LOGGER.info("Ehr Extract acknowledged: closing conversation {}", conversationId);
+                ackBuilder.conversationClosed(now);
+                ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
+            }
+
+            return;
+
         } else if (ACK_BUSINESS_ERROR_CODE.equals(ackTypeCode)) {
-            LOGGER.info("Application Acknowledgement Error ({}) received, messageRef: {}", messageRef, ackTypeCode);
+            LOGGER.info("Application Acknowledgement Error ({}) received, messageRef: {}", ackTypeCode, messageRef);
             ackBuilder.errors(extractErrorCodes(document, ERROR_CODE_XPATH));
         } else if (ACK_REJECTED_CODE.equals(ackTypeCode)) {
-            LOGGER.info("Application Acknowledgement Reject ({}) received, messageRef: {}", messageRef, ackTypeCode);
+            LOGGER.info("Application Acknowledgement Reject ({}) received, messageRef: {}", ackTypeCode, messageRef);
             ackBuilder.errors(extractErrorCodes(document, ACK_DETAILS_XPATH));
         } else {
             throw new InvalidInboundMessageException(String.format("Unsupported %s: %s", ACK_TYPE_CODE_XPATH, ackTypeCode));

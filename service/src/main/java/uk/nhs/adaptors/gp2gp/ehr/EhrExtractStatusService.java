@@ -57,6 +57,7 @@ public class EhrExtractStatusService {
     private static final String ROOT_ID = "rootId";
     private static final String CONVERSATION_CLOSED = "conversationClosed";
     private static final String MESSAGE_REF = "messageRef";
+    private static final String EHR_EXTRACT_MESSAGE_REF = "ehrExtractMessageRef";
     private static final String ERRORS = "errors";
     private static final String ERROR = "error";
     private static final String SENT_TO_MHS = "sentToMhs";
@@ -81,6 +82,7 @@ public class EhrExtractStatusService {
     private static final String EXTRACT_CORE_SENT_AT_PATH = EHR_EXTRACT_CORE + DOT + SENT_AT;
     private static final String EXTRACT_CORE_PENDING_TASK_ID_PATH = EHR_EXTRACT_CORE_PENDING + DOT + TASK_ID;
     private static final String EXTRACT_CORE_PENDING_SENT_AT_PATH = EHR_EXTRACT_CORE_PENDING + DOT + SENT_AT;
+    private final static String EXTRACT_CORE_EHR_EXTRACT_MESSAGE_ID = EHR_EXTRACT_CORE + DOT + EHR_EXTRACT_MESSAGE_REF;
     private static final String ACK_TASK_ID_PATH = ACK_TO_REQUESTER + DOT + TASK_ID;
     private static final String ACK_MESSAGE_ID_PATH = ACK_TO_REQUESTER + DOT + MESSAGE_ID;
     private static final String ACK_TYPE_CODE_PATH = ACK_TO_REQUESTER + DOT + TYPE_CODE;
@@ -103,6 +105,25 @@ public class EhrExtractStatusService {
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
+
+    public void saveEhrExtractMessageId(String conversationId, String messageId) {
+        Optional<EhrExtractStatus> ehrExtractStatusOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
+
+        ehrExtractStatusOptional.ifPresentOrElse(
+            ehrExtractStatus -> {
+                ehrExtractStatus.setEhrExtractMessageId(messageId);
+                ehrExtractStatusRepository.save(ehrExtractStatus);
+                },
+            () -> {
+                throw new EhrExtractException("Unable to find EHR Extract status with conversation id " + conversationId);
+            });
+    }
+
+    public Optional<String> fetchEhrExtractMessageId(String conversationId) {
+        Optional<EhrExtractStatus> ehrExtractStatusOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
+
+        return ehrExtractStatusOptional.map(EhrExtractStatus::getEhrExtractMessageId);
+    }
 
     public Map<String, String> fetchDocumentObjectNameAndSize(String conversationId) {
         Optional<EhrExtractStatus> ehrExtractStatusSearch = ehrExtractStatusRepository.findByConversationId(conversationId);

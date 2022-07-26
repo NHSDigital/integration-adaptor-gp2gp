@@ -41,11 +41,13 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         var documentObjectNameAndSize = ehrExtractStatusService
             .fetchDocumentObjectNameAndSize(sendEhrExtractCoreTaskDefinition.getConversationId());
 
+
         var requestData = mhsRequestBuilder
             .buildSendEhrExtractCoreRequest(
                 replacePlaceholders(documentObjectNameAndSize, storageDataWrapper.getData()),
                 sendEhrExtractCoreTaskDefinition.getConversationId(),
-                sendEhrExtractCoreTaskDefinition.getFromOdsCode()
+                sendEhrExtractCoreTaskDefinition.getFromOdsCode(),
+                sendEhrExtractCoreTaskDefinition.getEhrExtractMessageId()
             );
 
         Instant requestSentAtPending = Instant.now();

@@ -40,8 +40,8 @@ public class MhsRequestBuilder {
     private final RequestBuilderService requestBuilderService;
 
     public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(
-            String extractCoreMessage, String conversationId, String fromOdsCode) {
-        return buildRequest(extractCoreMessage, fromOdsCode, conversationId, MHS_OUTBOUND_EXTRACT_CORE_INTERACTION_ID, null);
+            String extractCoreMessage, String conversationId, String fromOdsCode, String messageId) {
+        return buildRequest(extractCoreMessage, fromOdsCode, conversationId, MHS_OUTBOUND_EXTRACT_CORE_INTERACTION_ID, messageId);
     }
 
     public RequestHeadersSpec<?> buildSendAcknowledgementRequest(

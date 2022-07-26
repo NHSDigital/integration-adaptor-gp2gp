@@ -130,9 +130,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .taskId(structuredTaskDefinition.getTaskId())
                     .messageId(structuredTaskDefinition.getConversationId()).build())
                 .forEach(ehrStatusGpcDocuments::add);
+
             documentsAsExternalAttachments = documentsAsExternalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isNotBlank(documentMetadata.getUrl()))
                 .collect(Collectors.toList());
+
             documentsAsExternalAttachments.stream()
                 .map(externalAttachment -> EhrExtractStatus.GpcDocument.builder()
                     .documentId(externalAttachment.getDocumentId())
@@ -145,6 +147,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             externalAttachments.addAll(documentsAsExternalAttachments);
 
             absentAttachments.addAll(structuredRecordMappingService.getAbsentAttachments(structuredRecord));
+
             absentAttachments.stream()
                 .map(absentAttachment -> EhrExtractStatus.GpcDocument.builder()
                     .documentId(absentAttachment.getDocumentId())

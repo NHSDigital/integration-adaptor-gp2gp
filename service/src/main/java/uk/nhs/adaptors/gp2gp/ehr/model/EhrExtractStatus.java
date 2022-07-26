@@ -43,6 +43,7 @@ public class EhrExtractStatus implements TimeToLive {
     private EhrReceivedAcknowledgement ehrReceivedAcknowledgement;
     private Error error;
     private Instant messageTimestamp;
+    private String ehrExtractMessageId;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
         this.created = created;

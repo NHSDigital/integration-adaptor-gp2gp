@@ -24,6 +24,7 @@ public class SendEhrExtractCoreTaskDispatcher {
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
+            .ehrExtractMessageId(ehrExtractStatus.getEhrExtractMessageId())
             .build();
 
         taskDispatcher.createTask(sendEhrExtractCoreTaskDefinition);

@@ -36,10 +36,13 @@ public class ProcessingErrorHandlerTest {
 
     @Test
     public void When_HandleRequestError_WithValidTask_Expect_ProcessToBeFailedWithCorrectCode() {
+        // Arrange
         when(taskDefinition.getTaskType()).thenReturn(GET_GPC_STRUCTURED);
 
+        // Act
         processingErrorHandler.handleRequestError(taskDefinition);
 
+        // Assert
         verify(processFailureHandlingService).failProcess(
             any(),
             eq("18"),
