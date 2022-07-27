@@ -65,7 +65,8 @@ public class MhsMockController {
             String interactionId = Optional.ofNullable(headers.get("interaction-id")).orElse(StringUtils.EMPTY);
             String waitForResponse = Optional.ofNullable(headers.get("wait-for-response")).orElse(StringUtils.EMPTY);
             String odsCode = Optional.ofNullable(headers.get("ods-code")).orElse(StringUtils.EMPTY);
-            return mockMhsService.handleRequest(interactionId, correlationId, waitForResponse, mockMhsMessage, odsCode);
+            String messageId = Optional.ofNullable(headers.get("message-id")).orElse(StringUtils.EMPTY);
+            return mockMhsService.handleRequest(interactionId, correlationId, waitForResponse, mockMhsMessage, odsCode, messageId);
         } catch (Exception e) {
             LOGGER.error("Error could not process mock request", e);
             responseHeaders.setContentType(MediaType.TEXT_HTML);
