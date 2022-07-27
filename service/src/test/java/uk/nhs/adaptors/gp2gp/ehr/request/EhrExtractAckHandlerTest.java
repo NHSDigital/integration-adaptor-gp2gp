@@ -1,8 +1,11 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.w3c.dom.Document;
 
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidInboundMessageException;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,6 +26,9 @@ public class EhrExtractAckHandlerTest {
     @Mock
     private XPathService xPathService;
 
+    @Mock
+    private EhrExtractStatusService ehrExtractStatusService;
+
     @InjectMocks
     private EhrExtractAckHandler ehrExtractAckHandler;
 
@@ -29,6 +36,7 @@ public class EhrExtractAckHandlerTest {
     public void When_HandleUnsupportedAckTypeCode_Expect_ExceptionThrown() {
         var document = mock(Document.class);
         when(xPathService.getNodeValue(document, ACK_TYPE_CODE_XPATH)).thenReturn("CE");
+        when(ehrExtractStatusService.fetchEhrExtractMessageId(any())).thenReturn(Optional.empty());
 
         assertThatExceptionOfType(InvalidInboundMessageException.class)
             .isThrownBy(() -> ehrExtractAckHandler.handle("123", document))

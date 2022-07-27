@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
@@ -24,6 +25,7 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -33,6 +35,7 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @ExtendWith(MockitoExtension.class)
 class StructuredRecordMappingServiceTest {
@@ -98,6 +101,8 @@ class StructuredRecordMappingServiceTest {
     private Gp2gpConfiguration gp2gpConfiguration;
     @Mock
     private SupportedContentTypes supportedContentTypes;
+    @Mock
+    private EhrExtractStatusService ehrExtractStatusService;
 
     @InjectMocks
     private StructuredRecordMappingService structuredRecordMappingService;
@@ -149,6 +154,7 @@ class StructuredRecordMappingServiceTest {
     void When_GettingHL7_Expect_BundleAndStructuredRecordAreMapped() {
         var expectedHL7 = "some hl7";
         var ehrExtractContent = "some ehr extract content";
+        var randomUUID = "randomUUID";
         var bundle = mock(Bundle.class);
         var structuredTaskDefinition = mock(GetGpcStructuredTaskDefinition.class);
         var ehrExtractTemplateParameters = mock(EhrExtractTemplateParameters.class);
@@ -158,12 +164,15 @@ class StructuredRecordMappingServiceTest {
         when(ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters)).thenReturn(ehrExtractContent);
         when(outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent))
             .thenReturn(expectedHL7);
+        when(ehrExtractTemplateParameters.getEhrExtractId()).thenReturn(randomUUID);
+        when(structuredTaskDefinition.getConversationId()).thenReturn(randomUUID);
 
         var actualHL7 = structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(structuredTaskDefinition, bundle);
 
         verify(ehrExtractMapper).mapBundleToEhrFhirExtractParams(structuredTaskDefinition, bundle);
         verify(ehrExtractMapper).mapEhrExtractToXml(ehrExtractTemplateParameters);
         verify(outputMessageWrapperMapper).map(structuredTaskDefinition, ehrExtractContent);
+        verify(ehrExtractStatusService).saveEhrExtractMessageId(randomUUID, randomUUID);
 
         assertThat(actualHL7).isEqualTo(expectedHL7);
     }
