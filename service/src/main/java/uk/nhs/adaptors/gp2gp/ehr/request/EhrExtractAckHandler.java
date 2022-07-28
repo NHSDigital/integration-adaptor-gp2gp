@@ -15,6 +15,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.EhrReceivedAcknowledgementBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
@@ -45,25 +46,26 @@ public class EhrExtractAckHandler {
         String messageRef = xPathService.getNodeValue(document, MESSAGE_REF_XPATH);
         String rootId = xPathService.getNodeValue(document, MESSAGE_ID_ROOT_XPATH);
         EhrReceivedAcknowledgementBuilder ackBuilder = EhrReceivedAcknowledgement.builder()
-                .messageRef(messageRef)
-                .rootId(rootId)
-                .received(now);
+            .messageRef(messageRef)
+            .rootId(rootId)
+            .received(now);
 
-        String ehrExtractMessageRef = ehrExtractStatusService.fetchEhrExtractMessageId(conversationId).orElse("");
+        String ehrExtractMessageRef = ehrExtractStatusService
+            .fetchEhrExtractMessageId(conversationId)
+            .orElseThrow(() -> new EhrExtractException("Unable to fetch EHR Extract Message ID for conversation"));
 
         LOGGER.debug("******* EHR Extract Message Ref = [{}]", ehrExtractMessageRef);
 
         if (ACK_OK_CODE.equals(ackTypeCode)) {
             LOGGER.info("Application Acknowledgement Accept ({}) received, messageRef: {}", ackTypeCode, messageRef);
 
-            if(messageRef.equals(ehrExtractMessageRef)) {
+            if (messageRef.equals(ehrExtractMessageRef)) {
                 LOGGER.info("Ehr Extract acknowledged: closing conversation {}", conversationId);
                 ackBuilder.conversationClosed(now);
                 ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
             }
 
             return;
-
         } else if (ACK_BUSINESS_ERROR_CODE.equals(ackTypeCode)) {
             LOGGER.info("Application Acknowledgement Error ({}) received, messageRef: {}", ackTypeCode, messageRef);
             ackBuilder.errors(extractErrorCodes(document, ERROR_CODE_XPATH));
