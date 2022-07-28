@@ -108,6 +108,7 @@ public class EhrAcknowledgementTest {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(randomIdGeneratorService.createNewId());
         ehrExtractStatus.setAckPending(EhrExtractStatus.AckPending.builder().build());
         ehrExtractStatus.setAckToRequester(EhrExtractStatus.AckToRequester.builder().build());
+        ehrExtractStatus.setEhrExtractMessageId(MESSAGE_REF);
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         ehrExtractRequestHandler.handleAcknowledgement(ehrExtractStatus.getConversationId(),
