@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.StringSubstitutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils;
@@ -40,7 +41,6 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
 
         var documentObjectNameAndSize = ehrExtractStatusService
             .fetchDocumentObjectNameAndSize(sendEhrExtractCoreTaskDefinition.getConversationId());
-
 
         var requestData = mhsRequestBuilder
             .buildSendEhrExtractCoreRequest(

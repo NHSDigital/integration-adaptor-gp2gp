@@ -1,8 +1,10 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import com.mongodb.client.result.UpdateResult;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
@@ -25,6 +28,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
+
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
@@ -82,7 +86,6 @@ public class EhrExtractStatusService {
     private static final String EXTRACT_CORE_SENT_AT_PATH = EHR_EXTRACT_CORE + DOT + SENT_AT;
     private static final String EXTRACT_CORE_PENDING_TASK_ID_PATH = EHR_EXTRACT_CORE_PENDING + DOT + TASK_ID;
     private static final String EXTRACT_CORE_PENDING_SENT_AT_PATH = EHR_EXTRACT_CORE_PENDING + DOT + SENT_AT;
-    private final static String EXTRACT_CORE_EHR_EXTRACT_MESSAGE_ID = EHR_EXTRACT_CORE + DOT + EHR_EXTRACT_MESSAGE_REF;
     private static final String ACK_TASK_ID_PATH = ACK_TO_REQUESTER + DOT + TASK_ID;
     private static final String ACK_MESSAGE_ID_PATH = ACK_TO_REQUESTER + DOT + MESSAGE_ID;
     private static final String ACK_TYPE_CODE_PATH = ACK_TO_REQUESTER + DOT + TYPE_CODE;
@@ -113,7 +116,7 @@ public class EhrExtractStatusService {
             ehrExtractStatus -> {
                 ehrExtractStatus.setEhrExtractMessageId(messageId);
                 ehrExtractStatusRepository.save(ehrExtractStatus);
-                },
+            },
             () -> {
                 throw new EhrExtractException("Unable to find EHR Extract status with conversation id " + conversationId);
             });
@@ -419,7 +422,6 @@ public class EhrExtractStatusService {
         var commonSentAt = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + SENT_AT;
         var commonTaskId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + TASK_ID;
         var commonMessageId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + MESSAGE_ID;
-
 
         Update update = createUpdateWithUpdatedAt();
         update.set(commonSentAt, Instant.now());
