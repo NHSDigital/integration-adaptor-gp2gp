@@ -60,23 +60,31 @@ public class EhrExtractAckHandler {
             LOGGER.info("Application Acknowledgement Accept ({}) received, messageRef: {}", ackTypeCode, messageRef);
 
             if (messageRef.equals(ehrExtractMessageRef)) {
-                LOGGER.info("Ehr Extract acknowledged: closing conversation {}", conversationId);
+                LOGGER.info("EHR Extract acknowledged: closing conversation {}", conversationId);
                 ackBuilder.conversationClosed(now);
                 ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
             }
 
-            return;
         } else if (ACK_BUSINESS_ERROR_CODE.equals(ackTypeCode)) {
+
             LOGGER.info("Application Acknowledgement Error ({}) received, messageRef: {}", ackTypeCode, messageRef);
-            ackBuilder.errors(extractErrorCodes(document, ERROR_CODE_XPATH));
+            if (messageRef.equals(ehrExtractMessageRef)) {
+                LOGGER.info("Received business error NACK referencing EHR Extract: closing conversation {}", conversationId);
+                ackBuilder
+                    .errors(extractErrorCodes(document, ERROR_CODE_XPATH))
+                    .conversationClosed(now);
+
+                ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
+            }
+
         } else if (ACK_REJECTED_CODE.equals(ackTypeCode)) {
             LOGGER.info("Application Acknowledgement Reject ({}) received, messageRef: {}", ackTypeCode, messageRef);
             ackBuilder.errors(extractErrorCodes(document, ACK_DETAILS_XPATH));
+            ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
         } else {
             throw new InvalidInboundMessageException(String.format("Unsupported %s: %s", ACK_TYPE_CODE_XPATH, ackTypeCode));
         }
 
-        ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
     }
 
     private List<ErrorDetails> extractErrorCodes(Document document, String xPath) {
