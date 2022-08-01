@@ -75,7 +75,7 @@ public class EhrAcknowledgementTest {
             .map(EhrExtractStatus::getEhrReceivedAcknowledgement)
             .hasValueSatisfying(ack -> assertAll(
                 () -> assertThat(ack.getReceived()).isNotNull(),
-                () -> assertThat(ack.getConversationClosed()).isNull(),
+                () -> assertThat(ack.getReceived()).isEqualTo(ack.getConversationClosed()),
                 () -> assertThat(ack.getMessageRef()).isEqualTo(MESSAGE_REF),
                 () -> assertThat(ack.getRootId()).isEqualTo(ROOT_ID),
                 () -> assertThat(ack.getErrors()).isNotEmpty()
@@ -94,7 +94,7 @@ public class EhrAcknowledgementTest {
             .map(EhrExtractStatus::getEhrReceivedAcknowledgement)
             .hasValueSatisfying(ack -> assertAll(
                 () -> assertThat(ack.getReceived()).isNotNull(),
-                () -> assertThat(ack.getConversationClosed()).isNull(),
+                () -> assertThat(ack.getReceived()).isEqualTo(ack.getConversationClosed()),
                 () -> assertThat(ack.getMessageRef()).isEqualTo(MESSAGE_REF),
                 () -> assertThat(ack.getRootId()).isEqualTo(ROOT_ID),
                 () -> assertThat(ack.getErrors()).isNotEmpty()
