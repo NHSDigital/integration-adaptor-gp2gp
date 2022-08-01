@@ -54,42 +54,44 @@ public class EhrExtractAckHandler {
             .fetchEhrExtractMessageId(conversationId)
             .orElseThrow(() -> new EhrExtractException("Unable to fetch EHR Extract Message ID for conversation"));
 
-        // TODO: Refactor into switch
+        switch (ackTypeCode) {
+            case ACK_OK_CODE:
+                LOGGER.info("Application Acknowledgement Accept ({}) received, messageRef: {}", ackTypeCode, messageRef);
 
-        if (ACK_OK_CODE.equals(ackTypeCode)) {
-            LOGGER.info("Application Acknowledgement Accept ({}) received, messageRef: {}", ackTypeCode, messageRef);
+                if (messageRef.equals(ehrExtractMessageRef)) {
+                    LOGGER.info("EHR Extract acknowledged: closing conversation {}", conversationId);
+                    ackBuilder.conversationClosed(now);
+                    ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
+                }
+                break;
 
-            if (messageRef.equals(ehrExtractMessageRef)) {
-                LOGGER.info("EHR Extract acknowledged: closing conversation {}", conversationId);
-                ackBuilder.conversationClosed(now);
-                ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
-            }
-
-        } else if (ACK_BUSINESS_ERROR_CODE.equals(ackTypeCode)) {
-            LOGGER.info("Application Acknowledgement Error ({}) received, messageRef: {}", ackTypeCode, messageRef);
-
-            if (messageRef.equals(ehrExtractMessageRef)) {
+            case ACK_BUSINESS_ERROR_CODE:
                 LOGGER.info("Received NACK referencing EHR Extract: closing conversation {}", conversationId);
-                ackBuilder
-                    .errors(extractErrorCodes(document, ERROR_CODE_XPATH))
-                    .conversationClosed(now);
 
-                ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
-            }
+                if (messageRef.equals(ehrExtractMessageRef)) {
+                    LOGGER.info("Received NACK referencing EHR Extract: closing conversation {}", conversationId);
+                    ackBuilder
+                        .errors(extractErrorCodes(document, ERROR_CODE_XPATH))
+                        .conversationClosed(now);
 
-        } else if (ACK_REJECTED_CODE.equals(ackTypeCode)) {
-            LOGGER.info("Application Acknowledgement Reject ({}) received, messageRef: {}", ackTypeCode, messageRef);
+                    ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
+                }
+                break;
 
-            if(messageRef.equals(ehrExtractMessageRef)) {
-                LOGGER.info("EHR Extract Rejected: closing conversation {}", conversationId);
-                ackBuilder
-                    .errors(extractErrorCodes(document, ACK_DETAILS_XPATH))
-                    .conversationClosed(now);
-                ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
-            }
+            case ACK_REJECTED_CODE:
+                LOGGER.info("Application Acknowledgement Reject ({}) received, messageRef: {}", ackTypeCode, messageRef);
 
-        } else {
-            throw new InvalidInboundMessageException(String.format("Unsupported %s: %s", ACK_TYPE_CODE_XPATH, ackTypeCode));
+                if(messageRef.equals(ehrExtractMessageRef)) {
+                    LOGGER.info("EHR Extract Rejected: closing conversation {}", conversationId);
+                    ackBuilder
+                        .errors(extractErrorCodes(document, ACK_DETAILS_XPATH))
+                        .conversationClosed(now);
+                    ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
+                }
+                break;
+
+            default:
+                throw new InvalidInboundMessageException(String.format("Unsupported %s: %s", ACK_TYPE_CODE_XPATH, ackTypeCode));
         }
 
     }
