@@ -47,8 +47,10 @@ public class EhrExtractAckHandlerTest {
     private static final String ACK_TYPE_CODE_XPATH = "//MCCI_IN010000UK13/acknowledgement/@typeCode";
     private static final String MESSAGE_REF_XPATH = "//MCCI_IN010000UK13/acknowledgement/messageRef/id/@root";
     private static final String ERROR_CODE_XPATH = "//justifyingDetectedIssueEvent/code";
+    private static final String ACK_DETAILS_XPATH = "//MCCI_IN010000UK13/acknowledgement/acknowledgementDetail/code";
     private static final String ACK_OK_CODE = "AA";
     private static final String ACK_BUSINESS_ERROR_CODE = "AE";
+    private static final String ACK_REJECTED_CODE = "AR";
 
     @Mock
     private XPathService xPathService;
@@ -163,6 +165,45 @@ public class EhrExtractAckHandlerTest {
 
         verify(ehrExtractStatusService, never()).updateEhrExtractStatusAck(any(), any());
 
+    }
+
+    @Test
+    public void When_Handle_WithRejectedReferencesEhrExtract_Expect_ConversationClosed() throws XPathExpressionException,
+        ParserConfigurationException, IOException, SAXException {
+        String conversationId = "mock-id";
+        String ehrMessageRef = "mock-message-ref";
+        String codeElement = "<code code=\"18\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.101\" displayName=\"Request message not " +
+            "well-formed or not able to be processed\"/>";
+        NodeList codeNodeList = codeElementToNodeList(codeElement);
+
+        var document = mock(Document.class);
+
+        when(xPathService.getNodeValue(any(), eq(ACK_TYPE_CODE_XPATH))).thenReturn(ACK_REJECTED_CODE);
+        when(xPathService.getNodeValue(any(), eq(MESSAGE_REF_XPATH))).thenReturn(ehrMessageRef);
+        when(xPathService.getNodes(any(), eq(ACK_DETAILS_XPATH))).thenReturn(codeNodeList);
+        when(ehrExtractStatusService.fetchEhrExtractMessageId(eq(conversationId))).thenReturn(Optional.of(ehrMessageRef));
+
+        ehrExtractAckHandler.handle(conversationId, document);
+
+        verify(ehrExtractStatusService).updateEhrExtractStatusAck(eq(conversationId), receivedAckField.capture());
+        var ackFieldValue = receivedAckField.getValue();
+        assertThat(ackFieldValue.getConversationClosed()).isNotNull();
+    }
+
+    @Test
+    public void When_Handle_WithRejectedDoesNotReferenceExtract_Expect_ReceivedAckFieldNotUpdated() {
+        String conversationId = "mock-id";
+        String ehrMessageRef = "mock-message-ref";
+        String randomMessageRef = "random-message-ref";
+        var document = mock(Document.class);
+
+        when(xPathService.getNodeValue(any(), eq(ACK_TYPE_CODE_XPATH))).thenReturn(ACK_REJECTED_CODE);
+        when(xPathService.getNodeValue(any(), eq(MESSAGE_REF_XPATH))).thenReturn(ehrMessageRef);
+        when(ehrExtractStatusService.fetchEhrExtractMessageId(eq(conversationId))).thenReturn(Optional.of(randomMessageRef));
+
+        ehrExtractAckHandler.handle(conversationId, document);
+
+        verify(ehrExtractStatusService, never()).updateEhrExtractStatusAck(any(), any());
     }
 
     private NodeList codeElementToNodeList(String element) throws XPathExpressionException, ParserConfigurationException, IOException,
