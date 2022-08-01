@@ -54,7 +54,7 @@ public class EhrExtractAckHandler {
             .fetchEhrExtractMessageId(conversationId)
             .orElseThrow(() -> new EhrExtractException("Unable to fetch EHR Extract Message ID for conversation"));
 
-        LOGGER.debug("******* EHR Extract Message Ref = [{}]", ehrExtractMessageRef);
+        // TODO: Refactor into switch
 
         if (ACK_OK_CODE.equals(ackTypeCode)) {
             LOGGER.info("Application Acknowledgement Accept ({}) received, messageRef: {}", ackTypeCode, messageRef);
@@ -66,10 +66,10 @@ public class EhrExtractAckHandler {
             }
 
         } else if (ACK_BUSINESS_ERROR_CODE.equals(ackTypeCode)) {
-
             LOGGER.info("Application Acknowledgement Error ({}) received, messageRef: {}", ackTypeCode, messageRef);
+
             if (messageRef.equals(ehrExtractMessageRef)) {
-                LOGGER.info("Received business error NACK referencing EHR Extract: closing conversation {}", conversationId);
+                LOGGER.info("Received NACK referencing EHR Extract: closing conversation {}", conversationId);
                 ackBuilder
                     .errors(extractErrorCodes(document, ERROR_CODE_XPATH))
                     .conversationClosed(now);
@@ -79,8 +79,15 @@ public class EhrExtractAckHandler {
 
         } else if (ACK_REJECTED_CODE.equals(ackTypeCode)) {
             LOGGER.info("Application Acknowledgement Reject ({}) received, messageRef: {}", ackTypeCode, messageRef);
-            ackBuilder.errors(extractErrorCodes(document, ACK_DETAILS_XPATH));
-            ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
+
+            if(messageRef.equals(ehrExtractMessageRef)) {
+                LOGGER.info("EHR Extract Rejected: closing conversation {}", conversationId);
+                ackBuilder
+                    .errors(extractErrorCodes(document, ACK_DETAILS_XPATH))
+                    .conversationClosed(now);
+                ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
+            }
+
         } else {
             throw new InvalidInboundMessageException(String.format("Unsupported %s: %s", ACK_TYPE_CODE_XPATH, ackTypeCode));
         }
