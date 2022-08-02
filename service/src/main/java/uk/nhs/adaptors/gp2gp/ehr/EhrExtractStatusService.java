@@ -264,7 +264,9 @@ public class EhrExtractStatusService {
     }
 
     public void updateEhrExtractStatusAck(String conversationId, EhrReceivedAcknowledgement ack) {
-        if (!isEhrStatusWaitingForFinalAck(conversationId)) {
+
+        if (ack.getErrors() == null && !isEhrStatusWaitingForFinalAck(conversationId)) {
+            LOGGER.warn("Received unexpected acknowledgement of EHR Extract with conversation id=" + conversationId);
             return;
         }
 
