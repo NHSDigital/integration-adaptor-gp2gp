@@ -15,7 +15,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Optional;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpression;
@@ -30,8 +29,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -164,7 +161,6 @@ public class EhrExtractAckHandlerTest {
         ehrExtractAckHandler.handle(conversationId, document);
 
         verify(ehrExtractStatusService, never()).updateEhrExtractStatusAck(any(), any());
-
     }
 
     @Test
@@ -172,8 +168,8 @@ public class EhrExtractAckHandlerTest {
         ParserConfigurationException, IOException, SAXException {
         String conversationId = "mock-id";
         String ehrMessageRef = "mock-message-ref";
-        String codeElement = "<code code=\"18\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.101\" displayName=\"Request message not " +
-            "well-formed or not able to be processed\"/>";
+        String codeElement = "<code code=\"18\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.101\" displayName=\"Request message not "
+            + "well-formed or not able to be processed\"/>";
         NodeList codeNodeList = codeElementToNodeList(codeElement);
 
         var document = mock(Document.class);
@@ -218,6 +214,5 @@ public class EhrExtractAckHandlerTest {
             .compile("//code");
 
         return (NodeList) xPathExpression.evaluate(document, NODESET);
-
     }
 }

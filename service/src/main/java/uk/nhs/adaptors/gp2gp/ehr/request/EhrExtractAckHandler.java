@@ -81,7 +81,7 @@ public class EhrExtractAckHandler {
             case ACK_REJECTED_CODE:
                 LOGGER.info("Application Acknowledgement Reject ({}) received, messageRef: {}", ackTypeCode, messageRef);
 
-                if(messageRef.equals(ehrExtractMessageRef)) {
+                if (messageRef.equals(ehrExtractMessageRef)) {
                     LOGGER.info("EHR Extract Rejected: closing conversation {}", conversationId);
                     ackBuilder
                         .errors(extractErrorCodes(document, ACK_DETAILS_XPATH))
@@ -93,7 +93,6 @@ public class EhrExtractAckHandler {
             default:
                 throw new InvalidInboundMessageException(String.format("Unsupported %s: %s", ACK_TYPE_CODE_XPATH, ackTypeCode));
         }
-
     }
 
     private List<ErrorDetails> extractErrorCodes(Document document, String xPath) {
