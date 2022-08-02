@@ -124,7 +124,6 @@ public class InboundMessageHandler {
         if (parsedMessage != null) {
             return processFailureHandlingService.failProcess(
                 parsedMessage.getConversationId(),
-                // TODO: error code and message to be prepared as part of NIAD-1524
                 "18",
                 "There has been an error when processing the message",
                 this.getClass().getSimpleName()

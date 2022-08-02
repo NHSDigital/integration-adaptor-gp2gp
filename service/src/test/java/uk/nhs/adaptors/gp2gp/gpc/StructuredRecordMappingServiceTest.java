@@ -1,5 +1,17 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
@@ -14,6 +26,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
@@ -21,18 +34,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
-
-import java.util.Arrays;
-import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class StructuredRecordMappingServiceTest {
@@ -98,6 +99,8 @@ class StructuredRecordMappingServiceTest {
     private Gp2gpConfiguration gp2gpConfiguration;
     @Mock
     private SupportedContentTypes supportedContentTypes;
+    @Mock
+    private EhrExtractStatusService ehrExtractStatusService;
 
     @InjectMocks
     private StructuredRecordMappingService structuredRecordMappingService;
@@ -166,6 +169,22 @@ class StructuredRecordMappingServiceTest {
         verify(outputMessageWrapperMapper).map(structuredTaskDefinition, ehrExtractContent);
 
         assertThat(actualHL7).isEqualTo(expectedHL7);
+    }
+
+    @Test
+    public void When_MapStructuredRecordToXml_Expect_EhrExtractMessageIdIsSaved() {
+        var ehrExtractTemplateParameters = mock(EhrExtractTemplateParameters.class);
+        var structuredTaskDefinition = mock(GetGpcStructuredTaskDefinition.class);
+        var bundle = mock(Bundle.class);
+        var randomUUID = "randomUUID";
+
+        when(ehrExtractMapper.mapBundleToEhrFhirExtractParams(any(), any())).thenReturn(ehrExtractTemplateParameters);
+        when(ehrExtractTemplateParameters.getEhrExtractId()).thenReturn(randomUUID);
+        when(structuredTaskDefinition.getConversationId()).thenReturn(randomUUID);
+
+        structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(structuredTaskDefinition, bundle);
+
+        verify(ehrExtractStatusService).saveEhrExtractMessageId(randomUUID, randomUUID);
     }
 
     private List<OutboundMessage.ExternalAttachment> getMappedExternalAttachments(DocumentReference... documentReferences) {

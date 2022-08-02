@@ -130,9 +130,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .taskId(structuredTaskDefinition.getTaskId())
                     .messageId(structuredTaskDefinition.getConversationId()).build())
                 .forEach(ehrStatusGpcDocuments::add);
+
             documentsAsExternalAttachments = documentsAsExternalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isNotBlank(documentMetadata.getUrl()))
                 .collect(Collectors.toList());
+
             documentsAsExternalAttachments.stream()
                 .map(externalAttachment -> EhrExtractStatus.GpcDocument.builder()
                     .documentId(externalAttachment.getDocumentId())
@@ -145,6 +147,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             externalAttachments.addAll(documentsAsExternalAttachments);
 
             absentAttachments.addAll(structuredRecordMappingService.getAbsentAttachments(structuredRecord));
+
             absentAttachments.stream()
                 .map(absentAttachment -> EhrExtractStatus.GpcDocument.builder()
                     .documentId(absentAttachment.getDocumentId())
@@ -214,8 +217,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     }
 
     private GetAbsentAttachmentTaskDefinition buildGetAbsentAttachmentTask(
-            TaskDefinition taskDefinition,
-            OutboundMessage.ExternalAttachment absentAttachment) {
+        TaskDefinition taskDefinition,
+        OutboundMessage.ExternalAttachment absentAttachment) {
         return GetAbsentAttachmentTaskDefinition.builder()
             .documentId(absentAttachment.getDocumentId())
             .title(absentAttachment.getTitle())
@@ -262,7 +265,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     }
 
     private OutboundMessage.ExternalAttachment buildExternalAttachmentForLargeEhrExtract(
-            int compressedAndEncodedEhrExtractSize, String messageId, String documentId, String fileName) {
+        int compressedAndEncodedEhrExtractSize, String messageId, String documentId, String fileName) {
 
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)

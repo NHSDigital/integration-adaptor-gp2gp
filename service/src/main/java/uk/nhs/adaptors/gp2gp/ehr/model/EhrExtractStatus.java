@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
 
 import java.time.Instant;
@@ -43,6 +45,7 @@ public class EhrExtractStatus implements TimeToLive {
     private EhrReceivedAcknowledgement ehrReceivedAcknowledgement;
     private Error error;
     private Instant messageTimestamp;
+    private String ehrExtractMessageId;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
         this.created = created;

@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -9,8 +10,10 @@ import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
@@ -33,6 +36,7 @@ public class StructuredRecordMappingService {
     private final Gp2gpConfiguration gp2gpConfiguration;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final SupportedContentTypes supportedContentTypes;
+    private final EhrExtractStatusService ehrExtractStatusService;
 
     private static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
 
@@ -116,13 +120,16 @@ public class StructuredRecordMappingService {
             .mapBundleToEhrFhirExtractParams(structuredTaskDefinition, bundle);
         String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
+        ehrExtractStatusService.saveEhrExtractMessageId(structuredTaskDefinition.getConversationId(),
+            ehrExtractTemplateParameters.getEhrExtractId());
+
         return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
     }
 
     public String buildSkeletonEhrExtractXml(
         GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle structuredRecord, String documentId
     ) {
-        String ehrExtractContent =  ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, structuredRecord, documentId);
+        String ehrExtractContent = ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, structuredRecord, documentId);
 
         return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
     }

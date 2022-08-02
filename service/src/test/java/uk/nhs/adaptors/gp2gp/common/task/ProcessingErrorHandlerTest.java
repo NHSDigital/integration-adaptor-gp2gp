@@ -33,9 +33,9 @@ public class ProcessingErrorHandlerTest {
     @InjectMocks
     private ProcessingErrorHandler processingErrorHandler;
 
-
     @Test
     public void When_HandleRequestError_WithValidTask_Expect_ProcessToBeFailedWithCorrectCode() {
+
         when(taskDefinition.getTaskType()).thenReturn(GET_GPC_STRUCTURED);
 
         processingErrorHandler.handleRequestError(taskDefinition);
@@ -150,5 +150,4 @@ public class ProcessingErrorHandlerTest {
             () -> processingErrorHandler.handleGeneralProcessingError(taskDefinition)
         ).isSameAs(failureHandlingException);
     }
-
 }

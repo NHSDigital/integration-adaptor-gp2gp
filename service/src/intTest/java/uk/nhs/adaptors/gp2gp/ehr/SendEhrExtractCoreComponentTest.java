@@ -96,7 +96,7 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         when(storageDataWrapper.getData()).thenReturn(PAYLOAD);
         when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
         doThrow(InvalidOutboundMessageException.class)
-            .when(mhsRequestBuilder).buildSendEhrExtractCoreRequest(any(), any(), any());
+            .when(mhsRequestBuilder).buildSendEhrExtractCoreRequest(any(), any(), any(), any());
 
         assertThrows(InvalidOutboundMessageException.class, () -> sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition));
 

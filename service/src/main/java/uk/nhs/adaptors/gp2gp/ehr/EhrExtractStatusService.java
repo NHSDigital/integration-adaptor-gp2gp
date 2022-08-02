@@ -1,8 +1,10 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import com.mongodb.client.result.UpdateResult;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
@@ -25,6 +28,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
+
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
@@ -57,6 +61,7 @@ public class EhrExtractStatusService {
     private static final String ROOT_ID = "rootId";
     private static final String CONVERSATION_CLOSED = "conversationClosed";
     private static final String MESSAGE_REF = "messageRef";
+    private static final String EHR_EXTRACT_MESSAGE_REF = "ehrExtractMessageRef";
     private static final String ERRORS = "errors";
     private static final String ERROR = "error";
     private static final String SENT_TO_MHS = "sentToMhs";
@@ -103,6 +108,25 @@ public class EhrExtractStatusService {
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
+
+    public void saveEhrExtractMessageId(String conversationId, String messageId) {
+        Optional<EhrExtractStatus> ehrExtractStatusOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
+
+        ehrExtractStatusOptional.ifPresentOrElse(
+            ehrExtractStatus -> {
+                ehrExtractStatus.setEhrExtractMessageId(messageId);
+                ehrExtractStatusRepository.save(ehrExtractStatus);
+            },
+            () -> {
+                throw new EhrExtractException("Unable to find EHR Extract status with conversation id " + conversationId);
+            });
+    }
+
+    public Optional<String> fetchEhrExtractMessageId(String conversationId) {
+        Optional<EhrExtractStatus> ehrExtractStatusOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
+
+        return ehrExtractStatusOptional.map(EhrExtractStatus::getEhrExtractMessageId);
+    }
 
     public Map<String, String> fetchDocumentObjectNameAndSize(String conversationId) {
         Optional<EhrExtractStatus> ehrExtractStatusSearch = ehrExtractStatusRepository.findByConversationId(conversationId);
@@ -398,7 +422,6 @@ public class EhrExtractStatusService {
         var commonSentAt = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + SENT_AT;
         var commonTaskId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + TASK_ID;
         var commonMessageId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + MESSAGE_ID;
-
 
         Update update = createUpdateWithUpdatedAt();
         update.set(commonSentAt, Instant.now());
