@@ -61,10 +61,21 @@ public class WebClientFilterService {
                 LOGGER.info(requestType + " request successful status_code: {}", clientResponse.statusCode());
                 return Mono.just(clientResponse);
             }
-            if (requestType.equals(RequestType.GPC) && clientResponse.statusCode().equals(NOT_FOUND)) {
-                return handleNotFoundFromGpc(clientResponse, requestType);
-            }
+//            if (requestType.equals(RequestType.GPC) && clientResponse.statusCode().equals(NOT_FOUND)) {
+//                return handleNotFoundFromGpc(clientResponse, requestType);
+//            }
+            if(requestType.equals(RequestType.GPC)){
 
+                switch(clientResponse.statusCode()){
+                    case NOT_FOUND:
+                        return handleNotFoundFromGpc(clientResponse, requestType);
+                        break;
+                    case UNAUTHORIZED:
+                        return handleNotAuthorisedError(clientResponse, requestType);
+                        break;
+                }
+            }
+§
             return getResponseError(clientResponse, requestType);
         });
     }

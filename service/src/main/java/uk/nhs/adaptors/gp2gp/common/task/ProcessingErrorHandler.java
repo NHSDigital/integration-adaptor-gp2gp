@@ -48,6 +48,30 @@ public class ProcessingErrorHandler {
         );
     }
 
+    public boolean handleNotAuthorisedError(TaskDefinition taskDefinition){
+        return handleFailingProcess(
+                taskDefinition,
+                "19",
+                "An error occurred, requesting organisation is not the patients registered practice"
+        );
+    }
+
+    public boolean handleInvalidNhsNumberError(TaskDefinition taskDefinition){
+        return handleFailingProcess(
+                taskDefinition,
+                "19",
+                "An error occurred, invalid NHS number"
+        );
+    }
+
+    public boolean handleInvalidPatientDemographicError(TaskDefinition taskDefinition){
+        return handleFailingProcess(
+                taskDefinition,
+                "20",
+                "An error occurred, GP Connect Provider is unable to connect to PDS to perform the trace"
+        );
+    }
+
     private boolean isNotSendNackTask(TaskDefinition taskDefinition) {
         return !(
             TaskType.SEND_ACKNOWLEDGEMENT.equals(taskDefinition.getTaskType())
