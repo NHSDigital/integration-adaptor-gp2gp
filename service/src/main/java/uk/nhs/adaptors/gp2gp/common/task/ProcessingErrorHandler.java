@@ -20,7 +20,7 @@ public class ProcessingErrorHandler {
         return handleFailingProcess(
             taskDefinition,
             "18",
-            "An error occurred processing the initial EHR request"
+            "Request message not well-formed or not able to be processed"
         );
     }
 
@@ -28,7 +28,7 @@ public class ProcessingErrorHandler {
         return handleFailingProcess(
             taskDefinition,
             "10",
-            "An error occurred translating the EHR extract"
+            "Failed to successfully generate EHR Extract."
         );
     }
 
@@ -44,31 +44,22 @@ public class ProcessingErrorHandler {
         return handleFailingProcess(
             taskDefinition,
             "20",
-            "An error occurred communicating with GP connect"
+            "Spine system responded with an error"
         );
     }
 
-    public boolean handleNotAuthorisedError(TaskDefinition taskDefinition){
+    public boolean handleInvalidNotAuthError(TaskDefinition taskDefinition){
         return handleFailingProcess(
                 taskDefinition,
                 "19",
-                "An error occurred, requesting organisation is not the patients registered practice"
+                "Sender check indicates that Requester is not the patient’s current healthcare provider"
         );
     }
-
-    public boolean handleInvalidNhsNumberError(TaskDefinition taskDefinition){
+    public boolean handleNotFoundError(TaskDefinition taskDefinition){
         return handleFailingProcess(
                 taskDefinition,
-                "19",
-                "An error occurred, invalid NHS number"
-        );
-    }
-
-    public boolean handleInvalidPatientDemographicError(TaskDefinition taskDefinition){
-        return handleFailingProcess(
-                taskDefinition,
-                "20",
-                "An error occurred, GP Connect Provider is unable to connect to PDS to perform the trace"
+                "6",
+                "Patient not at surgery."
         );
     }
 

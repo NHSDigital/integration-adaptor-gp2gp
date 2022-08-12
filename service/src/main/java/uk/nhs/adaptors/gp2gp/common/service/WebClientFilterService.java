@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -18,9 +16,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
-import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
+
+import static org.springframework.http.HttpStatus.*;
 
 @Slf4j
 public class WebClientFilterService {
@@ -61,44 +62,44 @@ public class WebClientFilterService {
                 LOGGER.info(requestType + " request successful status_code: {}", clientResponse.statusCode());
                 return Mono.just(clientResponse);
             }
-//            if (requestType.equals(RequestType.GPC) && clientResponse.statusCode().equals(NOT_FOUND)) {
-//                return handleNotFoundFromGpc(clientResponse, requestType);
-//            }
-            if(requestType.equals(RequestType.GPC)){
 
-                switch(clientResponse.statusCode()){
-                    case NOT_FOUND:
-                        return handleNotFoundFromGpc(clientResponse, requestType);
-                        break;
-                    case UNAUTHORIZED:
-                        return handleNotAuthorisedError(clientResponse, requestType);
-                        break;
+            return clientResponse.bodyToMono(String.class).flatMap(outcome -> {
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                try {
+                    JsonNode outcomeJson = objectMapper.readTree(outcome);
+                    var findValue = outcomeJson.findValues("code").stream();
+
+                    boolean patientNotFound = findValue.anyMatch(code -> code.textValue().equals("PATIENT_NOT_FOUND"));
+                    boolean notAuthorized = findValue.anyMatch(code -> code.textValue().equals("NOT_AUTHORISED"));
+                    boolean invalidNhsNumber = findValue.anyMatch(code -> code.textValue().equals("INVALID_NHS_NUMBER"));
+                    boolean invalidPatientDemographic = findValue.anyMatch(code -> code.textValue().equals("INVALID_PATIENT_DEMOGRAPHICS"));
+
+                    var statusCode = clientResponse.statusCode();
+
+                    if (statusCode.equals(NOT_FOUND) && patientNotFound) {
+                        //error 6
+                        return Mono.error(new GpConnectNotFoundException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
+
+                    } else if (statusCode.equals(UNAUTHORIZED) && notAuthorized) {
+                        //error 19
+                        return Mono.error(new GpConnectInvalidException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
+
+                    } else if (statusCode.equals(BAD_REQUEST) && invalidNhsNumber) {
+                        //error 19
+                        return Mono.error(new GpConnectInvalidException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
+
+                    } else if (statusCode.equals(BAD_REQUEST) && invalidPatientDemographic) {
+                        //error 20
+                        return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
+                    }
+
+                    return getResponseError(clientResponse, requestType);
+
+                } catch (JsonProcessingException e) {
+                    return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
                 }
-            }
-§
-            return getResponseError(clientResponse, requestType);
-        });
-    }
-
-    private static Mono<ClientResponse> handleNotFoundFromGpc(ClientResponse clientResponse, RequestType requestType) {
-
-        return clientResponse.bodyToMono(String.class).flatMap(outcome -> {
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                JsonNode outcomeJson = objectMapper.readTree(outcome);
-                boolean patientNotFound = outcomeJson.findValues("code").stream()
-                    .anyMatch(code -> code.textValue().equals("PATIENT_NOT_FOUND"));
-
-                if (patientNotFound) {
-                    return Mono.error(new EhrRequestException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-                }
-
-                return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-
-            } catch (JsonProcessingException e) {
-                return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-            }
+            });
         });
     }
 

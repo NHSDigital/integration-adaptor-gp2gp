@@ -13,6 +13,8 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -63,6 +65,12 @@ public class TaskHandler {
         } catch (GpConnectException e) {
             logError(e, message);
             return processingErrorHandler.handleGpConnectError(taskDefinition);
+        } catch (GpConnectInvalidException e) {
+            logError(e, message);
+            return processingErrorHandler.handleInvalidNotAuthError(taskDefinition);
+        }catch (GpConnectNotFoundException e) {
+            logError(e, message);
+            return processingErrorHandler.handleNotFoundError(taskDefinition);
         } catch (Exception e) {
             logError(e, message);
             return processingErrorHandler.handleGeneralProcessingError(taskDefinition);
