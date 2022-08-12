@@ -1,19 +1,20 @@
 package uk.nhs.adaptors.gp2gp.ehr.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
-
-import java.time.Instant;
-import java.util.List;
+import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 
 @CompoundIndexes({
     @CompoundIndex(
@@ -46,6 +47,7 @@ public class EhrExtractStatus implements TimeToLive {
     private Error error;
     private Instant messageTimestamp;
     private String ehrExtractMessageId;
+    private EhrStatus ehrStatus;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
         this.created = created;
@@ -195,5 +197,27 @@ public class EhrExtractStatus implements TimeToLive {
         private String code;
         private String message;
         private String taskType;
+    }
+
+    @Builder
+    @Data
+    @Document
+    @AllArgsConstructor
+    public static class EhrStatus {
+
+        private List<AttachmentStatus> attachmentStatus;
+        private List<Object> acknowledgementModel;
+        private MigrationStatus migrationStatus;
+        private LocalDateTime originalRequestDate;
+
+        @Builder
+        @Document
+        @Data
+        @AllArgsConstructor
+        public static class AttachmentStatus {
+            private String name;
+            private boolean isPlaceholder;
+            private String documentReferenceId;
+        }
     }
 }
