@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.2] - 2022-08-11
+
+### Added
+- Send more descriptive reason codes in negative acknowledgement messages  
+
+### Fixed
+- Bug fixes for received acknowledgment messages ending or not ending processing correctly   
+
+### Known Issues and Limitations
+
+- Information Disclosure [Low Severity][https://security.snyk.io/vuln/SNYK-JAVA-COMGOOGLEGUAVA-1015415]
+- Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268]
+- Information Exposure [Low Severity][https://snyk.io/vuln/SNYK-JAVA-ORGJETBRAINSKOTLIN-2393744]
+
 ## [1.5.0] - 2022-04-27
 
 - Large messaging bug fixes. 

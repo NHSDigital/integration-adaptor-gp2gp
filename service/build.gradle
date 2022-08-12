@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.7'
+	id 'org.springframework.boot' version '2.6.9'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id "checkstyle"
@@ -50,11 +50,11 @@ dependencies {
 	implementation 'com.heroku.sdk:env-keystore:1.1.6'
 
 	// Logging
-	implementation 'ch.qos.logback:logback-classic:1.2.3'
+	implementation 'ch.qos.logback:logback-classic:1.2.9'
 
 	// Infrastructure
-	implementation 'com.amazonaws:aws-java-sdk-s3:1.11.955'
-	implementation ('com.azure:azure-storage-blob:12.10.0') {
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.279'
+	implementation ('com.azure:azure-storage-blob:12.18.0') {
 		exclude group: 'io.netty', module: 'netty-codec'
 	}
 	implementation ('org.apache.qpid:qpid-jms-client:1.2.0') {
@@ -65,7 +65,7 @@ dependencies {
 	implementation 'org.apache.commons:commons-lang3:3.11'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
 	implementation 'com.github.spullara.mustache.java:compiler:0.9.5'
-	implementation 'org.apache.tika:tika-core:1.26'
+	implementation 'org.apache.tika:tika-core:1.28.4'
 
 	// Fhir
 	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:5.4.0'
@@ -81,7 +81,7 @@ dependencies {
 	testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.27.2'
 
 	constraints {
-		implementation('org.bouncycastle:bcprov-jdk15on:1.68') {
+		implementation('org.bouncycastle:bcprov-jdk15on:1.69') {
 			because 'env-keystore:1.1.6 depends on previous version with CVE-2020-28052'
 		}
 		implementation('com.google.guava:guava:30.1-jre') {
