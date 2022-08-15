@@ -68,7 +68,7 @@ public class TaskHandler {
         } catch (GpConnectInvalidException e) {
             logError(e, message);
             return processingErrorHandler.handleInvalidNotAuthError(taskDefinition);
-        }catch (GpConnectNotFoundException e) {
+        } catch (GpConnectNotFoundException e) {
             logError(e, message);
             return processingErrorHandler.handleNotFoundError(taskDefinition);
         } catch (Exception e) {

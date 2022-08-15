@@ -48,14 +48,14 @@ public class ProcessingErrorHandler {
         );
     }
 
-    public boolean handleInvalidNotAuthError(TaskDefinition taskDefinition){
+    public boolean handleInvalidNotAuthError(TaskDefinition taskDefinition) {
         return handleFailingProcess(
                 taskDefinition,
                 "19",
                 "Sender check indicates that Requester is not the patient’s current healthcare provider"
         );
     }
-    public boolean handleNotFoundError(TaskDefinition taskDefinition){
+    public boolean handleNotFoundError(TaskDefinition taskDefinition) {
         return handleFailingProcess(
                 taskDefinition,
                 "6",
