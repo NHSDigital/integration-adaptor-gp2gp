@@ -14,6 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
+import uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 
 @CompoundIndexes({
@@ -78,11 +79,13 @@ public class EhrExtractStatus implements TimeToLive {
     @Builder
     public static class GpcDocument {
         private String documentId;
+        private String originalDocumentId;
         private String accessDocumentUrl;
         private int contentLength;
         private String objectName;
         private Instant accessedAt;
         private String fileName;
+        private String originalFilename;
         private String taskId;
         private String messageId;
         private GpcAccessDocument.SentToMhs sentToMhs;
@@ -216,7 +219,7 @@ public class EhrExtractStatus implements TimeToLive {
         @AllArgsConstructor
         public static class AttachmentStatus {
             private String name;
-            private boolean isPlaceholder;
+            private FileStatus fileStatus;
             private String documentReferenceId;
         }
     }
