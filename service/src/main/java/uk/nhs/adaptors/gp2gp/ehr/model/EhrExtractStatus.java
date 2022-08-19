@@ -48,6 +48,7 @@ public class EhrExtractStatus implements TimeToLive {
     private Error error;
     private Instant messageTimestamp;
     private String ehrExtractMessageId;
+    private List<EhrReceivedAcknowledgement> allReceivedAcknowledgments;
     private EhrStatus ehrStatus;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {

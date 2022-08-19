@@ -63,36 +63,40 @@ public class EhrExtractAckHandler {
                     ackBuilder.conversationClosed(now);
                     ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
                 }
+
                 break;
 
             case ACK_BUSINESS_ERROR_CODE:
                 LOGGER.info("Received NACK referencing EHR Extract: closing conversation {}", conversationId);
 
+                ackBuilder.errors(extractErrorCodes(document, ERROR_CODE_XPATH));
+
                 if (messageRef.equals(ehrExtractMessageRef)) {
                     LOGGER.info("Received NACK referencing EHR Extract: closing conversation {}", conversationId);
-                    ackBuilder
-                        .errors(extractErrorCodes(document, ERROR_CODE_XPATH))
-                        .conversationClosed(now);
-
+                    ackBuilder.conversationClosed(now);
                     ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
                 }
+
                 break;
 
             case ACK_REJECTED_CODE:
                 LOGGER.info("Application Acknowledgement Reject ({}) received, messageRef: {}", ackTypeCode, messageRef);
 
+                ackBuilder.errors(extractErrorCodes(document, ACK_DETAILS_XPATH));
+
                 if (messageRef.equals(ehrExtractMessageRef)) {
                     LOGGER.info("EHR Extract Rejected: closing conversation {}", conversationId);
-                    ackBuilder
-                        .errors(extractErrorCodes(document, ACK_DETAILS_XPATH))
-                        .conversationClosed(now);
+                    ackBuilder.conversationClosed(now);
                     ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
                 }
+
                 break;
 
             default:
                 throw new InvalidInboundMessageException(String.format("Unsupported %s: %s", ACK_TYPE_CODE_XPATH, ackTypeCode));
         }
+
+        ehrExtractStatusService.saveAckForConversation(conversationId, ackBuilder.build());
     }
 
     private List<ErrorDetails> extractErrorCodes(Document document, String xPath) {

@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import uk.nhs.adaptors.gp2gp.common.exception.GeneralProcessingException;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
@@ -71,6 +72,8 @@ public class EhrExtractStatusService {
     private static final String TASK_TYPE = "taskType";
     private static final String ATTACHMENT = "attachment";
     private static final String BASE64_CONTENT_LENGTH = "contentLength";
+    private static final String ACK_HISTORY = "ackHistory";
+    private static final String ACKS = "acks";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
@@ -105,6 +108,7 @@ public class EhrExtractStatusService {
     private static final String ERROR_MESSAGE_PATH = ERROR + DOT + MESSAGE;
     private static final String ERROR_TASK_TYPE_PATH = ERROR + DOT + TASK_TYPE;
     private static final String LENGTH_PLACEHOLDER = "LENGTH_PLACEHOLDER_ID=";
+    private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -303,6 +307,24 @@ public class EhrExtractStatusService {
         }
 
         LOGGER.info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+    }
+
+    public void saveAckForConversation(String conversationId, EhrReceivedAcknowledgement ack) {
+
+        Query query = createQueryForConversationId(conversationId);
+
+        Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(ACKS_SET);
+
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+
+        Update update = updateBuilder.value(ack);
+
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query, update, returningUpdatedRecordOption, EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
+            throw new GeneralProcessingException("Unable to save received ack to database");
+        }
+
     }
 
     public void updateEhrExtractStatusAccessDocumentDocumentReferences(
