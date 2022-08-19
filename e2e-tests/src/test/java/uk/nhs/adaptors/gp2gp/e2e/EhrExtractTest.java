@@ -78,6 +78,7 @@ public class EhrExtractTest {
     private static final String ACK_TO_PENDING = "ackPending";
     private static final String NACK_CODE_FAILED_TO_GENERATE_EHR = "10";
     private final static String NACK_CODE_REQUEST_NOT_WELL_FORMED = "18";
+    private final static String NACK_CODE_PATIENT_NOT_FOUND = "6";
     private final static String NACK_CODE_GP_CONNECT_ERROR = "20";
     private final static String NACK_MESSAGE_REQUEST_NOT_WELL_FORMED = "An error occurred processing the initial EHR request";
 
@@ -114,8 +115,8 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_GPCRespondsWithPatientNotFound_Expect_NackWithCode18() throws Exception {
-        checkNhsNumberTriggersNackWithCode(NACK_CODE_REQUEST_NOT_WELL_FORMED, NHS_NUMBER_PATIENT_NOT_FOUND);
+    public void When_GPCRespondsWithPatientNotFound_Expect_NackWithCode6() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_PATIENT_NOT_FOUND, NHS_NUMBER_PATIENT_NOT_FOUND);
     }
 
     @Test

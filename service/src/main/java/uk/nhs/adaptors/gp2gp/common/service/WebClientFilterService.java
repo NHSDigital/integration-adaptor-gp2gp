@@ -112,7 +112,6 @@ public class WebClientFilterService {
                     //error 18
                     return Mono.error(new EhrExtractException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
                 }
-
                 //default error 20
                 return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
 
