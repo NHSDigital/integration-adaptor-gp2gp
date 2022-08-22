@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.service.EhrStatusService;
 
 @RestController
@@ -21,8 +22,8 @@ public class EhrStatusController {
     private EhrStatusService ehrStatusService;
 
     @GetMapping("/{conversationId}")
-    public ResponseEntity<EhrExtractStatus.EhrStatus> getEhrStatus(@PathVariable String conversationId) {
-        Optional<EhrExtractStatus.EhrStatus> ehrStatusOptional = ehrStatusService.getEhrStatus(conversationId);
+    public ResponseEntity<EhrStatus> getEhrStatus(@PathVariable String conversationId) {
+        Optional<EhrStatus> ehrStatusOptional = ehrStatusService.getEhrStatus(conversationId);
 
         return ehrStatusOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
     }

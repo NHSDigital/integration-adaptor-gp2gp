@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.model;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -14,8 +13,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 
 @CompoundIndexes({
     @CompoundIndex(
@@ -48,8 +45,7 @@ public class EhrExtractStatus implements TimeToLive {
     private Error error;
     private Instant messageTimestamp;
     private String ehrExtractMessageId;
-    private List<EhrReceivedAcknowledgement> allReceivedAcknowledgments;
-    private EhrStatus ehrStatus;
+    private AckHistory ackHistory;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
         this.created = created;
@@ -196,32 +192,18 @@ public class EhrExtractStatus implements TimeToLive {
     @AllArgsConstructor
     @Document
     @Builder
+    public static class AckHistory {
+        private List<EhrReceivedAcknowledgement> acks;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
     public static class Error {
         private Instant occurredAt;
         private String code;
         private String message;
         private String taskType;
-    }
-
-    @Builder
-    @Data
-    @Document
-    @AllArgsConstructor
-    public static class EhrStatus {
-
-        private List<AttachmentStatus> attachmentStatus;
-        private List<Object> acknowledgementModel;
-        private MigrationStatus migrationStatus;
-        private LocalDateTime originalRequestDate;
-
-        @Builder
-        @Document
-        @Data
-        @AllArgsConstructor
-        public static class AttachmentStatus {
-            private String name;
-            private FileStatus fileStatus;
-            private String documentReferenceId;
-        }
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 
@@ -24,87 +25,88 @@ import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.*;
 public class EhrStatusService {
 
     private EhrExtractStatusRepository ehrExtractStatusRepository;
-    public Optional<EhrExtractStatus.EhrStatus> getEhrStatus(String conversationId) {
+
+    public Optional<EhrStatus> getEhrStatus(String conversationId) {
 
         Optional<EhrExtractStatus> extractStatusOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
 
-        return extractStatusOptional.map(this::saveMockStatus);
+        if (extractStatusOptional.isEmpty()) {
+            return Optional.empty();
+        }
+
+        EhrExtractStatus ehrExtractStatus = extractStatusOptional.get();
+        List<EhrStatus.AttachmentStatus> attachmentStatusList = getAttachmentStatusList(ehrExtractStatus);
+
+        return Optional.of(
+            EhrStatus.builder()
+                .attachmentStatus(attachmentStatusList)
+                .acknowledgementModel(getAckModel(ehrExtractStatus))
+                .migrationStatus(evaluateMigrationStatus(ehrExtractStatus, attachmentStatusList))
+                .originalRequestDate(ehrExtractStatus.getCreated())
+                .build());
     }
 
-    private EhrExtractStatus.EhrStatus saveMockStatus(EhrExtractStatus ehrExtractStatus) {
-
-        var attachmentStatus = EhrExtractStatus.EhrStatus.AttachmentStatus.builder()
-            .documentReferenceId("testRef")
-            .fileStatus(PLACEHOLDER)
-            .name("test")
-            .build();
-
-        EhrExtractStatus.EhrStatus ehrStatus = EhrExtractStatus.EhrStatus.builder()
-            .attachmentStatus(List.of(attachmentStatus))
-            .migrationStatus(evaluateMigrationStatus(ehrExtractStatus))
-            .acknowledgementModel(new ArrayList<>())
-            .originalRequestDate(LocalDateTime.now())
-            .build();
-
-        ehrExtractStatus.setEhrStatus(ehrStatus);
-
-        return ehrExtractStatusRepository.save(ehrExtractStatus).getEhrStatus();
+    private List<EhrExtractStatus.EhrReceivedAcknowledgement> getAckModel(EhrExtractStatus ehrExtractStatus) {
+        return ehrExtractStatus.getAckHistory().getAcks();
     }
 
-   /** TODO Need to implement COMPLETE_WITH_ISSUES circumstances once ACK/NACK History is accessible */
-    private MigrationStatus evaluateMigrationStatus(EhrExtractStatus record) {
+    /**
+     * TODO Need to implement COMPLETE_WITH_ISSUES circumstances once ACK/NACK History is accessible
+     */
+    private MigrationStatus evaluateMigrationStatus(EhrExtractStatus record, List<EhrStatus.AttachmentStatus> attachmentStatusList) {
 
-        if(record.getAckPending().getTypeCode().equals("AE")
-                && record.getAckToRequester().getTypeCode().equals("AE")
-                    && !Objects.isNull(record.getError())) {
-            
+        if (record.getAckPending().getTypeCode().equals("AE")
+            && record.getAckToRequester().getTypeCode().equals("AE")
+            && !Objects.isNull(record.getError())) {
+
             return FAILED_NME;
-
         } else if (record.getAckPending().getTypeCode().equals("AA")
-                    && record.getAckToRequester().getTypeCode().equals("AA")
-                        && Objects.isNull(record.getError())
-                            && !Objects.isNull(record.getEhrReceivedAcknowledgement().getErrors())) {
+            && record.getAckToRequester().getTypeCode().equals("AA")
+            && Objects.isNull(record.getError())
+            && !Objects.isNull(record.getEhrReceivedAcknowledgement().getErrors())) {
 
             return FAILED_INCUMBENT;
-            
         } else if (record.getAckPending().getTypeCode().equals("AA")
-                    && record.getAckToRequester().getTypeCode().equals("AA")
-                        && Objects.isNull(record.getError())
-                            && !Objects.isNull(record.getEhrReceivedAcknowledgement().getConversationClosed())
-                                && Objects.isNull(record.getEhrReceivedAcknowledgement().getErrors())) {
+            && record.getAckToRequester().getTypeCode().equals("AA")
+            && Objects.isNull(record.getError())
+            && !Objects.isNull(record.getEhrReceivedAcknowledgement().getConversationClosed())
+            && Objects.isNull(record.getEhrReceivedAcknowledgement().getErrors())) {
 
-            return checkListContainsPlaceholder(attachmentStatusListBuilder(record))
-                    ? COMPLETE_WITH_ISSUES : COMPLETE;
+            return checkListContainsPlaceholder(attachmentStatusList)
+                ? COMPLETE_WITH_ISSUES : COMPLETE;
         }
 
         return null;
     }
 
-    /** TODO Find a way to properly pull out the Original Filename and Reference ID (current implementation not appropriate) */
-    private List<EhrExtractStatus.EhrStatus.AttachmentStatus> attachmentStatusListBuilder(EhrExtractStatus record) {
+    /**
+     * TODO Find a way to properly pull out the Original Filename and Reference ID (current implementation not appropriate)
+     */
+    private List<EhrStatus.AttachmentStatus> getAttachmentStatusList(EhrExtractStatus record) {
 
-        List<EhrExtractStatus.EhrStatus.AttachmentStatus> attachmentStatusList = new ArrayList<>();
+        List<EhrStatus.AttachmentStatus> attachmentStatusList = new ArrayList<>();
 
         record.getGpcAccessDocument().getDocuments()
-                .forEach(
-                gpcDocument ->
-                attachmentStatusList.add(new EhrExtractStatus.EhrStatus.AttachmentStatus(
-                        gpcDocument.getFileName(),
-                        checkIfPlaceholder(gpcDocument),
-                        gpcDocument.getDocumentId()))
-                );
+            .forEach(gpcDocument ->
+                attachmentStatusList.add(
+                    EhrStatus.AttachmentStatus.builder()
+                        .name(gpcDocument.getFileName())
+                        .fileStatus(checkIfPlaceholder(gpcDocument))
+                        .documentReferenceId(gpcDocument.getDocumentId())
+                        .build())
+            );
 
         return attachmentStatusList;
     }
 
     private FileStatus checkIfPlaceholder(EhrExtractStatus.GpcDocument document) {
 
-       return document.getFileName().equals("AbsentAttachment") ? PLACEHOLDER : ORIGINAL_FILE;
+        return document.getFileName().equals("AbsentAttachment") ? PLACEHOLDER : ORIGINAL_FILE;
     }
 
-    private Boolean checkListContainsPlaceholder(List<EhrExtractStatus.EhrStatus.AttachmentStatus> attachmentStatusList) {
+    private Boolean checkListContainsPlaceholder(List<EhrStatus.AttachmentStatus> attachmentStatusList) {
 
         return attachmentStatusList.stream().anyMatch(
-                attachmentList -> attachmentList.getFileStatus().equals(PLACEHOLDER));
+            attachmentList -> attachmentList.getFileStatus().equals(PLACEHOLDER));
     }
 }
