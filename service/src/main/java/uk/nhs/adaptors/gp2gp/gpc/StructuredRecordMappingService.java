@@ -84,6 +84,7 @@ public class StructuredRecordMappingService {
             )
             .url(extractUrl(documentReference).orElse(null))
             .title(documentReference.getContentFirstRep().getAttachment().getTitle())
+            .documentReferenceId(documentReference.getIdElement().getIdPart())
             .build();
     }
 

@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.status.service;
 
-import java.io.File;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +45,10 @@ public class EhrStatusService {
     }
 
     private List<EhrExtractStatus.EhrReceivedAcknowledgement> getAckModel(EhrExtractStatus ehrExtractStatus) {
-        return ehrExtractStatus.getAckHistory().getAcks();
+
+        Optional<EhrExtractStatus.AckHistory> ackHistoryOptional = Optional.ofNullable(ehrExtractStatus.getAckHistory());
+
+        return ackHistoryOptional.map(EhrExtractStatus.AckHistory::getAcks).orElse(new ArrayList<>());
     }
 
     /**
@@ -79,29 +80,40 @@ public class EhrStatusService {
         return null;
     }
 
-    /**
-     * TODO Find a way to properly pull out the Original Filename and Reference ID (current implementation not appropriate)
-     */
     private List<EhrStatus.AttachmentStatus> getAttachmentStatusList(EhrExtractStatus record) {
 
         List<EhrStatus.AttachmentStatus> attachmentStatusList = new ArrayList<>();
 
-        record.getGpcAccessDocument().getDocuments()
-            .forEach(gpcDocument ->
+        var accessDocumentOptional = Optional.ofNullable(record.getGpcAccessDocument());
+
+        accessDocumentOptional.ifPresent(accessDocument ->
+            accessDocument.getDocuments().forEach(gpcDocument ->
                 attachmentStatusList.add(
                     EhrStatus.AttachmentStatus.builder()
-                        .name(gpcDocument.getFileName())
-                        .fileStatus(checkIfPlaceholder(gpcDocument))
-                        .documentReferenceId(gpcDocument.getDocumentId())
+                        .url(gpcDocument.getAccessDocumentUrl())
+                        .title(gpcDocument.getTitle())
+                        .fileStatus(getFileStatus(gpcDocument)) // TODO: check if there are NACK messages for the document
+                        .documentReferenceId(gpcDocument.getDocumentReferenceId())
                         .build())
-            );
+            )
+        );
 
         return attachmentStatusList;
     }
 
-    private FileStatus checkIfPlaceholder(EhrExtractStatus.GpcDocument document) {
+    private FileStatus getFileStatus(EhrExtractStatus.GpcDocument document) {
 
-        return document.getFileName().equals("AbsentAttachment") ? PLACEHOLDER : ORIGINAL_FILE;
+        Optional<String> docRefOptional = Optional.ofNullable(document.getDocumentReferenceId());
+
+        if (docRefOptional.isEmpty()) {
+            return SKELETON_MESSAGE;
+        }
+
+        Optional<String> fileNameOptional = Optional.ofNullable(document.getFileName());
+
+        return fileNameOptional
+            .map(filename -> filename.contains("AbsentAttachment") ? PLACEHOLDER : ORIGINAL_FILE)
+            .orElse(ORIGINAL_FILE);
     }
 
     private Boolean checkListContainsPlaceholder(List<EhrStatus.AttachmentStatus> attachmentStatusList) {

@@ -76,16 +76,16 @@ public class EhrExtractStatus implements TimeToLive {
     @Builder
     public static class GpcDocument {
         private String documentId;
-        private String originalDocumentId;
         private String accessDocumentUrl;
         private int contentLength;
         private String objectName;
         private Instant accessedAt;
         private String fileName;
-        private String originalFilename;
         private String taskId;
         private String messageId;
         private GpcAccessDocument.SentToMhs sentToMhs;
+        private String title;
+        private String documentReferenceId;
     }
 
     @Data

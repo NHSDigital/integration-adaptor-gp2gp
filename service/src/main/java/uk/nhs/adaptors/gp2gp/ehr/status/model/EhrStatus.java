@@ -19,9 +19,10 @@ public class EhrStatus {
     @Builder
     @Data
     public static class AttachmentStatus {
-        private String name;
-        private FileStatus fileStatus;
         private String documentReferenceId;
+        private String url;
+        private String title;
+        private FileStatus fileStatus;
     }
 }
 

@@ -4,5 +4,6 @@ public enum FileStatus {
     
     PLACEHOLDER,
     ORIGINAL_FILE,
+    SKELETON_MESSAGE,
     ERROR
 }
