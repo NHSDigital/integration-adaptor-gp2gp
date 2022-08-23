@@ -53,31 +53,67 @@ public class EhrStatusService {
 
     /**
      * TODO Need to implement COMPLETE_WITH_ISSUES circumstances once ACK/NACK History is accessible
+     *
      */
     private MigrationStatus evaluateMigrationStatus(EhrExtractStatus record, List<EhrStatus.AttachmentStatus> attachmentStatusList) {
 
-        if (record.getAckPending().getTypeCode().equals("AE")
-            && record.getAckToRequester().getTypeCode().equals("AE")
-            && !Objects.isNull(record.getError())) {
+        var ackPendingOptional = Optional.ofNullable(record.getAckPending());
+        var ackToRequestorOptional = Optional.ofNullable(record.getAckToRequester());
+        var errorOptional = Optional.ofNullable(record.getError());
+        var receivedAcknowledgementOptional = Optional.ofNullable(record.getEhrReceivedAcknowledgement());
+
+        if (
+            ackPendingOptional
+                .map(ackPending -> ackPending.getTypeCode().equals("AE"))
+                .orElse(false)
+
+                && ackToRequestorOptional
+                .map(ackToRequester -> ackToRequester.getTypeCode().equals("AE"))
+                .orElse(false)
+
+                && errorOptional.isPresent()) {
 
             return FAILED_NME;
-        } else if (record.getAckPending().getTypeCode().equals("AA")
-            && record.getAckToRequester().getTypeCode().equals("AA")
-            && Objects.isNull(record.getError())
-            && !Objects.isNull(record.getEhrReceivedAcknowledgement().getErrors())) {
+        } else if (
+            ackPendingOptional
+                .map(ackPending -> ackPending.getTypeCode().equals("AA"))
+                .orElse(false)
+
+                && ackToRequestorOptional
+                .map(ackToRequester -> ackToRequester.getTypeCode().equals("AA"))
+                .orElse(false)
+
+                && errorOptional.isEmpty()
+
+                && receivedAcknowledgementOptional
+                .map(acknowledgement ->
+                    Optional.ofNullable(acknowledgement.getConversationClosed()).isPresent()
+                        && Optional.ofNullable(acknowledgement.getErrors()).isEmpty())
+                .orElse(false)) {
+
+            return checkListContainsPlaceholder(attachmentStatusList) ? COMPLETE_WITH_ISSUES : COMPLETE;
+        } else if (
+
+            // if a NACK or rejected message is received before the continue message these fields won't be populated
+//            ackPendingOptional
+//                .map(ackPending -> ackPending.getTypeCode().equals("AA"))
+//                .orElse(false)
+//
+//                && ackToRequestorOptional
+//                .map(ackToRequester -> ackToRequester.getTypeCode().equals("AA"))
+//                .orElse(false)
+//
+//                && errorOptional.isEmpty()
+
+                receivedAcknowledgementOptional
+                .map(acknowledgement ->
+                    Optional.ofNullable(acknowledgement.getErrors()).isPresent())
+                .orElse(false)) {
 
             return FAILED_INCUMBENT;
-        } else if (record.getAckPending().getTypeCode().equals("AA")
-            && record.getAckToRequester().getTypeCode().equals("AA")
-            && Objects.isNull(record.getError())
-            && !Objects.isNull(record.getEhrReceivedAcknowledgement().getConversationClosed())
-            && Objects.isNull(record.getEhrReceivedAcknowledgement().getErrors())) {
-
-            return checkListContainsPlaceholder(attachmentStatusList)
-                ? COMPLETE_WITH_ISSUES : COMPLETE;
         }
 
-        return null;
+        return IN_PROGRESS;
     }
 
     private List<EhrStatus.AttachmentStatus> getAttachmentStatusList(EhrExtractStatus record) {
@@ -92,7 +128,7 @@ public class EhrStatusService {
                     EhrStatus.AttachmentStatus.builder()
                         .url(gpcDocument.getAccessDocumentUrl())
                         .title(gpcDocument.getTitle())
-                        .fileStatus(getFileStatus(gpcDocument)) // TODO: check if there are NACK messages for the document
+                        .fileStatus(getFileStatus(gpcDocument)) // TODO: check if there are ACK / NACK messages for the document
                         .documentReferenceId(gpcDocument.getDocumentReferenceId())
                         .build())
             )

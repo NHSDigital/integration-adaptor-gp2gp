@@ -4,5 +4,6 @@ public enum MigrationStatus {
     COMPLETE,
     COMPLETE_WITH_ISSUES,
     FAILED_NME,
-    FAILED_INCUMBENT
+    FAILED_INCUMBENT,
+    IN_PROGRESS
 }
