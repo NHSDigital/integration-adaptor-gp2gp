@@ -103,9 +103,9 @@ public class EhrStatusService {
 //                .map(ackToRequester -> ackToRequester.getTypeCode().equals("AA"))
 //                .orElse(false)
 //
-//                && errorOptional.isEmpty()
+                errorOptional.isEmpty()
 
-                receivedAcknowledgementOptional
+                && receivedAcknowledgementOptional
                 .map(acknowledgement ->
                     Optional.ofNullable(acknowledgement.getErrors()).isPresent())
                 .orElse(false)) {
