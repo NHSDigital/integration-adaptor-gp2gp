@@ -16,7 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+
+import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
@@ -68,7 +69,7 @@ public class WebClientFilterService {
                 return Mono.just(clientResponse);
             }
             if (requestType.equals(RequestType.GPC)) {
-                getErrorException(clientResponse, requestType);
+                return getErrorException(clientResponse, requestType);
             }
 
             return getResponseError(clientResponse, requestType);
@@ -81,16 +82,17 @@ public class WebClientFilterService {
             ObjectMapper objectMapper = new ObjectMapper();
             try {
                 JsonNode outcomeJson = objectMapper.readTree(outcome);
-                var findValue = outcomeJson.findValues("code").stream();
+                var findValue = outcomeJson.findValues("code");
 
-                boolean patientNotFound = findValue.anyMatch(code -> code.textValue().equals("PATIENT_NOT_FOUND"));
-                boolean notAuthorized = findValue.anyMatch(code -> code.textValue().equals("NOT_AUTHORISED"));
-                boolean invalidNhsNumber = findValue.anyMatch(code -> code.textValue().equals("INVALID_NHS_NUMBER"));
-                boolean invalidPatientDemographic = findValue.anyMatch(code -> code.textValue().equals("INVALID_PATIENT_DEMOGRAPHICS"));
-                boolean invalidResource = findValue.anyMatch(code -> code.textValue().equals("INVALID_RESOURCE"));
-                boolean badRequest = findValue.anyMatch(code -> code.textValue().equals("BAD_REQUEST"));
-                boolean invalidParameter = findValue.anyMatch(code -> code.textValue().equals("INVALID_PARAMETER"));
-                boolean internalServErr = findValue.anyMatch(code -> code.textValue().equals("INTERNAL_SERVER_ERROR"));
+                boolean patientNotFound = findValue.stream().anyMatch(code -> code.textValue().equals("PATIENT_NOT_FOUND"));
+                boolean notAuthorized = findValue.stream().anyMatch(code -> code.textValue().equals("NOT_AUTHORISED"));
+                boolean invalidNhsNumber = findValue.stream().anyMatch(code -> code.textValue().equals("INVALID_NHS_NUMBER"));
+                boolean invalidPatientDemographic = findValue.stream().anyMatch(
+                        code -> code.textValue().equals("INVALID_PATIENT_DEMOGRAPHICS"));
+                boolean invalidResource = findValue.stream().anyMatch(code -> code.textValue().equals("INVALID_RESOURCE"));
+                boolean badRequest = findValue.stream().anyMatch(code -> code.textValue().equals("BAD_REQUEST"));
+                boolean invalidParameter = findValue.stream().anyMatch(code -> code.textValue().equals("INVALID_PARAMETER"));
+                boolean internalServErr = findValue.stream().anyMatch(code -> code.textValue().equals("INTERNAL_SERVER_ERROR"));
 
                 var statusCode = clientResponse.statusCode();
 
@@ -102,15 +104,16 @@ public class WebClientFilterService {
                     //error 19
                     return Mono.error(new GpConnectInvalidException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
 
-                } else if (statusCode.equals(BAD_REQUEST) && invalidPatientDemographic || statusCode.equals(BAD_REQUEST) && badRequest
+                } else if (statusCode.equals(BAD_REQUEST) && invalidPatientDemographic
                         || (statusCode.equals(INTERNAL_SERVER_ERROR) && internalServErr)) {
                     //error 20
                     return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
 
                 } else if (statusCode.equals(UNPROCESSABLE_ENTITY) && invalidResource
+                        || statusCode.equals(BAD_REQUEST) && badRequest
                         || statusCode.equals(UNPROCESSABLE_ENTITY) && invalidParameter) {
                     //error 18
-                    return Mono.error(new EhrExtractException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
+                    return Mono.error(new EhrRequestException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
                 }
                 //default error 20
                 return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));

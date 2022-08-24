@@ -7,12 +7,12 @@
       "matchesJsonPath" : "$.parameter[?(@.name == 'patientNHSNumber')]"
     },
       {
-        "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9600000009')]"
+        "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '960000001')]"
       }]
   },
   "response": {
-    "status": 404,
-    "bodyFileName": "operationOutcomePatientNotFound.json",
+    "status": 400,
+    "bodyFileName": "operationOutcomeInvalidNHSNumber.json",
     "headers": {
       "Server": "nginx",
       "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",
