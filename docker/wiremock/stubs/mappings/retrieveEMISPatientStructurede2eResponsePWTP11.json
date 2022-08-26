@@ -7,12 +7,12 @@
             "matchesJsonPath" : "$.parameter[?(@.name == 'patientNHSNumber')]"
         },
             {
-                "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9726908698')]"
+                "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9726908779')]"
             }]
     },
     "response": {
         "status": 200,
-        "bodyFileName": "EMISPatientStructurede2eResponsePatient2.json",
+        "bodyFileName": "EMISPatientStructurede2eResponsePWTP11.json",
         "headers": {
             "Server": "nginx",
             "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",
