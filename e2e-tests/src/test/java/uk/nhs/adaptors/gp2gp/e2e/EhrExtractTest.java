@@ -45,7 +45,12 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS = "9690937420";
     private static final String NHS_NUMBER_LARGE_PAYLOAD = "9690937421";
     private static final String NHS_NUMBER_LARGE_ATTACHMENT_DOCX = "9388098434";
-    private static final String NHS_NUMBER_PATIENT_NOT_FOUND = "9600000001";
+    private static final String NHS_NUMBER_PATIENT_NOT_FOUND = "9600000009";
+    private static final String NHS_NUMBER_INVALID_DEMOGRAPHIC = "9600000002";
+    private static final String NHS_NUMBER_INVALID_RESOURCE = "9600000003";
+    private static final String NHS_NUMBER_INVALID_PARAMETER = "9600000004";
+    private static final String NHS_NUMBER_BAD_REQUEST = "9600000005";
+    private static final String NHS_NUMBER_INTERNAL_SERVER_ERROR = "9600000006";
     private static final String NHS_NUMBER_INVALID_NHS_NUMBER = "123456789";
     private static final String NHS_NUMBER_RESPONSE_HAS_MALFORMED_DATE = "9690872294";
     private static final String NHS_NUMBER_RESPONSE_MISSING_PATIENT_RESOURCE = "2906543841";
@@ -78,8 +83,11 @@ public class EhrExtractTest {
     private static final String ACK_TO_PENDING = "ackPending";
     private static final String NACK_CODE_FAILED_TO_GENERATE_EHR = "10";
     private final static String NACK_CODE_REQUEST_NOT_WELL_FORMED = "18";
+    private final static String NACK_CODE_PATIENT_NOT_FOUND = "6";
+    private final static String NACK_CODE_INVALID = "19";
     private final static String NACK_CODE_GP_CONNECT_ERROR = "20";
     private final static String NACK_MESSAGE_REQUEST_NOT_WELL_FORMED = "An error occurred processing the initial EHR request";
+    private final static String NACK_MESSAGE_NOT_FOUND = "Patient not at surgery.";
 
     private static final CharSequence XML_NAMESPACE = "/urn:hl7-org:v3:";
     private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/RCMR_IN030000UK06/ControlActEvent/subject/EhrExtract/component/ehrFolder/component/ehrComposition/component/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='cid:%s']";
@@ -114,13 +122,38 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_GPCRespondsWithPatientNotFound_Expect_NackWithCode18() throws Exception {
-        checkNhsNumberTriggersNackWithCode(NACK_CODE_REQUEST_NOT_WELL_FORMED, NHS_NUMBER_PATIENT_NOT_FOUND);
+    public void When_GPCRespondsWithPatientNotFound_Expect_NackWithCode6() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_PATIENT_NOT_FOUND, NHS_NUMBER_PATIENT_NOT_FOUND);
     }
 
     @Test
-    public void When_GPCRespondsWithErrorNotPatientNotFound_Expect_NackWithCode20() throws Exception {
-        checkNhsNumberTriggersNackWithCode(NACK_CODE_GP_CONNECT_ERROR, NHS_NUMBER_INVALID_NHS_NUMBER);
+    public void When_GPCRespondsWithInvalidNhsNumber_Expect_NackWithCode19() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_INVALID, NHS_NUMBER_INVALID_NHS_NUMBER);
+    }
+
+    @Test
+    public void When_GPCRespondsWithInvalidDemographic_Expect_NackWithCode20() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_GP_CONNECT_ERROR, NHS_NUMBER_INVALID_DEMOGRAPHIC);
+    }
+
+    @Test
+    public void When_GPCRespondsWithInvalidResource_Expect_NackWithCode18() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_REQUEST_NOT_WELL_FORMED, NHS_NUMBER_INVALID_RESOURCE);
+    }
+
+    @Test
+    public void When_GPCRespondsWithInvalidParameter_Expect_NackWithCode18() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_REQUEST_NOT_WELL_FORMED, NHS_NUMBER_INVALID_PARAMETER);
+    }
+
+    @Test
+    public void When_GPCRespondsWithBadRequest_Expect_NackWithCode18() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_REQUEST_NOT_WELL_FORMED, NHS_NUMBER_BAD_REQUEST);
+    }
+
+    @Test
+    public void When_GPCRespondsWithInternalServerError_Expect_NackWithCode20() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_GP_CONNECT_ERROR, NHS_NUMBER_INTERNAL_SERVER_ERROR);
     }
 
     @Test
@@ -427,8 +460,8 @@ public class EhrExtractTest {
 
     private void assertThatNegativeAcknowledgementToRequesterWasSent(Document ackToRequester, String typeCode) {
         assertThatAcknowledgementPending(ackToRequester, typeCode);
-        softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo(NACK_CODE_REQUEST_NOT_WELL_FORMED);
-        softly.assertThat(ackToRequester.get("detail")).isEqualTo(NACK_MESSAGE_REQUEST_NOT_WELL_FORMED);
+        softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo(NACK_CODE_PATIENT_NOT_FOUND);
+        softly.assertThat(ackToRequester.get("detail")).isEqualTo(NACK_MESSAGE_NOT_FOUND);
     }
 
     private void assertThatNoErrorInfoIsStored(String conversationId) {
@@ -440,8 +473,8 @@ public class EhrExtractTest {
         var error = (Document) Mongo.findEhrExtractStatus(conversationId).get("error");
 
         softly.assertThat(error.get("occurredAt")).isNotNull();
-        softly.assertThat(error.get("code")).isEqualTo(NACK_CODE_REQUEST_NOT_WELL_FORMED);
-        softly.assertThat(error.get("message")).isEqualTo(NACK_MESSAGE_REQUEST_NOT_WELL_FORMED);
+        softly.assertThat(error.get("code")).isEqualTo(NACK_CODE_PATIENT_NOT_FOUND);
+        softly.assertThat(error.get("message")).isEqualTo(NACK_MESSAGE_NOT_FOUND);
         softly.assertThat(error.get("taskType")).isEqualTo(expectedTaskType);
     }
 
