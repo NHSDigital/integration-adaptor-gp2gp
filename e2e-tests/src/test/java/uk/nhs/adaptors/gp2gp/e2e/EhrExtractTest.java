@@ -87,6 +87,7 @@ public class EhrExtractTest {
     private final static String NACK_CODE_INVALID = "19";
     private final static String NACK_CODE_GP_CONNECT_ERROR = "20";
     private final static String NACK_MESSAGE_REQUEST_NOT_WELL_FORMED = "An error occurred processing the initial EHR request";
+    private final static String NACK_MESSAGE_NOT_FOUND = "Patient not at surgery.";
 
     private static final CharSequence XML_NAMESPACE = "/urn:hl7-org:v3:";
     private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/RCMR_IN030000UK06/ControlActEvent/subject/EhrExtract/component/ehrFolder/component/ehrComposition/component/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='cid:%s']";
@@ -459,8 +460,8 @@ public class EhrExtractTest {
 
     private void assertThatNegativeAcknowledgementToRequesterWasSent(Document ackToRequester, String typeCode) {
         assertThatAcknowledgementPending(ackToRequester, typeCode);
-        softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo(NACK_CODE_REQUEST_NOT_WELL_FORMED);
-        softly.assertThat(ackToRequester.get("detail")).isEqualTo(NACK_MESSAGE_REQUEST_NOT_WELL_FORMED);
+        softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo(NACK_CODE_PATIENT_NOT_FOUND);
+        softly.assertThat(ackToRequester.get("detail")).isEqualTo(NACK_MESSAGE_NOT_FOUND);
     }
 
     private void assertThatNoErrorInfoIsStored(String conversationId) {
@@ -472,8 +473,8 @@ public class EhrExtractTest {
         var error = (Document) Mongo.findEhrExtractStatus(conversationId).get("error");
 
         softly.assertThat(error.get("occurredAt")).isNotNull();
-        softly.assertThat(error.get("code")).isEqualTo(NACK_CODE_REQUEST_NOT_WELL_FORMED);
-        softly.assertThat(error.get("message")).isEqualTo(NACK_MESSAGE_REQUEST_NOT_WELL_FORMED);
+        softly.assertThat(error.get("code")).isEqualTo(NACK_CODE_PATIENT_NOT_FOUND);
+        softly.assertThat(error.get("message")).isEqualTo(NACK_MESSAGE_NOT_FOUND);
         softly.assertThat(error.get("taskType")).isEqualTo(expectedTaskType);
     }
 
