@@ -1,0 +1,21 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "GET",
+        "urlPattern": "\/gpcassurance-b86047.emis.thirdparty.nhs.uk\/.*\/STU3\/1\/GPConnect\/Documents\/Binary\/.*"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "correctPatientDocumentResponse.json",
+        "headers": {
+            "Server":"nginx",
+            "Date":"Tue, 12 Jan 2021 11:36:57 GMT",
+            "Content-Type":"application/fhir+json;charset=UTF-8",
+            "Connection":"keep-alive",
+            "expires":"0",
+            "Cache-Control": "no-store",
+            "Pragma": "no-cache",
+            "Strict-Transport-Security": "max-age:31536000"
+        }
+    }
+}

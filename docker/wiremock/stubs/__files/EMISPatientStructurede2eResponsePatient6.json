@@ -4109,7 +4109,7 @@
                     {
                         "attachment": {
                             "contentType": "image/bmp",
-                            "url": "https://gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F56DC83A174DFD4C1CA45245F8F8A8FBA1",
+                            "url": "{{request.baseUrl}}/gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F56DC83A174DFD4C1CA45245F8F8A8FBA1",
                             "size": 190950
                         }
                     }
@@ -4182,7 +4182,7 @@
                     {
                         "attachment": {
                             "contentType": "application/msword",
-                            "url": "https://gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F58B172D187ED24EA481C7E879C0718813",
+                            "url": "{{request.baseUrl}}/gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F58B172D187ED24EA481C7E879C0718813",
                             "size": 19456
                         }
                     }
@@ -4368,7 +4368,7 @@
                     {
                         "attachment": {
                             "contentType": "text/plain",
-                            "url": "https://gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F5BFBF038AF1424C67B05BD155E2C89990",
+                            "url": "{{request.baseUrl}}/gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F5BFBF038AF1424C67B05BD155E2C89990",
                             "size": 104
                         }
                     }
@@ -5305,7 +5305,7 @@
                     {
                         "attachment": {
                             "contentType": "image/jpeg",
-                            "url": "https://gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F5A72548B718AC4A77B5C5C6B34D253529",
+                            "url": "{{request.baseUrl}}/gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F5A72548B718AC4A77B5C5C6B34D253529",
                             "size": 23753
                         }
                     }
@@ -5355,7 +5355,7 @@
                     {
                         "attachment": {
                             "contentType": "image/gif",
-                            "url": "https://gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F516CADEB3BDB74FBE8771E9FC19108A2B",
+                            "url": "{{request.baseUrl}}/gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F516CADEB3BDB74FBE8771E9FC19108A2B",
                             "size": 5501
                         }
                     }
@@ -5400,7 +5400,7 @@
                     {
                         "attachment": {
                             "contentType": "text/richtext",
-                            "url": "https://gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F5799F91583CFF4908BFB1CD76049D3A37",
+                            "url": "{{request.baseUrl}}/gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F5799F91583CFF4908BFB1CD76049D3A37",
                             "size": 654
                         }
                     }
@@ -5450,7 +5450,7 @@
                     {
                         "attachment": {
                             "contentType": "text/plain",
-                            "url": "https://gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F53B24F143B01E4F02BCD4D9AD16323E98",
+                            "url": "{{request.baseUrl}}/gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/4C903809CADA442E8FA5655E5EFEB1F53B24F143B01E4F02BCD4D9AD16323E98",
                             "size": 152
                         }
                     }
