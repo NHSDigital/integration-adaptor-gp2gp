@@ -486,7 +486,7 @@ public class EhrExtractTest {
         assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, nhsNumber);
     }
 
-    @Disabled("disabled as there is an invalid date in TPPPatientStructuredRecordE2EPWTP6.json")
+//    @Disabled("disabled as there is an invalid date in TPPPatientStructuredRecordE2EPWTP6.json")
     @Test
     public void When_ExtractRequestReceivedForTPPPWTP6_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws IOException, NamingException, JMSException {
         String conversationId = UUID.randomUUID().toString();
