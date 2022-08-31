@@ -43,7 +43,7 @@ public class ProcessingErrorHandlerTest {
         verify(processFailureHandlingService).failProcess(
             any(),
             eq("18"),
-            eq("An error occurred processing the initial EHR request"),
+            eq("Request message not well-formed or not able to be processed"),
             any());
     }
 
@@ -67,7 +67,7 @@ public class ProcessingErrorHandlerTest {
         verify(processFailureHandlingService).failProcess(
             any(),
             eq("10"),
-            eq("An error occurred translating the EHR extract"),
+            eq("Failed to successfully generate EHR Extract."),
             any());
     }
 
@@ -115,7 +115,7 @@ public class ProcessingErrorHandlerTest {
         verify(processFailureHandlingService).failProcess(
             any(),
             eq("20"),
-            eq("An error occurred communicating with GP connect"),
+            eq("Spine system responded with an error"),
             any());
     }
 

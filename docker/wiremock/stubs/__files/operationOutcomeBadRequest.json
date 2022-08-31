@@ -8,17 +8,17 @@
   "issue": [
     {
       "severity": "error",
-      "code": "not-found",
+      "code": "invalid",
       "details": {
         "coding": [
           {
-            "system": "https://fhir.nhs.uk/STU3/CodeSystem/Spine-ErrorOrWarningCode-1",
-            "code": "PATIENT_NOT_FOUND",
-            "display": "PATIENT_NOT_FOUND"
+            "system": "https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1",
+            "code": "BAD_REQUEST",
+            "display": "Bad request"
           }
         ]
       },
-      "diagnostics": "No patient details found for patient ID: 9600000001"
+      "diagnostics": "Empty JWT aud claim"
     }
   ]
 }
