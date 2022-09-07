@@ -23,7 +23,7 @@
         "identifier": [
             {
                 "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                "value": "{{requestingOrganizationODSCode}}"
+                "value": "{{jwtRequestingOrganizationODSCode}}"
             }
         ],
         "name": "N/A"
@@ -34,18 +34,18 @@
         "identifier": [
             {
                 "system": "https://fhir.nhs.uk/Id/sds-user-id",
-                "value": "{{requestingPractitionerSDSUserId}}}}"
+                "value": "{{jwtRequestingPractitionerSDSUserId}}"
             },
             {
                 "system": "https://fhir.nhs.uk/Id/sds-role-profile-id",
-                "value": "{{requestingPractitionerSDSRoleProfileId}}}}"
+                "value": "{{jwtRequestingPractitionerSDSRoleProfileId}}"
             }
         ],
         "name": [
             {
-                "family": "{{requestingPractitionerFamilyName}}",
+                "family": "{{jwtRequestingPractitionerFamilyName}}",
                 "given": [
-                   "{{requestingPractitionerGivenName}}"
+                   "{{jwtRequestingPractitionerGivenName}}"
                 ],
                 "prefix": [
                     "System"
