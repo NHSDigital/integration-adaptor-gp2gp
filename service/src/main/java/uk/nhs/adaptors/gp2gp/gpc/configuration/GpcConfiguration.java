@@ -14,4 +14,8 @@ public class GpcConfiguration {
     private String url;
     private String migrateStructuredEndpoint;
     private int maxRequestSize;
+    private String requestingPractitionerSDSUserId;
+    private String requestingPractitionerSDSRoleProfileId;
+    private String requestingPractitionerFamilyName;
+    private String requestingPractitionerGivenName;
 }
