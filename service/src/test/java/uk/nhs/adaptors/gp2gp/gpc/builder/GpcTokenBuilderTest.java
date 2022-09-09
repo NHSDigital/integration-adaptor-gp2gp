@@ -45,7 +45,7 @@ public class GpcTokenBuilderTest {
         assertThat(payloadJson).contains(expectedExp, expectedIat);
     }
     @Test
-    public void When_GpcJwtTokenIsCreated_Expect_RequestingPractitionerElements_ToBePresent() {
+    public void When_GpcJwtTokenIsCreated_Expect_RequestingPractitionerElements() {
         Instant timestamp = Instant.ofEpochSecond(EPOCH_SECOND);
         when(timestampService.now()).thenReturn(timestamp);
         when(gpcConfiguration.getUrl()).thenReturn("http://aud");
