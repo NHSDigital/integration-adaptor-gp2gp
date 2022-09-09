@@ -37,7 +37,11 @@ public class GpcTokenBuilder {
             .targetURI(gpcConfiguration.getUrl())
             .jwtCreationTime(creationTime)
             .jwtExpiryTime(expiryTime)
-            .requestingOrganizationODSCode(odsFromCode)
+            .jwtRequestingOrganizationODSCode(odsFromCode)
+            .jwtRequestingPractitionerSDSUserId(gpcConfiguration.getRequestingPractitionerSDSUserId())
+            .jwtRequestingPractitionerSDSRoleProfileId(gpcConfiguration.getRequestingPractitionerSDSRoleProfileId())
+            .jwtRequestingPractitionerFamilyName(gpcConfiguration.getRequestingPractitionerFamilyName())
+            .jwtRequestingPractitionerGivenName(gpcConfiguration.getRequestingPractitionerGivenName())
             .build();
 
         String jwtHeader = GpcTemplateUtils.fillTemplate(JWT_HEADER_TEMPLATE, new JwtHeaderData());
@@ -72,7 +76,11 @@ public class GpcTokenBuilder {
         private String targetURI;
         private long jwtExpiryTime;
         private long jwtCreationTime;
-        private String requestingOrganizationODSCode;
+        private String jwtRequestingOrganizationODSCode;
+        private String jwtRequestingPractitionerSDSUserId;
+        private String jwtRequestingPractitionerSDSRoleProfileId;
+        private String jwtRequestingPractitionerFamilyName;
+        private String jwtRequestingPractitionerGivenName;
     }
 }
 

@@ -44,5 +44,20 @@ public class GpcTokenBuilderTest {
         String expectedIat = String.format("\"iat\": %d", timestamp.getEpochSecond());
         assertThat(payloadJson).contains(expectedExp, expectedIat);
     }
+    @Test
+    public void When_GpcJwtTokenIsCreated_Expect_RequestingPractitionerElements() {
+        Instant timestamp = Instant.ofEpochSecond(EPOCH_SECOND);
+        when(timestampService.now()).thenReturn(timestamp);
+        when(gpcConfiguration.getUrl()).thenReturn("http://aud");
+        String token = gpcTokenBuilder.buildToken("ODS-CODE");
+        String[] tokenParts = token.split("\\.");
+        String payloadBase64 = tokenParts[1];
+        String payloadJson = new String(Base64.getUrlDecoder().decode(payloadBase64), StandardCharsets.UTF_8);
+
+        assertThat(payloadJson).contains("https://fhir.nhs.uk/Id/sds-user-id",
+                                         "https://fhir.nhs.uk/Id/sds-role-profile-id",
+                                         "family",
+                                         "given");
+    }
 
 }

@@ -23,9 +23,34 @@
         "identifier": [
             {
                 "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                "value": "{{requestingOrganizationODSCode}}"
+                "value": "{{jwtRequestingOrganizationODSCode}}"
             }
         ],
         "name": "N/A"
+    },
+    "requesting_practitioner": {
+        "resourceType": "Practitioner",
+        "id": "1",
+        "identifier": [
+            {
+                "system": "https://fhir.nhs.uk/Id/sds-user-id",
+                "value": "{{jwtRequestingPractitionerSDSUserId}}"
+            },
+            {
+                "system": "https://fhir.nhs.uk/Id/sds-role-profile-id",
+                "value": "{{jwtRequestingPractitionerSDSRoleProfileId}}"
+            }
+        ],
+        "name": [
+            {
+                "family": "{{jwtRequestingPractitionerFamilyName}}",
+                "given": [
+                   "{{jwtRequestingPractitionerGivenName}}"
+                ],
+                "prefix": [
+                    "System"
+                ]
+            }
+        ]
     }
 }
