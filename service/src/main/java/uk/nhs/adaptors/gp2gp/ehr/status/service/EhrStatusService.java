@@ -3,7 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.status.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,12 +33,13 @@ public class EhrStatusService {
         }
 
         EhrExtractStatus ehrExtractStatus = extractStatusOptional.get();
-        List<EhrStatus.AttachmentStatus> attachmentStatusList = getAttachmentStatusList(ehrExtractStatus);
+        List<EhrExtractStatus.EhrReceivedAcknowledgement> receivedAcknowledgements = getAckModel(ehrExtractStatus);
+        List<EhrStatus.AttachmentStatus> attachmentStatusList = getAttachmentStatusList(ehrExtractStatus, receivedAcknowledgements);
 
         return Optional.of(
             EhrStatus.builder()
                 .attachmentStatus(attachmentStatusList)
-                .acknowledgementModel(getAckModel(ehrExtractStatus))
+                .acknowledgementModel(receivedAcknowledgements)
                 .migrationStatus(evaluateMigrationStatus(ehrExtractStatus, attachmentStatusList))
                 .originalRequestDate(ehrExtractStatus.getCreated())
                 .build());
@@ -51,10 +52,6 @@ public class EhrStatusService {
         return ackHistoryOptional.map(EhrExtractStatus.AckHistory::getAcks).orElse(new ArrayList<>());
     }
 
-    /**
-     * TODO Need to implement COMPLETE_WITH_ISSUES circumstances once ACK/NACK History is accessible
-     *
-     */
     private MigrationStatus evaluateMigrationStatus(EhrExtractStatus record, List<EhrStatus.AttachmentStatus> attachmentStatusList) {
 
         var ackPendingOptional = Optional.ofNullable(record.getAckPending());
@@ -91,7 +88,7 @@ public class EhrStatusService {
                         && Optional.ofNullable(acknowledgement.getErrors()).isEmpty())
                 .orElse(false)) {
 
-            return checkListContainsPlaceholder(attachmentStatusList) ? COMPLETE_WITH_ISSUES : COMPLETE;
+            return checkForPlaceholderOrError(attachmentStatusList) ? COMPLETE_WITH_ISSUES : COMPLETE;
         } else if (
 
             // if a NACK or rejected message is received before the continue message these fields won't be populated
@@ -116,7 +113,8 @@ public class EhrStatusService {
         return IN_PROGRESS;
     }
 
-    private List<EhrStatus.AttachmentStatus> getAttachmentStatusList(EhrExtractStatus record) {
+    private List<EhrStatus.AttachmentStatus> getAttachmentStatusList(EhrExtractStatus record,
+        List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
 
         List<EhrStatus.AttachmentStatus> attachmentStatusList = new ArrayList<>();
 
@@ -128,21 +126,33 @@ public class EhrStatusService {
                     EhrStatus.AttachmentStatus.builder()
                         .url(gpcDocument.getAccessDocumentUrl())
                         .title(gpcDocument.getTitle())
-                        .fileStatus(getFileStatus(gpcDocument)) // TODO: check if there are ACK / NACK messages for the document
+                        .fileStatus(getFileStatus(gpcDocument, acknowledgements))
                         .documentReferenceId(gpcDocument.getDocumentReferenceId())
                         .build())
             )
         );
 
-        return attachmentStatusList;
+        return attachmentStatusList.stream()
+            .filter(attachmentStatus -> attachmentStatus.getFileStatus() != SKELETON_MESSAGE)
+            .collect(Collectors.toList());
     }
 
-    private FileStatus getFileStatus(EhrExtractStatus.GpcDocument document) {
+    private FileStatus getFileStatus(EhrExtractStatus.GpcDocument document, List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
 
+        // TODO: change to get new isSkeleton field
         Optional<String> docRefOptional = Optional.ofNullable(document.getDocumentReferenceId());
 
         if (docRefOptional.isEmpty()) {
             return SKELETON_MESSAGE;
+        }
+
+        List<String> messageIds = document.getSentToMhs().getMessageId();
+        boolean documentHasNack = acknowledgements.stream()
+            .filter(ack -> ack.getErrors() != null)
+            .anyMatch(ack -> messageIds.contains(ack.getMessageRef()));
+
+        if(documentHasNack) {
+            return ERROR;
         }
 
         Optional<String> fileNameOptional = Optional.ofNullable(document.getFileName());
@@ -152,9 +162,11 @@ public class EhrStatusService {
             .orElse(ORIGINAL_FILE);
     }
 
-    private Boolean checkListContainsPlaceholder(List<EhrStatus.AttachmentStatus> attachmentStatusList) {
+    private Boolean checkForPlaceholderOrError(List<EhrStatus.AttachmentStatus> attachmentStatusList) {
 
-        return attachmentStatusList.stream().anyMatch(
-            attachmentList -> attachmentList.getFileStatus().equals(PLACEHOLDER));
+        return attachmentStatusList.stream()
+            .anyMatch(attachmentList ->
+                attachmentList.getFileStatus().equals(PLACEHOLDER) ||
+                attachmentList.getFileStatus().equals(ERROR));
     }
 }
