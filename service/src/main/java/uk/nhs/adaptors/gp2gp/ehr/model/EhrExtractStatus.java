@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
+import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 
 @CompoundIndexes({
     @CompoundIndex(
@@ -86,6 +87,7 @@ public class EhrExtractStatus implements TimeToLive {
         private GpcAccessDocument.SentToMhs sentToMhs;
         private String title;
         private boolean isSkeleton;
+        private List<Identifier> identifier;
     }
 
     @Data

@@ -39,7 +39,7 @@ public class EhrStatusService {
         return Optional.of(
             EhrStatus.builder()
                 .attachmentStatus(attachmentStatusList)
-                .acknowledgementModel(receivedAcknowledgements)
+                .receivedAcknowledgements(receivedAcknowledgements)
                 .migrationStatus(evaluateMigrationStatus(ehrExtractStatus, attachmentStatusList))
                 .originalRequestDate(ehrExtractStatus.getCreated())
                 .build());
@@ -124,6 +124,7 @@ public class EhrStatusService {
             accessDocument.getDocuments().forEach(gpcDocument ->
                 attachmentStatusList.add(
                     EhrStatus.AttachmentStatus.builder()
+                        .identifier(gpcDocument.getIdentifier())
                         .url(gpcDocument.getAccessDocumentUrl())
                         .title(gpcDocument.getTitle())
                         .fileStatus(getFileStatus(gpcDocument, acknowledgements))

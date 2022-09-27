@@ -6,20 +6,21 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 
 @Builder
 @Data
 public class EhrStatus {
 
     private List<AttachmentStatus> attachmentStatus;
-    private List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgementModel;
+    private List<EhrExtractStatus.EhrReceivedAcknowledgement> receivedAcknowledgements;
     private MigrationStatus migrationStatus;
     private Instant originalRequestDate;
 
     @Builder
     @Data
     public static class AttachmentStatus {
-        // TODO: add identifier
+        private List<Identifier> identifier;
         private String url;
         private String title;
         private FileStatus fileStatus;

@@ -113,6 +113,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .messageId(messageId)
                     .title(null)
                     .isSkeleton(true)
+                    .identifier(null)
                     .build());
 
                 ehrExtractXml = structuredRecordMappingService
@@ -134,6 +135,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .messageId(structuredTaskDefinition.getConversationId())
                     .title(absentAttachment.getTitle())
                     .isSkeleton(false)
+                    .identifier(absentAttachment.getIdentifiers())
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
 
@@ -151,6 +153,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .messageId(structuredTaskDefinition.getConversationId())
                     .title(externalAttachment.getTitle())
                     .isSkeleton(false)
+                    .identifier(externalAttachment.getIdentifiers())
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
             externalAttachments.addAll(documentsAsExternalAttachments);
@@ -168,6 +171,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .messageId(structuredTaskDefinition.getConversationId())
                     .title(absentAttachment.getTitle())
                     .isSkeleton(false)
+                    .identifier(absentAttachment.getIdentifiers())
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
 

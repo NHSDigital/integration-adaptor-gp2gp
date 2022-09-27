@@ -20,6 +20,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
+import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.util.List;
@@ -84,6 +85,12 @@ public class StructuredRecordMappingService {
             )
             .url(extractUrl(documentReference).orElse(null))
             .title(documentReference.getContentFirstRep().getAttachment().getTitle())
+            .identifiers(documentReference.getIdentifier().stream()
+                .map(identifier -> Identifier.builder()
+                    .system(identifier.getSystem())
+                    .value(identifier.getValue())
+                    .build())
+                .collect(Collectors.toList()))
             .build();
     }
 
