@@ -71,8 +71,6 @@ public class OutboundMessage {
         private String title;
         @JsonIgnore
         private String url;
-        @JsonIgnore
-        private String documentReferenceId;
     }
 
     private static String booleanToYesNo(boolean value) {

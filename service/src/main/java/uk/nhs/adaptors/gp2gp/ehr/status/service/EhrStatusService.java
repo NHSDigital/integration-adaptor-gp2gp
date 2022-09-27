@@ -127,7 +127,6 @@ public class EhrStatusService {
                         .url(gpcDocument.getAccessDocumentUrl())
                         .title(gpcDocument.getTitle())
                         .fileStatus(getFileStatus(gpcDocument, acknowledgements))
-                        .documentReferenceId(gpcDocument.getDocumentReferenceId())
                         .build())
             )
         );
@@ -139,10 +138,7 @@ public class EhrStatusService {
 
     private FileStatus getFileStatus(EhrExtractStatus.GpcDocument document, List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
 
-        // TODO: change to get new isSkeleton field
-        Optional<String> docRefOptional = Optional.ofNullable(document.getDocumentReferenceId());
-
-        if (docRefOptional.isEmpty()) {
+        if (document.isSkeleton()) {
             return SKELETON_MESSAGE;
         }
 

@@ -19,7 +19,7 @@ public class EhrStatus {
     @Builder
     @Data
     public static class AttachmentStatus {
-        private String documentReferenceId;
+        // TODO: add identifier
         private String url;
         private String title;
         private FileStatus fileStatus;

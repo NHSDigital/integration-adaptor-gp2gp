@@ -112,7 +112,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .taskId(getDocumentTaskDefinition.getTaskId())
                     .messageId(messageId)
                     .title(null)
-                    .documentReferenceId(null)
+                    .isSkeleton(true)
                     .build());
 
                 ehrExtractXml = structuredRecordMappingService
@@ -133,7 +133,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .taskId(structuredTaskDefinition.getTaskId())
                     .messageId(structuredTaskDefinition.getConversationId())
                     .title(absentAttachment.getTitle())
-                    .documentReferenceId(absentAttachment.getDocumentReferenceId())
+                    .isSkeleton(false)
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
 
@@ -150,7 +150,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .taskId(structuredTaskDefinition.getTaskId())
                     .messageId(structuredTaskDefinition.getConversationId())
                     .title(externalAttachment.getTitle())
-                    .documentReferenceId(externalAttachment.getDocumentReferenceId())
+                    .isSkeleton(false)
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
             externalAttachments.addAll(documentsAsExternalAttachments);
@@ -167,7 +167,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .taskId(structuredTaskDefinition.getTaskId())
                     .messageId(structuredTaskDefinition.getConversationId())
                     .title(absentAttachment.getTitle())
-                    .documentReferenceId(absentAttachment.getDocumentReferenceId())
+                    .isSkeleton(false)
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
 
