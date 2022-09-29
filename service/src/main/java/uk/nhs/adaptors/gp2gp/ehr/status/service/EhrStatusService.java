@@ -125,8 +125,6 @@ public class EhrStatusService {
                 attachmentStatusList.add(
                     EhrStatus.AttachmentStatus.builder()
                         .identifier(gpcDocument.getIdentifier())
-                        .url(gpcDocument.getAccessDocumentUrl())
-                        .title(gpcDocument.getTitle())
                         .fileStatus(getFileStatus(gpcDocument, acknowledgements))
                         .build())
             )
@@ -139,24 +137,34 @@ public class EhrStatusService {
 
     private FileStatus getFileStatus(EhrExtractStatus.GpcDocument document, List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
 
+        Optional<String> fileNameOptional = Optional.ofNullable(document.getFileName());
+        Optional<String> objectNameOptional = Optional.ofNullable(document.getObjectName());
+        Optional<EhrExtractStatus.GpcAccessDocument.SentToMhs> sentToMhsOptional = Optional.ofNullable(document.getSentToMhs());
+
         if (document.isSkeleton()) {
             return SKELETON_MESSAGE;
         }
 
-        List<String> messageIds = document.getSentToMhs().getMessageId();
-        boolean documentHasNack = acknowledgements.stream()
-            .filter(ack -> ack.getErrors() != null)
-            .anyMatch(ack -> messageIds.contains(ack.getMessageRef()));
+        if (sentToMhsOptional.isPresent()) {
+            List<String> messageIds = sentToMhsOptional.get().getMessageId();
+            boolean documentHasNack = acknowledgements.stream()
+                .filter(ack -> ack.getErrors() != null)
+                .anyMatch(ack -> messageIds.contains(ack.getMessageRef()));
 
-        if(documentHasNack) {
-            return ERROR;
+            if (documentHasNack) {
+                return ERROR;
+            }
         }
 
-        Optional<String> fileNameOptional = Optional.ofNullable(document.getFileName());
+        if (objectNameOptional.isPresent() && objectNameOptional.get().contains("AbsentAttachment")) {
+            return PLACEHOLDER;
+        }
 
-        return fileNameOptional
-            .map(filename -> filename.contains("AbsentAttachment") ? PLACEHOLDER : ORIGINAL_FILE)
-            .orElse(ORIGINAL_FILE);
+        if (fileNameOptional.isPresent() && fileNameOptional.get().contains("AbsentAttachment")) {
+            return PLACEHOLDER;
+        }
+
+        return ORIGINAL_FILE;
     }
 
     private Boolean checkForPlaceholderOrError(List<EhrStatus.AttachmentStatus> attachmentStatusList) {

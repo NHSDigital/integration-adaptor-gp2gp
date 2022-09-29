@@ -21,8 +21,6 @@ public class EhrStatus {
     @Data
     public static class AttachmentStatus {
         private List<Identifier> identifier;
-        private String url;
-        private String title;
         private FileStatus fileStatus;
     }
 }
