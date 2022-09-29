@@ -85,7 +85,7 @@ public class StructuredRecordMappingService {
             )
             .url(extractUrl(documentReference).orElse(null))
             .title(documentReference.getContentFirstRep().getAttachment().getTitle())
-            .identifiers(documentReference.getIdentifier().stream()
+            .identifier(documentReference.getIdentifier().stream()
                 .map(identifier -> Identifier.builder()
                     .system(identifier.getSystem())
                     .value(identifier.getValue())

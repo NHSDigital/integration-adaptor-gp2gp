@@ -135,7 +135,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .messageId(structuredTaskDefinition.getConversationId())
                     .title(absentAttachment.getTitle())
                     .isSkeleton(false)
-                    .identifier(absentAttachment.getIdentifiers())
+                    .identifier(absentAttachment.getIdentifier())
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
 
@@ -153,7 +153,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .messageId(structuredTaskDefinition.getConversationId())
                     .title(externalAttachment.getTitle())
                     .isSkeleton(false)
-                    .identifier(externalAttachment.getIdentifiers())
+                    .identifier(externalAttachment.getIdentifier())
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
             externalAttachments.addAll(documentsAsExternalAttachments);
@@ -171,7 +171,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .messageId(structuredTaskDefinition.getConversationId())
                     .title(absentAttachment.getTitle())
                     .isSkeleton(false)
-                    .identifier(absentAttachment.getIdentifiers())
+                    .identifier(absentAttachment.getIdentifier())
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
 
