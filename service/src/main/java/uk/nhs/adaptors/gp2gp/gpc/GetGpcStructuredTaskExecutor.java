@@ -151,6 +151,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .messageId(structuredTaskDefinition.getConversationId())
                     .isSkeleton(false)
                     .identifier(externalAttachment.getIdentifier())
+                    .fileName(externalAttachment.getFilename())
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
             externalAttachments.addAll(documentsAsExternalAttachments);

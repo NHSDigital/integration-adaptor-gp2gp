@@ -125,6 +125,7 @@ public class EhrStatusService {
                 attachmentStatusList.add(
                     EhrStatus.AttachmentStatus.builder()
                         .identifier(gpcDocument.getIdentifier())
+                        .fileName(gpcDocument.getFileName())
                         .fileStatus(getFileStatus(gpcDocument, acknowledgements))
                         .build())
             )

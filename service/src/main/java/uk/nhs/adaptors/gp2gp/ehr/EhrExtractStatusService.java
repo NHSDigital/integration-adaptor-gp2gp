@@ -51,6 +51,7 @@ public class EhrExtractStatusService {
     private static final String TASK_ID = "taskId";
     private static final String DOCUMENT_ID = "documentId";
     private static final String OBJECT_NAME = "objectName";
+    private static final String FILE_NAME = "fileName";
     private static final String MESSAGE_ID = "messageId";
     private static final String ACCESSED_AT = "accessedAt";
     private static final String RECEIVED = "received";
@@ -83,6 +84,7 @@ public class EhrExtractStatusService {
     private static final String DOCUMENT_ACCESS_AT_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + ACCESSED_AT;
     private static final String DOCUMENT_TASK_ID_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + TASK_ID;
     private static final String DOCUMENT_OBJECT_NAME_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + OBJECT_NAME;
+    private static final String DOCUMENT_FILE_NAME_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + FILE_NAME;
     private static final String DOCUMENT_MESSAGE_ID_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + MESSAGE_ID;
     private static final String DOCUMENT_BASE64_CONTENT_LENGTH = GPC_DOCUMENTS + ARRAY_REFERENCE + BASE64_CONTENT_LENGTH;
     private static final String EXTRACT_CORE_TASK_ID_PATH = EHR_EXTRACT_CORE + DOT + TASK_ID;
@@ -184,6 +186,7 @@ public class EhrExtractStatusService {
         Instant now = Instant.now();
         update.set(DOCUMENT_ACCESS_AT_PATH, now);
         update.set(DOCUMENT_TASK_ID_PATH, taskId);
+        update.set(DOCUMENT_FILE_NAME_PATH, documentName);
         update.set(DOCUMENT_OBJECT_NAME_PATH, documentName);
         update.set(DOCUMENT_MESSAGE_ID_PATH, messageId);
         update.set(DOCUMENT_BASE64_CONTENT_LENGTH, base64ContentLength);

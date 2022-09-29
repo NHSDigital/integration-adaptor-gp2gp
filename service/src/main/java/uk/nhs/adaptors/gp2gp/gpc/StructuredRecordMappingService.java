@@ -91,6 +91,7 @@ public class StructuredRecordMappingService {
                     .value(identifier.getValue())
                     .build())
                 .collect(Collectors.toList()))
+            .filename(fileName)
             .build();
     }
 

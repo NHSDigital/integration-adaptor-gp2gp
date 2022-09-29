@@ -22,6 +22,7 @@ public class EhrStatus {
     public static class AttachmentStatus {
         private List<Identifier> identifier;
         private FileStatus fileStatus;
+        private String fileName;
     }
 }
 
