@@ -136,7 +136,7 @@ public class EhrStatusService {
             .collect(Collectors.toList());
     }
 
-    private FileStatus getFileStatus(EhrExtractStatus.GpcDocument document, List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
+    public FileStatus getFileStatus(EhrExtractStatus.GpcDocument document, List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
 
         Optional<String> fileNameOptional = Optional.ofNullable(document.getFileName());
         Optional<String> objectNameOptional = Optional.ofNullable(document.getObjectName());
