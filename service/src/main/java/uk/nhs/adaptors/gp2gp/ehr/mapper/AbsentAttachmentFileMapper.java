@@ -15,9 +15,9 @@ public class AbsentAttachmentFileMapper {
 
     private static final Mustache ABSENT_ATTACHMENT_TEMPLATE = TemplateUtils.loadTemplate("absent_attachment_template.mustache");
 
-    public static String mapDataToAbsentAttachment(String title, String odsCode, String conversationId) {
+    public static String mapDataToAbsentAttachment(String originalFilename, String odsCode, String conversationId) {
         var absentAttachment = AbsentAttachmentParameters.builder()
-            .title(title)
+            .originalFilename(originalFilename)
             .odsCode(odsCode)
             .conversationId(conversationId)
             .build();

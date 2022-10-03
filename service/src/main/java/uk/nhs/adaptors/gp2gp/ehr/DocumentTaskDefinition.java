@@ -19,4 +19,8 @@ public abstract class DocumentTaskDefinition extends TaskDefinition {
      * content.attachment.title of DocumentReference qualified to be an AbsentAttachment
      */
     private final String title;
+    /**
+     * description element of DocumentReference
+     */
+    private final String originalDescription;
 }

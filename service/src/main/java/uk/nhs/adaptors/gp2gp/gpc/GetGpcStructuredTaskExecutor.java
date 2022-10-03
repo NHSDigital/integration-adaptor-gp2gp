@@ -246,6 +246,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .toOdsCode(taskDefinition.getToOdsCode())
             .fromOdsCode(taskDefinition.getFromOdsCode())
             .messageId(absentAttachment.getMessageId())
+            .originalDescription(absentAttachment.getOriginalDescription())
             .build();
     }
 
@@ -265,6 +266,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .accessDocumentUrl(externalAttachment.getUrl())
             .messageId(externalAttachment.getMessageId())
             .title(externalAttachment.getTitle())
+            .originalDescription(externalAttachment.getOriginalDescription())
             .build();
     }
 
