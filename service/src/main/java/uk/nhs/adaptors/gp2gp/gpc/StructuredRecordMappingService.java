@@ -92,6 +92,7 @@ public class StructuredRecordMappingService {
                     .build())
                 .collect(Collectors.toList()))
             .filename(fileName)
+            .originalDescription(documentReference.getDescription())
             .build();
     }
 

@@ -127,6 +127,7 @@ public class EhrStatusService {
                         .identifier(gpcDocument.getIdentifier())
                         .fileName(gpcDocument.getFileName())
                         .fileStatus(getFileStatus(gpcDocument, acknowledgements))
+                        .originalDescription(gpcDocument.getOriginalDescription())
                         .build())
             )
         );

@@ -87,6 +87,7 @@ public class EhrExtractStatus implements TimeToLive {
         private GpcAccessDocument.SentToMhs sentToMhs;
         private boolean isSkeleton;
         private List<Identifier> identifier;
+        private String originalDescription;
     }
 
     @Data
