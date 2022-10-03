@@ -1,8 +1,10 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
+import static uk.nhs.adaptors.gp2gp.e2e.model.EhrStatus.AttachmentStatus.FileStatus.PLACEHOLDER;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -17,20 +19,30 @@ import javax.jms.JMSException;
 import javax.naming.NamingException;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.hc.client5.http.ClientProtocolException;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpResponse;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.bson.Document;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.StringUtils;
 import org.xmlunit.assertj.XmlAssert;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
-
+import uk.nhs.adaptors.gp2gp.e2e.model.EhrStatus;
 
 @ExtendWith(SoftAssertionsExtension.class)
 public class EhrExtractTest {
@@ -60,6 +72,7 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_RESPONSE_HAS_MALFORMED_DATE = "9690872294";
     private static final String NHS_NUMBER_RESPONSE_MISSING_PATIENT_RESOURCE = "2906543841";
     private static final String NHS_NUMBER_MEDICUS_BASED_ON = "9302014592";
+    private static final String NHS_NUMBER_INVALID_CONTENT_TYPE_DOC = "9817280691";
 
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_WITHOUT_NHS_NUMBER_TEST_FILE = "/ehrExtractRequestWithoutNhsNumber.json";
@@ -100,6 +113,8 @@ public class EhrExtractTest {
 
     private final MhsMockRequestsJournal mhsMockRequestsJournal =
         new MhsMockRequestsJournal(getEnvVar("GP2GP_MHS_MOCK_BASE_URL", "http://localhost:8081"));
+
+    private final String gp2gpServerPort = getEnvVar("GP2GP_SERVER_PORT", "8080");
 
     private static final Map<String, String> emisPatientsNhsNumbers = Map.of(
         "PWTP2", "9726908671",
@@ -568,6 +583,91 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, nhsNumber);
+    }
+
+    @Test
+    public void When_ExtractRequestReceived_WithAttachmentNotFound_Expect_ApiHasPlaceholders() throws IOException, NamingException, JMSException {
+        String conversationId = UUID.randomUUID().toString();
+        String nhsNumber = emisPatientsNhsNumbers.get("PWTP7");
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, nhsNumber, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, nhsNumber);
+
+        EhrStatus ehrStatus = getEhrStatusForConversation(conversationId);
+
+        assertEhrStatusHasPlaceholders(ehrStatus);
+    }
+
+    @Test
+    public void When_ExtractRequestReceived_WithMissingUrl_Expect_ApiHasPlaceholders() throws IOException, NamingException, JMSException {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_THREE_SMALL_AA_DOCUMENTS, 3);
+
+        EhrStatus ehrStatus = getEhrStatusForConversation(conversationId);
+
+        assertEhrStatusHasPlaceholders(ehrStatus);
+    }
+
+    @Test
+    public void When_ExtractRequestReceived_WithInvalidContentType_Expect_ApiHasPlaceholders() throws IOException, NamingException,
+        JMSException {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_INVALID_CONTENT_TYPE_DOC, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1,  NHS_NUMBER_INVALID_CONTENT_TYPE_DOC, 1);
+    }
+
+    private void assertEhrStatusHasPlaceholders(EhrStatus ehrStatus) {
+        List<EhrStatus.AttachmentStatus> placeholders = ehrStatus.getAttachmentStatus().stream()
+            .filter(status -> status.getFileStatus().equals(PLACEHOLDER))
+            .collect(Collectors.toList());
+
+        boolean hasAbsentAttachmentInFilename = placeholders.stream()
+            .allMatch(status -> status.getFileName().startsWith("AbsentAttachment"));
+
+        boolean hasPlainTextSuffix = placeholders.stream()
+            .allMatch(status -> status.getFileName().endsWith(".txt"));
+
+        assertThat(placeholders.isEmpty())
+            .as("Migration should have placeholders")
+            .isFalse();
+
+        assertThat(hasAbsentAttachmentInFilename)
+            .as("A placeholder's filename should be prepended with AbsentAttachment")
+            .isTrue();
+
+        assertThat(hasPlainTextSuffix)
+            .as("A placeholder should have a plain text suffix")
+            .isTrue();
+    }
+
+    private EhrStatus getEhrStatusForConversation(String conversationId) throws IOException {
+        try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpGet httpGet = new HttpGet("http://localhost:".concat(gp2gpServerPort).concat("/ehr-status/").concat(conversationId));
+
+            String response = httpClient.execute(httpGet, httpResponse -> {
+                int statusCode = httpResponse.getCode();
+                assertThat(statusCode).isEqualTo(200);
+
+                HttpEntity entity = httpResponse.getEntity();
+
+                try {
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } catch (ParseException e) {
+                    throw new ClientProtocolException(e);
+                }
+            });
+
+            ObjectMapper objectMapper = new ObjectMapper()
+                .registerModule(new JavaTimeModule());
+
+            return objectMapper.readValue(response, EhrStatus.class);
+        }
     }
 
     private void assertMultipleDocumentsRetrieved(String conversationId, int documentCount) {
