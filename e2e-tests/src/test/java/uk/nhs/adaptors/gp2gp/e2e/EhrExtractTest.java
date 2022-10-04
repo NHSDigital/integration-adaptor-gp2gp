@@ -114,7 +114,7 @@ public class EhrExtractTest {
     private final MhsMockRequestsJournal mhsMockRequestsJournal =
         new MhsMockRequestsJournal(getEnvVar("GP2GP_MHS_MOCK_BASE_URL", "http://localhost:8081"));
 
-    private final String gp2gpServerPort = getEnvVar("GP2GP_SERVER_PORT", "8080");
+    private final String gp2gpBaseUrl = getEnvVar("GP2GP_BASE_URL", "http://localhost:8080");
 
     private static final Map<String, String> emisPatientsNhsNumbers = Map.of(
         "PWTP2", "9726908671",
@@ -620,6 +620,10 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         assertHappyPathWithAbsentAttachments(conversationId, FROM_ODS_CODE_1,  NHS_NUMBER_INVALID_CONTENT_TYPE_DOC, 1);
+
+        EhrStatus ehrStatus = getEhrStatusForConversation(conversationId);
+
+        assertEhrStatusHasPlaceholders(ehrStatus);
     }
 
     private void assertEhrStatusHasPlaceholders(EhrStatus ehrStatus) {
@@ -642,7 +646,7 @@ public class EhrExtractTest {
 //        assertThat(hasAbsentAttachmentInFilename)
 //            .as("A placeholder's filename should be prepended with AbsentAttachment")
 //            .isTrue();
-
+//
 //        assertThat(hasPlainTextSuffix)
 //            .as("A placeholder should have a plain text suffix")
 //            .isTrue();
@@ -650,7 +654,7 @@ public class EhrExtractTest {
 
     private EhrStatus getEhrStatusForConversation(String conversationId) throws IOException {
         try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpGet httpGet = new HttpGet("http://localhost:".concat(gp2gpServerPort).concat("/ehr-status/").concat(conversationId));
+            HttpGet httpGet = new HttpGet(gp2gpBaseUrl.concat("/ehr-status/").concat(conversationId));
 
             String response = httpClient.execute(httpGet, httpResponse -> {
                 int statusCode = httpResponse.getCode();
