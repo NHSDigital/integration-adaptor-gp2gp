@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class EhrStatus {
     private List<AttachmentStatus> attachmentStatus;
-    private List<ReceivedAck> receivedAcknowledgements;
+    private List<ReceivedAck> migrationLog;
     private MigrationStatus migrationStatus;
     private Instant originalRequestDate;
 

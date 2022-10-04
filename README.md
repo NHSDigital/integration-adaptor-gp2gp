@@ -197,19 +197,19 @@ An API is provided to query the status of any transfer to an incumbent.
 Requests can be made to the following endpoint using the *Conversation ID (SSP-TraceID)* of the transfer:
 
 ```http request
-    {location of gp2gp service}/ehr-status/{{conversationId}} [GET]
+    {location of gp2gp service}/ehr-status/{conversationId} [GET]
 ```
 
 The response will contain the following fields:
 
 ### EhrStatus
 
-| Field name               | Description                                                                                                     | Data type                                        | Possible values                                                                                                  | nullable |
-|--------------------------|-----------------------------------------------------------------------------------------------------------------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------|----------|
-| originalRequestDate      | The date and time of the original request                                                                       | ISO-8601                                         |                                                                                                                  | False    |
-| migrationStatus          | The current state of the transfer, a status of COMPLETE_WITH_ISSUES is given if placeholder documents were sent | string / enum                                    | COMPLETE <br/><br/>COMPLETE_WITH_ISSUES <br/><br/> FAILED_NME <br/><br/> FAILED_INCUMBENT <br/><br/> IN_PROGRESS | False    |
-| attachmentStatus         | An array of statuses for each document sent during the transfer                                                 | Array of **AttachmentStatus** (See below)        |                                                                                                                  | False    |
-| receivedAcknowledgements | An array containing details of acknowledgments received during the transfer                                     | Array of **ReceivedAcknowledgement** (See below) |                                                                                                                  | False    |
+| Field name          | Description                                                                                                     | Data type                                        | Possible values                                                                                                  | nullable |
+|---------------------|-----------------------------------------------------------------------------------------------------------------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------|----------|
+| originalRequestDate | The date and time of the original request                                                                       | ISO-8601                                         |                                                                                                                  | False    |
+| migrationStatus     | The current state of the transfer, a status of COMPLETE_WITH_ISSUES is given if placeholder documents were sent | string / enum                                    | COMPLETE <br/><br/>COMPLETE_WITH_ISSUES <br/><br/> FAILED_NME <br/><br/> FAILED_INCUMBENT <br/><br/> IN_PROGRESS | False    |
+| attachmentStatus    | An array of statuses for each document sent during the transfer                                                 | Array of **AttachmentStatus** (See below)        |                                                                                                                  | False    |
+| migrationLog        | An array containing details of acknowledgments received during the transfer                                     | Array of **ReceivedAcknowledgement** (See below) |                                                                                                                  | False    |
 
 <br/>
 

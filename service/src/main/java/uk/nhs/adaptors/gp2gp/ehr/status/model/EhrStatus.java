@@ -13,7 +13,7 @@ import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 public class EhrStatus {
 
     private List<AttachmentStatus> attachmentStatus;
-    private List<EhrExtractStatus.EhrReceivedAcknowledgement> receivedAcknowledgements;
+    private List<EhrExtractStatus.EhrReceivedAcknowledgement> migrationLog;
     private MigrationStatus migrationStatus;
     private Instant originalRequestDate;
 

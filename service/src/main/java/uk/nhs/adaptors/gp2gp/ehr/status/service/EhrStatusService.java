@@ -47,7 +47,7 @@ public class EhrStatusService {
         return Optional.of(
             EhrStatus.builder()
                 .attachmentStatus(attachmentStatusList)
-                .receivedAcknowledgements(receivedAcknowledgements)
+                .migrationLog(receivedAcknowledgements)
                 .migrationStatus(evaluateMigrationStatus(ehrExtractStatus, attachmentStatusList))
                 .originalRequestDate(ehrExtractStatus.getCreated())
                 .build());
