@@ -51,8 +51,10 @@ public class EhrExtractAckHandlerTest {
     private static final String CONVERSATION_ID =  "mock-id";
     private static final String EHR_MESSAGE_REF = "mock-ehr-message-ref";
     private static final String RANDOM_MESSAGE_REF = "mock-random-message-ref";
-    private static final String ERROR_CODE_ELEMENT_99 = "<code code=\"99\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.101\" displayName=\"Unexpected condition\"/>";
-    private static final String ERROR_CODE_ELEMENT_18 = "<code code=\"18\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.101\" displayName=\"Request message not "
+    private static final String ERROR_CODE_ELEMENT_99 =
+        "<code code=\"99\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.101\" displayName=\"Unexpected condition\"/>";
+    private static final String ERROR_CODE_ELEMENT_18 =
+        "<code code=\"18\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.101\" displayName=\"Request message not "
         + "well-formed or not able to be processed\"/>";
 
     @Mock
@@ -270,8 +272,7 @@ public class EhrExtractAckHandlerTest {
 
         ehrExtractAckHandler.handle(CONVERSATION_ID, document);
 
-        verify(ehrExtractStatusService).saveAckForConversation(eq(CONVERSATION_ID),any());
-
+        verify(ehrExtractStatusService).saveAckForConversation(eq(CONVERSATION_ID), any());
     }
 
     @Test

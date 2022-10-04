@@ -319,7 +319,8 @@ public class EhrExtractStatusService {
 
         Update update = updateBuilder.value(ack);
 
-        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query, update, returningUpdatedRecordOption, EhrExtractStatus.class);
+        EhrExtractStatus ehrExtractStatus =
+            mongoTemplate.findAndModify(query, update, returningUpdatedRecordOption, EhrExtractStatus.class);
 
         if (ehrExtractStatus == null) {
             throw new GeneralProcessingException("Unable to save received ack to database");

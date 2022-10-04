@@ -1,5 +1,15 @@
 package uk.nhs.adaptors.gp2gp.ehr.status.service;
 
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ERROR;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ORIGINAL_FILE;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.SKELETON_MESSAGE;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.COMPLETE;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.COMPLETE_WITH_ISSUES;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_INCUMBENT;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_NME;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.IN_PROGRESS;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +25,6 @@ import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.*;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.*;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -92,15 +100,15 @@ public class EhrStatusService {
         } else if (
 
             // if a NACK or rejected message is received before the continue message these fields won't be populated
-//            ackPendingOptional
-//                .map(ackPending -> ackPending.getTypeCode().equals("AA"))
-//                .orElse(false)
-//
-//                && ackToRequestorOptional
-//                .map(ackToRequester -> ackToRequester.getTypeCode().equals("AA"))
-//                .orElse(false)
-//
-                errorOptional.isEmpty()
+            //            ackPendingOptional
+            //                .map(ackPending -> ackPending.getTypeCode().equals("AA"))
+            //                .orElse(false)
+            //
+            //                && ackToRequestorOptional
+            //                .map(ackToRequester -> ackToRequester.getTypeCode().equals("AA"))
+            //                .orElse(false)
+            //
+            errorOptional.isEmpty()
 
                 && receivedAcknowledgementOptional
                 .map(acknowledgement ->
@@ -137,7 +145,8 @@ public class EhrStatusService {
             .collect(Collectors.toList());
     }
 
-    public FileStatus getFileStatus(EhrExtractStatus.GpcDocument document, List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
+    public FileStatus getFileStatus(EhrExtractStatus.GpcDocument document,
+        List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
 
         Optional<String> fileNameOptional = Optional.ofNullable(document.getFileName());
         Optional<String> objectNameOptional = Optional.ofNullable(document.getObjectName());
@@ -173,7 +182,7 @@ public class EhrStatusService {
 
         return attachmentStatusList.stream()
             .anyMatch(attachmentList ->
-                attachmentList.getFileStatus().equals(PLACEHOLDER) ||
-                attachmentList.getFileStatus().equals(ERROR));
+                attachmentList.getFileStatus().equals(PLACEHOLDER)
+                    || attachmentList.getFileStatus().equals(ERROR));
     }
 }

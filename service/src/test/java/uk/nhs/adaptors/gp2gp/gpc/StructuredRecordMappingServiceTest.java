@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
