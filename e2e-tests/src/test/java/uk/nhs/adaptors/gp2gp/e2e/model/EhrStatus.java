@@ -40,6 +40,7 @@ public class EhrStatus {
         private List<Identifier> identifier;
         private FileStatus fileStatus;
         private String fileName;
+        private String originalDescription;
 
         @Data
         public static class Identifier {
