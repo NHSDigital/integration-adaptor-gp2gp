@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -174,6 +176,7 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class EhrReceivedAcknowledgement {
+        @JsonIgnore
         private String rootId;
         private Instant received;
         private Instant conversationClosed;
