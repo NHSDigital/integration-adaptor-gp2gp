@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 import static uk.nhs.adaptors.gp2gp.e2e.model.EhrStatus.AttachmentStatus.FileStatus.PLACEHOLDER;
@@ -24,7 +23,6 @@ import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.HttpResponse;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.assertj.core.api.SoftAssertions;
