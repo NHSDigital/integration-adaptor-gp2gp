@@ -30,6 +30,9 @@ import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrStatusService {
 
+    private static final String ACK_TYPE_CODE = "AA";
+    private static final String NACK_TYPE_CODE = "AE";
+
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
     public Optional<EhrStatus> getEhrStatus(String conversationId) {
@@ -69,11 +72,11 @@ public class EhrStatusService {
 
         if (
             ackPendingOptional
-                .map(ackPending -> ackPending.getTypeCode().equals("AE"))
+                .map(ackPending -> ackPending.getTypeCode().equals(NACK_TYPE_CODE))
                 .orElse(false)
 
                 && ackToRequestorOptional
-                .map(ackToRequester -> ackToRequester.getTypeCode().equals("AE"))
+                .map(ackToRequester -> ackToRequester.getTypeCode().equals(NACK_TYPE_CODE))
                 .orElse(false)
 
                 && errorOptional.isPresent()) {
@@ -81,11 +84,11 @@ public class EhrStatusService {
             return FAILED_NME;
         } else if (
             ackPendingOptional
-                .map(ackPending -> ackPending.getTypeCode().equals("AA"))
+                .map(ackPending -> ackPending.getTypeCode().equals(ACK_TYPE_CODE))
                 .orElse(false)
 
                 && ackToRequestorOptional
-                .map(ackToRequester -> ackToRequester.getTypeCode().equals("AA"))
+                .map(ackToRequester -> ackToRequester.getTypeCode().equals(ACK_TYPE_CODE))
                 .orElse(false)
 
                 && errorOptional.isEmpty()
@@ -99,15 +102,6 @@ public class EhrStatusService {
             return checkForPlaceholderOrError(attachmentStatusList) ? COMPLETE_WITH_ISSUES : COMPLETE;
         } else if (
 
-            // if a NACK or rejected message is received before the continue message these fields won't be populated
-            //            ackPendingOptional
-            //                .map(ackPending -> ackPending.getTypeCode().equals("AA"))
-            //                .orElse(false)
-            //
-            //                && ackToRequestorOptional
-            //                .map(ackToRequester -> ackToRequester.getTypeCode().equals("AA"))
-            //                .orElse(false)
-            //
             errorOptional.isEmpty()
 
                 && receivedAcknowledgementOptional
@@ -167,22 +161,24 @@ public class EhrStatusService {
             }
         }
 
-        if (objectNameOptional.isPresent() && objectNameOptional.get().contains("AbsentAttachment")) {
-            return PLACEHOLDER;
-        }
+        boolean isPlaceholder = hasAbsentAttachmentPrefix(objectNameOptional) || hasAbsentAttachmentPrefix(fileNameOptional);
 
-        if (fileNameOptional.isPresent() && fileNameOptional.get().contains("AbsentAttachment")) {
+        if (isPlaceholder) {
             return PLACEHOLDER;
         }
 
         return ORIGINAL_FILE;
     }
 
-    private Boolean checkForPlaceholderOrError(List<EhrStatus.AttachmentStatus> attachmentStatusList) {
+    private boolean checkForPlaceholderOrError(List<EhrStatus.AttachmentStatus> attachmentStatusList) {
 
         return attachmentStatusList.stream()
             .anyMatch(attachmentList ->
                 attachmentList.getFileStatus().equals(PLACEHOLDER)
                     || attachmentList.getFileStatus().equals(ERROR));
+    }
+
+    private boolean hasAbsentAttachmentPrefix(Optional<String> filenameOptional) {
+        return filenameOptional.isPresent() && filenameOptional.get().startsWith("AbsentAttachment");
     }
 }
