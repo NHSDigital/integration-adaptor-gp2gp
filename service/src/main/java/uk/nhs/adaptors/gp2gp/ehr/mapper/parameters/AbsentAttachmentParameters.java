@@ -7,7 +7,7 @@ import lombok.Getter;
 @Builder
 public class AbsentAttachmentParameters {
 
-    private String title;
+    private String originalFilename;
     private String odsCode;
     private String conversationId;
 

@@ -110,7 +110,10 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .fileName(fileName)
                     .accessedAt(now)
                     .taskId(getDocumentTaskDefinition.getTaskId())
-                    .messageId(messageId).build());
+                    .messageId(messageId)
+                    .isSkeleton(true)
+                    .identifier(null)
+                    .build());
 
                 ehrExtractXml = structuredRecordMappingService
                     .buildSkeletonEhrExtractXml(structuredTaskDefinition, structuredRecord, documentId);
@@ -128,7 +131,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .objectName(null)
                     .accessedAt(now)
                     .taskId(structuredTaskDefinition.getTaskId())
-                    .messageId(structuredTaskDefinition.getConversationId()).build())
+                    .messageId(structuredTaskDefinition.getConversationId())
+                    .isSkeleton(false)
+                    .identifier(absentAttachment.getIdentifier())
+                    .originalDescription(absentAttachment.getOriginalDescription())
+                    .build())
                 .forEach(ehrStatusGpcDocuments::add);
 
             documentsAsExternalAttachments = documentsAsExternalAttachments.stream()
@@ -142,7 +149,12 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .objectName(null)
                     .accessedAt(now)
                     .taskId(structuredTaskDefinition.getTaskId())
-                    .messageId(structuredTaskDefinition.getConversationId()).build())
+                    .messageId(structuredTaskDefinition.getConversationId())
+                    .isSkeleton(false)
+                    .identifier(externalAttachment.getIdentifier())
+                    .fileName(externalAttachment.getFilename())
+                    .originalDescription(externalAttachment.getOriginalDescription())
+                    .build())
                 .forEach(ehrStatusGpcDocuments::add);
             externalAttachments.addAll(documentsAsExternalAttachments);
 
@@ -156,7 +168,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .objectName(null)
                     .accessedAt(now)
                     .taskId(structuredTaskDefinition.getTaskId())
-                    .messageId(structuredTaskDefinition.getConversationId()).build())
+                    .messageId(structuredTaskDefinition.getConversationId())
+                    .isSkeleton(false)
+                    .identifier(absentAttachment.getIdentifier())
+                    .originalDescription(absentAttachment.getOriginalDescription())
+                    .build())
                 .forEach(ehrStatusGpcDocuments::add);
 
             ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
@@ -230,6 +246,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .toOdsCode(taskDefinition.getToOdsCode())
             .fromOdsCode(taskDefinition.getFromOdsCode())
             .messageId(absentAttachment.getMessageId())
+            .originalDescription(absentAttachment.getOriginalDescription())
             .build();
     }
 
@@ -249,6 +266,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .accessDocumentUrl(externalAttachment.getUrl())
             .messageId(externalAttachment.getMessageId())
             .title(externalAttachment.getTitle())
+            .originalDescription(externalAttachment.getOriginalDescription())
             .build();
     }
 

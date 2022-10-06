@@ -61,5 +61,9 @@ public class OutboundMessage {
         private String description;
         @JsonIgnore
         private String url;
+        @JsonIgnore
+        private List<EhrStatus.AttachmentStatus.Identifier> identifier;
+        @JsonIgnore
+        private String originalDescription;
     }
 }

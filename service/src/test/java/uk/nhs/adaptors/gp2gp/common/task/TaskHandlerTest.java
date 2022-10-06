@@ -23,6 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
+import uk.nhs.adaptors.gp2gp.common.exception.GeneralProcessingException;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
@@ -265,6 +266,18 @@ public class TaskHandlerTest {
         assertThat(result).isFalse();
 
         verify(processingErrorHandler).handleRequestError(any());
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_Handle_WithExecuteThrowsGeneralProcessingException_Expect_ErrorHandled() {
+        setUpContinueMessage();
+        doThrow(new GeneralProcessingException("test exception")).when(taskExecutor).execute(any());
+
+        var result = taskHandler.handle(message);
+        assertThat(result).isFalse();
+
+        verify(processingErrorHandler).handleGeneralProcessingError(any());
     }
 
     private void setupAckMessage(String typeCode) throws JMSException {

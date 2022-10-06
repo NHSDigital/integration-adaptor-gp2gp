@@ -33,6 +33,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
+import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 @ExtendWith(MockitoExtension.class)
@@ -60,6 +61,7 @@ class StructuredRecordMappingServiceTest {
 
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_1 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
+        "111_new_doc_manifest_id.txt", List.of(),
         buildAttachmentDescription(
             "111_new_doc_manifest_id.txt", "text/plain", false,
             false, true, NEW_DOC_MANIFEST_ID_1
@@ -67,6 +69,7 @@ class StructuredRecordMappingServiceTest {
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_2 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, null,
+        "222_new_doc_manifest_id.html", List.of(),
         buildAttachmentDescription(
             "222_new_doc_manifest_id.html", "text/html", false,
             false, true, NEW_DOC_MANIFEST_ID_2
@@ -74,6 +77,7 @@ class StructuredRecordMappingServiceTest {
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_1 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, null, "some title",
+        "AbsentAttachment111_new_doc_manifest_id.txt", List.of(),
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
             false, true, NEW_DOC_MANIFEST_ID_1
@@ -81,6 +85,7 @@ class StructuredRecordMappingServiceTest {
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_2 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
+        "AbsentAttachment111_new_doc_manifest_id.txt", List.of(),
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
             false, true, NEW_DOC_MANIFEST_ID_1
@@ -205,13 +210,15 @@ class StructuredRecordMappingServiceTest {
     }
 
     private static OutboundMessage.ExternalAttachment buildExternalAttachment(String documentID, String messageID, String url, String title,
-        OutboundMessage.AttachmentDescription description) {
+        String filename, List<Identifier> identifier, OutboundMessage.AttachmentDescription description) {
         return OutboundMessage.ExternalAttachment.builder()
             .title(title)
             .documentId(documentID)
             .messageId(messageID)
             .description(description.toString())
             .url(url)
+            .filename(filename)
+            .identifier(identifier)
             .build();
     }
 

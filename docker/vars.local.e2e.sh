@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export GP2GP_SERVER_PORT="8080"
+export GP2GP_BASE_URL="http://gp2gp:$GP2GP_SERVER_PORT"
 export GP2GP_AMQP_BROKERS="amqp://activemq:5672"
 export GP2GP_MONGO_URI="mongodb://mongodb:27017"
 export GP2GP_MONGO_DATABASE_NAME="gp2gp"

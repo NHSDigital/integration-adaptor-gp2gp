@@ -1,9 +1,13 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+
+import org.springframework.stereotype.Component;
+
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
@@ -15,9 +19,6 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
 
 @Component
 @AllArgsConstructor

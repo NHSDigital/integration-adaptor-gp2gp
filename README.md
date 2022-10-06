@@ -190,6 +190,70 @@ Run `uk.nhs.adaptors.gp2gp.Gp2gpApplication` in your IDE or `java -jar build/lib
 
 ### Using Envfile for IntelliJ
 
+## How to query the EHR Status API
+
+An API is provided to query the status of any transfer to an incumbent.
+
+Requests can be made to the following endpoint using the *Conversation ID (SSP-TraceID)* of the transfer:
+
+```http request
+    {location of gp2gp service}/ehr-status/{conversationId} [GET]
+```
+
+The response will contain the following fields:
+
+### EhrStatus
+
+| Field name          | Description                                                                                                     | Data type                                        | Possible values                                                                                                  | nullable |
+|---------------------|-----------------------------------------------------------------------------------------------------------------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------|----------|
+| originalRequestDate | The date and time of the original request                                                                       | ISO-8601                                         |                                                                                                                  | False    |
+| migrationStatus     | The current state of the transfer, a status of COMPLETE_WITH_ISSUES is given if placeholder documents were sent | string / enum                                    | COMPLETE <br/><br/>COMPLETE_WITH_ISSUES <br/><br/> FAILED_NME <br/><br/> FAILED_INCUMBENT <br/><br/> IN_PROGRESS | False    |
+| attachmentStatus    | An array of statuses for each document sent during the transfer                                                 | Array of **AttachmentStatus** (See below)        |                                                                                                                  | False    |
+| migrationLog        | An array containing details of acknowledgments received during the transfer                                     | Array of **ReceivedAcknowledgement** (See below) |                                                                                                                  | False    |
+
+<br/>
+
+### Subtypes
+
+#### AttachmentStatus
+
+| Field name          | Description                                                                                                                                                                                                                                                                           | Data type                           | Possible values                                     | Nullable |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|-----------------------------------------------------|----------|
+| identifier          | An array of identifiers taken from the `identifier` element of the GP Connect `DocumentReference`                                                                                                                                                                                     | Array of **Identifier** (see below) |                                                     | False    |  
+| fileStatus          | The status of the document sent to the winning practice (can be used to identify if a placeholder document was sent)                                                                                                                                                                  | string / enum                       | PLACEHOLDER <br/><br/>ORIGINAL_FILE <br/><br/>ERROR | False    |  
+| filename            | The filename sent to winning practice in the GP2GP message                                                                                                                                                                                                                            | string                              |                                                     | False    |   
+| originalDescription | The description of the file as given by the `description` element of the GP Connect `DocumentReference` resource.<br/><br/> This is inserted into the GP2GP placeholder document as the original filename and suffix. So should be of the form *filename.suffix*, e.g. *referral.txt* | string                              |                                                     | True     |
+
+<br/>
+
+#### Identifier
+
+| Field name | Description                                                               | Data type | Nullable |
+|------------|---------------------------------------------------------------------------|-----------|----------|
+| system     | The `system` element of the Gp Connect `DocumentReference.identifier`     | string    | False    |    
+| value      | The `identifier` element of the Gp Connect `DocumentReference.identifier` | string    | False    |
+
+
+<br/>
+
+#### ReceivedAcknowledgement
+
+| Field name         | Description                                                                                                | Data type                      | Nullable |
+|--------------------|------------------------------------------------------------------------------------------------------------|--------------------------------|----------|
+| received           | The date and time the acknowledgment was received                                                          | ISO-8601                       | False    |
+| conversationClosed | If the acknowledgement ended the transfer, the date and time the conversation was closed can be found here | ISO-8601                       | True     |
+| errors             | An array of errors which will be populated in the case of a negative / rejected acknowledgement            | Array of **Error** (see below) | True     |      
+| messageRef         | the Message ID of the message that has been acknowledged                                                   | string                         | False    |   
+
+<br/>
+
+#### Error
+
+| Field name | Description                                        | Data type | Nullable |
+|------------|----------------------------------------------------|-----------|----------|
+| code       | The GP2GP response code from the negative response | string    | False    |
+| display    | The GP2GP response text from the negative response | string    | False    | 
+
 ## How to run tests
 
 **Warning**: Gradle uses a [Build Cache](https://docs.gradle.org/current/userguide/build_cache.html) to re-use compile and

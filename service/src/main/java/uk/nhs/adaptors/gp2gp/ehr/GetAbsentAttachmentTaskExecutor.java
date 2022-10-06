@@ -42,7 +42,7 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
         var messageId = taskDefinition.getMessageId();
 
         var fileContent = Base64Utils.toBase64String(AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
-            taskDefinition.getTitle(),
+            taskDefinition.getOriginalDescription(),
             taskDefinition.getToOdsCode(),
             taskDefinition.getConversationId()
         ));

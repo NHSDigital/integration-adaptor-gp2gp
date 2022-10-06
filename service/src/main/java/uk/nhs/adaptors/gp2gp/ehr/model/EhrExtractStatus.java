@@ -1,19 +1,21 @@
 package uk.nhs.adaptors.gp2gp.ehr.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.Instant;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.time.Instant;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
+import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 
 @CompoundIndexes({
     @CompoundIndex(
@@ -46,6 +48,7 @@ public class EhrExtractStatus implements TimeToLive {
     private Error error;
     private Instant messageTimestamp;
     private String ehrExtractMessageId;
+    private AckHistory ackHistory;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
         this.created = created;
@@ -84,6 +87,9 @@ public class EhrExtractStatus implements TimeToLive {
         private String taskId;
         private String messageId;
         private GpcAccessDocument.SentToMhs sentToMhs;
+        private boolean isSkeleton;
+        private List<Identifier> identifier;
+        private String originalDescription;
     }
 
     @Data
@@ -170,6 +176,7 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class EhrReceivedAcknowledgement {
+        @JsonIgnore
         private String rootId;
         private Instant received;
         private Instant conversationClosed;
@@ -184,6 +191,14 @@ public class EhrExtractStatus implements TimeToLive {
             private String code;
             private String display;
         }
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
+    public static class AckHistory {
+        private List<EhrReceivedAcknowledgement> acks;
     }
 
     @Data
