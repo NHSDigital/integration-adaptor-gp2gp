@@ -1,9 +1,9 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.9'
+	id 'org.springframework.boot' version '2.7.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id "checkstyle"
-	id "com.github.spotbugs" version "4.5.0"
+	id "com.github.spotbugs" version "5.0.12"
 	id "io.freefair.lombok" version "5.3.0"
 	id 'jacoco'
 }
@@ -23,6 +23,10 @@ lombok {
 	config['lombok.log.fieldName'] = 'LOGGER'
 }
 
+checkstyle {
+	toolVersion '8.38'
+}
+
 repositories {
 	mavenCentral()
 }
@@ -33,6 +37,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
+
+	implementation 'org.yaml:snakeyaml:1.33'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
 
 	// WebClient
 	implementation ('org.springframework.boot:spring-boot-starter-webflux:2.6.7') {
@@ -62,7 +69,7 @@ dependencies {
 	}
 
 	// Utils
-	implementation 'org.apache.commons:commons-lang3:3.11'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
 	implementation 'com.github.spullara.mustache.java:compiler:0.9.5'
 	implementation 'org.apache.tika:tika-core:1.28.4'
@@ -79,6 +86,8 @@ dependencies {
 	testImplementation 'org.awaitility:awaitility:4.0.3'
 	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.0'
 	testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.27.2'
+
+	spotbugs 'com.github.spotbugs:spptbugs:4.7.3'
 
 	constraints {
 		implementation('org.bouncycastle:bcprov-jdk15on:1.69') {
@@ -104,6 +113,15 @@ dependencies {
 		}
 		implementation('com.azure:azure-core-http-netty:1.9.1') {
 			because 'to fix SNYK-JAVA-IONETTY-1083991'
+		}
+		implementation('org.apache.commons:commons-text:1.10.0') {
+			because 'to fix SNYK-JAVA-ORGAPACHECOMMONS-3043138'
+		}
+		implementation('org.yaml:snakeyaml:1.33') {
+			because 'to fix SNYK-JAVA-ORGYAML-3016891, SNYK-JAVA-ORGYAML-3016889, SNYK-JAVA-ORGYAML-3016888, SNYK-JAVA-ORGYAML-2806360'
+		}
+		implementation('com.fasterxml.jackson.core:jackson-databind:2.13.4.2') {
+			because 'to fix SNYK-JAVA-COMFASTERXMLJACKSONCORE-3038426'
 		}
 	}
 }
