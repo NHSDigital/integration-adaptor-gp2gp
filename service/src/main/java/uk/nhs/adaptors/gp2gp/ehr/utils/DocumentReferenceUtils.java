@@ -21,6 +21,7 @@ public final class DocumentReferenceUtils {
     // but I see no way of changing order of existing file extensions
     // Because of that all extensions have been copied from the original tika project
     // https://raw.githubusercontent.com/apache/tika/master/tika-core/src/main/resources/org/apache/tika/mime/tika-mimetypes.xml
+    // and new mime types added as necessary
     private static final MimeTypes MIME_TYPES = MimeTypes.getDefaultMimeTypes();
 
     public static Attachment extractAttachment(DocumentReference documentReference) {

@@ -675,15 +675,18 @@
 
 	<mime-type type="application/pgp-encrypted">
 		<alias type="application/pgp"/>
+		<alias type="application/pgp-signature"/>
+		<alias type="application/pgp-keys"/>
+		<alias type="application/x-pgp-plugin"/>
 		<glob pattern="*.pgp"/>
 	</mime-type>
 
-	<mime-type type="application/pgp-keys"/>
+<!--	<mime-type type="application/pgp-keys"/>-->
 
-	<mime-type type="application/pgp-signature">
-		<glob pattern="*.asc"/>
-		<glob pattern="*.sig"/>
-	</mime-type>
+<!--	<mime-type type="application/pgp-signature">-->
+<!--		<glob pattern="*.asc"/>-->
+<!--		<glob pattern="*.sig"/>-->
+<!--	</mime-type>-->
 
 	<mime-type type="application/pics-rules">
 		<glob pattern="*.prf"/>
@@ -691,12 +694,18 @@
 	<mime-type type="application/pidf+xml"/>
 	<mime-type type="application/pidf-diff+xml"/>
 	<mime-type type="application/pkcs10">
+		<alias type="application/x-pkcs10"/>
 		<glob pattern="*.p10"/>
 	</mime-type>
 
 	<mime-type type="application/pkcs7-mime">
+		<alias type="application/x-pkcs7-mime"/>
 		<glob pattern="*.p7m"/>
 		<glob pattern="*.p7c"/>
+	</mime-type>
+
+	<mime-type type="application/x-pkcs7-signature">
+		<glob pattern="*.p7a"/>
 	</mime-type>
 
 	<mime-type type="application/pkcs7-signature">
@@ -735,9 +744,6 @@
 		</magic>
 	</mime-type>
 
-	<mime-type type="application/pkix-cert">
-		<glob pattern="*.cer"/>
-	</mime-type>
 	<mime-type type="application/pkix-crl">
 		<glob pattern="*.crl"/>
 	</mime-type>
@@ -844,6 +850,7 @@
 	<mime-type type="application/rtf">
 		<_comment>Rich Text Format File</_comment>
 		<alias type="text/rtf"/>
+		<alias type="application/x-rtf"/>
 		<magic priority="50">
 			<match value="{\\rtf" type="string" offset="0"/>
 		</magic>
@@ -1930,6 +1937,7 @@
 
 	<mime-type type="application/vnd.ms-outlook">
 		<_comment>Microsoft Outlook Message</_comment>
+		<alias type="application/msoutlook"/>
 		<glob pattern="*.msg" />
 		<sub-class-of type="application/x-tika-msoffice"/>
 	</mime-type>
@@ -2501,6 +2509,7 @@
 		<magic priority="50">
 			<match value=".RMF" type="string" offset="0" />
 		</magic>
+		<alias type="audio/vnd.rn-realaudio"/>
 		<glob pattern="*.rm"/>
 	</mime-type>
 
@@ -4111,8 +4120,10 @@
 	</mime-type>
 
 	<mime-type type="application/x-netcdf">
-		<glob pattern="*.nc"/>
+		<alias type="application/cdf"/>
+		<alias type="application/x-cdf"/>
 		<glob pattern="*.cdf"/>
+		<glob pattern="*.nc"/>
 		<magic priority="50">
 			<match value="CDF\001" type="string" offset="0" />
 			<match value="CDF\002" type="string" offset="0" />
@@ -4126,6 +4137,7 @@
 		</magic>
 	</mime-type>
 	<mime-type type="application/x-pkcs12">
+		<alias type="application/pkcs-12"/>
 		<glob pattern="*.p12"/>
 		<glob pattern="*.pfx"/>
 	</mime-type>
@@ -4631,6 +4643,8 @@
 	<mime-type type="application/x-x509-cert">
 		<alias type="application/x-x509-ca-cert"/>
 		<alias type="application/x-x509-user-cert"/>
+		<alias type="application/pkix-cert"/>
+		<glob pattern="*.cer"/>
 		<glob pattern="*.crt"/>
 	</mime-type>
 	<mime-type type="application/x-x509-cert;format=pem">
@@ -4761,6 +4775,9 @@
 		<tika:uti>public.xml</tika:uti>
 		<alias type="text/xml"/>
 		<alias type="application/x-xml"/>
+		<alias type="application/x-hl7"/>
+		<alias type="application/hl7-v2"/>
+		<alias type="application/hl7-v2+xml"/>
 		<magic priority="50">
 			<match value="&lt;?xml" type="string" offset="0"/>
 			<match value="&lt;?XML" type="string" offset="0"/>
@@ -4838,6 +4855,8 @@
 		<tika:link>http://en.wikipedia.org/wiki/ZIP_(file_format)</tika:link>
 		<tika:uti>com.pkware.zip-archive</tika:uti>
 		<alias type="application/x-zip-compressed"/>
+		<alias type="multipart/x-zip"/>
+		<alias type="application/x-compressed"/>
 		<magic priority="50">
 			<match value="PK\003\004" type="string" offset="0"/>
 			<match value="PK\005\006" type="string" offset="0"/>
@@ -5356,6 +5375,7 @@
 		<alias type="audio/x-wav"/>
 		<alias type="audio/wave"/>
 		<alias type="audio/wav"/>
+		<alias type="audio/x-pn-wav"/>
 		<acronym>WAV</acronym>
 		<magic priority="20">
 			<match value="RIFF....WAVE" type="string" offset="0"
@@ -5404,6 +5424,7 @@
 	<mime-type type="image/bmp">
 		<alias type="image/x-bmp"/>
 		<alias type="image/x-ms-bmp"/>
+		<alias type="image/x-windows-bmp"/>
 		<acronym>BMP</acronym>
 		<_comment>Windows bitmap</_comment>
 		<tika:link>http://en.wikipedia.org/wiki/BMP_file_format</tika:link>
@@ -5978,8 +5999,8 @@
 		<magic priority="50">
 			<match value="0x001102FF0C00" type="string" offset="522"/>
 		</magic>
-		<glob pattern="*.pic"/>
 		<glob pattern="*.pct"/>
+		<glob pattern="*.pic"/>
 		<glob pattern="*.pict"/>
 	</mime-type>
 
@@ -7338,6 +7359,7 @@
 			<match value="ftyp3g2b" type="string" offset="4"/>
 			<match value="ftyp3g2c" type="string" offset="4"/>
 		</magic>
+		<alias type="video/3gpp"/>
 		<glob pattern="*.3g2"/>
 	</mime-type>
 	<mime-type type="video/bmpeg"/>
@@ -7516,8 +7538,8 @@
 			<!-- Common starting Atoms of fixed size -->
 			<match value="\x00\x00\x00\x08wide" type="string" offset="0"/>
 		</magic>
-		<glob pattern="*.qt"/>
 		<glob pattern="*.mov"/>
+		<glob pattern="*.qt"/>
 		<sub-class-of type="application/quicktime" />
 	</mime-type>
 
@@ -7609,6 +7631,7 @@
 	</mime-type>
 	<mime-type type="application/x-ms-asx">
 		<_comment>Windows Media Metafile</_comment>
+		<alias type="application/x-mplayer2"/>
 		<glob pattern="*.asx"/>
 		<root-XML localName="asx"/>
 		<root-XML localName="ASX"/>
@@ -7637,6 +7660,7 @@
 		<_comment>Audio Video Interleave File</_comment>
 		<alias type="video/avi"/>
 		<alias type="video/msvideo"/>
+		<alias type="application/x-troff-msvideo"/>
 		<magic priority="50">
 			<match value="RIFF....AVI " type="string" offset="0"
 				   mask="0xFFFFFFFF00000000FFFFFFFF"/>
@@ -7741,6 +7765,38 @@
 		<_comment>R source code</_comment>
 		<glob pattern="*.r"/>
 		<sub-class-of type="text/plain"/>
+	</mime-type>
+
+	<mime-type type="chemical/x-mdl-sdfile">
+		<_comment>Standard Data File</_comment>
+		<glob pattern="*.sdf"/>
+	</mime-type>
+
+	<mime-type type="chemical/x-mdl-molfile">
+		<_comment>MDL Molfile</_comment>
+		<glob pattern="*.mol"/>
+	</mime-type>
+
+	<mime-type type="application/EDI-X12">
+		<_comment>EDIFACT message</_comment>
+		<alias type="application/EDIFACT"/>
+		<alias type="application/EDI-Consent"/>
+		<glob pattern="*.edi"/>
+	</mime-type>
+
+	<mime-type type="application/vnd.openxmlformats-package.relationships+xml">
+		<_comment>Open Office XML Relationships File</_comment>
+		<glob pattern="*.rels"/>
+	</mime-type>
+
+	<mime-type type="video/x-ms-vob">
+		<_comment>DVD Video Object File</_comment>
+		<glob pattern="*.vob"/>
+	</mime-type>
+
+	<mime-type type="application/dicom">
+		<_comment>DICOM image</_comment>
+		<glob pattern="*.dcm"/>
 	</mime-type>
 
 </mime-info>
