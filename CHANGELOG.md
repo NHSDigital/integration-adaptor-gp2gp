@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - EHR Status endpoint to query the status of transfers
+- Add missing MIME content types for documents
 
 ### Known Issues
 
