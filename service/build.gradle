@@ -3,7 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id "checkstyle"
-	id "com.github.spotbugs" version "4.5.0"
+	id "com.github.spotbugs" version "5.0.12"
 	id "io.freefair.lombok" version "5.3.0"
 	id 'jacoco'
 }
@@ -87,6 +87,7 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.0'
 	testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.27.2'
 
+	// upgraded to fix SNYK-JAVA-ORGAPACHECOMMONS-3043138
 	spotbugs 'com.github.spotbugs:spotbugs:4.7.3'
 
 	constraints {
@@ -190,6 +191,7 @@ spotbugsMain {
 		xml {
 			enabled = true
 		}
+		excludeFilter.set(file("config/spotbugs/exclude.xml"))
 	}
 }
 

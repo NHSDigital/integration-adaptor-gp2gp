@@ -4,4 +4,24 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
 
+    <Match>
+        <Class name="uk.nhs.adaptors.gp2gp.common.amqp.AmqpProperties"/>
+        <bug pattern="EI_EXPOSE_REP"/>
+    </Match>
+
+    <Match>
+        <Class name="uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle"/>
+        <bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+
+    <Match>
+        <Class name="uk.nhs.adaptors.gp2gp.ehr.mapper.wrapper.ConditionWrapper"/>
+        <bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+
+    <Match>
+        <Class name="uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus"/>
+        <bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+
 </FindBugsFilter>
