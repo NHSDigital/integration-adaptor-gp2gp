@@ -31,7 +31,7 @@ you are testing to ensure compatibility with configurations and scripts.
 
 ```bash
 git pull
-git checkout 1.5.2
+git checkout 1.5.5
 ```
 
 ## Find the docker directory

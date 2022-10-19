@@ -123,7 +123,11 @@ public class DiagnosticReportMapperTest {
         final DiagnosticReport diagnosticReport = new FhirParseService().parseResource(jsonInput, DiagnosticReport.class);
 
         final String outputMessage = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
-        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
+        assertThat(removeLineEndings(outputMessage)).isEqualTo(removeLineEndings(expectedOutputMessage.toString()));
+    }
+
+    private String removeLineEndings(String input) {
+        return input.replace("\n", "").replace("\r", "");
     }
 
     private static Stream<Arguments> resourceFileParams() {

@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.5] - 2022-10-17
+
+### Added
+
+- EHR Status endpoint to query the status of transfers
+- Add missing MIME content types for documents
+
+### Known Issues
+
+- Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268]
+- Information Exposure [Low Severity][https://snyk.io/vuln/SNYK-JAVA-ORGJETBRAINSKOTLIN-2393744]
+
 ## [1.5.2] - 2022-08-11
 
 ### Added
