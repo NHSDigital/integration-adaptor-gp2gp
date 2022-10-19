@@ -172,7 +172,7 @@ public class EncounterComponentsMapperTest {
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
-        assertThat(mappedXml).isEqualTo(expectedXml);
+        assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
     }
 
     @Test
@@ -183,7 +183,7 @@ public class EncounterComponentsMapperTest {
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
-        assertThat(mappedXml).isEqualTo(expectedXml);
+        assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
     }
 
     @ParameterizedTest
@@ -214,6 +214,10 @@ public class EncounterComponentsMapperTest {
         assertThatThrownBy(() -> encounterComponentsMapper.mapComponents(encounter))
             .hasMessageContaining("Unsupported resource in consultation list: Flag/flagid1")
             .isInstanceOf(EhrMapperException.class);
+    }
+
+    private String removeLineEndings(String input) {
+        return input.replace("\n", "").replace("\r", "");
     }
 
     private Encounter extractEncounter(Bundle bundle) {
