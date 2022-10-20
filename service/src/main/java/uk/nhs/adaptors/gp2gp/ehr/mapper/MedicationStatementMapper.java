@@ -41,6 +41,7 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.MedicationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.UnitsOfTimeMappingUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -189,7 +190,9 @@ public class MedicationStatementMapper {
         if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().hasExpectedSupplyDuration()) {
             return String.format(EXPECTED_SUPPLY_DURATION,
                 medicationRequest.getDispenseRequest().getExpectedSupplyDuration().getValue().toString(),
-                medicationRequest.getDispenseRequest().getExpectedSupplyDuration().getUnit());
+                UnitsOfTimeMappingUtils.mapCodeToDisplayValue(
+                    medicationRequest.getDispenseRequest().getExpectedSupplyDuration().getCode())
+            );
         }
         return StringUtils.EMPTY;
     }

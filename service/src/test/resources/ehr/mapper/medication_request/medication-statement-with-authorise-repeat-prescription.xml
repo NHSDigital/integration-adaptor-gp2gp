@@ -31,7 +31,7 @@
                 </quantity>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
-                        <text>Patient Instruction: Take in morning Expected Supply Duration: 28 day Notes: Example note text 1 Example note text 2 Example note text 3</text>
+                        <text>Patient Instruction: Take in morning Expected Supply Duration: 28 days Notes: Example note text 1 Example note text 2 Example note text 3</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
             </ehrSupplyAuthorise>
