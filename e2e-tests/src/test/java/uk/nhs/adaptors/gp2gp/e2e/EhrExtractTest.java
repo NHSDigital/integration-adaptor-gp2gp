@@ -71,8 +71,6 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_RESPONSE_MISSING_PATIENT_RESOURCE = "2906543841";
     private static final String NHS_NUMBER_MEDICUS_BASED_ON = "9302014592";
     private static final String NHS_NUMBER_INVALID_CONTENT_TYPE_DOC = "9817280691";
-    private static final String NHS_NUMBER_MEDICUS_TEST_UNITS_OF_MEASUREMENT_ASR = "9693142837";
-
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_WITHOUT_NHS_NUMBER_TEST_FILE = "/ehrExtractRequestWithoutNhsNumber.json";
     private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS = "/ehrExtractRequestWithNoDocuments.json";
@@ -161,13 +159,6 @@ public class EhrExtractTest {
             .hasXPath("/MCCI_IN010000UK13/acknowledgement[@type='Acknowledgement' and @typeCode='AE']/acknowledgementDetail[@type='AcknowledgementDetail' and @typeCode='ER']/code[@code='18']".replace("/", XML_NAMESPACE));
         XmlAssert.assertThat(requestJournal.get(0).getPayload())
             .hasXPath("/MCCI_IN010000UK13/ControlActEvent/reason/justifyingDetectedIssueEvent/code[@code='18']".replace("/", XML_NAMESPACE));
-    }
-
-    @Test
-    public void sendThroughMedicusMeasurementsBugASR() throws IOException, NamingException, JMSException {
-        String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_MEDICUS_TEST_UNITS_OF_MEASUREMENT_ASR, FROM_ODS_CODE_1);
-        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
     }
 
     @Test
