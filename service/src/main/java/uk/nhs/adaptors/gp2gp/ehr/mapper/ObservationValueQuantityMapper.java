@@ -60,7 +60,7 @@ public final class ObservationValueQuantityMapper {
     private static String prepareQuantityValueWithoutComparator(Quantity valueQuantity) {
         BigDecimal value = valueQuantity.getValue();
         if (valueQuantity.hasSystem() && valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)) {
-            return String.format(NO_COMPARATOR_VALUE_TEMPLATE, value, valueQuantity.getCode());
+            return String.format(NO_COMPARATOR_VALUE_TEMPLATE, value, valueQuantity.getUnit());
         } else {
             return String.format(NO_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE, value, value, prepareUnit(valueQuantity));
         }

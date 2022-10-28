@@ -71,7 +71,6 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_RESPONSE_MISSING_PATIENT_RESOURCE = "2906543841";
     private static final String NHS_NUMBER_MEDICUS_BASED_ON = "9302014592";
     private static final String NHS_NUMBER_INVALID_CONTENT_TYPE_DOC = "9817280691";
-
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_WITHOUT_NHS_NUMBER_TEST_FILE = "/ehrExtractRequestWithoutNhsNumber.json";
     private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS = "/ehrExtractRequestWithNoDocuments.json";
