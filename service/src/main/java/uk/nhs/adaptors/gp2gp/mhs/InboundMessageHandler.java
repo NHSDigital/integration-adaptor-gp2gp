@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -43,9 +44,10 @@ public class InboundMessageHandler {
      * @return True if the message has been processed. Otherwise false.
      */
     @SneakyThrows
-    public boolean handle(Message message) {
+    public boolean handle(Message message) throws DataAccessResourceFailureException {
         ParsedInboundMessage parsedMessage = null;
         var messageID = message.getJMSMessageID();
+
         try {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Inbound message: {}", JmsReader.readMessage(message));
@@ -60,9 +62,12 @@ public class InboundMessageHandler {
                 );
             }
             return true;
+
         } catch (MessageOutOfOrderException | NonExistingInteractionIdException | UnsupportedInteractionException e) {
             LOGGER.error("An error occurred while handing MHS inbound message id: {}", messageID, e);
             return false;
+        } catch (DataAccessResourceFailureException e) {
+            throw e;
         } catch (Exception e) {
             LOGGER.error("An error occurred while handing MHS inbound message id: {}", messageID, e);
             return handleMessageProcessingError(parsedMessage);
