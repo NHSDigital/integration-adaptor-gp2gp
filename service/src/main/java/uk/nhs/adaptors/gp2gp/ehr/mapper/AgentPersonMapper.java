@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
@@ -27,8 +28,11 @@ public class AgentPersonMapper {
     private final MessageContext messageContext;
 
     public String mapAgentPerson(AgentDirectory.AgentKey agentKey, String agentDirectoryId) {
-        var builder = PractitionerAgentPersonMapperParameters.builder()
-            .agentId(agentDirectoryId);
+        var builder = PractitionerAgentPersonMapperParameters
+                .builder()
+                .agentId(agentDirectoryId);
+
+        AtomicReference<String> tempNameFromText = new AtomicReference<>("");
 
         if (agentKey.getPractitionerReference() != null) {
             messageContext.getInputBundleHolder()
@@ -46,6 +50,9 @@ public class AgentPersonMapper {
                         practitionerFamily.ifPresent(builder::practitionerFamilyName);
 
                         if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
+                            if(practitioner.getName().get(0).getText() != null){
+                                tempNameFromText.set(practitioner.getName().get(0).getText());
+                            }
                             builder.practitionerFamilyName(UNKNOWN);
                         }
                     });
@@ -70,7 +77,15 @@ public class AgentPersonMapper {
 
         buildPractitionerRole(agentKey).ifPresent(builder::practitionerRole);
 
-        return TemplateUtils.fillTemplate(AGENT_STATEMENT_TEMPLATE, builder.build());
+
+        var practitionerAgentPersonMapperParameters = builder.build();
+        var xmlAgentPerson = TemplateUtils.fillTemplate(AGENT_STATEMENT_TEMPLATE, practitionerAgentPersonMapperParameters);
+        var familyName = practitionerAgentPersonMapperParameters.getPractitionerFamilyName();
+        if(!familyName.equalsIgnoreCase("")){
+            var stringToBeReplaced = "\n                <family>Unknown</family>\n            ";
+            xmlAgentPerson = xmlAgentPerson.replace(stringToBeReplaced, tempNameFromText.get());
+        }
+        return xmlAgentPerson;
     }
 
     private Optional<String> buildPractitionerRole(AgentDirectory.AgentKey agentKey) {
