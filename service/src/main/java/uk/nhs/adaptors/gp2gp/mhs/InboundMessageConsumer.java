@@ -38,6 +38,7 @@ public class InboundMessageConsumer {
                 session.rollback();
             }
         } catch (DataAccessResourceFailureException e) {
+            LOGGER.trace("Caught Data Access Resource Failure Exception and re-throwing it for the error handler");
             throw e;
         } catch (Exception e) {
             LOGGER.error("An error occurred while handing inbound MHS message_id: {}", messageID, e);
