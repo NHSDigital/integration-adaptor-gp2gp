@@ -23,6 +23,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataAccessResourceFailureException;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.w3c.dom.Document;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -210,6 +212,19 @@ public class InboundMessageHandlerTest {
 
         assertThatThrownBy(() -> inboundMessageHandler.handle(message)).isSameAs(failureHandlingException);
     }
+
+    @Test
+    @SneakyThrows
+    public void When_DatabaseAccessFailure_Expect_ExceptionThrown() {
+        setupValidMessage();
+
+        var testException = new DataAccessResourceFailureException("Test Exception");
+
+        doThrow(testException).when(processFailureHandlingService).hasProcessFailed(any());
+
+        assertThatThrownBy(() -> inboundMessageHandler.handle(message)).isSameAs(testException);
+    }
+
 
     @Test
     @SneakyThrows
