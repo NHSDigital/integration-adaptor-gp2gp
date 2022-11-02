@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataAccessResourceFailureException;
 
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
@@ -60,12 +62,46 @@ public class TaskConsumerTest {
 
     @Test
     @SneakyThrows
+    public void When_TaskHandlerReturnsFalse_Expect_SessionRolledBack() {
+        when(taskHandler.handle(any())).thenReturn(false);
+
+        taskConsumer.receive(message, session);
+
+        verify(taskHandler).handle(message);
+        verify(session, times(1)).rollback();
+    }
+
+    @Test
+    @SneakyThrows
     public void When_TaskHandlerThrowsException_Expect_MessageNotAcknowledged() {
         doThrow(RuntimeException.class).when(taskHandler).handle(message);
 
         taskConsumer.receive(message, session);
 
         verify(taskHandler).handle(message);
+        verify(message, times(0)).acknowledge();
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_TaskHandlerThrowsException_Expect_SessionRolledBack() {
+        doThrow(RuntimeException.class).when(taskHandler).handle(message);
+
+        taskConsumer.receive(message, session);
+
+        verify(taskHandler).handle(message);
+        verify(session, times(1)).rollback();
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_TaskHandlerThrowsDataResourceAccessFailureException_Expect_ExceptionIsThrown() {
+        doThrow(DataAccessResourceFailureException.class).when(taskHandler).handle(message);
+
+        assertThatExceptionOfType(DataAccessResourceFailureException.class)
+            .isThrownBy(() -> taskConsumer.receive(message, session));
+
+        verify(session, times(0)).rollback();
         verify(message, times(0)).acknowledge();
     }
 }

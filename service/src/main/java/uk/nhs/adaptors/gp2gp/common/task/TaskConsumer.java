@@ -27,8 +27,6 @@ public class TaskConsumer {
         var messageID = message.getJMSMessageID();
         LOGGER.info("Received taskQueue message_id: {}", messageID);
 
-        System.out.println("Delivery count: " + message.getIntProperty("JMSXDeliveryCount"));
-
         try {
             if (taskHandler.handle(message)) {
                 message.acknowledge();

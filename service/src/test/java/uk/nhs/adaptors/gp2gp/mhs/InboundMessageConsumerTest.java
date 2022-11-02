@@ -88,11 +88,14 @@ public class InboundMessageConsumerTest {
     }
 
     @Test
+    @SneakyThrows
     public void When_MessageHandlerThrowsDataAccessResourceFailure_Expect_ExceptionIsThrown() {
         doThrow(new DataAccessResourceFailureException("Test exception")).when(inboundMessageHandler).handle(mockMessage);
 
         assertThatExceptionOfType(DataAccessResourceFailureException.class)
             .isThrownBy(() -> inboundMessageConsumer.receive(mockMessage, mockSession));
 
+        verify(mockSession, times(0)).rollback();
+        verify(mockMessage, times(0)).acknowledge();
     }
 }
