@@ -171,7 +171,7 @@ public class SendAcknowledgementComponentTest {
     }
 
     @Test
-    public void When_SendAckTaskExecuted_withMhsConnectionException_Expect_ExceptionThrownAndDbNotUpdated() {
+    public void When_SendAckTaskExecuted_WithMhsConnectionException_Expect_ExceptionThrownAndDbNotUpdated() {
         var taskDefinition =
             SendAcknowledgementTaskDefinition.builder()
                 .fromAsid(FROM_ASID)
@@ -197,7 +197,7 @@ public class SendAcknowledgementComponentTest {
     }
 
     @Test
-    public void When_SendAckTaskExecuted_withMhsServerErrorException_Expect_ExceptionThrownAndDbNotUpdated() {
+    public void When_SendAckTaskExecuted_WithMhsServerErrorException_Expect_ExceptionThrownAndDbNotUpdated() {
         var taskDefinition =
             SendAcknowledgementTaskDefinition.builder()
                 .fromAsid(FROM_ASID)

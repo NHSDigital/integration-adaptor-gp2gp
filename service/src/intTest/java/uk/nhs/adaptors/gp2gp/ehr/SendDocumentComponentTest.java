@@ -19,7 +19,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import uk.nhs.adaptors.gp2gp.common.storage.LocalMockConnector;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -37,7 +36,7 @@ public class SendDocumentComponentTest {
     private static final String DOCUMENT_NAME = "some-conversation-id/document-name.json";
 
     @MockBean
-    MhsClient mhsClient;
+    private MhsClient mhsClient;
 
     @Autowired
     private SendDocumentTaskExecutor sendDocumentTaskExecutor;
@@ -67,7 +66,7 @@ public class SendDocumentComponentTest {
     }
 
     @Test
-    public void When_SendDocumentTask_withMhsConnectionException_Expect_exceptionThrownAndDatabaseNotUpdated() throws IOException {
+    public void When_SendDocumentTask_WithMhsConnectionException_Expect_ExceptionThrownAndDatabaseNotUpdated() throws IOException {
         var inputStream = readMessageAsInputStream();
         localMockConnector.uploadToStorage(inputStream, inputStream.available(), DOCUMENT_NAME);
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
@@ -87,7 +86,7 @@ public class SendDocumentComponentTest {
     }
 
     @Test
-    public void When_SendDocumentTask_withMhsServerFailureException_Expect_exceptionThrownAndDataBaseNotUpdated() throws IOException {
+    public void When_SendDocumentTask_WithMhsServerFailureException_Expect_ExceptionThrownAndDataBaseNotUpdated() throws IOException {
         var inputStream = readMessageAsInputStream();
         localMockConnector.uploadToStorage(inputStream, inputStream.available(), DOCUMENT_NAME);
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();

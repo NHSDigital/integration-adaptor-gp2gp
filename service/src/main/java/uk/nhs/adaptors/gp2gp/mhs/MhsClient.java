@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
 import java.net.ConnectException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,9 @@ public class MhsClient {
             return responseBody;
         } catch (WebClientRequestException e) {
 
-            if (e.getRootCause() != null && e.getRootCause().getClass().equals(ConnectException.class)) {
+            Optional<Throwable> rootCause = Optional.ofNullable(e.getRootCause());
+
+            if (rootCause.isPresent() && rootCause.get().getClass().equals(ConnectException.class)) {
                 throw new MhsConnectionException(e.getMessage());
             }
 

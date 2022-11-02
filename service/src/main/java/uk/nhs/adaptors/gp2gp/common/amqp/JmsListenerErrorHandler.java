@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.common.amqp;
 
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Component;
