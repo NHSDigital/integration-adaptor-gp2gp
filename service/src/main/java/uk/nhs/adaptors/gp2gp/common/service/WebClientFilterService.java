@@ -22,6 +22,7 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
@@ -70,6 +71,9 @@ public class WebClientFilterService {
             }
             if (requestType.equals(RequestType.GPC)) {
                 return getErrorException(clientResponse, requestType);
+            }
+            if (requestType.equals(RequestType.MHS_OUTBOUND) && httpStatus.is5xxServerError()) {
+                return Mono.error(new MhsServerErrorException("MHS responded with status code " + httpStatus.value()));
             }
 
             return getResponseError(clientResponse, requestType);

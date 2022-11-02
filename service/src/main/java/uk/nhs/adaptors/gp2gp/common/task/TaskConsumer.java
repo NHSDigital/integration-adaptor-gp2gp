@@ -8,6 +8,8 @@ import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 
 import javax.jms.Message;
 import javax.jms.Session;
@@ -36,8 +38,8 @@ public class TaskConsumer {
                 session.rollback();
             }
 
-        } catch (DataAccessResourceFailureException e) {
-            LOGGER.trace("Caught Data Access Resource Failure Exception and re-throwing it for the error handler");
+        } catch (DataAccessResourceFailureException | MhsServerErrorException | MhsConnectionException e) {
+            LOGGER.trace("Caught {} and re-throwing it for the error handler", e.getClass().getName());
             throw e;
         } catch (Exception e) {
             LOGGER.error("Error while processing taskQueue message_id: {}", messageID, e);

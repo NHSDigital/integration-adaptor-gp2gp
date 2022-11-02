@@ -20,6 +20,8 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 
 @Component
 @AllArgsConstructor
@@ -56,7 +58,7 @@ public class TaskHandler {
 
             return true;
 
-        } catch (DataAccessResourceFailureException e) {
+        } catch (DataAccessResourceFailureException | MhsConnectionException | MhsServerErrorException e) {
             logError(e, message);
             throw e;
         } catch (TaskHandlerException e) {
