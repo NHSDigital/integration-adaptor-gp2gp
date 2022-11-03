@@ -65,6 +65,10 @@ public class AmqpServiceFailureTest {
     private static final String ACK_TYPE_CODE = "AA";
     private static final String INBOUND_QUEUE_NAME = "inbound";
     private static final String DLQ_NAME = "ActiveMQ.DLQ";
+    private static final int JMS_RECEIVE_TIMEOUT = 60000;
+    private static final Duration THREE_SECONDS = Duration.ofSeconds(3);
+    private static final Duration ONE_MINUTE = Duration.ofMinutes(1);
+    private static final Duration TWENTY_SECONDS = Duration.ofSeconds(20);
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -80,9 +84,10 @@ public class AmqpServiceFailureTest {
 
     @BeforeEach
     public void setUp() {
+
         inboundJmsTemplate.setDefaultDestinationName(INBOUND_QUEUE_NAME);
         conversationId = UUID.randomUUID().toString();
-        inboundJmsTemplate.setReceiveTimeout(60000);
+        inboundJmsTemplate.setReceiveTimeout(JMS_RECEIVE_TIMEOUT);
     }
 
     @Test
@@ -155,7 +160,8 @@ public class AmqpServiceFailureTest {
     }
 
     @Test
-    public void When_TransferProcessing_WithUnexpectedExceptionDuringRequest_Expect_MessagePutOnDLQ() throws JsonProcessingException, JMSException {
+    public void When_TransferProcessing_WithUnexpectedExceptionDuringRequest_Expect_MessagePutOnDLQ() throws JsonProcessingException,
+        JMSException {
         doThrow(RuntimeException.class)
             .when(processFailureHandlingService).hasProcessFailed(conversationId);
 
@@ -174,8 +180,8 @@ public class AmqpServiceFailureTest {
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
         await()
-            .atMost(Duration.ofMinutes(1))
-            .pollInterval(Duration.ofSeconds(3))
+            .atMost(ONE_MINUTE)
+            .pollInterval(THREE_SECONDS)
             .until(this::awaitingContinue);
 
         when(processFailureHandlingService.hasProcessFailed(conversationId))
@@ -183,7 +189,7 @@ public class AmqpServiceFailureTest {
 
         sendInboundMessageToQueue(PAYLOAD_PATH_CONTINUE_MESSAGE, EBXML_PATH_CONTINUE_MESSAGE);
 
-        await().atMost(Duration.ofSeconds(20)).until(this::processFailed);
+        await().atMost(TWENTY_SECONDS).until(this::processFailed);
         assertThat(processFailed()).isTrue();
     }
 
@@ -193,14 +199,14 @@ public class AmqpServiceFailureTest {
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
         await()
-            .atMost(Duration.ofMinutes(1))
-            .pollInterval(Duration.ofSeconds(3))
+            .atMost(ONE_MINUTE)
+            .pollInterval(THREE_SECONDS)
             .until(this::awaitingContinue);
 
         sendInboundMessageToQueue(PAYLOAD_PATH_CONTINUE_MESSAGE, EBXML_PATH_CONTINUE_MESSAGE);
 
         await()
-            .atMost(Duration.ofSeconds(20))
+            .atMost(TWENTY_SECONDS)
             .until(this::awaitingAck);
 
         when(processFailureHandlingService.hasProcessFailed(conversationId))
@@ -208,7 +214,7 @@ public class AmqpServiceFailureTest {
 
         sendFinalAckToQueue();
 
-        await().atMost(Duration.ofSeconds(20)).until(this::processFailed);
+        await().atMost(TWENTY_SECONDS).until(this::processFailed);
         assertThat(processFailed()).isTrue();
     }
 
@@ -227,42 +233,42 @@ public class AmqpServiceFailureTest {
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
         await()
-            .atMost(Duration.ofMinutes(1))
-            .pollInterval(Duration.ofSeconds(3))
+            .atMost(ONE_MINUTE)
+            .pollInterval(THREE_SECONDS)
             .until(this::awaitingContinue);
 
         sendInboundMessageToQueue(PAYLOAD_PATH_CONTINUE_MESSAGE, EBXML_PATH_CONTINUE_MESSAGE);
 
         await()
-            .atMost(Duration.ofSeconds(20))
+            .atMost(TWENTY_SECONDS)
             .until(this::awaitingAck);
 
         sendFinalAckToQueue();
 
         await()
-            .atMost(Duration.ofSeconds(20))
+            .atMost(TWENTY_SECONDS)
             .until(this::transferComplete);
     }
 
     private boolean awaitingAck() {
-        var DbExtractOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
-        if (DbExtractOptional.isEmpty()) {
+        var dbExtractOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
+        if (dbExtractOptional.isEmpty()) {
             return false;
         }
-        var DbExtract = DbExtractOptional.orElseThrow();
-        var ackPending = Optional.ofNullable(DbExtract.getAckPending());
+        var dbExtract = dbExtractOptional.orElseThrow();
+        var ackPending = Optional.ofNullable(dbExtract.getAckPending());
 
         return ackPending.isPresent();
     }
 
     private boolean awaitingContinue() {
-        var DbExtractOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
-        if (DbExtractOptional.isEmpty()) {
+        var dbExtractOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
+        if (dbExtractOptional.isEmpty()) {
             return false;
         }
-        var DbExtract = DbExtractOptional.orElseThrow();
-        var ehrCorePendingOptional = Optional.ofNullable(DbExtract.getEhrExtractCorePending());
-        var ackPending = Optional.ofNullable(DbExtract.getAckPending());
+        var dbExtract = dbExtractOptional.orElseThrow();
+        var ehrCorePendingOptional = Optional.ofNullable(dbExtract.getEhrExtractCorePending());
+        var ackPending = Optional.ofNullable(dbExtract.getAckPending());
 
         return ehrCorePendingOptional.isPresent() && ackPending.isEmpty();
     }
@@ -324,8 +330,10 @@ public class AmqpServiceFailureTest {
         var ehrExtractStatus = readEhrExtractStatusFromDb();
         var ehrMessageRef = ehrExtractStatus.getEhrExtractMessageId();
         var inboundMessage = new InboundMessage();
-        var payload = readResourceAsString(AmqpServiceFailureTest.PAYLOAD_PATH_FINAL_ACK_MESSAGE).replace(EHR_MESSAGE_REF_PLACEHOLDER, ehrMessageRef);
-        var ebXml = readResourceAsString(AmqpServiceFailureTest.EBXML_PATH_FINAL_ACK_MESSAGE).replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
+        var payload = readResourceAsString(AmqpServiceFailureTest.PAYLOAD_PATH_FINAL_ACK_MESSAGE).replace(EHR_MESSAGE_REF_PLACEHOLDER,
+            ehrMessageRef);
+        var ebXml = readResourceAsString(AmqpServiceFailureTest.EBXML_PATH_FINAL_ACK_MESSAGE).replace(CONVERSATION_ID_PLACEHOLDER,
+            conversationId);
         inboundMessage.setPayload(payload);
         inboundMessage.setEbXML(ebXml);
         return inboundMessage;
