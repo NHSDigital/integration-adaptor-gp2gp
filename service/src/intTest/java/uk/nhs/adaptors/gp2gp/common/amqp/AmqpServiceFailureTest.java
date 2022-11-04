@@ -67,7 +67,7 @@ public class AmqpServiceFailureTest {
     private static final String DLQ_NAME = "ActiveMQ.DLQ";
     private static final int JMS_RECEIVE_TIMEOUT = 60000;
     private static final Duration THREE_SECONDS = Duration.ofSeconds(3);
-    private static final Duration ONE_MINUTE = Duration.ofMinutes(1);
+    private static final Duration THREE_MINUTES = Duration.ofMinutes(3);
     private static final Duration TWENTY_SECONDS = Duration.ofSeconds(20);
 
     @Autowired
@@ -180,7 +180,7 @@ public class AmqpServiceFailureTest {
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
         await()
-            .atMost(ONE_MINUTE)
+            .atMost(THREE_MINUTES)
             .pollInterval(THREE_SECONDS)
             .until(this::awaitingContinue);
 
@@ -199,7 +199,7 @@ public class AmqpServiceFailureTest {
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
         await()
-            .atMost(ONE_MINUTE)
+            .atMost(THREE_MINUTES)
             .pollInterval(THREE_SECONDS)
             .until(this::awaitingContinue);
 
@@ -233,7 +233,7 @@ public class AmqpServiceFailureTest {
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
         await()
-            .atMost(ONE_MINUTE)
+            .atMost(THREE_MINUTES)
             .pollInterval(THREE_SECONDS)
             .until(this::awaitingContinue);
 
