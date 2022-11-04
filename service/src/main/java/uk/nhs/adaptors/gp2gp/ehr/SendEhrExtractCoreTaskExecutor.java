@@ -50,10 +50,10 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
                 sendEhrExtractCoreTaskDefinition.getEhrExtractMessageId()
             );
 
+        mhsClient.sendMessageToMHS(requestData);
+
         Instant requestSentAtPending = Instant.now();
         ehrExtractStatusService.updateEhrExtractStatusCorePending(sendEhrExtractCoreTaskDefinition, requestSentAtPending);
-
-        mhsClient.sendMessageToMHS(requestData);
 
         Instant requestSentAt = Instant.now();
         var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCore(sendEhrExtractCoreTaskDefinition, requestSentAt);

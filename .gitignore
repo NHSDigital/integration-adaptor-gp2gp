@@ -46,3 +46,4 @@ lombok.config
 vars.sh*
 env.yaml*
 /smoke-tests/smoke_vars.sh
+/service/testsuiteEnv.yml

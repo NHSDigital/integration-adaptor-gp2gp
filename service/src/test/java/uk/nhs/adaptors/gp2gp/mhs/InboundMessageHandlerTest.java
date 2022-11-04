@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
@@ -11,8 +13,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -23,13 +23,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.SneakyThrows;
-import org.xml.sax.SAXException;
 import uk.nhs.adaptors.gp2gp.ResourceHelper;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
@@ -210,6 +211,19 @@ public class InboundMessageHandlerTest {
 
         assertThatThrownBy(() -> inboundMessageHandler.handle(message)).isSameAs(failureHandlingException);
     }
+
+    @Test
+    @SneakyThrows
+    public void When_DatabaseAccessFailure_Expect_ExceptionThrown() {
+        setupValidMessage();
+
+        var testException = new DataAccessResourceFailureException("Test Exception");
+
+        doThrow(testException).when(processFailureHandlingService).hasProcessFailed(any());
+
+        assertThatThrownBy(() -> inboundMessageHandler.handle(message)).isSameAs(testException);
+    }
+
 
     @Test
     @SneakyThrows

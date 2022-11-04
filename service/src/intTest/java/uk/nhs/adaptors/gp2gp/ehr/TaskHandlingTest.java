@@ -13,6 +13,7 @@ import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 
 import javax.jms.Message;
+import javax.jms.Session;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,6 +66,8 @@ public class TaskHandlingTest {
     @Mock
     private Message message;
     @Mock
+    private Session session;
+    @Mock
     private TaskExecutor taskExecutor;
 
 
@@ -79,7 +82,7 @@ public class TaskHandlingTest {
         when(message.getStringProperty(TASK_TYPE_HEADER_NAME)).thenReturn(SendEhrExtractCoreTaskDefinition.class.getName());
         when(message.getBody(any())).thenReturn("not a valid body");
 
-        taskConsumer.receive(message);
+        taskConsumer.receive(message, session);
 
         verify(message, never()).acknowledge();
         verifyNoInteractions(taskExecutorFactory, ehrExtractStatusService);
@@ -92,7 +95,7 @@ public class TaskHandlingTest {
         doThrow(RuntimeException.class).when(taskExecutor).execute(any());
         var ehrExtractStatus = createEhrExtractStatusInDb(false);
 
-        taskConsumer.receive(message);
+        taskConsumer.receive(message, session);
 
         verify(message).acknowledge();
 
@@ -108,7 +111,7 @@ public class TaskHandlingTest {
         doThrow(RuntimeException.class).when(taskExecutor).execute(any());
         var initialDbStatus = readEhrExtractStatusFromDb();
 
-        taskConsumer.receive(message);
+        taskConsumer.receive(message, session);
 
         verify(message, never()).acknowledge();
 
@@ -128,7 +131,7 @@ public class TaskHandlingTest {
 
         assertThat(initialDbExtract.getError()).isNotNull();
 
-        taskConsumer.receive(message);
+        taskConsumer.receive(message, session);
 
         verify(message).acknowledge();
         verifyNoInteractions(taskExecutor);
@@ -144,7 +147,7 @@ public class TaskHandlingTest {
         EhrExtractStatus ehrExtractStatus = createEhrExtractStatusInDb(true);
         var initialDbStatus = readEhrExtractStatusFromDb();
 
-        taskConsumer.receive(message);
+        taskConsumer.receive(message, session);
 
         verify(message).acknowledge();
         verify(taskExecutor).execute(taskDefinition);
@@ -160,7 +163,7 @@ public class TaskHandlingTest {
         var taskDefinition = mockSendEhExtractCoreTaskMessage();
         createEhrExtractStatusInDb(false);
 
-        taskConsumer.receive(message);
+        taskConsumer.receive(message, session);
 
         verify(message).acknowledge();
         verify(taskExecutor).execute(taskDefinition);

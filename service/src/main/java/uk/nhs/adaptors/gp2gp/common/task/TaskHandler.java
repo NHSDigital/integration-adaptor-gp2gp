@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.common.task;
 import javax.jms.JMSException;
 import javax.jms.Message;
 
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -19,6 +20,8 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 
 @Component
 @AllArgsConstructor
@@ -36,7 +39,7 @@ public class TaskHandler {
      * @return True if the message has been processed. Otherwise, false.
      */
     @SneakyThrows
-    public boolean handle(Message message) {
+    public boolean handle(Message message) throws DataAccessResourceFailureException {
         TaskDefinition taskDefinition = null;
 
         try {
@@ -54,6 +57,10 @@ public class TaskHandler {
             }
 
             return true;
+
+        } catch (DataAccessResourceFailureException | MhsConnectionException | MhsServerErrorException e) {
+            logError(e, message);
+            throw e;
         } catch (TaskHandlerException e) {
             logError(e, message);
             return false;

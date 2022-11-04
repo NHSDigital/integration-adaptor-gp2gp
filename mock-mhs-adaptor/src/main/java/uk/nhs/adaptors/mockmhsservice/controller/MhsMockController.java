@@ -1,9 +1,19 @@
 package uk.nhs.adaptors.mockmhsservice.controller;
 
-import io.micrometer.core.instrument.util.IOUtils;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+import static org.springframework.http.HttpStatus.ACCEPTED;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,22 +27,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.micrometer.core.instrument.util.IOUtils;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.mockmhsservice.service.MDCService;
 import uk.nhs.adaptors.mockmhsservice.service.MockMhsService;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.springframework.http.HttpStatus.ACCEPTED;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @Slf4j
@@ -47,6 +48,12 @@ public class MhsMockController {
     @GetMapping(value = "/mock-mhs-endpoint/healthcheck")
     @ResponseStatus(value = HttpStatus.OK)
     public void healthcheck() {}
+
+    @PostMapping(value = "/mock-mhs-endpoint/accept-only", consumes = APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = ACCEPTED)
+    public ResponseEntity<String> postMockMHSAndDoNotAct(@RequestHeader Map<String, String> headers) {
+        return mockMhsService.accept();
+    }
 
     @PostMapping(value = "/mock-mhs-endpoint",
         consumes = APPLICATION_JSON_VALUE

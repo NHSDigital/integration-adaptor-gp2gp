@@ -1,5 +1,16 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
+
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_ODS_CODE;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -12,6 +23,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.reactive.function.client.WebClient;
+
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
@@ -20,17 +32,10 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_ODS_CODE;
 
 @RunWith(SpringRunner.class)
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class, MockitoExtension.class})
@@ -72,11 +77,8 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
-        when(storageConnectorService.downloadFile(eq(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME))).thenReturn(storageDataWrapper);
-        when(storageDataWrapper.getData()).thenReturn(PAYLOAD);
-        when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
-        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
-        when(sendEhrExtractCoreTaskDefinition.getFromOdsCode()).thenReturn(FROM_ODS_CODE);
+        prepareCommonStubbing(ehrExtractStatus);
+
         when(mhsClient.sendMessageToMHS(request)).thenReturn("Successful Mhs Outbound Request");
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
@@ -90,11 +92,8 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
-        when(storageConnectorService.downloadFile(eq(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME))).thenReturn(storageDataWrapper);
-        when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
-        when(sendEhrExtractCoreTaskDefinition.getFromOdsCode()).thenReturn("12345");
-        when(storageDataWrapper.getData()).thenReturn(PAYLOAD);
-        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
+        prepareCommonStubbing(ehrExtractStatus);
+
         doThrow(InvalidOutboundMessageException.class)
             .when(mhsRequestBuilder).buildSendEhrExtractCoreRequest(any(), any(), any(), any());
 
@@ -102,6 +101,50 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         assertThat(ehrExtractUpdated.getEhrExtractCore()).isNull();
+    }
+
+    @Test
+    public void When_ExtractCoreThrowsMhsConnectionException_Expect_ExceptionThrownAndDbNotUpdated() {
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        prepareCommonStubbing(ehrExtractStatus);
+
+        doThrow(MhsConnectionException.class).when(mhsClient).sendMessageToMHS(any());
+
+        assertThatExceptionOfType(MhsConnectionException.class)
+            .isThrownBy(() -> sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition));
+
+        var ehrExtractStatusUpdated = ehrExtractStatusRepository
+            .findByConversationId(ehrExtractStatus.getConversationId()).orElseThrow();
+
+        assertThat(ehrExtractStatusUpdated.getEhrExtractCore()).isNull();
+    }
+
+    @Test
+    public void When_ExtractCoreThrowsMhsServerErrorException_Expect_ExceptionThrownAndDbNotUpdated() {
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        prepareCommonStubbing(ehrExtractStatus);
+
+        doThrow(MhsServerErrorException.class).when(mhsClient).sendMessageToMHS(any());
+
+        assertThatExceptionOfType(MhsServerErrorException.class)
+            .isThrownBy(() -> sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition));
+
+        var ehrExtractStatusUpdated = ehrExtractStatusRepository
+            .findByConversationId(ehrExtractStatus.getConversationId()).orElseThrow();
+
+        assertThat(ehrExtractStatusUpdated.getEhrExtractCore()).isNull();
+    }
+
+    private void prepareCommonStubbing(EhrExtractStatus ehrExtractStatus) {
+        when(storageConnectorService.downloadFile(eq(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME))).thenReturn(storageDataWrapper);
+        when(storageDataWrapper.getData()).thenReturn(PAYLOAD);
+        when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
+        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
+        when(sendEhrExtractCoreTaskDefinition.getFromOdsCode()).thenReturn(FROM_ODS_CODE);
     }
 
     private void assertThatInitialRecordWasUpdated(EhrExtractStatus ehrExtractStatusUpdated, EhrExtractStatus ehrExtractStatus) {

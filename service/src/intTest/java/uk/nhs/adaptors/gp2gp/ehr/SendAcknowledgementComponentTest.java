@@ -1,6 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,6 +31,8 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -163,5 +168,57 @@ public class SendAcknowledgementComponentTest {
         assertThat(ackToRequester.getTypeCode()).isEqualTo(POSITIVE_ACK_TYPE_CODE);
         assertThat(ackToRequester.getReasonCode()).isNull();
         assertThat(ackToRequester.getDetail()).isNull();
+    }
+
+    @Test
+    public void When_SendAckTaskExecuted_WithMhsConnectionException_Expect_ExceptionThrownAndDbNotUpdated() {
+        var taskDefinition =
+            SendAcknowledgementTaskDefinition.builder()
+                .fromAsid(FROM_ASID)
+                .toAsid(TO_ASID)
+                .fromOdsCode(FROM_ODS_CODE)
+                .toOdsCode(TO_ODS_CODE)
+                .ehrRequestMessageId(EHR_REQUEST_MESSAGE_ID)
+                .conversationId(EhrStatusConstants.CONVERSATION_ID)
+                .taskId(TASK_ID)
+                .typeCode(POSITIVE_ACK_TYPE_CODE)
+                .build();
+
+        doThrow(MhsConnectionException.class).when(mhsClient).sendMessageToMHS(any());
+
+        assertThatExceptionOfType(MhsConnectionException.class)
+            .isThrownBy(() -> sendAcknowledgementExecutor.execute(taskDefinition));
+
+        var updatedEhrExtractStatus = ehrExtractStatusRepository
+            .findByConversationId(EhrStatusConstants.CONVERSATION_ID)
+            .orElseThrow();
+
+        assertThat(updatedEhrExtractStatus.getAckToRequester()).isNull();
+    }
+
+    @Test
+    public void When_SendAckTaskExecuted_WithMhsServerErrorException_Expect_ExceptionThrownAndDbNotUpdated() {
+        var taskDefinition =
+            SendAcknowledgementTaskDefinition.builder()
+                .fromAsid(FROM_ASID)
+                .toAsid(TO_ASID)
+                .fromOdsCode(FROM_ODS_CODE)
+                .toOdsCode(TO_ODS_CODE)
+                .ehrRequestMessageId(EHR_REQUEST_MESSAGE_ID)
+                .conversationId(EhrStatusConstants.CONVERSATION_ID)
+                .taskId(TASK_ID)
+                .typeCode(POSITIVE_ACK_TYPE_CODE)
+                .build();
+
+        doThrow(MhsServerErrorException.class).when(mhsClient).sendMessageToMHS(any());
+
+        assertThatExceptionOfType(MhsServerErrorException.class)
+            .isThrownBy(() -> sendAcknowledgementExecutor.execute(taskDefinition));
+
+        var updatedEhrExtractStatus = ehrExtractStatusRepository
+            .findByConversationId(EhrStatusConstants.CONVERSATION_ID)
+            .orElseThrow();
+
+        assertThat(updatedEhrExtractStatus.getAckToRequester()).isNull();
     }
 }

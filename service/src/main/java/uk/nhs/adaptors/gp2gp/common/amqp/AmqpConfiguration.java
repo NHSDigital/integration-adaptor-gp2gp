@@ -8,15 +8,26 @@ import org.apache.qpid.jms.JmsDestination;
 import org.apache.qpid.jms.message.JmsMessageSupport;
 import org.apache.qpid.jms.policy.JmsDefaultDeserializationPolicy;
 import org.apache.qpid.jms.policy.JmsRedeliveryPolicy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
+import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 
 @Configuration
 @ConditionalOnMissingBean(ConnectionFactory.class)
 public class AmqpConfiguration {
+
+    private final JmsListenerErrorHandler jmsListenerErrorHandler;
+
+    @Autowired
+    public AmqpConfiguration(JmsListenerErrorHandler errorHandler) {
+        this.jmsListenerErrorHandler = errorHandler;
+    }
 
     @Bean
     protected MessageConverter jsonMessageConverter() {
@@ -47,6 +58,18 @@ public class AmqpConfiguration {
 
         configureDeserializationPolicy(properties, factory);
         configureRedeliveryPolicy(properties, factory);
+
+        return factory;
+    }
+
+    @Bean
+    public JmsListenerContainerFactory<?> transactedJmsListenerContainerFactory(ConnectionFactory connectionFactory,
+        DefaultJmsListenerContainerFactoryConfigurer configurer) {
+        var factory = new DefaultJmsListenerContainerFactory();
+
+        configurer.configure(factory, connectionFactory);
+        factory.setSessionTransacted(true);
+        factory.setErrorHandler(jmsListenerErrorHandler);
 
         return factory;
     }

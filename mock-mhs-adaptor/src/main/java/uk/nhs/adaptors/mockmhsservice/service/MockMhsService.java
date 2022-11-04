@@ -110,6 +110,10 @@ public class MockMhsService {
         return new ResponseEntity<>(INTERNAL_SERVER_ERROR_RESPONSE, headers, INTERNAL_SERVER_ERROR);
     }
 
+    public ResponseEntity<String> accept() {
+        return new ResponseEntity<>(STUB_ACCEPTED_RESPONSE, headers, ACCEPTED);
+    }
+
     private void verifyOutboundMessagePayload(String requestBody) throws JsonProcessingException, MockMHSException {
         LOGGER.debug("Received outbound MHS request payload:\n{}", requestBody);
         var payloadObject = objectMapper.readValue(requestBody, OutboundMessage.class);
