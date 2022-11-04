@@ -67,8 +67,8 @@ public class AmqpServiceFailureTest {
     private static final String DLQ_NAME = "ActiveMQ.DLQ";
     private static final int JMS_RECEIVE_TIMEOUT = 60000;
     private static final Duration THREE_SECONDS = Duration.ofSeconds(3);
-    private static final Duration SIX_MINUTES = Duration.ofMinutes(6);
-    private static final Duration TWO_MINUTES = Duration.ofMinutes(2);
+    private static final Duration TEN_MINUTES = Duration.ofMinutes(10);
+    private static final Duration THREE_MINUTES = Duration.ofMinutes(3);
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -180,7 +180,7 @@ public class AmqpServiceFailureTest {
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
         await()
-            .atMost(SIX_MINUTES)
+            .atMost(TEN_MINUTES)
             .pollInterval(THREE_SECONDS)
             .until(this::awaitingContinue);
 
@@ -189,7 +189,7 @@ public class AmqpServiceFailureTest {
 
         sendInboundMessageToQueue(PAYLOAD_PATH_CONTINUE_MESSAGE, EBXML_PATH_CONTINUE_MESSAGE);
 
-        await().atMost(TWO_MINUTES).until(this::processFailed);
+        await().atMost(THREE_MINUTES).until(this::processFailed);
         assertThat(processFailed()).isTrue();
     }
 
@@ -199,14 +199,14 @@ public class AmqpServiceFailureTest {
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
         await()
-            .atMost(SIX_MINUTES)
+            .atMost(TEN_MINUTES)
             .pollInterval(THREE_SECONDS)
             .until(this::awaitingContinue);
 
         sendInboundMessageToQueue(PAYLOAD_PATH_CONTINUE_MESSAGE, EBXML_PATH_CONTINUE_MESSAGE);
 
         await()
-            .atMost(TWO_MINUTES)
+            .atMost(THREE_MINUTES)
             .until(this::awaitingAck);
 
         when(processFailureHandlingService.hasProcessFailed(conversationId))
@@ -214,7 +214,7 @@ public class AmqpServiceFailureTest {
 
         sendFinalAckToQueue();
 
-        await().atMost(TWO_MINUTES).until(this::processFailed);
+        await().atMost(THREE_MINUTES).until(this::processFailed);
         assertThat(processFailed()).isTrue();
     }
 
@@ -233,20 +233,20 @@ public class AmqpServiceFailureTest {
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
         await()
-            .atMost(SIX_MINUTES)
+            .atMost(TEN_MINUTES)
             .pollInterval(THREE_SECONDS)
             .until(this::awaitingContinue);
 
         sendInboundMessageToQueue(PAYLOAD_PATH_CONTINUE_MESSAGE, EBXML_PATH_CONTINUE_MESSAGE);
 
         await()
-            .atMost(TWO_MINUTES)
+            .atMost(THREE_MINUTES)
             .until(this::awaitingAck);
 
         sendFinalAckToQueue();
 
         await()
-            .atMost(TWO_MINUTES)
+            .atMost(THREE_MINUTES)
             .until(this::transferComplete);
     }
 
