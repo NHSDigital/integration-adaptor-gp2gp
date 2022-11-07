@@ -29,10 +29,8 @@ public class AgentPersonMapper {
 
     public String mapAgentPerson(AgentDirectory.AgentKey agentKey, String agentDirectoryId) {
         var builder = PractitionerAgentPersonMapperParameters
-                .builder()
-                .agentId(agentDirectoryId);
-
-        AtomicReference<String> tempNameFromText = new AtomicReference<>("");
+            .builder()
+            .agentId(agentDirectoryId);
 
         if (agentKey.getPractitionerReference() != null) {
             messageContext.getInputBundleHolder()
@@ -51,8 +49,9 @@ public class AgentPersonMapper {
                         practitionerFamily.ifPresent(builder::practitionerFamilyName);
 
                         if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
-                            practitionerUnstructuredName.ifPresentOrElse
-                                (builder::practitionerUnstructuredName, () -> builder.practitionerFamilyName(UNKNOWN));
+                            practitionerUnstructuredName.ifPresentOrElse(
+                                builder::practitionerUnstructuredName, () -> builder.practitionerFamilyName(UNKNOWN)
+                            );
                         }
                     });
 
@@ -80,7 +79,7 @@ public class AgentPersonMapper {
     }
 
     private Optional<String> buildPractitionerUnstructuredName(Practitioner practitioner) {
-        if(practitioner.hasName() && practitioner.getNameFirstRep().hasText()) {
+        if (practitioner.hasName() && practitioner.getNameFirstRep().hasText()) {
             return Optional.of(practitioner.getNameFirstRep().getText());
         }
         return Optional.empty();
