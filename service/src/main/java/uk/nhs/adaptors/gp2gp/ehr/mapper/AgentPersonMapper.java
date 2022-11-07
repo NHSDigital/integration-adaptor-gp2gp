@@ -45,15 +45,14 @@ public class AgentPersonMapper {
 
                         var practitionerGiven = buildPractitionerGivenName(practitioner);
                         var practitionerFamily = buildPractitionerFamilyName(practitioner);
+                        var practitionerUnstructuredName = buildPractitionerUnstructuredName(practitioner);
 
                         practitionerGiven.ifPresent(builder::practitionerGivenName);
                         practitionerFamily.ifPresent(builder::practitionerFamilyName);
 
                         if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
-                            if(practitioner.getName().get(0).getText() != null){
-                                tempNameFromText.set(practitioner.getName().get(0).getText());
-                            }
-                            builder.practitionerFamilyName(UNKNOWN);
+                            practitionerUnstructuredName.ifPresentOrElse
+                                (builder::practitionerUnstructuredName, () -> builder.practitionerFamilyName(UNKNOWN));
                         }
                     });
 
@@ -77,15 +76,14 @@ public class AgentPersonMapper {
 
         buildPractitionerRole(agentKey).ifPresent(builder::practitionerRole);
 
+        return TemplateUtils.fillTemplate(AGENT_STATEMENT_TEMPLATE, builder.build());
+    }
 
-        var practitionerAgentPersonMapperParameters = builder.build();
-        var xmlAgentPerson = TemplateUtils.fillTemplate(AGENT_STATEMENT_TEMPLATE, practitionerAgentPersonMapperParameters);
-        var familyName = practitionerAgentPersonMapperParameters.getPractitionerFamilyName();
-        if(!familyName.equalsIgnoreCase("")){
-            var stringToBeReplaced = "\n                <family>Unknown</family>\n            ";
-            xmlAgentPerson = xmlAgentPerson.replace(stringToBeReplaced, tempNameFromText.get());
+    private Optional<String> buildPractitionerUnstructuredName(Practitioner practitioner) {
+        if(practitioner.hasName() && practitioner.getNameFirstRep().hasText()) {
+            return Optional.of(practitioner.getNameFirstRep().getText());
         }
-        return xmlAgentPerson;
+        return Optional.empty();
     }
 
     private Optional<String> buildPractitionerRole(AgentDirectory.AgentKey agentKey) {
