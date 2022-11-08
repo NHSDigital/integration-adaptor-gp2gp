@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
