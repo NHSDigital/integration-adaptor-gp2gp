@@ -1,0 +1,17 @@
+{
+    "resourceType": "Practitioner",
+    "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+    "meta": {
+        "versionId": "cf7c7d18eb75d97ef4893b516f40c58c",
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+        ]
+    },
+    "active": true,
+    "name": [
+        {
+            "use": "official",
+            "text": "Paula Allen"
+        }
+    ]
+}

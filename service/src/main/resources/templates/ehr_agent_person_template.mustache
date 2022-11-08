@@ -6,6 +6,10 @@
         </code>
         {{#practitioner}}
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            {{#practitionerUnstructuredName}}
+            <name>{{practitionerUnstructuredName}}</name>
+            {{/practitionerUnstructuredName}}
+            {{^practitionerUnstructuredName}}
             <name>
                 {{#practitionerPrefix}}
                 <prefix>{{practitionerPrefix}}</prefix>
@@ -17,11 +21,12 @@
                 <family>{{practitionerFamilyName}}</family>
                 {{/practitionerFamilyName}}
             </name>
+            {{/practitionerUnstructuredName}}
         </agentPerson>
         {{/practitioner}}
         {{#organization}}
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
-{{{organization}}}
+            {{{organization}}}
         </representedOrganization>
         {{/organization}}
     </Agent>
