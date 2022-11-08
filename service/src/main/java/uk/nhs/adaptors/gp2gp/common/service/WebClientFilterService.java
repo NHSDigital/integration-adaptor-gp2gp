@@ -72,8 +72,8 @@ public class WebClientFilterService {
             if (requestType.equals(RequestType.GPC)) {
                 return getErrorException(clientResponse, requestType);
             }
-            if (requestType.equals(RequestType.MHS_OUTBOUND) && httpStatus.is5xxServerError()) {
-                return Mono.error(new MhsServerErrorException("MHS responded with status code " + httpStatus.value()));
+            if (requestType.equals(RequestType.MHS_OUTBOUND) && clientResponse.statusCode().is5xxServerError()) {
+                return Mono.error(new MhsServerErrorException("MHS responded with status code " + clientResponse.statusCode().value()));
             }
 
             return getResponseError(clientResponse, requestType);
