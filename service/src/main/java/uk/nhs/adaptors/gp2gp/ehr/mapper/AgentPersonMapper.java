@@ -27,7 +27,8 @@ public class AgentPersonMapper {
     private final MessageContext messageContext;
 
     public String mapAgentPerson(AgentDirectory.AgentKey agentKey, String agentDirectoryId) {
-        var builder = PractitionerAgentPersonMapperParameters.builder()
+        var builder = PractitionerAgentPersonMapperParameters
+            .builder()
             .agentId(agentDirectoryId);
 
         if (agentKey.getPractitionerReference() != null) {
@@ -41,12 +42,15 @@ public class AgentPersonMapper {
 
                         var practitionerGiven = buildPractitionerGivenName(practitioner);
                         var practitionerFamily = buildPractitionerFamilyName(practitioner);
+                        var practitionerUnstructuredName = buildPractitionerUnstructuredName(practitioner);
 
                         practitionerGiven.ifPresent(builder::practitionerGivenName);
                         practitionerFamily.ifPresent(builder::practitionerFamilyName);
 
                         if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
-                            builder.practitionerFamilyName(UNKNOWN);
+                            practitionerUnstructuredName.ifPresentOrElse(
+                                builder::practitionerUnstructuredName, () -> builder.practitionerFamilyName(UNKNOWN)
+                            );
                         }
                     });
 
@@ -71,6 +75,13 @@ public class AgentPersonMapper {
         buildPractitionerRole(agentKey).ifPresent(builder::practitionerRole);
 
         return TemplateUtils.fillTemplate(AGENT_STATEMENT_TEMPLATE, builder.build());
+    }
+
+    private Optional<String> buildPractitionerUnstructuredName(Practitioner practitioner) {
+        if (practitioner.hasName() && practitioner.getNameFirstRep().hasText()) {
+            return Optional.of(practitioner.getNameFirstRep().getText());
+        }
+        return Optional.empty();
     }
 
     private Optional<String> buildPractitionerRole(AgentDirectory.AgentKey agentKey) {

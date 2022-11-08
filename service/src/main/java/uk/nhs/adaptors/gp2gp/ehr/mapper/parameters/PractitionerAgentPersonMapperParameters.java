@@ -15,4 +15,5 @@ public class PractitionerAgentPersonMapperParameters {
     private String practitionerFamilyName;
     private String organization;
     private boolean practitioner;
+    private String practitionerUnstructuredName;
 }
