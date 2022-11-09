@@ -1,18 +1,18 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+import javax.jms.Message;
+import javax.jms.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
-import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
-
-import javax.jms.Message;
-import javax.jms.Session;
 
 @Component
 @Slf4j
@@ -37,8 +37,7 @@ public class TaskConsumer {
                 LOGGER.info("Unable to handle taskQueue message_id: {}", messageID);
                 session.rollback();
             }
-
-        } catch (DataAccessResourceFailureException | MhsServerErrorException | MhsConnectionException e) {
+        } catch (DataAccessResourceFailureException | MhsConnectionException e) {
             LOGGER.trace("Caught {} and re-throwing it for the error handler", e.getClass().getName());
             throw e;
         } catch (Exception e) {

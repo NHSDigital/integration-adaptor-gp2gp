@@ -75,10 +75,6 @@ public class EhrStatusService {
                 .map(ackPending -> ackPending.getTypeCode().equals(NACK_TYPE_CODE))
                 .orElse(false)
 
-                && ackToRequestorOptional
-                .map(ackToRequester -> ackToRequester.getTypeCode().equals(NACK_TYPE_CODE))
-                .orElse(false)
-
                 && errorOptional.isPresent()) {
 
             return FAILED_NME;

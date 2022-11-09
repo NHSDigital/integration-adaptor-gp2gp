@@ -19,6 +19,7 @@ import org.springframework.dao.DataAccessResourceFailureException;
 
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskConsumerTest {
@@ -99,6 +100,18 @@ public class TaskConsumerTest {
         doThrow(DataAccessResourceFailureException.class).when(taskHandler).handle(message);
 
         assertThatExceptionOfType(DataAccessResourceFailureException.class)
+            .isThrownBy(() -> taskConsumer.receive(message, session));
+
+        verify(session, times(0)).rollback();
+        verify(message, times(0)).acknowledge();
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_TaskHandlerThrowsMhsConnectionException_Expect_ExceptionIsThrown() {
+        doThrow(MhsConnectionException.class).when(taskHandler).handle(message);
+
+        assertThatExceptionOfType(MhsConnectionException.class)
             .isThrownBy(() -> taskConsumer.receive(message, session));
 
         verify(session, times(0)).rollback();
