@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataAccessResourceFailureException;
 
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
@@ -31,6 +33,8 @@ import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ExtendWith(MockitoExtension.class)
@@ -278,6 +282,37 @@ public class TaskHandlerTest {
         assertThat(result).isFalse();
 
         verify(processingErrorHandler).handleGeneralProcessingError(any());
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_Handle_WithExecuteThrows_MhsConnectionException_Expect_ExceptionThrown() {
+        setUpContinueMessage();
+        doThrow(new MhsConnectionException("test exception")).when(taskExecutor).execute(any());
+
+        assertThatExceptionOfType(MhsConnectionException.class).isThrownBy(() -> taskHandler.handle(message));
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_Handle_WithDataAccessResourceFailureException_Expect_ExceptionThrown() {
+        setUpContinueMessage();
+        doThrow(new DataAccessResourceFailureException("test exception")).when(processFailureHandlingService).hasProcessFailed(any());
+
+        assertThatExceptionOfType(DataAccessResourceFailureException.class).isThrownBy(() -> taskHandler.handle(message));
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_Handle_WithMhsServerErrorException_Expect_ProcessFailed() {
+        setUpContinueMessage();
+        doThrow(new MhsServerErrorException("Test exception")).when(taskExecutor).execute(any());
+
+        var result = taskHandler.handle(message);
+        assertThat(result).isFalse();
+
+        verify(processingErrorHandler).handleGeneralProcessingError(any());
+
     }
 
     private void setupAckMessage(String typeCode) throws JMSException {

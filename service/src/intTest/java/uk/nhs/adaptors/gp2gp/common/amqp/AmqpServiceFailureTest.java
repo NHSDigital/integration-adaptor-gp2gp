@@ -130,19 +130,17 @@ public class AmqpServiceFailureTest {
     }
 
     @Test
-    public void When_TransferProcessed_WithMhsOutboundServiceServerError_Expect_TransferProcessedWhenServiceRecovers() {
+    public void When_TransferProcessed_WithMhsOutboundServiceServerError_Expect_TransferFailed() {
         // ensure method throws (at least) one more time than the value of GP2GP_AMQP_MAX_REDELIVERIES (default 3)
         doThrow(MhsServerErrorException.class)
             .doThrow(MhsServerErrorException.class)
-            .doThrow(MhsServerErrorException.class)
-            .doThrow(MhsServerErrorException.class)
-            .doThrow(MhsServerErrorException.class)
-            .doCallRealMethod()
             .when(sendEhrExtractCoreTaskExecutor).execute(any());
 
-        attemptTransfer();
+        sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
-        assertThat(transferComplete()).isTrue();
+        await().atMost(ONE_MINUTE).until(this::processFailed);
+        assertThat(processFailed()).isTrue();
+
     }
 
     @Test

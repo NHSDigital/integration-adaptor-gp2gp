@@ -8,7 +8,6 @@ import org.springframework.util.ErrorHandler;
 
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
-import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 
 @Component
 @Slf4j
@@ -16,7 +15,6 @@ public class JmsListenerErrorHandler implements ErrorHandler {
 
     private static final Map<Class<? extends RuntimeException>, String> RETRYABLE_EXCEPTION_MESSAGES = Map.of(
         DataAccessResourceFailureException.class, "Unable to access database",
-        MhsServerErrorException.class, "MHS Outbound responded with a server error",
         MhsConnectionException.class, "Unable to connect to MHS Outbound"
     );
 
