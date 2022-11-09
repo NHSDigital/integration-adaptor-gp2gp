@@ -23,7 +23,7 @@ import org.springframework.jms.support.converter.MessageConverter;
 public class AmqpConfiguration {
 
     private final JmsListenerErrorHandler jmsListenerErrorHandler;
-    private final static long TEN_SECONDS = 10000L;
+    private static final long TEN_SECONDS = 10000L;
 
     @Autowired
     public AmqpConfiguration(JmsListenerErrorHandler errorHandler) {
