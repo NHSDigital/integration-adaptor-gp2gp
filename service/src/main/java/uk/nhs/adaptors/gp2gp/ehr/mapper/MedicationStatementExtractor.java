@@ -13,7 +13,9 @@ import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
+import org.hl7.fhir.dstu3.model.MedicationStatement;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
 import org.hl7.fhir.instance.model.api.IPrimitiveType;
 
@@ -168,5 +170,27 @@ public class MedicationStatementExtractor {
             .build();
 
         return TemplateUtils.fillTemplate(IN_FULFILMENT_OF_TEMPLATE, inFulfilmentOfTemplateParameters);
+    }
+
+    public static Optional<CodeableConcept> extractEhrSupplyTypeCodeableConcept(MedicationRequest medicationRequest, MessageContext messageContext) {
+        var medicationStatements = messageContext.getInputBundleHolder().getResourcesOfType(MedicationStatement.class);
+        var medicationRequestReference = medicationRequest.getId();
+
+        var medicationStatement = medicationStatements.stream()
+            .filter(resource -> resource.getResourceType().equals(ResourceType.MedicationStatement))
+            .map(MedicationStatement.class::cast)
+            .filter(MedicationStatement::hasBasedOn)
+            .filter(statement -> statement.getBasedOn().stream()
+                .anyMatch(reference -> reference.getReference().equals(medicationRequestReference))
+            )
+            .findFirst();
+
+         return medicationStatement.flatMap(
+            statement -> statement.getExtension().stream()
+                .filter(extension -> extension.getUrlElement().getValue().equals("https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescribingAgency-1"))
+                .map(extension -> (CodeableConcept) extension.getValue())
+                .findFirst()
+        );
+
     }
 }
