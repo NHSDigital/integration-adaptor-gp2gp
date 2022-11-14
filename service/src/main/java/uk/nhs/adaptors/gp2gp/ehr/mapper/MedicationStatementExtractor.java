@@ -44,6 +44,7 @@ public class MedicationStatementExtractor {
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
     private static final String DEFAULT_QUANTITY_TEXT = "Unk UoM";
     private static final String NO_INFO_AVAILABLE = "No information available";
+    private static final String PRESCRIBING_AGENCY_EXTENSION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescribingAgency-1";
 
     public static String extractDispenseRequestQuantityText(MedicationRequest medicationRequest) {
         return medicationRequest.getDispenseRequest()
@@ -172,25 +173,26 @@ public class MedicationStatementExtractor {
         return TemplateUtils.fillTemplate(IN_FULFILMENT_OF_TEMPLATE, inFulfilmentOfTemplateParameters);
     }
 
-    public static Optional<CodeableConcept> extractEhrSupplyTypeCodeableConcept(MedicationRequest medicationRequest, MessageContext messageContext) {
+    public static Optional<CodeableConcept> extractEhrSupplyTypeCodeableConcept(MedicationRequest medicationRequest,
+        MessageContext messageContext) {
         var medicationStatements = messageContext.getInputBundleHolder().getResourcesOfType(MedicationStatement.class);
-        var medicationRequestReference = medicationRequest.getId();
 
         var medicationStatement = medicationStatements.stream()
             .filter(resource -> resource.getResourceType().equals(ResourceType.MedicationStatement))
             .map(MedicationStatement.class::cast)
             .filter(MedicationStatement::hasBasedOn)
             .filter(statement -> statement.getBasedOn().stream()
-                .anyMatch(reference -> reference.getReference().equals(medicationRequestReference))
+                .anyMatch(reference -> reference.getReference().equals(medicationRequest.getId()))
             )
             .findFirst();
 
-         return medicationStatement.flatMap(
+        return medicationStatement.flatMap(
             statement -> statement.getExtension().stream()
-                .filter(extension -> extension.getUrlElement().getValue().equals("https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescribingAgency-1"))
+                .filter(Extension::hasUrl)
+                .filter(extension -> extension.getUrlElement().getValue().equals(PRESCRIBING_AGENCY_EXTENSION_URL))
+                .filter(Extension::hasValue)
                 .map(extension -> (CodeableConcept) extension.getValue())
                 .findFirst()
         );
-
     }
 }

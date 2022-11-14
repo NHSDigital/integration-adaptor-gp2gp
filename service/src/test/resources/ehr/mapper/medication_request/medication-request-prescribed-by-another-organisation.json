@@ -1,0 +1,48 @@
+{
+    "resourceType": "MedicationRequest",
+    "id": "mr-e95ecc90-43af-11ed-8306-0a0bbb679524",
+    "identifier": [
+        {
+            "system": "https://medicus.health",
+            "value": "mr-e95ecc90-43af-11ed-8306-0a0bbb679524"
+        }
+    ],
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+        ]
+    },
+    "extension": [
+        {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
+            "valueCodeableConcept": {
+                "text": "No information available"
+            }
+        }
+    ],
+    "status": "active",
+    "intent": "plan",
+    "medicationReference": {
+        "reference": "Medication/412556009"
+    },
+    "subject": {
+        "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+    },
+    "authoredOn": "2022-10-04",
+    "recorder": {
+        "reference": "Practitioner/1332aa9c-28d6-11eb-adc1-0242ac120002"
+    },
+    "dosageInstruction": [
+        {
+            "text": "0.1ml once per day"
+        }
+    ],
+    "dispenseRequest": {
+        "validityPeriod": {
+            "start": "2022-10-04"
+        }
+    },
+    "context": {
+        "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+    }
+}

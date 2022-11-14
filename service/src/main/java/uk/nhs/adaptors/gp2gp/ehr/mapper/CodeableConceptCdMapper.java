@@ -36,6 +36,13 @@ public class CodeableConceptCdMapper {
     private static final String PROBLEM_DISPLAY_NAME = "Problem";
     private static final String ACTIVE_CLINICAL_STATUS = "active";
     private static final String RESOLVED_CLINICAL_STATUS = "resolved";
+    private static final String PRESCRIBING_AGENCY_GP_PRACTICE_CODE = "prescribed-at-gp-practice";
+    private static final String PRESCRIBING_AGENCY_PREVIOUS_PRACTICE_CODE = "prescribed-by-previous-practice";
+    private static final String PRESCRIBING_AGENCY_ANOTHER_ORGANISATION_CODE = "prescribed-by-another-organisation";
+    private static final String EHR_SUPPLY_TYPE_NHS_PRESCRIPTION_CODE = "394823007";
+    private static final String EHR_SUPPLY_TYPE_NHS_PRESCRIPTION_DISPLAY = "NHS Prescription";
+    private static final String EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_CODE = "394828003";
+    private static final String EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_DISPLAY = "Prescription by another organisation";
 
     public String mapCodeableConceptToCd(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
@@ -157,14 +164,14 @@ public class CodeableConceptCdMapper {
         }
 
         switch (prescribingAgency.orElseThrow().getCode()) {
-            case "prescribed-at-gp-practice":
-            case "prescribed-by-previous-practice":
-                code = "394823007";
-                displayText = "NHS Prescription";
+            case PRESCRIBING_AGENCY_GP_PRACTICE_CODE:
+            case PRESCRIBING_AGENCY_PREVIOUS_PRACTICE_CODE:
+                code = EHR_SUPPLY_TYPE_NHS_PRESCRIPTION_CODE;
+                displayText = EHR_SUPPLY_TYPE_NHS_PRESCRIPTION_DISPLAY;
                 break;
-            case "prescribed-by-another-organisation":
-                code = "394828003";
-                displayText = "Prescription by another organisation";
+            case PRESCRIBING_AGENCY_ANOTHER_ORGANISATION_CODE:
+                code = EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_CODE;
+                displayText = EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_DISPLAY;
                 break;
             default:
                 return Optional.empty();
@@ -176,9 +183,8 @@ public class CodeableConceptCdMapper {
             .mainDisplayName(displayText);
 
         return Optional.of(TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build()));
-
     }
-    
+
     private Optional<Coding> findPrescribingAgency(CodeableConcept codeableConcept) {
         return codeableConcept.getCoding()
             .stream()
@@ -271,7 +277,7 @@ public class CodeableConceptCdMapper {
     private boolean isSnomed(Coding coding) {
         return coding.hasSystem() && coding.getSystem().equals(SNOMED_SYSTEM);
     }
-    
+
     private boolean isPrescribingAgency(Coding coding) {
         return coding.hasSystem() && coding.getSystem().equals(CARE_CONNECT_PRESCRIBING_AGENCY_SYSTEM);
     }

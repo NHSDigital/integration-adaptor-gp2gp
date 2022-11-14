@@ -303,7 +303,7 @@ public class MedicationStatementMapper {
     }
 
     private Optional<String> buildEhrSupplyTypeCode(MedicationRequest medicationRequest) {
-        var ehrSupplyTypeCodeableConcept = extractEhrSupplyTypeCodeableConcept(medicationRequest, messageContext);
-        return ehrSupplyTypeCodeableConcept.flatMap(codeableConceptCdMapper::mapCodeableConceptToCdForEhrSupplyType);
+        return extractEhrSupplyTypeCodeableConcept(medicationRequest, messageContext)
+            .flatMap(codeableConceptCdMapper::mapCodeableConceptToCdForEhrSupplyType);
     }
 }
