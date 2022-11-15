@@ -42,12 +42,6 @@ public class EhrStatusServiceTest {
         .ehrRequest(EhrExtractStatus.EhrRequest.builder().toAsid(TO_ASID_CODE).fromAsid(FROM_ASID_CODE).build())
         .build();
 
-    private static final EhrExtractStatus MISSING_ASID_EHR_EXTRACT_STATUS =
-        EhrExtractStatus.builder()
-            .ackPending(EhrExtractStatus.AckPending.builder().typeCode("AA").build())
-            .ackToRequester(EhrExtractStatus.AckToRequester.builder().typeCode("AA").build())
-            .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().conversationClosed(Instant.now()).build())
-            .build();
     private static final EhrExtractStatus FAILED_NME_EXTRACT_STATUS = EhrExtractStatus.builder()
         .ackPending(EhrExtractStatus.AckPending.builder().typeCode("AE").build())
         .ackToRequester(EhrExtractStatus.AckToRequester.builder().typeCode("AE").build())
