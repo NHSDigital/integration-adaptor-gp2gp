@@ -16,6 +16,8 @@ public class EhrStatus {
     private List<EhrExtractStatus.EhrReceivedAcknowledgement> migrationLog;
     private MigrationStatus migrationStatus;
     private Instant originalRequestDate;
+    private String fromAsid;
+    private String toAsid;
 
     @Builder
     @Data
