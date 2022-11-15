@@ -1,0 +1,69 @@
+{
+    "resourceType": "MedicationRequest",
+    "id": "mr-97efbccf-fb40-4f6d-b40a-bbdcc18ba9f0",
+    "identifier": [
+        {
+            "system": "https://medicus.health",
+            "value": "mr-97efbccf-fb40-4f6d-b40a-bbdcc18ba9f0"
+        }
+    ],
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+        ]
+    },
+    "extension": [
+        {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
+            "valueCodeableConcept": {
+                "coding": [
+                    {
+                        "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescriptionType-1",
+                        "code": "acute",
+                        "display": "Acute"
+                    }
+                ]
+            }
+        }
+    ],
+    "status": "completed",
+    "intent": "plan",
+    "medicationReference": {
+        "reference": "Medication/26148711000001101"
+    },
+    "subject": {
+        "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+    },
+    "authoredOn": "2022-10-04",
+    "recorder": {
+        "reference": "Practitioner/1332aa9c-28d6-11eb-adc1-0242ac120002"
+    },
+    "requester": {
+        "agent": {
+            "reference": "Organization/F85003"
+        }
+    },
+    "dosageInstruction": [
+        {
+            "text": "One puff as needed. Max 10 doses per day"
+        }
+    ],
+    "dispenseRequest": {
+        "validityPeriod": {
+            "start": "2022-10-04",
+            "end": "2022-11-01"
+        },
+        "quantity": {
+            "value": 1,
+            "unit": "dose"
+        },
+        "expectedSupplyDuration": {
+            "value": 28,
+            "system": "http://unitsofmeasure.org",
+            "code": "d"
+        }
+    },
+    "context": {
+        "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+    }
+}

@@ -1,0 +1,1002 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "id": "00d756ae-360d-11ed-95ee-060b232f1aa2",
+                "meta": {
+                    "versionId": "b054cee05d5843b5d9e856b10c56d79a",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1",
+                        "extension": [
+                            {
+                                "url": "registrationPeriod",
+                                "valuePeriod": {
+                                    "start": "2000-06-29"
+                                }
+                            },
+                            {
+                                "url": "registrationType",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-RegistrationType-1",
+                                            "code": "R",
+                                            "display": "Regular"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-NHSNumberVerificationStatus-1",
+                                            "code": "01",
+                                            "display": "Number present and verified"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "system": "https://fhir.nhs.uk/Id/nhs-number",
+                        "value": "9693142837"
+                    }
+                ],
+                "active": true,
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Watson",
+                        "prefix": [
+                            "Mr"
+                        ],
+                        "given": [
+                            "Sam"
+                        ]
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "2020-12-22",
+                "address": [
+                    {
+                        "use": "home",
+                        "line": [
+                            "126 GREEN DRAGON LANE",
+                            "LONDON"
+                        ],
+                        "postalCode": "N21 1HA",
+                        "country": "GBR"
+                    }
+                ],
+                "managingOrganization": {
+                    "reference": "Organization/F85003"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "4a18bd73-28d9-11eb-adc1-213bc7ad69f8",
+                "meta": {
+                    "versionId": "cf7c7d18eb75d97ef4893b516f40c58c",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "active": true,
+                "name": [
+                    {
+                        "use": "official",
+                        "text": "Paula Allen"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "F85003",
+                "meta": {
+                    "versionId": "46b094770b261cb692f88dd406ba5c31",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "F85003"
+                    }
+                ],
+                "active": true,
+                "name": "Riley House GP Practice",
+                "address": [
+                    {
+                        "use": "work",
+                        "line": [
+                            "101 Yvonne Falls"
+                        ],
+                        "city": "West Carey",
+                        "district": "Norfolk",
+                        "postalCode": "MK3 7SA",
+                        "country": "GBR"
+                    }
+                ],
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "+441273749184",
+                        "use": "work"
+                    },
+                    {
+                        "system": "fax",
+                        "value": "+441455338473",
+                        "use": "work"
+                    },
+                    {
+                        "system": "email",
+                        "value": "bakers.hill@medicus.health",
+                        "use": "work"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Location",
+                "id": "c1073d6b-28d9-11eb-adc1-2a09fc8b15ed",
+                "meta": {
+                    "versionId": "337ee2cb549a0c54a2819eaf9ddc9e7a",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Location-1"
+                    ]
+                },
+                "status": "active",
+                "name": "Andover Site",
+                "address": [
+                    {
+                        "use": "work",
+                        "line": [
+                            "872 Melisa Spurs"
+                        ],
+                        "city": "Legrosberg",
+                        "district": "Cornwall",
+                        "postalCode": "W5 9TG",
+                        "country": "GBR"
+                    }
+                ],
+                "managingOrganization": {
+                    "reference": "Organization/F85003"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "1332aa9c-28d6-11eb-adc1-0242ac120002",
+                "meta": {
+                    "versionId": "d638bbaf8a63b7bfd23de016e0ecbb65",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "active": true,
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Lincoln",
+                        "prefix": [
+                            "Dr"
+                        ],
+                        "given": [
+                            "Lara",
+                            "Lona"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationStatement",
+                "id": "ms-e95ecc90-43af-11ed-8306-0a0bbb679524",
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "ms-e95ecc90-43af-11ed-8306-0a0bbb679524"
+                    }
+                ],
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationStatement-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescribingAgency-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescribingAgency-1",
+                                    "code": "prescribed-by-another-organisation",
+                                    "display": "Prescribed by another organisation"
+                                }
+                            ],
+                            "text": "Over the counter medication"
+                        }
+                    }
+                ],
+                "context": {
+                    "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                },
+                "status": "active",
+                "basedOn": [
+                    {
+                        "reference": "MedicationRequest/mr-e95ecc90-43af-11ed-8306-0a0bbb679524"
+                    }
+                ],
+                "medicationReference": {
+                    "reference": "Medication/412556009"
+                },
+                "effectivePeriod": {
+                    "start": "2022-10-04"
+                },
+                "dateAsserted": "2022-10-04",
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "taken": "unk",
+                "dosage": [
+                    {
+                        "text": "0.1ml once per day"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationRequest",
+                "id": "mr-e95ecc90-43af-11ed-8306-0a0bbb679524",
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "mr-e95ecc90-43af-11ed-8306-0a0bbb679524"
+                    }
+                ],
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
+                        "valueCodeableConcept": {
+                            "text": "No information available"
+                        }
+                    }
+                ],
+                "status": "active",
+                "intent": "plan",
+                "medicationReference": {
+                    "reference": "Medication/412556009"
+                },
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "authoredOn": "2022-10-04",
+                "recorder": {
+                    "reference": "Practitioner/1332aa9c-28d6-11eb-adc1-0242ac120002"
+                },
+                "dosageInstruction": [
+                    {
+                        "text": "0.1ml once per day"
+                    }
+                ],
+                "dispenseRequest": {
+                    "validityPeriod": {
+                        "start": "2022-10-04"
+                    }
+                },
+                "context": {
+                    "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Medication",
+                "id": "412556009",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Medication-1"
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "412556009",
+                            "display": "Co-codamol"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationStatement",
+                "id": "ms-0614dac8-43b0-11ed-bf45-0a0bbb679524",
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "ms-0614dac8-43b0-11ed-bf45-0a0bbb679524"
+                    }
+                ],
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationStatement-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescribingAgency-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescribingAgency-1",
+                                    "code": "prescribed-at-gp-practice",
+                                    "display": "Prescribed at GP practice"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatementLastIssueDate-1",
+                        "valueDateTime": "2022-10-04"
+                    }
+                ],
+                "context": {
+                    "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                },
+                "status": "completed",
+                "basedOn": [
+                    {
+                        "reference": "MedicationRequest/mr-0614dac8-43b0-11ed-bf45-0a0bbb679524"
+                    }
+                ],
+                "medicationReference": {
+                    "reference": "Medication/26148711000001101"
+                },
+                "effectivePeriod": {
+                    "start": "2022-10-04",
+                    "end": "2022-11-01"
+                },
+                "dateAsserted": "2022-10-04",
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "taken": "unk",
+                "dosage": [
+                    {
+                        "text": "One puff as needed. Max 10 doses per day"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationRequest",
+                "id": "mr-0614dac8-43b0-11ed-bf45-0a0bbb679524",
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "mr-0614dac8-43b0-11ed-bf45-0a0bbb679524"
+                    }
+                ],
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescriptionType-1",
+                                    "code": "acute",
+                                    "display": "Acute"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "status": "completed",
+                "intent": "plan",
+                "medicationReference": {
+                    "reference": "Medication/26148711000001101"
+                },
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "authoredOn": "2022-10-04",
+                "recorder": {
+                    "reference": "Practitioner/1332aa9c-28d6-11eb-adc1-0242ac120002"
+                },
+                "requester": {
+                    "agent": {
+                        "reference": "Organization/F85003"
+                    }
+                },
+                "dosageInstruction": [
+                    {
+                        "text": "One puff as needed. Max 10 doses per day"
+                    }
+                ],
+                "dispenseRequest": {
+                    "validityPeriod": {
+                        "start": "2022-10-04",
+                        "end": "2022-11-01"
+                    },
+                    "quantity": {
+                        "value": 1,
+                        "unit": "dose"
+                    },
+                    "expectedSupplyDuration": {
+                        "value": 28,
+                        "system": "http://unitsofmeasure.org",
+                        "code": "d"
+                    }
+                },
+                "context": {
+                    "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationStatement",
+                "id": "ms-a231e73b-e631-4c87-82c2-e2e3d45d6b84",
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "ms-a231e73b-e631-4c87-82c2-e2e3d45d6b84"
+                    }
+                ],
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationStatement-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescribingAgency-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescribingAgency-1",
+                                    "code": "prescribed-by-previous-practice",
+                                    "display": "Prescribed by previous practice"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatementLastIssueDate-1",
+                        "valueDateTime": "2022-10-04"
+                    }
+                ],
+                "context": {
+                    "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                },
+                "status": "completed",
+                "basedOn": [
+                    {
+                        "reference": "MedicationRequest/mr-4c816c87-09b5-4bec-bae4-e81855758da7"
+                    }
+                ],
+                "medicationReference": {
+                    "reference": "Medication/26148711000001101"
+                },
+                "effectivePeriod": {
+                    "start": "2022-10-04",
+                    "end": "2022-11-01"
+                },
+                "dateAsserted": "2022-10-04",
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "taken": "unk",
+                "dosage": [
+                    {
+                        "text": "One puff as needed. Max 10 doses per day"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationRequest",
+                "id": "mr-4c816c87-09b5-4bec-bae4-e81855758da7",
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "mr-4c816c87-09b5-4bec-bae4-e81855758da7"
+                    }
+                ],
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescriptionType-1",
+                                    "code": "acute",
+                                    "display": "Acute"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "status": "completed",
+                "intent": "plan",
+                "medicationReference": {
+                    "reference": "Medication/26148711000001101"
+                },
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "authoredOn": "2022-10-04",
+                "recorder": {
+                    "reference": "Practitioner/1332aa9c-28d6-11eb-adc1-0242ac120002"
+                },
+                "requester": {
+                    "agent": {
+                        "reference": "Organization/F85003"
+                    }
+                },
+                "dosageInstruction": [
+                    {
+                        "text": "One puff as needed. Max 10 doses per day"
+                    }
+                ],
+                "dispenseRequest": {
+                    "validityPeriod": {
+                        "start": "2022-10-04",
+                        "end": "2022-11-01"
+                    },
+                    "quantity": {
+                        "value": 1,
+                        "unit": "dose"
+                    },
+                    "expectedSupplyDuration": {
+                        "value": 28,
+                        "system": "http://unitsofmeasure.org",
+                        "code": "d"
+                    }
+                },
+                "context": {
+                    "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationStatement",
+                "id": "ms-cff96f1d-0abc-47f1-8549-5ebb4a2c22a9",
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "ms-cff96f1d-0abc-47f1-8549-5ebb4a2c22a9"
+                    }
+                ],
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationStatement-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescribingAgency-1",
+                        "valueCodeableConcept": {
+                            "coding": []
+                        }
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatementLastIssueDate-1",
+                        "valueDateTime": "2022-10-04"
+                    }
+                ],
+                "context": {
+                    "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                },
+                "status": "completed",
+                "basedOn": [
+                    {
+                        "reference": "MedicationRequest/mr-4f8728a6-e2d1-49e6-8f29-a6bdb8781b65"
+                    }
+                ],
+                "medicationReference": {
+                    "reference": "Medication/26148711000001101"
+                },
+                "effectivePeriod": {
+                    "start": "2022-10-04",
+                    "end": "2022-11-01"
+                },
+                "dateAsserted": "2022-10-04",
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "taken": "unk",
+                "dosage": [
+                    {
+                        "text": "One puff as needed. Max 10 doses per day"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationRequest",
+                "id": "mr-4f8728a6-e2d1-49e6-8f29-a6bdb8781b65",
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "mr-4c816c87-09b5-4bec-bae4-e81855758da7"
+                    }
+                ],
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescriptionType-1",
+                                    "code": "acute",
+                                    "display": "Acute"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "status": "completed",
+                "intent": "plan",
+                "medicationReference": {
+                    "reference": "Medication/26148711000001101"
+                },
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "authoredOn": "2022-10-04",
+                "recorder": {
+                    "reference": "Practitioner/1332aa9c-28d6-11eb-adc1-0242ac120002"
+                },
+                "requester": {
+                    "agent": {
+                        "reference": "Organization/F85003"
+                    }
+                },
+                "dosageInstruction": [
+                    {
+                        "text": "One puff as needed. Max 10 doses per day"
+                    }
+                ],
+                "dispenseRequest": {
+                    "validityPeriod": {
+                        "start": "2022-10-04",
+                        "end": "2022-11-01"
+                    },
+                    "quantity": {
+                        "value": 1,
+                        "unit": "dose"
+                    },
+                    "expectedSupplyDuration": {
+                        "value": 28,
+                        "system": "http://unitsofmeasure.org",
+                        "code": "d"
+                    }
+                },
+                "context": {
+                    "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationStatement",
+                "id": "ms-f4afb1d5-d6d1-431f-9dc9-15fc6c363ab6",
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "ms-f4afb1d5-d6d1-431f-9dc9-15fc6c363ab6"
+                    }
+                ],
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationStatement-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescribingAgency-1"
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatementLastIssueDate-1",
+                        "valueDateTime": "2022-10-04"
+                    }
+                ],
+                "context": {
+                    "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                },
+                "status": "completed",
+                "basedOn": [
+                    {
+                        "reference": "MedicationRequest/mr-97efbccf-fb40-4f6d-b40a-bbdcc18ba9f0"
+                    }
+                ],
+                "medicationReference": {
+                    "reference": "Medication/26148711000001101"
+                },
+                "effectivePeriod": {
+                    "start": "2022-10-04",
+                    "end": "2022-11-01"
+                },
+                "dateAsserted": "2022-10-04",
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "taken": "unk",
+                "dosage": [
+                    {
+                        "text": "One puff as needed. Max 10 doses per day"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationRequest",
+                "id": "mr-97efbccf-fb40-4f6d-b40a-bbdcc18ba9f0",
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "mr-97efbccf-fb40-4f6d-b40a-bbdcc18ba9f0"
+                    }
+                ],
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescriptionType-1",
+                                    "code": "acute",
+                                    "display": "Acute"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "status": "completed",
+                "intent": "plan",
+                "medicationReference": {
+                    "reference": "Medication/26148711000001101"
+                },
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "authoredOn": "2022-10-04",
+                "recorder": {
+                    "reference": "Practitioner/1332aa9c-28d6-11eb-adc1-0242ac120002"
+                },
+                "requester": {
+                    "agent": {
+                        "reference": "Organization/F85003"
+                    }
+                },
+                "dosageInstruction": [
+                    {
+                        "text": "One puff as needed. Max 10 doses per day"
+                    }
+                ],
+                "dispenseRequest": {
+                    "validityPeriod": {
+                        "start": "2022-10-04",
+                        "end": "2022-11-01"
+                    },
+                    "quantity": {
+                        "value": 1,
+                        "unit": "dose"
+                    },
+                    "expectedSupplyDuration": {
+                        "value": 28,
+                        "system": "http://unitsofmeasure.org",
+                        "code": "d"
+                    }
+                },
+                "context": {
+                    "reference": "Encounter/e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Medication",
+                "id": "26148711000001101",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Medication-1"
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "26148711000001101",
+                            "display": "Beclometasone 100micrograms/dose / Formoterol 6micrograms/dose dry powder inhaler"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Encounter",
+                "id": "e61ec0cc-43ae-11ed-ba7c-0a0bbb679524",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Encounter-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://medicus.health",
+                        "value": "e61ec0cc-43ae-11ed-ba7c-0a0bbb679524"
+                    }
+                ],
+                "status": "finished",
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "325861000000105",
+                                "display": "Face to face consultation",
+                                "extension": [
+                                    {
+                                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                        "extension": [
+                                            {
+                                                "url": "descriptionId",
+                                                "valueId": "600731000000118"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/00d756ae-360d-11ed-95ee-060b232f1aa2"
+                },
+                "participant": [
+                    {
+                        "type": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                                        "code": "PPRF",
+                                        "display": "Primary Performer"
+                                    }
+                                ]
+                            }
+                        ],
+                        "individual": {
+                            "reference": "Practitioner/1332aa9c-28d6-11eb-adc1-0242ac120002"
+                        }
+                    },
+                    {
+                        "type": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                                        "code": "PART",
+                                        "display": "Participant"
+                                    }
+                                ]
+                            }
+                        ],
+                        "individual": {
+                            "reference": "Practitioner/4a18bd73-28d9-11eb-adc1-213bc7ad69f8"
+                        }
+                    },
+                    {
+                        "type": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                                        "code": "PART",
+                                        "display": "Participant"
+                                    }
+                                ]
+                            }
+                        ],
+                        "individual": {
+                            "display": "translator"
+                        }
+                    },
+                    {
+                        "type": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-ParticipantType-1",
+                                        "code": "REC",
+                                        "display": "Recorder"
+                                    }
+                                ]
+                            }
+                        ],
+                        "individual": {
+                            "reference": "Practitioner/1332aa9c-28d6-11eb-adc1-0242ac120002"
+                        }
+                    }
+                ],
+                "period": {
+                    "start": "2022-10-04T07:36:00+01:00"
+                },
+                "location": [
+                    {
+                        "location": {
+                            "reference": "Location/c1073d6b-28d9-11eb-adc1-2a09fc8b15ed"
+                        }
+                    }
+                ],
+                "serviceProvider": {
+                    "reference": "Organization/F85003"
+                }
+            }
+        }
+    ]
+}

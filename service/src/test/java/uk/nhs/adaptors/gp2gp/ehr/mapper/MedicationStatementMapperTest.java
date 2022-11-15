@@ -2,9 +2,10 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 import java.io.IOException;
@@ -25,6 +26,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
@@ -37,6 +40,8 @@ public class MedicationStatementMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/medication_request/";
     private static final String INPUT_JSON_BUNDLE = TEST_FILE_DIRECTORY + "fhir-bundle.json";
+    private static final String INPUT_JSON_BUNDLE_WITH_MEDICATION_STATEMENTS = TEST_FILE_DIRECTORY
+        + "fhir-bundle-with-medication-statements.json";
     private static final String INPUT_JSON_WITH_INVALID_INTENT = TEST_FILE_DIRECTORY + "medication-request-with-invalid-intent.json";
     private static final String INPUT_JSON_WITH_NO_VALIDITY_PERIOD = TEST_FILE_DIRECTORY
         + "medication-request-with-no-validity-period.json";
@@ -135,7 +140,20 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-requester-agent-as-org.json";
     private static final String INPUT_JSON_WITH_REQUESTER_ORG_AND_ON_BEHALF_OF = TEST_FILE_DIRECTORY
         + "medication-request-with-requester-org-and-on-behalf-of.json";
-
+    private static final String INPUT_JSON_WITH_PRESCRIBED_BY_ANOTHER_ORG_IN_BUNDLE = TEST_FILE_DIRECTORY
+        + "medication-request-prescribed-by-another-organisation.json";
+    private static final String OUTPUT_XML_WITH_PRESCRIBED_BY_ANOTHER_ORG = TEST_FILE_DIRECTORY
+        + "medication-statement-prescribed-by-another-organisation.xml";
+    private static final String INPUT_JSON_WITH_PRESCRIBED_BY_GP_IN_BUNDLE = TEST_FILE_DIRECTORY
+        + "medication-request-prescribed-by-gp-practice.json";
+    private static final String OUTPUT_XML_NHS_PRESCRIPTION = TEST_FILE_DIRECTORY
+        + "medication-statement-nhs-prescription.xml";
+    private static final String INPUT_JSON_WITH_PRESCRIBED_BY_PREVIOUS_PRACTICE_IN_BUNDLE = TEST_FILE_DIRECTORY
+        + "medication-request-prescribed-by-previous-practice.json";
+    private static final String INPUT_JSON_WITH_PRESCRIBING_AGENCY_ERROR_EMPTY_CODING = TEST_FILE_DIRECTORY
+        + "medication-request-empty-prescribing-agency-coding-array.json";
+    private static final String INPUT_JSON_WITH_PRESCRIBING_AGENCY_ERROR_MISSING_CODEABLE_CONCEPT = TEST_FILE_DIRECTORY
+        + "medication-request-missing-prescribing-agency-codeable-concept.json";
 
     private static final String PRACTITIONER_RESOURCE_1 = "Practitioner/1";
     private static final String PRACTITIONER_RESOURCE_2 = "Practitioner/2";
@@ -333,5 +351,61 @@ public class MedicationStatementMapperTest {
         verify(agentDirectoryMock).getAgentId(agent.capture());
 
         assertThat(agent.getValue().getReference()).isEqualTo(agentId);
+    }
+
+    private static Stream<Arguments> resourceFilesWithMedicationStatement() {
+        return Stream.of(
+            Arguments.of(INPUT_JSON_WITH_PRESCRIBED_BY_ANOTHER_ORG_IN_BUNDLE, OUTPUT_XML_WITH_PRESCRIBED_BY_ANOTHER_ORG),
+            Arguments.of(INPUT_JSON_WITH_PRESCRIBED_BY_GP_IN_BUNDLE, OUTPUT_XML_NHS_PRESCRIPTION),
+            Arguments.of(INPUT_JSON_WITH_PRESCRIBED_BY_PREVIOUS_PRACTICE_IN_BUNDLE, OUTPUT_XML_NHS_PRESCRIPTION),
+            Arguments.of(INPUT_JSON_WITH_PRESCRIBING_AGENCY_ERROR_EMPTY_CODING, OUTPUT_XML_NHS_PRESCRIPTION),
+            Arguments.of(INPUT_JSON_WITH_PRESCRIBING_AGENCY_ERROR_MISSING_CODEABLE_CONCEPT, OUTPUT_XML_NHS_PRESCRIPTION)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("resourceFilesWithMedicationStatement")
+    public void When_MappingMedicationRequest_WithMedicationStateMent_Expect_PrescribingAgencyMappedToSupplyType(
+        String inputJson, String outputXml) throws IOException {
+
+        var expected = ResourceTestFileUtils.getFileContent(outputXml);
+
+        when(mockRandomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        codeableConceptCdMapper = new CodeableConceptCdMapper();
+        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE_WITH_MEDICATION_STATEMENTS);
+        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+
+        var messageContextMock = mock(MessageContext.class);
+        var agentDirectoryMock = mock(AgentDirectory.class);
+        var idMapper = new IdMapper(mockRandomIdGeneratorService);
+        var medicationRequestIdMapper = new MedicationRequestIdMapper(mockRandomIdGeneratorService);
+
+        when(messageContextMock.getIdMapper()).thenReturn(idMapper);
+        when(messageContextMock.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
+        when(messageContextMock.getMedicationRequestIdMapper()).thenReturn(medicationRequestIdMapper);
+        when(messageContextMock.getAgentDirectory()).thenReturn(agentDirectoryMock);
+
+        medicationStatementMapper = new MedicationStatementMapper(messageContextMock, codeableConceptCdMapper,
+            new ParticipantMapper(), mockRandomIdGeneratorService);
+
+        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
+        MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
+        var outputString = medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
+
+        assertXmlIsEqual(outputString, expected);
+
+    }
+
+    private void assertXmlIsEqual(String outputString, String expected) {
+
+        Diff diff = DiffBuilder.compare(outputString).withTest(expected)
+            .checkForIdentical()
+            .ignoreWhitespace()
+            .build();
+
+        assertThat(diff.hasDifferences())
+            .as("Xml is not equal: " + System.lineSeparator() + diff.fullDescription())
+            .isFalse();
+
     }
 }

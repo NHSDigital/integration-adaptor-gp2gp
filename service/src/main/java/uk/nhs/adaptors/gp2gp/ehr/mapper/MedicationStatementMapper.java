@@ -1,11 +1,11 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityTextFromQuantity;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractIdFromPlanMedicationRequestReference;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityText;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractRepeatValue;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityTextFromQuantity;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractEhrSupplyTypeCodeableConcept;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractIdFromPlanMedicationRequestReference;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractRepeatValue;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedAvailabilityTime;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedCode;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedText;
@@ -20,7 +20,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Medication;
@@ -35,6 +34,7 @@ import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -95,8 +95,9 @@ public class MedicationStatementMapper {
         var ehrSupplyDiscontinueReasonText = buildStatusReasonStoppedText(medicationRequest);
         var basedOn = buildBasedOn(medicationRequest);
         var participant = buildParticipant(medicationRequest);
+        var ehrSupplyTypeCode = buildEhrSupplyTypeCode(medicationRequest);
 
-        var medicationStatementTemplateParameters = MedicationStatementTemplateParameters.builder()
+        var medicationStatementTemplateParametersBuilder = MedicationStatementTemplateParameters.builder()
             .medicationStatementId(medicationStatementId)
             .statusCode(statusCode)
             .effectiveTime(effectiveTime)
@@ -114,13 +115,14 @@ public class MedicationStatementMapper {
             .ehrSupplyDiscontinueAvailabilityTime(ehrSupplyDiscontinueAvailabilityTime)
             .ehrSupplyDiscontinueReasonText(ehrSupplyDiscontinueReasonText)
             .basedOn(basedOn)
-            .participant(participant)
-            .build();
+            .participant(participant);
+
+        ehrSupplyTypeCode.ifPresent(medicationStatementTemplateParametersBuilder::ehrSupplyTypeCode);
 
         final var template = DISPLAY_TO_TEMPLATE_MAPPER.apply(medicationRequest.getIntent().getDisplay())
             .orElseThrow(() -> new EhrMapperException("Could not resolve Medication Request intent"));
 
-        return TemplateUtils.fillTemplate(template, medicationStatementTemplateParameters);
+        return TemplateUtils.fillTemplate(template, medicationStatementTemplateParametersBuilder.build());
     }
 
     private String buildStatusCode(MedicationRequest medicationRequest) {
@@ -298,5 +300,10 @@ public class MedicationStatementMapper {
 
     private static Predicate<Reference> buildPredicateReferenceIsA(@NonNull ResourceType type) {
         return reference -> type.name().equals(reference.getReferenceElement().getResourceType());
+    }
+
+    private Optional<String> buildEhrSupplyTypeCode(MedicationRequest medicationRequest) {
+        return extractEhrSupplyTypeCodeableConcept(medicationRequest, messageContext)
+            .flatMap(codeableConceptCdMapper::mapCodeableConceptToCdForEhrSupplyType);
     }
 }

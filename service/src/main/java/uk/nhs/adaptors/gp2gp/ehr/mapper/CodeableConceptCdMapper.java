@@ -27,6 +27,7 @@ public class CodeableConceptCdMapper {
     private static final Mustache CODEABLE_CONCEPT_CD_TEMPLATE = TemplateUtils
         .loadTemplate("codeable_concept_cd_template.mustache");
     private static final String SNOMED_SYSTEM = "http://snomed.info/sct";
+    private static final String CARE_CONNECT_PRESCRIBING_AGENCY_SYSTEM = "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescribingAgency-1";
     private static final String SNOMED_SYSTEM_CODE = "2.16.840.1.113883.2.1.3.2.4.15";
     private static final String DESCRIPTION_ID = "descriptionId";
     private static final String DESCRIPTION_DISPLAY = "descriptionDisplay";
@@ -35,6 +36,13 @@ public class CodeableConceptCdMapper {
     private static final String PROBLEM_DISPLAY_NAME = "Problem";
     private static final String ACTIVE_CLINICAL_STATUS = "active";
     private static final String RESOLVED_CLINICAL_STATUS = "resolved";
+    private static final String PRESCRIBING_AGENCY_GP_PRACTICE_CODE = "prescribed-at-gp-practice";
+    private static final String PRESCRIBING_AGENCY_PREVIOUS_PRACTICE_CODE = "prescribed-by-previous-practice";
+    private static final String PRESCRIBING_AGENCY_ANOTHER_ORGANISATION_CODE = "prescribed-by-another-organisation";
+    private static final String EHR_SUPPLY_TYPE_NHS_PRESCRIPTION_CODE = "394823007";
+    private static final String EHR_SUPPLY_TYPE_NHS_PRESCRIPTION_DISPLAY = "NHS Prescription";
+    private static final String EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_CODE = "394828003";
+    private static final String EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_DISPLAY = "Prescription by another organisation";
 
     public String mapCodeableConceptToCd(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
@@ -145,6 +153,45 @@ public class CodeableConceptCdMapper {
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
 
+    public Optional<String> mapCodeableConceptToCdForEhrSupplyType(CodeableConcept codeableConcept) {
+        var builder = CodeableConceptCdTemplateParameters.builder();
+        var prescribingAgency = findPrescribingAgency(codeableConcept);
+        String code;
+        String displayText;
+
+        if (prescribingAgency.isEmpty()) {
+            return Optional.empty();
+        }
+
+        switch (prescribingAgency.orElseThrow().getCode()) {
+            case PRESCRIBING_AGENCY_GP_PRACTICE_CODE:
+            case PRESCRIBING_AGENCY_PREVIOUS_PRACTICE_CODE:
+                code = EHR_SUPPLY_TYPE_NHS_PRESCRIPTION_CODE;
+                displayText = EHR_SUPPLY_TYPE_NHS_PRESCRIPTION_DISPLAY;
+                break;
+            case PRESCRIBING_AGENCY_ANOTHER_ORGANISATION_CODE:
+                code = EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_CODE;
+                displayText = EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_DISPLAY;
+                break;
+            default:
+                return Optional.empty();
+        }
+
+        builder
+            .mainCodeSystem(SNOMED_SYSTEM_CODE)
+            .mainCode(code)
+            .mainDisplayName(displayText);
+
+        return Optional.of(TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build()));
+    }
+
+    private Optional<Coding> findPrescribingAgency(CodeableConcept codeableConcept) {
+        return codeableConcept.getCoding()
+            .stream()
+            .filter(this::isPrescribingAgency)
+            .findFirst();
+    }
+
     private Optional<Coding> findMainCode(CodeableConcept codeableConcept) {
         return codeableConcept.getCoding()
             .stream()
@@ -229,6 +276,10 @@ public class CodeableConceptCdMapper {
 
     private boolean isSnomed(Coding coding) {
         return coding.hasSystem() && coding.getSystem().equals(SNOMED_SYSTEM);
+    }
+
+    private boolean isPrescribingAgency(Coding coding) {
+        return coding.hasSystem() && coding.getSystem().equals(CARE_CONNECT_PRESCRIBING_AGENCY_SYSTEM);
     }
 
     private Optional<Extension> retrieveDescriptionExtension(Coding coding) {
