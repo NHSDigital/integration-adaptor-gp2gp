@@ -47,6 +47,7 @@ import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
+import uk.nhs.adaptors.gp2gp.util.ProcessDetectionService;
 
 @RunWith(SpringRunner.class)
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class, MockitoExtension.class})
@@ -62,7 +63,6 @@ public class AmqpServiceFailureTest {
     private static final String PAYLOAD_PATH_REQUEST_MESSAGE = "/requestmessage/RCMR_IN010000UK05_payload.txt";
     private static final String EBXML_PATH_FINAL_ACK_MESSAGE = "/finalAckMessage/MCCI_IN010000UK13_ebxml.txt";
     private static final String PAYLOAD_PATH_FINAL_ACK_MESSAGE = "/finalAckMessage/MCCI_IN010000UK1313_payload.txt";
-    private static final String ACK_TYPE_CODE = "AA";
     private static final String INBOUND_QUEUE_NAME = "inbound";
     private static final String DLQ_NAME = "ActiveMQ.DLQ";
     private static final int JMS_RECEIVE_TIMEOUT = 60000;
@@ -76,6 +76,8 @@ public class AmqpServiceFailureTest {
     private EhrExtractStatusRepository ehrExtractStatusRepository;
     @Autowired
     private JmsTemplate inboundJmsTemplate;
+    @Autowired
+    private ProcessDetectionService processDetectionService;
     @SpyBean
     private ProcessFailureHandlingService processFailureHandlingService;
     @SpyBean
@@ -216,17 +218,6 @@ public class AmqpServiceFailureTest {
         assertThat(processFailed()).isTrue();
     }
 
-    private boolean processFailed() {
-        var finalDbExtractOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
-        if (finalDbExtractOptional.isEmpty()) {
-            return false;
-        }
-        var finalDbExtract = finalDbExtractOptional.orElseThrow();
-        var extractError = Optional.ofNullable(finalDbExtract.getError());
-
-        return extractError.isPresent();
-    }
-
     private void attemptTransfer() {
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
@@ -249,54 +240,19 @@ public class AmqpServiceFailureTest {
     }
 
     private boolean awaitingAck() {
-        var dbExtractOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
-        if (dbExtractOptional.isEmpty()) {
-            return false;
-        }
-        var dbExtract = dbExtractOptional.orElseThrow();
-        var ackPending = Optional.ofNullable(dbExtract.getAckPending());
-
-        return ackPending.isPresent();
+        return processDetectionService.awaitingAck(conversationId);
     }
 
     private boolean awaitingContinue() {
-        var dbExtractOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
-        if (dbExtractOptional.isEmpty()) {
-            return false;
-        }
-        var dbExtract = dbExtractOptional.orElseThrow();
-        var ehrCorePendingOptional = Optional.ofNullable(dbExtract.getEhrExtractCorePending());
-        var ackPending = Optional.ofNullable(dbExtract.getAckPending());
-
-        return ehrCorePendingOptional.isPresent() && ackPending.isEmpty();
+        return processDetectionService.awaitingContinue(conversationId);
     }
 
     private boolean transferComplete() {
-        var finalDbExtractOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
-        if (finalDbExtractOptional.isEmpty()) {
-            return false;
-        }
-        var finalDbExtract = finalDbExtractOptional.orElseThrow();
-        var ackPendingOptional = Optional.ofNullable(finalDbExtract.getAckPending());
-        var ackToRequestorOptional = Optional.ofNullable(finalDbExtract.getAckToRequester());
-        var errorOptional = Optional.ofNullable(finalDbExtract.getError());
-        var receivedAcknowledgementOptional = Optional.ofNullable(finalDbExtract.getEhrReceivedAcknowledgement());
+        return processDetectionService.transferComplete(conversationId);
+    }
 
-        return ackPendingOptional
-            .map(ackPending -> ackPending.getTypeCode().equals(ACK_TYPE_CODE))
-            .orElse(false)
-
-            && ackToRequestorOptional
-            .map(ackToRequester -> ackToRequester.getTypeCode().equals(ACK_TYPE_CODE))
-            .orElse(false)
-
-            && errorOptional.isEmpty()
-
-            && receivedAcknowledgementOptional
-            .map(acknowledgement ->
-                Optional.ofNullable(acknowledgement.getConversationClosed()).isPresent()
-                    && Optional.ofNullable(acknowledgement.getErrors()).isEmpty())
-            .orElse(false);
+    private boolean processFailed() {
+        return processDetectionService.processFailed(conversationId);
     }
 
     private EhrExtractStatus readEhrExtractStatusFromDb() {
