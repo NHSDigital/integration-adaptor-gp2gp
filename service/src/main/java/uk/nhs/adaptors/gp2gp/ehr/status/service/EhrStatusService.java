@@ -53,6 +53,8 @@ public class EhrStatusService {
                 .migrationLog(receivedAcknowledgements)
                 .migrationStatus(evaluateMigrationStatus(ehrExtractStatus, attachmentStatusList))
                 .originalRequestDate(ehrExtractStatus.getCreated())
+                .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+                .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
                 .build());
     }
 
