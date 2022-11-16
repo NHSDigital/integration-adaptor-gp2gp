@@ -11,6 +11,8 @@ public class EhrStatus {
     private List<ReceivedAck> migrationLog;
     private MigrationStatus migrationStatus;
     private Instant originalRequestDate;
+    private String fromAsid;
+    private String toAsid;
 
     @Data
     public static class ReceivedAck {
