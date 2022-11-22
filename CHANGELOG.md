@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mapping bug - Missing unit of measurement in MedicationStatement and Observation
 - Mapping bug - Missing practitioner name when mapping unstructured name
 - Mapping bug - Wrong SMOMED code added for MedicationStatement when prescribed elsewhere
-- Failover - Modify the queue so messages are retried when the database, MHS Adaptor or SDS are down
+- Failover - Modify queue handling so messages are retried when the database, MHS Adaptor or SDS are down
 
 ## [1.5.5] - 2022-10-17
 
