@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.7] - 2022-11-25
+
+### Added
+
+- fromAsid and toAsid - EHR Status Endpoint now contains To/From Asid.
+
 ## [1.5.6] - 2022-11-15
 
 ### Fixed
