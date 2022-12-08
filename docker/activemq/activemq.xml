@@ -64,6 +64,11 @@
 							<individualDeadLetterStrategy queuePrefix="DLQ." useQueueForQueueMessages="true"/>
 						</deadLetterStrategy>
 					</policyEntry>
+					<policyEntry queue=">">
+						<deadLetterStrategy>
+							<sharedDeadLetterStrategy processNonPersistent="true"/>
+						</deadLetterStrategy>
+					</policyEntry>
 				</policyEntries>
 			</policyMap>
 		</destinationPolicy>

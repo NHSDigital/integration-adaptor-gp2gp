@@ -72,8 +72,7 @@ services:
     networks: 
       - commonforgp2gp
     build:
-      context: ../
-      dockerfile: ./docker/activemq/DockerfileARM
+      context: ./activemq
     ports:
       - "8161:8161"
       - "5672:5672"
