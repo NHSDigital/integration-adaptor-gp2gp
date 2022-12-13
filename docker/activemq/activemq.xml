@@ -61,12 +61,7 @@
 							  Use the prefix 'DLQ.' for the destination name, and make
 							  the DLQ a queue rather than a topic
 							-->
-							<individualDeadLetterStrategy queuePrefix="DLQ." useQueueForQueueMessages="true"/>
-						</deadLetterStrategy>
-					</policyEntry>
-					<policyEntry queue=">">
-						<deadLetterStrategy>
-							<sharedDeadLetterStrategy processNonPersistent="true"/>
+							<individualDeadLetterStrategy queuePrefix="DLQ." useQueueForQueueMessages="true" processNonPersistent="true"/>
 						</deadLetterStrategy>
 					</policyEntry>
 				</policyEntries>
