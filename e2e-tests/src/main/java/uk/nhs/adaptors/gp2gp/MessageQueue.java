@@ -15,7 +15,7 @@ import javax.naming.NamingException;
 
 public class MessageQueue {
     public static void sendToMhsInboundQueue(String messageContent) throws NamingException, JMSException {
-        Context context = prepareContext(System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "inbound"));
+        Context context = prepareContext(System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "gp2gpInboundQueue"));
         String queueUsername = System.getenv().getOrDefault("GP2GP_AMQP_USERNAME", "");
         String queuePassword = System.getenv().getOrDefault("GP2GP_AMQP_PASSWORD", "");
 
