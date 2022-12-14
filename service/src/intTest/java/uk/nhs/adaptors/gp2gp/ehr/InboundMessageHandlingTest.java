@@ -51,7 +51,7 @@ public class InboundMessageHandlingTest {
 
     @BeforeEach
     public void setUp() {
-        inboundJmsTemplate.setDefaultDestinationName("inbound");
+        inboundJmsTemplate.setDefaultDestinationName("gp2gpInboundQueue");
         conversationId = UUID.randomUUID().toString();
     }
 
