@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -43,6 +44,8 @@ public class CodeableConceptCdMapper {
     private static final String EHR_SUPPLY_TYPE_NHS_PRESCRIPTION_DISPLAY = "NHS Prescription";
     private static final String EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_CODE = "394828003";
     private static final String EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_DISPLAY = "Prescription by another organisation";
+    private static final String UNSPECIFIED_PROBLEM_CODE = "394776006";
+    private static final String UNSPECIFIED_PROBLEM_DESCRIPTION = "Unspecified problem";
 
     public String mapCodeableConceptToCd(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
@@ -183,6 +186,82 @@ public class CodeableConceptCdMapper {
             .mainDisplayName(displayText);
 
         return Optional.of(TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build()));
+    }
+
+    public String mapCdForTopic() {
+        var params = CodeableConceptCdTemplateParameters.builder()
+            .mainCode(UNSPECIFIED_PROBLEM_CODE)
+            .mainCodeSystem(SNOMED_SYSTEM_CODE)
+            .mainDisplayName(UNSPECIFIED_PROBLEM_DESCRIPTION)
+            .build();
+
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, params);
+    }
+
+    public String mapCdForTopic(CodeableConcept relatedProblem, String title) {
+        var mainCode = findMainCode(relatedProblem);
+
+        if (mainCode.isEmpty()) {
+            return mapCdForTopic(title);
+        }
+
+        var params = prepareTemplateParameters(mainCode.orElseThrow());
+        params.setMainOriginalText(title);
+
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, params);
+    }
+
+    public String mapCdForTopic(CodeableConcept relatedProblem) {
+        var mainCode = findMainCode(relatedProblem);
+
+        if (mainCode.isEmpty()) {
+            return mapCdForTopic();
+        }
+
+        var params = prepareTemplateParameters(mainCode.orElseThrow());
+
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, params);
+    }
+
+    public String mapCdForTopic(String title) {
+        var params = CodeableConceptCdTemplateParameters.builder()
+            .mainCode(UNSPECIFIED_PROBLEM_CODE)
+            .mainCodeSystem(SNOMED_SYSTEM_CODE)
+            .mainDisplayName(UNSPECIFIED_PROBLEM_DESCRIPTION)
+            .mainOriginalText(title)
+            .build();
+
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, params);
+
+    }
+
+    private CodeableConceptCdTemplateParameters prepareTemplateParameters(Coding mainCode) {
+        var extensions = retrieveDescriptionExtension(mainCode)
+            .map(Extension::getExtension)
+            .orElse(Collections.emptyList());
+
+        Optional<String> displayCode = findDescriptionExtValue(extensions);
+        Optional<String> displayName = findDisplayExtValue(extensions);
+
+        return CodeableConceptCdTemplateParameters.builder()
+            .mainCodeSystem(SNOMED_SYSTEM_CODE)
+            .mainCode(displayCode.orElse(mainCode.getCode()))
+            .mainDisplayName(displayName.orElse(mainCode.getDisplay()))
+            .build();
+    }
+
+    private Optional<String> findDescriptionExtValue(List<Extension> extensions) {
+        return extensions.stream()
+            .filter(ext -> ext.getUrl().equals(DESCRIPTION_ID))
+            .map(descriptionExt -> descriptionExt.getValue().toString())
+            .findFirst();
+    }
+
+    private Optional<String> findDisplayExtValue(List<Extension> extensions) {
+        return extensions.stream()
+            .filter(ext -> ext.getUrl().equals(DESCRIPTION_DISPLAY))
+            .map(displayExt -> displayExt.getValue().toString())
+            .findFirst();
     }
 
     private Optional<Coding> findPrescribingAgency(CodeableConcept codeableConcept) {
