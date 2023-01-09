@@ -162,7 +162,8 @@ public class EhrExtractMapperComponentTest {
             new DiagnosticReportMapper(
                 messageContext, specimenMapper, participantMapper, randomIdGeneratorService
             ),
-            new BloodPressureValidator()
+            new BloodPressureValidator(),
+            codeableConceptCdMapper
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(

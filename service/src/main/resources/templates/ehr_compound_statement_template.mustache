@@ -1,0 +1,12 @@
+<component typeCode="COMP" {{#nested}}contextConductionInd="true"{{/nested}}>
+    <CompoundStatement classCode="{{classCode}}" moodCode="EVN">
+        <id root="{{id}}" />
+        {{{compoundStatementCode}}}
+        <statusCode code="{{statusCode}}" />
+        <effectiveTime>
+            {{{effectiveTime}}}
+        </effectiveTime>
+        {{{availabilityTime}}}
+        {{{components}}}
+    </CompoundStatement>
+</component>

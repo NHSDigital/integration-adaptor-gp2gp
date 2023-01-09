@@ -88,6 +88,8 @@ public class EncounterComponentsMapperTest {
         when(codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(any(CodeableConcept.class),
             any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapCdForTopic(any(String.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(bloodPressureValidator.isValidBloodPressure(argThat(observation ->
             CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(
                 "bloodPressureCode1", "bloodPressureCode2", "bloodPressureCode3"
@@ -155,7 +157,8 @@ public class EncounterComponentsMapperTest {
             observationStatementMapper,
             requestStatementMapper,
             diagnosticReportMapper,
-            bloodPressureValidator
+            bloodPressureValidator,
+            codeableConceptCdMapper
         );
     }
 
@@ -217,7 +220,10 @@ public class EncounterComponentsMapperTest {
     }
 
     private String removeLineEndings(String input) {
-        return input.replace("\n", "").replace("\r", "");
+        return input
+            .replace("\n", "")
+            .replace("\r", "")
+            .replace(" ", "");
     }
 
     private Encounter extractEncounter(Bundle bundle) {

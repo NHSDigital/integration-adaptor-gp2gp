@@ -7,7 +7,9 @@ import lombok.Getter;
 @Getter
 public enum CompoundStatementClassCode {
     BATTERY("BATTERY"),
-    CLUSTER("CLUSTER");
+    CLUSTER("CLUSTER"),
+    TOPIC("TOPIC"),
+    CATEGORY("CATEGORY");
 
     private final String code;
 }

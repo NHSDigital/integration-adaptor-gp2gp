@@ -2,9 +2,10 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static java.util.function.Predicate.not;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode.CATEGORY;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode.TOPIC;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils.isIgnoredResourceType;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.DocumentReference;
@@ -22,19 +24,25 @@ import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ProcedureRequest;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.github.mustachejava.Mustache;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.CompoundStatementParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -45,10 +53,14 @@ public class EncounterComponentsMapper {
     private static final String CONSULTATION_LIST_CODE = "325851000000107";
     private static final String TOPIC_LIST_CODE = "25851000000105";
     private static final String CATEGORY_LIST_CODE = "24781000000107";
-    private static final List<String> COMPONENTS_LISTS = Arrays.asList(TOPIC_LIST_CODE, CATEGORY_LIST_CODE);
     private static final String NOT_IMPLEMENTED_MAPPER_PLACE_HOLDER = "<!-- %s/%s -->";
     private static final boolean IS_NESTED = false;
     private static final String NIAD_1409_INVALID_REFERENCE = "Referral items are not supported by the provider system";
+    private static final Mustache COMPOUND_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_compound_statement_template.mustache");
+    private static final String RELATED_PROBLEM_EXTENSION_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1";
+    private static final String RELATED_PROBLEM_TARGET = "target";
+    private static final String COMPLETE_CODE = "COMPLETE";
+
     private final MessageContext messageContext;
     private final AllergyStructureMapper allergyStructureMapper;
     private final BloodPressureMapper bloodPressureMapper;
@@ -62,12 +74,12 @@ public class EncounterComponentsMapper {
     private final RequestStatementMapper requestStatementMapper;
     private final DiagnosticReportMapper diagnosticReportMapper;
     private final BloodPressureValidator bloodPressureValidator;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final Map<ResourceType, Function<Resource, Optional<String>>> encounterComponents = Map.of(
         ResourceType.AllergyIntolerance, this::mapAllergyIntolerance,
         ResourceType.Condition, this::mapCondition,
         ResourceType.DocumentReference, this::mapDocumentReference,
         ResourceType.Immunization, this::mapImmunization,
-        ResourceType.List, this::mapListResource,
         ResourceType.MedicationRequest, this::mapMedicationRequest,
         ResourceType.Observation, this::mapObservation,
         ResourceType.ProcedureRequest, this::mapProcedureRequest,
@@ -78,15 +90,93 @@ public class EncounterComponentsMapper {
         Optional<ListResource> listReferencedToEncounter =
             messageContext.getInputBundleHolder().getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE);
 
-        return listReferencedToEncounter
-            .map(this::mapListResourceToComponents)
-            .orElse(StringUtils.EMPTY);
+        if (listReferencedToEncounter.isEmpty()) {
+            return StringUtils.EMPTY;
+        }
+
+        var entries = listReferencedToEncounter.orElseThrow().getEntry();
+        List<ListResource> topics = entries.stream()
+            .map(entry -> entry.getItem().getReferenceElement())
+            .map(reference ->
+                (ListResource) messageContext
+                    .getInputBundleHolder()
+                    .getRequiredResource(reference))
+            .collect(Collectors.toList());
+
+        return topics.stream()
+            .map(this::mapTopicListToComponent)
+            .collect(Collectors.joining());
     }
 
-    private String mapListResourceToComponents(ListResource listReferencedToEncounter) {
-        LOGGER.debug("Mapping List {} that contains {} entries", listReferencedToEncounter.getId(),
-            listReferencedToEncounter.getEntry().size());
-        return listReferencedToEncounter.getEntry()
+    private String mapTopicListToComponent(ListResource topicList) {
+
+        if (!CodeableConceptMappingUtils.hasCode(topicList.getCode(), List.of(TOPIC_LIST_CODE))) {
+            throw new EhrMapperException(String.format("Unexpected list %s referenced in Consultation, expected list to be coded as " +
+                "Topic (EHR)", topicList.getId()));
+        }
+
+        String effectiveTime = prepareEffectiveTime(topicList);
+        String availabilityTime = prepareAvailabilityTime(topicList);
+
+        var params = CompoundStatementParameters.builder()
+            .nested(false)
+            .id(messageContext.getIdMapper().getOrNew(ResourceType.List, topicList.getIdElement()))
+            .classCode(TOPIC.getCode())
+            .compoundStatementCode(prepareCdForTopic(topicList))
+            .statusCode(COMPLETE_CODE)
+            .effectiveTime(effectiveTime)
+            .availabilityTime(availabilityTime)
+            .components(mapTopicListComponents(topicList))
+            .build();
+
+        return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_TEMPLATE, params);
+    }
+
+    private String mapTopicListComponents(ListResource topicList) {
+
+        String categories = topicList.getEntry().stream()
+            .map(entry -> entry.getItem().getReferenceElement())
+            .map(reference -> messageContext
+                .getInputBundleHolder()
+                .getRequiredResource(reference))
+            .filter(resource -> resource.getResourceType().equals(ResourceType.List))
+            .map(resource -> (ListResource) resource)
+            .map(this::mapCategoryListToComponent)
+            .collect(Collectors.joining());
+
+        String uncategorisedComponents = mapListResourceToComponents(topicList);
+
+        return categories + uncategorisedComponents;
+    }
+
+    private String mapCategoryListToComponent(ListResource categoryList) {
+
+        if (!CodeableConceptMappingUtils.hasCode(categoryList.getCode(), List.of(CATEGORY_LIST_CODE))) {
+            throw new EhrMapperException(String.format("Unexpected list %s referenced in Topic (EHR), expected list to be coded as " +
+                "Category (EHR)", categoryList.getId()));
+        }
+
+            String effectiveTime = prepareEffectiveTime(categoryList);
+            String availabilityTime = prepareAvailabilityTime(categoryList);
+
+            var params = CompoundStatementParameters.builder()
+                .nested(true)
+                .id(messageContext.getIdMapper().getOrNew(ResourceType.List, categoryList.getIdElement()))
+                .classCode(CATEGORY.getCode())
+                .compoundStatementCode(codeableConceptCdMapper.mapCodeableConceptToCd(categoryList.getCode()))
+                .statusCode(COMPLETE_CODE)
+                .effectiveTime(effectiveTime)
+                .availabilityTime(availabilityTime)
+                .components(mapListResourceToComponents(categoryList))
+                .build();
+
+            return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_TEMPLATE, params);
+    }
+
+    private String mapListResourceToComponents(ListResource listResource) {
+        LOGGER.debug("Mapping List {} that contains {} entries", listResource.getId(),
+            listResource.getEntry().size());
+        return listResource.getEntry()
             .stream()
             .map(this::mapItemToComponent)
             .flatMap(Optional::stream)
@@ -112,7 +202,12 @@ public class EncounterComponentsMapper {
         } else if (isIgnoredResourceType(resource.getResourceType())) {
             LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
             return Optional.empty();
-        } else {
+        } else if (resource.getResourceType().equals(ResourceType.List)) {
+            // lists referenced within consultations are only mapped as topics and categories
+            // so should be ignored when mapping individual items
+            return Optional.empty();
+        }
+        else {
             throw new EhrMapperException("Unsupported resource in consultation list: " + resource.getId());
         }
     }
@@ -146,16 +241,6 @@ public class EncounterComponentsMapper {
             immunizationObservationStatementMapper.mapImmunizationToObservationStatement((Immunization) resource, IS_NESTED));
     }
 
-    private Optional<String> mapListResource(Resource resource) {
-        ListResource listResource = (ListResource) resource;
-
-        if (listResource.hasEntry() && CodeableConceptMappingUtils.hasCode(listResource.getCode(), COMPONENTS_LISTS)) {
-            return Optional.of(mapListResourceToComponents(listResource));
-        }
-
-        return Optional.empty();
-    }
-
     private Optional<String> mapMedicationRequest(Resource resource) {
         return Optional.of(resource)
             .map(MedicationRequest.class::cast)
@@ -187,5 +272,50 @@ public class EncounterComponentsMapper {
 
     private Optional<String> mapDiagnosticReport(Resource resource) {
         return Optional.of(diagnosticReportMapper.mapDiagnosticReportToCompoundStatement((DiagnosticReport) resource));
+    }
+
+    private String prepareCdForTopic(ListResource topicList) {
+        var extensions = topicList.getExtension();
+
+        Optional<Reference> conditionRef = extensions.stream()
+            .filter(ext -> ext.getUrl().equals(RELATED_PROBLEM_EXTENSION_URL))
+            .filter(relatedProblemExt -> relatedProblemExt.getUrl().equals(RELATED_PROBLEM_TARGET))
+            .findFirst()
+            .map(ext ->  (Reference) ext.getValue());
+
+        Optional<CodeableConcept> relatedProblem = conditionRef
+            .map(reference -> (Condition) messageContext
+                .getInputBundleHolder()
+                .getRequiredResource(reference.getReferenceElement()))
+            .map(Condition::getCode);
+
+        Optional<String> title = Optional.ofNullable(topicList.getTitle());
+
+        if (relatedProblem.isPresent() && title.isPresent()) {
+            return codeableConceptCdMapper.mapCdForTopic(relatedProblem.orElseThrow(), title.orElseThrow());
+        }
+
+        if (relatedProblem.isPresent()) {
+            return codeableConceptCdMapper.mapCdForTopic(relatedProblem.orElseThrow());
+        }
+
+        if (title.isPresent()) {
+            return codeableConceptCdMapper.mapCdForTopic(title.orElseThrow());
+        }
+
+        return codeableConceptCdMapper.mapCdForTopic();
+    }
+
+    private String prepareEffectiveTime(ListResource listResource) {
+        var encounter = (Encounter) messageContext.getInputBundleHolder().getRequiredResource(listResource.getEncounter().getReferenceElement());
+        return StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter);
+    }
+
+    private String prepareAvailabilityTime(ListResource listResource) {
+        var amendedDateTime = Optional.ofNullable(listResource.getDateElement());
+
+        return amendedDateTime
+            .map(StatementTimeMappingUtils::prepareAvailabilityTime)
+            .orElseGet(() -> StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(listResource.getEncounterTarget()));
     }
 }
