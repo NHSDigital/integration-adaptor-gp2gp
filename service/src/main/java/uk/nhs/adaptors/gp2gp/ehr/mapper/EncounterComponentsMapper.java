@@ -115,6 +115,12 @@ public class EncounterComponentsMapper {
                 "Topic (EHR)", topicList.getId()));
         }
 
+        String components = mapTopicListComponents(topicList);
+
+        if(StringUtils.isAllEmpty(components)) {
+            return components;
+        }
+
         String effectiveTime = prepareEffectiveTime(topicList);
         String availabilityTime = prepareAvailabilityTime(topicList);
 
@@ -126,7 +132,7 @@ public class EncounterComponentsMapper {
             .statusCode(COMPLETE_CODE)
             .effectiveTime(effectiveTime)
             .availabilityTime(availabilityTime)
-            .components(mapTopicListComponents(topicList))
+            .components(components)
             .build();
 
         return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_TEMPLATE, params);
@@ -156,6 +162,12 @@ public class EncounterComponentsMapper {
                 "Category (EHR)", categoryList.getId()));
         }
 
+            String components = mapListResourceToComponents(categoryList);
+
+            if (StringUtils.isAllEmpty(components)) {
+                return components;
+            }
+
             String effectiveTime = prepareEffectiveTime(categoryList);
             String availabilityTime = prepareAvailabilityTime(categoryList);
 
@@ -167,7 +179,7 @@ public class EncounterComponentsMapper {
                 .statusCode(COMPLETE_CODE)
                 .effectiveTime(effectiveTime)
                 .availabilityTime(availabilityTime)
-                .components(mapListResourceToComponents(categoryList))
+                .components(components)
                 .build();
 
             return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_TEMPLATE, params);
@@ -199,12 +211,14 @@ public class EncounterComponentsMapper {
         LOGGER.debug("Translating list entry resource {}", resource.getId());
         if (encounterComponents.containsKey(resource.getResourceType())) {
             return encounterComponents.get(resource.getResourceType()).apply(resource);
-        } else if (isIgnoredResourceType(resource.getResourceType())) {
-            LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
-            return Optional.empty();
-        } else if (resource.getResourceType().equals(ResourceType.List)) {
-            // lists referenced within consultations are only mapped as topics and categories
+        } else if (isIgnoredResourceType(resource.getResourceType()) || resource.getResourceType().equals(ResourceType.List)) {
+            // lists referenced within consultations are only mapped as topics or categories
             // so should be ignored when mapping individual items
+
+            if (!resource.getResourceType().equals(ResourceType.List)) {
+                LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
+            }
+
             return Optional.empty();
         }
         else {
@@ -279,9 +293,10 @@ public class EncounterComponentsMapper {
 
         Optional<Reference> conditionRef = extensions.stream()
             .filter(ext -> ext.getUrl().equals(RELATED_PROBLEM_EXTENSION_URL))
+            .flatMap(ext -> ext.getExtension().stream())
             .filter(relatedProblemExt -> relatedProblemExt.getUrl().equals(RELATED_PROBLEM_TARGET))
             .findFirst()
-            .map(ext ->  (Reference) ext.getValue());
+            .map(ext -> (Reference) ext.getValue());
 
         Optional<CodeableConcept> relatedProblem = conditionRef
             .map(reference -> (Condition) messageContext
@@ -307,15 +322,21 @@ public class EncounterComponentsMapper {
     }
 
     private String prepareEffectiveTime(ListResource listResource) {
-        var encounter = (Encounter) messageContext.getInputBundleHolder().getRequiredResource(listResource.getEncounter().getReferenceElement());
-        return StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter);
+        return StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(findEncounterForList(listResource));
     }
 
     private String prepareAvailabilityTime(ListResource listResource) {
-        var amendedDateTime = Optional.ofNullable(listResource.getDateElement());
+        var amendedDateTime = listResource.getDateElement();
 
-        return amendedDateTime
-            .map(StatementTimeMappingUtils::prepareAvailabilityTime)
-            .orElseGet(() -> StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(listResource.getEncounterTarget()));
+        if (amendedDateTime.isEmpty()) {
+            var encounter = findEncounterForList(listResource);
+            return StatementTimeMappingUtils.prepareAvailabilityTime(encounter.getPeriod().getStartElement());
+        }
+
+        return StatementTimeMappingUtils.prepareAvailabilityTime(amendedDateTime);
+    }
+
+    private Encounter findEncounterForList(ListResource listResource) {
+        return (Encounter) messageContext.getInputBundleHolder().getRequiredResource(listResource.getEncounter().getReferenceElement());
     }
 }

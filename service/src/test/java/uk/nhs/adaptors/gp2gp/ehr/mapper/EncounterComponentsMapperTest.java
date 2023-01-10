@@ -56,9 +56,14 @@ public class EncounterComponentsMapperTest {
     private static final String INPUT_BUNDLE_WITHOUT_CONSULTATION_LIST = TEST_DIRECTORY + "input-bundle-5.json";
     private static final String INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA = TEST_DIRECTORY + "input-bundle-6.json";
     private static final String INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE = TEST_DIRECTORY + "input-bundle-7.json";
-    private static final String INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY = TEST_DIRECTORY + "input-bundle-8.json";
+    private static final String INPUT_BUNDLE_WITH_NON_TOPIC_CONSULTATION_LIST_ENTRY = TEST_DIRECTORY + "input-bundle-8.json";
     private static final String INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES = TEST_DIRECTORY + "input-bundle-9-unsupported-resource.json";
     private static final String INPUT_BUNDLE_WITH_IGNORED_RESOURCE = TEST_DIRECTORY + "input-bundle-10-ignored-resource.json";
+    private static final String INPUT_BUNDLE_WITH_NON_CATEGORY_TOPIC_LIST_ENTRY = TEST_DIRECTORY + "input-bundle-11-invalid-category-list.json";
+    private static final String INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC = TEST_DIRECTORY + "input-bundle-12-related-problem.json";
+    private static final String EXPECTED_COMPONENTS_RELATED_PROBLEM = TEST_DIRECTORY + "expected-components-12-related-problem.xml";
+    private static final String INPUT_BUNDLE_WITH_NO_DATE_PROVIDED_IN_TOPIC = TEST_DIRECTORY + "input-bundle-13-topic-without-date.json";
+    private static final String EXPECTED_COMPONENTS_TOPIC_AVAILABILITY_DATE_MAPPED_FROM_ENCOUNTER = TEST_DIRECTORY + "expected-components-13-topic-without-date.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -175,6 +180,9 @@ public class EncounterComponentsMapperTest {
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        System.out.println(mappedXml);
+
         assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
     }
 
@@ -219,11 +227,65 @@ public class EncounterComponentsMapperTest {
             .isInstanceOf(EhrMapperException.class);
     }
 
+    @Test
+    public void When_MappingConsultation_WithNonTopicList_Expect_ExceptionThrown() throws IOException {
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_NON_TOPIC_CONSULTATION_LIST_ENTRY);
+        var encounter = extractEncounter(bundle);
+
+        assertThatThrownBy(() ->
+            encounterComponentsMapper.mapComponents(encounter))
+            .hasMessageContaining("Unexpected list List/topicid1 referenced in Consultation, " +
+                "expected list to be coded as Topic (EHR)")
+            .isInstanceOf(EhrMapperException.class);
+    }
+
+    @Test
+    public void When_MappingTopic_WithNonCategoryList_Expect_ExceptionThrown() throws IOException {
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_NON_CATEGORY_TOPIC_LIST_ENTRY);
+        var encounter = extractEncounter(bundle);
+
+        assertThatThrownBy(() ->
+            encounterComponentsMapper.mapComponents(encounter))
+            .hasMessageContaining("Unexpected list List/category1 referenced in Topic (EHR), " +
+                "expected list to be coded as Category (EHR)")
+            .isInstanceOf(EhrMapperException.class);
+    }
+
+    @Test
+    public void When_MappingTopic_With_RelatedProblem_Expect_MappedToCode() throws IOException {
+
+        when(codeableConceptCdMapper.mapCdForTopic(any(CodeableConcept.class), any(String.class)))
+            .thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_RELATED_PROBLEM);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
+    }
+
+    @Test
+    public void When_MappingTopic_With_MissingDate_Expect_DateMappedFromEncounter() throws IOException {
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_TOPIC_AVAILABILITY_DATE_MAPPED_FROM_ENCOUNTER);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_NO_DATE_PROVIDED_IN_TOPIC);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
+    }
+
     private String removeLineEndings(String input) {
         return input
-            .replace("\n", "")
-            .replace("\r", "")
-            .replace(" ", "");
+            .replace("\n", " ")
+            .replace("\r", " ")
+            .replaceAll("\\s+", " ")
+            .replaceAll("\"\\s>", "\">")
+            .replaceAll("\"\\s/>", "\"/>")
+            .replaceAll("\\s+<", "<");
+
     }
 
     private Encounter extractEncounter(Bundle bundle) {
@@ -240,8 +302,7 @@ public class EncounterComponentsMapperTest {
             Arguments.of(INPUT_BUNDLE_WITH_EMPTY_TOPIC_LIST),
             Arguments.of(INPUT_BUNDLE_WITH_EMPTY_CATEGORY_LIST),
             Arguments.of(INPUT_BUNDLE_WITHOUT_CONSULTATION_LIST),
-            Arguments.of(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA),
-            Arguments.of(INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY)
+            Arguments.of(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA)
         );
     }
 
