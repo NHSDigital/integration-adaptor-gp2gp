@@ -212,6 +212,24 @@
                 <id root="test-id-3"/>
             </agentRef>
         </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="TOPIC" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100714180700"/><high value="20130713162000"/>
+        </effectiveTime>
+        <availabilityTime value="20100714163232"/>
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100714180700"/><high value="20130713162000"/>
+        </effectiveTime>
+        <availabilityTime value="20100714163232"/>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
@@ -236,6 +254,10 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
+</component>
+    </CompoundStatement>
+</component>
+    </CompoundStatement>
 </component>
     </ehrComposition>
 </component>
@@ -269,6 +291,24 @@
                 <id root="test-id-3"/>
             </agentRef>
         </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="TOPIC" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100113152000"/>
+        </effectiveTime>
+        <availabilityTime value="20100113152950"/>
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100113152000"/>
+        </effectiveTime>
+        <availabilityTime value="20100113152950"/>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
@@ -293,6 +333,10 @@ The line below contains special characters...
     </agentRef>
 </Participant>
     </NarrativeStatement>
+</component>
+    </CompoundStatement>
+</component>
+    </CompoundStatement>
 </component>
     </ehrComposition>
 </component>
@@ -326,6 +370,24 @@ The line below contains special characters...
                 <id root="test-id-3"/>
             </agentRef>
         </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="TOPIC" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100123134800"/>
+        </effectiveTime>
+        <availabilityTime value="20100123140354"/>
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100123134800"/>
+        </effectiveTime>
+        <availabilityTime value="20100123140354"/>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
@@ -410,7 +472,18 @@ The line below contains special characters...
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" >
+</component>
+    </CompoundStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100123134800"/>
+        </effectiveTime>
+        <availabilityTime value="20100123140354"/>
+        <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
@@ -459,6 +532,10 @@ The line below contains special characters...
 </Participant>
     </ObservationStatement>
 </component>
+    </CompoundStatement>
+</component>
+    </CompoundStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -491,6 +568,24 @@ The line below contains special characters...
                 <id root="test-id-3"/>
             </agentRef>
         </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="TOPIC" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100609"/>
+        </effectiveTime>
+        <availabilityTime value="20100609175121"/>
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100609"/>
+        </effectiveTime>
+        <availabilityTime value="20100609175121"/>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
@@ -503,6 +598,10 @@ The line below contains special characters...
     </agentRef>
 </Participant>
     </NarrativeStatement>
+</component>
+    </CompoundStatement>
+</component>
+    </CompoundStatement>
 </component>
     </ehrComposition>
 </component>
@@ -536,6 +635,24 @@ The line below contains special characters...
                 <id root="test-id-3"/>
             </agentRef>
         </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="TOPIC" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100610082200"/>
+        </effectiveTime>
+        <availabilityTime value="20100610081925"/>
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100610082200"/>
+        </effectiveTime>
+        <availabilityTime value="20100610081925"/>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
@@ -548,6 +665,10 @@ The line below contains special characters...
     </agentRef>
 </Participant>
     </NarrativeStatement>
+</component>
+    </CompoundStatement>
+</component>
+    </CompoundStatement>
 </component>
     </ehrComposition>
 </component>
@@ -581,6 +702,24 @@ The line below contains special characters...
                 <id root="test-id-3"/>
             </agentRef>
         </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="TOPIC" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100714175500"/>
+        </effectiveTime>
+        <availabilityTime value="20100714162813"/>
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100714175500"/>
+        </effectiveTime>
+        <availabilityTime value="20100714162813"/>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="test-id-3"/>
@@ -627,6 +766,10 @@ The line below contains special characters...
         <id root="test-id-3"/>
     </agentRef>
 </Participant>
+    </CompoundStatement>
+</component>
+    </CompoundStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>

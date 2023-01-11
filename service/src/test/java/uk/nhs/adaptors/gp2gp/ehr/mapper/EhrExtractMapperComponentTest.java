@@ -122,6 +122,18 @@ public class EhrExtractMapperComponentTest {
             .thenCallRealMethod();
         when(codeableConceptCdMapper.mapCodeableConceptToCdForBloodPressure(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForTopic(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForTopic(any(CodeableConcept.class), any(String.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForTopic(any(String.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.getCdForTopic())
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForCategory(any(String.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.getCdForCategory())
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
 
         messageContext = new MessageContext(randomIdGeneratorService);
