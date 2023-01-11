@@ -57,7 +57,8 @@ public class EncounterComponentsMapper {
     private static final boolean IS_NESTED = false;
     private static final String NIAD_1409_INVALID_REFERENCE = "Referral items are not supported by the provider system";
     private static final Mustache COMPOUND_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_compound_statement_template.mustache");
-    private static final String RELATED_PROBLEM_EXTENSION_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1";
+    private static final String RELATED_PROBLEM_EXTENSION_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
+        + "-RelatedProblemHeader-1";
     private static final String RELATED_PROBLEM_TARGET = "target";
     private static final String COMPLETE_CODE = "COMPLETE";
 
@@ -111,13 +112,13 @@ public class EncounterComponentsMapper {
     private String mapTopicListToComponent(ListResource topicList) {
 
         if (!CodeableConceptMappingUtils.hasCode(topicList.getCode(), List.of(TOPIC_LIST_CODE))) {
-            throw new EhrMapperException(String.format("Unexpected list %s referenced in Consultation, expected list to be coded as " +
-                "Topic (EHR)", topicList.getId()));
+            throw new EhrMapperException(String.format("Unexpected list %s referenced in Consultation, expected list to be coded as "
+                + "Topic (EHR)", topicList.getId()));
         }
 
         String components = mapTopicListComponents(topicList);
 
-        if(StringUtils.isAllEmpty(components)) {
+        if (StringUtils.isAllEmpty(components)) {
             return components;
         }
 
@@ -158,31 +159,31 @@ public class EncounterComponentsMapper {
     private String mapCategoryListToComponent(ListResource categoryList) {
 
         if (!CodeableConceptMappingUtils.hasCode(categoryList.getCode(), List.of(CATEGORY_LIST_CODE))) {
-            throw new EhrMapperException(String.format("Unexpected list %s referenced in Topic (EHR), expected list to be coded as " +
-                "Category (EHR)", categoryList.getId()));
+            throw new EhrMapperException(String.format("Unexpected list %s referenced in Topic (EHR), expected list to be coded as "
+                + "Category (EHR)", categoryList.getId()));
         }
 
-            String components = mapListResourceToComponents(categoryList);
+        String components = mapListResourceToComponents(categoryList);
 
-            if (StringUtils.isAllEmpty(components)) {
-                return components;
-            }
+        if (StringUtils.isAllEmpty(components)) {
+            return components;
+        }
 
-            String effectiveTime = prepareEffectiveTime(categoryList);
-            String availabilityTime = prepareAvailabilityTime(categoryList);
+        String effectiveTime = prepareEffectiveTime(categoryList);
+        String availabilityTime = prepareAvailabilityTime(categoryList);
 
-            var params = CompoundStatementParameters.builder()
-                .nested(true)
-                .id(messageContext.getIdMapper().getOrNew(ResourceType.List, categoryList.getIdElement()))
-                .classCode(CATEGORY.getCode())
-                .compoundStatementCode(prepareCdForCategory(categoryList))
-                .statusCode(COMPLETE_CODE)
-                .effectiveTime(effectiveTime)
-                .availabilityTime(availabilityTime)
-                .components(components)
-                .build();
+        var params = CompoundStatementParameters.builder()
+            .nested(true)
+            .id(messageContext.getIdMapper().getOrNew(ResourceType.List, categoryList.getIdElement()))
+            .classCode(CATEGORY.getCode())
+            .compoundStatementCode(prepareCdForCategory(categoryList))
+            .statusCode(COMPLETE_CODE)
+            .effectiveTime(effectiveTime)
+            .availabilityTime(availabilityTime)
+            .components(components)
+            .build();
 
-            return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_TEMPLATE, params);
+        return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_TEMPLATE, params);
     }
 
     private String mapListResourceToComponents(ListResource listResource) {
@@ -220,8 +221,7 @@ public class EncounterComponentsMapper {
             }
 
             return Optional.empty();
-        }
-        else {
+        } else {
             throw new EhrMapperException("Unsupported resource in consultation list: " + resource.getId());
         }
     }

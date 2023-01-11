@@ -59,19 +59,25 @@ public class EncounterComponentsMapperTest {
     private static final String INPUT_BUNDLE_WITH_NON_TOPIC_CONSULTATION_LIST_ENTRY = TEST_DIRECTORY + "input-bundle-8.json";
     private static final String INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES = TEST_DIRECTORY + "input-bundle-9-unsupported-resource.json";
     private static final String INPUT_BUNDLE_WITH_IGNORED_RESOURCE = TEST_DIRECTORY + "input-bundle-10-ignored-resource.json";
-    private static final String INPUT_BUNDLE_WITH_NON_CATEGORY_TOPIC_LIST_ENTRY = TEST_DIRECTORY + "input-bundle-11-invalid-category-list.json";
+    private static final String INPUT_BUNDLE_WITH_NON_CATEGORY_TOPIC_LIST_ENTRY = TEST_DIRECTORY
+        + "input-bundle-11-invalid-category-list.json";
     private static final String INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC = TEST_DIRECTORY + "input-bundle-12-related-problem.json";
     private static final String EXPECTED_COMPONENTS_RELATED_PROBLEM = TEST_DIRECTORY + "expected-components-12-related-problem.xml";
-    private static final String INPUT_BUNDLE_WITH_NO_DATE_PROVIDED_IN_TOPIC = TEST_DIRECTORY + "input-bundle-13-topic-without-date.json";
-    private static final String EXPECTED_COMPONENTS_TOPIC_AVAILABILITY_DATE_MAPPED_FROM_ENCOUNTER = TEST_DIRECTORY + "expected-components-13-topic-without-date.xml";
+    private static final String INPUT_BUNDLE_WITH_NO_DATE_PROVIDED_IN_TOPIC = TEST_DIRECTORY
+        + "input-bundle-13-topic-without-date.json";
+    private static final String EXPECTED_COMPONENTS_TOPIC_AVAILABILITY_DATE_MAPPED_FROM_ENCOUNTER = TEST_DIRECTORY
+        + "expected-components-13-topic-without-date.xml";
     private static final String INPUT_BUNDLE_WITH_MISSING_TITLE_IN_CATEGORY = TEST_DIRECTORY + "input-bundle-14-category-codes.json";
     private static final String EXPECTED_COMPONENTS_WITH_CD_IN_CATEGORIES = TEST_DIRECTORY + "expected-components-14-category-codes.xml";
-    private static final String INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC_NO_TITLE = TEST_DIRECTORY + "input-bundle-15-related-problem-no-title.json";
-    private static final String EXPECTED_COMPONENTS_RELATED_PROBLEM_NO_TITLE = TEST_DIRECTORY + "expected-components-15-related-problem-no-title.xml";
+    private static final String INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC_NO_TITLE = TEST_DIRECTORY
+        + "input-bundle-15-related-problem-no-title.json";
+    private static final String EXPECTED_COMPONENTS_RELATED_PROBLEM_NO_TITLE = TEST_DIRECTORY
+        + "expected-components-15-related-problem-no-title.xml";
     private static final String INPUT_BUNDLE_WITH_MISSING_TITLE_IN_TOPIC = TEST_DIRECTORY + "input-bundle-16-topic-codes.json";
     private static final String EXPECTED_COMPONENTS_WITH_CD_IN_TOPICS = TEST_DIRECTORY + "expected-components-16-topic-codes.xml";
     private static final String INPUT_BUNDLE_TOPIC_NO_CATEGORIES = TEST_DIRECTORY + "input-bundle-17-topic-no-categories.json";
-    private static final String EXPECTED_COMPONENTS_TOPIC_NO_CATEGORIES = TEST_DIRECTORY + "expected-components-17-topic-no-categories.xml";
+    private static final String EXPECTED_COMPONENTS_TOPIC_NO_CATEGORIES = TEST_DIRECTORY
+        + "expected-components-17-topic-no-categories.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -244,8 +250,8 @@ public class EncounterComponentsMapperTest {
 
         assertThatThrownBy(() ->
             encounterComponentsMapper.mapComponents(encounter))
-            .hasMessageContaining("Unexpected list List/topicid1 referenced in Consultation, " +
-                "expected list to be coded as Topic (EHR)")
+            .hasMessageContaining("Unexpected list List/topicid1 referenced in Consultation, "
+                + "expected list to be coded as Topic (EHR)")
             .isInstanceOf(EhrMapperException.class);
     }
 
@@ -256,8 +262,8 @@ public class EncounterComponentsMapperTest {
 
         assertThatThrownBy(() ->
             encounterComponentsMapper.mapComponents(encounter))
-            .hasMessageContaining("Unexpected list List/category1 referenced in Topic (EHR), " +
-                "expected list to be coded as Category (EHR)")
+            .hasMessageContaining("Unexpected list List/category1 referenced in Topic (EHR), "
+                + "expected list to be coded as Category (EHR)")
             .isInstanceOf(EhrMapperException.class);
     }
 

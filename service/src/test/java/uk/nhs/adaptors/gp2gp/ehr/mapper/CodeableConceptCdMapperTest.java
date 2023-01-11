@@ -24,8 +24,10 @@ public class CodeableConceptCdMapperTest {
     private static final String TEST_FILE_DIRECTORY_NULL_FLAVOR = "/ehr/mapper/codeableconcept/nullFlavor/";
     private static final String TEST_FILE_DIRECTORY_ACTUAL_PROBLEM = "/ehr/mapper/codeableconcept/actualProblem/";
     private static final String TEST_FILE_DIRECTORY_ALLERGY_CLINICAL_STATUS = "/ehr/mapper/codeableconcept/allergyClinicalStatus/";
-    private static final String TEST_FILE_TOPIC_RELATED_CONDITION = TEST_FILE_DIRECTORY + "topic/codeable_concept_snowmed_related_condtition.json";
-    private static final String CD_FOR_TOPIC_RELATED_PROBLEM_AND_TITLE = TEST_FILE_DIRECTORY + "topic/cd_for_topic_related_problem_and_title.xml";
+    private static final String TEST_FILE_TOPIC_RELATED_CONDITION = TEST_FILE_DIRECTORY
+        + "topic/codeable_concept_snowmed_related_condtition.json";
+    private static final String CD_FOR_TOPIC_RELATED_PROBLEM_AND_TITLE = TEST_FILE_DIRECTORY
+        + "topic/cd_for_topic_related_problem_and_title.xml";
     private static final String CD_FOR_TOPIC_TITLE = TEST_FILE_DIRECTORY + "topic/cd_for_topic_title.xml";
     private static final String CD_FOR_TOPIC_UNSPECIFIED = TEST_FILE_DIRECTORY + "topic/cd_for_topic_unspecified.xml";
     private static final String TEST_FILE_DIRECTORY_TOPIC_RELATED_PROBLEM = TEST_FILE_DIRECTORY + "topic/relatedProblem/";
