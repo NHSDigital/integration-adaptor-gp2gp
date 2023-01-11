@@ -64,6 +64,14 @@ public class EncounterComponentsMapperTest {
     private static final String EXPECTED_COMPONENTS_RELATED_PROBLEM = TEST_DIRECTORY + "expected-components-12-related-problem.xml";
     private static final String INPUT_BUNDLE_WITH_NO_DATE_PROVIDED_IN_TOPIC = TEST_DIRECTORY + "input-bundle-13-topic-without-date.json";
     private static final String EXPECTED_COMPONENTS_TOPIC_AVAILABILITY_DATE_MAPPED_FROM_ENCOUNTER = TEST_DIRECTORY + "expected-components-13-topic-without-date.xml";
+    private static final String INPUT_BUNDLE_WITH_MISSING_TITLE_IN_CATEGORY = TEST_DIRECTORY + "input-bundle-14-category-codes.json";
+    private static final String EXPECTED_COMPONENTS_WITH_CD_IN_CATEGORIES = TEST_DIRECTORY + "expected-components-14-category-codes.xml";
+    private static final String INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC_NO_TITLE = TEST_DIRECTORY + "input-bundle-15-related-problem-no-title.json";
+    private static final String EXPECTED_COMPONENTS_RELATED_PROBLEM_NO_TITLE = TEST_DIRECTORY + "expected-components-15-related-problem-no-title.xml";
+    private static final String INPUT_BUNDLE_WITH_MISSING_TITLE_IN_TOPIC = TEST_DIRECTORY + "input-bundle-16-topic-codes.json";
+    private static final String EXPECTED_COMPONENTS_WITH_CD_IN_TOPICS = TEST_DIRECTORY + "expected-components-16-topic-codes.xml";
+    private static final String INPUT_BUNDLE_TOPIC_NO_CATEGORIES = TEST_DIRECTORY + "input-bundle-17-topic-no-categories.json";
+    private static final String EXPECTED_COMPONENTS_TOPIC_NO_CATEGORIES = TEST_DIRECTORY + "expected-components-17-topic-no-categories.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -93,7 +101,9 @@ public class EncounterComponentsMapperTest {
         when(codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(any(CodeableConcept.class),
             any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        when(codeableConceptCdMapper.mapCdForTopic(any(String.class)))
+        when(codeableConceptCdMapper.mapToCdForTopic(any(String.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForCategory(any()))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(bloodPressureValidator.isValidBloodPressure(argThat(observation ->
             CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(
@@ -183,7 +193,7 @@ public class EncounterComponentsMapperTest {
 
         System.out.println(mappedXml);
 
-        assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
     }
 
     @Test
@@ -194,7 +204,7 @@ public class EncounterComponentsMapperTest {
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
-        assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
     }
 
     @ParameterizedTest
@@ -254,7 +264,7 @@ public class EncounterComponentsMapperTest {
     @Test
     public void When_MappingTopic_With_RelatedProblem_Expect_MappedToCode() throws IOException {
 
-        when(codeableConceptCdMapper.mapCdForTopic(any(CodeableConcept.class), any(String.class)))
+        when(codeableConceptCdMapper.mapToCdForTopic(any(CodeableConcept.class), any(String.class)))
             .thenCallRealMethod();
 
         var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_RELATED_PROBLEM);
@@ -263,7 +273,21 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @Test
+    public void When_MappingTopic_With_RelatedProblemAndNoTitle_Expect_MappedToCode() throws IOException {
+        when(codeableConceptCdMapper.mapToCdForTopic(any(CodeableConcept.class)))
+            .thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_RELATED_PROBLEM_NO_TITLE);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC_NO_TITLE);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
     }
 
     @Test
@@ -274,10 +298,50 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
     }
 
-    private String removeLineEndings(String input) {
+    @Test
+    public void When_MappingCategory_WithAndWithout_Title_Expect_BothCdsPresent() throws IOException {
+        when(codeableConceptCdMapper.getCdForCategory()).thenCallRealMethod();
+        when(codeableConceptCdMapper.mapToCdForCategory(any())).thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_WITH_CD_IN_CATEGORIES);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_MISSING_TITLE_IN_CATEGORY);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @Test
+    public void When_MappingTopic_WithAndWithout_Title_Expect_BothCdsPresent() throws IOException {
+
+        when(codeableConceptCdMapper.mapToCdForTopic(any(String.class))).thenCallRealMethod();
+        when(codeableConceptCdMapper.getCdForTopic()).thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_WITH_CD_IN_TOPICS);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_MISSING_TITLE_IN_TOPIC);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @Test
+    public void When_MappingTopic_WithoutCategory_Expect_ComponentsMapped() throws IOException {
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_TOPIC_NO_CATEGORIES);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_TOPIC_NO_CATEGORIES);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    private String removeLineEndingsAndWhiteSpace(String input) {
         return input
             .replace("\n", " ")
             .replace("\r", " ")

@@ -175,7 +175,7 @@ public class EncounterComponentsMapper {
                 .nested(true)
                 .id(messageContext.getIdMapper().getOrNew(ResourceType.List, categoryList.getIdElement()))
                 .classCode(CATEGORY.getCode())
-                .compoundStatementCode(codeableConceptCdMapper.mapCodeableConceptToCd(categoryList.getCode()))
+                .compoundStatementCode(prepareCdForCategory(categoryList))
                 .statusCode(COMPLETE_CODE)
                 .effectiveTime(effectiveTime)
                 .availabilityTime(availabilityTime)
@@ -307,18 +307,26 @@ public class EncounterComponentsMapper {
         Optional<String> title = Optional.ofNullable(topicList.getTitle());
 
         if (relatedProblem.isPresent() && title.isPresent()) {
-            return codeableConceptCdMapper.mapCdForTopic(relatedProblem.orElseThrow(), title.orElseThrow());
+            return codeableConceptCdMapper.mapToCdForTopic(relatedProblem.orElseThrow(), title.orElseThrow());
         }
 
         if (relatedProblem.isPresent()) {
-            return codeableConceptCdMapper.mapCdForTopic(relatedProblem.orElseThrow());
+            return codeableConceptCdMapper.mapToCdForTopic(relatedProblem.orElseThrow());
         }
 
         if (title.isPresent()) {
-            return codeableConceptCdMapper.mapCdForTopic(title.orElseThrow());
+            return codeableConceptCdMapper.mapToCdForTopic(title.orElseThrow());
         }
 
-        return codeableConceptCdMapper.mapCdForTopic();
+        return codeableConceptCdMapper.getCdForTopic();
+    }
+
+    private String prepareCdForCategory(ListResource categoryList) {
+        Optional<String> title = Optional.ofNullable(categoryList.getTitle());
+
+        return title
+            .map(codeableConceptCdMapper::mapToCdForCategory)
+            .orElse(codeableConceptCdMapper.getCdForCategory());
     }
 
     private String prepareEffectiveTime(ListResource listResource) {

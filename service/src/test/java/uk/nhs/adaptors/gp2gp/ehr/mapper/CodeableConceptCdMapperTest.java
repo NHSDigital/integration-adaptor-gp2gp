@@ -29,6 +29,8 @@ public class CodeableConceptCdMapperTest {
     private static final String CD_FOR_TOPIC_TITLE = TEST_FILE_DIRECTORY + "topic/cd_for_topic_title.xml";
     private static final String CD_FOR_TOPIC_UNSPECIFIED = TEST_FILE_DIRECTORY + "topic/cd_for_topic_unspecified.xml";
     private static final String TEST_FILE_DIRECTORY_TOPIC_RELATED_PROBLEM = TEST_FILE_DIRECTORY + "topic/relatedProblem/";
+    private static final String CD_FOR_CATEGORY_TITLE = TEST_FILE_DIRECTORY + "category/cd_for_category_titile.xml";
+    private static final String CD_FOR_CATEGORY_NO_TITLE = TEST_FILE_DIRECTORY + "category/cd_for_category_no_title.xml";
     private static final String TEST_TITLE = "test title";
 
     private FhirParseService fhirParseService;
@@ -123,8 +125,7 @@ public class CodeableConceptCdMapperTest {
         var condition = ResourceTestFileUtils.getFileContent(inputJson);
         var codeableConcept = fhirParseService.parseResource(condition, Condition.class).getCode();
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
-
-        var outputString = codeableConceptCdMapper.mapCdForTopic(codeableConcept);
+        var outputString = codeableConceptCdMapper.mapToCdForTopic(codeableConcept);
 
         assertThat(outputString)
             .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
@@ -133,23 +134,20 @@ public class CodeableConceptCdMapperTest {
 
     @Test
     @SneakyThrows
-    public void When_MapCdForTopic_With_RelatedProblemAndTitle_Expect_ProblemCodeAndTitleAreUsed() {
+    public void When_MapToCdForTopic_With_RelatedProblemAndTitle_Expect_ProblemCodeAndTitleAreUsed() {
         var relatedProblem = ResourceTestFileUtils.getFileContent(TEST_FILE_TOPIC_RELATED_CONDITION);
         var codeableConcept = fhirParseService.parseResource(relatedProblem, Condition.class).getCode();
         var expectedOutput = ResourceTestFileUtils.getFileContent(CD_FOR_TOPIC_RELATED_PROBLEM_AND_TITLE);
+        var outputString = codeableConceptCdMapper.mapToCdForTopic(codeableConcept, TEST_TITLE);
 
-        var outputString = codeableConceptCdMapper.mapCdForTopic(codeableConcept, TEST_TITLE);
-
-        assertThat(outputString)
-            .isEqualToIgnoringWhitespace(expectedOutput);
+        assertThat(outputString).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     @Test
     @SneakyThrows
-    public void When_MapCdForTopic_With_TitleOnly_Expect_UnspecifiedProblemAndTitle() {
+    public void When_MapToCdForTopic_With_TitleOnly_Expect_UnspecifiedProblemAndTitle() {
         var expectedOutput = ResourceTestFileUtils.getFileContent(CD_FOR_TOPIC_TITLE);
-
-        var outputString = codeableConceptCdMapper.mapCdForTopic(TEST_TITLE);
+        var outputString = codeableConceptCdMapper.mapToCdForTopic(TEST_TITLE);
 
         assertThat(outputString)
             .isEqualToIgnoringWhitespace(expectedOutput);
@@ -157,12 +155,28 @@ public class CodeableConceptCdMapperTest {
 
     @Test
     @SneakyThrows
-    public void When_MapCdForTopic_Without_RelatedProblemOrTile_Expect_UnspecifiedProblem() {
+    public void When_MapToCdForTopic_Without_RelatedProblemOrTile_Expect_UnspecifiedProblem() {
         var expectedOutput = ResourceTestFileUtils.getFileContent(CD_FOR_TOPIC_UNSPECIFIED);
+        var outputString = codeableConceptCdMapper.getCdForTopic();
 
-        var outputString = codeableConceptCdMapper.mapCdForTopic();
+        assertThat(outputString).isEqualToIgnoringWhitespace(expectedOutput);
+    }
 
-        assertThat(outputString)
-            .isEqualToIgnoringWhitespace(expectedOutput);
+    @Test
+    @SneakyThrows
+    public void When_MapToCdForCategory_With_Title_Expect_OtherCategoryAndOriginalText() {
+        var expectedOutput = ResourceTestFileUtils.getFileContent(CD_FOR_CATEGORY_TITLE);
+        var outputString = codeableConceptCdMapper.mapToCdForCategory(TEST_TITLE);
+
+        assertThat(outputString).isEqualToIgnoringWhitespace(expectedOutput);
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_GetCdForCategory_Expect_OtherCategory() {
+        var expectedOutput = ResourceTestFileUtils.getFileContent(CD_FOR_CATEGORY_NO_TITLE);
+        var outputString = codeableConceptCdMapper.getCdForCategory();
+
+        assertThat(outputString).isEqualToIgnoringWhitespace(expectedOutput);
     }
 }

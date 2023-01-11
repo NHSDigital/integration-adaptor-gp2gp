@@ -2,7 +2,6 @@
     <CompoundStatement classCode="TOPIC" moodCode="EVN">
         <id root="394559384658936"/>
         <code code="1234567" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="test display">
-            <originalText>Endometriosis of uterus</originalText>
         </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>

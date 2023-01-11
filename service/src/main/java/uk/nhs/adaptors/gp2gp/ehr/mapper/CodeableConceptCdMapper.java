@@ -46,6 +46,8 @@ public class CodeableConceptCdMapper {
     private static final String EHR_SUPPLY_TYPE_ANOTHER_ORGANISATION_DISPLAY = "Prescription by another organisation";
     private static final String UNSPECIFIED_PROBLEM_CODE = "394776006";
     private static final String UNSPECIFIED_PROBLEM_DESCRIPTION = "Unspecified problem";
+    private static final String OTHER_CATEGORY_CODE = "394841004";
+    private static final String OTHER_CATEGORY_DESCRIPTION = "Other category";
 
     public String mapCodeableConceptToCd(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
@@ -188,7 +190,7 @@ public class CodeableConceptCdMapper {
         return Optional.of(TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build()));
     }
 
-    public String mapCdForTopic() {
+    public String getCdForTopic() {
         var params = CodeableConceptCdTemplateParameters.builder()
             .mainCode(UNSPECIFIED_PROBLEM_CODE)
             .mainCodeSystem(SNOMED_SYSTEM_CODE)
@@ -198,11 +200,11 @@ public class CodeableConceptCdMapper {
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, params);
     }
 
-    public String mapCdForTopic(CodeableConcept relatedProblem, String title) {
+    public String mapToCdForTopic(CodeableConcept relatedProblem, String title) {
         var mainCode = findMainCode(relatedProblem);
 
         if (mainCode.isEmpty()) {
-            return mapCdForTopic(title);
+            return mapToCdForTopic(title);
         }
 
         var params = prepareTemplateParameters(mainCode.orElseThrow());
@@ -211,11 +213,11 @@ public class CodeableConceptCdMapper {
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, params);
     }
 
-    public String mapCdForTopic(CodeableConcept relatedProblem) {
+    public String mapToCdForTopic(CodeableConcept relatedProblem) {
         var mainCode = findMainCode(relatedProblem);
 
         if (mainCode.isEmpty()) {
-            return mapCdForTopic();
+            return getCdForTopic();
         }
 
         var params = prepareTemplateParameters(mainCode.orElseThrow());
@@ -223,7 +225,7 @@ public class CodeableConceptCdMapper {
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, params);
     }
 
-    public String mapCdForTopic(String title) {
+    public String mapToCdForTopic(String title) {
         var params = CodeableConceptCdTemplateParameters.builder()
             .mainCode(UNSPECIFIED_PROBLEM_CODE)
             .mainCodeSystem(SNOMED_SYSTEM_CODE)
@@ -233,6 +235,27 @@ public class CodeableConceptCdMapper {
 
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, params);
 
+    }
+
+    public String mapToCdForCategory(String title) {
+        var params = CodeableConceptCdTemplateParameters.builder()
+            .mainCode(OTHER_CATEGORY_CODE)
+            .mainCodeSystem(SNOMED_SYSTEM_CODE)
+            .mainDisplayName(OTHER_CATEGORY_DESCRIPTION)
+            .mainOriginalText(title)
+            .build();
+
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, params);
+    }
+
+    public String getCdForCategory() {
+        var params = CodeableConceptCdTemplateParameters.builder()
+            .mainCode(OTHER_CATEGORY_CODE)
+            .mainCodeSystem(SNOMED_SYSTEM_CODE)
+            .mainDisplayName(OTHER_CATEGORY_DESCRIPTION)
+            .build();
+
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, params);
     }
 
     private CodeableConceptCdTemplateParameters prepareTemplateParameters(Coding mainCode) {
