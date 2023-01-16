@@ -1,0 +1,108 @@
+{
+    "resourceType": "Condition",
+    "id": "0c47177a-6b4d-11ed-8591-0a69bde48cbe",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+        ]
+    },
+    "extension": [
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
+            "valueCode": "major"
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "Encounter/3642bd5e-6b4d-11ed-a206-0a58a9feac02"
+            }
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "Observation/4b817e3a-6b4d-11ed-9767-0a58a9feac02"
+            }
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "Observation/52febd1c-6b4d-11ed-967a-0a69bde48cbe"
+            }
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "Observation/7fdefbda-6b4d-11ed-8c16-0a69bde48cbe"
+            }
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "Observation/9d29ea6a-6b4d-11ed-994e-0a69bde48cbe"
+            }
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "Observation/b8e1782c-6b4d-11ed-83b9-0a69bde48cbe"
+            }
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "DocumentReference/emed3-fit-note--cf84924e-6b4d-11ed-81fd-0a58a9feac02"
+            }
+        }
+    ],
+    "identifier": [
+        {
+            "system": "https://medicus.health",
+            "value": "0c47177a-6b4d-11ed-8591-0a69bde48cbe"
+        }
+    ],
+    "clinicalStatus": "active",
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/condition-category",
+                    "code": "problem-list-item",
+                    "display": "Problem List Item"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "169449001",
+                "display": "Trying to conceive",
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "262944016"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/d0690910-6b43-11ed-98f8-0a0382d71aaa"
+    },
+    "onsetDateTime": "2016",
+    "assertedDate": "2022-11-23T16:36:58+00:00",
+    "asserter": {
+        "reference": "Practitioner/aebc00c2-28df-11eb-adc1-0242ac120002"
+    },
+    "note": [
+        {
+            "text": "Episode: First"
+        }
+    ]
+}

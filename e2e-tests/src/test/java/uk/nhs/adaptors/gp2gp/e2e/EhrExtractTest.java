@@ -51,7 +51,7 @@ public class EhrExtractTest {
     //NORMAL-DR = Non-AbsentAttachment DocumentReference
     private static final String NHS_NUMBER_WITH_AA_DR = "9690937286";
     private static final String NHS_NUMBER_WITH_NORMAL_DR = "9690937287";
-    private static final String NHS_NUMBER_NOT_EXISTING_PATIENT = "9876543210";
+    private static final String NHS_NUMBER_NOT_EXISTING_PATIENT = "9600000001";
     private static final String NHS_NUMBER_NO_DOCUMENTS = "9690937294";
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_1 = "9690937819";
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_2 = "9690937841";
