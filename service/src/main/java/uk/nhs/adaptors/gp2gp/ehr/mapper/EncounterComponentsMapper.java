@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,6 +20,7 @@ import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Encounter;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
@@ -28,6 +30,7 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -76,6 +79,7 @@ public class EncounterComponentsMapper {
     private final DiagnosticReportMapper diagnosticReportMapper;
     private final BloodPressureValidator bloodPressureValidator;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+
     private final Map<ResourceType, Function<Resource, Optional<String>>> encounterComponents = Map.of(
         ResourceType.AllergyIntolerance, this::mapAllergyIntolerance,
         ResourceType.Condition, this::mapCondition,
@@ -102,6 +106,7 @@ public class EncounterComponentsMapper {
                 (ListResource) messageContext
                     .getInputBundleHolder()
                     .getRequiredResource(reference))
+            .filter(listResource -> CodeableConceptMappingUtils.hasCode(listResource.getCode(), List.of(TOPIC_LIST_CODE)))
             .collect(Collectors.toList());
 
         return topics.stream()
@@ -110,11 +115,6 @@ public class EncounterComponentsMapper {
     }
 
     private String mapTopicListToComponent(ListResource topicList) {
-
-        if (!CodeableConceptMappingUtils.hasCode(topicList.getCode(), List.of(TOPIC_LIST_CODE))) {
-            throw new EhrMapperException(String.format("Unexpected list %s referenced in Consultation, expected list to be coded as "
-                + "Topic (EHR)", topicList.getId()));
-        }
 
         String components = mapTopicListComponents(topicList);
 
@@ -148,6 +148,7 @@ public class EncounterComponentsMapper {
                 .getRequiredResource(reference))
             .filter(resource -> resource.getResourceType().equals(ResourceType.List))
             .map(resource -> (ListResource) resource)
+            .filter(listResource -> CodeableConceptMappingUtils.hasCode(listResource.getCode(), List.of(CATEGORY_LIST_CODE)))
             .map(this::mapCategoryListToComponent)
             .collect(Collectors.joining());
 
@@ -157,11 +158,6 @@ public class EncounterComponentsMapper {
     }
 
     private String mapCategoryListToComponent(ListResource categoryList) {
-
-        if (!CodeableConceptMappingUtils.hasCode(categoryList.getCode(), List.of(CATEGORY_LIST_CODE))) {
-            throw new EhrMapperException(String.format("Unexpected list %s referenced in Topic (EHR), expected list to be coded as "
-                + "Category (EHR)", categoryList.getId()));
-        }
 
         String components = mapListResourceToComponents(categoryList);
 
@@ -208,18 +204,22 @@ public class EncounterComponentsMapper {
             return Optional.empty();
         }
 
-        Resource resource = messageContext.getInputBundleHolder().getRequiredResource(item.getItem().getReferenceElement());
+        var reference = item.getItem().getReferenceElement();
+        if (isListResource(reference)) {
+            return mapResourcesContainedInList(reference, this::mapConsultationListResourceToComponent);
+        }
+
+        Resource resource = messageContext.getInputBundleHolder().getRequiredResource(reference);
+
         LOGGER.debug("Translating list entry resource {}", resource.getId());
+        return mapConsultationListResourceToComponent(resource);
+    }
+
+    private Optional<String> mapConsultationListResourceToComponent(Resource resource) {
         if (encounterComponents.containsKey(resource.getResourceType())) {
             return encounterComponents.get(resource.getResourceType()).apply(resource);
-        } else if (isIgnoredResourceType(resource.getResourceType()) || resource.getResourceType().equals(ResourceType.List)) {
-            // lists referenced within consultations are only mapped as topics or categories
-            // so should be ignored when mapping individual items
-
-            if (!resource.getResourceType().equals(ResourceType.List)) {
-                LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
-            }
-
+        } else if (isIgnoredResourceType(resource.getResourceType())) {
+            LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
             return Optional.empty();
         } else {
             throw new EhrMapperException("Unsupported resource in consultation list: " + resource.getId());
@@ -346,5 +346,43 @@ public class EncounterComponentsMapper {
 
     private Encounter findEncounterForList(ListResource listResource) {
         return (Encounter) messageContext.getInputBundleHolder().getRequiredResource(listResource.getEncounter().getReferenceElement());
+    }
+
+    private Optional<String> mapResourcesContainedInList(IIdType fullReference, Function<Resource, Optional<String>> mapperFunction) {
+        var pattern = Pattern.compile("^([\\da-zA-Z-]*)(#[\\da-zA-Z-]*)$");
+        var matcher = pattern.matcher(fullReference.getIdPart());
+
+        if (!matcher.find()) {
+            return Optional.empty();
+        }
+
+        var listId = matcher.group(1);
+        var containedResourceId = matcher.group(2);
+
+        var listResource = (ListResource) messageContext.getInputBundleHolder()
+            .getRequiredResource(buildListReference(listId));
+
+        return listResource.getContained().stream()
+            .filter(resource -> resourceHasId(resource, containedResourceId))
+            .map(this::removeNumberSignFromId)
+            .findFirst()
+            .flatMap(mapperFunction);
+    }
+
+    private Resource removeNumberSignFromId(Resource resource) {
+        return resource.setIdElement(new IdType(resource.getResourceType().name(), resource.getId().replace("#", StringUtils.EMPTY)));
+    }
+
+    private boolean resourceHasId(Resource resource, String id) {
+        return resource.hasIdElement() && resource.getIdElement().getValue().equals(id);
+    }
+
+    private IIdType buildListReference(String id) {
+        var referenceString = String.format("%s/%s", ResourceType.List, id);
+        return new Reference(referenceString).getReferenceElement();
+    }
+
+    private boolean isListResource(IIdType reference) {
+        return reference.hasResourceType() && reference.getResourceType().equals(ResourceType.List.name());
     }
 }
