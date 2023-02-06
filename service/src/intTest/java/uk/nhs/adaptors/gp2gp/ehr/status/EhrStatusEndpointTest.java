@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -33,6 +32,7 @@ import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessage;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
+import uk.nhs.adaptors.gp2gp.util.ProcessDetectionService;
 
 @RunWith(SpringRunner.class)
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
@@ -47,6 +47,7 @@ public class EhrStatusEndpointTest {
     private static final String FROM_ASID = "276827251543";
     private static final int JMS_RECEIVE_TIMEOUT = 60000;
     private static final Duration ONE_MINUTE = Duration.ofMinutes(1);
+    private static final Duration THREE_SECONDS = Duration.ofSeconds(3);
 
     @LocalServerPort
     private int port;
@@ -71,6 +72,9 @@ public class EhrStatusEndpointTest {
     @Autowired
     private JmsTemplate inboundJmsTemplate;
 
+    @Autowired
+    private ProcessDetectionService processDetectionService;
+
     @Test
     public void When_EhrStatusEndpointHasContent_Expect_StatusEndpointReturnsAsidCodes() {
 
@@ -85,7 +89,8 @@ public class EhrStatusEndpointTest {
 
         await()
             .atMost(ONE_MINUTE)
-            .until(this::ehrEndpointHasContent);
+            .pollInterval(THREE_SECONDS)
+            .until(() -> processDetectionService.awaitingContinue(conversationId));
 
         EhrStatus status = restTemplate.getForObject(ehrStatusEndpoint, EhrStatus.class);
 
@@ -106,11 +111,5 @@ public class EhrStatusEndpointTest {
             }
             return IOUtils.toString(is, UTF_8);
         }
-    }
-
-    private boolean ehrEndpointHasContent() {
-        var responseEntity = restTemplate.getForEntity(ehrStatusEndpoint, EhrStatus.class);
-
-        return responseEntity.getStatusCode() == HttpStatus.OK;
     }
 }
