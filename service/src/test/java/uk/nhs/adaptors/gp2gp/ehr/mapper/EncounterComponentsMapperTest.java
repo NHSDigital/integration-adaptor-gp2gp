@@ -78,6 +78,7 @@ public class EncounterComponentsMapperTest {
     private static final String INPUT_BUNDLE_TOPIC_NO_CATEGORIES = TEST_DIRECTORY + "input-bundle-17-topic-no-categories.json";
     private static final String EXPECTED_COMPONENTS_TOPIC_NO_CATEGORIES = TEST_DIRECTORY
         + "expected-components-17-topic-no-categories.xml";
+    private static final String CONTAINED_TEST_DIRECTORY = TEST_DIRECTORY + "contained-resources/";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -262,8 +263,8 @@ public class EncounterComponentsMapperTest {
 
         assertThatThrownBy(() ->
             encounterComponentsMapper.mapComponents(encounter))
-            .hasMessageContaining("Unexpected list List/category1 referenced in Topic (EHR), "
-                + "expected list to be coded as Category (EHR)")
+            .hasMessageContaining("Unexpected list List/category1 referenced in Consultation, "
+                + "expected list to be coded as Category (EHR) or be a container")
             .isInstanceOf(EhrMapperException.class);
     }
 
@@ -345,6 +346,31 @@ public class EncounterComponentsMapperTest {
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
         assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @ParameterizedTest
+    @MethodSource("containedResourceMappingArguments")
+    public void When_MappingContainedResource_Expect_ResourcesMapped(String inputBundle, String expectedComponents) throws IOException {
+        var expectedXml = ResourceTestFileUtils.getFileContent(CONTAINED_TEST_DIRECTORY + expectedComponents);
+        var bundle = initializeMessageContext(CONTAINED_TEST_DIRECTORY + inputBundle);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        System.out.println(mappedXml);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    private static Stream<Arguments> containedResourceMappingArguments() {
+        return Stream.of(
+            Arguments.of("input-referenced-in-category.json", "output-referenced-in-category.xml"),
+            Arguments.of("input-referenced-in-topic.json", "output-referenced-in-topic.xml"),
+            Arguments.of("input-not-referenced.json", "output-empty.xml"),
+            Arguments.of("input-topic-and-category.json", "output-topic-and-category.xml"),
+            Arguments.of("input-two-resources-category.json", "output-two-resources-category.xml"),
+            Arguments.of("input-referenced-observation.json", "output-referenced-observation.xml")
+        );
     }
 
     private String removeLineEndingsAndWhiteSpace(String input) {

@@ -31,6 +31,7 @@ import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
+import org.intellij.lang.annotations.RegExp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -64,6 +65,10 @@ public class EncounterComponentsMapper {
         + "-RelatedProblemHeader-1";
     private static final String RELATED_PROBLEM_TARGET = "target";
     private static final String COMPLETE_CODE = "COMPLETE";
+    @RegExp
+    private static final String LIST_REFERENCE_PATTERN = "^List/[\\da-zA-z-]+$";
+    @RegExp
+    private static final String CONTAINED_RESOURCE_REFERENCE_PATTERN = "^List/([\\da-zA-Z-]+)(#[\\da-zA-Z-]+)$";
 
     private final MessageContext messageContext;
     private final AllergyStructureMapper allergyStructureMapper;
@@ -106,7 +111,6 @@ public class EncounterComponentsMapper {
                 (ListResource) messageContext
                     .getInputBundleHolder()
                     .getRequiredResource(reference))
-            .filter(listResource -> CodeableConceptMappingUtils.hasCode(listResource.getCode(), List.of(TOPIC_LIST_CODE)))
             .collect(Collectors.toList());
 
         return topics.stream()
@@ -115,6 +119,11 @@ public class EncounterComponentsMapper {
     }
 
     private String mapTopicListToComponent(ListResource topicList) {
+
+        if (!CodeableConceptMappingUtils.hasCode(topicList.getCode(), List.of(TOPIC_LIST_CODE))) {
+            throw new EhrMapperException(String.format("Unexpected list %s referenced in Consultation, expected list to be coded as "
+                + "Topic (EHR)", topicList.getId()));
+        }
 
         String components = mapTopicListComponents(topicList);
 
@@ -143,6 +152,7 @@ public class EncounterComponentsMapper {
 
         String categories = topicList.getEntry().stream()
             .map(entry -> entry.getItem().getReferenceElement())
+            .filter(reference -> reference.getValue().matches(LIST_REFERENCE_PATTERN))
             .map(reference -> messageContext
                 .getInputBundleHolder()
                 .getRequiredResource(reference))
@@ -206,7 +216,7 @@ public class EncounterComponentsMapper {
 
         var reference = item.getItem().getReferenceElement();
         if (isListResource(reference)) {
-            return mapResourcesContainedInList(reference, this::mapConsultationListResourceToComponent);
+            return mapResourceContainedInList(reference, this::mapConsultationListResourceToComponent);
         }
 
         Resource resource = messageContext.getInputBundleHolder().getRequiredResource(reference);
@@ -348,21 +358,28 @@ public class EncounterComponentsMapper {
         return (Encounter) messageContext.getInputBundleHolder().getRequiredResource(listResource.getEncounter().getReferenceElement());
     }
 
-    private Optional<String> mapResourcesContainedInList(IIdType fullReference, Function<Resource, Optional<String>> mapperFunction) {
-        var pattern = Pattern.compile("^([\\da-zA-Z-]*)(#[\\da-zA-Z-]*)$");
-        var matcher = pattern.matcher(fullReference.getIdPart());
+    private Optional<String> mapResourceContainedInList(IIdType fullReference, Function<Resource, Optional<String>> mapperFunction) {
+        var pattern = Pattern.compile(CONTAINED_RESOURCE_REFERENCE_PATTERN);
+        var matcher = pattern.matcher(fullReference.getValue());
 
         if (!matcher.find()) {
-            return Optional.empty();
+            var listResource = (ListResource) messageContext.getInputBundleHolder().getRequiredResource(fullReference);
+
+            if (CodeableConceptMappingUtils.hasCode(listResource.getCode(), List.of(CATEGORY_LIST_CODE))) {
+                return Optional.empty();
+            }
+
+            throw new EhrMapperException("Unexpected list " + fullReference
+                + " referenced in Consultation, expected list to be coded as Category (EHR) or be a container");
         }
 
         var listId = matcher.group(1);
         var containedResourceId = matcher.group(2);
 
-        var listResource = (ListResource) messageContext.getInputBundleHolder()
+        var container = (ListResource) messageContext.getInputBundleHolder()
             .getRequiredResource(buildListReference(listId));
 
-        return listResource.getContained().stream()
+        return container.getContained().stream()
             .filter(resource -> resourceHasId(resource, containedResourceId))
             .map(this::removeNumberSignFromId)
             .findFirst()
