@@ -49,7 +49,7 @@
             <low nullFlavor="UNK"/>
             <high value="20201004000000"/>
         </effectiveTime>
-        <availabilityTime nullFlavor="UNK" />
+        <availabilityTime value="20200907101202" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">

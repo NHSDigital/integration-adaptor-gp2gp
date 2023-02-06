@@ -39,6 +39,6 @@
             <low nullFlavor="UNK"/>
             
         </effectiveTime>
-        <availabilityTime nullFlavor="UNK" />
+        <availabilityTime value="20200907101202" />
   </ObservationStatement>
 </component>

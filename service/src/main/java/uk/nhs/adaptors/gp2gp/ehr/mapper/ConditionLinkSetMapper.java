@@ -2,11 +2,13 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils.isMedicationRequestType;
 
+import java.time.Year;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.BaseDateTimeType;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.IdType;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
 
+import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -131,11 +134,13 @@ public class ConditionLinkSetMapper {
     }
 
     private Optional<String> buildConditionNamed(Condition condition) {
-        return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
+        var conditionResource = ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
             .map(Extension::getValue)
             .map(value -> (Reference) value)
             .filter(reference -> checkIfReferenceIsObservation(reference))
             .map(this::mapLinkedId);
+
+        return conditionResource;
     }
 
     private boolean isTransformedActualProblemHeader(Condition condition) {
@@ -258,10 +263,9 @@ public class ConditionLinkSetMapper {
     }
 
     private Optional<String> buildObservationStatementAvailabilityTime(Condition condition) {
-        return Optional.of(condition)
-            .filter(Condition::hasOnsetDateTimeType)
-            .map(Condition::getOnsetDateTimeType)
-            .map(DateFormatUtil::toHl7Format);
+
+        var observationStatementAvaliabilityTime = buildAvailabilityTime(condition);
+        return observationStatementAvaliabilityTime;
     }
 
     private String mapLinkedId(Reference reference) {
