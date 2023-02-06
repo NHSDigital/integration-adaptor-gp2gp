@@ -117,7 +117,8 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-43.json";
     private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_END = TEST_FILE_DIRECTORY
         + "example-observation-resource-44.json";
-
+    private static final String INPUT_JSON_WITH_BODY_SITE = TEST_FILE_DIRECTORY
+        + "example-observation-with-body-site.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY
@@ -180,6 +181,8 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-31.xml";
     private static final String OUTPUT_XML_WITH_EFFECTIVE_TIME_NO_END = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-32.xml";
+    private static final String OUTPUT_XML_WITH_BODY_SITE = TEST_FILE_DIRECTORY
+            + "expected-output-observation-with-body-site.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -306,7 +309,8 @@ public class ObservationStatementMapperTest {
                 OUTPUT_XML_WITH_REFERENCE_RANGE_NO_LOW_NO_VALUE_QUANTITY),
             Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_NO_HIGH_NO_VALUE_QUANTITY,
                 OUTPUT_XML_WITH_REFERENCE_RANGE_NO_HIGH_NO_VALUE_QUANTITY),
-            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_END, OUTPUT_XML_WITH_EFFECTIVE_TIME_NO_END)
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_END, OUTPUT_XML_WITH_EFFECTIVE_TIME_NO_END),
+            Arguments.of(INPUT_JSON_WITH_BODY_SITE, OUTPUT_XML_WITH_BODY_SITE)
         );
     }
 }
