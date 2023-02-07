@@ -141,7 +141,7 @@ public class MedicationStatementMapper {
             .getResource(reference)
             .map(Medication.class::cast)
             .map(Medication::getCode)
-            .map(codeableConceptCdMapper::mapCodeableConceptToCd)
+            .map(codeableConceptCdMapper::mapCodeableConceptForMedication)
             .get();
     }
 
