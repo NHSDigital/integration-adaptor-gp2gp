@@ -34,8 +34,8 @@ public class CodeableConceptCdMapperTest {
     private static final String CD_FOR_TOPIC_TITLE = TEST_FILE_DIRECTORY + "topic/cd_for_topic_title.xml";
     private static final String CD_FOR_TOPIC_UNSPECIFIED = TEST_FILE_DIRECTORY + "topic/cd_for_topic_unspecified.xml";
     private static final String TEST_FILE_DIRECTORY_TOPIC_RELATED_PROBLEM = TEST_FILE_DIRECTORY + "topic/relatedProblem/";
-    private static final String CD_FOR_CATEGORY_TITLE = TEST_FILE_DIRECTORY + "category/cd_for_medication_titile.xml";
-    private static final String CD_FOR_CATEGORY_NO_TITLE = TEST_FILE_DIRECTORY + "category/medication_with_no_extension.xml";
+    private static final String CD_FOR_CATEGORY_TITLE = TEST_FILE_DIRECTORY + "category/cd_for_category_titile.xml";
+    private static final String CD_FOR_CATEGORY_NO_TITLE = TEST_FILE_DIRECTORY + "category/cd_for_category_no_title.xml";
 
     private static final String TEST_TITLE = "test title";
 
