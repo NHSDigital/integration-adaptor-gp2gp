@@ -197,7 +197,8 @@ public class NonConsultationResourceMapperTest {
 
         var mappedResources = resourceArgumentCaptor.getAllValues();
         var mappedResourceTypesInOrder = mappedResources.stream().map(Resource::getResourceType);
-        assertThat(mappedResourceTypesInOrder.collect(Collectors.toList())).isEqualTo(asList(ResourceType.DiagnosticReport, ResourceType.Observation));
+        assertThat(mappedResourceTypesInOrder.collect(Collectors.toList()))
+            .isEqualTo(asList(ResourceType.DiagnosticReport, ResourceType.Observation));
     }
 
     private static Stream<Arguments> testArgs() {
