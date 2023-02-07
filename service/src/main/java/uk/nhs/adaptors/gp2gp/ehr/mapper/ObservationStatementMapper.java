@@ -29,6 +29,8 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
+
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 @Slf4j
@@ -67,6 +69,11 @@ public class ObservationStatementMapper {
                     structuredObservationValueMapper.mapObservationValueToStructuredElement(value));
             }
         }
+
+        var bodySite = extractTextOrCoding(observation.getBodySite())
+                .map(text -> String.format("BodySite: %s", text));
+
+        bodySite.ifPresent(observationStatementTemplateParametersBuilder::comment);
 
         if (observation.hasReferenceRange() && observation.hasValueQuantity()) {
             observationStatementTemplateParametersBuilder.referenceRange(
@@ -159,8 +166,13 @@ public class ObservationStatementMapper {
         }
 
         if (observation.hasComment()) {
-            commentBuilder.append(observation.getComment());
+            commentBuilder.append(observation.getComment()).append(StringUtils.SPACE);
         }
+
+        var bodySite = extractTextOrCoding(observation.getBodySite())
+                .map(text -> String.format("BodySite: %s", text));
+
+        bodySite.ifPresent(commentBuilder::append);
 
         buildActualProblemTextIfExists(observation)
             .map(t -> StringUtils.SPACE + t)
