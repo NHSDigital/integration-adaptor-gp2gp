@@ -131,11 +131,13 @@ public class ConditionLinkSetMapper {
     }
 
     private Optional<String> buildConditionNamed(Condition condition) {
-        return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
+        var conditionResource = ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
             .map(Extension::getValue)
             .map(value -> (Reference) value)
             .filter(reference -> checkIfReferenceIsObservation(reference))
             .map(this::mapLinkedId);
+
+        return conditionResource;
     }
 
     private boolean isTransformedActualProblemHeader(Condition condition) {
@@ -258,10 +260,9 @@ public class ConditionLinkSetMapper {
     }
 
     private Optional<String> buildObservationStatementAvailabilityTime(Condition condition) {
-        return Optional.of(condition)
-            .filter(Condition::hasOnsetDateTimeType)
-            .map(Condition::getOnsetDateTimeType)
-            .map(DateFormatUtil::toHl7Format);
+
+        var observationStatementAvaliabilityTime = buildAvailabilityTime(condition);
+        return observationStatementAvaliabilityTime;
     }
 
     private String mapLinkedId(Reference reference) {
