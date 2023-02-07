@@ -1,0 +1,66 @@
+{
+  "resourceType": "Observation",
+  "id": "df265dd8-9afd-11ed-9add-0a58a9feac02",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "https://medicus.health",
+      "value": "df265dd8-9afd-11ed-9add-0a58a9feac02"
+    }
+  ],
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "446063006",
+        "display": "MRI of rib",
+        "extension": [
+          {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+            "extension": [
+              {
+                "url": "descriptionId",
+                "valueId": "3027809017"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/c168d7d0-9afd-11ed-9c6b-0a58a9feac02"
+  },
+  "effectiveDateTime": "2023-01-23",
+  "issued": "2023-01-23T00:00:00+00:00",
+  "comment": "test additional information",
+  "bodySite": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "60413009",
+        "display": "Thoracic cage structure",
+        "extension": [
+          {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+            "extension": [
+              {
+                "url": "descriptionId",
+                "valueId": "100385018"
+              },
+              {
+                "url": "descriptionDisplay",
+                "valueString": "Rib cage"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
