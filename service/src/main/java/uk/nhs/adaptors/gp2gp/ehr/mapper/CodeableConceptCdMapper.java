@@ -3,7 +3,6 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
@@ -95,7 +94,6 @@ public class CodeableConceptCdMapper {
         var builder = CodeableConceptCdTemplateParameters.builder();
         var mainCode = findMainCode(codeableConcept);
 
-        LOGGER.debug("Maincode found? :" + mainCode.isPresent());
         builder.nullFlavor(mainCode.isEmpty());
 
         if (mainCode.isPresent()) {
@@ -107,8 +105,6 @@ public class CodeableConceptCdMapper {
 
             Optional<String> code = Optional.of(mainCode.get().getCode().toString());
             code.ifPresent(builder::mainCode);
-
-            LOGGER.debug("Code at this point is:" + code);
 
             Optional<String> displayName = extension.stream()
                 .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
