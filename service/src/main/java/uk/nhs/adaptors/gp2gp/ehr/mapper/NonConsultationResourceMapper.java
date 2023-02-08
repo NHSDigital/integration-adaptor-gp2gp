@@ -1,10 +1,14 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import com.github.mustachejava.Mustache;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+
 import org.hl7.fhir.dstu3.model.Bundle;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.ListResource;
@@ -15,6 +19,11 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters.EncounterTemplateParametersBuilder;
@@ -23,14 +32,6 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.XpathExtractor;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
-
-import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -51,7 +52,6 @@ public class NonConsultationResourceMapper {
         + "data\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
     private static final String CONDITION_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication transaction\" "
         + "codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
-    private static final String ENDED_ALLERGIES_CODE = "1103671000000101";
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -82,10 +82,10 @@ public class NonConsultationResourceMapper {
             .flatMap(Optional::stream)
             .collect(Collectors.toList());
 
-        var endedAllergies = bundle.getEntry()
+        var containedResources = bundle.getEntry()
             .stream()
             .map(Bundle.BundleEntryComponent::getResource)
-            .filter(this::isEndedAllergyList)
+            .filter(this::isListWithContained)
             .map(ListResource.class::cast)
             .map(ListResource::getContained)
             .flatMap(List::stream)
@@ -95,14 +95,14 @@ public class NonConsultationResourceMapper {
             .flatMap(Optional::stream)
             .collect(Collectors.toList());
 
-        mappedResources.addAll(endedAllergies);
+        mappedResources.addAll(containedResources);
 
         LOGGER.debug("Non-consultation resources mapped: {}", mappedResources.size());
         return mappedResources;
     }
 
     private Resource replaceId(Resource resource) {
-        resource.setIdElement(new IdType(ResourceType.AllergyIntolerance.name(), randomIdGeneratorService.createNewId()));
+        resource.setIdElement(new IdType(resource.getResourceType().name(), randomIdGeneratorService.createNewId()));
         return resource;
     }
 
@@ -268,16 +268,10 @@ public class NonConsultationResourceMapper {
         return false;
     }
 
-    private boolean isEndedAllergyList(Resource resource) {
+    private boolean isListWithContained(Resource resource) {
         if (resource.getResourceType().equals(ResourceType.List)) {
             var list = (ListResource) resource;
-            var endedAllergies = Optional.ofNullable(list.getCode())
-                .map(CodeableConcept::getCodingFirstRep)
-                .filter(coding -> ENDED_ALLERGIES_CODE.equals(coding.getCode()))
-                .orElse(null);
-            if (endedAllergies != null) {
-                return list.hasContained();
-            }
+            return list.hasContained();
         }
         return false;
     }

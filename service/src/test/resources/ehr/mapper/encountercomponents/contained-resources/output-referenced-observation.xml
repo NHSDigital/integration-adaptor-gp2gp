@@ -1,0 +1,50 @@
+<component typeCode="COMP">
+    <CompoundStatement classCode="TOPIC" moodCode="EVN">
+        <id root="394559384658936"/>
+        <code nullFlavor="UNK">
+            <originalText>Mocked code</originalText>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20221123163700"/>
+        </effectiveTime>
+        <availabilityTime value="20221123163808"/>
+        <component typeCode="COMP" contextConductionInd="true">
+            <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+                <id root="394559384658936"/>
+                <code nullFlavor="UNK">
+                    <originalText>Mocked code</originalText>
+                </code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20221123163700"/>
+                </effectiveTime>
+                <availabilityTime value="20221123163700"/>
+                <component typeCode="COMP">
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="394559384658936"/>
+                        <code nullFlavor="UNK">
+                            <originalText>Mocked code</originalText>
+                        </code>
+                        <statusCode code="COMPLETE"/>
+                        <effectiveTime>
+                            <center value="20091102"/>
+                        </effectiveTime>
+                        <availabilityTime value="20091102"/>
+                        <pertinentInformation typeCode="PERT">
+                            <sequenceNumber value="+1"/>
+                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                <text>Family member : Uncle</text>
+                            </pertinentAnnotation>
+                        </pertinentInformation>
+                        <Participant typeCode="PRF" contextControlCode="OP">
+                            <agentRef classCode="AGNT">
+                                <id root="394559384658936"/>
+                            </agentRef>
+                        </Participant>
+                    </ObservationStatement>
+                </component>
+            </CompoundStatement>
+        </component>
+    </CompoundStatement>
+</component>
