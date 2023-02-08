@@ -66,14 +66,14 @@ public class CodeableConceptCdMapper {
                 .filter(descriptionExt -> DESCRIPTION_ID.equals(descriptionExt.getUrl()))
                 .map(description -> description.getValue().toString())
                 .findFirst()
-                .or(() -> Optional.of(mainCode.get().getCode()));
+                .or(() -> Optional.ofNullable(mainCode.get().getCode()));
             code.ifPresent(builder::mainCode);
 
             Optional<String> displayName = extension.stream()
                 .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
                 .map(description -> description.getValue().toString())
                 .findFirst()
-                .or(() -> Optional.of(mainCode.get().getDisplay()));
+                .or(() -> Optional.ofNullable(mainCode.get().getDisplay()));
             displayName.ifPresent(builder::mainDisplayName);
 
             if (codeableConcept.hasText()) {
@@ -103,14 +103,14 @@ public class CodeableConceptCdMapper {
 
             builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
 
-            Optional<String> code = Optional.of(mainCode.get().getCode().toString());
+            Optional<String> code = Optional.ofNullable(mainCode.get().getCode().toString());
             code.ifPresent(builder::mainCode);
 
             Optional<String> displayName = extension.stream()
                 .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
                 .map(description -> description.getValue().toString())
                 .findFirst()
-                .or(() -> Optional.of(mainCode.get().getDisplay()));
+                .or(() -> Optional.ofNullable(mainCode.get().getDisplay()));
             displayName.ifPresent(builder::mainDisplayName);
 
             if (codeableConcept.hasText()) {
@@ -146,10 +146,10 @@ public class CodeableConceptCdMapper {
                 .filter(descriptionExt -> DESCRIPTION_ID.equals(descriptionExt.getUrl()))
                 .map(description -> description.getValue().toString())
                 .findFirst()
-                .or(() -> Optional.of(mainCode.get().getCode()));
+                .or(() -> Optional.ofNullable(mainCode.get().getCode()));
             code.ifPresent(builder::mainCode);
 
-            Optional<String> displayName = Optional.of(mainCode.get().getDisplay());
+            Optional<String> displayName = Optional.ofNullable(mainCode.get().getDisplay());
             displayName.ifPresent(builder::mainDisplayName);
 
             if (codeableConcept.hasText()) {
@@ -185,7 +185,7 @@ public class CodeableConceptCdMapper {
 
         if (mainCode.isPresent()) {
             builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
-            var code = Optional.of(mainCode.get().getCode());
+            var code = Optional.ofNullable(mainCode.get().getCode());
             var displayText = findDisplayText(mainCode.get());
 
             code.ifPresent(builder::mainCode);
@@ -341,10 +341,10 @@ public class CodeableConceptCdMapper {
     private Optional<String> findOriginalText(CodeableConcept codeableConcept, Optional<Coding> coding) {
         if (coding.isPresent()) {
             if (codeableConcept.hasText()) {
-                return Optional.of(codeableConcept.getText());
+                return Optional.ofNullable(codeableConcept.getText());
             } else {
                 if (coding.get().hasDisplay()) {
-                    Optional<String> originalText = Optional.of(coding.get().getDisplay());
+                    Optional<String> originalText = Optional.ofNullable(coding.get().getDisplay());
                     return originalText;
                 } else {
                     var extension = retrieveDescriptionExtension(coding.get());
@@ -367,7 +367,7 @@ public class CodeableConceptCdMapper {
             if (RESOLVED_CLINICAL_STATUS.equals(allergyIntoleranceClinicalStatus.toCode())) {
                 if (coding.isPresent()) {
                     if (codeableConcept.hasText()) {
-                        return Optional.of(codeableConcept.getText());
+                        return Optional.ofNullable(codeableConcept.getText());
                     } else {
                         var extension = retrieveDescriptionExtension(coding.get());
                         if (extension.isPresent()) {
@@ -381,10 +381,10 @@ public class CodeableConceptCdMapper {
                             if (originalText.isPresent()) {
                                 return originalText;
                             } else if (coding.get().hasDisplay()) {
-                                return Optional.of(coding.get().getDisplay());
+                                return Optional.ofNullable(coding.get().getDisplay());
                             }
                         } else if (coding.get().hasDisplay()) {
-                            return Optional.of(coding.get().getDisplay());
+                            return Optional.ofNullable(coding.get().getDisplay());
                         }
                     }
                 }
@@ -410,7 +410,7 @@ public class CodeableConceptCdMapper {
     }
 
     private Optional<String> findDisplayText(Coding coding) {
-        return Optional.of(coding.getDisplay());
+        return Optional.ofNullable(coding.getDisplay());
     }
 
     private boolean isSnomed(Coding coding) {
