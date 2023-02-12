@@ -4,17 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrRequestStatus;
+import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatusRequest;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrRequestsRequest;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.service.EhrRequestsService;
 
 @RestController
@@ -24,10 +22,10 @@ public class EhrRequestsController {
 
     private EhrRequestsService ehrRequestsService;
 
-    @PostMapping()
-    public ResponseEntity<EhrRequestStatus> getEhrStatus(@RequestBody EhrRequestsRequest request) {
+    @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE, MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<EhrStatusRequest>> getEhrRequests(EhrRequestsRequest request) {
 
-        Optional<List<EhrRequestStatus>> ehrRequestOptional = ehrRequestsService.getEhrRequests(request);
+        Optional<List<EhrStatusRequest>> ehrRequestOptional = ehrRequestsService.getEhrStatusRequests(request);
         return ehrRequestOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
     }
 

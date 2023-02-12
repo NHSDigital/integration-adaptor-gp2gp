@@ -1,187 +1,95 @@
 package uk.nhs.adaptors.gp2gp.ehr.status.service;
 
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ERROR;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ORIGINAL_FILE;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.PLACEHOLDER;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.SKELETON_MESSAGE;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.COMPLETE;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.COMPLETE_WITH_ISSUES;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_INCUMBENT;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_NME;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.IN_PROGRESS;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrRequestStatus;
+import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatusRequest;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrRequestsRequest;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class EhrRequestsService {
+public class EhrRequestsService extends EhrStatusBaseService {
+    
+    private final MongoTemplate mongoTemplate;
 
-    private EhrExtractStatusRepository ehrExtractStatusRepository;
+    public Optional<List<EhrStatusRequest>> getEhrStatusRequests(EhrRequestsRequest requestQuery) {
 
-    public Optional<List<EhrRequestStatus>> getEhrRequests(EhrRequestsRequest requestQuery) {
+        // create a dynamic query based on the parameters we have been provided
+        Query query = new Query();
 
-        Optional<List<EhrExtractStatus>> extractStatusOptional = ehrExtractStatusRepository.findByEhrRequestQuery(requestQuery);
-
-        if (extractStatusOptional.isEmpty()) {
-            return Optional.empty();
+        var updatedAtQueryCriteria = new Criteria();
+        updatedAtQueryCriteria = updatedAtQueryCriteria.where("updatedAt");
+        if (!(requestQuery.getFromDateTime() == null)) {
+            updatedAtQueryCriteria = updatedAtQueryCriteria.gte(requestQuery.getFromDateTime());
         }
 
-        var statuses = extractStatusOptional.get();
-        List<EhrRequestStatus> requestResponse = new ArrayList<EhrRequestStatus>();
-        for (var statusCount = 0; statusCount < statuses.size(); statusCount ++) {
-            var status = statuses.get(statusCount);
-            requestResponse.add(
-                EhrRequestStatus.builder()
-                    .actionTimestamp(status.getCreated())
-                    .build()
-            )
+        if (!(requestQuery.getToDateTime() == null)) {
+            updatedAtQueryCriteria = updatedAtQueryCriteria.lte(requestQuery.getToDateTime());
         }
 
-//        return Optional.of(
-//            EhrStatus.builder()
-//                .attachmentStatus(attachmentStatusList)
-//                .migrationLog(receivedAcknowledgements)
-//                .migrationStatus(evaluateMigrationStatus(ehrExtractStatus, attachmentStatusList))
-//                .originalRequestDate(ehrExtractStatus.getCreated())
-//                .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
-//                .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
-//                .build());
-    }
+        query.addCriteria(updatedAtQueryCriteria);
 
-    private List<EhrExtractStatus.EhrReceivedAcknowledgement> getAckModel(EhrExtractStatus ehrExtractStatus) {
-
-        Optional<EhrExtractStatus.AckHistory> ackHistoryOptional = Optional.ofNullable(ehrExtractStatus.getAckHistory());
-
-        return ackHistoryOptional.map(EhrExtractStatus.AckHistory::getAcks).orElse(new ArrayList<>());
-    }
-
-    private MigrationStatus evaluateMigrationStatus(EhrExtractStatus record, List<EhrStatus.AttachmentStatus> attachmentStatusList) {
-
-        var ackPendingOptional = Optional.ofNullable(record.getAckPending());
-        var ackToRequestorOptional = Optional.ofNullable(record.getAckToRequester());
-        var errorOptional = Optional.ofNullable(record.getError());
-        var receivedAcknowledgementOptional = Optional.ofNullable(record.getEhrReceivedAcknowledgement());
-
-        if (
-            ackPendingOptional
-                .map(ackPending -> ackPending.getTypeCode().equals(NACK_TYPE_CODE))
-                .orElse(false)
-
-                && errorOptional.isPresent()) {
-
-            return FAILED_NME;
-        } else if (
-            ackPendingOptional
-                .map(ackPending -> ackPending.getTypeCode().equals(ACK_TYPE_CODE))
-                .orElse(false)
-
-                && ackToRequestorOptional
-                .map(ackToRequester -> ackToRequester.getTypeCode().equals(ACK_TYPE_CODE))
-                .orElse(false)
-
-                && errorOptional.isEmpty()
-
-                && receivedAcknowledgementOptional
-                .map(acknowledgement ->
-                    Optional.ofNullable(acknowledgement.getConversationClosed()).isPresent()
-                        && Optional.ofNullable(acknowledgement.getErrors()).isEmpty())
-                .orElse(false)) {
-
-            return checkForPlaceholderOrError(attachmentStatusList) ? COMPLETE_WITH_ISSUES : COMPLETE;
-        } else if (
-
-            errorOptional.isEmpty()
-
-                && receivedAcknowledgementOptional
-                .map(acknowledgement ->
-                    Optional.ofNullable(acknowledgement.getErrors()).isPresent())
-                .orElse(false)) {
-
-            return FAILED_INCUMBENT;
+        if (!(requestQuery.getFromAsid() == null)) {
+            query.addCriteria(Criteria.where("ehrRequest.fromAsid").is(requestQuery.getFromAsid()));
         }
 
-        return IN_PROGRESS;
-    }
-
-    private List<EhrStatus.AttachmentStatus> getAttachmentStatusList(EhrExtractStatus record,
-        List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
-
-        List<EhrStatus.AttachmentStatus> attachmentStatusList = new ArrayList<>();
-
-        var accessDocumentOptional = Optional.ofNullable(record.getGpcAccessDocument());
-
-        accessDocumentOptional.ifPresent(accessDocument ->
-            accessDocument.getDocuments().forEach(gpcDocument ->
-                attachmentStatusList.add(
-                    EhrStatus.AttachmentStatus.builder()
-                        .identifier(gpcDocument.getIdentifier())
-                        .fileName(gpcDocument.getFileName())
-                        .fileStatus(getFileStatus(gpcDocument, acknowledgements))
-                        .originalDescription(gpcDocument.getOriginalDescription())
-                        .build())
-            )
-        );
-
-        return attachmentStatusList.stream()
-            .filter(attachmentStatus -> attachmentStatus.getFileStatus() != SKELETON_MESSAGE)
-            .collect(Collectors.toList());
-    }
-
-    public FileStatus getFileStatus(EhrExtractStatus.GpcDocument document,
-        List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
-
-        Optional<String> fileNameOptional = Optional.ofNullable(document.getFileName());
-        Optional<String> objectNameOptional = Optional.ofNullable(document.getObjectName());
-        Optional<EhrExtractStatus.GpcAccessDocument.SentToMhs> sentToMhsOptional = Optional.ofNullable(document.getSentToMhs());
-
-        if (document.isSkeleton()) {
-            return SKELETON_MESSAGE;
+        if (!(requestQuery.getToAsid() == null)) {
+            query.addCriteria(Criteria.where("ehrRequest.toAsid").is(requestQuery.getToAsid()));
         }
 
-        if (sentToMhsOptional.isPresent()) {
-            List<String> messageIds = sentToMhsOptional.get().getMessageId();
-            boolean documentHasNack = acknowledgements.stream()
-                .filter(ack -> ack.getErrors() != null)
-                .anyMatch(ack -> messageIds.contains(ack.getMessageRef()));
+        if (!(requestQuery.getFromOdsCode() == null)) {
+            query.addCriteria(Criteria.where("ehrRequest.fromOdsCode").is(requestQuery.getFromOdsCode()));
+        }
 
-            if (documentHasNack) {
-                return ERROR;
+        if (!(requestQuery.getToOdsCode() == null)) {
+            query.addCriteria(Criteria.where("ehrRequest.toOdsCode").is(requestQuery.getToOdsCode()));
+        }
+
+        List<EhrExtractStatus> ehrStatuses = mongoTemplate.find(query, EhrExtractStatus.class);
+        List<EhrStatusRequest> ehrStatusRequests = new ArrayList<EhrStatusRequest>();
+
+        // SA: I'm not a big fan of this method but since the status of an EHR is not recorded in the MongoDB
+        // we can only calculate it after receiving the records using the previous query filters.
+        // at some point a refactoring of status should be moved to the mongo db to optimise this, until
+        // then minimum filtering previsions will be put in place.
+        ehrStatuses.stream().forEach(ehrExtractStatus -> {
+            List<EhrExtractStatus.EhrReceivedAcknowledgement> receivedAcknowledgements = getAckModel(ehrExtractStatus);
+            List<EhrStatus.AttachmentStatus> attachmentStatusList = getAttachmentStatusList(ehrExtractStatus, receivedAcknowledgements);
+            var migrationStatus = evaluateMigrationStatus(ehrExtractStatus, attachmentStatusList);
+
+            if (migrationStatus != MigrationStatus.IN_PROGRESS) {
+                var ehrStatusRequest = EhrStatusRequest.builder()
+                    .initialRequestTimestamp(ehrExtractStatus.getCreated())
+                    .actionCompletedTimestamp(ehrExtractStatus.getCreated())
+                    .migrationStatus(migrationStatus)
+                    .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+                    .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+                    .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
+                    .conversationId(ehrExtractStatus.getConversationId())
+                    .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+                    .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
+                    .build();
+                ehrStatusRequests.add(ehrStatusRequest);
             }
+        });
+
+        if (ehrStatusRequests.size() > 0) {
+            return Optional.of(ehrStatusRequests);
         }
 
-        boolean isPlaceholder = hasAbsentAttachmentPrefix(objectNameOptional) || hasAbsentAttachmentPrefix(fileNameOptional);
+        return Optional.empty();
 
-        if (isPlaceholder) {
-            return PLACEHOLDER;
-        }
-
-        return ORIGINAL_FILE;
     }
 
-    private boolean checkForPlaceholderOrError(List<EhrStatus.AttachmentStatus> attachmentStatusList) {
-
-        return attachmentStatusList.stream()
-            .anyMatch(attachmentList ->
-                attachmentList.getFileStatus().equals(PLACEHOLDER)
-                    || attachmentList.getFileStatus().equals(ERROR));
-    }
-
-    private boolean hasAbsentAttachmentPrefix(Optional<String> filenameOptional) {
-        return filenameOptional.isPresent() && filenameOptional.get().startsWith("AbsentAttachment");
-    }
 }
