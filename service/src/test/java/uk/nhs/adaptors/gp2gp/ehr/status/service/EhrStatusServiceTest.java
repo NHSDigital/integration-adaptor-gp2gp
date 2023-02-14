@@ -108,13 +108,13 @@ public class EhrStatusServiceTest {
     @Mock
     private EhrExtractStatusRepository extractStatusRepository;
     @InjectMocks
-    private EhrStatusService ehrStatusBaseService;
+    private EhrStatusService ehrStatusService;
 
     @Test
     public void When_GetEhrStatus_WithCompleteMigration_Expect_CompleteStatus() {
         when(extractStatusRepository.findByConversationId(any())).thenReturn(Optional.of(COMPLETE_EHR_EXTRACT_STATUS));
 
-        Optional<EhrStatus> status = ehrStatusBaseService.getEhrStatus(UUID.randomUUID().toString());
+        Optional<EhrStatus> status = ehrStatusService.getEhrStatus(UUID.randomUUID().toString());
 
         assertThat(status).isPresent();
         assertThat(status.get().getMigrationStatus()).isEqualTo(COMPLETE);
@@ -125,7 +125,7 @@ public class EhrStatusServiceTest {
     public void When_GetEhrStatus_WithFailedNME_Expect_FailedNameStatus() {
         when(extractStatusRepository.findByConversationId(any())).thenReturn(Optional.of(FAILED_NME_EXTRACT_STATUS));
 
-        Optional<EhrStatus> status = ehrStatusBaseService.getEhrStatus(UUID.randomUUID().toString());
+        Optional<EhrStatus> status = ehrStatusService.getEhrStatus(UUID.randomUUID().toString());
 
         assertThat(status).isPresent();
         assertThat(status.get().getMigrationStatus()).isEqualTo(FAILED_NME);
@@ -135,7 +135,7 @@ public class EhrStatusServiceTest {
     public void When_GetEhrStatus_WithFailedIncumbent_Expect_FailedIncumbentStatus() {
         when(extractStatusRepository.findByConversationId(any())).thenReturn(Optional.of(FAILED_INCUMBENT_EXTRACT_STATUS_1));
 
-        Optional<EhrStatus> status = ehrStatusBaseService.getEhrStatus(UUID.randomUUID().toString());
+        Optional<EhrStatus> status = ehrStatusService.getEhrStatus(UUID.randomUUID().toString());
 
         assertThat(status).isPresent();
         assertThat(status.get().getMigrationStatus()).isEqualTo(FAILED_INCUMBENT);
@@ -145,7 +145,7 @@ public class EhrStatusServiceTest {
     public void When_GetEhrStatus_WithFailedIncumbentBeforeContinue_Expect_FailedIncumbentStatus() {
         when(extractStatusRepository.findByConversationId(any())).thenReturn(Optional.of(FAILED_INCUMBENT_EXTRACT_STATUS_2));
 
-        Optional<EhrStatus> status = ehrStatusBaseService.getEhrStatus(UUID.randomUUID().toString());
+        Optional<EhrStatus> status = ehrStatusService.getEhrStatus(UUID.randomUUID().toString());
 
         assertThat(status).isPresent();
         assertThat(status.get().getMigrationStatus()).isEqualTo(FAILED_INCUMBENT);
@@ -155,7 +155,7 @@ public class EhrStatusServiceTest {
     public void When_GetEhrStatus_WithInProgress_Expect_InProgressStatus() {
         when(extractStatusRepository.findByConversationId(any())).thenReturn(Optional.of(IN_PROGRESS_EXTRACT_STATUS));
 
-        Optional<EhrStatus> status = ehrStatusBaseService.getEhrStatus(UUID.randomUUID().toString());
+        Optional<EhrStatus> status = ehrStatusService.getEhrStatus(UUID.randomUUID().toString());
 
         assertThat(status).isPresent();
         assertThat(status.get().getMigrationStatus()).isEqualTo(IN_PROGRESS);
@@ -165,7 +165,7 @@ public class EhrStatusServiceTest {
     public void When_GetEhrStatus_Expect_AsidCodesArePresent() {
         when(extractStatusRepository.findByConversationId(any())).thenReturn(Optional.of(COMPLETE_EHR_EXTRACT_STATUS));
 
-        Optional<EhrStatus> statusOptional = ehrStatusBaseService.getEhrStatus(UUID.randomUUID().toString());
+        Optional<EhrStatus> statusOptional = ehrStatusService.getEhrStatus(UUID.randomUUID().toString());
 
         EhrStatus status = statusOptional.orElseThrow();
 

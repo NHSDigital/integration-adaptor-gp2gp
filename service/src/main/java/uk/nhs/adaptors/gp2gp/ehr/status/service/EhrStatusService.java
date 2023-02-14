@@ -1,19 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.status.service;
 
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ERROR;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ORIGINAL_FILE;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.PLACEHOLDER;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.SKELETON_MESSAGE;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.COMPLETE;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.COMPLETE_WITH_ISSUES;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_INCUMBENT;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_NME;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.IN_PROGRESS;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +10,6 @@ import lombok.AllArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 
 
 @Service

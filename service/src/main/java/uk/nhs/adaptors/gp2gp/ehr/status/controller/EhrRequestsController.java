@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatusRequest;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrRequestsRequest;
-import uk.nhs.adaptors.gp2gp.ehr.status.service.EhrRequestsService;
+import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatusRequestQuery;
+import uk.nhs.adaptors.gp2gp.ehr.status.service.EhrStatusRequestsService;
 
 @RestController
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(path = "/requests")
 public class EhrRequestsController {
 
-    private EhrRequestsService ehrRequestsService;
+    private EhrStatusRequestsService ehrRequestsService;
 
     @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE, MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<EhrStatusRequest>> getEhrRequests(EhrRequestsRequest request) {
+    public ResponseEntity<List<EhrStatusRequest>> getEhrRequests(EhrStatusRequestQuery request) {
 
         Optional<List<EhrStatusRequest>> ehrRequestOptional = ehrRequestsService.getEhrStatusRequests(request);
         return ehrRequestOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());

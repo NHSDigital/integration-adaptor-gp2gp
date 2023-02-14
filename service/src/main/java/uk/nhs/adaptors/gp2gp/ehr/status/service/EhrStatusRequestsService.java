@@ -13,17 +13,17 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatusRequest;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrRequestsRequest;
+import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatusRequestQuery;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class EhrRequestsService extends EhrStatusBaseService {
+public class EhrStatusRequestsService extends EhrStatusBaseService {
     
-    private final MongoTemplate mongoTemplate;
+    private MongoTemplate mongoTemplate;
 
-    public Optional<List<EhrStatusRequest>> getEhrStatusRequests(EhrRequestsRequest requestQuery) {
+    public Optional<List<EhrStatusRequest>> getEhrStatusRequests(EhrStatusRequestQuery requestQuery) {
 
         // create a dynamic query based on the parameters we have been provided
         Query query = new Query();
@@ -63,26 +63,28 @@ public class EhrRequestsService extends EhrStatusBaseService {
         // we can only calculate it after receiving the records using the previous query filters.
         // at some point a refactoring of status should be moved to the mongo db to optimise this, until
         // then minimum filtering previsions will be put in place.
-        ehrStatuses.stream().forEach(ehrExtractStatus -> {
-            List<EhrExtractStatus.EhrReceivedAcknowledgement> receivedAcknowledgements = getAckModel(ehrExtractStatus);
-            List<EhrStatus.AttachmentStatus> attachmentStatusList = getAttachmentStatusList(ehrExtractStatus, receivedAcknowledgements);
-            var migrationStatus = evaluateMigrationStatus(ehrExtractStatus, attachmentStatusList);
+        if (ehrStatuses != null) {
+            ehrStatuses.stream().forEach(ehrExtractStatus -> {
+                List<EhrExtractStatus.EhrReceivedAcknowledgement> receivedAcknowledgements = getAckModel(ehrExtractStatus);
+                List<EhrStatus.AttachmentStatus> attachmentStatusList = getAttachmentStatusList(ehrExtractStatus, receivedAcknowledgements);
+                var migrationStatus = evaluateMigrationStatus(ehrExtractStatus, attachmentStatusList);
 
-            if (migrationStatus != MigrationStatus.IN_PROGRESS) {
-                var ehrStatusRequest = EhrStatusRequest.builder()
-                    .initialRequestTimestamp(ehrExtractStatus.getCreated())
-                    .actionCompletedTimestamp(ehrExtractStatus.getCreated())
-                    .migrationStatus(migrationStatus)
-                    .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
-                    .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
-                    .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
-                    .conversationId(ehrExtractStatus.getConversationId())
-                    .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
-                    .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
-                    .build();
-                ehrStatusRequests.add(ehrStatusRequest);
-            }
-        });
+                if (migrationStatus != MigrationStatus.IN_PROGRESS) {
+                    var ehrStatusRequest = EhrStatusRequest.builder()
+                        .initialRequestTimestamp(ehrExtractStatus.getCreated())
+                        .actionCompletedTimestamp(ehrExtractStatus.getUpdatedAt())
+                        .migrationStatus(migrationStatus)
+                        .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+                        .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+                        .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
+                        .conversationId(ehrExtractStatus.getConversationId())
+                        .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+                        .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
+                        .build();
+                    ehrStatusRequests.add(ehrStatusRequest);
+                }
+            });
+        }
 
         if (ehrStatusRequests.size() > 0) {
             return Optional.of(ehrStatusRequests);
