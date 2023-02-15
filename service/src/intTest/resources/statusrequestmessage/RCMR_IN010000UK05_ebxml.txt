@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:eb="http://www.oasis-open.org/committees/ebxml-msg/schema/msg-header-2_0.xsd" xmlns:hl7ebxml="urn:hl7-org:transport/ebxml/DSTUv1.0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Header>
+		<eb:MessageHeader eb:version="2.0" soap:mustUnderstand="1">
+			<eb:From>
+				<eb:PartyId eb:type="urn:nhs:names:partyType:ocs+serviceInstance">RHM-803229</eb:PartyId>
+			</eb:From>
+			<eb:To>
+				<eb:PartyId eb:type="urn:nhs:names:partyType:ocs+serviceInstance">RHM-801710</eb:PartyId>
+			</eb:To>
+			<eb:CPAId>1b09c9557a7794ff6fd2</eb:CPAId>
+			<eb:ConversationId>{{conversationId}}</eb:ConversationId>
+			<eb:Service>urn:nhs:names:services:gp2gp</eb:Service>
+			<eb:Action>RCMR_IN010000UK05</eb:Action>
+			<eb:MessageData>
+				<eb:MessageId>93499435-ed45-43c1-8987-7790a5aa6d84</eb:MessageId>
+				<eb:Timestamp>2013-10-28T08:59:26Z</eb:Timestamp>
+				<eb:TimeToLive>2013-10-28T08:59:26Z</eb:TimeToLive>
+			</eb:MessageData>
+			<eb:DuplicateElimination/>
+		</eb:MessageHeader>
+		<eb:AckRequested eb:signed="false" eb:version="2.0" soap:actor="urn:oasis:names:tc:ebxml-msg:actor:nextMSH" soap:mustUnderstand="1"/>
+	</soap:Header>
+	<soap:Body>
+		<eb:Manifest eb:version="2.0" soap:mustUnderstand="1">
+			<eb:Reference xlink:href="cid:93499435-ed45-43c1-8987-7790a5aa6d84@e-mis.com/EMISWeb/GP2GP2.2A" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<eb:Description xml:lang="en">RCMR_IN010000UK05</eb:Description>
+				<hl7ebxml:Payload encoding="XML" style="HL7" version="3.0"/>
+			</eb:Reference>
+		</eb:Manifest>
+	</soap:Body>
+</soap:Envelope>
