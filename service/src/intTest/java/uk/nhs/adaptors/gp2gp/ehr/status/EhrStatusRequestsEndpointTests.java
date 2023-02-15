@@ -33,6 +33,7 @@ import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.ehr.InboundMessageHandlingTest;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatusRequest;
+import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatusRequestQuery;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessage;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
@@ -62,12 +63,12 @@ public class EhrStatusRequestsEndpointTests {
     private String ehrStatusRequestsEndpoint;
     private Boolean setupComplete = false;
 
-    private DateTime fromDateTime;
-    private DateTime toDateTime;
-    private String toAsid;
-    private String getFromAsid;
-    private String toOds;
-    private String fromOds;
+    private DateTime[] fromDateTimes;
+    private DateTime[] toDateTimes;
+    private String[] toAsids;
+    private String[] fromAsids;
+    private String[] toOdss;
+    private String[] fromOdss;
 
 
     private static final String CONVERSATION_ID_PLACEHOLDER = "{{conversationId}}";
@@ -116,22 +117,96 @@ public class EhrStatusRequestsEndpointTests {
     private ProcessDetectionService processDetectionService;
 
     @Test
-    public void When_EhrStatusEndpointHasContent_Expect_StatusEndpointReturnsAsidCodes() {
-
-        EhrStatusRequest statusRequests = restTemplate.getForObject(ehrStatusRequestsEndpoint, EhrStatusRequest.class);
-
-//        assertThat(status.getFromAsid()).isEqualTo(FROM_ASID);
-//        assertThat(status.getToAsid()).isEqualTo(TO_ASID);
+    public void When_EhrStatusEndpointHasContentAndNoFilltersAreApplied_Expect_StatusEndpointReturnsAllExpectedResponses() {
+        var queryRequest = EhrStatusRequestQuery.builder()
+            .build();
+        EhrStatusRequest statusRequests = restTemplate.postForObject(ehrStatusRequestsEndpoint, queryRequest, EhrStatusRequest.class);
     }
 
-    // Test case 1: From Date works as expected
-    // Test case 2: To Date Works
-    // Test case 3: a combination of from date and to date work as expected
-    // Test case 4: From asid works as expected
-    // Test case 5: To Asid works as expected
-    // Test case 6: From ods works as expected
-    // Test case 7: To Ods works as expected
+    @Test
+    public void When_EhrStatusEndpointHasContentAndNoFromDateFilterIsApplied_Expect_StatusEndpointReturnsTheExpectedRangeOfResponses() {
 
+        // If we take the from timestamp of the second created item we should get n - 1 responses where n is the number of data items created for these tests;
+        var queryRequest = EhrStatusRequestQuery.builder()
+            .fromDateTime(fromDateTimes[1])
+            .build();
+        EhrStatusRequest statusRequests = restTemplate.postForObject(ehrStatusRequestsEndpoint, queryRequest, EhrStatusRequest.class);
+
+    }
+
+    @Test
+    public void When_EhrStatusEndpointHasContentAndNoToDateFilterIsApplied_Expect_StatusEndpointReturnsTheExpectedRangeOfResponses() {
+
+        // If we take the to timestamp of the first created item we should only get the first data item from our test data
+        var queryRequest = EhrStatusRequestQuery.builder()
+            .toDateTime(toDateTimes[0])
+            .build();
+
+        EhrStatusRequest statusRequests = restTemplate.postForObject(ehrStatusRequestsEndpoint, queryRequest, EhrStatusRequest.class);
+
+    }
+
+    @Test
+    public void When_EhrStatusEndpointHasContentAndBothToAndFromDateFilterIsApplied_Expect_StatusEndpointReturnsTheExpectedRangeOfResponses() {
+
+        // We are excluding the first and last data item in our test data meaning we should get n-2 results where n is the number of test data items
+        var queryRequest = EhrStatusRequestQuery.builder()
+            .fromDateTime(fromDateTimes[1])
+            .toDateTime(toDateTimes[toDateTimes.length-1])
+            .build();
+        EhrStatusRequest statusRequests = restTemplate.postForObject(ehrStatusRequestsEndpoint, queryRequest, EhrStatusRequest.class);
+
+    }
+
+    @Test
+    public void When_EhrStatusEndpointHasContentAndFromASIDFilterIsApplied_Expect_StatusEndpointReturnsTheExpectedRangeOfResponses() {
+
+        var queryRequest = EhrStatusRequestQuery.builder()
+            .fromAsid(fromAsids[1])
+            .build();
+        EhrStatusRequest statusRequests = restTemplate.postForObject(ehrStatusRequestsEndpoint, queryRequest, EhrStatusRequest.class);
+
+    }
+
+    @Test
+    public void When_EhrStatusEndpointHasContentAndToASIDFilterIsApplied_Expect_StatusEndpointReturnsTheExpectedRangeOfResponses() {
+
+        var queryRequest = EhrStatusRequestQuery.builder()
+            .toAsid(toAsids[3])
+            .build();
+        EhrStatusRequest statusRequests = restTemplate.postForObject(ehrStatusRequestsEndpoint, queryRequest, EhrStatusRequest.class);
+
+    }
+
+    @Test
+    public void When_EhrStatusEndpointHasContentAndFromODSFilterIsApplied_Expect_StatusEndpointReturnsTheExpectedRangeOfResponses() {
+
+        var queryRequest = EhrStatusRequestQuery.builder()
+            .fromOdsCode(fromOdss[1])
+            .build();
+        EhrStatusRequest statusRequests = restTemplate.postForObject(ehrStatusRequestsEndpoint, queryRequest, EhrStatusRequest.class);
+
+    }
+
+    @Test
+    public void When_EhrStatusEndpointHasContentAndToODSFilterIsApplied_Expect_StatusEndpointReturnsTheExpectedRangeOfResponses() {
+
+        var queryRequest = EhrStatusRequestQuery.builder()
+            .toOdsCode(toOdss[4])
+            .build();
+        EhrStatusRequest statusRequests = restTemplate.postForObject(ehrStatusRequestsEndpoint, queryRequest, EhrStatusRequest.class);
+
+    }
+
+    @Test
+    public void When_EhrStatusEndpointResponseHasNoContent_Expect_StatusEndpointReturnsA204Response() {
+
+        var queryRequest = EhrStatusRequestQuery.builder()
+            .toDateTime(fromDateTimes[0].minusDays(1))
+            .build();
+        EhrStatusRequest statusRequests = restTemplate.postForObject(ehrStatusRequestsEndpoint, queryRequest, EhrStatusRequest.class);
+
+    }
 
     @SneakyThrows
     private String parseMessageToString(InboundMessage inboundMessage) {
