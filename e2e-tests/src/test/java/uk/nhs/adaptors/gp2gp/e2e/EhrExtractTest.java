@@ -51,7 +51,7 @@ public class EhrExtractTest {
     //NORMAL-DR = Non-AbsentAttachment DocumentReference
     private static final String NHS_NUMBER_WITH_AA_DR = "9690937286";
     private static final String NHS_NUMBER_WITH_NORMAL_DR = "9690937287";
-    private static final String NHS_NUMBER_NOT_EXISTING_PATIENT = "9876543210";
+    private static final String NHS_NUMBER_NOT_EXISTING_PATIENT = "9600000001";
     private static final String NHS_NUMBER_NO_DOCUMENTS = "9690937294";
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_1 = "9690937819";
     private static final String NHS_NUMBER_LARGE_DOCUMENTS_2 = "9690937841";
@@ -71,6 +71,7 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_RESPONSE_MISSING_PATIENT_RESOURCE = "2906543841";
     private static final String NHS_NUMBER_MEDICUS_BASED_ON = "9302014592";
     private static final String NHS_NUMBER_INVALID_CONTENT_TYPE_DOC = "9817280691";
+    private static final String NHS_NUMBER_BODY_SITE = "1239577290";
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_WITHOUT_NHS_NUMBER_TEST_FILE = "/ehrExtractRequestWithoutNhsNumber.json";
     private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS = "/ehrExtractRequestWithNoDocuments.json";
@@ -107,6 +108,7 @@ public class EhrExtractTest {
 
     private static final CharSequence XML_NAMESPACE = "/urn:hl7-org:v3:";
     private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/RCMR_IN030000UK06/ControlActEvent/subject/EhrExtract/component/ehrFolder/component/ehrComposition/component/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='cid:%s']";
+    private static final String BODY_SITE_REFERENCE_XPATH_TEMPLATE = "/RCMR_IN030000UK06/ControlActEvent/subject/EhrExtract/component/ehrFolder/component/ehrComposition/component/ObservationStatement/pertinentInformation/pertinentAnnotation/text[contains(text(), 'BodySite: Rib cage')]";
 
     private final MhsMockRequestsJournal mhsMockRequestsJournal =
         new MhsMockRequestsJournal(getEnvVar("GP2GP_MHS_MOCK_BASE_URL", "http://localhost:8081"));
@@ -337,6 +339,39 @@ public class EhrExtractTest {
             .format(DOCUMENT_REFERENCE_XPATH_TEMPLATE, documentId)
             .replace("/", XML_NAMESPACE);
         XmlAssert.assertThat(ehrExtractMhsRequest.getPayload()).hasXPath(documentReferenceXPath);
+    }
+
+
+    @Test
+    public void When_ExtractRequest_ContainsObservationWithBodySite_ExpectBodySiteValueInPertinentInformationText() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_BODY_SITE, FROM_ODS_CODE_2);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        var ehrExtractStatus = waitFor(() -> getFinishedEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_BODY_SITE, FROM_ODS_CODE_2);
+        var gpcAccessStructured = ehrExtractStatus.get(GPC_ACCESS_STRUCTURED, Document.class);
+        assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
+
+        var ehrExtractCore = ehrExtractStatus.get(EHR_EXTRACT_CORE, Document.class);
+        assertThatExtractCoreMessageWasSent(ehrExtractCore);
+
+        var ehrContinue = ehrExtractStatus.get(EHR_CONTINUE, Document.class);
+        assertThatExtractContinueMessageWasSent(ehrContinue);
+
+        var ackPending = ehrExtractStatus.get(ACK_TO_PENDING, Document.class);
+        assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+
+        var requestJournals = waitFor(() -> {
+            try {
+                return mhsMockRequestsJournal.getRequestsJournal(conversationId);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        XmlAssert.assertThat(requestJournals.get(0).getPayload())
+                .hasXPath(BODY_SITE_REFERENCE_XPATH_TEMPLATE.replace("/", XML_NAMESPACE));
     }
 
     private Document getFinishedEhrExtractStatus(String conversationId) {

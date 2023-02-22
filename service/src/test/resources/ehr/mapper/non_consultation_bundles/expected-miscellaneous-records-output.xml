@@ -1,0 +1,46 @@
+<component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="b2175be3-29c2-465f-b2c6-323db03c2c7c" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20091102"/>
+        </effectiveTime>
+        <availabilityTime value="20091102"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20091102" />
+            <agentRef classCode="AGNT">
+                <id root="394559384658936" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="394559384658936"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+            <ObservationStatement classCode="OBS" moodCode="EVN">
+                <id root="394559384658936"/>
+                <code nullFlavor="UNK">
+                    <originalText>Mocked code</originalText>
+                </code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20091102"/>
+                </effectiveTime>
+                <availabilityTime value="20091102"/>
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Family member : Uncle</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <Participant typeCode="PRF" contextControlCode="OP">
+                    <agentRef classCode="AGNT">
+                        <id root="394559384658936"/>
+                    </agentRef>
+                </Participant>
+            </ObservationStatement>
+        </component>
+    </ehrComposition>
+</component>

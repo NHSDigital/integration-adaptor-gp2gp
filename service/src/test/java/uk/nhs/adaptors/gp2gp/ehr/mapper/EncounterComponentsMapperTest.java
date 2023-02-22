@@ -56,9 +56,29 @@ public class EncounterComponentsMapperTest {
     private static final String INPUT_BUNDLE_WITHOUT_CONSULTATION_LIST = TEST_DIRECTORY + "input-bundle-5.json";
     private static final String INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA = TEST_DIRECTORY + "input-bundle-6.json";
     private static final String INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE = TEST_DIRECTORY + "input-bundle-7.json";
-    private static final String INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY = TEST_DIRECTORY + "input-bundle-8.json";
+    private static final String INPUT_BUNDLE_WITH_NON_TOPIC_CONSULTATION_LIST_ENTRY = TEST_DIRECTORY + "input-bundle-8.json";
     private static final String INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES = TEST_DIRECTORY + "input-bundle-9-unsupported-resource.json";
     private static final String INPUT_BUNDLE_WITH_IGNORED_RESOURCE = TEST_DIRECTORY + "input-bundle-10-ignored-resource.json";
+    private static final String INPUT_BUNDLE_WITH_NON_CATEGORY_TOPIC_LIST_ENTRY = TEST_DIRECTORY
+        + "input-bundle-11-invalid-category-list.json";
+    private static final String INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC = TEST_DIRECTORY + "input-bundle-12-related-problem.json";
+    private static final String EXPECTED_COMPONENTS_RELATED_PROBLEM = TEST_DIRECTORY + "expected-components-12-related-problem.xml";
+    private static final String INPUT_BUNDLE_WITH_NO_DATE_PROVIDED_IN_TOPIC = TEST_DIRECTORY
+        + "input-bundle-13-topic-without-date.json";
+    private static final String EXPECTED_COMPONENTS_TOPIC_AVAILABILITY_DATE_MAPPED_FROM_ENCOUNTER = TEST_DIRECTORY
+        + "expected-components-13-topic-without-date.xml";
+    private static final String INPUT_BUNDLE_WITH_MISSING_TITLE_IN_CATEGORY = TEST_DIRECTORY + "input-bundle-14-category-codes.json";
+    private static final String EXPECTED_COMPONENTS_WITH_CD_IN_CATEGORIES = TEST_DIRECTORY + "expected-components-14-category-codes.xml";
+    private static final String INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC_NO_TITLE = TEST_DIRECTORY
+        + "input-bundle-15-related-problem-no-title.json";
+    private static final String EXPECTED_COMPONENTS_RELATED_PROBLEM_NO_TITLE = TEST_DIRECTORY
+        + "expected-components-15-related-problem-no-title.xml";
+    private static final String INPUT_BUNDLE_WITH_MISSING_TITLE_IN_TOPIC = TEST_DIRECTORY + "input-bundle-16-topic-codes.json";
+    private static final String EXPECTED_COMPONENTS_WITH_CD_IN_TOPICS = TEST_DIRECTORY + "expected-components-16-topic-codes.xml";
+    private static final String INPUT_BUNDLE_TOPIC_NO_CATEGORIES = TEST_DIRECTORY + "input-bundle-17-topic-no-categories.json";
+    private static final String EXPECTED_COMPONENTS_TOPIC_NO_CATEGORIES = TEST_DIRECTORY
+        + "expected-components-17-topic-no-categories.xml";
+    private static final String CONTAINED_TEST_DIRECTORY = TEST_DIRECTORY + "contained-resources/";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -78,6 +98,8 @@ public class EncounterComponentsMapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapCodeableConceptForMedication(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(codeableConceptCdMapper.mapCodeableConceptToCdForBloodPressure(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
@@ -87,6 +109,10 @@ public class EncounterComponentsMapperTest {
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(any(CodeableConcept.class),
             any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForTopic(any(String.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForCategory(any()))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(bloodPressureValidator.isValidBloodPressure(argThat(observation ->
             CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(
@@ -155,7 +181,8 @@ public class EncounterComponentsMapperTest {
             observationStatementMapper,
             requestStatementMapper,
             diagnosticReportMapper,
-            bloodPressureValidator
+            bloodPressureValidator,
+            codeableConceptCdMapper
         );
     }
 
@@ -172,7 +199,10 @@ public class EncounterComponentsMapperTest {
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
-        assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
+
+        System.out.println(mappedXml);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
     }
 
     @Test
@@ -183,7 +213,7 @@ public class EncounterComponentsMapperTest {
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
-        assertThat(removeLineEndings(mappedXml)).isEqualTo(removeLineEndings(expectedXml));
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
     }
 
     @ParameterizedTest
@@ -216,8 +246,144 @@ public class EncounterComponentsMapperTest {
             .isInstanceOf(EhrMapperException.class);
     }
 
-    private String removeLineEndings(String input) {
-        return input.replace("\n", "").replace("\r", "");
+    @Test
+    public void When_MappingConsultation_WithNonTopicList_Expect_ExceptionThrown() throws IOException {
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_NON_TOPIC_CONSULTATION_LIST_ENTRY);
+        var encounter = extractEncounter(bundle);
+
+        assertThatThrownBy(() ->
+            encounterComponentsMapper.mapComponents(encounter))
+            .hasMessageContaining("Unexpected list List/topicid1 referenced in Consultation, "
+                + "expected list to be coded as Topic (EHR)")
+            .isInstanceOf(EhrMapperException.class);
+    }
+
+    @Test
+    public void When_MappingTopic_WithNonCategoryList_Expect_ExceptionThrown() throws IOException {
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_NON_CATEGORY_TOPIC_LIST_ENTRY);
+        var encounter = extractEncounter(bundle);
+
+        assertThatThrownBy(() ->
+            encounterComponentsMapper.mapComponents(encounter))
+            .hasMessageContaining("Unexpected list List/category1 referenced in Consultation, "
+                + "expected list to be coded as Category (EHR) or be a container")
+            .isInstanceOf(EhrMapperException.class);
+    }
+
+    @Test
+    public void When_MappingTopic_With_RelatedProblem_Expect_MappedToCode() throws IOException {
+
+        when(codeableConceptCdMapper.mapToCdForTopic(any(CodeableConcept.class), any(String.class)))
+            .thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_RELATED_PROBLEM);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @Test
+    public void When_MappingTopic_With_RelatedProblemAndNoTitle_Expect_MappedToCode() throws IOException {
+        when(codeableConceptCdMapper.mapToCdForTopic(any(CodeableConcept.class)))
+            .thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_RELATED_PROBLEM_NO_TITLE);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_RELATED_PROBLEM_IN_TOPIC_NO_TITLE);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @Test
+    public void When_MappingTopic_With_MissingDate_Expect_DateMappedFromEncounter() throws IOException {
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_TOPIC_AVAILABILITY_DATE_MAPPED_FROM_ENCOUNTER);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_NO_DATE_PROVIDED_IN_TOPIC);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @Test
+    public void When_MappingCategory_WithAndWithout_Title_Expect_BothCdsPresent() throws IOException {
+        when(codeableConceptCdMapper.getCdForCategory()).thenCallRealMethod();
+        when(codeableConceptCdMapper.mapToCdForCategory(any())).thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_WITH_CD_IN_CATEGORIES);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_MISSING_TITLE_IN_CATEGORY);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @Test
+    public void When_MappingTopic_WithAndWithout_Title_Expect_BothCdsPresent() throws IOException {
+
+        when(codeableConceptCdMapper.mapToCdForTopic(any(String.class))).thenCallRealMethod();
+        when(codeableConceptCdMapper.getCdForTopic()).thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_WITH_CD_IN_TOPICS);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_MISSING_TITLE_IN_TOPIC);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @Test
+    public void When_MappingTopic_WithoutCategory_Expect_ComponentsMapped() throws IOException {
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_TOPIC_NO_CATEGORIES);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_TOPIC_NO_CATEGORIES);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @ParameterizedTest
+    @MethodSource("containedResourceMappingArguments")
+    public void When_MappingContainedResource_Expect_ResourcesMapped(String inputBundle, String expectedComponents) throws IOException {
+        var expectedXml = ResourceTestFileUtils.getFileContent(CONTAINED_TEST_DIRECTORY + expectedComponents);
+        var bundle = initializeMessageContext(CONTAINED_TEST_DIRECTORY + inputBundle);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        System.out.println(mappedXml);
+
+        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    private static Stream<Arguments> containedResourceMappingArguments() {
+        return Stream.of(
+            Arguments.of("input-referenced-in-category.json", "output-referenced-in-category.xml"),
+            Arguments.of("input-referenced-in-topic.json", "output-referenced-in-topic.xml"),
+            Arguments.of("input-not-referenced.json", "output-empty.xml"),
+            Arguments.of("input-topic-and-category.json", "output-topic-and-category.xml"),
+            Arguments.of("input-two-resources-category.json", "output-two-resources-category.xml"),
+            Arguments.of("input-referenced-observation.json", "output-referenced-observation.xml")
+        );
+    }
+
+    private String removeLineEndingsAndWhiteSpace(String input) {
+        return input
+            .replace("\n", " ")
+            .replace("\r", " ")
+            .replaceAll("\\s+", " ")
+            .replaceAll("\"\\s>", "\">")
+            .replaceAll("\"\\s/>", "\"/>")
+            .replaceAll("\\s+<", "<");
+
     }
 
     private Encounter extractEncounter(Bundle bundle) {
@@ -234,8 +400,7 @@ public class EncounterComponentsMapperTest {
             Arguments.of(INPUT_BUNDLE_WITH_EMPTY_TOPIC_LIST),
             Arguments.of(INPUT_BUNDLE_WITH_EMPTY_CATEGORY_LIST),
             Arguments.of(INPUT_BUNDLE_WITHOUT_CONSULTATION_LIST),
-            Arguments.of(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA),
-            Arguments.of(INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY)
+            Arguments.of(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA)
         );
     }
 

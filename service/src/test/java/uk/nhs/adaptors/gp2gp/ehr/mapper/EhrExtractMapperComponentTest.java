@@ -108,6 +108,8 @@ public class EhrExtractMapperComponentTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapCodeableConceptForMedication(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         when(codeableConceptCdMapper.mapCodeableConceptToCdForTransformedActualProblemHeader(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.ACTUAL_PROBLEM_CODE);
         when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
@@ -121,6 +123,18 @@ public class EhrExtractMapperComponentTest {
         when(codeableConceptCdMapper.getDisplayFromCodeableConcept(any(CodeableConcept.class)))
             .thenCallRealMethod();
         when(codeableConceptCdMapper.mapCodeableConceptToCdForBloodPressure(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForTopic(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForTopic(any(CodeableConcept.class), any(String.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForTopic(any(String.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.getCdForTopic())
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToCdForCategory(any(String.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.getCdForCategory())
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
 
@@ -162,7 +176,8 @@ public class EhrExtractMapperComponentTest {
             new DiagnosticReportMapper(
                 messageContext, specimenMapper, participantMapper, randomIdGeneratorService
             ),
-            new BloodPressureValidator()
+            new BloodPressureValidator(),
+            codeableConceptCdMapper
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
