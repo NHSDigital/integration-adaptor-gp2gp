@@ -35,8 +35,8 @@ RUN tar xzf $ACTIVEMQ-bin.tar.gz -C  /opt && \
 
 USER activemq
 
-COPY --chown=activemq:activemq ./docker/activemq/activemq.xml $ACTIVEMQ_HOME/conf/activemq.xml
-COPY --chown=activemq:activemq ./docker/activemq/jetty.xml $ACTIVEMQ_HOME/conf/jetty.xml
+COPY --chown=activemq:activemq ./activemq.xml $ACTIVEMQ_HOME/conf/activemq.xml
+COPY --chown=activemq:activemq ./jetty.xml $ACTIVEMQ_HOME/conf/jetty.xml
 
 WORKDIR $ACTIVEMQ_HOME
 EXPOSE $ACTIVEMQ_AMQP $ACTIVEMQ_UI
