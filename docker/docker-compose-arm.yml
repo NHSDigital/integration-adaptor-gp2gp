@@ -71,8 +71,7 @@ services:
   activemq:
     networks: 
       - commonforgp2gp
-    build:
-      context: ./activemq
+    image: nhsdev/nia-ps-activemq:0.1-arm64
     ports:
       - "8161:8161"
       - "5672:5672"
