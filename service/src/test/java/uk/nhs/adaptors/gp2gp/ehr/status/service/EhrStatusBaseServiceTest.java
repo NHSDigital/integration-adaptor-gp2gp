@@ -1,22 +1,13 @@
 package uk.nhs.adaptors.gp2gp.ehr.status.service;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ERROR;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ORIGINAL_FILE;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.PLACEHOLDER;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.SKELETON_MESSAGE;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.COMPLETE;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_INCUMBENT;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_NME;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.IN_PROGRESS;
 
-import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,56 +17,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrStatusBaseServiceTest {
-
-    private static final String TO_ASID_CODE = "test-to-asid";
-    private static final String FROM_ASID_CODE = "test-from-asid";
-
-    private static final EhrExtractStatus COMPLETE_EHR_EXTRACT_STATUS = EhrExtractStatus.builder()
-        .ackPending(EhrExtractStatus.AckPending.builder().typeCode("AA").build())
-        .ackToRequester(EhrExtractStatus.AckToRequester.builder().typeCode("AA").build())
-        .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().conversationClosed(Instant.now()).build())
-        .ehrRequest(EhrExtractStatus.EhrRequest.builder().toAsid(TO_ASID_CODE).fromAsid(FROM_ASID_CODE).build())
-        .build();
-
-    private static final EhrExtractStatus FAILED_NME_EXTRACT_STATUS = EhrExtractStatus.builder()
-        .ackPending(EhrExtractStatus.AckPending.builder().typeCode("AE").build())
-        .ackToRequester(EhrExtractStatus.AckToRequester.builder().typeCode("AE").build())
-        .error(EhrExtractStatus.Error.builder().code("18").occurredAt(Instant.now()).build())
-        .ehrRequest(EhrExtractStatus.EhrRequest.builder().toAsid(TO_ASID_CODE).fromAsid(FROM_ASID_CODE).build())
-        .build();
-
-    private static final EhrExtractStatus FAILED_INCUMBENT_EXTRACT_STATUS_1 = EhrExtractStatus.builder()
-        .ackPending(EhrExtractStatus.AckPending.builder().typeCode("AA").build())
-        .ackToRequester(EhrExtractStatus.AckToRequester.builder().typeCode("AA").build())
-        .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
-            .errors(List.of(EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
-                    .code("30")
-                    .display("Test Error")
-                    .build()))
-            .build())
-        .ehrRequest(EhrExtractStatus.EhrRequest.builder().toAsid(TO_ASID_CODE).fromAsid(FROM_ASID_CODE).build())
-        .build();
-
-    private static final EhrExtractStatus FAILED_INCUMBENT_EXTRACT_STATUS_2 = EhrExtractStatus.builder()
-        .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
-            .errors(List.of(EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
-                    .code("30")
-                    .display("Test Error")
-                    .build()))
-            .build())
-        .ehrRequest(EhrExtractStatus.EhrRequest.builder().toAsid(TO_ASID_CODE).fromAsid(FROM_ASID_CODE).build())
-        .build();
-
-    private static final EhrExtractStatus IN_PROGRESS_EXTRACT_STATUS = EhrExtractStatus.builder()
-        .ackPending(EhrExtractStatus.AckPending.builder().typeCode("AA").build())
-        .ackToRequester(EhrExtractStatus.AckToRequester.builder().typeCode("AA").build())
-        .ehrRequest(EhrExtractStatus.EhrRequest.builder().toAsid(TO_ASID_CODE).fromAsid(FROM_ASID_CODE).build())
-        .build();
 
     private static final EhrExtractStatus.GpcDocument SKELETON_DOCUMENT = EhrExtractStatus.GpcDocument.builder()
         .isSkeleton(true)

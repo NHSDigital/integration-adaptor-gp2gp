@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,12 +19,19 @@ import uk.nhs.adaptors.gp2gp.ehr.status.service.EhrStatusRequestsService;
 @RestController
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(path = "/requests")
-public class EhrRequestsController {
+public class EhrStatusRequestsController {
 
     private EhrStatusRequestsService ehrRequestsService;
 
-    @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE, MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<EhrStatusRequest>> getEhrRequests(EhrStatusRequestQuery request) {
+    @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<EhrStatusRequest>> getEhrRequestsEncodedForm(EhrStatusRequestQuery request) {
+
+        Optional<List<EhrStatusRequest>> ehrRequestOptional = ehrRequestsService.getEhrStatusRequests(request);
+        return ehrRequestOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
+    }
+
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<EhrStatusRequest>> getEhrRequests(@RequestBody EhrStatusRequestQuery request) {
 
         Optional<List<EhrStatusRequest>> ehrRequestOptional = ehrRequestsService.getEhrStatusRequests(request);
         return ehrRequestOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());

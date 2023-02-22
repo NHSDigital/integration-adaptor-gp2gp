@@ -20,7 +20,6 @@ import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrStatusRequestsService extends EhrStatusBaseService {
-    
     private MongoTemplate mongoTemplate;
 
     public Optional<List<EhrStatusRequest>> getEhrStatusRequests(EhrStatusRequestQuery requestQuery) {
@@ -29,7 +28,7 @@ public class EhrStatusRequestsService extends EhrStatusBaseService {
         Query query = new Query();
 
         var updatedAtQueryCriteria = new Criteria();
-        updatedAtQueryCriteria = updatedAtQueryCriteria.where("updatedAt");
+        updatedAtQueryCriteria = Criteria.where("updatedAt");
         if (!(requestQuery.getFromDateTime() == null)) {
             updatedAtQueryCriteria = updatedAtQueryCriteria.gte(requestQuery.getFromDateTime());
         }
@@ -38,7 +37,9 @@ public class EhrStatusRequestsService extends EhrStatusBaseService {
             updatedAtQueryCriteria = updatedAtQueryCriteria.lte(requestQuery.getToDateTime());
         }
 
-        query.addCriteria(updatedAtQueryCriteria);
+        if (requestQuery.getFromDateTime() != null || requestQuery.getToDateTime() != null) {
+            query.addCriteria(updatedAtQueryCriteria);
+        }
 
         if (!(requestQuery.getFromAsid() == null)) {
             query.addCriteria(Criteria.where("ehrRequest.fromAsid").is(requestQuery.getFromAsid()));
@@ -57,7 +58,7 @@ public class EhrStatusRequestsService extends EhrStatusBaseService {
         }
 
         List<EhrExtractStatus> ehrStatuses = mongoTemplate.find(query, EhrExtractStatus.class);
-        List<EhrStatusRequest> ehrStatusRequests = new ArrayList<EhrStatusRequest>();
+        List<EhrStatusRequest> ehrStatusRequests = new ArrayList<>();
 
         // SA: I'm not a big fan of this method but since the status of an EHR is not recorded in the MongoDB
         // we can only calculate it after receiving the records using the previous query filters.
@@ -91,7 +92,5 @@ public class EhrStatusRequestsService extends EhrStatusBaseService {
         }
 
         return Optional.empty();
-
     }
-
 }
