@@ -43,6 +43,8 @@ public class EhrStatusEndpointTest {
     private static final String INBOUND_QUEUE_NAME = "inbound";
     private static final String EBXML_PATH_REQUEST_MESSAGE = "/requestmessage/RCMR_IN010000UK05_ebxml.txt";
     private static final String PAYLOAD_PATH_REQUEST_MESSAGE = "/requestmessage/RCMR_IN010000UK05_payload.txt";
+    private static final String TO_ASID_PLACEHOLDER = "{{toAsid}}";
+    private static final String FROM_ASID_PLACEHOLDER = "{{fromAsid}}";
     private static final String TO_ASID = "715373337545";
     private static final String FROM_ASID = "276827251543";
     private static final int JMS_RECEIVE_TIMEOUT = 60000;
@@ -81,6 +83,9 @@ public class EhrStatusEndpointTest {
         var inboundMessage = new InboundMessage();
         var payload = readResourceAsString(PAYLOAD_PATH_REQUEST_MESSAGE);
         var ebxml = readResourceAsString(EBXML_PATH_REQUEST_MESSAGE).replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
+
+        payload = payload.replace(FROM_ASID_PLACEHOLDER, FROM_ASID)
+            .replace(TO_ASID_PLACEHOLDER, TO_ASID);
 
         inboundMessage.setEbXML(ebxml);
         inboundMessage.setPayload(payload);
