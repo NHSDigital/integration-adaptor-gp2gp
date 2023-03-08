@@ -4,10 +4,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ERROR;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ORIGINAL_FILE;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.PLACEHOLDER;
-import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.SKELETON_MESSAGE;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.COMPLETE;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_INCUMBENT;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_NME;
@@ -27,7 +23,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
-import uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrStatusServiceTest {
@@ -164,42 +159,6 @@ public class EhrStatusServiceTest {
 
         assertThat(status).isPresent();
         assertThat(status.get().getMigrationStatus()).isEqualTo(IN_PROGRESS);
-    }
-
-    @Test
-    public void When_GetFileStatus_WithSkeleton_Expect_SkeletonStatus() {
-        FileStatus fileStatus = ehrStatusService.getFileStatus(SKELETON_DOCUMENT, List.of());
-
-        assertThat(fileStatus).isEqualTo(SKELETON_MESSAGE);
-    }
-
-    @Test
-    public void When_GetFileStatus_WithAbsentAttachmentInFilename_Expect_PlaceholderStatus() {
-        FileStatus fileStatus = ehrStatusService.getFileStatus(PLACEHOLDER_DOCUMENT_1, List.of());
-
-        assertThat(fileStatus).isEqualTo(PLACEHOLDER);
-
-    }
-
-    @Test
-    public void When_GetFileStatus_WithAbsentAttachmentInObjectName_Expect_PlaceholderStatus() {
-        FileStatus fileStatus = ehrStatusService.getFileStatus(PLACEHOLDER_DOCUMENT_2, List.of());
-
-        assertThat(fileStatus).isEqualTo(PLACEHOLDER);
-    }
-
-    @Test
-    public void When_GetFileStatus_WithNoErrorOrPlaceholder_Expect_OriginalFileStatus() {
-        FileStatus fileStatus = ehrStatusService.getFileStatus(ORIGINAL_FILE_DOCUMENT, List.of());
-
-        assertThat(fileStatus).isEqualTo(ORIGINAL_FILE);
-    }
-
-    @Test
-    public void When_GetFileStatus_WithNACK_Expect_ErrorStatus() {
-        FileStatus fileStatus = ehrStatusService.getFileStatus(ORIGINAL_FILE_DOCUMENT, ONE_FAILED_ACK_LIST);
-
-        assertThat(fileStatus).isEqualTo(ERROR);
     }
 
     @Test
