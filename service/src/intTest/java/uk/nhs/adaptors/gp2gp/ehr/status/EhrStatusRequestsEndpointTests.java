@@ -45,7 +45,7 @@ import uk.nhs.adaptors.gp2gp.util.ProcessDetectionService;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 public class EhrStatusRequestsEndpointTests {
 
-    private static final String INBOUND_QUEUE_NAME = "inbound";
+    private static final String INBOUND_QUEUE_NAME = "gp2gpInboundQueue";
     private static final String EBXML_PATH_REQUEST_MESSAGE = "/requestmessage/RCMR_IN010000UK05_ebxml.txt";
     private static final String PAYLOAD_PATH_REQUEST_MESSAGE = "/requestmessage/RCMR_IN010000UK05_payload.txt";
 
