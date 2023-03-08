@@ -63,8 +63,9 @@ public class AmqpServiceFailureTest {
     private static final String PAYLOAD_PATH_REQUEST_MESSAGE = "/requestmessage/RCMR_IN010000UK05_payload.txt";
     private static final String EBXML_PATH_FINAL_ACK_MESSAGE = "/finalAckMessage/MCCI_IN010000UK13_ebxml.txt";
     private static final String PAYLOAD_PATH_FINAL_ACK_MESSAGE = "/finalAckMessage/MCCI_IN010000UK1313_payload.txt";
-    private static final String INBOUND_QUEUE_NAME = "inbound";
-    private static final String DLQ_NAME = "ActiveMQ.DLQ";
+    private static final String INBOUND_QUEUE_NAME = "gp2gpInboundQueue";
+    private static final String TASK_QUEUE_NAME = "gp2gpTaskQueue";
+    private static final String DLQ_PREFIX = "DLQ.";
     private static final int JMS_RECEIVE_TIMEOUT = 60000;
     private static final Duration THREE_SECONDS = Duration.ofSeconds(3);
     private static final Duration ONE_MINUTE = Duration.ofMinutes(1);
@@ -152,7 +153,7 @@ public class AmqpServiceFailureTest {
 
         sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
-        var dlqMessage = Optional.ofNullable(inboundJmsTemplate.receive(DLQ_NAME)).orElseThrow();
+        var dlqMessage = Optional.ofNullable(inboundJmsTemplate.receive(DLQ_PREFIX + TASK_QUEUE_NAME)).orElseThrow();
         var body = JmsReader.readMessage(dlqMessage);
         var dlqTaskDefinition = objectMapper.readValue(body, SendEhrExtractCoreTaskDefinition.class);
 
@@ -167,7 +168,7 @@ public class AmqpServiceFailureTest {
 
         var inboundMessage = sendInboundMessageToQueue(PAYLOAD_PATH_REQUEST_MESSAGE, EBXML_PATH_REQUEST_MESSAGE);
 
-        var dlqMessage = Optional.ofNullable(inboundJmsTemplate.receive(DLQ_NAME)).orElseThrow();
+        var dlqMessage = Optional.ofNullable(inboundJmsTemplate.receive(DLQ_PREFIX + INBOUND_QUEUE_NAME)).orElseThrow();
         var body = JmsReader.readMessage(dlqMessage);
         var dlqInboundMessage = objectMapper.readValue(body, InboundMessage.class);
 

@@ -16,7 +16,7 @@ management:
 
 gp2gp:
   amqp:
-    inboundQueueName: ${GP2GP_MHS_INBOUND_QUEUE:inbound}
+    inboundQueueName: ${GP2GP_MHS_INBOUND_QUEUE:gp2gpInboundQueue}
     brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672}
     username: ${GP2GP_AMQP_USERNAME:}
     password: ${GP2GP_AMQP_PASSWORD:}
