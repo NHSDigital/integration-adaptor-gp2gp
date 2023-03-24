@@ -58,7 +58,7 @@ public class ProcessingErrorHandler {
     public boolean handleNotFoundError(TaskDefinition taskDefinition) {
         return handleFailingProcess(
                 taskDefinition,
-                "6",
+                "06",
                 "Patient not at surgery."
         );
     }

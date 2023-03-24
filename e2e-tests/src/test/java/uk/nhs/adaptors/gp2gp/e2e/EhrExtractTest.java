@@ -100,7 +100,7 @@ public class EhrExtractTest {
     private static final String ACK_TO_PENDING = "ackPending";
     private static final String NACK_CODE_FAILED_TO_GENERATE_EHR = "10";
     private final static String NACK_CODE_REQUEST_NOT_WELL_FORMED = "18";
-    private final static String NACK_CODE_PATIENT_NOT_FOUND = "6";
+    private final static String NACK_CODE_PATIENT_NOT_FOUND = "06";
     private final static String NACK_CODE_INVALID = "19";
     private final static String NACK_CODE_GP_CONNECT_ERROR = "20";
     private final static String NACK_MESSAGE_REQUEST_NOT_WELL_FORMED = "An error occurred processing the initial EHR request";
