@@ -1,5 +1,11 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -16,19 +22,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
-
+import uk.nhs.adaptors.gp2gp.common.exception.MaximumExternalAttachmentsException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
-
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.UNAUTHORIZED;
-import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
 @Slf4j
 public class WebClientFilterService {
@@ -75,9 +75,33 @@ public class WebClientFilterService {
             if (requestType.equals(RequestType.MHS_OUTBOUND) && clientResponse.statusCode().is5xxServerError()) {
                 return Mono.error(new MhsServerErrorException("MHS responded with status code " + clientResponse.statusCode().value()));
             }
+            if (requestType.equals(RequestType.MHS_OUTBOUND) && clientResponse.statusCode().value() == 400) {
+                return clientResponse.bodyToMono(String.class)
+                    .flatMap(WebClientFilterService::handle400FromMhsOutbound);
+            }
 
             return getResponseError(clientResponse, requestType);
         });
+    }
+
+    private static Mono<ClientResponse> handle400FromMhsOutbound(String body) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            var json = objectMapper.readTree(body);
+            var externalAttachmentErrors = json.get("external_attachments");
+
+            if (externalAttachmentErrors != null && externalAttachmentErrors.isArray()) {
+                for (JsonNode node : externalAttachmentErrors) {
+                    if (node.isTextual() && node.asText().contains("Longer than maximum length")) {
+                        return Mono.error(new MaximumExternalAttachmentsException(body));
+                    }
+                }
+            }
+        } catch (JsonProcessingException e) {
+            LOGGER.error("Error reading body of MHS OUTBOUND response with Http status 400");
+        }
+
+        return Mono.error(new InvalidOutboundMessageException(String.format(REQUEST_EXCEPTION_MESSAGE, RequestType.MHS_OUTBOUND, body)));
     }
 
     private static Mono<ClientResponse> getErrorException(ClientResponse clientResponse, RequestType requestType) {
