@@ -1,21 +1,45 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
+import java.util.Map;
+import java.util.function.Function;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
 
 @Component
 @Slf4j
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ProcessingErrorHandler {
 
+    private final Map<Class<? extends Exception>, Function<TaskDefinition, Boolean>> errorHandlers = Map.of(
+        EhrRequestException.class, this::handleRequestError,
+        EhrExtractException.class, this::handleTranslationError,
+        EhrMapperException.class, this::handleTranslationError,
+        FhirValidationException.class, this::handleTranslationError,
+        GpConnectException.class, this::handleGpConnectError,
+        GpConnectInvalidException.class, this::handleInvalidNotAuthError,
+        GpConnectNotFoundException.class, this::handleNotFoundError
+    );
+
     private final ProcessFailureHandlingService processFailureHandlingService;
 
-    public boolean handleRequestError(TaskDefinition taskDefinition) {
+    public boolean handleProcessingError(Exception exception, TaskDefinition taskDefinition) {
+        return errorHandlers.getOrDefault(exception.getClass(), this::handleGeneralProcessingError).apply(taskDefinition);
+    }
+
+    private boolean handleRequestError(TaskDefinition taskDefinition) {
 
         return handleFailingProcess(
             taskDefinition,
@@ -24,7 +48,7 @@ public class ProcessingErrorHandler {
         );
     }
 
-    public boolean handleTranslationError(TaskDefinition taskDefinition) {
+    private boolean handleTranslationError(TaskDefinition taskDefinition) {
         return handleFailingProcess(
             taskDefinition,
             "10",
@@ -32,7 +56,7 @@ public class ProcessingErrorHandler {
         );
     }
 
-    public boolean handleGeneralProcessingError(TaskDefinition taskDefinition) {
+    private boolean handleGeneralProcessingError(TaskDefinition taskDefinition) {
         return handleFailingProcess(
             taskDefinition,
             "99",
@@ -40,7 +64,7 @@ public class ProcessingErrorHandler {
         );
     }
 
-    public boolean handleGpConnectError(TaskDefinition taskDefinition) {
+    private boolean handleGpConnectError(TaskDefinition taskDefinition) {
         return handleFailingProcess(
             taskDefinition,
             "20",
@@ -48,14 +72,14 @@ public class ProcessingErrorHandler {
         );
     }
 
-    public boolean handleInvalidNotAuthError(TaskDefinition taskDefinition) {
+    private boolean handleInvalidNotAuthError(TaskDefinition taskDefinition) {
         return handleFailingProcess(
                 taskDefinition,
                 "19",
                 "Sender check indicates that Requester is not the patient’s current healthcare provider"
         );
     }
-    public boolean handleNotFoundError(TaskDefinition taskDefinition) {
+    private boolean handleNotFoundError(TaskDefinition taskDefinition) {
         return handleFailingProcess(
                 taskDefinition,
                 "06",

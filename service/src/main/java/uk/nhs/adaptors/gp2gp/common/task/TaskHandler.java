@@ -10,16 +10,9 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
-import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
 
 @Component
@@ -63,24 +56,9 @@ public class TaskHandler {
         } catch (TaskHandlerException e) {
             logError(e, message);
             return false;
-        } catch (EhrRequestException e) {
-            logError(e, message);
-            return processingErrorHandler.handleRequestError(taskDefinition);
-        } catch (EhrExtractException | EhrMapperException | FhirValidationException e) {
-            logError(e, message);
-            return processingErrorHandler.handleTranslationError(taskDefinition);
-        } catch (GpConnectException e) {
-            logError(e, message);
-            return processingErrorHandler.handleGpConnectError(taskDefinition);
-        } catch (GpConnectInvalidException e) {
-            logError(e, message);
-            return processingErrorHandler.handleInvalidNotAuthError(taskDefinition);
-        } catch (GpConnectNotFoundException e) {
-            logError(e, message);
-            return processingErrorHandler.handleNotFoundError(taskDefinition);
         } catch (Exception e) {
             logError(e, message);
-            return processingErrorHandler.handleGeneralProcessingError(taskDefinition);
+            return processingErrorHandler.handleProcessingError(e, taskDefinition);
         }
     }
     @SneakyThrows
