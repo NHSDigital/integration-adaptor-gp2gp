@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
+import uk.nhs.adaptors.gp2gp.common.exception.MaximumExternalAttachmentsException;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
@@ -30,7 +31,8 @@ public class TaskErrorHandler {
         FhirValidationException.class, this::handleTranslationError,
         GpConnectException.class, this::handleGpConnectError,
         GpConnectInvalidException.class, this::handleInvalidNotAuthError,
-        GpConnectNotFoundException.class, this::handleNotFoundError
+        GpConnectNotFoundException.class, this::handleNotFoundError,
+        MaximumExternalAttachmentsException.class, this::handleMaximumExternalAttachmentsError
     );
 
     private final ProcessFailureHandlingService processFailureHandlingService;
@@ -84,6 +86,14 @@ public class TaskErrorHandler {
                 taskDefinition,
                 "06",
                 "Patient not at surgery."
+        );
+    }
+
+    private boolean handleMaximumExternalAttachmentsError(TaskDefinition taskDefinition) {
+        return handleFailingProcess(
+            taskDefinition,
+            "30",
+            "Large Message general failure"
         );
     }
 

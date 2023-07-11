@@ -23,6 +23,7 @@ import org.mockito.quality.Strictness;
 
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
+import uk.nhs.adaptors.gp2gp.common.exception.MaximumExternalAttachmentsException;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -207,6 +208,26 @@ public class TaskErrorHandlerTest {
 
         assertTrue(taskErrorHandler.handleProcessingError(new GpConnectNotFoundException(TEST_EXCEPTION_MESSAGE), taskDefinition));
         assertFalse(taskErrorHandler.handleProcessingError(new GpConnectNotFoundException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+    }
+
+    @Test
+    public void When_HandleProcessingError_WithMaximumExternalAttachmentsException_Expect_ProcessToBeFailedWithCorrectCode() {
+        taskErrorHandler.handleProcessingError(new MaximumExternalAttachmentsException(TEST_EXCEPTION_MESSAGE), taskDefinition);
+
+        verify(processFailureHandlingService).failProcess(
+            any(),
+            eq("30"),
+            eq("Large Message general failure"),
+            any());
+    }
+
+    @Test
+    public void When_HandleProcessingError_WithMaximumExternalAttachmentsException_Expect_ReturnValueOfFailService() {
+        when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
+            .thenReturn(true, false);
+
+        assertTrue(taskErrorHandler.handleProcessingError(new MaximumExternalAttachmentsException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertFalse(taskErrorHandler.handleProcessingError(new MaximumExternalAttachmentsException(TEST_EXCEPTION_MESSAGE), taskDefinition));
     }
 
     @Test
