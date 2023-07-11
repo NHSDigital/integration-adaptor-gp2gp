@@ -25,7 +25,7 @@ public class TaskHandler {
     private final TaskExecutorFactory taskExecutorFactory;
     private final MDCService mdcService;
     private final ProcessFailureHandlingService processFailureHandlingService;
-    private final ProcessingErrorHandler processingErrorHandler;
+    private final TaskErrorHandler taskErrorHandler;
 
     /**
      * @return True if the message has been processed. Otherwise, false.
@@ -58,7 +58,7 @@ public class TaskHandler {
             return false;
         } catch (Exception e) {
             logError(e, message);
-            return processingErrorHandler.handleProcessingError(e, taskDefinition);
+            return taskErrorHandler.handleProcessingError(e, taskDefinition);
         }
     }
     @SneakyThrows

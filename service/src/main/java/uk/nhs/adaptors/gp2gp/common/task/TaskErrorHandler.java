@@ -21,7 +21,7 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
 @Component
 @Slf4j
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class ProcessingErrorHandler {
+public class TaskErrorHandler {
 
     private final Map<Class<? extends Exception>, Function<TaskDefinition, Boolean>> errorHandlers = Map.of(
         EhrRequestException.class, this::handleRequestError,

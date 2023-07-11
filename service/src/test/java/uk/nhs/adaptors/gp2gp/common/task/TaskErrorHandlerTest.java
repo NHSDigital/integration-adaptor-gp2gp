@@ -32,7 +32,7 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
 
 @ExtendWith(MockitoExtension.class)
-public class ProcessingErrorHandlerTest {
+public class TaskErrorHandlerTest {
     private static final String TEST_EXCEPTION_MESSAGE = "Test Exception";
 
     @Mock
@@ -42,7 +42,7 @@ public class ProcessingErrorHandlerTest {
     private ProcessFailureHandlingService processFailureHandlingService;
 
     @InjectMocks
-    private ProcessingErrorHandler processingErrorHandler;
+    private TaskErrorHandler taskErrorHandler;
 
     @BeforeEach
     public void setup() {
@@ -51,7 +51,7 @@ public class ProcessingErrorHandlerTest {
 
     @Test
     public void When_HandleProcessingError_WithEhrRequestException_Expect_ProcessToBeFailedWithCorrectCode() {
-        processingErrorHandler.handleProcessingError(new EhrRequestException(TEST_EXCEPTION_MESSAGE), taskDefinition);
+        taskErrorHandler.handleProcessingError(new EhrRequestException(TEST_EXCEPTION_MESSAGE), taskDefinition);
 
         verify(processFailureHandlingService).failProcess(
             any(),
@@ -65,13 +65,13 @@ public class ProcessingErrorHandlerTest {
         when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
             .thenReturn(true, false);
 
-        assertTrue(processingErrorHandler.handleProcessingError(new EhrRequestException(TEST_EXCEPTION_MESSAGE), taskDefinition));
-        assertFalse(processingErrorHandler.handleProcessingError(new EhrRequestException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertTrue(taskErrorHandler.handleProcessingError(new EhrRequestException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertFalse(taskErrorHandler.handleProcessingError(new EhrRequestException(TEST_EXCEPTION_MESSAGE), taskDefinition));
     }
 
     @Test
     public void When_HandleProcessingError_With_EhrExtractException_Expect_ProcessToBeFailedWithCorrectCode() {
-        processingErrorHandler.handleProcessingError(new EhrExtractException("Test Exception"), taskDefinition);
+        taskErrorHandler.handleProcessingError(new EhrExtractException("Test Exception"), taskDefinition);
 
         verify(processFailureHandlingService).failProcess(
             any(),
@@ -85,13 +85,13 @@ public class ProcessingErrorHandlerTest {
         when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
             .thenReturn(true, false);
 
-        assertTrue(processingErrorHandler.handleProcessingError(new EhrExtractException(TEST_EXCEPTION_MESSAGE), taskDefinition));
-        assertFalse(processingErrorHandler.handleProcessingError(new EhrExtractException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertTrue(taskErrorHandler.handleProcessingError(new EhrExtractException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertFalse(taskErrorHandler.handleProcessingError(new EhrExtractException(TEST_EXCEPTION_MESSAGE), taskDefinition));
     }
 
     @Test
     public void When_HandleProcessingError_WithEhrMapperException_Expect_ProcessToBeFailedWithCorrectCode() {
-        processingErrorHandler.handleProcessingError(new EhrMapperException(TEST_EXCEPTION_MESSAGE), taskDefinition);
+        taskErrorHandler.handleProcessingError(new EhrMapperException(TEST_EXCEPTION_MESSAGE), taskDefinition);
 
         verify(processFailureHandlingService).failProcess(
             any(),
@@ -105,13 +105,13 @@ public class ProcessingErrorHandlerTest {
         when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
             .thenReturn(true, false);
 
-        assertTrue(processingErrorHandler.handleProcessingError(new EhrMapperException(TEST_EXCEPTION_MESSAGE), taskDefinition));
-        assertFalse(processingErrorHandler.handleProcessingError(new EhrMapperException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertTrue(taskErrorHandler.handleProcessingError(new EhrMapperException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertFalse(taskErrorHandler.handleProcessingError(new EhrMapperException(TEST_EXCEPTION_MESSAGE), taskDefinition));
     }
 
     @Test
     public void When_HandleProcessingError_WithFhirValidationException_Expect_ProcessToBeFailedWithCorrectCode() {
-        processingErrorHandler.handleProcessingError(new FhirValidationException(TEST_EXCEPTION_MESSAGE), taskDefinition);
+        taskErrorHandler.handleProcessingError(new FhirValidationException(TEST_EXCEPTION_MESSAGE), taskDefinition);
 
         verify(processFailureHandlingService).failProcess(
             any(),
@@ -125,13 +125,13 @@ public class ProcessingErrorHandlerTest {
         when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
             .thenReturn(true, false);
 
-        assertTrue(processingErrorHandler.handleProcessingError(new FhirValidationException(TEST_EXCEPTION_MESSAGE), taskDefinition));
-        assertFalse(processingErrorHandler.handleProcessingError(new FhirValidationException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertTrue(taskErrorHandler.handleProcessingError(new FhirValidationException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertFalse(taskErrorHandler.handleProcessingError(new FhirValidationException(TEST_EXCEPTION_MESSAGE), taskDefinition));
     }
 
     @Test
     public void When_HandleProcessingError_WithOtherException_Expect_ProcessToBeFailedWithCorrectCode() {
-        processingErrorHandler.handleProcessingError(new Exception(), taskDefinition);
+        taskErrorHandler.handleProcessingError(new Exception(), taskDefinition);
 
         verify(processFailureHandlingService).failProcess(
             any(),
@@ -145,13 +145,13 @@ public class ProcessingErrorHandlerTest {
         when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
             .thenReturn(true, false);
 
-        assertTrue(processingErrorHandler.handleProcessingError(new Exception(), taskDefinition));
-        assertFalse(processingErrorHandler.handleProcessingError(new Exception(), taskDefinition));
+        assertTrue(taskErrorHandler.handleProcessingError(new Exception(), taskDefinition));
+        assertFalse(taskErrorHandler.handleProcessingError(new Exception(), taskDefinition));
     }
 
     @Test
     public void When_HandleProcessingError_WithGpConnectException_Expect_ProcessToBeFailedWithCorrectCode() {
-        processingErrorHandler.handleProcessingError(new GpConnectException(TEST_EXCEPTION_MESSAGE), taskDefinition);
+        taskErrorHandler.handleProcessingError(new GpConnectException(TEST_EXCEPTION_MESSAGE), taskDefinition);
 
         verify(processFailureHandlingService).failProcess(
             any(),
@@ -165,13 +165,13 @@ public class ProcessingErrorHandlerTest {
         when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
             .thenReturn(true, false);
 
-        assertTrue(processingErrorHandler.handleProcessingError(new GpConnectException(TEST_EXCEPTION_MESSAGE), taskDefinition));
-        assertFalse(processingErrorHandler.handleProcessingError(new GpConnectException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertTrue(taskErrorHandler.handleProcessingError(new GpConnectException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertFalse(taskErrorHandler.handleProcessingError(new GpConnectException(TEST_EXCEPTION_MESSAGE), taskDefinition));
     }
 
     @Test
     public void When_HandleProcessingError_WithGpConnectInvalidException_Expect_ProcessToBeFailedWithCorrectCode() {
-        processingErrorHandler.handleProcessingError(new GpConnectInvalidException(TEST_EXCEPTION_MESSAGE), taskDefinition);
+        taskErrorHandler.handleProcessingError(new GpConnectInvalidException(TEST_EXCEPTION_MESSAGE), taskDefinition);
 
         verify(processFailureHandlingService).failProcess(
             any(),
@@ -185,13 +185,13 @@ public class ProcessingErrorHandlerTest {
         when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
             .thenReturn(true, false);
 
-        assertTrue(processingErrorHandler.handleProcessingError(new GpConnectInvalidException(TEST_EXCEPTION_MESSAGE), taskDefinition));
-        assertFalse(processingErrorHandler.handleProcessingError(new GpConnectInvalidException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertTrue(taskErrorHandler.handleProcessingError(new GpConnectInvalidException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertFalse(taskErrorHandler.handleProcessingError(new GpConnectInvalidException(TEST_EXCEPTION_MESSAGE), taskDefinition));
     }
 
     @Test
     public void When_HandleProcessingError_WithGpConnectGpConnectNotFoundException_Expect_ProcessToBeFailedWithCorrectCode() {
-        processingErrorHandler.handleProcessingError(new GpConnectNotFoundException(TEST_EXCEPTION_MESSAGE), taskDefinition);
+        taskErrorHandler.handleProcessingError(new GpConnectNotFoundException(TEST_EXCEPTION_MESSAGE), taskDefinition);
 
         verify(processFailureHandlingService).failProcess(
             any(),
@@ -205,14 +205,14 @@ public class ProcessingErrorHandlerTest {
         when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
             .thenReturn(true, false);
 
-        assertTrue(processingErrorHandler.handleProcessingError(new GpConnectNotFoundException(TEST_EXCEPTION_MESSAGE), taskDefinition));
-        assertFalse(processingErrorHandler.handleProcessingError(new GpConnectNotFoundException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertTrue(taskErrorHandler.handleProcessingError(new GpConnectNotFoundException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertFalse(taskErrorHandler.handleProcessingError(new GpConnectNotFoundException(TEST_EXCEPTION_MESSAGE), taskDefinition));
     }
 
     @Test
     @MockitoSettings(strictness = Strictness.LENIENT)
     public void When_HandleGeneralProcessingError_WithNullParameter_Expect_ProcessIsNotFailed() {
-        processingErrorHandler.handleProcessingError(new RuntimeException(), null);
+        taskErrorHandler.handleProcessingError(new RuntimeException(), null);
 
         verifyNoInteractions(processFailureHandlingService);
     }
@@ -224,7 +224,7 @@ public class ProcessingErrorHandlerTest {
             any(), any(), any(), any());
 
         assertThatThrownBy(
-            () -> processingErrorHandler.handleProcessingError(new RuntimeException(), taskDefinition)
+            () -> taskErrorHandler.handleProcessingError(new RuntimeException(), taskDefinition)
         ).isSameAs(failureHandlingException);
     }
 }

@@ -68,7 +68,7 @@ public class TaskHandlerTest {
     private ProcessFailureHandlingService processFailureHandlingService;
 
     @Mock
-    private ProcessingErrorHandler processingErrorHandler;
+    private TaskErrorHandler taskErrorHandler;
 
     private TaskDefinition taskDefinition;
     private SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition;
@@ -97,7 +97,7 @@ public class TaskHandlerTest {
             taskExecutorFactory,
             taskExecutor,
             processFailureHandlingService,
-            processingErrorHandler
+            taskErrorHandler
         );
     }
 
@@ -140,7 +140,7 @@ public class TaskHandlerTest {
         setupAckMessage(SendAcknowledgementTaskDefinition.NACK_TYPE_CODE);
         Exception exception = new RuntimeException(TEST_EXCEPTION_MESSAGE);
         doThrow(exception).when(taskExecutor).execute(any());
-        when(processingErrorHandler.handleProcessingError(eq(exception), any())).thenReturn(false);
+        when(taskErrorHandler.handleProcessingError(eq(exception), any())).thenReturn(false);
 
         var result = taskHandler.handle(message);
 
@@ -159,7 +159,7 @@ public class TaskHandlerTest {
         taskHandler.handle(message);
 
         verify(taskExecutor).execute(taskDefinition);
-        verify(processingErrorHandler).handleProcessingError(eq(exception), any());
+        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
     }
 
     @Test
@@ -169,7 +169,7 @@ public class TaskHandlerTest {
         Exception exception = new RuntimeException(TEST_EXCEPTION_MESSAGE);
         doThrow(exception).when(taskExecutor).execute(any());
 
-        when(processingErrorHandler.handleProcessingError(eq(exception), any()))
+        when(taskErrorHandler.handleProcessingError(eq(exception), any()))
             .thenReturn(true, false);
 
         assertThat(taskHandler.handle(message)).isTrue();
@@ -183,7 +183,7 @@ public class TaskHandlerTest {
         Exception exception = new RuntimeException(TEST_EXCEPTION_MESSAGE);
         doThrow(exception).when(taskExecutor).execute(any());
 
-        when(processingErrorHandler.handleProcessingError(eq(exception), any()))
+        when(taskErrorHandler.handleProcessingError(eq(exception), any()))
             .thenReturn(true, false);
 
         assertThat(taskHandler.handle(message)).isTrue();
@@ -199,7 +199,7 @@ public class TaskHandlerTest {
         doThrow(taskException).when(taskExecutor).execute(any());
 
         var failureHandlingException = new RuntimeException("failure handler exception");
-        doThrow(failureHandlingException).when(processingErrorHandler).handleProcessingError(eq(taskException), any());
+        doThrow(failureHandlingException).when(taskErrorHandler).handleProcessingError(eq(taskException), any());
 
         assertThatThrownBy(
             () -> taskHandler.handle(message)
@@ -242,7 +242,7 @@ public class TaskHandlerTest {
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();
 
-        verify(processingErrorHandler).handleProcessingError(eq(exception), any());
+        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
     }
 
     @Test
@@ -255,7 +255,7 @@ public class TaskHandlerTest {
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();
 
-        verify(processingErrorHandler).handleProcessingError(eq(exception), any());
+        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
     }
 
     @Test
@@ -268,7 +268,7 @@ public class TaskHandlerTest {
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();
 
-        verify(processingErrorHandler).handleProcessingError(eq(exception), any());
+        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
     }
 
 
@@ -282,7 +282,7 @@ public class TaskHandlerTest {
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();
 
-        verify(processingErrorHandler).handleProcessingError(eq(exception), any());
+        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
     }
 
     @Test
@@ -295,7 +295,7 @@ public class TaskHandlerTest {
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();
 
-        verify(processingErrorHandler).handleProcessingError(eq(exception), any());
+        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
     }
 
     @Test
@@ -326,7 +326,7 @@ public class TaskHandlerTest {
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();
 
-        verify(processingErrorHandler).handleProcessingError(eq(exception), any());
+        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
 
     }
 
@@ -340,7 +340,7 @@ public class TaskHandlerTest {
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();
 
-        verify(processingErrorHandler).handleProcessingError(eq(exception), any());
+        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
     }
 
     @Test
@@ -353,7 +353,7 @@ public class TaskHandlerTest {
         var result = taskHandler.handle(message);
         assertThat(result).isFalse();
 
-        verify(processingErrorHandler).handleProcessingError(eq(exception), any());
+        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
     }
 
     private void setupAckMessage(String typeCode) throws JMSException {
