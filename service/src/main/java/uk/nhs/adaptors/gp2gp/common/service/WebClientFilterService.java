@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
+import static java.util.regex.Pattern.CASE_INSENSITIVE;
+
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -9,6 +11,8 @@ import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.slf4j.MDC;
@@ -34,6 +38,7 @@ import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 public class WebClientFilterService {
 
     private static final String REQUEST_EXCEPTION_MESSAGE = "The following error occurred during %s request: %s";
+    private static final String MAX_ATTACHMENTS_REGEX = ".*'external_attachments': \\[[^]]*Longer than maximum length[^]]*].*";
 
     private static final Map<RequestType, Function<String, Exception>> REQUEST_TYPE_TO_EXCEPTION_MAP = Map.of(
         RequestType.GPC, GpConnectException::new);
@@ -85,20 +90,14 @@ public class WebClientFilterService {
     }
 
     private static Mono<ClientResponse> handle400FromMhsOutbound(String body) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            var json = objectMapper.readTree(body);
-            var externalAttachmentErrors = json.get("external_attachments");
 
-            if (externalAttachmentErrors != null && externalAttachmentErrors.isArray()) {
-                for (JsonNode node : externalAttachmentErrors) {
-                    if (node.isTextual() && node.asText().contains("Longer than maximum length")) {
-                        return Mono.error(new MaximumExternalAttachmentsException(body));
-                    }
-                }
-            }
-        } catch (JsonProcessingException e) {
-            LOGGER.error("Error reading body of MHS OUTBOUND response with Http status 400");
+        Pattern pattern = Pattern.compile(MAX_ATTACHMENTS_REGEX, CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(body);
+
+        if (matcher.find()) {
+            return Mono.error(
+                new MaximumExternalAttachmentsException(String.format(REQUEST_EXCEPTION_MESSAGE, RequestType.MHS_OUTBOUND, body))
+            );
         }
 
         return Mono.error(new InvalidOutboundMessageException(String.format(REQUEST_EXCEPTION_MESSAGE, RequestType.MHS_OUTBOUND, body)));
@@ -116,7 +115,7 @@ public class WebClientFilterService {
                 boolean notAuthorized = findValue.stream().anyMatch(code -> code.textValue().equals("NOT_AUTHORISED"));
                 boolean invalidNhsNumber = findValue.stream().anyMatch(code -> code.textValue().equals("INVALID_NHS_NUMBER"));
                 boolean invalidPatientDemographic = findValue.stream().anyMatch(
-                        code -> code.textValue().equals("INVALID_PATIENT_DEMOGRAPHICS"));
+                    code -> code.textValue().equals("INVALID_PATIENT_DEMOGRAPHICS"));
                 boolean invalidResource = findValue.stream().anyMatch(code -> code.textValue().equals("INVALID_RESOURCE"));
                 boolean badRequest = findValue.stream().anyMatch(code -> code.textValue().equals("BAD_REQUEST"));
                 boolean invalidParameter = findValue.stream().anyMatch(code -> code.textValue().equals("INVALID_PARAMETER"));
@@ -127,25 +126,21 @@ public class WebClientFilterService {
                 if (statusCode.equals(NOT_FOUND) && patientNotFound) {
                     //error 6
                     return Mono.error(new GpConnectNotFoundException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-
                 } else if (statusCode.equals(UNAUTHORIZED) && notAuthorized || statusCode.equals(BAD_REQUEST) && invalidNhsNumber) {
                     //error 19
                     return Mono.error(new GpConnectInvalidException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-
                 } else if (statusCode.equals(BAD_REQUEST) && invalidPatientDemographic
-                        || (statusCode.equals(INTERNAL_SERVER_ERROR) && internalServErr)) {
+                    || (statusCode.equals(INTERNAL_SERVER_ERROR) && internalServErr)) {
                     //error 20
                     return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-
                 } else if (statusCode.equals(UNPROCESSABLE_ENTITY) && invalidResource
-                        || statusCode.equals(BAD_REQUEST) && badRequest
-                        || statusCode.equals(UNPROCESSABLE_ENTITY) && invalidParameter) {
+                    || statusCode.equals(BAD_REQUEST) && badRequest
+                    || statusCode.equals(UNPROCESSABLE_ENTITY) && invalidParameter) {
                     //error 18
                     return Mono.error(new EhrRequestException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
                 }
                 //default error 20
                 return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-
             } catch (JsonProcessingException e) {
                 return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
             }
@@ -158,7 +153,7 @@ public class WebClientFilterService {
 
         return clientResponse.bodyToMono(String.class)
             .flatMap(operationalOutcome -> Mono.error(
-                exceptionBuilder.apply(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, operationalOutcome))
+                    exceptionBuilder.apply(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, operationalOutcome))
                 )
             );
     }

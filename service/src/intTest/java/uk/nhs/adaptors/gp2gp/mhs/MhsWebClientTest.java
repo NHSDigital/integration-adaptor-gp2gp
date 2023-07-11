@@ -7,12 +7,16 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,6 +50,25 @@ public class MhsWebClientTest {
     @SpyBean
     private MhsConfiguration mhsConfiguration;
 
+    private static Stream<Arguments> maxAttachmentsValidationErrors() {
+        return Stream.of(
+            Arguments.of("400: Invalid request. Validation errors: {'external_attachments': ['Longer than maximum length 99.']}"),
+            Arguments.of("400: Invalid request. Validation errors: {'external_attachments': ['unknown issue','Longer than "
+                + "maximum length 99.']}"),
+            Arguments.of("400: Invalid request. Validation errors: {'external_attachments': "
+                + "['unknown issue','Longer than maximum length 99.'], 'internal_attachments': ['unknown issue']}}")
+        );
+    }
+
+    private static Stream<Arguments> otherValidationErrors() {
+        return Stream.of(
+            Arguments.of("400: Invalid request. Validation errors: {'external_attachments': ['unknown issue']}"),
+            Arguments.of("400: Invalid request. Validation errors: {'internal_attachments': ['Longer than maximum length 99.']}"),
+            Arguments.of("400: Invalid request. Validation errors: {'external_attachments': ['unknown issue'], "
+                + "'internal_attachments': ['Longer than maximum length 99.']}")
+        );
+    }
+
     @BeforeAll
     public static void setup() throws IOException {
         mockWebServer = new MockWebServer();
@@ -63,13 +86,15 @@ public class MhsWebClientTest {
         when(mhsConfiguration.getUrl()).thenReturn(baseUrl);
     }
 
-    @Test
-    public void When_SendMessageToMHS_With_HttpStatus400AndMaxExternalAttachments_Expect_CorrectException() {
+
+    @ParameterizedTest
+    @MethodSource("maxAttachmentsValidationErrors")
+    public void When_SendMessageToMHS_With_HttpStatus400AndMaxExternalAttachments_Expect_CorrectException(String body) {
         MockResponse response = new MockResponse();
         response
-            .addHeader("Content-Type", "application/json")
+            .addHeader("Content-Type", "text/plain")
             .setResponseCode(BAD_REQUEST.value())
-            .setBody("{\"external_attachments\": [\"Longer than maximum length 99.\"]}");
+            .setBody(body);
 
         mockWebServer.enqueue(response);
 
@@ -80,13 +105,14 @@ public class MhsWebClientTest {
             .isInstanceOf(MaximumExternalAttachmentsException.class);
     }
 
-    @Test
-    public void When_SendMessageToMHS_With_HttpStatus400AndOtherValidationErrors_Expect_CorrectException() {
+    @ParameterizedTest
+    @MethodSource("otherValidationErrors")
+    public void When_SendMessageToMHS_With_HttpStatus400AndOtherValidationErrors_Expect_CorrectException(String body) {
         MockResponse response = new MockResponse();
         response
-            .addHeader("Content-Type", "application/json")
+            .addHeader("Content-Type", "text/plain")
             .setResponseCode(BAD_REQUEST.value())
-            .setBody("{\"unknown_verification_error\": [\"test problem.\"]}");
+            .setBody(body);
 
         mockWebServer.enqueue(response);
 
@@ -97,30 +123,12 @@ public class MhsWebClientTest {
             .isInstanceOf(InvalidOutboundMessageException.class);
     }
 
-    @Test
-    public void When_SendMessageToMHS_With_HttpStatus400AndInvalidJson_Expect_CorrectException() {
-        MockResponse response = new MockResponse();
-        response
-            .addHeader("Content-Type", "application/json")
-            .setResponseCode(BAD_REQUEST.value())
-            .setBody("Invalid JSON body");
-
-        mockWebServer.enqueue(response);
-
-        var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(TEST_BODY,
-            TEST_CONVERSATION_ID, TEST_FROM_ODS_CODE, TEST_MESSAGE_ID);
-
-        assertThatThrownBy(() -> mhsClient.sendMessageToMHS(request))
-            .isInstanceOf(InvalidOutboundMessageException.class);
-    }
 
     @Test
     public void When_SendMessageToMHS_With_HttpStatus404_Expect_CorrectException() {
         MockResponse response = new MockResponse();
         response
-            .addHeader("Content-Type", "application/json")
-            .setResponseCode(NOT_FOUND.value())
-            .setBody("Not found");
+            .setResponseCode(NOT_FOUND.value());
 
         mockWebServer.enqueue(response);
 
@@ -128,16 +136,14 @@ public class MhsWebClientTest {
             TEST_CONVERSATION_ID, TEST_FROM_ODS_CODE, TEST_MESSAGE_ID);
 
         assertThatThrownBy(() -> mhsClient.sendMessageToMHS(request))
-            .isInstanceOf(InvalidOutboundMessageException.class);
+            .isInstanceOf(IllegalStateException.class);
     }
 
     @Test
     public void When_SendMessageToMHS_With_HttpStatus5xx_Expect_CorrectException() {
         MockResponse response = new MockResponse();
         response
-            .addHeader("Content-Type", "application/json")
-            .setResponseCode(INTERNAL_SERVER_ERROR.value())
-            .setBody("Server Error");
+            .setResponseCode(INTERNAL_SERVER_ERROR.value());
 
         mockWebServer.enqueue(response);
 
