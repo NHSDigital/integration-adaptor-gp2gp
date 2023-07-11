@@ -226,8 +226,12 @@ public class TaskErrorHandlerTest {
         when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
             .thenReturn(true, false);
 
-        assertTrue(taskErrorHandler.handleProcessingError(new MaximumExternalAttachmentsException(TEST_EXCEPTION_MESSAGE), taskDefinition));
-        assertFalse(taskErrorHandler.handleProcessingError(new MaximumExternalAttachmentsException(TEST_EXCEPTION_MESSAGE), taskDefinition));
+        assertTrue(
+            taskErrorHandler.handleProcessingError(new MaximumExternalAttachmentsException(TEST_EXCEPTION_MESSAGE), taskDefinition)
+        );
+        assertFalse(
+            taskErrorHandler.handleProcessingError(new MaximumExternalAttachmentsException(TEST_EXCEPTION_MESSAGE), taskDefinition)
+        );
     }
 
     @Test

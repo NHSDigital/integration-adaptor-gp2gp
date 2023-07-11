@@ -2,6 +2,9 @@ package uk.nhs.adaptors.gp2gp.mhs;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import java.io.IOException;
 
@@ -33,7 +36,7 @@ public class MhsWebClientTest {
     private static final String TEST_FROM_ODS_CODE = "test from ods code";
     private static final String TEST_MESSAGE_ID = "test message id";
 
-    public static MockWebServer mockWebServer;
+    private static MockWebServer mockWebServer;
 
     @Autowired
     private MhsRequestBuilder mhsRequestBuilder;
@@ -44,28 +47,28 @@ public class MhsWebClientTest {
     private MhsConfiguration mhsConfiguration;
 
     @BeforeAll
-    static void setup() throws IOException {
+    public static void setup() throws IOException {
         mockWebServer = new MockWebServer();
         mockWebServer.start();
     }
 
     @AfterAll
-    static void tearDown() throws IOException {
+    public static void tearDown() throws IOException {
         mockWebServer.shutdown();
     }
 
     @BeforeEach
-    void initialise() {
+    public void initialise() {
         String baseUrl = String.format("http://localhost:%s", mockWebServer.getPort());
         when(mhsConfiguration.getUrl()).thenReturn(baseUrl);
     }
 
     @Test
-    public void When_SendMessageToMHS_With_400AndMaxExternalAttachments_Expect_CorrectException() {
+    public void When_SendMessageToMHS_With_HttpStatus400AndMaxExternalAttachments_Expect_CorrectException() {
         MockResponse response = new MockResponse();
         response
             .addHeader("Content-Type", "application/json")
-            .setResponseCode(400)
+            .setResponseCode(BAD_REQUEST.value())
             .setBody("{\"external_attachments\": [\"Longer than maximum length 99.\"]}");
 
         mockWebServer.enqueue(response);
@@ -78,11 +81,11 @@ public class MhsWebClientTest {
     }
 
     @Test
-    public void When_SendMessageToMHS_With_400AndOtherValidationErrors_Expect_CorrectException() {
+    public void When_SendMessageToMHS_With_HttpStatus400AndOtherValidationErrors_Expect_CorrectException() {
         MockResponse response = new MockResponse();
         response
             .addHeader("Content-Type", "application/json")
-            .setResponseCode(400)
+            .setResponseCode(BAD_REQUEST.value())
             .setBody("{\"unknown_verification_error\": [\"test problem.\"]}");
 
         mockWebServer.enqueue(response);
@@ -95,11 +98,11 @@ public class MhsWebClientTest {
     }
 
     @Test
-    public void When_SendMessageToMHS_With_400AndInvalidJson_Expect_CorrectException() {
+    public void When_SendMessageToMHS_With_HttpStatus400AndInvalidJson_Expect_CorrectException() {
         MockResponse response = new MockResponse();
         response
             .addHeader("Content-Type", "application/json")
-            .setResponseCode(400)
+            .setResponseCode(BAD_REQUEST.value())
             .setBody("Invalid JSON body");
 
         mockWebServer.enqueue(response);
@@ -112,11 +115,11 @@ public class MhsWebClientTest {
     }
 
     @Test
-    public void When_SendMessageToMHS_With_404_Expect_CorrectException() {
+    public void When_SendMessageToMHS_With_HttpStatus404_Expect_CorrectException() {
         MockResponse response = new MockResponse();
         response
             .addHeader("Content-Type", "application/json")
-            .setResponseCode(404)
+            .setResponseCode(NOT_FOUND.value())
             .setBody("Not found");
 
         mockWebServer.enqueue(response);
@@ -129,11 +132,11 @@ public class MhsWebClientTest {
     }
 
     @Test
-    public void When_SendMessageToMHS_With_5xx_Expect_CorrectException() {
+    public void When_SendMessageToMHS_With_HttpStatus5xx_Expect_CorrectException() {
         MockResponse response = new MockResponse();
         response
             .addHeader("Content-Type", "application/json")
-            .setResponseCode(500)
+            .setResponseCode(INTERNAL_SERVER_ERROR.value())
             .setBody("Server Error");
 
         mockWebServer.enqueue(response);

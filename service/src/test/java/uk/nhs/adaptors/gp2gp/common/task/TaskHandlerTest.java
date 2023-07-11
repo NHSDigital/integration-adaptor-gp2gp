@@ -332,7 +332,7 @@ public class TaskHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_handle_WithGpConnectInvalidException_Expect_ProcessFailed() {
+    public void When_Handle_WithGpConnectInvalidException_Expect_ProcessFailed() {
         setUpContinueMessage();
         Exception exception = new GpConnectInvalidException(TEST_EXCEPTION_MESSAGE);
         doThrow(exception).when(taskExecutor).execute(any());
@@ -345,7 +345,7 @@ public class TaskHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_handle_WithGpConnectNotFoundException_Expect_ProcessFailed() {
+    public void When_Handle_WithGpConnectNotFoundException_Expect_ProcessFailed() {
         setUpContinueMessage();
         Exception exception = new GpConnectNotFoundException(TEST_EXCEPTION_MESSAGE);
         doThrow(exception).when(taskExecutor).execute(any());

@@ -75,7 +75,7 @@ public class WebClientFilterService {
             if (requestType.equals(RequestType.MHS_OUTBOUND) && clientResponse.statusCode().is5xxServerError()) {
                 return Mono.error(new MhsServerErrorException("MHS responded with status code " + clientResponse.statusCode().value()));
             }
-            if (requestType.equals(RequestType.MHS_OUTBOUND) && clientResponse.statusCode().value() == 400) {
+            if (requestType.equals(RequestType.MHS_OUTBOUND) && clientResponse.statusCode().value() == BAD_REQUEST.value()) {
                 return clientResponse.bodyToMono(String.class)
                     .flatMap(WebClientFilterService::handle400FromMhsOutbound);
             }
