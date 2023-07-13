@@ -25,19 +25,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataAccessResourceFailureException;
 
 import lombok.SneakyThrows;
-import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
-import uk.nhs.adaptors.gp2gp.common.exception.GeneralProcessingException;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
-import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
-import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ExtendWith(MockitoExtension.class)
@@ -234,72 +226,6 @@ public class TaskHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_Handle_WithExecuteThrowsEhrExtractException_Expect_ErrorHandled() {
-        setUpContinueMessage();
-        Exception exception = new EhrExtractException(TEST_EXCEPTION_MESSAGE);
-        doThrow(exception).when(taskExecutor).execute(any());
-
-        var result = taskHandler.handle(message);
-        assertThat(result).isFalse();
-
-        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
-    }
-
-    @Test
-    @SneakyThrows
-    public void When_Handle_WithExecuteThrowsEhrMapperException_Expect_ErrorHandled() {
-        setUpContinueMessage();
-        Exception exception = new EhrMapperException(TEST_EXCEPTION_MESSAGE);
-        doThrow(exception).when(taskExecutor).execute(any());
-
-        var result = taskHandler.handle(message);
-        assertThat(result).isFalse();
-
-        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
-    }
-
-    @Test
-    @SneakyThrows
-    public void When_Handle_WithExecuteThrowFhirValidationException_Expect_ErrorHandled() {
-        setUpContinueMessage();
-        Exception exception = new FhirValidationException(TEST_EXCEPTION_MESSAGE);
-        doThrow(exception).when(taskExecutor).execute(any());
-
-        var result = taskHandler.handle(message);
-        assertThat(result).isFalse();
-
-        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
-    }
-
-
-    @Test
-    @SneakyThrows
-    public void When_Handle_WithExecuteThrowsEhrRequestException_Expect_ErrorHandled() {
-        setUpContinueMessage();
-        Exception exception = new EhrRequestException(TEST_EXCEPTION_MESSAGE);
-        doThrow(exception).when(taskExecutor).execute(any());
-
-        var result = taskHandler.handle(message);
-        assertThat(result).isFalse();
-
-        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
-    }
-
-    @Test
-    @SneakyThrows
-    public void When_Handle_WithExecuteThrowsGeneralProcessingException_Expect_ErrorHandled() {
-        setUpContinueMessage();
-        Exception exception = new GeneralProcessingException(TEST_EXCEPTION_MESSAGE);
-        doThrow(exception).when(taskExecutor).execute(any());
-
-        var result = taskHandler.handle(message);
-        assertThat(result).isFalse();
-
-        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
-    }
-
-    @Test
-    @SneakyThrows
     public void When_Handle_WithExecuteThrows_MhsConnectionException_Expect_ExceptionThrown() {
         setUpContinueMessage();
         doThrow(new MhsConnectionException("test exception")).when(taskExecutor).execute(any());
@@ -318,36 +244,9 @@ public class TaskHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_Handle_WithMhsServerErrorException_Expect_ProcessFailed() {
+    public void When_Handle_WithOtherRuntimeException_Expect_ProcessFailed() {
         setUpContinueMessage();
-        Exception exception = new MhsServerErrorException(TEST_EXCEPTION_MESSAGE);
-        doThrow(exception).when(taskExecutor).execute(any());
-
-        var result = taskHandler.handle(message);
-        assertThat(result).isFalse();
-
-        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
-
-    }
-
-    @Test
-    @SneakyThrows
-    public void When_Handle_WithGpConnectInvalidException_Expect_ProcessFailed() {
-        setUpContinueMessage();
-        Exception exception = new GpConnectInvalidException(TEST_EXCEPTION_MESSAGE);
-        doThrow(exception).when(taskExecutor).execute(any());
-
-        var result = taskHandler.handle(message);
-        assertThat(result).isFalse();
-
-        verify(taskErrorHandler).handleProcessingError(eq(exception), any());
-    }
-
-    @Test
-    @SneakyThrows
-    public void When_Handle_WithGpConnectNotFoundException_Expect_ProcessFailed() {
-        setUpContinueMessage();
-        Exception exception = new GpConnectNotFoundException(TEST_EXCEPTION_MESSAGE);
+        Exception exception = new RuntimeException(TEST_EXCEPTION_MESSAGE);
         doThrow(exception).when(taskExecutor).execute(any());
 
         var result = taskHandler.handle(message);

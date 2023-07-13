@@ -217,7 +217,7 @@ public class TaskErrorHandlerTest {
         verify(processFailureHandlingService).failProcess(
             any(),
             eq("30"),
-            eq("Large Message general failure"),
+            eq("Maximum external attachment limit reached"),
             any());
     }
 
