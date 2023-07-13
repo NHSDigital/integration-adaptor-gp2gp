@@ -93,7 +93,7 @@ public class TaskErrorHandler {
         return handleFailingProcess(
             taskDefinition,
             "30",
-            "Large Message general failure"
+            "Maximum external attachment limit reached"
         );
     }
 
