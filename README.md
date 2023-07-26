@@ -254,6 +254,136 @@ The response will contain the following fields:
 | code       | The GP2GP response code from the negative response | string    | False    |
 | display    | The GP2GP response text from the negative response | string    | False    | 
 
+<details>
+    <summary>EHR Status example responses</summary>
+
+#### Successful migration, with single positive acknowledgement of EHR Extract (conversation closed and no errors):
+```json
+
+{
+    "attachmentStatus": [],
+    "migrationLog": [
+        {
+            "received": "2023-07-24T09:39:09.377Z",
+            "conversationClosed": "2023-07-24T09:39:09.377Z",
+            "errors": null,
+            "messageRef": "0BEBCA12-8BE4-44B4-BDC0-016A4FE3D107"
+        }
+    ],
+    "migrationStatus": "COMPLETE",
+    "originalRequestDate": "2023-07-24T09:38:50.947Z",
+    "fromAsid": "918999198738",
+    "toAsid": "200000000359"
+}
+```
+
+#### Failed by requester, with single negative acknowledgement of EHR Extract (conversation closed and error):
+
+```json
+
+{
+    "attachmentStatus": [],
+    "migrationLog": [
+        {
+            "received": "2023-07-21T16:09:19.594Z",
+            "conversationClosed": "2023-07-21T16:09:19.594Z",
+            "errors": [
+                {
+                    "code": "11",
+                    "display": "Failed to successfully integrate EHR Extract."
+                }
+            ],
+            "messageRef": "C5271147-3D89-4EF6-A719-01AEB3AD00A1"
+        }
+    ],
+    "migrationStatus": "FAILED_INCUMBENT",
+    "originalRequestDate": "2023-07-21T16:09:12.695Z",
+    "fromAsid": "918999198738",
+    "toAsid": "200000000359"
+}
+```
+
+
+#### Failed by requester, with multiple positive acknowledgements for COPC messages (without conversation closed) and one negative acknowledgement for EHR Extract (conversation closed and error):
+
+```json
+
+{
+    "attachmentStatus": [
+        {
+            "identifier": [
+                {
+                    "system": "https://EMISWeb/A82038",
+                    "value": "ad174c84-51d1-4744-89e3-7918a31248d1"
+                }
+            ],
+            "fileStatus": "ORIGINAL_FILE",
+            "fileName": "54E94A29-B0CC-4CD6-86B0-B21C9C0CA894.doc",
+            "originalDescription": "Referral for further care (22-Dec-2020)"
+        },
+        {
+            "identifier": [
+                {
+                    "system": "https://EMISWeb/A82038",
+                    "value": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC"
+                }
+            ],
+            "fileStatus": "ORIGINAL_FILE",
+            "fileName": "629BF3F7-C71F-49D7-8FCD-AEE16C11AFBD.doc",
+            "originalDescription": "Referral for further care (22-Dec-2020)"
+        },
+        {
+            "identifier": [
+                {
+                    "system": "https://EMISWeb/A82038",
+                    "value": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC"
+                }
+            ],
+            "fileStatus": "ORIGINAL_FILE",
+            "fileName": "2F73A243-0F94-4683-B3F9-727CE7780815.doc",
+            "originalDescription": "Referral for further care (22-Dec-2020)"
+        }
+    ],
+    "migrationLog": [
+        {
+            "received": "2023-07-24T10:42:18.591Z",
+            "conversationClosed": null,
+            "errors": null,
+            "messageRef": "ED2FB0DD-52AE-4EBC-B596-3BCA9CF5B272"
+        },
+                {
+            "received": "2023-07-24T10:42:19.176Z",
+            "conversationClosed": null,
+            "errors": null,
+            "messageRef": "5068BAE1-7228-4E59-B3AD-92FA5CBDE4AC"
+        },
+                {
+            "received": "2023-07-24T10:42:19.467Z",
+            "conversationClosed": null,
+            "errors": null,
+            "messageRef": "A9E37B68-07F4-43A5-889E-645D6681CE68"
+        },
+        {
+            "received": "2023-07-24T10:42:22.611Z",
+            "conversationClosed": "2023-07-24T10:42:22.611Z",
+            "errors": [
+                {
+                    "code": "99",
+                    "display": "Unexpected condition."
+                }
+            ],
+            "messageRef": "E600D1D4-D5BE-4D0D-8080-F7F6188B0548"
+        }
+    ],
+    "migrationStatus": "FAILED_INCUMBENT",
+    "originalRequestDate": "2023-07-24T10:42:05.757Z",
+    "fromAsid": "918999198738",
+    "toAsid": "200000000359"
+}
+```
+
+</details>
+
 ## How to run tests
 
 **Warning**: Gradle uses a [Build Cache](https://docs.gradle.org/current/userguide/build_cache.html) to re-use compile and
