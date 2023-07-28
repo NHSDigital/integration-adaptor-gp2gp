@@ -381,7 +381,18 @@ The response will contain the following fields:
     "toAsid": "200000000359"
 }
 ```
+#### Failed by adaptor, due to a PATIENT_NOT_FOUND error from the GP Connect provider's migrate structured endpoint
+```json
 
+{
+    "attachmentStatus": [],
+    "migrationLog": [],
+    "migrationStatus": "FAILED_NME",
+    "originalRequestDate": "2023-07-26T15:36:22.284Z",
+    "fromAsid": "918999198738",
+    "toAsid": "200000000359"
+}
+```
 </details>
 
 ## How to run tests
