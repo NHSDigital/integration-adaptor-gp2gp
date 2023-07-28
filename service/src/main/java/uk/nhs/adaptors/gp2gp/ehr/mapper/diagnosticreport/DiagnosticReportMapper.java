@@ -239,7 +239,7 @@ public class DiagnosticReportMapper {
             .map(Observation::getComment)
             .filter(StringUtils::isNotBlank)
             .map(observationComment -> buildNarrativeStatementForDiagnosticReport(
-                issuedElement, CommentType.AGGREGATE_COMMENT_SET.getCode(), observationComment
+                issuedElement, CommentType.USER_COMMENT.getCode(), observationComment
             ))
             .collect(Collectors.joining(System.lineSeparator()));
 

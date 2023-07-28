@@ -408,7 +408,7 @@
                     <component typeCode="COMP" contextConductionInd="true">
                         <NarrativeStatement classCode="OBS" moodCode="EVN">
                             <id root="394559384658936"/>
-                            <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+                            <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
                                 CommentDate:20100225154100
 
                                 (q) - Normal - No Action
@@ -421,7 +421,7 @@
                     <component typeCode="COMP" contextConductionInd="true">
                         <NarrativeStatement classCode="OBS" moodCode="EVN">
                             <id root="394559384658936"/>
-                            <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+                            <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
                                 CommentDate:20100225154100
 
                                 (q) - Normal - No Action
@@ -434,7 +434,7 @@
                     <component typeCode="COMP" contextConductionInd="true">
                         <NarrativeStatement classCode="OBS" moodCode="EVN">
                             <id root="394559384658936"/>
-                            <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+                            <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
                                 CommentDate:20100225154100
 
                                 (q) - Normal - No Action
