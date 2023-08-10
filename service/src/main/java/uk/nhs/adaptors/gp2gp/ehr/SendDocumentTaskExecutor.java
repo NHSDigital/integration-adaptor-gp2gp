@@ -74,7 +74,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                 var messageId = randomIdGeneratorService.createNewId();
                 var filename = mainMessageId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
                 var chunkPayload = generateChunkPayload(taskDefinition, messageId, filename);
-                var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, contentType);
+                var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, "application/octet-stream");
                 requestDataToSend.add(Pair.of(messageId, chunkedOutboundMessage));
                 var externalAttachment = OutboundMessage.ExternalAttachment.builder()
                     .description(OutboundMessage.AttachmentDescription.builder()
