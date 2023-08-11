@@ -35,14 +35,10 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 @Slf4j
 public class ConditionLinkSetMapper {
 
-    private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils
-        .loadTemplate("ehr_link_set_template.mustache");
-    private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
-        + "-ActualProblem-1";
-    private static final String PROBLEM_SIGNIFICANCE_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
-        + "-ProblemSignificance-1";
-    private static final String RELATED_CLINICAL_CONTENT_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
-        + "-RelatedClinicalContent-1";
+    private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_link_set_template.mustache");
+    private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
+    private static final String PROBLEM_SIGNIFICANCE_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1";
+    private static final String RELATED_CLINICAL_CONTENT_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1";
     private static final String ACTIVE = "Active";
     private static final String ACTIVE_CODE = "394774009";
     private static final String INACTIVE = "Inactive";
@@ -131,21 +127,20 @@ public class ConditionLinkSetMapper {
     }
 
     private Optional<String> buildConditionNamed(Condition condition) {
-        var conditionResource = ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
-            .map(Extension::getValue)
-            .map(value -> (Reference) value)
-            .filter(reference -> checkIfReferenceIsObservation(reference))
-            .map(this::mapLinkedId);
+        return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
+                                    .map(Extension::getValue)
+                                    .map(Reference.class::cast)
+                                    .filter(this::checkIfReferenceIsObservation)
+                                    .map(this::mapLinkedId);
 
-        return conditionResource;
     }
 
     private boolean isTransformedActualProblemHeader(Condition condition) {
         return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
-            .map(Extension::getValue)
-            .map(value -> (Reference) value)
-            .filter(reference -> checkIfReferenceIsAllergyIntolerance(reference) || checkIfReferenceIsImmunization(reference)
-                    || checkIfReferenceIsMedicationRequest(reference)).isPresent();
+                                    .map(Extension::getValue)
+                                    .map(Reference.class::cast)
+                                    .filter(reference -> checkIfReferenceIsAllergyIntolerance(reference) || checkIfReferenceIsImmunization(reference)
+                                            || checkIfReferenceIsMedicationRequest(reference)).isPresent();
     }
 
     private Optional<String> buildQualifier(Condition condition) {
@@ -188,13 +183,13 @@ public class ConditionLinkSetMapper {
 
     private List<String> buildRelatedClinicalContent(Condition condition) {
         return ExtensionMappingUtils.filterAllExtensionsByUrl(condition, RELATED_CLINICAL_CONTENT_URL)
-            .stream()
-            .map(Extension::getValue)
-            .map(value -> (Reference) value)
-            .filter(this::nonExistentResourceFilter)
-            .filter(this::suppressedLinkageResourcesFilter)
-            .map(this::mapLinkedId)
-            .collect(Collectors.toList());
+                                    .stream()
+                                    .map(Extension::getValue)
+                                    .map(Reference.class::cast)
+                                    .filter(this::nonExistentResourceFilter)
+                                    .filter(this::suppressedLinkageResourcesFilter)
+                                    .map(this::mapLinkedId)
+                                    .collect(Collectors.toList());
     }
 
     private boolean nonExistentResourceFilter(Reference reference) {
@@ -261,8 +256,7 @@ public class ConditionLinkSetMapper {
 
     private Optional<String> buildObservationStatementAvailabilityTime(Condition condition) {
 
-        var observationStatementAvaliabilityTime = buildAvailabilityTime(condition);
-        return observationStatementAvaliabilityTime;
+        return buildAvailabilityTime(condition);
     }
 
     private String mapLinkedId(Reference reference) {

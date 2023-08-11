@@ -68,7 +68,7 @@ public class ResourceExtractor {
     private static boolean hasIdMatchInListContainedResources(IIdType reference, Resource resource) {
         final var listID = resource.getIdElement().getIdPart();
         return StringUtils.equals(ResourceType.List.name(), resource.getResourceType().name())
-               &&  ((ListResource)resource)
+               &&  ((ListResource) resource)
                    .getContained()
                    .stream()
                    .peek(resource1 -> {
