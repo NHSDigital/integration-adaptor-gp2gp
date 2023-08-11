@@ -139,8 +139,9 @@ public class ConditionLinkSetMapper {
         return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
                                     .map(Extension::getValue)
                                     .map(Reference.class::cast)
-                                    .filter(reference -> checkIfReferenceIsAllergyIntolerance(reference) || checkIfReferenceIsImmunization(reference)
-                                            || checkIfReferenceIsMedicationRequest(reference)).isPresent();
+                                    .filter(reference -> checkIfReferenceIsAllergyIntolerance(reference)
+                                                         || checkIfReferenceIsImmunization(reference)
+                                                         || checkIfReferenceIsMedicationRequest(reference)).isPresent();
     }
 
     private Optional<String> buildQualifier(Condition condition) {
