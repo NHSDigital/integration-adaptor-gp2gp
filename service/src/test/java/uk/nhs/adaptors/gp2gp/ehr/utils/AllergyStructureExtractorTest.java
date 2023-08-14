@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.hl7.fhir.dstu3.model.AllergyIntolerance.AllergyIntoleranceSeverity.MODERATE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

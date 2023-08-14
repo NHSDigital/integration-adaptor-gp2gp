@@ -17,7 +17,8 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
 import java.util.Optional;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
