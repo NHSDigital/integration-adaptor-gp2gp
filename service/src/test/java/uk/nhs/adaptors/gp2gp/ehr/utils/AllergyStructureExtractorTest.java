@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hl7.fhir.dstu3.model.AllergyIntolerance.AllergyIntoleranceSeverity.MODERATE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,7 @@ public class AllergyStructureExtractorTest {
 
         String outputReasonEnd = AllergyStructureExtractor.extractReasonEnd(extension);
 
-        assertThat(outputReasonEnd).isEqualTo(expectedReasonEnd);
+        assertEquals(expectedReasonEnd, outputReasonEnd);
     }
 
     @ParameterizedTest
@@ -101,7 +102,7 @@ public class AllergyStructureExtractorTest {
 
         String outputEndDate = AllergyStructureExtractor.extractEndDate(extension, DateFormatUtil::toHl7Format);
 
-        assertThat(outputEndDate).isEqualTo(expectedEndDate);
+        assertEquals(expectedEndDate, outputEndDate);
     }
 
     @ParameterizedTest
@@ -115,7 +116,7 @@ public class AllergyStructureExtractorTest {
 
         String outputEndDate = AllergyStructureExtractor.extractEndDate(extension, DateFormatUtil::toTextFormat);
 
-        assertThat(outputEndDate).isEqualTo(expectedEndDate);
+        assertEquals(expectedEndDate, outputEndDate);
     }
 
     @ParameterizedTest
@@ -126,7 +127,7 @@ public class AllergyStructureExtractorTest {
 
         String outputReasonEnd = AllergyStructureExtractor.extractOnsetDate(allergyIntolerance);
 
-        assertThat(outputReasonEnd).isEqualTo(expectedOnsetDate);
+        assertEquals(expectedOnsetDate, outputReasonEnd);
     }
 
     @Test
@@ -135,7 +136,7 @@ public class AllergyStructureExtractorTest {
 
         String outputOnsetDate = AllergyStructureExtractor.extractOnsetDate(allergyIntolerance);
 
-        assertThat(outputOnsetDate).isEqualTo(StringUtils.EMPTY);
+        assertEquals(StringUtils.EMPTY, outputOnsetDate);
     }
 
     @Test
@@ -164,7 +165,7 @@ public class AllergyStructureExtractorTest {
 
         String outputOnsetDate = AllergyStructureExtractor.extractReaction(reactionComponent, atomicInteger);
 
-        assertThat(outputOnsetDate).isEqualTo(FULL_REACTION);
+        assertEquals(FULL_REACTION, outputOnsetDate);
     }
 
     @Test
@@ -175,6 +176,6 @@ public class AllergyStructureExtractorTest {
 
         String outputOnsetDate = AllergyStructureExtractor.extractReaction(reactionComponent, atomicInteger);
 
-        assertThat(outputOnsetDate).isEqualTo(REACTION_START);
+        assertEquals(REACTION_START, outputOnsetDate);
     }
 }
