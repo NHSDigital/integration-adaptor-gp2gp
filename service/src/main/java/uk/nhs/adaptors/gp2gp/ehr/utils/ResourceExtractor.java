@@ -71,13 +71,7 @@ public class ResourceExtractor {
                &&  ((ListResource) resource)
                    .getContained()
                    .stream()
-                   .peek(resource1 -> {
-                       System.out.println("ResourceID ID Part: " + listID);
-                       System.out.println("Just contained resourceID: " + resource1.getId());
-                       System.out.println("Reference ID: " + reference.getIdPart());
-                   })
                    .anyMatch(containedResource -> StringUtils.equals(reference.getIdPart(), listID + containedResource.getId()));
-
     }
 
     private static boolean hasEncounterReference(IIdType reference, ListResource resource) {
