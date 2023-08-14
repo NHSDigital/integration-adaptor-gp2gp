@@ -36,10 +36,7 @@ class ResourceExtractorTest {
         String bundleJsonInput = ResourceTestFileUtils.getFileContent(LIST_RESOURCE_TEST_FILE_DIRECTORY + "fhir_bundle.json");
         Bundle allBundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
 
-        AllergyIntolerance allergyIntolerance = new AllergyIntolerance();
-        allergyIntolerance.getAsserter().setReference(LIST_REFERENCE_ID);
-
-        IIdType reference = allergyIntolerance.getAsserter().getReferenceElement();
+        IIdType reference = createAllergyIntoleranceReference(LIST_REFERENCE_ID);
         Optional<Resource> resources = ResourceExtractor.extractResourceByReference(allBundle, reference);
 
         assertEquals(1, resources.stream().count());
@@ -54,10 +51,7 @@ class ResourceExtractorTest {
         String bundleJsonInput = ResourceTestFileUtils.getFileContent(LIST_RESOURCE_TEST_FILE_DIRECTORY + "fhir_bundle.json");
         Bundle allBundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
 
-        AllergyIntolerance allergyIntolerance = new AllergyIntolerance();
-        allergyIntolerance.getAsserter().setReference(LIST_REFERENCE_ID_WITH_WRONG_RESOURCE_TYPE);
-
-        IIdType reference = allergyIntolerance.getAsserter().getReferenceElement();
+        IIdType reference = createAllergyIntoleranceReference(LIST_REFERENCE_ID_WITH_WRONG_RESOURCE_TYPE);
         Optional<Resource> resources = ResourceExtractor.extractResourceByReference(allBundle, reference);
 
         assertEquals(Optional.empty(), resources);
@@ -70,13 +64,18 @@ class ResourceExtractorTest {
         String bundleJsonInput = ResourceTestFileUtils.getFileContent(LIST_RESOURCE_TEST_FILE_DIRECTORY + "fhir_bundle.json");
         Bundle allBundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
 
-        AllergyIntolerance allergyIntolerance = new AllergyIntolerance();
-        allergyIntolerance.getAsserter().setReference(NON_EXISTED_LIST_REFERENCE_ID);
-
-        IIdType reference = allergyIntolerance.getAsserter().getReferenceElement();
+        IIdType reference = createAllergyIntoleranceReference(NON_EXISTED_LIST_REFERENCE_ID);
         Optional<Resource> resources = ResourceExtractor.extractResourceByReference(allBundle, reference);
 
         assertEquals(Optional.empty(), resources);
+    }
+
+    private IIdType createAllergyIntoleranceReference(String ref_id) {
+        AllergyIntolerance allergyIntolerance = new AllergyIntolerance();
+        allergyIntolerance.getAsserter().setReference(ref_id);
+
+        IIdType reference = allergyIntolerance.getAsserter().getReferenceElement();
+        return reference;
     }
 
 
