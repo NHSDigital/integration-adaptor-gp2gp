@@ -70,9 +70,9 @@ class ResourceExtractorTest {
         assertEquals(Optional.empty(), resources);
     }
 
-    private IIdType createAllergyIntoleranceReference(String ref_id) {
+    private IIdType createAllergyIntoleranceReference(String refId) {
         AllergyIntolerance allergyIntolerance = new AllergyIntolerance();
-        allergyIntolerance.getAsserter().setReference(ref_id);
+        allergyIntolerance.getAsserter().setReference(refId);
 
         IIdType reference = allergyIntolerance.getAsserter().getReferenceElement();
         return reference;
