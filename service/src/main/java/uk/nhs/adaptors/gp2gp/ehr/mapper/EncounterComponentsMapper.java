@@ -156,8 +156,8 @@ public class EncounterComponentsMapper {
             .map(reference -> messageContext
                 .getInputBundleHolder()
                 .getRequiredResource(reference))
-            .filter(resource -> resource.getResourceType().equals(ResourceType.List))
-            .map(resource -> (ListResource) resource)
+            .filter(resource -> ResourceType.List.equals(resource.getResourceType()))
+            .map(ListResource.class::cast)
             .filter(listResource -> CodeableConceptMappingUtils.hasCode(listResource.getCode(), List.of(CATEGORY_LIST_CODE)))
             .map(this::mapCategoryListToComponent)
             .collect(Collectors.joining());

@@ -45,7 +45,7 @@ public class ResourceExtractor {
                 .filter(Bundle.BundleEntryComponent::hasResource)
                 .map(Bundle.BundleEntryComponent::getResource)
                 .filter(resource -> hasResourceType(resource, ResourceType.List.name()))
-                .map(resource -> (ListResource) resource)
+                .map(ListResource.class::cast)
                 .filter(resource -> hasEncounterReference(reference, resource))
                 .filter(resource -> hasCode(code, resource))
                 .findFirst();
@@ -59,13 +59,25 @@ public class ResourceExtractor {
     }
 
     private static boolean hasId(IIdType reference, Resource resource) {
-        return resource.hasIdElement() && StringUtils.equals(resource.getIdElement().getIdPart(), reference.getIdPart());
+
+        return resource.hasIdElement()
+               && (StringUtils.equals(resource.getIdElement().getIdPart(), reference.getIdPart())
+                   || hasIdMatchInListContainedResources(reference, resource));
+    }
+
+    private static boolean hasIdMatchInListContainedResources(IIdType reference, Resource resource) {
+        final var listID = resource.getIdElement().getIdPart();
+        return StringUtils.equals(ResourceType.List.name(), resource.getResourceType().name())
+               &&  ((ListResource) resource)
+                   .getContained()
+                   .stream()
+                   .anyMatch(containedResource -> StringUtils.equals(reference.getIdPart(), listID + containedResource.getId()));
     }
 
     private static boolean hasEncounterReference(IIdType reference, ListResource resource) {
         return resource.hasEncounter()
-            && resource.getEncounter().hasReferenceElement()
-            && StringUtils.equals(resource.getEncounter().getReferenceElement().getIdPart(), reference.getIdPart());
+               && resource.getEncounter().hasReferenceElement()
+               && StringUtils.equals(resource.getEncounter().getReferenceElement().getIdPart(), reference.getIdPart());
     }
 
     private static boolean hasCode(String code, ListResource resource) {
