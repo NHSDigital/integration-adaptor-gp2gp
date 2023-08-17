@@ -125,7 +125,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 .peek(absentAttachment -> LOGGER.warn("DocumentReference missing URL: {}", absentAttachment.getDocumentId()))
                 .peek(absentAttachments::add)
                 .map(absentAttachment -> EhrExtractStatus.GpcDocument.builder()
-                    .documentId(absentAttachment.getDocumentId())
+                    .documentId("does breaking this cause any tests to fail?")
                     .fileName(buildAbsentAttachmentFileName(absentAttachment.getDocumentId()))
                     .accessDocumentUrl(null)
                     .objectName(null)
