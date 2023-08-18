@@ -61,7 +61,7 @@ class StructuredRecordMappingServiceTest {
 
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_1 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
-        "111_new_doc_manifest_id.txt", List.of(),
+        "111_new_doc_manifest_id.txt", "text/plain", List.of(),
         buildAttachmentDescription(
             "111_new_doc_manifest_id.txt", "text/plain", false,
             false, true, NEW_DOC_MANIFEST_ID_1
@@ -69,7 +69,7 @@ class StructuredRecordMappingServiceTest {
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_2 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, null,
-        "222_new_doc_manifest_id.html", List.of(),
+        "222_new_doc_manifest_id.html", "text/html", List.of(),
         buildAttachmentDescription(
             "222_new_doc_manifest_id.html", "text/html", false,
             false, true, NEW_DOC_MANIFEST_ID_2
@@ -77,7 +77,7 @@ class StructuredRecordMappingServiceTest {
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_1 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, null, "some title",
-        "AbsentAttachment111_new_doc_manifest_id.txt", List.of(),
+        "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", List.of(),
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
             false, true, NEW_DOC_MANIFEST_ID_1
@@ -85,7 +85,7 @@ class StructuredRecordMappingServiceTest {
     );
     private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_2 = buildExternalAttachment(
         NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
-        "AbsentAttachment111_new_doc_manifest_id.txt", List.of(),
+        "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", List.of(),
         buildAttachmentDescription(
             "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
             false, true, NEW_DOC_MANIFEST_ID_1
@@ -209,8 +209,11 @@ class StructuredRecordMappingServiceTest {
         return bundle;
     }
 
+    @SuppressWarnings("checkstyle:ParameterNumber")
     private static OutboundMessage.ExternalAttachment buildExternalAttachment(String documentID, String messageID, String url, String title,
-        String filename, List<Identifier> identifier, OutboundMessage.AttachmentDescription description) {
+                                                                              String filename, String contentType,
+                                                                              List<Identifier> identifier,
+                                                                              OutboundMessage.AttachmentDescription description) {
         return OutboundMessage.ExternalAttachment.builder()
             .title(title)
             .documentId(documentID)
@@ -219,6 +222,7 @@ class StructuredRecordMappingServiceTest {
             .url(url)
             .filename(filename)
             .identifier(identifier)
+            .contentType(contentType)
             .build();
     }
 
