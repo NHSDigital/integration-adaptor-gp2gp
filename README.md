@@ -422,8 +422,11 @@ You must run all gradle commands from the `service/` directory.
 ./gradlew integrationTest
 ```
 
-Integration tests automatically start their external dependencies using [TestContainers](https://www.testcontainers.org/). 
+Most integration tests automatically start their external dependencies using [TestContainers](https://www.testcontainers.org/). 
 To disable this set the `DISABLE_TEST_CONTAINERS` environment variable to `true`.
+
+If a Test fails with a connection error, you will need to boot up the Docker dependencies.
+See "How to run service" section for details.
 
 You can set the adaptor's environment variables to test integrations with specific dependencies.
 
