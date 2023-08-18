@@ -73,14 +73,20 @@ public class GetGpcStructuredTaskExecutorTest {
         );
     }
 
+    @BeforeEach public void setup() {
+        stubTimestampService();
+        stubEhrExtractXml();
+        setupIt();
+    }
+
     private Instant stubbedTime;
-    @BeforeEach public void stubTimestampService() {
+    public void stubTimestampService() {
         this.stubbedTime = Instant.now().truncatedTo(ChronoUnit.MILLIS);
         when(timestampService.now()).thenReturn(stubbedTime);
     }
 
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
-    @BeforeEach public void setupIt() {
+    public void setupIt() {
         this.getGpcStructuredTaskExecutor = new GetGpcStructuredTaskExecutor(
             this.timestampService,
             this.gpcClient,
@@ -98,7 +104,7 @@ public class GetGpcStructuredTaskExecutorTest {
         );
     }
 
-    @BeforeEach public void stubEhrExtractXml() {
+    public void stubEhrExtractXml() {
         when(this.structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(any(), any())).thenReturn(
             ""
         );
