@@ -16,6 +16,7 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.time.Instant;
@@ -50,12 +51,18 @@ public class GetGpcStructuredTaskExecutorTest {
                 OutboundMessage.ExternalAttachment.builder()
                     .documentId("Docktor")
                     .url("https://assets.nhs.uk/nhsuk-cms/images/IS_0818_homepage_hero_3_913783962.width-1000.jpg")
+                    .identifier(List.of(Identifier.builder().value("Medicine in action").build()))
+                    .originalDescription("NHS Docs")
+                    .filename("homepage_hero.jpg")
                     .build()
             )
         );
 
         getGpcStructuredTaskExecutor.execute(
-            GetGpcStructuredTaskDefinition.builder().conversationId("118 118").build()
+            GetGpcStructuredTaskDefinition.builder()
+                .conversationId("118 118")
+                .taskId("tasky boi")
+                .build()
         );
 
         verify(ehrExtractStatusService).updateEhrExtractStatusAccessDocumentDocumentReferences(
@@ -65,8 +72,14 @@ public class GetGpcStructuredTaskExecutorTest {
                     EhrExtractStatus.GpcDocument.builder()
                         .documentId("Docktor")
                         .accessDocumentUrl("https://assets.nhs.uk/nhsuk-cms/images/IS_0818_homepage_hero_3_913783962.width-1000.jpg")
-                        .messageId("118 118")
+                        .objectName(null)
                         .accessedAt(stubbedTime)
+                        .taskId("tasky boi")
+                        .messageId("118 118")
+                        .isSkeleton(false)
+                        .identifier(List.of(Identifier.builder().value("Medicine in action").build()))
+                        .fileName("homepage_hero.jpg")
+                        .originalDescription("NHS Docs")
                         .build()
                 )
             )
