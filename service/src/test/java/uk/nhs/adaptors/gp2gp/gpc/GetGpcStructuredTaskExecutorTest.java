@@ -87,7 +87,50 @@ public class GetGpcStructuredTaskExecutorTest {
     }
 
     @Test
+    public void When_BundleContainsAbsentAttachment_Expect_DocumentAddedToEhrExtractStatusService() {
+        when(this.structuredRecordMappingService.getAbsentAttachments(any())).thenReturn(
+            List.of(
+                OutboundMessage.ExternalAttachment.builder()
+                    .documentId("NopeDocument")
+                    .url("https://assets.nhs.uk/nope.jpg")
+                    .identifier(List.of(Identifier.builder().value("Nooooope").build()))
+                    .originalDescription("Nope Nope Nope")
+                    .filename("ignored.jpg")
+                    .build()
+            )
+        );
+
+        getGpcStructuredTaskExecutor.execute(
+            GetGpcStructuredTaskDefinition.builder()
+                .conversationId("1471")
+                .taskId("vincent")
+                .build()
+        );
+
+        verify(ehrExtractStatusService).updateEhrExtractStatusAccessDocumentDocumentReferences(
+            any(),
+            eq(
+                List.of(
+                    EhrExtractStatus.GpcDocument.builder()
+                        .documentId("NopeDocument")
+                        .fileName("AbsentAttachmentNopeDocument.txt")
+                        .accessDocumentUrl(null)
+                        .objectName(null)
+                        .accessedAt(stubbedTime)
+                        .taskId("vincent")
+                        .messageId("1471")
+                        .isSkeleton(false)
+                        .identifier(List.of(Identifier.builder().value("Nooooope").build()))
+                        .originalDescription("Nope Nope Nope")
+                        .build()
+                )
+            )
+        );
+    }
+
+    @Test
     public void When_EhrSizeExceedsThreshold_Expect_SkeletonExtractAddedToEhrExtractStatusService() {
+        stubRandomIdGeneratorService();
         when(this.structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(any(), any())).thenReturn(
             "<BIG EHR />"
         );
@@ -118,7 +161,6 @@ public class GetGpcStructuredTaskExecutorTest {
     }
 
     @BeforeEach public void setup() {
-        stubRandomIdGeneratorService();
         stubTimestampService();
         stubEhrExtractXml();
         setupIt();
