@@ -24,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
@@ -48,6 +49,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     public static final String TEXT_XML_CONTENT_TYPE = "text/xml";
     private static final String LEADING_UNDERSCORE_CHAR = "_";
 
+    private final TimestampService timestampService;
     private final GpcClient gpcClient;
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -70,7 +72,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     @Override
     public void execute(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         String ehrExtractXml;
-        Instant now = Instant.now();
+        Instant now = this.timestampService.now();
         List<OutboundMessage.ExternalAttachment> externalAttachments = new ArrayList<>();
         List<OutboundMessage.ExternalAttachment> absentAttachments = new ArrayList<>();
         List<EhrExtractStatus.GpcDocument> ehrStatusGpcDocuments = new ArrayList<>();
