@@ -75,6 +75,8 @@ public class OutboundMessage {
         private List<Identifier> identifier;
         @JsonIgnore
         private String originalDescription;
+        @JsonIgnore
+        private String contentType;
     }
 
     private static String booleanToYesNo(boolean value) {
