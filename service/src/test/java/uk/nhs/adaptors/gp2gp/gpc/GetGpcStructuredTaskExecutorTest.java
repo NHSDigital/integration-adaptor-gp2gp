@@ -73,20 +73,61 @@ public class GetGpcStructuredTaskExecutorTest {
         );
     }
 
+    @Test
+    public void When_EhrSizeExceedsThreshold_Expect_SkeletonExtractAddedToEhrExtractStatusService() {
+        when(this.structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(any(), any())).thenReturn(
+            "<BIG EHR />"
+        );
+
+        getGpcStructuredTaskExecutor.execute(
+            GetGpcStructuredTaskDefinition.builder().conversationId("118 118").build()
+        );
+
+        verify(ehrExtractStatusService).updateEhrExtractStatusAccessDocumentDocumentReferences(
+            any(),
+            eq(
+                List.of(
+                    EhrExtractStatus.GpcDocument.builder()
+                        .messageId("1st randomly generated ID")
+                        .documentId("2nd randomly generated ID")
+                        .objectName("2nd randomly generated ID.gzip")
+                        .fileName("2nd randomly generated ID.gzip")
+                        .taskId("3rd randomly generated ID")
+                        .accessDocumentUrl(null)
+                        .accessedAt(stubbedTime)
+                        .isSkeleton(true)
+                        .identifier(null)
+                        .originalDescription(null)
+                        .build()
+                )
+            )
+        );
+    }
+
     @BeforeEach public void setup() {
+        stubRandomIdGeneratorService();
         stubTimestampService();
         stubEhrExtractXml();
         setupIt();
     }
 
+    private void stubRandomIdGeneratorService() {
+        when(this.randomIdGeneratorService.createNewId()).thenReturn(
+            "1st randomly generated ID",
+            "2nd randomly generated ID",
+            "3rd randomly generated ID",
+            "4th randomly generated ID"
+        );
+    }
+
     private Instant stubbedTime;
-    public void stubTimestampService() {
+    private void stubTimestampService() {
         this.stubbedTime = Instant.now().truncatedTo(ChronoUnit.MILLIS);
         when(timestampService.now()).thenReturn(stubbedTime);
     }
 
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
-    public void setupIt() {
+    private void setupIt() {
         this.getGpcStructuredTaskExecutor = new GetGpcStructuredTaskExecutor(
             this.timestampService,
             this.gpcClient,
@@ -104,7 +145,7 @@ public class GetGpcStructuredTaskExecutorTest {
         );
     }
 
-    public void stubEhrExtractXml() {
+    private void stubEhrExtractXml() {
         when(this.structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(any(), any())).thenReturn(
             ""
         );
