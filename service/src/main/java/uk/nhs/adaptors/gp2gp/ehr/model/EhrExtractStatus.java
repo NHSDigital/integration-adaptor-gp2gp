@@ -84,6 +84,7 @@ public class EhrExtractStatus implements TimeToLive {
         private String objectName;
         private Instant accessedAt;
         private String fileName;
+        private String contentType;
         private String taskId;
         private String messageId;
         private GpcAccessDocument.SentToMhs sentToMhs;

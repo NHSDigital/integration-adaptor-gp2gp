@@ -108,6 +108,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 ehrStatusGpcDocuments.add(EhrExtractStatus.GpcDocument.builder()
                     .documentId(documentId)
                     .accessDocumentUrl(null)
+                    .contentType(TEXT_XML_CONTENT_TYPE)
                     .objectName(fileName)
                     .fileName(fileName)
                     .accessedAt(now)
@@ -142,6 +143,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .isSkeleton(false)
                     .identifier(externalAttachment.getIdentifier())
                     .fileName(externalAttachment.getFilename())
+                    .contentType(externalAttachment.getContentType())
                     .originalDescription(externalAttachment.getOriginalDescription())
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
@@ -153,6 +155,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 .map(absentAttachment -> EhrExtractStatus.GpcDocument.builder()
                     .documentId(absentAttachment.getDocumentId())
                     .fileName(buildAbsentAttachmentFileName(absentAttachment.getDocumentId()))
+                    .contentType(StructuredRecordMappingService.DEFAULT_ATTACHMENT_CONTENT_TYPE)
                     .accessDocumentUrl(null)
                     .objectName(null)
                     .accessedAt(now)

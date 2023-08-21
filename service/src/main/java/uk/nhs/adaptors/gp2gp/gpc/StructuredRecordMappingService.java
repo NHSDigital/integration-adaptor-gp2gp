@@ -39,7 +39,7 @@ public class StructuredRecordMappingService {
     private final SupportedContentTypes supportedContentTypes;
     private final EhrExtractStatusService ehrExtractStatusService;
 
-    private static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
+    public static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
 
     public List<OutboundMessage.ExternalAttachment> getExternalAttachments(Bundle bundle) {
         return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
