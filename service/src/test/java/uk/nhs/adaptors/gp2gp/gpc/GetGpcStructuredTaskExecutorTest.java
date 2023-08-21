@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
@@ -80,6 +83,54 @@ public class GetGpcStructuredTaskExecutorTest {
                         .identifier(List.of(Identifier.builder().value("Medicine in action").build()))
                         .fileName("homepage_hero.jpg")
                         .originalDescription("NHS Docs")
+                        .build()
+                )
+            )
+        );
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = {"", " "})
+    public void When_BundleContainsAttachmentMissingAUrl_Expect_DocumentAddedToEhrExtractStatusServiceAsAbsent(String url) {
+        // Arrange
+        when(this.structuredRecordMappingService.getAbsentAttachments(any())).thenReturn(List.of());
+        when(this.structuredRecordMappingService.getExternalAttachments(any())).thenReturn(
+            List.of(
+                OutboundMessage.ExternalAttachment.builder()
+                    .documentId("Very important document")
+                    .url(url)
+                    .identifier(List.of(Identifier.builder().value("Mewow").build()))
+                    .originalDescription("Pictures of cats")
+                    .filename("cats.jpg")
+                    .build()
+            )
+        );
+
+        // Act
+        getGpcStructuredTaskExecutor.execute(
+                GetGpcStructuredTaskDefinition.builder()
+                        .conversationId("1984")
+                        .taskId("HIHO")
+                        .build()
+        );
+
+        // Assert
+        verify(ehrExtractStatusService).updateEhrExtractStatusAccessDocumentDocumentReferences(
+            any(),
+            eq(
+                List.of(
+                    EhrExtractStatus.GpcDocument.builder()
+                        .documentId("Very important document")
+                        .fileName("AbsentAttachmentVery important document.txt")
+                        .accessDocumentUrl(null)
+                        .objectName(null)
+                        .accessedAt(stubbedTime)
+                        .taskId("HIHO")
+                        .messageId("1984")
+                        .isSkeleton(false)
+                        .identifier(List.of(Identifier.builder().value("Mewow").build()))
+                        .originalDescription("Pictures of cats")
                         .build()
                 )
             )
