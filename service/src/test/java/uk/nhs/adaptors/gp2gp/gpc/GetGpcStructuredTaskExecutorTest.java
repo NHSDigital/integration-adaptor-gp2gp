@@ -16,6 +16,7 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.time.Instant;
@@ -50,8 +51,88 @@ public class GetGpcStructuredTaskExecutorTest {
                 OutboundMessage.ExternalAttachment.builder()
                     .documentId("Docktor")
                     .url("https://assets.nhs.uk/nhsuk-cms/images/IS_0818_homepage_hero_3_913783962.width-1000.jpg")
+                    .identifier(List.of(Identifier.builder().value("Medicine in action").build()))
+                    .originalDescription("NHS Docs")
+                    .filename("homepage_hero.jpg")
                     .build()
             )
+        );
+
+        getGpcStructuredTaskExecutor.execute(
+            GetGpcStructuredTaskDefinition.builder()
+                .conversationId("118 118")
+                .taskId("tasky boi")
+                .build()
+        );
+
+        verify(ehrExtractStatusService).updateEhrExtractStatusAccessDocumentDocumentReferences(
+            any(),
+            eq(
+                List.of(
+                    EhrExtractStatus.GpcDocument.builder()
+                        .documentId("Docktor")
+                        .accessDocumentUrl("https://assets.nhs.uk/nhsuk-cms/images/IS_0818_homepage_hero_3_913783962.width-1000.jpg")
+                        .objectName(null)
+                        .accessedAt(stubbedTime)
+                        .taskId("tasky boi")
+                        .messageId("118 118")
+                        .isSkeleton(false)
+                        .identifier(List.of(Identifier.builder().value("Medicine in action").build()))
+                        .fileName("homepage_hero.jpg")
+                        .originalDescription("NHS Docs")
+                        .build()
+                )
+            )
+        );
+    }
+
+    @Test
+    public void When_BundleContainsAbsentAttachment_Expect_DocumentAddedToEhrExtractStatusService() {
+        when(this.structuredRecordMappingService.getAbsentAttachments(any())).thenReturn(
+            List.of(
+                OutboundMessage.ExternalAttachment.builder()
+                    .documentId("NopeDocument")
+                    .url("https://assets.nhs.uk/nope.jpg")
+                    .identifier(List.of(Identifier.builder().value("Nooooope").build()))
+                    .originalDescription("Nope Nope Nope")
+                    .filename("ignored.jpg")
+                    .build()
+            )
+        );
+
+        getGpcStructuredTaskExecutor.execute(
+            GetGpcStructuredTaskDefinition.builder()
+                .conversationId("1471")
+                .taskId("vincent")
+                .build()
+        );
+
+        verify(ehrExtractStatusService).updateEhrExtractStatusAccessDocumentDocumentReferences(
+            any(),
+            eq(
+                List.of(
+                    EhrExtractStatus.GpcDocument.builder()
+                        .documentId("NopeDocument")
+                        .fileName("AbsentAttachmentNopeDocument.txt")
+                        .accessDocumentUrl(null)
+                        .objectName(null)
+                        .accessedAt(stubbedTime)
+                        .taskId("vincent")
+                        .messageId("1471")
+                        .isSkeleton(false)
+                        .identifier(List.of(Identifier.builder().value("Nooooope").build()))
+                        .originalDescription("Nope Nope Nope")
+                        .build()
+                )
+            )
+        );
+    }
+
+    @Test
+    public void When_EhrSizeExceedsThreshold_Expect_SkeletonExtractAddedToEhrExtractStatusService() {
+        stubRandomIdGeneratorService();
+        when(this.structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(any(), any())).thenReturn(
+            "<BIG EHR />"
         );
 
         getGpcStructuredTaskExecutor.execute(
@@ -63,10 +144,16 @@ public class GetGpcStructuredTaskExecutorTest {
             eq(
                 List.of(
                     EhrExtractStatus.GpcDocument.builder()
-                        .documentId("Docktor")
-                        .accessDocumentUrl("https://assets.nhs.uk/nhsuk-cms/images/IS_0818_homepage_hero_3_913783962.width-1000.jpg")
-                        .messageId("118 118")
+                        .messageId("1st randomly generated ID")
+                        .documentId("2nd randomly generated ID")
+                        .objectName("2nd randomly generated ID.gzip")
+                        .fileName("2nd randomly generated ID.gzip")
+                        .taskId("3rd randomly generated ID")
+                        .accessDocumentUrl(null)
                         .accessedAt(stubbedTime)
+                        .isSkeleton(true)
+                        .identifier(null)
+                        .originalDescription(null)
                         .build()
                 )
             )
@@ -79,14 +166,23 @@ public class GetGpcStructuredTaskExecutorTest {
         setupIt();
     }
 
+    private void stubRandomIdGeneratorService() {
+        when(this.randomIdGeneratorService.createNewId()).thenReturn(
+            "1st randomly generated ID",
+            "2nd randomly generated ID",
+            "3rd randomly generated ID",
+            "4th randomly generated ID"
+        );
+    }
+
     private Instant stubbedTime;
-    public void stubTimestampService() {
+    private void stubTimestampService() {
         this.stubbedTime = Instant.now().truncatedTo(ChronoUnit.MILLIS);
         when(timestampService.now()).thenReturn(stubbedTime);
     }
 
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
-    public void setupIt() {
+    private void setupIt() {
         this.getGpcStructuredTaskExecutor = new GetGpcStructuredTaskExecutor(
             this.timestampService,
             this.gpcClient,
@@ -104,7 +200,7 @@ public class GetGpcStructuredTaskExecutorTest {
         );
     }
 
-    public void stubEhrExtractXml() {
+    private void stubEhrExtractXml() {
         when(this.structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(any(), any())).thenReturn(
             ""
         );
