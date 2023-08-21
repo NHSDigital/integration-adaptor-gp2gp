@@ -125,20 +125,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             documentsAsExternalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isBlank(documentMetadata.getUrl()))
                 .peek(absentAttachment -> LOGGER.warn("DocumentReference missing URL: {}", absentAttachment.getDocumentId()))
-                .peek(absentAttachments::add)
-                .map(absentAttachment -> EhrExtractStatus.GpcDocument.builder()
-                    .documentId(absentAttachment.getDocumentId())
-                    .fileName(buildAbsentAttachmentFileName(absentAttachment.getDocumentId()))
-                    .accessDocumentUrl(null)
-                    .objectName(null)
-                    .accessedAt(now)
-                    .taskId(structuredTaskDefinition.getTaskId())
-                    .messageId(structuredTaskDefinition.getConversationId())
-                    .isSkeleton(false)
-                    .identifier(absentAttachment.getIdentifier())
-                    .originalDescription(absentAttachment.getOriginalDescription())
-                    .build())
-                .forEach(ehrStatusGpcDocuments::add);
+                .forEach(absentAttachments::add);
 
             documentsAsExternalAttachments = documentsAsExternalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isNotBlank(documentMetadata.getUrl()))
