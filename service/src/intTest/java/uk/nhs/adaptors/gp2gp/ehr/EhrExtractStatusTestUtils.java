@@ -1,6 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_NAME;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL;
 
 import java.time.Instant;
@@ -13,7 +15,7 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 public class EhrExtractStatusTestUtils {
     public static EhrExtractStatus prepareEhrExtractStatus() {
-        return prepareEhrExtractStatus(EhrStatusConstants.CONVERSATION_ID);
+        return prepareEhrExtractStatus(CONVERSATION_ID);
     }
 
     public static EhrExtractStatus prepareEhrExtractStatus(String conversationId) {
@@ -67,7 +69,9 @@ public class EhrExtractStatusTestUtils {
         return EhrExtractStatus.GpcAccessDocument.builder()
             .documents(List.of(
                 EhrExtractStatus.GpcDocument.builder()
+                    .messageId(CONVERSATION_ID)
                     .documentId(documentId)
+                    .objectName(DOCUMENT_NAME)
                     .accessDocumentUrl(String.format(GPC_ACCESS_DOCUMENT_URL, documentId))
                     .build()
             )).build();
