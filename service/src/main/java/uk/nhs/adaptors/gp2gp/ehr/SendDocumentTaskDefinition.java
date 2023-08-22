@@ -24,6 +24,10 @@ public class SendDocumentTaskDefinition extends DocumentTaskDefinition {
      * Position of the document on EhrStatus document list
      */
     private final int documentPosition;
+    /**
+     * Content-Type of the document, as provided by sending system.
+     */
+    private final String documentContentType;
     @Override
     public TaskType getTaskType() {
         return SEND_EHR_CONTINUE;
