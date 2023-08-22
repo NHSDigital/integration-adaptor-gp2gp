@@ -22,6 +22,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_NAME;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -30,7 +33,7 @@ public class EhrContinueTest {
     private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
     private static final String CONTINUE_ACKNOWLEDGEMENT = "Continue Acknowledgement";
-    private static final String DOCUMENT_NAME = "documentName";
+
 
     @Autowired
     private EhrExtractRequestHandler ehrExtractRequestHandler;
@@ -49,10 +52,12 @@ public class EhrContinueTest {
         ehrExtractRequestHandler.handleContinue(ehrExtractStatus.getConversationId(), CONTINUE_ACKNOWLEDGEMENT);
 
         verify(taskDispatcher).createTask(
-            argThat(task -> hasSameContent(
-                (SendDocumentTaskDefinition) task, expectedResponse)));
-        var ehrExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId());
+            argThat((SendDocumentTaskDefinition task) -> {
+                assertThat(task).usingRecursiveComparison().ignoringFields("taskId").isEqualTo(expectedResponse);
+                return true;
+            }));
 
+        var ehrExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId());
         assertThat(ehrExtract.get().getEhrContinue().getReceived()).isNotNull();
     }
 
@@ -84,6 +89,8 @@ public class EhrContinueTest {
     private SendDocumentTaskDefinition createContinueTasks(EhrExtractStatus ehrExtractStatus) {
         return SendDocumentTaskDefinition.builder()
             .documentName(DOCUMENT_NAME)
+            .documentId(DOCUMENT_ID)
+            .messageId(CONVERSATION_ID)
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
@@ -92,15 +99,5 @@ public class EhrContinueTest {
             .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
-    }
-
-    private boolean hasSameContent(SendDocumentTaskDefinition structuredTaskDefinition, SendDocumentTaskDefinition expectedResponse) {
-        assertThat(structuredTaskDefinition.getConversationId()).isEqualTo(expectedResponse.getConversationId());
-        assertThat(structuredTaskDefinition.getFromAsid()).isEqualTo(expectedResponse.getFromAsid());
-        assertThat(structuredTaskDefinition.getFromOdsCode()).isEqualTo(expectedResponse.getFromOdsCode());
-        assertThat(structuredTaskDefinition.getRequestId()).isEqualTo(expectedResponse.getRequestId());
-        assertThat(structuredTaskDefinition.getToOdsCode()).isEqualTo(expectedResponse.getToOdsCode());
-
-        return true;
     }
 }
