@@ -60,9 +60,8 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
         }
 
         var binary = outboundMessage.getAttachments().get(0).getPayload();
-        LOGGER.debug("Attachment size=" + getBytesLengthOfString(binary));
+        LOGGER.debug("Attachment size=" + getBytesLengthOfString(binary) + " content-type=" + taskDefinition.getDocumentContentType());
         if (isLargeAttachment(binary)) {
-            var contentType = outboundMessage.getAttachments().get(0).getContentType();
             outboundMessage.getAttachments().clear(); // since it's a large message, chunks will be sent as external attachments
             outboundMessage.setExternalAttachments(new ArrayList<>());
 
@@ -74,13 +73,13 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                 var messageId = randomIdGeneratorService.createNewId();
                 var filename = mainMessageId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
                 var chunkPayload = generateChunkPayload(taskDefinition, messageId, filename);
-                var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, contentType);
+                var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, taskDefinition.getDocumentContentType());
                 requestDataToSend.add(Pair.of(messageId, chunkedOutboundMessage));
                 var externalAttachment = OutboundMessage.ExternalAttachment.builder()
                     .description(OutboundMessage.AttachmentDescription.builder()
                         .length(getBytesLengthOfString(chunk)) //calculate size for chunk
                         .fileName(filename)
-                        .contentType(contentType)
+                        .contentType(taskDefinition.getDocumentContentType())
                         .compressed(false) //const
                         .largeAttachment(false) // const - chunks are not large attachments themself
                         .originalBase64(true) //const
