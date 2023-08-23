@@ -155,14 +155,14 @@ We provide several example configurations:
 
 ```bash
 cd docker/
-cp vars.local.sh vars.sh
+cp vars.local.tests.sh vars.sh
 ```
 
 ### Using the helper script for Docker Compose
 
 For local environment to run against mocks:
 ```bash
-./start-local-environment-mocks.sh
+./start-local-environment-local.sh
 ```
 
 For local environment to run against gp demonstrator 1.6.0
