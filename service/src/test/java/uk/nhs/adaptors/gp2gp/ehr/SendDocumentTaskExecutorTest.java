@@ -59,14 +59,14 @@ public class SendDocumentTaskExecutorTest {
 
     @SneakyThrows
     @Test
-    public void When_DocumentNeedsToBeSplitInto5Chunks_Expect_FiveChunksWhereMultipartContentTypeHeaderIsPulledFromStorageDataWrapper() {
+    public void When_DocumentNeedsToBeSplitInto5Chunks_Expect_FiveChunksWhereMultipartContentTypeHeaderIsPulledFromTaskDefinition() {
         final int SIZE_OF_EACH_CHUNK = 1;
         final int NUMBER_OF_CHUNKS = 5;
         final String storageFileName = "large_file_which_will_be_split.txt";
 
         // Arrange
         this.gp2gpConfiguration.setLargeAttachmentThreshold(SIZE_OF_EACH_CHUNK);
-        uploadDocumentToStorageWrapperWithPayloadSize(SIZE_OF_EACH_CHUNK * NUMBER_OF_CHUNKS, storageFileName, "test/example");
+        uploadDocumentToStorageWrapperWithPayloadSize(SIZE_OF_EACH_CHUNK * NUMBER_OF_CHUNKS, storageFileName, "should-not-be-used");
 
         // Act
         this.sendDocumentTaskExecutor.execute(
@@ -75,19 +75,20 @@ public class SendDocumentTaskExecutorTest {
                 .messageId("88")
                 .fromOdsCode("RANDOM-ODS")
                 .conversationId("RANDOM-ID")
+                .documentContentType("should-be-used")
                 .build()
         );
 
         // Assert
         verify(mhsRequestBuilder, times(NUMBER_OF_CHUNKS)).buildSendEhrExtractCommonRequest(
-            argThat(mhsRequestBodyContainsAttachmentWithContentType("test/example")),
+            argThat(mhsRequestBodyContainsAttachmentWithContentType("should-be-used")),
             eq("RANDOM-ID"),
             eq("RANDOM-ODS"),
             any()
         );
 
         verify(mhsRequestBuilder, times(1)).buildSendEhrExtractCommonRequest(
-            argThat(mhsRequestBodyWithAnExternalAttachmentForEachChunkWithContentType(NUMBER_OF_CHUNKS, "test/example")),
+            argThat(mhsRequestBodyWithAnExternalAttachmentForEachChunkWithContentType(NUMBER_OF_CHUNKS, "should-be-used")),
             eq("RANDOM-ID"),
             eq("RANDOM-ODS"),
             any()

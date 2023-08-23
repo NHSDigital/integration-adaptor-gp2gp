@@ -23,6 +23,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_CONTENT_TYPE;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_NAME;
 
@@ -90,6 +91,7 @@ public class EhrContinueTest {
         return SendDocumentTaskDefinition.builder()
             .documentName(DOCUMENT_NAME)
             .documentId(DOCUMENT_ID)
+            .documentContentType(DOCUMENT_CONTENT_TYPE)
             .messageId(CONVERSATION_ID)
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
