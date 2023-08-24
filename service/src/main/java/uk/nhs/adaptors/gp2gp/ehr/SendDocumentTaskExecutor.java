@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tika.mime.MimeTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
@@ -74,7 +75,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                 var filename = mainMessageId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
                 var chunkPayload = generateChunkPayload(taskDefinition, messageId, filename);
 
-                var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, "application/octet-stream");
+                var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, MimeTypes.OCTET_STREAM);
 
                 requestDataToSend.add(Pair.of(messageId, chunkedOutboundMessage));
                 var externalAttachment = OutboundMessage.ExternalAttachment.builder()
