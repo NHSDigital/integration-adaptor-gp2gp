@@ -37,7 +37,7 @@ public class DocumentToMHSTranslator {
         var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
 
         try {
-            return prepareOutboundMessage(taskDefinition, base64Content, contentType, xmlContent);
+            return prepareOutboundMessage(taskDefinition, base64Content, MediaType.APPLICATION_OCTET_STREAM_VALUE, xmlContent);
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
         }
