@@ -4,7 +4,7 @@
         {
             "description": "test-document-id",
             "payload": "VGhlIGZpbGUgY291bGQgbm90IGJlIGluY2x1ZGVkIHdpdGggdGhlIEVsZWN0cm9uaWMgUmVjb3JkCgp0ZXN0LXRvLW9kcy1jb2RlOnRlc3QtY29udmVyc2F0aW9uLWlkClJlYXNvbjowNjpVbmFibGUgdG8gZGV0ZXJtaW5lIHByb2JsZW0=",
-            "content_type": "text/plain",
+            "content_type": "application/octet-stream",
             "is_base64": true
         }
     ]

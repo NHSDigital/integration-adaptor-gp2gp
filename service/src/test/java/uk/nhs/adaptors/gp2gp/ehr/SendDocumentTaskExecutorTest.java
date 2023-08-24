@@ -3,9 +3,11 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.apache.tika.mime.MimeTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -59,7 +61,7 @@ public class SendDocumentTaskExecutorTest {
 
     @SneakyThrows
     @Test
-    public void When_DocumentNeedsToBeSplitInto5Chunks_Expect_FiveChunksWhereMultipartContentTypeHeaderIsPulledFromTaskDefinition() {
+    public void When_DocumentNeedsToBeSplitIntoFiveChunks_Expect_FiveMhsRequestsWithAttachmentsOfContentTypeOctetStream() {
         final int SIZE_OF_EACH_CHUNK = 1;
         final int NUMBER_OF_CHUNKS = 5;
         final String storageFileName = "large_file_which_will_be_split.txt";
@@ -81,17 +83,42 @@ public class SendDocumentTaskExecutorTest {
 
         // Assert
         verify(mhsRequestBuilder, times(NUMBER_OF_CHUNKS)).buildSendEhrExtractCommonRequest(
-            argThat(mhsRequestBodyContainsAttachmentWithContentType("should-be-used")),
+            argThat(mhsRequestBodyContainsAttachmentWithContentType(MimeTypes.OCTET_STREAM)),
             eq("RANDOM-ID"),
             eq("RANDOM-ODS"),
             any()
         );
+    }
 
+    @DisplayName("When_DocumentNeedsToBeSplitInto5Chunks_Expect_"
+            + "MhsMessageWith5ExternalAttachmentWithDescriptionContentTypeHeaderFromTaskDefinition")
+    @Test
+    public void When_DocumentNeedsToBeSplitInto5Chunks_Expect_MhsMessageWith5ExternalAttachmentCorrectlySet() {
+        final int SIZE_OF_EACH_CHUNK = 1;
+        final int NUMBER_OF_CHUNKS = 5;
+        final String storageFileName = "large_file_which_will_be_split.txt";
+
+        // Arrange
+        this.gp2gpConfiguration.setLargeAttachmentThreshold(SIZE_OF_EACH_CHUNK);
+        uploadDocumentToStorageWrapperWithPayloadSize(SIZE_OF_EACH_CHUNK * NUMBER_OF_CHUNKS, storageFileName, "should-not-be-used");
+
+        // Act
+        this.sendDocumentTaskExecutor.execute(
+                SendDocumentTaskDefinition.builder()
+                        .documentName(storageFileName)
+                        .messageId("88")
+                        .fromOdsCode("RANDOM-ODS")
+                        .conversationId("RANDOM-ID")
+                        .documentContentType("should-be-used")
+                        .build()
+        );
+
+        // Assert
         verify(mhsRequestBuilder, times(1)).buildSendEhrExtractCommonRequest(
-            argThat(mhsRequestBodyWithAnExternalAttachmentForEachChunkWithContentType(NUMBER_OF_CHUNKS, "should-be-used")),
-            eq("RANDOM-ID"),
-            eq("RANDOM-ODS"),
-            any()
+                argThat(mhsRequestBodyWithAnExternalAttachmentForEachChunkWithContentType(NUMBER_OF_CHUNKS, "should-be-used")),
+                eq("RANDOM-ID"),
+                eq("RANDOM-ODS"),
+                any()
         );
     }
 
@@ -99,16 +126,16 @@ public class SendDocumentTaskExecutorTest {
     private static ArgumentMatcher<String> mhsRequestBodyContainsAttachmentWithContentType(String contentType) {
         return mhsRequestBody -> {
             ObjectMapper objectMapper = new ObjectMapper();
-            OutboundMessage amap;
+            OutboundMessage outboundMessage;
             try {
-                amap = objectMapper.readValue(mhsRequestBody, OutboundMessage.class);
+                outboundMessage = objectMapper.readValue(mhsRequestBody, OutboundMessage.class);
             } catch (JsonProcessingException e) {
                 return false;
             }
-            if (amap.getAttachments().isEmpty()) {
+            if (outboundMessage.getAttachments().isEmpty()) {
                 return false;
             }
-            return Objects.equals(amap.getAttachments().get(0).getContentType(), contentType);
+            return Objects.equals(outboundMessage.getAttachments().get(0).getContentType(), contentType);
         };
     }
 
@@ -118,16 +145,16 @@ public class SendDocumentTaskExecutorTest {
 
         return mhsRequestBody -> {
             ObjectMapper objectMapper = new ObjectMapper();
-            OutboundMessage amap;
+            OutboundMessage outboundMessage;
             try {
-                amap = objectMapper.readValue(mhsRequestBody, OutboundMessage.class);
+                outboundMessage = objectMapper.readValue(mhsRequestBody, OutboundMessage.class);
             } catch (JsonProcessingException e) {
                 return false;
             }
-            if (amap.getExternalAttachments() == null || amap.getExternalAttachments().size() != numberOfChunks) {
+            if (outboundMessage.getExternalAttachments() == null || outboundMessage.getExternalAttachments().size() != numberOfChunks) {
                 return false;
             }
-            return amap.getExternalAttachments().stream().allMatch(
+            return outboundMessage.getExternalAttachments().stream().allMatch(
                     externalAttachment -> externalAttachment.getDescription().contains("ContentType=" + contentType)
             );
         };
