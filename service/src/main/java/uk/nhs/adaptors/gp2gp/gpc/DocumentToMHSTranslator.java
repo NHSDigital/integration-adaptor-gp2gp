@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 
+import org.apache.tika.mime.MimeTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -37,7 +38,7 @@ public class DocumentToMHSTranslator {
         var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
 
         try {
-            return prepareOutboundMessage(taskDefinition, base64Content, MediaType.APPLICATION_OCTET_STREAM_VALUE, xmlContent);
+            return prepareOutboundMessage(taskDefinition, base64Content, MimeTypes.OCTET_STREAM, xmlContent);
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
         }

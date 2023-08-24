@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.apache.tika.mime.MimeTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.BeforeEach;
@@ -82,7 +83,7 @@ public class SendDocumentTaskExecutorTest {
 
         // Assert
         verify(mhsRequestBuilder, times(NUMBER_OF_CHUNKS)).buildSendEhrExtractCommonRequest(
-            argThat(mhsRequestBodyContainsAttachmentWithContentType("application/octet-stream")),
+            argThat(mhsRequestBodyContainsAttachmentWithContentType(MimeTypes.OCTET_STREAM)),
             eq("RANDOM-ID"),
             eq("RANDOM-ODS"),
             any()
@@ -125,16 +126,16 @@ public class SendDocumentTaskExecutorTest {
     private static ArgumentMatcher<String> mhsRequestBodyContainsAttachmentWithContentType(String contentType) {
         return mhsRequestBody -> {
             ObjectMapper objectMapper = new ObjectMapper();
-            OutboundMessage amap;
+            OutboundMessage outboundMessage;
             try {
-                amap = objectMapper.readValue(mhsRequestBody, OutboundMessage.class);
+                outboundMessage = objectMapper.readValue(mhsRequestBody, OutboundMessage.class);
             } catch (JsonProcessingException e) {
                 return false;
             }
-            if (amap.getAttachments().isEmpty()) {
+            if (outboundMessage.getAttachments().isEmpty()) {
                 return false;
             }
-            return Objects.equals(amap.getAttachments().get(0).getContentType(), contentType);
+            return Objects.equals(outboundMessage.getAttachments().get(0).getContentType(), contentType);
         };
     }
 
