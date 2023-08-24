@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_CONTENT_TYPE;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_NAME;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL;
@@ -72,6 +73,7 @@ public class EhrExtractStatusTestUtils {
                     .messageId(CONVERSATION_ID)
                     .documentId(documentId)
                     .objectName(DOCUMENT_NAME)
+                    .contentType(DOCUMENT_CONTENT_TYPE)
                     .accessDocumentUrl(String.format(GPC_ACCESS_DOCUMENT_URL, documentId))
                     .build()
             )).build();

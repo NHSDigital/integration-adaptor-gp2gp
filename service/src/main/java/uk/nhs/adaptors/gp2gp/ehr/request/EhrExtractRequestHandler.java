@@ -144,7 +144,8 @@ public class EhrExtractRequestHandler {
                             document.getObjectName(),
                             documentPosition,
                             document.getMessageId(),
-                            document.getDocumentId());
+                            document.getDocumentId(),
+                            document.getContentType());
                     }
                 });
         } else {
@@ -154,11 +155,13 @@ public class EhrExtractRequestHandler {
     }
 
     private void createSendDocumentTasks(
-            EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation, String messageId, String documentId
+            EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation, String messageId,
+            String documentId, String documentContentType
     ) {
         var sendDocumentTaskDefinition = SendDocumentTaskDefinition.builder()
             .documentName(documentName)
             .documentPosition(documentLocation)
+            .documentContentType(documentContentType)
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())

@@ -11,6 +11,7 @@ public class EhrStatusConstants {
     public static final String FROM_ODS_CODE = "GPC001";
     public static final String TO_ODS_CODE = "B82617";
     public static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
+    public static final String DOCUMENT_CONTENT_TYPE = "application/msword";
     public static final String GPC_ACCESS_DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/documents/fhir/Binary/%s";
     public static final String MESSAGE_ID = "DFF5321C-C6EA-4AC9-942F-0F6621CC0BFC";
     public static final String DOCUMENT_NAME = "Discharge Summary";
