@@ -1102,7 +1102,7 @@
                         "attachment": {
                             "contentType": "application/pdf",
                             "size": 315497,
-                            "url": "http://gpcc:8090/F85003/STU3/1/gpconnect/documents/Binary/care-record-document--b5dc8e04-1cc0-11ed-93ea-0a58a9feac02"
+                            "url": "{{request.baseUrl}}/F85003/STU3/1/gpconnect/documents/Binary/care-record-document--b5dc8e04-1cc0-11ed-93ea-0a58a9feac02"
                         }
                     }
                 ]
@@ -1203,7 +1203,7 @@
                         "attachment": {
                             "contentType": "application/pdf",
                             "size": 315497,
-                            "url": "http://gpcc:8090/F85003/STU3/1/gpconnect/documents/Binary/care-record-document--b60f1a9a-1cc0-11ed-85de-0a58a9feac02"
+                            "url": "{{request.baseUrl}}/F85003/STU3/1/gpconnect/documents/Binary/care-record-document--b60f1a9a-1cc0-11ed-85de-0a58a9feac02"
                         }
                     }
                 ]
