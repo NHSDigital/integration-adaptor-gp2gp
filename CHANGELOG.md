@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.10] - 2023-08-30
+
+### Added
+
+- Add "/requests" endpoint which returns a history of transfers made. (#500)
+- Support for running the GP2GP adaptor and PS adaptors against single MHS inbound adaptor. (#494)
+
+### Fixed
+
+- GP2GP bug - Patient not found error was returning Response Code "6" instead of "06". (#501)
+- When a GP2GP transfer fails because the MHS Adaptor rejects the attachments, we now return a Response Code of 30
+  previously this situation was unhandled, and defaulted to 99. (#502)
+- Mapping bug - DiagnosticReport result comments were previously generated as a NarrativeStatement with PMIP with 
+  comment type `AGGREGATE COMMENT SET`, they are now generated with `USER COMMENT` (#504).
+- Mapping bug - Lists which referenced [contained elements] were treated as invalid, they should now work (#507).
+- GP2GP bug - Attachments with a content type not supported by Spine were being sent to the MHS Adaptor
+  with their original content type. Now they are sent with `application/octect-stream` to match the GP2GP Spec. (#506)
+
+[contained elements]: https://build.fhir.org/references.html#contained
+
 ## [1.5.7] - 2022-11-25
 
 ### Added
