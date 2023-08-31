@@ -4,17 +4,8 @@ set -e
 
 source ./version.sh
 
-cd ../docker
-docker-compose build gp2gp
+cd ../
 
-docker tag local/gp2gp:latest nhsdev/nia-gp2gp-adaptor:${RELEASE_VERSION}
+docker buildx build -f docker/service/Dockerfile . --platform linux/arm64/v8,linux/amd64 --tag nhsdev/nia-gp2gp-adaptor:${RELEASE_VERSION} --push
 
-docker scan --severity high --file ../docker/service/Dockerfile --exclude-base nhsdev/nia-gp2gp-adaptor:${RELEASE_VERSION}
-
-if [ "$1" == "-y" ];
-then
-  echo "Tagging and pushing Docker image and git tag"
-  docker push nhsdev/nia-gp2gp-adaptor:${RELEASE_VERSION}
-  git tag -a ${RELEASE_VERSION} -m "Release ${RELEASE_VERSION}"
-  git push origin ${RELEASE_VERSION}
-fi
+docker scout cves --only-severity critical,high --ignore-base nhsdev/nia-gp2gp-adaptor:${RELEASE_VERSION}
