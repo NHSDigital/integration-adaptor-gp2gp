@@ -1,5 +1,5 @@
 # integration-adaptor-gp2gp
-National Integration Adaptor - GP2GP
+National Integration Adaptor - [GP2GP Sending Adaptor](https://digital.nhs.uk/developer/api-catalogue/gp2gp/gp2gp---integration-adaptor)
 
 The existing GP2GP solution uses a legacy messaging standard and infrastructure (HL7v3 and Spine TMS). Reliance 
 on these standards going forward presents a significant barrier to successful GP2GP implementation by new suppliers, 
