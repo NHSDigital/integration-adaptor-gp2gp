@@ -81,19 +81,19 @@
               }
             ],
             "system": "https://fhir.nhs.uk/Id/nhs-number",
-            "value": "9729649529"
+            "value": "9729649537"
           }
         ],
         "active": true,
         "name": [
           {
             "use": "official",
-            "family": "Kereva",
+            "family": "POLAND",
             "prefix": [
               "MS"
             ],
             "given": [
-              "Louisa"
+              "Claire"
             ]
           }
         ],
@@ -109,17 +109,17 @@
             "use": "work"
           }
         ],
-        "gender": "male",
-        "birthDate": "2012-04-21",
+        "gender": "female",
+        "birthDate": "2009-07-15",
         "address": [
           {
             "use": "home",
             "line": [
-              "10 Water Lane"
+              "4 EAST AVENUE"
             ],
             "city": "Manchester",
             "district": "Lancashire",
-            "postalCode": "M26 4BS",
+            "postalCode": "M45 7JD",
             "country": "GBR"
           }
         ],
