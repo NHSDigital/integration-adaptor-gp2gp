@@ -395,6 +395,72 @@ The response will contain the following fields:
 ```
 </details>
 
+## How to query the Requests endpoint
+
+An API is provided to query the status of all transfers to an incumbent.
+Any "in-progress" transfers are excluded from this list, but become available once they either succeed or fail.
+
+Requests can be made to the following endpoint, where each attribute within the JSON POST body is an optional filter criteria.
+
+```http request
+POST /requests
+Content-Type: application/json
+
+{
+    "fromDateTime": "2020-10-31T01:30:00.000Z",
+    "toDateTime": "2030-10-31T01:30:00.000Z",
+    "fromAsid": "",
+    "toAsid": "",
+    "fromOdsCode": "",
+    "toOdsCode": ""
+}
+```
+
+The response will contain a JSON array of the following:
+
+### EhrStatusRequest
+
+| Field name               | Description                                                                                                     | Data type     | Possible values                                                                               | nullable |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------- | -------- |
+| initialRequestTimestamp  | The date and time of the original request.                                                                      | ISO-8601      |                                                                                               | False    |
+| actionCompletedTimestamp | The date and time of when the transfer completed.                                                               | ISO-8601      |                                                                                               | False    |
+| nhsNumber                |                                                                                                                 | string        |                                                                                               | False    |
+| conversationId           |                                                                                                                 | string        |                                                                                               | False    |
+| fromAsid                 |                                                                                                                 | string        |                                                                                               | False    |
+| toAsid                   |                                                                                                                 | string        |                                                                                               | False    |
+| fromOdsCode              |                                                                                                                 | string        |                                                                                               | False    |
+| toOdsCode                |                                                                                                                 | string        |                                                                                               | False    |
+| migrationStatus          | The current state of the transfer, a status of COMPLETE_WITH_ISSUES is given if placeholder documents were sent | string / enum | COMPLETE <br/> COMPLETE_WITH_ISSUES <br/> FAILED_NME <br/> FAILED_INCUMBENT <br/> IN_PROGRESS | False    |
+
+#### Example EhrStatusRequest response
+
+```json
+[
+    {
+        "initialRequestTimestamp":"2023-09-20T11:47:58.966Z",
+        "actionCompletedTimestamp":"2023-09-20T11:54:19.552Z",
+        "nhsNumber":"9729734925",
+        "conversationId":"59B118DB-70C3-4883-8A60-5E725981F003",
+        "migrationStatus":"COMPLETE",
+        "fromAsid":"858000001001",
+        "toAsid":"200000001908",
+        "fromOdsCode":"C88046",
+        "toOdsCode":"B84012"
+    },
+    {
+        "initialRequestTimestamp":"2023-09-20T12:18:10.364Z",
+        "actionCompletedTimestamp":"2023-09-20T12:18:13.923Z",
+        "nhsNumber":"9729735336",
+        "conversationId":"C2A59970-57AF-11EE-AFE6-CD607DC58E3B",
+        "migrationStatus":"FAILED_INCUMBENT",
+        "fromAsid":"200000000169",
+        "toAsid":"200000001908",
+        "fromOdsCode":"P84009",
+        "toOdsCode":"B84012"
+    }
+]
+```
+
 ## How to run tests
 
 **Warning**: Gradle uses a [Build Cache](https://docs.gradle.org/current/userguide/build_cache.html) to re-use compile and
