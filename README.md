@@ -419,18 +419,18 @@ Content-Type: application/json
 The response will contain a JSON array of the following:
 
 ### EhrStatusRequest
+| Field name               | Description                                                                                                     | Data type     | Possible values                                                             | nullable |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------- | -------- |
+| initialRequestTimestamp  | The date and time of the original request.                                                                      | ISO-8601      |                                                                             | False    |
+| actionCompletedTimestamp | The date and time of when the transfer completed.                                                               | ISO-8601      |                                                                             | False    |
+| nhsNumber                |                                                                                                                 | string        |                                                                             | False    |
+| conversationId           |                                                                                                                 | string        |                                                                             | False    |
+| fromAsid                 |                                                                                                                 | string        |                                                                             | False    |
+| toAsid                   |                                                                                                                 | string        |                                                                             | False    |
+| fromOdsCode              |                                                                                                                 | string        |                                                                             | False    |
+| toOdsCode                |                                                                                                                 | string        |                                                                             | False    |
+| migrationStatus          | The current state of the transfer, a status of COMPLETE_WITH_ISSUES is given if placeholder documents were sent | string / enum | COMPLETE <br/> COMPLETE_WITH_ISSUES <br/> FAILED_NME <br/> FAILED_INCUMBENT | False    |
 
-| Field name               | Description                                                                                                     | Data type     | Possible values                                                                               | nullable |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------- | -------- |
-| initialRequestTimestamp  | The date and time of the original request.                                                                      | ISO-8601      |                                                                                               | False    |
-| actionCompletedTimestamp | The date and time of when the transfer completed.                                                               | ISO-8601      |                                                                                               | False    |
-| nhsNumber                |                                                                                                                 | string        |                                                                                               | False    |
-| conversationId           |                                                                                                                 | string        |                                                                                               | False    |
-| fromAsid                 |                                                                                                                 | string        |                                                                                               | False    |
-| toAsid                   |                                                                                                                 | string        |                                                                                               | False    |
-| fromOdsCode              |                                                                                                                 | string        |                                                                                               | False    |
-| toOdsCode                |                                                                                                                 | string        |                                                                                               | False    |
-| migrationStatus          | The current state of the transfer, a status of COMPLETE_WITH_ISSUES is given if placeholder documents were sent | string / enum | COMPLETE <br/> COMPLETE_WITH_ISSUES <br/> FAILED_NME <br/> FAILED_INCUMBENT <br/> IN_PROGRESS | False    |
 
 #### Example EhrStatusRequest response
 
