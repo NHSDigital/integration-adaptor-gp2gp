@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.11] - 2023-09-26
+
+### Added
+
+- Document "/requests" method.(#526)
+- 1hr timeline to pipeline.(#525)
+
+### Fixed
+
+- GP2GP bug - Fixed plain text file attachment being transferred into TPP as Base64Encoded. (#523)
+
 ## [1.5.10] - 2023-08-30
 
 ### Added
