@@ -34,8 +34,7 @@ public class JmsListenerErrorHandler implements ErrorHandler {
             return;
         }
 
-        Class<? extends Throwable> classOfCause = cause.getClass();
-        LOGGER.error("Caught Error cause of type: [{}], with message: [{}]", classOfCause.toString(), cause.getMessage());
+        LOGGER.error("Caught Error cause of type: [{}], with message: [{}]", cause.getClass().toString(), cause.getMessage());
 
         // Retry these specific exceptions continuously until they stop happening.
         // These retries will happen until the associated transfer times out.
