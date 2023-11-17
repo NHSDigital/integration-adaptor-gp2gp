@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Guard against possible null pointer error in exception handler.
+
 ## [1.5.11] - 2023-09-26
 
 ### Fixed
