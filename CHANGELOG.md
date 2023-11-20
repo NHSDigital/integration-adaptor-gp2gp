@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added 
+
+- Added functionality for response type: NO_RELATIONSHIP (403) to produce NACK with code 19.
+
+### Removed
+
+- Removed functionality for response type: NOT_AUTHORISED (401) to produce NACK with code 19.
+
 ### Fixed
 
 - Guard against possible null pointer error in exception handler.
