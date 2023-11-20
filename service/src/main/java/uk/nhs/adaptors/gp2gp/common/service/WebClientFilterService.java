@@ -135,7 +135,6 @@ public class WebClientFilterService {
     }
 
     private static int getErrorCode(HttpStatus statusCode, List<String> codes) {
-        LOGGER.debug("Status Code: " + statusCode);
         switch (statusCode) {
             case NOT_FOUND:
                 if (codes.contains(PATIENT_NOT_FOUND_STATUS)) {
@@ -171,12 +170,10 @@ public class WebClientFilterService {
             default:
                 return NACK_ERROR_20;
         }
-        return NACK_ERROR_18;
+        return NACK_ERROR_20;
     }
 
     private static Mono<ClientResponse> getMonoError(int errorCode, String exceptionMessage) {
-        LOGGER.debug("Error Code" + errorCode);
-        LOGGER.debug("Exception" + exceptionMessage);
         switch (errorCode) {
             case NACK_ERROR_6:
                 return Mono.error(new GpConnectNotFoundException(exceptionMessage));
