@@ -14,11 +14,10 @@
           {
             "system": "https://fhir.nhs.uk/STU3/CodeSystem/Spine-ErrorOrWarningCode-1",
             "code": "NO_RELATIONSHIP",
-            "display": "PATIENT_NOT_FOUND"
+            "display": "No legitimate relationship exists with this patient"
           }
         ]
-      },
-      "diagnostics": "No legitimate relationship exists with this patient"
+      }
     }
   ]
 }
