@@ -15,4 +15,11 @@ public class EhrStatusConstants {
     public static final String GPC_ACCESS_DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/documents/fhir/Binary/%s";
     public static final String MESSAGE_ID = "DFF5321C-C6EA-4AC9-942F-0F6621CC0BFC";
     public static final String DOCUMENT_NAME = "Discharge Summary";
+
+    public static final String NME_NACK_CODE = "06";
+    public static final String NME_NACK_DISPLAY = "Patient not at surgery.";
+    public static final String NME_NACK_TYPE = "AE";
+    public static final String INCUMBENT_NACK_CODE = "99";
+    public static final String INCUMBENT_NACK_DISPLAY = "Unexpected condition.";
+    public static final String ACK_TYPE = "AA";
 }

@@ -1,9 +1,14 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import com.mongodb.client.result.UpdateResult;
+import static java.lang.String.format;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static org.springframework.util.CollectionUtils.isEmpty;
+
+import java.time.Instant;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -13,6 +18,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import com.mongodb.client.result.UpdateResult;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.exception.GeneralProcessingException;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -21,16 +30,6 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgeme
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
-
-import java.time.Instant;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.lang.String.format;
-
-import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
 @Slf4j
@@ -439,6 +438,35 @@ public class EhrExtractStatusService {
     public EhrExtractStatus updateEhrExtractStatusCommonForExternalEhrExtract(SendDocumentTaskDefinition taskDefinition,
         List<String> messageIds) {
         return updateEhrExtractStatusAttachmentSentToMhs(taskDefinition, messageIds);
+    }
+
+    public List<EhrExtractStatus> findInProgressTransfers() {
+
+        var failedNme = new Criteria();
+        failedNme.andOperator(
+            Criteria.where("ackPending.typeCode").is("AE"),
+            Criteria.where("error").exists(true));
+
+        var complete = new Criteria();
+        complete.andOperator(
+            Criteria.where("ackPending.typeCode").is("AA"),
+            Criteria.where("ackToRequester.typeCode").is("AA"),
+            Criteria.where("error").exists(false),
+            Criteria.where("ehrReceivedAcknowledgement.conversationClosed").exists(true),
+            Criteria.where("ehrReceivedAcknowledgement.errors").exists(false)
+        );
+
+        var failedIncumbent = new Criteria();
+        failedIncumbent.andOperator(
+            Criteria.where("ehrReceivedAcknowledgement.errors").exists(true)
+        );
+
+        var queryCriteria = new Criteria();
+        queryCriteria.norOperator(failedNme, complete, failedIncumbent);
+
+        var query = Query.query(queryCriteria);
+
+        return mongoTemplate.find(query, EhrExtractStatus.class);
     }
 
     private EhrExtractStatus updateEhrExtractStatusDocumentSentToMHS(SendDocumentTaskDefinition taskDefinition, List<String> messageIds) {
