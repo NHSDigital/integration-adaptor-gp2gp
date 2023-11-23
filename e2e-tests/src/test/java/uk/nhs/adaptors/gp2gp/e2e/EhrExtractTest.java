@@ -60,6 +60,7 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_THREE_SMALL_NORMAL_DOCUMENTS = "9690937420";
     private static final String NHS_NUMBER_LARGE_PAYLOAD = "9690937421";
     private static final String NHS_NUMBER_LARGE_ATTACHMENT_DOCX = "9388098434";
+    private static final String NHS_NUMBER_NO_RELATIONSHIP = "9600000010";
     private static final String NHS_NUMBER_PATIENT_NOT_FOUND = "9600000009";
     private static final String NHS_NUMBER_INVALID_DEMOGRAPHIC = "9600000002";
     private static final String NHS_NUMBER_INVALID_RESOURCE = "9600000003";
@@ -103,6 +104,7 @@ public class EhrExtractTest {
     private final static String NACK_CODE_PATIENT_NOT_FOUND = "06";
     private final static String NACK_CODE_INVALID = "19";
     private final static String NACK_CODE_GP_CONNECT_ERROR = "20";
+    private final static String NACK_CODE_NO_RELATIONSHIP = "19";
     private final static String NACK_MESSAGE_REQUEST_NOT_WELL_FORMED = "An error occurred processing the initial EHR request";
     private final static String NACK_MESSAGE_NOT_FOUND = "Patient not at surgery.";
 
@@ -161,6 +163,11 @@ public class EhrExtractTest {
             .hasXPath("/MCCI_IN010000UK13/acknowledgement[@type='Acknowledgement' and @typeCode='AE']/acknowledgementDetail[@type='AcknowledgementDetail' and @typeCode='ER']/code[@code='18']".replace("/", XML_NAMESPACE));
         XmlAssert.assertThat(requestJournal.get(0).getPayload())
             .hasXPath("/MCCI_IN010000UK13/ControlActEvent/reason/justifyingDetectedIssueEvent/code[@code='18']".replace("/", XML_NAMESPACE));
+    }
+
+    @Test
+    public void When_GPCRespondsWithNoRelationship_Expect_NackWithCode19() throws Exception {
+        checkNhsNumberTriggersNackWithCode(NACK_CODE_NO_RELATIONSHIP, NHS_NUMBER_NO_RELATIONSHIP);
     }
 
     @Test

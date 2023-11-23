@@ -1,12 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
-
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.UNAUTHORIZED;
-import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +16,6 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -39,50 +33,68 @@ public class WebClientFilterService {
 
     private static final String REQUEST_EXCEPTION_MESSAGE = "The following error occurred during %s request: %s";
     private static final String MAX_ATTACHMENTS_REGEX = ".*'external_attachments': \\[[^]]*Longer than maximum length[^]]*].*";
+    private static final String PATIENT_NOT_FOUND_STATUS = "PATIENT_NOT_FOUND";
+    private static final String NO_RELATIONSHIP_STATUS = "NO_RELATIONSHIP";
+    private static final String INVALID_NHS_NUMBER_STATUS = "INVALID_NHS_NUMBER";
+    private static final String INVALID_PATIENT_DEMOGRAPHICS_STATUS = "INVALID_PATIENT_DEMOGRAPHICS";
+    private static final String INVALID_RESOURCE_STATUS = "INVALID_RESOURCE";
+    private static final String BAD_REQUEST_STATUS = "BAD_REQUEST";
+    private static final String INVALID_PARAMETER_STATUS = "INVALID_PARAMETER";
+    private static final String INTERNAL_SERVER_ERROR_STATUS = "INTERNAL_SERVER_ERROR";
+
+    private static final int NACK_ERROR_6 = 6;
+    private static final int NACK_ERROR_18 = 18;
+    private static final int NACK_ERROR_19 = 19;
+    private static final int NACK_ERROR_20 = 20;
 
     private static final Map<RequestType, Function<String, Exception>> REQUEST_TYPE_TO_EXCEPTION_MAP = Map.of(
-        RequestType.GPC, GpConnectException::new);
+            RequestType.GPC, GpConnectException::new);
 
     public enum RequestType {
         GPC, MHS_OUTBOUND
     }
 
     public static void addWebClientFilters(
-        List<ExchangeFilterFunction> filters, RequestType requestType, HttpStatus expectedSuccessHttpStatus) {
+            List<ExchangeFilterFunction> filters,
+            RequestType requestType,
+            HttpStatus expectedSuccessHttpStatus) {
 
         // filters are executed in reversed order
         filters.add(errorHandling(requestType, expectedSuccessHttpStatus));
         filters.add(logRequest());
         filters.add(logResponse());
-        filters.add(mdc()); // this will be executed as the first one - always needs to come first
+        // this will be executed as the first one - always needs to come first
+        filters.add(mdc());
     }
 
     private static ExchangeFilterFunction mdc() {
         var mdc = MDC.getCopyOfContextMap();
         return (request, next) -> next.exchange(request)
-            .doOnNext(value -> {
-                if (mdc != null) {
-                    MDC.setContextMap(mdc);
-                }
-            });
+                .doOnNext(value -> {
+                    if (mdc != null) {
+                        MDC.setContextMap(mdc);
+                    }
+                });
     }
 
     private static ExchangeFilterFunction errorHandling(RequestType requestType, HttpStatus httpStatus) {
         return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
-            clientResponse.statusCode();
-            if (clientResponse.statusCode().equals(httpStatus)) {
-                LOGGER.info(requestType + " request successful status_code: {}", clientResponse.statusCode());
+            var statusCode = clientResponse.statusCode();
+            if (statusCode.equals(httpStatus)) {
+                LOGGER.info(requestType + " request successful status_code: {}", statusCode.value());
                 return Mono.just(clientResponse);
             }
             if (requestType.equals(RequestType.GPC)) {
                 return getErrorException(clientResponse, requestType);
             }
-            if (requestType.equals(RequestType.MHS_OUTBOUND) && clientResponse.statusCode().is5xxServerError()) {
-                return Mono.error(new MhsServerErrorException("MHS responded with status code " + clientResponse.statusCode().value()));
+            if (requestType.equals(RequestType.MHS_OUTBOUND) && statusCode.is5xxServerError()) {
+                return Mono.error(new MhsServerErrorException("MHS responded with status code " + statusCode.value()));
             }
-            if (requestType.equals(RequestType.MHS_OUTBOUND) && clientResponse.statusCode().value() == BAD_REQUEST.value()) {
-                return clientResponse.bodyToMono(String.class)
-                    .flatMap(WebClientFilterService::handle400FromMhsOutbound);
+            if (requestType.equals(RequestType.MHS_OUTBOUND) && statusCode.value() == BAD_REQUEST.value()) {
+
+                return clientResponse
+                        .bodyToMono(String.class)
+                        .flatMap(WebClientFilterService::handle400FromMhsOutbound);
             }
 
             return getResponseError(clientResponse, requestType);
@@ -96,7 +108,7 @@ public class WebClientFilterService {
 
         if (matcher.find()) {
             return Mono.error(
-                new MaximumExternalAttachmentsException(String.format(REQUEST_EXCEPTION_MESSAGE, RequestType.MHS_OUTBOUND, body))
+                    new MaximumExternalAttachmentsException(String.format(REQUEST_EXCEPTION_MESSAGE, RequestType.MHS_OUTBOUND, body))
             );
         }
 
@@ -106,56 +118,86 @@ public class WebClientFilterService {
     private static Mono<ClientResponse> getErrorException(ClientResponse clientResponse, RequestType requestType) {
 
         return clientResponse.bodyToMono(String.class).flatMap(outcome -> {
-            ObjectMapper objectMapper = new ObjectMapper();
+            var exceptionMessage = String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome);
+
             try {
-                JsonNode outcomeJson = objectMapper.readTree(outcome);
-                var findValue = outcomeJson.findValues("code");
-
-                boolean patientNotFound = findValue.stream().anyMatch(code -> code.textValue().equals("PATIENT_NOT_FOUND"));
-                boolean notAuthorized = findValue.stream().anyMatch(code -> code.textValue().equals("NOT_AUTHORISED"));
-                boolean invalidNhsNumber = findValue.stream().anyMatch(code -> code.textValue().equals("INVALID_NHS_NUMBER"));
-                boolean invalidPatientDemographic = findValue.stream().anyMatch(
-                    code -> code.textValue().equals("INVALID_PATIENT_DEMOGRAPHICS"));
-                boolean invalidResource = findValue.stream().anyMatch(code -> code.textValue().equals("INVALID_RESOURCE"));
-                boolean badRequest = findValue.stream().anyMatch(code -> code.textValue().equals("BAD_REQUEST"));
-                boolean invalidParameter = findValue.stream().anyMatch(code -> code.textValue().equals("INVALID_PARAMETER"));
-                boolean internalServErr = findValue.stream().anyMatch(code -> code.textValue().equals("INTERNAL_SERVER_ERROR"));
-
+                var objectMapper = new ObjectMapper();
+                var outcomeJson = objectMapper.readTree(outcome);
+                var codes = outcomeJson.findValuesAsText("code");
                 var statusCode = clientResponse.statusCode();
+                var errorCode = getErrorCode(statusCode, codes);
 
-                if (statusCode.equals(NOT_FOUND) && patientNotFound) {
-                    //error 6
-                    return Mono.error(new GpConnectNotFoundException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-                } else if (statusCode.equals(UNAUTHORIZED) && notAuthorized || statusCode.equals(BAD_REQUEST) && invalidNhsNumber) {
-                    //error 19
-                    return Mono.error(new GpConnectInvalidException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-                } else if (statusCode.equals(BAD_REQUEST) && invalidPatientDemographic
-                    || (statusCode.equals(INTERNAL_SERVER_ERROR) && internalServErr)) {
-                    //error 20
-                    return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-                } else if (statusCode.equals(UNPROCESSABLE_ENTITY) && invalidResource
-                    || statusCode.equals(BAD_REQUEST) && badRequest
-                    || statusCode.equals(UNPROCESSABLE_ENTITY) && invalidParameter) {
-                    //error 18
-                    return Mono.error(new EhrRequestException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
-                }
-                //default error 20
-                return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
+                return getMonoError(errorCode, exceptionMessage);
             } catch (JsonProcessingException e) {
-                return Mono.error(new GpConnectException(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome)));
+                return Mono.error(new GpConnectException(exceptionMessage));
             }
         });
     }
 
+    private static int getErrorCode(HttpStatus statusCode, List<String> codes) {
+        switch (statusCode) {
+            case NOT_FOUND:
+                if (codes.contains(PATIENT_NOT_FOUND_STATUS)) {
+                    return NACK_ERROR_6;
+                }
+                break;
+            case FORBIDDEN:
+                if (codes.contains(NO_RELATIONSHIP_STATUS)) {
+                    return NACK_ERROR_19;
+                }
+                break;
+            case BAD_REQUEST:
+                if (codes.contains(INVALID_NHS_NUMBER_STATUS)) {
+                    return NACK_ERROR_19;
+                } else if (codes.contains(INVALID_PATIENT_DEMOGRAPHICS_STATUS)) {
+                    return NACK_ERROR_20;
+                } else if (codes.contains(BAD_REQUEST_STATUS)) {
+                    return NACK_ERROR_18;
+                }
+                break;
+            case INTERNAL_SERVER_ERROR:
+                if (codes.contains(INTERNAL_SERVER_ERROR_STATUS)) {
+                    return NACK_ERROR_20;
+                }
+                break;
+            case UNPROCESSABLE_ENTITY:
+                if (codes.contains(INVALID_RESOURCE_STATUS)
+                        || codes.contains(BAD_REQUEST_STATUS)
+                        || codes.contains(INVALID_PARAMETER_STATUS)) {
+                    return NACK_ERROR_18;
+                }
+                break;
+            default:
+                return NACK_ERROR_20;
+        }
+        return NACK_ERROR_20;
+    }
+
+    private static Mono<ClientResponse> getMonoError(int errorCode, String exceptionMessage) {
+        switch (errorCode) {
+            case NACK_ERROR_6:
+                return Mono.error(new GpConnectNotFoundException(exceptionMessage));
+            case NACK_ERROR_19:
+                return Mono.error(new GpConnectInvalidException(exceptionMessage));
+            case NACK_ERROR_18:
+                return Mono.error(new EhrRequestException(exceptionMessage));
+            case NACK_ERROR_20:
+            default:
+                return Mono.error(new GpConnectException(exceptionMessage));
+        }
+    }
+
     private static Mono<ClientResponse> getResponseError(ClientResponse clientResponse, RequestType requestType) {
         var exceptionBuilder = REQUEST_TYPE_TO_EXCEPTION_MAP
-            .getOrDefault(requestType, InvalidOutboundMessageException::new);
+                .getOrDefault(requestType, InvalidOutboundMessageException::new);
 
-        return clientResponse.bodyToMono(String.class)
-            .flatMap(operationalOutcome -> Mono.error(
-                    exceptionBuilder.apply(String.format(REQUEST_EXCEPTION_MESSAGE, requestType, operationalOutcome))
-                )
-            );
+        return clientResponse
+                .bodyToMono(String.class)
+                .flatMap(operationalOutcome -> {
+                    var exceptionMessage = String.format(REQUEST_EXCEPTION_MESSAGE, requestType, operationalOutcome);
+
+                    return Mono.error(exceptionBuilder.apply(exceptionMessage));
+                });
     }
 
     private static ExchangeFilterFunction logRequest() {
@@ -179,7 +221,6 @@ public class WebClientFilterService {
                 LOGGER.debug("Response: {} {} \n{}",
                     response.statusCode().value(), response.statusCode().getReasonPhrase(), headers);
             }
-
             return Mono.just(response);
         });
     }
