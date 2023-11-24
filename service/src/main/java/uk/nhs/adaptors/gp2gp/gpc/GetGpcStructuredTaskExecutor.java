@@ -287,7 +287,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 .length(compressedAndEncodedEhrExtractSize)
                 .compressed(true)
                 .largeAttachment(compressedAndEncodedEhrExtractSize > gp2gpConfiguration.getLargeAttachmentThreshold())
-                .originalBase64(true) // always true for compressed base64-encoded large ehr extract
+                .originalBase64(false)
                 .domainData(SKELETON_ATTACHMENT)
                 .build()
                 .toString())

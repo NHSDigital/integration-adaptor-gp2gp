@@ -338,7 +338,7 @@ public class EhrExtractTest {
             "ContentType=text/xml",
             "Compressed=Yes",
             "LargeAttachment=No",
-            "OriginalBase64=Yes",
+            "OriginalBase64=No",
             "Length=",
             "DomainData=\"X-GP2GP-Skeleton: Yes\"");
 
