@@ -10,7 +10,7 @@ FROM build AS package
 
 RUN gradle --build-cache bootJar
 
-FROM adoptopenjdk:11-jre-hotspot
+FROM eclipse-temurin:11-jre-focal
 
 EXPOSE 8080
 
