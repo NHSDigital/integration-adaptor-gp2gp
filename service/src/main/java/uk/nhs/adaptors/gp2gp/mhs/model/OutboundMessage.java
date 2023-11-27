@@ -110,7 +110,7 @@ public class OutboundMessage {
                         Optional.ofNullable(documentId)
                         .map(docId -> "Length=${" + LENGTH_PLACEHOLDER + docId + "}")
                         .orElse(StringUtils.EMPTY)),
-                Optional.ofNullable(domainData).map(value -> "DomainData=" + value).orElse(StringUtils.EMPTY));
+                Optional.ofNullable(domainData).map(value -> "DomainData=\"" + value + "\"").orElse(StringUtils.EMPTY));
             // all this below to pretty indent on MHS side
             return descriptionElements
                 .filter(StringUtils::isNotBlank)
