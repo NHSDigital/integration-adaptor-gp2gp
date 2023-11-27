@@ -6,17 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added 
+### Changed 
 
-- Added functionality for response type: NO_RELATIONSHIP (403) to produce NACK with code 19.
+- Previously, a NOT_AUTHORISED (401) response from [`/$gpc.migratestructuredrecord`][migrate-structured-record] would generate a NACK with code 19.
+  This behaviour has now been removed and instead a response type of NO_RELATIONSHIP (403) will produce NACK with code 19.
 
-### Removed
-
-- Removed functionality for response type: NOT_AUTHORISED (401) to produce NACK with code 19.
+[migrate-structured-record]: https://developer.nhs.uk/apis/gpconnect-1-6-0/accessrecord_structured_development_migrate_patient_record.html
 
 ### Fixed
 
 - Guard against possible null pointer error in exception handler.
+- Fix errors within the generation of compressed EHR Extracts (happens when the record becomes >5MB) which was causing
+  SystmOne to reject the transfer.  
 
 ## [1.5.11] - 2023-09-26
 
