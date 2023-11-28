@@ -338,9 +338,9 @@ public class EhrExtractTest {
             "ContentType=text/xml",
             "Compressed=Yes",
             "LargeAttachment=No",
-            "OriginalBase64=Yes",
+            "OriginalBase64=No",
             "Length=",
-            "DomainData=X-GP2GP-Skeleton: Yes");
+            "DomainData=\"X-GP2GP-Skeleton: Yes\"");
 
         var documentReferenceXPath = String
             .format(DOCUMENT_REFERENCE_XPATH_TEMPLATE, documentId)

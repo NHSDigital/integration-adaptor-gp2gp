@@ -45,6 +45,6 @@ class AttachmentDescriptionTest {
             + "ContentType=some_other_content_type "
             + "Compressed=Yes LargeAttachment=Yes "
             + "OriginalBase64=Yes Length=123 "
-            + "DomainData=some_other_domain_data");
+            + "DomainData=\"some_other_domain_data\"");
     }
 }
