@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added 
 
 - Added functionality for response type: NO_RELATIONSHIP (403) to produce NACK with code 19.
-- Added more memory allocation to E2E tests and enforce G1 GC usage for better performance
+- Added more memory allocation to E2E tests
 
 ### Removed
 
