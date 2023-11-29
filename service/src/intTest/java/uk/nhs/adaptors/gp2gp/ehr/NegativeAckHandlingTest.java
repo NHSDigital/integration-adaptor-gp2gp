@@ -123,20 +123,20 @@ public class NegativeAckHandlingTest {
 
     @Test
     public void When_FailedByRequestor_With_ReasonCode31AfterContinue_Expect_CorrectMigrationStatus() {
-        sendRequestToQueue();
-        await().until(() -> processDetectionService.awaitingContinue(conversationId));
+        assertEhrNackIsHandledCorrectlyAfterContinue("31",
+            "The overall EHR Extract has been rejected because one or more attachments via Large Messages were not received.");
+    }
 
-        sendContinueToQueue();
-        await().until(() -> processDetectionService.awaitingAck(conversationId));
+    @Test
+    public void When_FailedByRequestor_With_ReasonCode11AfterContinue_Expect_CorrectMigrationStatus() {
+        assertEhrNackIsHandledCorrectlyAfterContinue("11",
+            "Failed to successfully integrate EHR Extract.");
+    }
 
-        String ehrMessageId = extractStatusService.fetchEhrExtractMessageId(conversationId).orElseThrow();
-        sendNackToQueue("31", "The overall EHR Extract has been rejected because one or more attachments via " +
-            "Large Messages were not received.", ehrMessageId);
-
-        await().until(() -> processDetectionService.processFailed(conversationId));
-
-        EhrStatus ehrStatus = retrieveEhrStatus();
-        assertThat(ehrStatus.getMigrationStatus()).isEqualTo(FAILED_INCUMBENT);
+    @Test
+    public void When_FailedByRequestor_With_ReasonCode15AfterContinue_Expect_CorrectMigrationStatus() {
+        assertEhrNackIsHandledCorrectlyAfterContinue("15",
+            "A-B-A EHR Extract Received and Stored As Suppressed Record");
     }
 
     @Test
@@ -153,6 +153,22 @@ public class NegativeAckHandlingTest {
     @Test
     public void When_FailedByRequestor_With_COPCNackWithReasonCode30_Expect_CorrectMigrationStatus() {
         assertLargeMessageCOPCNackIsHandledCorrectly("30", "Large Message Re-assembly failure");
+    }
+
+    private void assertEhrNackIsHandledCorrectlyAfterContinue(String reasonCode, String reasonDisplay) {
+        sendRequestToQueue();
+        await().until(() -> processDetectionService.awaitingContinue(conversationId));
+
+        sendContinueToQueue();
+        await().until(() -> processDetectionService.awaitingAck(conversationId));
+
+        String ehrMessageId = extractStatusService.fetchEhrExtractMessageId(conversationId).orElseThrow();
+        sendNackToQueue(reasonCode, reasonDisplay, ehrMessageId);
+
+        await().until(() -> processDetectionService.processFailed(conversationId));
+
+        EhrStatus ehrStatus = retrieveEhrStatus();
+        assertThat(ehrStatus.getMigrationStatus()).isEqualTo(FAILED_INCUMBENT);
     }
 
     private void assertEhrNackIsHandledCorrectlyBeforeContinue(String reasonCode, String reasonDisplay) {
