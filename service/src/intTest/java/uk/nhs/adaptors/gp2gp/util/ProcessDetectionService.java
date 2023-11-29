@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 @Component
 public class ProcessDetectionService {
@@ -77,7 +78,34 @@ public class ProcessDetectionService {
         }
         var finalDbExtract = finalDbExtractOptional.orElseThrow();
         var extractError = Optional.ofNullable(finalDbExtract.getError());
+        var receivedEhrAck = Optional.ofNullable(finalDbExtract.getEhrReceivedAcknowledgement());
+        boolean hasIncumbentNack = receivedEhrAck
+            .map(ehrAck -> ehrAck.getErrors().size() > 0)
+            .orElse(false);
 
-        return extractError.isPresent();
+        return extractError.isPresent() || hasIncumbentNack;
+    }
+
+    public boolean nackReceived(String conversationId) {
+        var dbExtractOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
+        if (dbExtractOptional.isEmpty()) {
+            return false;
+        }
+
+        var dbExtract = dbExtractOptional.orElseThrow();
+        var ackHistory = Optional.ofNullable(dbExtract.getAckHistory());
+        if (ackHistory.isEmpty()) {
+            return false;
+        }
+
+        var receivedAcks = ackHistory
+            .map(EhrExtractStatus.AckHistory::getAcks)
+            .orElseThrow();
+
+        var negativeAck = receivedAcks.stream()
+            .filter(ack -> ack.getErrors().size() > 0)
+            .findFirst();
+
+        return negativeAck.isPresent();
     }
 }

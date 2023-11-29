@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eb="http://www.oasis-open.org/committees/ebxml-msg/schema/msg-header-2_0.xsd" xmlns:hl7ebxml="urn:hl7-org:transport/ebxml/DSTUv1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3c.org/2001/XML-Schema-Instance">
+	<SOAP:Header>
+		<eb:MessageHeader SOAP:mustUnderstand="1" eb:version="2.0">
+			<eb:From>
+				<eb:PartyId eb:type="urn:nhs:names:partyType:ocs+serviceInstance">YGM24-820388</eb:PartyId>
+			</eb:From>
+			<eb:To>
+				<eb:PartyId eb:type="urn:nhs:names:partyType:ocs+serviceInstance">YGMYW-822993</eb:PartyId>
+			</eb:To>
+			<eb:CPAId>2b32a9287ec17f0f1726</eb:CPAId>
+			<eb:ConversationId>{{conversationId}}</eb:ConversationId>
+			<eb:Service>urn:nhs:names:services:gp2gp</eb:Service>
+			<eb:Action>MCCI_IN010000UK13</eb:Action>
+			<eb:MessageData>
+				<eb:MessageId>{{messageId}}</eb:MessageId>
+				<eb:Timestamp>2023-11-28T09:45:38Z</eb:Timestamp>
+				<eb:TimeToLive>2023-11-28T09:55:38Z</eb:TimeToLive>
+			</eb:MessageData>
+			<eb:DuplicateElimination>always</eb:DuplicateElimination>
+		</eb:MessageHeader>
+		<eb:AckRequested SOAP:actor="urn:oasis:names:tc:ebxml-msg:actor:nextMSH" SOAP:mustUnderstand="1" eb:signed="false" eb:version="2.0"/>
+	</SOAP:Header>
+	<SOAP:Body>
+		<eb:Manifest SOAP:mustUnderstand="1" eb:version="2.0">
+			<eb:Reference xlink:href="cid:payload@tpp-uk.com/SystmOne/GP2GP1.1A">
+				<eb:Schema eb:location="http://www.nhsia.nhs.uk/schemas/HL7-Message.xsd" eb:version="2.0"/>
+				<hl7ebxml:Payload encoding="XML" style="HL7" version="3.0"/>
+			</eb:Reference>
+		</eb:Manifest>
+	</SOAP:Body>
+</SOAP:Envelope>
