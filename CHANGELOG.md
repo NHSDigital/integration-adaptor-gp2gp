@@ -17,7 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Guard against possible null pointer error in exception handler.
 - Fix errors within the generation of compressed EHR Extracts (happens when the record becomes >5MB) which was causing
-  SystmOne to reject the transfer.  
+  SystmOne to reject the transfer. 
+- Fix logging message that incorrectly stated a conversation was closed on receipt of a negative ack referencing an 
+attachment
 
 ## [1.5.11] - 2023-09-26
 
