@@ -199,8 +199,8 @@ public class NegativeAckHandlingTest {
         assertThat(ehrStatus.getMigrationStatus()).isEqualTo(IN_PROGRESS);
 
         String ehrMessageId = extractStatusService.fetchEhrExtractMessageId(conversationId).orElseThrow();
-        sendNackToQueue("31", "The overall EHR Extract has been rejected because one or more attachments via " +
-            "Large Messages were not received.", ehrMessageId);
+        sendNackToQueue("31", "The overall EHR Extract has been rejected because one or more attachments via "
+            + "Large Messages were not received.", ehrMessageId);
 
         await().until(() -> processDetectionService.processFailed(conversationId));
 
