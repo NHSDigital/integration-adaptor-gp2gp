@@ -7,10 +7,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,7 +43,7 @@ public class MhsMockController {
     private final MDCService mdcService;
     private final HttpHeaders responseHeaders = new HttpHeaders();
 
-    private static final Map<String, List<String>> REQUEST_JOURNALS_MAP = new HashMap<>();
+    private static final Map<String, List<String>> REQUEST_JOURNALS_MAP = new ConcurrentHashMap<>();
 
     @GetMapping(value = "/mock-mhs-endpoint/healthcheck")
     @ResponseStatus(value = HttpStatus.OK)

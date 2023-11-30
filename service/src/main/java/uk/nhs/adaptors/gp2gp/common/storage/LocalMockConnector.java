@@ -3,14 +3,14 @@ package uk.nhs.adaptors.gp2gp.common.storage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class LocalMockConnector implements StorageConnector {
     private final Map<String, byte[]> storage;
 
     protected LocalMockConnector() {
-        storage = new HashMap<>();
+        storage = new ConcurrentHashMap<>();
     }
 
     @Override
