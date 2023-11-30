@@ -2,9 +2,9 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import lombok.AllArgsConstructor;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +21,7 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 @AllArgsConstructor
 public class IdMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
-    private final Map<String, MappedId> ids = new HashMap<>();
+    private final Map<String, MappedId> ids = new ConcurrentHashMap<>();
     private static final Set<String> NOT_ALLOWED = Set.of(
         ResourceType.Organization.name(),
         ResourceType.Practitioner.name(),

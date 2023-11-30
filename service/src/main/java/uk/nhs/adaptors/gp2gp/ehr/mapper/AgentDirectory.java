@@ -1,8 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -22,7 +22,7 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 @AllArgsConstructor
 public class AgentDirectory {
     private final RandomIdGeneratorService randomIdGeneratorService;
-    private final Map<AgentKey, String> agentDirectory = new HashMap<>();
+    private final Map<AgentKey, String> agentDirectory = new ConcurrentHashMap<>();
     private final Bundle inputBundle;
 
     public Set<Map.Entry<AgentKey, String>> getEntries() {
