@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Previously, a NOT_AUTHORISED (401) response from [`/$gpc.migratestructuredrecord`][migrate-structured-record] would generate a NACK with code 19.
   This behaviour has now been removed and instead a response type of NO_RELATIONSHIP (403) will produce NACK with code 19.
-- HashMap has been replaced with more efficient ConcurrentHashMap
+- Some data structures have been replaced with more efficient concurrent version to avoid any potential side effects
 
 [migrate-structured-record]: https://developer.nhs.uk/apis/gpconnect-1-6-0/accessrecord_structured_development_migrate_patient_record.html
 
