@@ -6,9 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-- Added more memory allocation to E2E tests
-
 ### Changed 
 - Previously, a NOT_AUTHORISED (401) response from [`/$gpc.migratestructuredrecord`][migrate-structured-record] would generate a NACK with code 19.
   This behaviour has now been removed and instead a response type of NO_RELATIONSHIP (403) will produce NACK with code 19.
