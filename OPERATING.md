@@ -2,6 +2,120 @@
 
 How to operate the GP2GP adaptor
 
+## Configuration
+
+The adaptor reads its configuration from environment variables. The following sections describe the environment variables
+used to configure the adaptor.
+
+Variables without a default value and not marked optional, *MUST* be defined for the adaptor to run.
+
+### General Configuration Options
+
+| Environment Variable     | Default                   | Description                                                                               |
+|--------------------------|---------------------------|-------------------------------------------------------------------------------------------|
+| GP2GP_SERVER_PORT        | 8080                      | The port on which the GP2GP Adapter will run.                                             |
+| GP2GP_ROOT_LOGGING_LEVEL | WARN                      | The logging level applied to the entire application (including third-party dependencies). |
+| GP2GP_LOGGING_LEVEL      | INFO                      | The logging level applied to GP2GP adaptor components.                                    |
+| GP2GP_LOGGING_FORMAT     | (*)                       | Defines how to format log events on stdout                                                |
+
+Logging levels are ane of: DEBUG, INFO, WARN, ERROR
+
+The level DEBUG **MUST NOT** be used when handling live patient data.
+
+(*) GP2GP API uses logback (http://logback.qos.ch/). The built-in [logback.xml](service/src/main/resources/logback.xml)
+defines the default log format. This value can be overridden using the `GP2GP_LOGGING_FORMAT` environment variable.
+You can provide an external `logback.xml` file using the `-Dlogback.configurationFile` JVM parameter.
+
+### Database Configuration Options
+
+The adaptor requires a Mongodb-compatible database to manage its internal state.
+
+| Environment Variable            | Default                   | Description                                                                                                                                                    |
+|---------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GP2GP_MONGO_URI                 | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.                                                                             |
+| GP2GP_MONGO_DATABASE_NAME       | gp2gp                     | The database name.                                                                                                                                             |
+| GP2GP_MONGO_HOST                |                           | The database host. Leave undefined if GP2GP_MONGO_URI is used.                                                                                                 |
+| GP2GP_MONGO_PORT                |                           | The database port. Leave undefined if GP2GP_MONGO_URI is used.                                                                                                 |
+| GP2GP_MONGO_USERNAME            |                           | The database username. Leave undefined if GP2GP_MONGO_URI is used.                                                                                             |
+| GP2GP_MONGO_PASSWORD            |                           | Mongo database password. Leave undefined if GP2GP_MONGO_URI is used.                                                                                           |
+| GP2GP_MONGO_OPTIONS             |                           | Mongodb URL encoded parameters for the connection string without a leading "?". Leave undefined if GP2GP_MONGO_URI is used.                                    |
+| GP2GP_MONGO_AUTO_INDEX_CREATION | true                      | (Optional) Should auto index for Mongo database be created.                                                                                                    |
+| GP2GP_MONGO_TTL                 | P7D                       | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations). |
+| GP2GP_COSMOS_DB_ENABLED         | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.                                                                |
+
+**Trust Store Configuration Options**
+
+You can configure a trust store with private CA certificates if required for TLS connections. The trust store does not
+replace Java's default trust store. At runtime the application adds these additional certificates to the default trust
+store. Only an s3:// url is currently supported, and the current use-case is to support AWS DocumentDb.
+
+| Environment Variable           | Default | Description                                                                           |
+|--------------------------------|---------|---------------------------------------------------------------------------------------|
+| GP2GP_SSL_TRUST_STORE_URL      |         | (Optional) URL of the trust store JKS. The only scheme currently supported is `s3://` |
+| GP2GP_SSL_TRUST_STORE_PASSWORD |         | (Optional) Password used to access the trust store                                    |
+
+### File Storage Configuration Options
+
+The adaptor uses AWS S3 or Azure Storage Blob to stage translated GP2GP HL7 and ebXML documents.
+
+| Environment Variable                  | Default   | Description                                                                         |
+|---------------------------------------|-----------|-------------------------------------------------------------------------------------|
+| GP2GP_STORAGE_TYPE                    | LocalMock | The type of storage solution. One of: S3, Azure, LocalMock                          |
+| GP2GP_STORAGE_CONTAINER_NAME          |           | The name of the Azure Storage container or Amazon S3 Bucket                         |
+| GP2GP_AZURE_STORAGE_CONNECTION_STRING |           | The connection string for Azure Blob Storage. Leave undefined if type is not Azure. |
+| AWS_ACCESS_KEY_ID                     |           | The access key for Amazon S3. Leave undefined if using an AWS instance role.        |
+| AWS_SECRET_ACCESS_KEY                 |           | The secret access key for Amazon S3. Leave undefined if using an AWS instance role. |
+| AWS_REGION                            |           | The region for Amazon S3. Leave undefined if using an AWS instance role.            |
+
+### Message Broker Configuration Options
+
+The adaptor requires an AMQP 1.0 compatible message broker to 1) receive inbound Spine messages via MHS adaptor and 2)
+queue its own internal asynchronous tasks
+
+| Environment Variable                  | Default               | Description                                                                                                                                                                                                       |
+|---------------------------------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GP2GP_AMQP_BROKERS                    | amqp://localhost:5672 | A comma-separated list of URLs to AMQP brokers (*)                                                                                                                                                                |
+| GP2GP_AMQP_USERNAME                   |                       | (Optional) username for the AMQP server                                                                                                                                                                           |
+| GP2GP_AMQP_PASSWORD                   |                       | (Optional) password for the AMQP server                                                                                                                                                                           |
+| GP2GP_AMQP_MAX_REDELIVERIES           | 3                     | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue                                                    |
+| GP2GP_TASK_QUEUE                      | gp2gpTaskQueue        | Defines name of internal taskQueue.                                                                                                                                                                               |
+| GP2GP_TASK_QUEUE_CONSUMER_CONCURRENCY | 1                     | Defines the number of concurrent task queue consumers in a single application. https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jms/annotation/JmsListener.html#concurrency-- |
+
+(*) Active/Standby: The first broker in the list always used unless there is an error, in which case the other URLs
+will be used. At least one URL is required.
+
+### GP Connect API Configuration Options
+
+The adaptor fetches patient records and documents with the GP Connect Consumer Adaptor
+([Github](https://github.com/nhsconnect/integration-adaptor-gpc-consumer) /
+[Dockerhub](https://hub.docker.com/repository/docker/nhsdev/nia-gpc-consumer-adaptor)) consuming the
+[GP Connect API](https://developer.nhs.uk/apis/gpconnect/).
+
+| Environment Variable           | Default                                           | Description                                                                                                                                            |
+|--------------------------------|---------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GP2GP_GPC_GET_URL              | http://localhost:8090/@ODS_CODE@/STU3/1/gpconnect | (*) The base URL of the GP Connect Consumer Adaptor. @ODS_CODE@ is a placeholder replaced in runtime with the actual ODS code of the loosing practice. |
+| GP2GP_GPC_STRUCTURED_FHIR_BASE | /fhir                                             | The path segment for Get Access Structured FHIR server                                                                                                 |
+| GP2GP_GPC_MAX_REQUEST_SIZE     | 150000000 (150 MB)                                | Buffer size when downloading data from GPC                                                                                                             |                                                                                                             
+
+(*) `GP2GP_GPC_GET_URL` could be set to the base URL of a GP Connect Producer for limited testing purposes
+
+### MHS Adaptor Configuration Options
+
+The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adaptor-mhs) to send/receive messages to/from Spine.
+
+| Environment Variable                         | Default                                 | Description                                                                                                                                                                                                              |
+|----------------------------------------------|-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GP2GP_MHS_OUTBOUND_URL                       | http://localhost:8081/mock-mhs-endpoint | URL to the MHS adaptor's outbound endpoint                                                                                                                                                                               |
+| GP2GP_MHS_INBOUND_QUEUE                      | inbound                                 | Name of the queue for MHS inbound                                                                                                                                                                                        |
+| GP2GP_MHS_INBOUND_QUEUE_CONSUMER_CONCURRENCY | 1                                       | Defines the number of concurrent mhs inbound queue consumers in a single application. https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jms/annotation/JmsListener.html#concurrency-- |
+
+
+### GP2GP Configuration Options
+
+| Environment Variable             | Default | Description                                                                                                                                                      |
+|----------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GP2GP_LARGE_ATTACHMENT_THRESHOLD | 4500000 | Value in bytes. Defines the max size of a single attachment sent to MHS. If a document is larger than this value, it's content will be split and sent in chunks. | 
+
 ## Adaptor Process
 
 TODO: Sequence diagram "user journey" of Spine messages, tasks, and GPCC requests
