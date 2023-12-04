@@ -34,6 +34,17 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         return GetGpcDocumentTaskDefinition.class;
     }
 
+    /**
+     * This task downloads the Document using the "Migrate a document" endpoint and stores it in S3.
+     *
+     * The "Migrate a document" request has a File Size limit of 100MB, otherwise it returns "NO_RECORD_FOUND".
+     *
+     * This task is very memory inefficient in its processing of the downloaded document.
+     * If this GP Connect limit were to be removed in future, particular care would be needed in ensuring that the
+     * adaptor could handle 1GB and beyond.
+     *
+     * https://developer.nhs.uk/apis/gpconnect-1-6-0/access_documents_development_migrate_patient_documents.html
+     */
     @Override
     @SneakyThrows
     public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
