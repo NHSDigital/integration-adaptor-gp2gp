@@ -8,10 +8,13 @@ import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_INCU
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.IN_PROGRESS;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -99,63 +102,41 @@ public class NegativeAckHandlingTest {
         inboundJmsTemplate.setReceiveTimeout(JMS_RECEIVE_TIMEOUT);
     }
 
-    @Test
-    public void When_FailedByRequestor_With_ReasonCode12BeforeContinue_Expect_CorrectMigrationStatus() {
-        assertEhrNackIsHandledCorrectlyBeforeContinue("12", "Duplicate EHR Extract received");
+    private static Stream<Arguments> preContinueReasonCodes() {
+        return Stream.of(
+            Arguments.of("12", "Duplicate EHR Extract received"),
+            Arguments.of("21", "EHR Extract message not well-formed or not able to be processed"),
+            Arguments.of("17", "A-B-A EHR Extract Received and rejected due to wrong record or wrong patient"),
+            Arguments.of("28", "Non A-B-A EHR Extract Received and rejected due to wrong record or wrong patient")
+        );
     }
 
-    @Test
-    public void When_FailedByRequestor_With_ReasonCode21BeforeContinue_Expect_CorrectMigrationStatus() {
-        assertEhrNackIsHandledCorrectlyBeforeContinue("21", "EHR Extract message not well-formed or not able to be processed");
+    @ParameterizedTest
+    @MethodSource(value = "preContinueReasonCodes")
+    public void When_FailedByRequestor_With_EhrNackBeforeContinue_Expect_FailedIncumbentStatus(String reasonCode, String reasonDisplay) {
+        sendRequestToQueue();
+        await().until(() -> processDetectionService.awaitingContinue(conversationId));
+        String ehrMessageId = extractStatusService.fetchEhrExtractMessageId(conversationId).orElseThrow();
+
+        sendNackToQueue(reasonCode, reasonDisplay, ehrMessageId);
+        await().until(() -> processDetectionService.processFailed(conversationId));
+
+        EhrStatus ehrStatus = retrieveEhrStatus();
+        assertThat(ehrStatus.getMigrationStatus()).isEqualTo(FAILED_INCUMBENT);
     }
 
-    @Test
-    public void When_FailedByRequestor_With_ReasonCode17BeforeContinue_Expect_CorrectMigrationStatus() {
-        assertEhrNackIsHandledCorrectlyBeforeContinue("17",
-            "A-B-A EHR Extract Received and rejected due to wrong record or wrong patient");
+    private static Stream<Arguments> postContinueReasonCodes() {
+        return Stream.of(
+            Arguments.of("31",
+                "The overall EHR Extract has been rejected because one or more attachments via Large Messages were not received."),
+            Arguments.of("11", "Failed to successfully integrate EHR Extract."),
+            Arguments.of("15", "A-B-A EHR Extract Received and Stored As Suppressed Record")
+        );
     }
 
-    @Test
-    public void When_FailedByRequestor_With_ReasonCode28BeforeContinue_Expect_CorrectMigrationStatus() {
-        assertEhrNackIsHandledCorrectlyBeforeContinue("28",
-            "Non A-B-A EHR Extract Received and rejected due to wrong record or wrong patient");
-    }
-
-    @Test
-    public void When_FailedByRequestor_With_ReasonCode31AfterContinue_Expect_CorrectMigrationStatus() {
-        assertEhrNackIsHandledCorrectlyAfterContinue("31",
-            "The overall EHR Extract has been rejected because one or more attachments via Large Messages were not received.");
-    }
-
-    @Test
-    public void When_FailedByRequestor_With_ReasonCode11AfterContinue_Expect_CorrectMigrationStatus() {
-        assertEhrNackIsHandledCorrectlyAfterContinue("11",
-            "Failed to successfully integrate EHR Extract.");
-    }
-
-    @Test
-    public void When_FailedByRequestor_With_ReasonCode15AfterContinue_Expect_CorrectMigrationStatus() {
-        assertEhrNackIsHandledCorrectlyAfterContinue("15",
-            "A-B-A EHR Extract Received and Stored As Suppressed Record");
-    }
-
-    @Test
-    public void When_FailedByRequestor_With_COPCNackWithReasonCode25_Expect_CorrectMigrationStatus() {
-        assertLargeMessageCOPCNackIsHandledCorrectly("25",
-            "Large messages rejected due to timeout duration reached of overall transfer");
-    }
-
-    @Test
-    public void When_FailedByRequestor_With_COPCNackWithReasonCode29_Expect_CorrectMigrationStatus() {
-        assertLargeMessageCOPCNackIsHandledCorrectly("29", "Large Message general failure");
-    }
-
-    @Test
-    public void When_FailedByRequestor_With_COPCNackWithReasonCode30_Expect_CorrectMigrationStatus() {
-        assertLargeMessageCOPCNackIsHandledCorrectly("30", "Large Message Re-assembly failure");
-    }
-
-    private void assertEhrNackIsHandledCorrectlyAfterContinue(String reasonCode, String reasonDisplay) {
+    @ParameterizedTest
+    @MethodSource(value = "postContinueReasonCodes")
+    public void When_FailedByRequestor_With_EhrNackAfterContinue_Expect_FailedIncumbentStatus(String reasonCode, String reasonDisplay) {
         sendRequestToQueue();
         await().until(() -> processDetectionService.awaitingContinue(conversationId));
 
@@ -171,19 +152,17 @@ public class NegativeAckHandlingTest {
         assertThat(ehrStatus.getMigrationStatus()).isEqualTo(FAILED_INCUMBENT);
     }
 
-    private void assertEhrNackIsHandledCorrectlyBeforeContinue(String reasonCode, String reasonDisplay) {
-        sendRequestToQueue();
-        await().until(() -> processDetectionService.awaitingContinue(conversationId));
-        String ehrMessageId = extractStatusService.fetchEhrExtractMessageId(conversationId).orElseThrow();
-
-        sendNackToQueue(reasonCode, reasonDisplay, ehrMessageId);
-        await().until(() -> processDetectionService.processFailed(conversationId));
-
-        EhrStatus ehrStatus = retrieveEhrStatus();
-        assertThat(ehrStatus.getMigrationStatus()).isEqualTo(FAILED_INCUMBENT);
+    private static Stream<Arguments> copcReasonCodes() {
+        return Stream.of(
+            Arguments.of("25", "Large messages rejected due to timeout duration reached of overall transfer"),
+            Arguments.of("29", "Large Message general failure"),
+            Arguments.of("30", "Large Message Re-assembly failure")
+        );
     }
 
-    private void assertLargeMessageCOPCNackIsHandledCorrectly(String reasonCode, String reasonDisplay) {
+    @ParameterizedTest
+    @MethodSource(value = "copcReasonCodes")
+    public void When_FailedByRequestor_With_COPCNack_Expect_InProgressStatusUntilEhrNackReceived(String reasonCode, String reasonDisplay) {
         sendRequestToQueue();
         await().until(() -> processDetectionService.awaitingContinue(conversationId));
 
