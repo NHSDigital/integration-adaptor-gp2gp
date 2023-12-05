@@ -67,12 +67,12 @@ public class EhrExtractAckHandler {
                 break;
 
             case ACK_BUSINESS_ERROR_CODE:
-                LOGGER.info("Received NACK referencing EHR Extract: closing conversation {}", conversationId);
+                LOGGER.info("Application Acknowledgement Error ({}) received, messageRef: {}", ackTypeCode, messageRef);
 
                 ackBuilder.errors(extractErrorCodes(document, ERROR_CODE_XPATH));
 
                 if (messageRef.equals(ehrExtractMessageRef)) {
-                    LOGGER.info("Received NACK referencing EHR Extract: closing conversation {}", conversationId);
+                    LOGGER.info("Received Negative Acknowledgment referencing EHR Extract: closing conversation {}", conversationId);
                     ackBuilder.conversationClosed(now);
                     ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
                 }
