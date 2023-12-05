@@ -248,7 +248,14 @@ old messages after a reasonable time period.
 
 ## Exemplar Deployment
 
-https://github.com/nhsconnect/integration-adaptors/tree/develop/terraform/aws/components/gp2gp
+We release adaptor image on Dockerhub as [nhsdev/nia-gp2gp-adaptor][docker-hub-image],
+with the latest changes documented within the [CHANGELOG.md](CHANGELOG.md).
 
-We provide Terraform scripts to perform an exemplar deployment of the GP2GP adaptor and its
+When performing assurance against a simulated workload involving the transfer of 100MB attachments, we
+have identified a minimum of 8GB of RAM and 2 vCPUs to the container is required.
+
+We provide [Terraform scripts][exemplar-deployment] to perform an exemplar deployment of the GP2GP adaptor and its
 dependencies into AWS.
+
+[exemplar-deployment]: https://github.com/nhsconnect/integration-adaptors/tree/develop/terraform/aws/components/gp2gp
+[docker-hub-image]: https://hub.docker.com/r/nhsdev/nia-gp2gp-adaptor
