@@ -6,11 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Some data structures have been replaced with more efficient concurrent version to avoid any potential side effects
+
+### Fixed
+- Fix logging message that incorrectly stated a conversation was closed on receipt of a negative ack referencing an
+  attachment
+
+## [1.5.12] - 2023-11-29
+
 ### Changed 
 - Previously, a NOT_AUTHORISED (401) response from [`/$gpc.migratestructuredrecord`][migrate-structured-record] would generate a NACK with code 19.
   This behaviour has now been removed and instead a response type of NO_RELATIONSHIP (403) will produce NACK with code 19.
-- Some data structures have been replaced with more efficient concurrent version to avoid any potential side effects
-
 
 [migrate-structured-record]: https://developer.nhs.uk/apis/gpconnect-1-6-0/accessrecord_structured_development_migrate_patient_record.html
 
@@ -18,9 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Guard against possible null pointer error in exception handler.
 - Fix errors within the generation of compressed EHR Extracts (happens when the record becomes >5MB) which was causing
-  SystmOne to reject the transfer. 
-- Fix logging message that incorrectly stated a conversation was closed on receipt of a negative ack referencing an 
-attachment
+  SystmOne to reject the transfer.
+
 
 ## [1.5.11] - 2023-09-26
 
