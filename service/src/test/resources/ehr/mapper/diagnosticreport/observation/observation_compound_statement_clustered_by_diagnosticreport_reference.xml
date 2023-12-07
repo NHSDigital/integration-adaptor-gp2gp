@@ -1,7 +1,7 @@
 <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="random-unmapped-id"/>
-        <code code="257472014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="International normalised ratio">
+        <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="International normalised ratio">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -11,7 +11,7 @@
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
-        <code code="257472014" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="International normalised ratio">
+        <code code="165581004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="International normalised ratio">
 </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
