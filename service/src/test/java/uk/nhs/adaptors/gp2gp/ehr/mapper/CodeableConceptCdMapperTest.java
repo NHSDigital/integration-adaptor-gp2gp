@@ -25,8 +25,6 @@ public class CodeableConceptCdMapperTest {
     private static final String TEST_FILE_DIRECTORY_NULL_FLAVOR = "/ehr/mapper/codeableconcept/nullFlavor/";
     private static final String TEST_FILE_DIRECTORY_ACTUAL_PROBLEM = "/ehr/mapper/codeableconcept/actualProblem/";
     private static final String TEST_FILE_DIRECTORY_ALLERGY_CLINICAL_STATUS = "/ehr/mapper/codeableconcept/allergyClinicalStatus/";
-    private static final String TEST_FILE_DIRECTORY_MEDICATION = "/ehr/mapper/codeableconcept/medication/";
-
     private static final String TEST_FILE_TOPIC_RELATED_CONDITION = TEST_FILE_DIRECTORY
         + "topic/codeable_concept_snowmed_related_condtition.json";
     private static final String CD_FOR_TOPIC_RELATED_PROBLEM_AND_TITLE = TEST_FILE_DIRECTORY
@@ -56,10 +54,6 @@ public class CodeableConceptCdMapperTest {
 
     private static Stream<Arguments> getTestArgumentsAllergyClinicalStatus() {
         return TestArgumentsLoaderUtil.readTestCases(TEST_FILE_DIRECTORY_ALLERGY_CLINICAL_STATUS);
-    }
-
-    private static Stream<Arguments> getTestArgumentsMedication() {
-        return TestArgumentsLoaderUtil.readTestCases(TEST_FILE_DIRECTORY_MEDICATION);
     }
 
     private static Stream<Arguments> getTestArgumentsForTopicRelatedProblem() {
@@ -136,20 +130,6 @@ public class CodeableConceptCdMapperTest {
         var codeableConcept = fhirParseService.parseResource(condition, Condition.class).getCode();
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var outputString = codeableConceptCdMapper.mapToCdForTopic(codeableConcept);
-
-        assertThat(outputString)
-            .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
-            .isEqualToIgnoringWhitespace(expectedOutput);
-    }
-
-    @ParameterizedTest
-    @MethodSource("getTestArgumentsMedication")
-    @SneakyThrows
-    public void When_MappingCdForMedication_Expect_HL7CdObjectXml(String inputJson, String outputXml) {
-        var medication = ResourceTestFileUtils.getFileContent(inputJson);
-        var codeableConcept = fhirParseService.parseResource(medication, Medication.class).getCode();
-        var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
-        var outputString = codeableConceptCdMapper.mapCodeableConceptForMedication(codeableConcept);
 
         assertThat(outputString)
             .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
