@@ -18,6 +18,7 @@ GP2GP 2.2b producer, or those wishing to decommission their existing producer, m
 1. [Guidance for operating the adaptor as a New Market Entrant](OPERATING.md)
 2. [Guidance on integrating with the adaptors APIs](#how-to-query-the-ehr-status-api)
 3. [Guidance for developing the adaptor](developer-information.md)
+4. [Documentation on how this adaptor maps GPConnect concepts to GP2GP concepts](https://github.com/NHSDigital/patient-switching-adaptors-mapping-documentation)
 
 ## How to query the EHR Status API
 
