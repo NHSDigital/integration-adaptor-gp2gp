@@ -36,7 +36,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
+	implementation 'org.springframework:spring-jms:6.1.1'
 
 	implementation 'org.yaml:snakeyaml:1.33'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
