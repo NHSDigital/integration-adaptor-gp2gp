@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.common.service;
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
 import uk.nhs.adaptors.gp2gp.common.exception.MaximumExternalAttachmentsException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
@@ -54,6 +56,24 @@ public class WebClientFilterService {
         GPC, MHS_OUTBOUND
     }
 
+     private static final Retry gpcRetry = Retry.backoff(5, Duration.ofMillis(1000))
+            .maxBackoff(Duration.ofMillis(5))
+            .jitter(0.5)
+            .doBeforeRetry(s -> LOGGER.info("Connection to: {0} failed, retrying request"));
+
+    private static final Retry outboundRetry = Retry.backoff(5, Duration.ofMillis(1000))
+            .maxBackoff(Duration.ofMillis(5))
+            .jitter(0.5)
+            .doBeforeRetry(s -> LOGGER.info("Connection to: {0} failed, retrying request"));
+
+    public static Retry getRetryPolicyByRequestType(RequestType type) {
+        if(type == RequestType.GPC) {
+            return gpcRetry;
+        }
+
+        return outboundRetry;
+    }
+
     public static void addWebClientFilters(
             List<ExchangeFilterFunction> filters,
             RequestType requestType,
@@ -63,6 +83,8 @@ public class WebClientFilterService {
         filters.add(errorHandling(requestType, expectedSuccessHttpStatus));
         filters.add(logRequest());
         filters.add(logResponse());
+        filters.add((request, next) ->
+                Mono.defer(() -> next.exchange(request)).retryWhen(getRetryPolicyByRequestType(requestType)));
         // this will be executed as the first one - always needs to come first
         filters.add(mdc());
     }
