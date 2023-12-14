@@ -246,6 +246,15 @@ The adaptor's queued messages contain:
 The supplier MUST monitor the broker's dead-letter queues to investigate any errors and clear 
 old messages after a reasonable time period.
 
+## Known receiving system limits
+
+During end-to-end testing between different GP system implementations of GP2GP we observed the following limits.
+
+*  One implementation had a limit on the size of each individual attachment sent to it of 100MB.
+   If an attachment sent to it exceeds this they will not file it into the patient record, but file a placeholder instead.
+*  One implementation had a limit on the total size of all attachments sent to it, equalling 375MB (≈ 500MB encoded as base64).
+   If a patient record exceeds this they will send a "Large Message general failure" response to the `IN030000UK06` message.
+
 ## Exemplar Deployment
 
 We release adaptor image on Dockerhub as [nhsdev/nia-gp2gp-adaptor][docker-hub-image],
