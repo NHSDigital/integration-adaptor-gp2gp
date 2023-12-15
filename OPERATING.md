@@ -116,6 +116,25 @@ The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adapt
 |----------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | GP2GP_LARGE_ATTACHMENT_THRESHOLD | 4500000 | Value in bytes. Defines the max size of a single attachment sent to MHS. If a document is larger than this value, it's content will be split and sent in chunks. | 
 
+### MHS Adaptor and GP Connect Consumer Adaptor Client Options
+Options for configuring the web client making requests to the MHS Adaptor and the GP Connect Consumer Adaptor  
+
+#### MHS Adaptor client
+
+| Environment Variable                  | Default | Description                 |
+|---------------------------------------|---------|-----------------------------|
+| GP2GP_GPC_CLIENT_MAX_BACKOFF_ATTEMPTS | 6       | Max backoff attempts        |
+| GP2GP_GPC_CLIENT_MIN_BACKOFF_SECONDS  | 5       | Min Backoff time (seconds)  |
+| GP2GP_GPC_CLIENT_TIMEOUT_SECONDS      | 1200    | Request timeout (seconds)   |
+
+#### GP Connect Consumer Adaptor client
+
+| Environment Variable                  | Default | Description                 |
+|---------------------------------------|---------|-----------------------------|
+| GP2GP_MHS_CLIENT_MAX_BACKOFF_ATTEMPTS | 6       | Max backoff attempts        |
+| GP2GP_MHS_CLIENT_MIN_BACKOFF_SECONDS  | 5       | Min Backoff time (seconds)  |
+| GP2GP_MHS_CLIENT_TIMEOUT_SECONDS      | 120     | Request timeout (seconds)   |
+
 ## Adaptor Process
 
 TODO: Sequence diagram "user journey" of Spine messages, tasks, and GPCC requests

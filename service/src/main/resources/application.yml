@@ -51,14 +51,13 @@ gp2gp:
     requestingPractitionerFamilyName: ${GP2GP_REQUESTING_PRACTITIONER_FAMILY_NAME:ADAPTOR}
     requestingPractitionerGivenName: ${GP2GP_REQUESTING_PRACTITIONER_GIVEN_NAME:GP2GP}
     client:
-      max-backoff-attempts: 6
-      min-back-off: 5
-      timeout: 2
+      max-backoff-attempts: ${GP2GP_GPC_CLIENT_MAX_BACKOFF_ATTEMPTS:6}
+      min-back-off: ${GP2GP_GPC_CLIENT_MIN_BACKOFF_SECONDS:5}
+      timeout: ${GP2GP_GPC_CLIENT_TIMEOUT_SECONDS:1200} # defaults to 20 minutes to account for large documents
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}
-#    TODO: add environment variables and document
     client:
-      max-backoff-attempts: 6
-      min-back-off: 5
-      timeout: 2
+      max-backoff-attempts: ${GP2GP_MHS_CLIENT_MAX_BACKOFF_ATTEMPTS:6}
+      min-back-off: ${GP2GP_MHS_CLIENT_MIN_BACKOFF_SECONDS:5}
+      timeout: ${GP2GP_MHS_CLIENT_TIMEOUT_SECONDS:120}
 
