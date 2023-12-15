@@ -1,9 +1,10 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
-import com.google.common.collect.ImmutableMap;
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -12,22 +13,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+
+import com.google.common.collect.ImmutableMap;
+
+import io.netty.handler.ssl.SslContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
-import reactor.util.retry.Retry;
-import uk.nhs.adaptors.gp2gp.common.configuration.WebClientConfiguration;
-import uk.nhs.adaptors.gp2gp.common.exception.RetryLimitReachedException;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.mhs.configuration.MhsClientConfiguration;
 import uk.nhs.adaptors.gp2gp.mhs.configuration.MhsConfiguration;
-import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
-
-import java.time.Duration;
-import java.util.Collections;
-import java.util.concurrent.TimeoutException;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
