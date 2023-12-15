@@ -12,6 +12,8 @@ import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.common.task.TaskType.GET_GPC_STRUCTURED;
 
+import java.util.concurrent.TimeoutException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,6 +26,7 @@ import org.mockito.quality.Strictness;
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.exception.MaximumExternalAttachmentsException;
+import uk.nhs.adaptors.gp2gp.common.exception.RetryLimitReachedException;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -31,6 +34,7 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpcServerErrorException;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskErrorHandlerTest {
@@ -251,5 +255,33 @@ public class TaskErrorHandlerTest {
         assertThatThrownBy(
             () -> taskErrorHandler.handleProcessingError(new RuntimeException(), taskDefinition)
         ).isSameAs(failureHandlingException);
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_HandleProcessingError_WithGpcServerErrorExceptionAsRootCause_Expect_FailedWithCorrectCode() {
+        Throwable testException = new RetryLimitReachedException("test", new GpcServerErrorException("exception"));
+
+        taskErrorHandler.handleProcessingError(testException, taskDefinition);
+
+        verify(processFailureHandlingService).failProcess(
+            any(),
+            eq("20"),
+            eq("Spine system responded with an error"),
+            any());
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_HandleProcessingError_WithTimeoutExceptionAsRootCause_Expect_FailedWithCorrectCode() {
+        Throwable testException = new RetryLimitReachedException("test", new TimeoutException("exception"));
+
+        taskErrorHandler.handleProcessingError(testException, taskDefinition);
+
+        verify(processFailureHandlingService).failProcess(
+            any(),
+            eq("99"),
+            eq("An error occurred when executing a task"),
+            any());
     }
 }

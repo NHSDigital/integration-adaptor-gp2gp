@@ -43,6 +43,7 @@ public class MhsWebClientTest {
     private static final String TEST_CONVERSATION_ID = "test conversation id";
     private static final String TEST_FROM_ODS_CODE = "test from ods code";
     private static final String TEST_MESSAGE_ID = "test message id";
+    private static final int FOUR = 4;
 
     private static MockWebServer mockWebServer;
 
@@ -157,7 +158,7 @@ public class MhsWebClientTest {
             .hasMessage("Retries exhausted: 3/3")
             .hasRootCauseInstanceOf(TimeoutException.class);
 
-        assertThat(mockWebServer.getRequestCount()).isEqualTo(4);
+        assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
 
     }
 
@@ -185,7 +186,6 @@ public class MhsWebClientTest {
         MockResponse response = new MockResponse();
         response.setResponseCode(INTERNAL_SERVER_ERROR.value());
 
-        // Retries due to exceptions response thrown processing the response do not count
         mockWebServer.enqueue(response);
         mockWebServer.enqueue(response);
         mockWebServer.enqueue(response);
@@ -200,6 +200,6 @@ public class MhsWebClientTest {
             .hasRootCauseInstanceOf(MhsServerErrorException.class)
             .hasMessage("Retries exhausted: 3/3");
 
-        assertThat(mockWebServer.getRequestCount()).isEqualTo(4);
+        assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
     }
 }

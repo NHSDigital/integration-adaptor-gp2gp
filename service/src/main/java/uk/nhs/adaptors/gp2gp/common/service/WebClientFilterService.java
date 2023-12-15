@@ -30,6 +30,7 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpcServerErrorException;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 
@@ -57,7 +58,8 @@ public class WebClientFilterService {
 
     private static final List<Class<? extends Exception>> RETRYABLE_EXCEPTIONS = List.of(
         TimeoutException.class,
-        MhsServerErrorException.class
+        MhsServerErrorException.class,
+        GpcServerErrorException.class
     );
 
     public enum RequestType {
@@ -97,6 +99,9 @@ public class WebClientFilterService {
             if (statusCode.equals(httpStatus)) {
                 LOGGER.info(requestType + " request successful status_code: {}", statusCode.value());
                 return Mono.just(clientResponse);
+            }
+            if (requestType.equals(RequestType.GPC) && statusCode.is5xxServerError()) {
+                return getInternalServerErrorException(clientResponse, requestType);
             }
             if (requestType.equals(RequestType.GPC)) {
                 return getErrorException(clientResponse, requestType);
@@ -169,11 +174,6 @@ public class WebClientFilterService {
                     return NACK_ERROR_18;
                 }
                 break;
-            case INTERNAL_SERVER_ERROR:
-                if (codes.contains(INTERNAL_SERVER_ERROR_STATUS)) {
-                    return NACK_ERROR_20;
-                }
-                break;
             case UNPROCESSABLE_ENTITY:
                 if (codes.contains(INVALID_RESOURCE_STATUS)
                         || codes.contains(BAD_REQUEST_STATUS)
@@ -236,6 +236,20 @@ public class WebClientFilterService {
                     response.statusCode().value(), response.statusCode().getReasonPhrase(), headers);
             }
             return Mono.just(response);
+        });
+    }
+
+    private static Mono<ClientResponse> getInternalServerErrorException(ClientResponse clientResponse, RequestType requestType) {
+        return clientResponse.bodyToMono(String.class).flatMap(body -> {
+            String exceptionMessage;
+
+            if (body.isEmpty()) {
+                exceptionMessage = String.format(REQUEST_EXCEPTION_MESSAGE, requestType, clientResponse.statusCode());
+            } else {
+                exceptionMessage = String.format(REQUEST_EXCEPTION_MESSAGE, requestType, body);
+            }
+
+            return Mono.error(new GpcServerErrorException(exceptionMessage));
         });
     }
 

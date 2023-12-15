@@ -57,6 +57,10 @@ gp2gp:
     requestingPractitionerSDSRoleProfileId: ${GP2GP_REQUESTING_PRACTITIONER_SDS_ROLE_PROFILE_ID:UNK}
     requestingPractitionerFamilyName: ${GP2GP_REQUESTING_PRACTITIONER_FAMILY_NAME:ADAPTOR}
     requestingPractitionerGivenName: ${GP2GP_REQUESTING_PRACTITIONER_GIVEN_NAME:GP2GP}
+    client:
+      max-backoff-attempts: 3
+      min-back-off: 2
+      timeout: 3
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint/accept-only}
     client:

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.configuration.WebClientConfiguration;
 
 @Component
-@ConfigurationProperties(prefix = "gpc.client")
-public class GpcClientConfig extends WebClientConfiguration {
+@ConfigurationProperties(prefix = "gp2gp.gpc.client")
+public class GpcClientConfiguration extends WebClientConfiguration {
 }
