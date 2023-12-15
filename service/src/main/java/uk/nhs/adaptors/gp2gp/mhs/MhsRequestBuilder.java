@@ -13,10 +13,18 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 import reactor.netty.http.client.HttpClient;
+import reactor.util.retry.Retry;
+import uk.nhs.adaptors.gp2gp.common.configuration.WebClientConfiguration;
+import uk.nhs.adaptors.gp2gp.common.exception.RetryLimitReachedException;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
+import uk.nhs.adaptors.gp2gp.mhs.configuration.MhsClientConfiguration;
+import uk.nhs.adaptors.gp2gp.mhs.configuration.MhsConfiguration;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 
+import java.time.Duration;
 import java.util.Collections;
+import java.util.concurrent.TimeoutException;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -38,6 +46,7 @@ public class MhsRequestBuilder {
 
     private final MhsConfiguration mhsConfiguration;
     private final RequestBuilderService requestBuilderService;
+    private final MhsClientConfiguration mhsClientConfig;
 
     public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(
             String extractCoreMessage, String conversationId, String fromOdsCode, String messageId) {
@@ -91,7 +100,8 @@ public class MhsRequestBuilder {
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
             .filters(filters -> WebClientFilterService
-                .addWebClientFilters(filters, WebClientFilterService.RequestType.MHS_OUTBOUND, HttpStatus.ACCEPTED))
+                .addWebClientFilters(
+                    filters, WebClientFilterService.RequestType.MHS_OUTBOUND, HttpStatus.ACCEPTED, mhsClientConfig))
             .baseUrl(mhsConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", mhsConfiguration.getUrl()))
             .build();

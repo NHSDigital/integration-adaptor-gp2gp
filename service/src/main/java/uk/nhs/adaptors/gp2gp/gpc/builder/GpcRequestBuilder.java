@@ -28,6 +28,7 @@ import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcClientConfig;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 import java.util.Collections;
@@ -60,6 +61,7 @@ public class GpcRequestBuilder {
     private final GpcTokenBuilder gpcTokenBuilder;
     private final GpcConfiguration gpcConfiguration;
     private final RequestBuilderService requestBuilderService;
+    private final GpcClientConfig gpcClientConfig;
 
     @Value("${gp2gp.gpc.overrideNhsNumber}")
     private String overrideNhsNumber;
@@ -121,7 +123,7 @@ public class GpcRequestBuilder {
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
             .filters(filters -> WebClientFilterService
-                .addWebClientFilters(filters, WebClientFilterService.RequestType.GPC, HttpStatus.OK))
+                .addWebClientFilters(filters, WebClientFilterService.RequestType.GPC, HttpStatus.OK, gpcClientConfig))
             .baseUrl(baseUrl)
             .defaultUriVariables(Collections.singletonMap("url", baseUrl))
             .build();

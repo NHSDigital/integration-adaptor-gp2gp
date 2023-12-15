@@ -59,3 +59,7 @@ gp2gp:
     requestingPractitionerGivenName: ${GP2GP_REQUESTING_PRACTITIONER_GIVEN_NAME:GP2GP}
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint/accept-only}
+    client:
+      max-backoff-attempts: 3
+      min-back-off: 2
+      timeout: 3

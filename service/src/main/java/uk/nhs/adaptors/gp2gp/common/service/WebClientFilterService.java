@@ -1,11 +1,12 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
+
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +23,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
+import uk.nhs.adaptors.gp2gp.common.configuration.WebClientConfiguration;
 import uk.nhs.adaptors.gp2gp.common.exception.MaximumExternalAttachmentsException;
+import uk.nhs.adaptors.gp2gp.common.exception.RetryLimitReachedException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
@@ -52,39 +55,27 @@ public class WebClientFilterService {
     private static final Map<RequestType, Function<String, Exception>> REQUEST_TYPE_TO_EXCEPTION_MAP = Map.of(
             RequestType.GPC, GpConnectException::new);
 
+    private static final List<Class<? extends Exception>> RETRYABLE_EXCEPTIONS = List.of(
+        TimeoutException.class,
+        MhsServerErrorException.class
+    );
+
     public enum RequestType {
         GPC, MHS_OUTBOUND
-    }
-
-     private static final Retry gpcRetry = Retry.backoff(5, Duration.ofMillis(1000))
-            .maxBackoff(Duration.ofMillis(5))
-            .jitter(0.5)
-            .doBeforeRetry(s -> LOGGER.info("Connection to: {0} failed, retrying request"));
-
-    private static final Retry outboundRetry = Retry.backoff(5, Duration.ofMillis(1000))
-            .maxBackoff(Duration.ofMillis(5))
-            .jitter(0.5)
-            .doBeforeRetry(s -> LOGGER.info("Connection to: {0} failed, retrying request"));
-
-    public static Retry getRetryPolicyByRequestType(RequestType type) {
-        if(type == RequestType.GPC) {
-            return gpcRetry;
-        }
-
-        return outboundRetry;
     }
 
     public static void addWebClientFilters(
             List<ExchangeFilterFunction> filters,
             RequestType requestType,
-            HttpStatus expectedSuccessHttpStatus) {
+            HttpStatus expectedSuccessHttpStatus,
+            WebClientConfiguration clientConfiguration) {
 
         // filters are executed in reversed order
+        filters.add(retryPolicy(requestType, clientConfiguration));
         filters.add(errorHandling(requestType, expectedSuccessHttpStatus));
         filters.add(logRequest());
         filters.add(logResponse());
-        filters.add((request, next) ->
-                Mono.defer(() -> next.exchange(request)).retryWhen(getRetryPolicyByRequestType(requestType)));
+        filters.add(timeout(clientConfiguration));
         // this will be executed as the first one - always needs to come first
         filters.add(mdc());
     }
@@ -101,6 +92,7 @@ public class WebClientFilterService {
 
     private static ExchangeFilterFunction errorHandling(RequestType requestType, HttpStatus httpStatus) {
         return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
+
             var statusCode = clientResponse.statusCode();
             if (statusCode.equals(httpStatus)) {
                 LOGGER.info(requestType + " request successful status_code: {}", statusCode.value());
@@ -245,5 +237,30 @@ public class WebClientFilterService {
             }
             return Mono.just(response);
         });
+    }
+
+    private static ExchangeFilterFunction retryPolicy(RequestType requestType, WebClientConfiguration clientConfiguration) {
+        return (request, next) ->
+            next.exchange(request)
+                .retryWhen(getRetryPolicyByRequestType(requestType, clientConfiguration));
+    }
+
+    private static ExchangeFilterFunction timeout(WebClientConfiguration clientConfiguration) {
+        return (request, next) -> next.exchange(request).timeout(clientConfiguration.getTimeout());
+    }
+
+    private static Retry getRetryPolicyByRequestType(RequestType type, WebClientConfiguration clientConfiguration) {
+        return Retry
+            .backoff(clientConfiguration.getMaxBackoffAttempts(), clientConfiguration.getMinBackOff())
+            .filter(exception -> RETRYABLE_EXCEPTIONS.contains(exception.getClass()))
+            .doBeforeRetry(retrySignal ->
+                LOGGER.info("Request to `{}` failed, retrying request {}/{}",
+                    type, retrySignal.totalRetries() + 1, clientConfiguration.getMaxBackoffAttempts()))
+            .onRetryExhaustedThrow((retryBackoffSpec, retrySignal) ->
+                new RetryLimitReachedException(String.format("Retries exhausted: %s/%s",
+                        retrySignal.totalRetries(), clientConfiguration.getMaxBackoffAttempts()), retrySignal.failure()
+                )
+            );
+
     }
 }

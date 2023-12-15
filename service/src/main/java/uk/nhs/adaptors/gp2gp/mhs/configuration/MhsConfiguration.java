@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.mhs;
+package uk.nhs.adaptors.gp2gp.mhs.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
