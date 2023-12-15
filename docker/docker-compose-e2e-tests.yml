@@ -31,6 +31,8 @@ services:
       - GP2GP_LARGE_ATTACHMENT_THRESHOLD
       - GP2GP_MHS_MOCK_BASE_URL
       - GP2GP_BASE_URL
+      - GP2GP_MHS_CLIENT_MAX_BACKOFF_ATTEMPTS
+      - GP2GP_GPC_CLIENT_MAX_BACKOFF_ATTEMPTS
     networks: 
       - commonforgp2gp
 networks:
