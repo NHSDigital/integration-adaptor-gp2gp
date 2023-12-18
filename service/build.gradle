@@ -54,7 +54,7 @@ dependencies {
 	implementation('net.minidev:json-smart:2.4.7')
 
 	//Keystore
-	implementation 'com.heroku.sdk:env-keystore:1.1.6'
+	implementation 'com.heroku.sdk:env-keystore:1.1.8'
 
 	// Logging
 	implementation 'ch.qos.logback:logback-classic:1.2.9'
