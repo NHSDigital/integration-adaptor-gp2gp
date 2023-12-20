@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class RequestBuilderService {
-    private static final int BYTE_COUNT = 16 * 1024 * 1024;
+    private static final int BYTE_COUNT = 150 * 1024 * 1024;
 
     @SneakyThrows
     public SslContext buildSSLContext() {
