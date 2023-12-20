@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Some data structures have been replaced with more efficient concurrent version to avoid any potential side effects
+- REST client buffer limit has been increased to 150 Mb
 
 ### Fixed
 - Fix logging message that incorrectly stated a conversation was closed on receipt of a negative ack referencing an
