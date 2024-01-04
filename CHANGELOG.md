@@ -6,9 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.14] - 2024-01-05
+
 ### Added 
 - Add configurable timeout for requests to MHS or GPCC adaptors
 - Add retries with configurable backoff for 5xx or timeout from MHS or GPCC adaptors 
+
+## [1.5.13] - 2024-01-04
 
 ### Changed
 - Some data structures have been replaced with more efficient concurrent version to avoid any potential side effects
