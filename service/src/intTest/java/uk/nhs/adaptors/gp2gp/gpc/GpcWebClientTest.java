@@ -46,11 +46,38 @@ public class GpcWebClientTest {
 
     private static MockWebServer mockWebServer;
 
+    private static final MockResponse STUB_OK = initialiseOKResponse();
+    private static final MockResponse STUB_INTERNAL_SERVER_ERROR = initialise500Response();
+    private static final MockResponse STUB_NO_RESPONSE = initialiseNoResponse();
+
     private String baseUrl;
     @SpyBean
     private GpcConfiguration gpcConfiguration;
     @Autowired
     private GpcClient gpcWebClient;
+
+    private static MockResponse initialiseOKResponse() {
+        MockResponse response = new MockResponse();
+        response.setResponseCode(OK.value())
+            .setBody(TEST_BODY);
+
+        return response;
+    }
+
+    private static MockResponse initialise500Response() {
+        MockResponse response = new MockResponse();
+        response.setResponseCode(INTERNAL_SERVER_ERROR.value());
+        response.setBody(TEST_BODY);
+
+        return response;
+    }
+
+    private static MockResponse initialiseNoResponse() {
+        MockResponse response = new MockResponse();
+        response.setSocketPolicy(SocketPolicy.NO_RESPONSE);
+
+        return response;
+    }
 
     @BeforeEach
     public void initialise() throws IOException {
@@ -67,11 +94,8 @@ public class GpcWebClientTest {
 
     @Test
     public void When_GetDocumentRecord_With_HttpStatus200_Expect_NoException() {
-        MockResponse response = new MockResponse();
-        response.setResponseCode(OK.value())
-            .setBody(TEST_BODY);
 
-        mockWebServer.enqueue(response);
+        mockWebServer.enqueue(STUB_OK);
 
         var taskDefinition = buildDocumentTaskDefinition();
         var result = gpcWebClient.getDocumentRecord(taskDefinition);
@@ -81,14 +105,10 @@ public class GpcWebClientTest {
 
     @Test
     public void When_GetDocumentRecord_With_HttpStatus5xx_Expect_RetryExceptionWithGpcServerErrorExceptionAsRootCause() {
-        MockResponse response = new MockResponse();
-        response.setResponseCode(INTERNAL_SERVER_ERROR.value());
-        response.setBody(TEST_BODY);
 
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
+        for (int i = 0; i < FOUR; i++) {
+            mockWebServer.enqueue(STUB_INTERNAL_SERVER_ERROR);
+        }
 
         var taskDefinition = buildDocumentTaskDefinition();
 
@@ -104,13 +124,10 @@ public class GpcWebClientTest {
 
     @Test
     public void When_GetDocumentRecord_With_NoResponse_Expect_RetryExceptionWithTimeoutAsRootCause() {
-        MockResponse response = new MockResponse();
-        response.setSocketPolicy(SocketPolicy.NO_RESPONSE);
 
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
+        for (int i = 0; i < FOUR; i++) {
+            mockWebServer.enqueue(STUB_NO_RESPONSE);
+        }
 
         var taskDefinition = buildDocumentTaskDefinition();
 
@@ -124,14 +141,9 @@ public class GpcWebClientTest {
 
     @Test
     public void When_GetDocumentRecord_With_NoResponseBeforeHttpStatus200_Expect_RetryBeforeSuccess() {
-        MockResponse response1 = new MockResponse();
-        response1.setSocketPolicy(SocketPolicy.NO_RESPONSE);
-        MockResponse response2 = new MockResponse();
-        response2.setResponseCode(OK.value());
-        response2.setBody(TEST_BODY);
 
-        mockWebServer.enqueue(response1);
-        mockWebServer.enqueue(response2);
+        mockWebServer.enqueue(STUB_NO_RESPONSE);
+        mockWebServer.enqueue(STUB_OK);
 
         var taskDefinition = buildDocumentTaskDefinition();
         var result = gpcWebClient.getDocumentRecord(taskDefinition);
@@ -141,11 +153,8 @@ public class GpcWebClientTest {
 
     @Test
     public void When_GetStructuredRecord_With_HttpStatus200_Expect_NoException() {
-        MockResponse response = new MockResponse();
-        response.setResponseCode(OK.value())
-            .setBody(TEST_BODY);
 
-        mockWebServer.enqueue(response);
+        mockWebServer.enqueue(STUB_OK);
 
         var taskDefinition = getStructuredDefinition();
         var result = gpcWebClient.getStructuredRecord(taskDefinition);
@@ -155,13 +164,10 @@ public class GpcWebClientTest {
 
     @Test
     public void When_GetStructuredRecord_With_NoResponse_Expect_RetryExceptionWithTimeoutAsRootCause() {
-        MockResponse response = new MockResponse();
-        response.setSocketPolicy(SocketPolicy.NO_RESPONSE);
 
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
+        for (int i = 0; i < FOUR; i++) {
+            mockWebServer.enqueue(STUB_NO_RESPONSE);
+        }
 
         var taskDefinition = getStructuredDefinition();
 
@@ -175,14 +181,10 @@ public class GpcWebClientTest {
 
     @Test
     public void When_GetStructuredRecord_With_HttpStatus5xx_Expect_RetryWithGpcServerErrorExceptionAsRootCause() {
-        MockResponse response = new MockResponse();
-        response.setResponseCode(INTERNAL_SERVER_ERROR.value());
-        response.setBody(TEST_BODY);
 
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
+        for (int i = 0; i < FOUR; i++) {
+            mockWebServer.enqueue(STUB_INTERNAL_SERVER_ERROR);
+        }
 
         var taskDefinition = getStructuredDefinition();
 
