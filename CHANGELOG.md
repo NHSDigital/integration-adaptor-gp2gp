@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added 
+- Add configurable timeout for requests to MHS or GPCC adaptors
+- Add retries with configurable backoff for 5xx or timeout from MHS or GPCC adaptors 
+
 ### Changed
 - Some data structures have been replaced with more efficient concurrent version to avoid any potential side effects
 - REST client buffer limit has been increased to 150 Mb

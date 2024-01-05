@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.common.task;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,13 +19,14 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectNotFoundException;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpcServerErrorException;
 
 @Component
 @Slf4j
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class TaskErrorHandler {
 
-    private final Map<Class<? extends Exception>, Function<TaskDefinition, Boolean>> errorHandlers = Map.of(
+    private final Map<Class<? extends Throwable>, Function<TaskDefinition, Boolean>> errorHandlers = Map.of(
         EhrRequestException.class, this::handleRequestError,
         EhrExtractException.class, this::handleTranslationError,
         EhrMapperException.class, this::handleTranslationError,
@@ -32,12 +34,18 @@ public class TaskErrorHandler {
         GpConnectException.class, this::handleGpConnectError,
         GpConnectInvalidException.class, this::handleInvalidNotAuthError,
         GpConnectNotFoundException.class, this::handleNotFoundError,
-        MaximumExternalAttachmentsException.class, this::handleMaximumExternalAttachmentsError
+        MaximumExternalAttachmentsException.class, this::handleMaximumExternalAttachmentsError,
+        GpcServerErrorException.class, this::handleGpConnectError
     );
 
     private final ProcessFailureHandlingService processFailureHandlingService;
 
-    public boolean handleProcessingError(Exception exception, TaskDefinition taskDefinition) {
+    public boolean handleProcessingError(Throwable exception, TaskDefinition taskDefinition) {
+
+        if (ExceptionUtils.getRootCause(exception) instanceof GpcServerErrorException) {
+            exception = ExceptionUtils.getRootCause(exception);
+        }
+
         return errorHandlers.getOrDefault(exception.getClass(), this::handleGeneralProcessingError).apply(taskDefinition);
     }
 

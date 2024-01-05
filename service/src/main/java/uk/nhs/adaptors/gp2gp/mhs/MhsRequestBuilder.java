@@ -1,9 +1,10 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
-import com.google.common.collect.ImmutableMap;
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -12,14 +13,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+
+import com.google.common.collect.ImmutableMap;
+
+import io.netty.handler.ssl.SslContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
-
-import java.util.Collections;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import uk.nhs.adaptors.gp2gp.mhs.configuration.MhsClientConfiguration;
+import uk.nhs.adaptors.gp2gp.mhs.configuration.MhsConfiguration;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -38,6 +42,7 @@ public class MhsRequestBuilder {
 
     private final MhsConfiguration mhsConfiguration;
     private final RequestBuilderService requestBuilderService;
+    private final MhsClientConfiguration mhsClientConfig;
 
     public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(
             String extractCoreMessage, String conversationId, String fromOdsCode, String messageId) {
@@ -91,7 +96,8 @@ public class MhsRequestBuilder {
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
             .filters(filters -> WebClientFilterService
-                .addWebClientFilters(filters, WebClientFilterService.RequestType.MHS_OUTBOUND, HttpStatus.ACCEPTED))
+                .addWebClientFilters(
+                    filters, WebClientFilterService.RequestType.MHS_OUTBOUND, HttpStatus.ACCEPTED, mhsClientConfig))
             .baseUrl(mhsConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", mhsConfiguration.getUrl()))
             .build();

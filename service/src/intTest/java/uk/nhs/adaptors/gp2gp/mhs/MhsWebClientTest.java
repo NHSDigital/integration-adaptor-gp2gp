@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -7,10 +8,10 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +27,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.SocketPolicy;
 import uk.nhs.adaptors.gp2gp.common.exception.MaximumExternalAttachmentsException;
+import uk.nhs.adaptors.gp2gp.common.exception.RetryLimitReachedException;
+import uk.nhs.adaptors.gp2gp.mhs.configuration.MhsConfiguration;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -39,6 +43,7 @@ public class MhsWebClientTest {
     private static final String TEST_CONVERSATION_ID = "test conversation id";
     private static final String TEST_FROM_ODS_CODE = "test from ods code";
     private static final String TEST_MESSAGE_ID = "test message id";
+    private static final int FOUR = 4;
 
     private static MockWebServer mockWebServer;
 
@@ -69,23 +74,18 @@ public class MhsWebClientTest {
         );
     }
 
-    @BeforeAll
-    public static void setup() throws IOException {
+    @BeforeEach
+    public void initialise() throws IOException {
         mockWebServer = new MockWebServer();
         mockWebServer.start();
-    }
-
-    @AfterAll
-    public static void tearDown() throws IOException {
-        mockWebServer.shutdown();
-    }
-
-    @BeforeEach
-    public void initialise() {
         String baseUrl = String.format("http://localhost:%s", mockWebServer.getPort());
         when(mhsConfiguration.getUrl()).thenReturn(baseUrl);
     }
 
+    @AfterEach
+    public void tearDown() throws IOException {
+        mockWebServer.shutdown();
+    }
 
     @ParameterizedTest
     @MethodSource("maxAttachmentsValidationErrors")
@@ -125,7 +125,7 @@ public class MhsWebClientTest {
 
 
     @Test
-    public void When_SendMessageToMHS_With_HttpStatus404_Expect_CorrectException() {
+    public void When_SendMessageToMHS_With_HttpStatus404_Expect_IllegalStateException() {
         MockResponse response = new MockResponse();
         response
             .setResponseCode(NOT_FOUND.value());
@@ -140,17 +140,65 @@ public class MhsWebClientTest {
     }
 
     @Test
-    public void When_SendMessageToMHS_With_HttpStatus5xx_Expect_CorrectException() {
+    public void When_SendMessageToMHS_With_NoResponse_Expect_RetryExceptionWithTimeoutRootCause() {
         MockResponse response = new MockResponse();
-        response
-            .setResponseCode(INTERNAL_SERVER_ERROR.value());
+        response.setSocketPolicy(SocketPolicy.NO_RESPONSE);
 
-        mockWebServer.enqueue(response);
+        for (int i = 0; i < FOUR; i++) {
+            mockWebServer.enqueue(response);
+        }
+
+        var request = mhsRequestBuilder.buildSendEhrExtractCommonRequest(TEST_BODY, TEST_CONVERSATION_ID,
+            TEST_FROM_ODS_CODE, TEST_MESSAGE_ID);
+
+        assertThatThrownBy(() ->
+            mhsClient.sendMessageToMHS(request))
+            .isInstanceOf(RetryLimitReachedException.class)
+            .hasMessage("Retries exhausted: 3/3")
+            .hasRootCauseInstanceOf(TimeoutException.class);
+
+        assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
+
+    }
+
+    @Test
+    public void When_SendMessageToMHS_With_ResponseOn404SecondAttempt_Expect_RetryBeforeIllegalStateException() {
+        MockResponse response1 = new MockResponse();
+        response1.setSocketPolicy(SocketPolicy.NO_RESPONSE);
+        MockResponse response2 = new MockResponse();
+        response2.setResponseCode(NOT_FOUND.value());
+
+        mockWebServer.enqueue(response1);
+        mockWebServer.enqueue(response2);
 
         var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(TEST_BODY,
             TEST_CONVERSATION_ID, TEST_FROM_ODS_CODE, TEST_MESSAGE_ID);
 
         assertThatThrownBy(() -> mhsClient.sendMessageToMHS(request))
-            .isInstanceOf(MhsServerErrorException.class);
+            .isInstanceOf(IllegalStateException.class);
+
+        assertThat(mockWebServer.getRequestCount()).isEqualTo(2);
+    }
+
+    @Test
+    public void When_SendMessageToMHS_With_HttpStatus5xx_Expect_RetryExceptionWithMhsServerErrorRootCause() {
+        MockResponse response = new MockResponse();
+        response.setResponseCode(INTERNAL_SERVER_ERROR.value());
+
+        for (int i = 0; i < FOUR; i++) {
+            mockWebServer.enqueue(response);
+        }
+
+        var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(TEST_BODY,
+            TEST_CONVERSATION_ID, TEST_FROM_ODS_CODE, TEST_MESSAGE_ID);
+
+        assertThatThrownBy(() ->
+            mhsClient.sendMessageToMHS(request))
+            .isInstanceOf(RetryLimitReachedException.class)
+            .hasMessage("Retries exhausted: 3/3")
+            .hasRootCauseInstanceOf(MhsServerErrorException.class)
+            .hasRootCauseMessage("The following error occurred during MHS_OUTBOUND request: 500 INTERNAL_SERVER_ERROR");
+
+        assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
     }
 }
