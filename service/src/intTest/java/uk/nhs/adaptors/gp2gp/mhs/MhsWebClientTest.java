@@ -144,10 +144,9 @@ public class MhsWebClientTest {
         MockResponse response = new MockResponse();
         response.setSocketPolicy(SocketPolicy.NO_RESPONSE);
 
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
+        for (int i = 0; i < FOUR; i++) {
+            mockWebServer.enqueue(response);
+        }
 
         var request = mhsRequestBuilder.buildSendEhrExtractCommonRequest(TEST_BODY, TEST_CONVERSATION_ID,
             TEST_FROM_ODS_CODE, TEST_MESSAGE_ID);
@@ -186,10 +185,9 @@ public class MhsWebClientTest {
         MockResponse response = new MockResponse();
         response.setResponseCode(INTERNAL_SERVER_ERROR.value());
 
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
-        mockWebServer.enqueue(response);
+        for (int i = 0; i < FOUR; i++) {
+            mockWebServer.enqueue(response);
+        }
 
         var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(TEST_BODY,
             TEST_CONVERSATION_ID, TEST_FROM_ODS_CODE, TEST_MESSAGE_ID);
@@ -197,8 +195,9 @@ public class MhsWebClientTest {
         assertThatThrownBy(() ->
             mhsClient.sendMessageToMHS(request))
             .isInstanceOf(RetryLimitReachedException.class)
+            .hasMessage("Retries exhausted: 3/3")
             .hasRootCauseInstanceOf(MhsServerErrorException.class)
-            .hasMessage("Retries exhausted: 3/3");
+            .hasRootCauseMessage("The following error occurred during MHS_OUTBOUND request: 500 INTERNAL_SERVER_ERROR");
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
     }

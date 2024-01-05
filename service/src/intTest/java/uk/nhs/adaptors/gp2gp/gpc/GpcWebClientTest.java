@@ -48,6 +48,7 @@ public class GpcWebClientTest {
 
     private static final MockResponse STUB_OK = initialiseOKResponse();
     private static final MockResponse STUB_INTERNAL_SERVER_ERROR = initialise500Response();
+    private static final MockResponse STUB_INTERNAL_SERVER_ERROR_NO_BODY = initialise500ResponseNoBody();
     private static final MockResponse STUB_NO_RESPONSE = initialiseNoResponse();
 
     private String baseUrl;
@@ -68,6 +69,13 @@ public class GpcWebClientTest {
         MockResponse response = new MockResponse();
         response.setResponseCode(INTERNAL_SERVER_ERROR.value());
         response.setBody(TEST_BODY);
+
+        return response;
+    }
+
+    private static MockResponse initialise500ResponseNoBody() {
+        MockResponse response = new MockResponse();
+        response.setResponseCode(INTERNAL_SERVER_ERROR.value());
 
         return response;
     }
@@ -117,6 +125,25 @@ public class GpcWebClientTest {
             .hasMessage("Retries exhausted: 3/3")
             .hasRootCauseInstanceOf(GpcServerErrorException.class)
             .hasRootCauseMessage("The following error occurred during GPC request: " + TEST_BODY);
+
+
+        assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
+    }
+
+    @Test
+    public void When_GetDocumentRecord_With_HttpStatus5xxAndNoBody_Expect_AlternativeExceptionMessage() {
+
+        for (int i = 0; i < FOUR; i++) {
+            mockWebServer.enqueue(STUB_INTERNAL_SERVER_ERROR_NO_BODY);
+        }
+
+        var taskDefinition = buildDocumentTaskDefinition();
+
+        assertThatThrownBy(() -> gpcWebClient.getDocumentRecord(taskDefinition))
+            .isInstanceOf(RetryLimitReachedException.class)
+            .hasMessage("Retries exhausted: 3/3")
+            .hasRootCauseInstanceOf(GpcServerErrorException.class)
+            .hasRootCauseMessage("The following error occurred during GPC request: 500 INTERNAL_SERVER_ERROR");
 
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);

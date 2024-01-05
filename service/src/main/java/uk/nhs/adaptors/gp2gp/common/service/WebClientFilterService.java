@@ -100,14 +100,11 @@ public class WebClientFilterService {
                 LOGGER.info(requestType + " request successful status_code: {}", statusCode.value());
                 return Mono.just(clientResponse);
             }
-            if (requestType.equals(RequestType.GPC) && statusCode.is5xxServerError()) {
+            if (statusCode.is5xxServerError()) {
                 return getInternalServerErrorException(clientResponse, requestType);
             }
             if (requestType.equals(RequestType.GPC)) {
                 return getErrorException(clientResponse, requestType);
-            }
-            if (requestType.equals(RequestType.MHS_OUTBOUND) && statusCode.is5xxServerError()) {
-                return Mono.error(new MhsServerErrorException("MHS responded with status code " + statusCode.value()));
             }
             if (requestType.equals(RequestType.MHS_OUTBOUND) && statusCode.value() == BAD_REQUEST.value()) {
 
@@ -240,13 +237,20 @@ public class WebClientFilterService {
     }
 
     private static Mono<ClientResponse> getInternalServerErrorException(ClientResponse clientResponse, RequestType requestType) {
-        return clientResponse.bodyToMono(String.class).flatMap(body -> {
+
+        if (requestType.equals(RequestType.MHS_OUTBOUND)) {
+            return Mono.error(new MhsServerErrorException(
+                String.format(REQUEST_EXCEPTION_MESSAGE, requestType, clientResponse.statusCode()))
+            );
+        }
+
+        return clientResponse.toEntity(String.class).flatMap(response -> {
             String exceptionMessage;
 
-            if (body.isEmpty()) {
-                exceptionMessage = String.format(REQUEST_EXCEPTION_MESSAGE, requestType, clientResponse.statusCode());
+            if (response.hasBody()) {
+                exceptionMessage = String.format(REQUEST_EXCEPTION_MESSAGE, requestType, response.getBody());
             } else {
-                exceptionMessage = String.format(REQUEST_EXCEPTION_MESSAGE, requestType, body);
+                exceptionMessage = String.format(REQUEST_EXCEPTION_MESSAGE, requestType, clientResponse.statusCode());
             }
 
             return Mono.error(new GpcServerErrorException(exceptionMessage));
