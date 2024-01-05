@@ -117,7 +117,9 @@ The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adapt
 | GP2GP_LARGE_ATTACHMENT_THRESHOLD | 4500000 | Value in bytes. Defines the max size of a single attachment sent to MHS. If a document is larger than this value, it's content will be split and sent in chunks. | 
 
 ### MHS Adaptor and GP Connect Consumer Adaptor Client Options
-Options for configuring the web client making requests to the MHS Adaptor and the GP Connect Consumer Adaptor  
+Options for configuring the web client making requests to the MHS Adaptor and the GP Connect Consumer Adaptor.
+
+Backoff options are used when the client experiences a timeout or 5xx response. Timeout is measured as total time for the HTTP request and response to complete.
 
 #### MHS Adaptor client
 
