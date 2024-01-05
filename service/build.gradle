@@ -53,9 +53,6 @@ dependencies {
 	}
 	implementation('net.minidev:json-smart:2.4.7')
 
-	//Keystore
-	implementation 'com.heroku.sdk:env-keystore:1.1.6'
-
 	// Logging
 	implementation 'ch.qos.logback:logback-classic:1.2.9'
 
@@ -93,9 +90,6 @@ dependencies {
 	spotbugs 'com.github.spotbugs:spotbugs:4.7.3'
 
 	constraints {
-		implementation('org.bouncycastle:bcprov-jdk15on:1.69') {
-			because 'env-keystore:1.1.6 depends on previous version with CVE-2020-28052'
-		}
 		implementation('com.google.guava:guava:30.1-jre') {
 			because 'hapi-fhir-structures-dstu3:5.2.1 depends on previous version with CVE-2020-8908'
 		}
