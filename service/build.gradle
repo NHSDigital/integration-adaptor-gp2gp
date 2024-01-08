@@ -99,7 +99,7 @@ dependencies {
 		implementation('commons-io:commons-io:2.7') {
 			because 'to fix https://snyk.io/vuln/SNYK-JAVA-COMMONSIO-1277109'
 		}
-		implementation('io.netty:netty-codec-http:4.1.68.Final') {
+		implementation('io.netty:netty-codec-http:4.1.104.Final') {
 			because 'to fix SNYK-JAVA-IONETTY-1070799'
 		}
 		implementation('io.netty:netty-codec:4.1.68.Final') {
