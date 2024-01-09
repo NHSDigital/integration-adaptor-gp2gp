@@ -2,7 +2,7 @@
 
 ## Requirements:
 
-* JDK 11 - We develop the adaptor in Java with Spring Boot
+* JDK 17 - We develop the adaptor in Java with Spring Boot
 * Docker - We release the adaptor using Docker images on [Dockerhub](https://hub.docker.com/repository/docker/nhsdev/nia-gp2gp-adaptor)
 
 ## How to operate the adaptor
