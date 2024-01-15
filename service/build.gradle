@@ -80,7 +80,7 @@ dependencies {
 	spotbugs 'com.github.spotbugs:spotbugs:4.7.3'
 
 	constraints {
-		implementation('com.google.guava:guava:30.1-jre') {
+		implementation('com.google.guava:guava:33.0.0-jre') {
 			because 'hapi-fhir-structures-dstu3:5.2.1 depends on previous version with CVE-2020-8908'
 		}
 		implementation('commons-codec:commons-codec:1.15') {
