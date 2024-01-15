@@ -40,7 +40,6 @@ service/out/*
 .vscode
 */out/
 out/
-lombok.config
 
 # env vars with credentials for development
 vars.sh*
