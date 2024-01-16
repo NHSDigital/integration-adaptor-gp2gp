@@ -35,7 +35,7 @@ dependencies {
 	implementation 'org.springframework:spring-jms:5.3.31'
 
 	implementation 'org.yaml:snakeyaml:1.33'
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
 
 	// WebClient
 	implementation ('org.springframework.boot:spring-boot-starter-webflux:2.7.18')
@@ -95,7 +95,7 @@ dependencies {
 		implementation('org.yaml:snakeyaml:1.33') {
 			because 'to fix SNYK-JAVA-ORGYAML-3016891, SNYK-JAVA-ORGYAML-3016889, SNYK-JAVA-ORGYAML-3016888, SNYK-JAVA-ORGYAML-2806360'
 		}
-		implementation('com.fasterxml.jackson.core:jackson-databind:2.13.4.2') {
+		implementation('com.fasterxml.jackson.core:jackson-databind:2.16.1') {
 			because 'to fix SNYK-JAVA-COMFASTERXMLJACKSONCORE-3038426'
 		}
 	}
