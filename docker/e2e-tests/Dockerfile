@@ -1,4 +1,4 @@
-FROM gradle:7.2.0-jdk11
+FROM gradle:7.4-jdk11
 
 COPY --chown=gradle:gradle e2e-tests /home/gradle/e2e-tests
 
