@@ -66,13 +66,15 @@ pipeline {
                                     spotBugs(pattern: 'build/reports/spotbugs/*.xml')
                                 ]
                             )
-                            step([
-                                $class : 'JacocoPublisher',
-                                execPattern : '**/build/jacoco/*.exec',
-                                classPattern : '**/build/classes/java',
-                                sourcePattern : 'src/main/java',
-                                exclusionPattern : '**/*Test.class'
-                            ])
+                            // Disable JacocoPublisher for now, as our Jenkins doesn't support Java 17
+                            // See NIAD-3022 for more details
+                            // step([
+                            //   $class : 'JacocoPublisher',
+                            //   execPattern : '**/build/jacoco/*.exec',
+                            //   classPattern : '**/build/classes/java',
+                            //   sourcePattern : 'src/main/java',
+                            //   exclusionPattern : '**/*Test.class'
+                            // ])
                             sh "rm -rf build"
                             sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
                             sh "docker network rm commonforgp2gp"
