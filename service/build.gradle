@@ -34,7 +34,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework:spring-jms:5.3.31'
 
-	implementation 'org.yaml:snakeyaml:1.33'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
 
 	// WebClient
@@ -93,7 +92,7 @@ dependencies {
 			because 'to fix SNYK-JAVA-ORGAPACHECOMMONS-3043138'
 		}
 		implementation('org.yaml:snakeyaml:1.33') {
-			because 'to fix SNYK-JAVA-ORGYAML-3016891, SNYK-JAVA-ORGYAML-3016889, SNYK-JAVA-ORGYAML-3016888, SNYK-JAVA-ORGYAML-2806360'
+			because 'spring-boot-starter:2.7.18 depends on 1.30 which has 7 CVEs'
 		}
 		implementation('com.fasterxml.jackson.core:jackson-databind:2.13.4.2') {
 			because 'to fix SNYK-JAVA-COMFASTERXMLJACKSONCORE-3038426'
