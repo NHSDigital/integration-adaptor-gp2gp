@@ -1,5 +1,4 @@
-FROM openjdk:17-jdk-alpine
-#FROM bellsoft/liberica-openjdk-alpine-musl:17 - ARM build
+FROM eclipse-temurin:21-jdk-alpine
 
 ENV ACTIVEMQ_VERSION 5.16.3
 ENV ACTIVEMQ apache-activemq-$ACTIVEMQ_VERSION
