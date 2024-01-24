@@ -9,7 +9,7 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 
 group = 'uk.nhs.adaptors'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()

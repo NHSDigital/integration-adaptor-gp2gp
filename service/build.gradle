@@ -17,7 +17,7 @@ apply plugin: 'application'
 mainClassName = ' uk.nhs.adaptors.gp2gp.Gp2gpApplication'
 
 group = 'uk.nhs.adaptors'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 checkstyle {
 	toolVersion '8.38'

@@ -1,4 +1,4 @@
-FROM gradle:7.4-jdk11 AS build
+FROM gradle:7.4-jdk17 AS build
 
 COPY --chown=gradle:gradle mock-mhs-adaptor /home/gradle/mock-mhs-adaptor
 
@@ -10,7 +10,7 @@ FROM build AS package
 
 RUN gradle --build-cache bootJar
 
-FROM adoptopenjdk/openjdk11:jre
+FROM eclipse-temurin:17-jre-focal
 
 EXPOSE 8081
 
