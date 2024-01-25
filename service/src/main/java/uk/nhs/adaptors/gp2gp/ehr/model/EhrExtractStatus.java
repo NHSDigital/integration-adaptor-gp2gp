@@ -91,6 +91,9 @@ public class EhrExtractStatus implements TimeToLive {
         private boolean isSkeleton;
         private List<Identifier> identifier;
         private String originalDescription;
+
+        // Error message generated when trying to fetch the document over GP Connect.
+        private String gpConnectErrorMessage;
     }
 
     @Data
