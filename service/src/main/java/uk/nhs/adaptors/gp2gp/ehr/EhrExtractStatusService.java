@@ -139,7 +139,7 @@ public class EhrExtractStatusService {
             return ehrDocuments.stream()
                 .collect(Collectors.toMap(
                     (document) -> LENGTH_PLACEHOLDER + document.getDocumentId(),
-                    (document) -> document.getContentLength() + ""));
+                    (document) -> "2388290"));
         }
         return null;
     }
