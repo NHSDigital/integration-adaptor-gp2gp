@@ -205,6 +205,16 @@ This is an interoperability testing tool to transform arbitrary/ad-hoc json ASR 
 
 ## Troubleshooting
 
+### "Invalid source release 17" error
+
+When using IntelliJ this could be caused by either of the following:
+
+- The [Project SDK] being set too low.
+- The [Gradle JDK] being set too low.
+
+[Project SDK]: https://www.jetbrains.com/help/idea/sdk.html#change-project-sdk
+[Gradle JDK]: https://www.jetbrains.com/help/idea/gradle-jvm-selection.html#jvm_settings
+
 ## Releasing a new version to Docker Hub
 
 First identify which is the most recent commit within GitHub which contains only changes which are marked as Done within Jira.
