@@ -205,12 +205,6 @@ This is an interoperability testing tool to transform arbitrary/ad-hoc json ASR 
 
 ## Troubleshooting
 
-### gradle-wrapper.jar doesn't exist
-
-If gradle-wrapper.jar doesn't exist run in terminal:
-* Install Gradle (MacOS) `brew install gradle`
-* Update gradle `gradle wrapper`
-
 ## Releasing a new version to Docker Hub
 
 First identify which is the most recent commit within GitHub which contains only changes which are marked as Done within Jira.
