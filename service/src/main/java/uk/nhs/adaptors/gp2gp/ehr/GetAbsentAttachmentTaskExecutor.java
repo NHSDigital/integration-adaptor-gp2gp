@@ -57,7 +57,15 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, fileName);
 
         return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, fileName, taskId, messageId, fileContent.length()
+            taskDefinition, fileName, taskId, messageId, fileContent.length(), getTitle(taskDefinition)
         );
+    }
+
+    private String getTitle(DocumentTaskDefinition taskDefinition) {
+        if (taskDefinition.getTitle() != null) {
+            return taskDefinition.getTitle();
+        }
+
+        return "The document could not be retrieved";
     }
 }
