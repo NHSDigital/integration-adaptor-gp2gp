@@ -205,11 +205,15 @@ This is an interoperability testing tool to transform arbitrary/ad-hoc json ASR 
 
 ## Troubleshooting
 
-### gradle-wrapper.jar doesn't exist
+### "Invalid source release 17" error
 
-If gradle-wrapper.jar doesn't exist run in terminal:
-* Install Gradle (MacOS) `brew install gradle`
-* Update gradle `gradle wrapper`
+When using IntelliJ this could be caused by either of the following:
+
+- The [Project SDK] being set too low.
+- The [Gradle JDK] being set too low.
+
+[Project SDK]: https://www.jetbrains.com/help/idea/sdk.html#change-project-sdk
+[Gradle JDK]: https://www.jetbrains.com/help/idea/gradle-jvm-selection.html#jvm_settings
 
 ## Releasing a new version to Docker Hub
 
