@@ -1,3 +1,0 @@
-FROM wiremock/wiremock
-
-COPY ./docker/wiremock/stubs /home/wiremock
