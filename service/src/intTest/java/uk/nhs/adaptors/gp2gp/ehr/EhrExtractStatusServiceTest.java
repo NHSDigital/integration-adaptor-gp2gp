@@ -23,7 +23,9 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -64,10 +66,69 @@ public class EhrExtractStatusServiceTest {
     }
 
     @Test
+    public void When_FetchDocumentObjectNameAndSize_With_OneMissingAttachment_Expect_Returned() {
+        var inProgressConversationId = generateRandomUppercaseUUID();
+
+        ArrayList<EhrExtractStatus.GpcDocument> documents = new ArrayList<>();
+
+        EhrExtractStatus.GpcDocument document = EhrExtractStatus.GpcDocument.builder()
+                        .fileName("AbsentAttachment4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60.rtx")
+                        .documentId("4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60")
+                        .contentLength(244)
+                        .gpConnectErrorMessage("404 Not Found")
+                        .contentType("application/msword")
+                        .build();
+
+        documents.add(document);
+        addInProgressTransfer(inProgressConversationId, documents);
+
+        Map<String, String> results = ehrExtractStatusService.fetchDocumentObjectNameAndSize(inProgressConversationId);
+
+        Map<String, String> expectedResult = new HashMap<>();
+
+        expectedResult.put("FILENAME_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "AbsentAttachment4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60.rtx");
+        expectedResult.put("LENGTH_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "244");
+        expectedResult.put("ERROR_MESSAGE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "Absent Attachment: 404 Not Found");
+        expectedResult.put("CONTENT_TYPE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "text/plain");
+
+        assertThat(results.size()).isEqualTo(4);
+        assertThat(results).isEqualTo(expectedResult);
+    }
+
+    @Test
+    public void When_FetchDocumentObjectNameAndSize_With_OnePresentAttachment_Expect_Returned() {
+        var inProgressConversationId = generateRandomUppercaseUUID();
+
+        ArrayList<EhrExtractStatus.GpcDocument> documents = new ArrayList<>();
+
+        EhrExtractStatus.GpcDocument document = EhrExtractStatus.GpcDocument.builder()
+                .fileName("4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60.rtx")
+                .documentId("4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60")
+                .contentLength(244)
+                .gpConnectErrorMessage(null)
+                .contentType("application/msword")
+                .build();
+
+        documents.add(document);
+        addInProgressTransfer(inProgressConversationId, documents);
+
+        Map<String, String> results = ehrExtractStatusService.fetchDocumentObjectNameAndSize(inProgressConversationId);
+
+        Map<String, String> expectedResult = new HashMap<>();
+        expectedResult.put("FILENAME_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60.rtx");
+        expectedResult.put("LENGTH_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "244");
+        expectedResult.put("ERROR_MESSAGE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "");
+        expectedResult.put("CONTENT_TYPE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "application/msword");
+
+        assertThat(results.size()).isEqualTo(4);
+        assertThat(results).isEqualTo(expectedResult);
+    }
+
+    @Test
     public void When_FindInProgressTransfers_With_OneInProgress_Expect_Returned() {
         var inProgressConversationId = generateRandomUppercaseUUID();
 
-        addInProgressTransfer(inProgressConversationId);
+        addInProgressTransfer(inProgressConversationId, new ArrayList<>());
 
         List<EhrExtractStatus> results = ehrExtractStatusService.findInProgressTransfers();
 
@@ -79,7 +140,7 @@ public class EhrExtractStatusServiceTest {
     public void When_FindInProgressTransfers_With_MixedTransfers_Expect_InProgressFound() {
         var inProgressConversationId = generateRandomUppercaseUUID();
 
-        addInProgressTransfer(inProgressConversationId);
+        addInProgressTransfer(inProgressConversationId, new ArrayList<>());
         addCompleteTransfer();
         addFailedIncumbentTransfer();
         addFailedNmeTransfer();
@@ -115,7 +176,7 @@ public class EhrExtractStatusServiceTest {
         addFailedIncumbentTransfer();
 
         for (String inProgressConversationId : inProgressConversationIds) {
-            addInProgressTransfer(inProgressConversationId);
+            addInProgressTransfer(inProgressConversationId, new ArrayList<>());
         }
 
         List<EhrExtractStatus> results = ehrExtractStatusService.findInProgressTransfers();
@@ -216,7 +277,7 @@ public class EhrExtractStatusServiceTest {
             .isEqualTo(2);
     }
 
-    private void addInProgressTransfer(String conversationId) {
+    private void addInProgressTransfer(String conversationId, ArrayList<EhrExtractStatus.GpcDocument> documents) {
         EhrExtractStatus extractStatus = EhrExtractStatus.builder()
             .ackPending(buildPositiveAckPending())
             .ackToRequester(buildPositiveAckToRequester())
@@ -232,7 +293,7 @@ public class EhrExtractStatusServiceTest {
             .ehrExtractMessageId(generateRandomUppercaseUUID())
             .ehrRequest(buildEhrRequest())
             .gpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
-                .documents(new ArrayList<>())
+                .documents(documents)
                 .build())
             .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
                 .accessedAt(FIVE_DAYS_AGO)

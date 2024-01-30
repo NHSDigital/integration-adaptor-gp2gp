@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import static java.lang.String.format;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
+import static org.springframework.util.CollectionUtils.newHashMap;
 
 import java.time.Instant;
 import java.util.List;
@@ -108,6 +109,9 @@ public class EhrExtractStatusService {
     private static final String ERROR_MESSAGE_PATH = ERROR + DOT + MESSAGE;
     private static final String ERROR_TASK_TYPE_PATH = ERROR + DOT + TASK_TYPE;
     private static final String LENGTH_PLACEHOLDER = "LENGTH_PLACEHOLDER_ID=";
+    private static final String ERROR_MESSAGE_PLACEHOLDER = "ERROR_MESSAGE_PLACEHOLDER_ID=";
+    private static final String CONTENT_TYPE_PLACEHOLDER = "CONTENT_TYPE_PLACEHOLDER_ID=";
+    private static final String FILENAME_TYPE_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
 
     private final MongoTemplate mongoTemplate;
@@ -138,10 +142,27 @@ public class EhrExtractStatusService {
         if (ehrExtractStatusSearch.isPresent()) {
             var ehrExtractStatus = ehrExtractStatusSearch.get();
             var ehrDocuments = ehrExtractStatus.getGpcAccessDocument().getDocuments();
-            return ehrDocuments.stream()
-                .collect(Collectors.toMap(
-                    (document) -> LENGTH_PLACEHOLDER + document.getDocumentId(),
-                    (document) -> document.getContentLength() + ""));
+
+            Map<String, String> replacementMap = newHashMap(ehrDocuments.size());
+
+            for(var document:ehrDocuments){
+                String error = document.getGpConnectErrorMessage() == null ? "" :
+                        "Absent Attachment: " + document.getGpConnectErrorMessage();
+
+                replacementMap.put(ERROR_MESSAGE_PLACEHOLDER + document.getDocumentId(),
+                        error);
+                replacementMap.put(LENGTH_PLACEHOLDER + document.getDocumentId(),
+                        String.valueOf(document.getContentLength()));
+
+                if(document.getGpConnectErrorMessage() != null){
+                    replacementMap.put(CONTENT_TYPE_PLACEHOLDER + document.getDocumentId(), "text/plain");
+                }else{
+                    replacementMap.put(CONTENT_TYPE_PLACEHOLDER + document.getDocumentId(), document.getContentType());
+                }
+                replacementMap.put(FILENAME_TYPE_PLACEHOLDER + document.getDocumentId(), document.getFileName());
+            }
+
+            return replacementMap;
         }
         return null;
     }

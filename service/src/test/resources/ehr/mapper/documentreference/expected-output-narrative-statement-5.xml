@@ -1,7 +1,7 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
-        <text>Author Org: Organisation name</text>
+        <text>Author Org: Organisation name ${ERROR_MESSAGE_PLACEHOLDER_ID=394559384658936}</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200921141759" />
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -13,7 +13,7 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="394559384658936"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="text/richtext">
+                <text mediaType="${CONTENT_TYPE_PLACEHOLDER_ID=394559384658936}">
                     <reference value="file://localhost/394559384658936.rtx"/>
                 </text>
             </referredToExternalDocument>
