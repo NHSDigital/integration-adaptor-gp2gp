@@ -17,6 +17,17 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
+
+/**
+ * There exists no requirement within GP Connect FHIR specification that the `IdType`
+ * field is populated with a UUID.
+ * The GP2GP HL7 specification however does mandate that DCE UUIDs are used within the
+ * Instance Identifier field.
+ *
+ * This class generates UUIDs for use within HL7, and maintains a mapping between FHIR
+ * resource and UUID such that the same FHIR resource reference gets assigned the same
+ * UUID.
+ */
 @Slf4j
 @AllArgsConstructor
 public class IdMapper {
