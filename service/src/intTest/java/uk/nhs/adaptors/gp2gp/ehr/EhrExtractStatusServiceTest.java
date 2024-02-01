@@ -50,6 +50,7 @@ public class EhrExtractStatusServiceTest {
 
     public static final Instant NOW = Instant.now();
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
+    private static final int DEFAULT_CONTENT_LENGTH = 244;
 
     @Autowired
     private EhrExtractStatusService ehrExtractStatusService;
@@ -65,6 +66,7 @@ public class EhrExtractStatusServiceTest {
         ehrExtractStatusRepository.deleteAll();
     }
 
+    @SuppressWarnings("checkstyle:MagicNumber")
     @Test
     public void When_FetchDocumentObjectNameAndSize_With_OneMissingAttachment_Expect_Returned() {
         var inProgressConversationId = generateRandomUppercaseUUID();
@@ -74,7 +76,7 @@ public class EhrExtractStatusServiceTest {
         EhrExtractStatus.GpcDocument document = EhrExtractStatus.GpcDocument.builder()
                         .fileName("AbsentAttachment4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60.rtx")
                         .documentId("4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60")
-                        .contentLength(244)
+                        .contentLength(DEFAULT_CONTENT_LENGTH)
                         .gpConnectErrorMessage("404 Not Found")
                         .contentType("application/msword")
                         .build();
@@ -86,15 +88,18 @@ public class EhrExtractStatusServiceTest {
 
         Map<String, String> expectedResult = new HashMap<>();
 
-        expectedResult.put("FILENAME_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "AbsentAttachment4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60.rtx");
+        expectedResult.put("FILENAME_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60",
+                "AbsentAttachment4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60.rtx");
         expectedResult.put("LENGTH_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "244");
-        expectedResult.put("ERROR_MESSAGE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "Absent Attachment: 404 Not Found");
+        expectedResult.put("ERROR_MESSAGE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60",
+                "Absent Attachment: 404 Not Found");
         expectedResult.put("CONTENT_TYPE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "text/plain");
 
         assertThat(results.size()).isEqualTo(4);
         assertThat(results).isEqualTo(expectedResult);
     }
 
+    @SuppressWarnings("checkstyle:MagicNumber")
     @Test
     public void When_FetchDocumentObjectNameAndSize_With_OnePresentAttachment_Expect_Returned() {
         var inProgressConversationId = generateRandomUppercaseUUID();
@@ -104,7 +109,7 @@ public class EhrExtractStatusServiceTest {
         EhrExtractStatus.GpcDocument document = EhrExtractStatus.GpcDocument.builder()
                 .fileName("4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60.rtx")
                 .documentId("4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60")
-                .contentLength(244)
+                .contentLength(DEFAULT_CONTENT_LENGTH)
                 .gpConnectErrorMessage(null)
                 .contentType("application/msword")
                 .build();

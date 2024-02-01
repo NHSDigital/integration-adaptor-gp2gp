@@ -9,7 +9,6 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -145,18 +144,18 @@ public class EhrExtractStatusService {
 
             Map<String, String> replacementMap = newHashMap(ehrDocuments.size());
 
-            for(var document:ehrDocuments){
-                String error = document.getGpConnectErrorMessage() == null ? "" :
-                        "Absent Attachment: " + document.getGpConnectErrorMessage();
+            for (var document:ehrDocuments) {
+                String error = document.getGpConnectErrorMessage() == null ? ""
+                        : "Absent Attachment: " + document.getGpConnectErrorMessage();
 
                 replacementMap.put(ERROR_MESSAGE_PLACEHOLDER + document.getDocumentId(),
                         error);
                 replacementMap.put(LENGTH_PLACEHOLDER + document.getDocumentId(),
                         String.valueOf(document.getContentLength()));
 
-                if(document.getGpConnectErrorMessage() != null){
+                if (document.getGpConnectErrorMessage() != null) {
                     replacementMap.put(CONTENT_TYPE_PLACEHOLDER + document.getDocumentId(), "text/plain");
-                }else{
+                } else {
                     replacementMap.put(CONTENT_TYPE_PLACEHOLDER + document.getDocumentId(), document.getContentType());
                 }
                 replacementMap.put(FILENAME_TYPE_PLACEHOLDER + document.getDocumentId(), document.getFileName());
