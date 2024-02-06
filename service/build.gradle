@@ -32,13 +32,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	implementation 'org.springframework:spring-jms:5.3.31'
+	implementation 'org.springframework:spring-jms'
 
 	implementation 'org.yaml:snakeyaml:1.33'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
 
 	// WebClient
-	implementation ('org.springframework.boot:spring-boot-starter-webflux:2.7.18')
+	implementation ('org.springframework.boot:spring-boot-starter-webflux')
 	implementation('org.projectreactor:reactor-spring:1.0.1.RELEASE') {
 		exclude group: 'com.jayway.jsonpath', module: 'json-path'
 	}
