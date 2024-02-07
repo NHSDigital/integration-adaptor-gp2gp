@@ -75,7 +75,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
 
         return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, documentName, taskId, taskDefinition.getMessageId(), contentAsBase64.length());
+            taskDefinition, documentName, taskId, taskDefinition.getMessageId(), contentAsBase64.length(), null);
     }
 
     private StorageDataWrapper getStorageDataWrapper(

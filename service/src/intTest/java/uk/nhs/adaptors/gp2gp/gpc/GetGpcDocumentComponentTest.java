@@ -158,6 +158,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(gpcDocuments.get(0).getAccessedAt()).isNotNull();
         assertThat(gpcDocuments.get(0).getObjectName()).isEqualTo(absentAttachmentFilename);
         assertThat(gpcDocuments.get(0).getMessageId()).isEqualTo(documentId);
+        assertThat(gpcDocuments.get(0).getGpConnectErrorMessage()).isEqualTo("The document could not be retrieved");
 
         assertDoesNotThrow(() -> storageConnector.downloadFromStorage(absentAttachmentFilename));
 
@@ -198,6 +199,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(gpcDocument.getObjectName()).isEqualTo(EXPECTED_DOCUMENT_JSON_FILENAME);
         assertThat(gpcDocument.getAccessedAt()).isNotNull();
         assertThat(gpcDocument.getTaskId()).isEqualTo(taskDefinition.getTaskId());
+        assertThat(gpcDocument.getGpConnectErrorMessage()).isNull();
     }
 
     private List<EhrExtractStatus.GpcDocument> prepareDocuments() {
