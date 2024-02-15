@@ -113,7 +113,7 @@
                 "subject": {
                     "identifier": {
                         "system": "https://fhir.nhs.uk/Id/nhs-number",
-                        "value": "9690937294"
+                        "value": "{{jsonPath request.body '$.parameter[0].valueIdentifier.value'}}"
                     }
                 },
                 "note": [
