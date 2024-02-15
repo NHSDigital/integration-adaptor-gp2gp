@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fix GpConnectException (ASID_CHECK_FAILED_MESSAGESENDER) being thrown, a correct ASID value is fetched in GP Connect Consumer Adapter 
+
 ## [1.5.14] - 2024-01-05
 
 ### Added 
@@ -35,7 +38,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Guard against possible null pointer error in exception handler.
 - Fix errors within the generation of compressed EHR Extracts (happens when the record becomes >5MB) which was causing
   SystmOne to reject the transfer.
-
 
 ## [1.5.11] - 2023-09-26
 
