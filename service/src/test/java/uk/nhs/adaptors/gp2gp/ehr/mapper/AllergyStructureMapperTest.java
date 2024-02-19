@@ -116,6 +116,7 @@ public class AllergyStructureMapperTest {
             + "expected-output-allergy-structure-19.xml";
     private static final String OUTPUT_XML_USES_RECORDER_AS_PERFORMER_PATIENT_ASSERTER = TEST_FILE_DIRECTORY
             + "expected-output-allergy-structure-20.xml";
+
     private static final String OUTPUT_XML_USES_RECORDER_AS_FALLBACK_ASSERTER = TEST_FILE_DIRECTORY
         + "expected-output-allergy-structure-21.xml";
     private static final String OUTPUT_XML_USES_RESOLVED_CLINICAL_STATUS = TEST_FILE_DIRECTORY
@@ -130,34 +131,33 @@ public class AllergyStructureMapperTest {
     private AllergyStructureMapper allergyStructureMapper;
     private MessageContext messageContext;
 
+
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS, OUTPUT_XML_USES_OPTIONAL_TEXT_FIELDS),
-            Arguments.of(INPUT_JSON_WITH_NO_OPTIONAL_TEXT_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_TEXT_FIELDS),
-            Arguments.of(INPUT_JSON_WITH_PATIENT_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_PATIENT_RECORDER_AND_ASSERTER),
-            Arguments.of(INPUT_JSON_WITH_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_RECORDER_AND_ASSERTER),
-            Arguments.of(INPUT_JSON_WITH_DATES, OUTPUT_XML_USES_DATES),
-            Arguments.of(INPUT_JSON_WITH_ONSET_DATE_ONLY, OUTPUT_XML_USES_ONSET_DATE),
-            Arguments.of(INPUT_JSON_WITH_REASON_END_DATE_ONLY, OUTPUT_XML_USES_END_DATE),
-            Arguments.of(INPUT_JSON_WITH_NO_DATES, OUTPUT_XML_USES_NULL_FLAVOR_DATE),
-            Arguments.of(INPUT_JSON_WITH_ENVIRONMENT_CATEGORY, OUTPUT_XML_USES_ENVIRONMENT_CATEGORY),
-            Arguments.of(INPUT_JSON_WITH_MEDICATION_CATEGORY, OUTPUT_XML_USES_MEDICATION_CATEGORY),
-            Arguments.of(INPUT_JSON_WITH_REACTION, OUTPUT_XML_USES_REACTION),
-            Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_ONE_NOTE),
-            Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_TWO_NOTES),
-            Arguments.of(INPUT_JSON_WITH_NO_RELATION_TO_CONDITION, OUTPUT_XML_USES_NO_RELATION_TO_CONDITION),
-            Arguments.of(INPUT_JSON_WITH_DEVICE_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_DEVICE_RECORDER_AND_ASSERTER),
-            Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER),
-            Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NAME_TEXT, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER),
-            Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NO_NAME, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER_NO_NAME),
-            Arguments.of(INPUT_JSON_WITHOUT_END_DATE, OUTPUT_XML_USES_NO_END_DATE),
-            Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_FALLBACK_ASSERTER),
-            Arguments.of(INPUT_JSON_WITH_INVALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_NO_AUTHOR_OR_PERFORMER),
-            Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_RELATED_PERSON_ASSERTER,
-                    OUTPUT_XML_USES_RECORDER_AS_PERFORMER_RELATED_PERSON_ASSERTER),
-            Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_PATIENT_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_PERFORMER_PATIENT_ASSERTER),
-            Arguments.of(INPUT_JSON_WITH_RESOLVED_CLINICAL_STATUS, OUTPUT_XML_USES_RESOLVED_CLINICAL_STATUS)
-
+                Arguments.of(INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS, OUTPUT_XML_USES_OPTIONAL_TEXT_FIELDS, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_NO_OPTIONAL_TEXT_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_TEXT_FIELDS, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_PATIENT_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_PATIENT_RECORDER_AND_ASSERTER, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_RECORDER_AND_ASSERTER, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_DATES, OUTPUT_XML_USES_DATES, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_ONSET_DATE_ONLY, OUTPUT_XML_USES_ONSET_DATE, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_REASON_END_DATE_ONLY, OUTPUT_XML_USES_END_DATE, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_NO_DATES, OUTPUT_XML_USES_NULL_FLAVOR_DATE, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_ENVIRONMENT_CATEGORY, OUTPUT_XML_USES_ENVIRONMENT_CATEGORY, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_MEDICATION_CATEGORY, OUTPUT_XML_USES_MEDICATION_CATEGORY, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_REACTION, OUTPUT_XML_USES_REACTION, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_DEVICE_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_DEVICE_RECORDER_AND_ASSERTER, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITHOUT_END_DATE, OUTPUT_XML_USES_NO_END_DATE, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_FALLBACK_ASSERTER, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_INVALID_RECORDER_NO_ASSERTER, OUTPUT_XML_USES_NO_AUTHOR_OR_PERFORMER, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_RELATED_PERSON_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_PERFORMER_RELATED_PERSON_ASSERTER, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_VALID_RECORDER_PATIENT_ASSERTER, OUTPUT_XML_USES_RECORDER_AS_PERFORMER_PATIENT_ASSERTER, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_RESOLVED_CLINICAL_STATUS, OUTPUT_XML_USES_RESOLVED_CLINICAL_STATUS, "0C1232CF-D34B-4C16-A5F4-0F6461C51A41"),
+                Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NAME_TEXT, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER, "230D3D37-99E3-450A-AE88-B5AB802B7137"),
+                Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_ONE_NOTE, "081CE989-17CD-46C6-8C22-C90F8F2487C2"),
+                Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_TWO_NOTES, "75691D32-C7DE-4639-AA74-24B1AF61C32B"),
+                Arguments.of(INPUT_JSON_WITH_NO_RELATION_TO_CONDITION, OUTPUT_XML_USES_NO_RELATION_TO_CONDITION,"04288662-8B7A-4350-B69B-CE155E992A7C"),
+                Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NO_NAME, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER_NO_NAME)
         );
     }
 
@@ -168,6 +168,32 @@ public class AllergyStructureMapperTest {
         );
     }
 
+    @BeforeEach
+    public void setUp() throws IOException {
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+
+        lenient().when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
+                .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        lenient().when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+                .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        lenient().when(codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(any(CodeableConcept.class),
+                        any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
+                .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        lenient().when(codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(any(CodeableConcept.class),
+                        any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
+                .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+
+        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.initialize(bundle);
+        List.of(ResourceType.Patient, ResourceType.Device)
+                .forEach(resourceType -> messageContext.getIdMapper().getOrNew(resourceType, buildIdType(resourceType, COMMON_ID)));
+        List.of(ResourceType.Practitioner, ResourceType.Organization)
+                .forEach(resourceType -> messageContext.getAgentDirectory().getAgentId(buildReference(resourceType, COMMON_ID)));
+        allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
+    }
+
     @AfterEach
     public void tearDown() {
         messageContext.resetMessageContext();
@@ -175,40 +201,21 @@ public class AllergyStructureMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")
-    public void When_MappingAllergyIntoleranceJson_Expect_AllergyStructureXmlOutput(String inputJson, String outputXml)
+    public void When_MappingAllergyIntoleranceJsonWithoutRelations_Expect_AllergyStructureXmlOutput(
+            String inputJson,
+            String outputXml,
+            String sourceId)
         throws IOException {
         CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
 
+        when(randomIdGeneratorService.createNewOrUseExistingUUID(sourceId))
+                .thenReturn(sourceId);
+
         String outputMessage = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(parsedAllergyIntolerance);
+
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
-    }
-
-    @BeforeEach
-    public void setUp() throws IOException {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-
-        lenient().when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        lenient().when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        lenient().when(codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(any(CodeableConcept.class),
-            any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        lenient().when(codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(any(CodeableConcept.class),
-            any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-
-        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
-        messageContext = new MessageContext(randomIdGeneratorService);
-        messageContext.initialize(bundle);
-        List.of(ResourceType.Patient, ResourceType.Device)
-            .forEach(resourceType -> messageContext.getIdMapper().getOrNew(resourceType, buildIdType(resourceType, COMMON_ID)));
-        List.of(ResourceType.Practitioner, ResourceType.Organization)
-            .forEach(resourceType -> messageContext.getAgentDirectory().getAgentId(buildReference(resourceType, COMMON_ID)));
-        allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
     }
 
     @ParameterizedTest
