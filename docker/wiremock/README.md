@@ -2,6 +2,8 @@
 
 ## Patients - `migratestructuredrecord` endpoint
 
+Each scenario below can be retrieved by requesting the associated NHS Number specified.
+
 ### Invalid/error responses
 - [OperationOutcome - Invalid NHS Number](stubs/__files/operationOutcomeInvalidNHSNumber.json) 123456789, 960000001
 - [OperationOutcome - Bad Request](stubs/__files/operationOutcomeBadRequest.json) 9600000005
@@ -11,7 +13,7 @@
 - [OperationOutcome - Invalid Resource](stubs/__files/operationOutcomeInvalidResource.json) 9600000003
 - [OperationOutcome - No Relationship](stubs/__files/operationOutcomeNoRelationship.json) 9600000010
 - [Bundle without Patient Resource](stubs/__files/malformedStructuredRecordMissingPatientResource.json) 2906543841
-- [OperationOutcome - Not Found](stubs/__files/operationOutcomePatientNotFound.json) 9600000009, also used as a fallback for any unrecognised NHS number.
+- [OperationOutcome - Not Found](stubs/__files/operationOutcomePatientNotFound.json) 9600000009
 
 ### Valid bundles
 
@@ -45,3 +47,24 @@
 - PWTP9 [EMIS](stubs/__files/EMISPatientStructurede2eResponsePWTP9.json) 9726908752 [TPP](stubs/__files/TPPPatientStructuredRecordE2EPWTP9.json) 9726908841
 - PWTP10 [EMIS](stubs/__files/EMISPatientStructurede2eResponsePWTP10.json) 9726908760 [TPP](stubs/__files/TPPPatientStructuredRecordE2EPWTP10.json) 9726908868
 - PWTP11 [EMIS](stubs/__files/EMISPatientStructurede2eResponsePWTP11.json) 9726908779 [TPP](stubs/__files/TPPPatientStructuredRecordE2EPWTP11.json) 9726908876
+
+
+## Patients - `migratestructuredrecord` endpoint, unknown patient
+
+The `migratestructuredrecord` endpoint will also respond to unknown NHS Numbers,
+by default returning a NOT FOUND response, but can also be set up to reply with
+a valid patient record.
+
+### Changing the default record
+
+To change the patient record returned to be [No Documents](stubs/__files/correctPatientNoDocsStructuredRecordResponse.json):
+
+```shell
+curl --request PUT --data '{"state": "No Documents"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+```
+
+To change the patient record returned to be NOT FOUND:
+
+```shell
+curl --request PUT --data '{"state": "Started"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+```
