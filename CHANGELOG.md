@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2024-02-19
+
+**Breaking change**: This release creates a minimum version requirement of 1.0.0 for the [GP Connect Consumer Adaptor][gpcc-adaptor].
+
 ### Fixed
 - Fix GpConnectException (ASID_CHECK_FAILED_MESSAGESENDER) being thrown, a correct ASID value is fetched in GP Connect Consumer Adapter 
 
@@ -580,3 +584,5 @@ enable ptl deployment (#170)
 - Information Disclosure (new) [Medium Severity] https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCATEMBED-1061939 in org.apache.tomcat.embed:tomcat-embed-core@9.0.39
 - Denial of Service (DoS) [High Severity] https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONDATAFORMAT-1047329 in com.fasterxml.jackson.dataformat:jackson-dataformat-cbor@2.11.3
 - Use [Official Images](https://docs.docker.com/docker-hub/official_images/) for adaptor's base image.
+
+[gpcc-adaptor]: https://github.com/NHSDigital/integration-adaptor-gpc-consumer
