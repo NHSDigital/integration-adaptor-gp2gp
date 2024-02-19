@@ -61,7 +61,7 @@
                             }
                         ],
                         "system": "https://fhir.nhs.uk/Id/nhs-number",
-                        "value": "1239577290"
+                        "value": "{{jsonPath request.body '$.parameter[0].valueIdentifier.value'}}"
                     }
                 ],
                 "active": true,
