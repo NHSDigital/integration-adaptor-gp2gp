@@ -1,6 +1,6 @@
 <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="394559384658936"/>
+        <id root="75691D32-C7DE-4639-AA74-24B1AF61C32B"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -9,7 +9,7 @@
         <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="394559384658936"/>
+                <id root="75691D32-C7DE-4639-AA74-24B1AF61C32B"/>
                 <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>

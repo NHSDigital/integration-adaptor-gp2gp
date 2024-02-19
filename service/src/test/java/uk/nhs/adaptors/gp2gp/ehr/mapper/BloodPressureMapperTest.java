@@ -26,11 +26,13 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class BloodPressureMapperTest {
-    private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
+    private static final String TEST_NEW_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
+    private static final String TEST_RESOURCE_ID = "296D5D73-8D65-4CAC-8047-553232F77A82";
     private static final String BLOOD_PRESSURE_FILE_LOCATION = "/ehr/mapper/blood_pressure/";
 
     private static final String INPUT_ARTERIAL_PRESSURE_WITH_DATA = "arterial-pressure-with-data.json";
@@ -68,7 +70,10 @@ public class BloodPressureMapperTest {
 
     @BeforeEach
     public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewId())
+                .thenReturn(TEST_NEW_ID);
+        when(randomIdGeneratorService.createNewOrUseExistingUUID(TEST_RESOURCE_ID))
+                .thenReturn(TEST_RESOURCE_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(new Bundle());
         bloodPressureMapper = new BloodPressureMapper(
@@ -117,6 +122,8 @@ public class BloodPressureMapperTest {
 
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + inputJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + outputXml);
+        var sourceId = "296D5D73-8D65-4CAC-8047-553232F77A82";
+        when(randomIdGeneratorService.createNewOrUseExistingUUID(sourceId)).thenReturn(sourceId);
 
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, false);
@@ -143,15 +150,13 @@ public class BloodPressureMapperTest {
     @Test
     public void When_MappingBloodPressureWithCodeableConcepts_Expect_CompoundStatementXmlReturned() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS);
-        var expectedOutput = ResourceTestFileUtils.getFileContent(
-            BLOOD_PRESSURE_FILE_LOCATION + EXPECTED_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS);
-
+        var expectedOutput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + EXPECTED_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS);
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
         bloodPressureMapper = new BloodPressureMapper(
             messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
             codeableConceptCdMapper, new ParticipantMapper());
-
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, true);
 
         assertThat(outputMessage).isEqualTo(expectedOutput);
