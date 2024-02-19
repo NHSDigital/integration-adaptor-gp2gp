@@ -60,8 +60,8 @@ public class AllergyStructureExtractor {
     }
 
     public static String extractAssertedDate(AllergyIntolerance allergyIntolerance) {
-        if (allergyIntolerance.hasOnset() && allergyIntolerance.getOnsetDateTimeType().hasValue()) {
-            return toHl7Format(allergyIntolerance.getOnsetDateTimeType());
+        if (allergyIntolerance.hasAssertedDateElement() && allergyIntolerance.getAssertedDateElement().hasValue()) {
+            return toHl7Format(allergyIntolerance.getAssertedDateElement());
         }
         return StringUtils.EMPTY;
     }

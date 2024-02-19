@@ -1,14 +1,14 @@
 <EhrExtract classCode="EXTRACT" moodCode="EVN">
     <id root="test-id-1" />
     <statusCode code="COMPLETE" />
-    <availabilityTime value="20200101010101"/>
+    <availabilityTime value="20200101010101" />
     <recordTarget typeCode="RCT">
         <patient classCode="PAT">
             <id root="2.16.840.1.113883.2.1.4.1" extension="1234567890" />
         </patient>
     </recordTarget>
     <author typeCode="AUT">
-        <time value="20200101010101"/>
+        <time value="20200101010101" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
                 <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
@@ -63,9 +63,9 @@
         <effectiveTime>
             <center value="19781231"/>
         </effectiveTime>
-        <availabilityTime value="19781231"/>
+        <availabilityTime value="20100114095757"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="19781231" />
+            <time value="20100114095757" />
             <agentRef classCode="AGNT">
                 <id nullFlavor="UNK" />
             </agentRef>
@@ -83,7 +83,7 @@
         <effectiveTime>
             <center value="19781231"/>
         </effectiveTime>
-        <availabilityTime value="19781231" />
+        <availabilityTime value="20100114095757"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="test-id-3"/>
@@ -92,7 +92,7 @@
                 <effectiveTime>
                     <center value="19781231"/>
                 </effectiveTime>
-                <availabilityTime value="19781231" />
+                <availabilityTime value="20100114095757"/>
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
