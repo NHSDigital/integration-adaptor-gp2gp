@@ -4,7 +4,6 @@ import ca.uhn.fhir.parser.IParser;
 import io.netty.handler.ssl.SslContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Parameters;
@@ -41,6 +40,7 @@ import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class GpcRequestBuilder {
+
     @Value("${gp2gp.gpc.overrideFromAsid}")
     private String overrideFromAsid;
     @Value("${gp2gp.gpc.overrideToAsid}")
@@ -48,7 +48,6 @@ public class GpcRequestBuilder {
 
     private static final String NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number";
     private static final String FHIR_CONTENT_TYPE = "application/fhir+json";
-    private static final String SSP_FROM = "Ssp-From";
     private static final String SSP_INTERACTION_ID = "Ssp-InteractionID";
     private static final String SSP_TRACE_ID = "Ssp-TraceID";
     private static final String AUTHORIZATION = "Authorization";
@@ -130,34 +129,12 @@ public class GpcRequestBuilder {
     }
 
     private RequestBodySpec buildRequestWithHeaders(RequestBodySpec uri, TaskDefinition taskDefinition, String interactionId) {
-        /*
-         * SSP_FROM must be set to GP2GP ASID which is stored in the toAsid property of the task
-         * SSP_TO is left blank as it will be set in the GPC Consumer Proxy
-         */
+
         return uri.accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
-            .header(SSP_FROM, getToAsid(taskDefinition.getToAsid()))
             .header(SSP_INTERACTION_ID, interactionId)
             .header(SSP_TRACE_ID, taskDefinition.getConversationId())
             .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode()))
             .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
-    }
-
-    private String getFromAsid(String fromAsid) {
-        if (StringUtils.isNotBlank(overrideFromAsid)) {
-            LOGGER.warn("GP2GP_GPC_OVERRIDE_FROM_ASID is being used, no longer using provided from asid");
-            return overrideFromAsid;
-        } else {
-            return fromAsid;
-        }
-    }
-
-    private String getToAsid(String toAsid) {
-        if (StringUtils.isNotBlank(overrideToAsid)) {
-            LOGGER.warn("GP2GP_GPC_OVERRIDE_TO_ASID is being used, no longer using provided to asid");
-            return overrideToAsid;
-        } else {
-            return toAsid;
-        }
     }
 
     private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri, String requestBody,
