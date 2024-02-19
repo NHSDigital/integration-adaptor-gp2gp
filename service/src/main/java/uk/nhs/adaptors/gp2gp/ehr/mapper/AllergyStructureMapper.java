@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractOnsetDate;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractReaction;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractAssertedDate;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 
@@ -124,11 +125,10 @@ public class AllergyStructureMapper {
     }
 
     private String buildAvailabilityTime(AllergyIntolerance allergyIntolerance) {
-        return Optional.of(allergyIntolerance)
-            .filter(AllergyIntolerance::hasOnsetDateTimeType)
-            .map(AllergyIntolerance::getOnsetDateTimeType)
-            .map(DateFormatUtil::toHl7Format)
-            .orElse(StringUtils.EMPTY);
+
+        var availabilityTime = extractAssertedDate(allergyIntolerance);
+
+        return StatementTimeMappingUtils.prepareAvailabilityTimeForAllergyIntolerance(availabilityTime);
     }
 
     private String buildEffectiveTime(AllergyIntolerance allergyIntolerance) {

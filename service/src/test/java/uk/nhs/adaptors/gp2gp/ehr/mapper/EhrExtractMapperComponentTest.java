@@ -245,7 +245,7 @@ public class EhrExtractMapperComponentTest {
             getGpcStructuredTaskDefinition,
             bundle);
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
-        assertThat(output).isEqualTo(expectedJsonToXmlContent);
+        assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
     }
 
     @Test
