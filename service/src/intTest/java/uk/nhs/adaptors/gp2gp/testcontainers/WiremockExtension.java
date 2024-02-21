@@ -23,7 +23,7 @@ public class WiremockExtension implements BeforeAllCallback, BeforeEachCallback 
     }
 
     private WireMockServer startWiremock(ExtensionContext context) {
-        var wireMockServer = new WireMockServer(new WireMockConfiguration().dynamicPort());
+        wireMockServer = new WireMockServer(new WireMockConfiguration().dynamicPort());
         wireMockServer.start();
 
         var configurableApplicationContext = (ConfigurableApplicationContext) SpringExtension.getApplicationContext(context);

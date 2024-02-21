@@ -103,7 +103,7 @@ public class CodeableConceptCdMapper {
 
             builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
 
-            Optional<String> code = Optional.ofNullable(mainCode.get().getCode().toString());
+            Optional<String> code = Optional.ofNullable(mainCode.get().getCode());
             code.ifPresent(builder::mainCode);
 
             Optional<String> displayName = extension.stream()
@@ -344,15 +344,13 @@ public class CodeableConceptCdMapper {
                 return Optional.ofNullable(codeableConcept.getText());
             } else {
                 if (coding.get().hasDisplay()) {
-                    Optional<String> originalText = Optional.ofNullable(coding.get().getDisplay());
-                    return originalText;
+                    return Optional.ofNullable(coding.get().getDisplay());
                 } else {
                     var extension = retrieveDescriptionExtension(coding.get());
-                    Optional<String> originalText = extension.stream()
+                    return extension.stream()
                         .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
                         .map(extension1 -> extension1.getValue().toString())
                         .findFirst();
-                    return originalText;
                 }
             }
         } else {

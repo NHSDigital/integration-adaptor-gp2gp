@@ -39,9 +39,9 @@ public class SupportingInfoResourceExtractor {
             if (documentReference.getType().hasText()) {
                 stringBuilder.append(" " + documentReference.getType().getText());
             } else if (documentReference.getType().hasCoding()) {
-                CodeableConceptMappingUtils.extractTextOrCoding(documentReference.getType()).ifPresent(docType -> {
-                    stringBuilder.append(" " + docType);
-                });
+                CodeableConceptMappingUtils.extractTextOrCoding(
+                    documentReference.getType()).ifPresent(docType -> stringBuilder.append(" " + docType)
+                );
             }
         }
 
@@ -72,10 +72,7 @@ public class SupportingInfoResourceExtractor {
             }
         }
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getCode()).ifPresent(code -> {
-            stringBuilder.append(" " + code);
-        });
-
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getCode()).ifPresent(code -> stringBuilder.append(" " + code));
         stringBuilder.append(" }");
 
         return stringBuilder.toString();
@@ -96,9 +93,9 @@ public class SupportingInfoResourceExtractor {
         }
 
         if (referralRequest.hasReasonCode()) {
-            CodeableConceptMappingUtils.extractTextOrCoding(referralRequest.getReasonCode().get(0)).ifPresent(reasonCode -> {
-                stringBuilder.append(" " + reasonCode);
-            });
+            CodeableConceptMappingUtils.extractTextOrCoding(referralRequest.getReasonCode().get(0)).ifPresent(reasonCode ->
+                stringBuilder.append(" " + reasonCode)
+            );
         }
 
         stringBuilder.append(" }");
@@ -163,9 +160,9 @@ public class SupportingInfoResourceExtractor {
                     .map(Medication.class::cast)
                     .get();
 
-            CodeableConceptMappingUtils.extractTextOrCoding(medication.getCode()).ifPresent(code -> {
-                stringBuilder.append(" " + code);
-            });
+            CodeableConceptMappingUtils.extractTextOrCoding(medication.getCode()).ifPresent(code ->
+                stringBuilder.append(" " + code)
+            );
         }
 
         stringBuilder.append(" }");

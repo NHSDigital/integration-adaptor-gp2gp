@@ -119,7 +119,7 @@ public class ConditionWrapper {
         return messageContext.getInputBundleHolder()
             .getResource(target.getReferenceElement())
             .map(Condition.class::cast)
-            .map(condition -> getCodeDisplay(condition))
+            .map(this::getCodeDisplay)
             .orElse(UNKNOWN_CONDITION);
     }
 

@@ -65,7 +65,7 @@ public class DiaryPlanStatementMapper {
         buildEffectiveTime(procedureRequest).ifPresent(builder::effectiveTime);
         buildText(procedureRequest).ifPresent(builder::text);
         builder.code(buildCode(procedureRequest));
-        buildParticipant(procedureRequest, idMapper).ifPresent(builder::participant);
+        buildParticipant(procedureRequest).ifPresent(builder::participant);
 
         return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
     }
@@ -112,7 +112,7 @@ public class DiaryPlanStatementMapper {
         throw new EhrMapperException("Procedure request code not present");
     }
 
-    private Optional<String> buildParticipant(ProcedureRequest procedureRequest, IdMapper idMapper) {
+    private Optional<String> buildParticipant(ProcedureRequest procedureRequest) {
         var requesterAgent = procedureRequest.getRequester().getAgent();
 
         if (requesterAgent.hasReference()) {
@@ -158,12 +158,12 @@ public class DiaryPlanStatementMapper {
             if (reference.getResourceType().equals(ResourceType.Organization.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
-                    .map(resource -> (Organization) resource)
+                    .map(Organization.class::cast)
                     .map(this::formatOrganization);
             } else if (reference.getResourceType().equals(ResourceType.Device.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
-                    .map(resource -> (Device) resource)
+                    .map(Device.class::cast)
                     .map(this::formatDevice);
             }
         }
