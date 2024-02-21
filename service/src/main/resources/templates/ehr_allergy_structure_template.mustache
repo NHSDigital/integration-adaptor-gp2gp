@@ -6,7 +6,7 @@
         <effectiveTime>
             {{{effectiveTime}}}
         </effectiveTime>
-        <availabilityTime {{#availabilityTime}}value="{{availabilityTime}}"{{/availabilityTime}}{{^availabilityTime}}nullFlavor="UNK"{{/availabilityTime}} />
+        {{{availabilityTime}}}
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="{{observationId}}"/>
@@ -15,7 +15,7 @@
                 <effectiveTime>
                     {{{effectiveTime}}}
                 </effectiveTime>
-                <availabilityTime {{#availabilityTime}}value="{{availabilityTime}}"{{/availabilityTime}}{{^availabilityTime}}nullFlavor="UNK"{{/availabilityTime}} />
+                {{{availabilityTime}}}
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">

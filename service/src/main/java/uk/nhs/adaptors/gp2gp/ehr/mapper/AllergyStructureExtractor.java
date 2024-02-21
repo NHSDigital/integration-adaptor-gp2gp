@@ -59,6 +59,13 @@ public class AllergyStructureExtractor {
         return StringUtils.EMPTY;
     }
 
+    public static String extractAssertedDate(AllergyIntolerance allergyIntolerance) {
+        if (allergyIntolerance.hasAssertedDateElement() && allergyIntolerance.getAssertedDateElement().hasValue()) {
+            return toHl7Format(allergyIntolerance.getAssertedDateElement());
+        }
+        return StringUtils.EMPTY;
+    }
+
     public static String extractReaction(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent,
         AtomicInteger reactionCount) {
         String reaction = String.format(REACTION, reactionCount.getAndIncrement());
