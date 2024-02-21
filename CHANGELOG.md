@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2024-02-22
+
 ### Fixed
 - When mapping an `AllergyIntollerance` to an `ObservationStatement`, both the `availabilityTime` and `effectiveTime`
   fields were previously mapped from the `onset` field and the `assertedDate` field was ignored.

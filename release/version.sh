@@ -1,3 +1,3 @@
 #!/bin/bash
 
-export RELEASE_VERSION=2.0.0
+export RELEASE_VERSION=2.0.1
