@@ -1181,10 +1181,9 @@
                 "name": [
                     {
                         "use": "official",
-                        "family": "SPICER",
+                        "family": "PART",
                         "given": [
-                            "Sibyl",
-                            "Stacey"
+                            "Cassie"
                         ],
                         "prefix": [
                             "MISS"
@@ -1196,7 +1195,7 @@
                     }
                 ],
                 "gender": "female",
-                "birthDate": "2020-06-03",
+                "birthDate": "2022-08-02",
                 "address": [
                     {
                         "use": "home",
