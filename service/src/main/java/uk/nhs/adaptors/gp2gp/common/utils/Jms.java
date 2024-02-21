@@ -2,7 +2,7 @@ package uk.nhs.adaptors.gp2gp.common.utils;
 
 import lombok.SneakyThrows;
 
-import javax.jms.Message;
+import jakarta.jms.Message;
 import java.time.Instant;
 
 public class Jms {

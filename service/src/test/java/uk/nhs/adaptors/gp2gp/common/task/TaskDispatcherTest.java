@@ -10,8 +10,8 @@ import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.common.task.TaskHandler.TASK_TYPE_HEADER_NAME;
 
-import javax.jms.Session;
-import javax.jms.TextMessage;
+import jakarta.jms.Session;
+import jakarta.jms.TextMessage;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -14,7 +14,7 @@ import java.time.Duration;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.jms.JMSException;
+import jakarta.jms.JMSException;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeEach;

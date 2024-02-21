@@ -12,8 +12,8 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 
-import javax.jms.Message;
-import javax.jms.Session;
+import jakarta.jms.Message;
+import jakarta.jms.Session;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

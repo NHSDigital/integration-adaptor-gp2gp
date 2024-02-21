@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
-import javax.jms.Message;
-import javax.jms.Session;
+import jakarta.jms.Message;
+import jakarta.jms.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessResourceFailureException;
