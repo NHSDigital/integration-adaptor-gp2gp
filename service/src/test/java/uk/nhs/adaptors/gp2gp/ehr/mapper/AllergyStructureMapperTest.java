@@ -70,7 +70,6 @@ public class AllergyStructureMapperTest {
         + "example-allergy-intolerance-resource-20.json";
     private static final String INPUT_JSON_WITHOUT_END_DATE = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-without-endDate.json";
-
     private static final String INPUT_JSON_WITHOUT_ASSERTED_DATE = TEST_FILE_DIRECTORY
             + "example-allergy-intolerance-resource-without-assertedDate.json";
     private static final String INPUT_JSON_WITH_VALID_RECORDER_NO_ASSERTER = TEST_FILE_DIRECTORY
