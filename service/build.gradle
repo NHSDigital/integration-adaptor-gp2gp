@@ -39,13 +39,6 @@ dependencies {
 
 	// WebClient
 	implementation ('org.springframework.boot:spring-boot-starter-webflux')
-	implementation('org.projectreactor:reactor-spring:1.0.1.RELEASE') {
-		exclude group: 'com.jayway.jsonpath', module: 'json-path'
-	}
-	implementation('com.jayway.jsonpath:json-path:2.5.0') {
-		exclude group: 'net.minidev', module: 'json-smart'
-	}
-	implementation('net.minidev:json-smart:2.4.7')
 
 	// Logging
 	implementation 'ch.qos.logback:logback-classic:1.2.9'
