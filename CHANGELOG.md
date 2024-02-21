@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- When mapping an `AllergyIntollerance` to an `ObservationStatement`, both the `availabilityTime` and `effectiveTime`
+  fields were previously mapped from the `onset` field and the `assertedDate` field was ignored.
+  Now, the `effectiveTime` is populated with the `onset` field, and the `availabilityTime` is populated with the
+  `assertedDate` field.
+
 ## [2.0.0] - 2024-02-19
 
 **Breaking change**: This release creates a minimum version requirement of 1.0.0 for the [GP Connect Consumer Adaptor][gpcc-adaptor].
