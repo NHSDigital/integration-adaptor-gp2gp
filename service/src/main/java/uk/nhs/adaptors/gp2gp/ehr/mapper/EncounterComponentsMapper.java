@@ -31,7 +31,6 @@ import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
-import org.intellij.lang.annotations.RegExp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -65,9 +64,7 @@ public class EncounterComponentsMapper {
         + "-RelatedProblemHeader-1";
     private static final String RELATED_PROBLEM_TARGET = "target";
     private static final String COMPLETE_CODE = "COMPLETE";
-    @RegExp
     private static final String LIST_REFERENCE_PATTERN = "^List/[\\da-zA-z-]+$";
-    @RegExp
     private static final String CONTAINED_RESOURCE_REFERENCE_PATTERN = "^List/([\\da-zA-Z-]+)(#[\\da-zA-Z-]+)$";
 
     private final MessageContext messageContext;
