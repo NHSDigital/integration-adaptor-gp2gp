@@ -4,6 +4,9 @@ set -e
 
 source ./version.sh
 
+git fetch
+git checkout $RELEASE_VERSION
+
 cd ../
 
 docker buildx build -f docker/service/Dockerfile . --platform linux/arm64/v8,linux/amd64 --tag nhsdev/nia-gp2gp-adaptor:${RELEASE_VERSION} --push
