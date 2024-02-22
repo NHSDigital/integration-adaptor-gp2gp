@@ -48,7 +48,7 @@ public class ActiveMQExtension implements BeforeAllCallback, BeforeEachCallback 
         var receiveTimeout = jmsTemplate.getReceiveTimeout();
         jmsTemplate.setReceiveTimeout(RECEIVE_TIMEOUT_NO_WAIT);
 
-        List<String> list = new ArrayList();
+        List<String> list = new ArrayList<>();
         if (isNotBlank(inboundqueueName)) {
             list.add(inboundqueueName);
             list.add(DLQ_PREFIX + inboundqueueName);

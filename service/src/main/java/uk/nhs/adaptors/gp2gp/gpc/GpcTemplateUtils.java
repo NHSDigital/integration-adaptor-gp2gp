@@ -15,8 +15,7 @@ public class GpcTemplateUtils {
 
     public static Mustache loadTemplate(String templateName) {
         MustacheFactory mf = new DefaultMustacheFactory(TEMPLATES_DIRECTORY);
-        Mustache m = mf.compile(templateName);
-        return m;
+        return mf.compile(templateName);
     }
 
     public static String fillTemplate(Mustache template, Object content) {

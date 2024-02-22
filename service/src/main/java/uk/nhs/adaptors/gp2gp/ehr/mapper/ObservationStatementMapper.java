@@ -18,8 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
-import com.google.common.collect.ImmutableList;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -35,7 +33,8 @@ import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extrac
 @Component
 @Slf4j
 public class ObservationStatementMapper {
-    private static final List<Class<? extends Type>> UNHANDLED_TYPES = ImmutableList.of(SampledData.class, Attachment.class);
+
+    private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
     private static final Mustache OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE =
         TemplateUtils.loadTemplate("unstructured_observation_statement_template.mustache");
     private static final String REFERENCE_RANGE_UNIT_PREFIX = "Range Units: ";
@@ -160,9 +159,9 @@ public class ObservationStatementMapper {
         }
 
         if (!interpretationCodeMapped && observation.hasInterpretation()) {
-            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
-                commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF);
-            });
+            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText ->
+                commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF)
+            );
         }
 
         if (observation.hasComment()) {

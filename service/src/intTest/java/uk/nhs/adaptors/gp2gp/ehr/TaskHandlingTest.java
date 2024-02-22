@@ -126,7 +126,7 @@ public class TaskHandlingTest {
     @SneakyThrows
     public void When_ProcessIsAlreadyFailed_Expect_NonNackTaskToBeAborted() {
         mockSendEhExtractCoreTaskMessage();
-        EhrExtractStatus ehrExtractStatus = createEhrExtractStatusInDb(true);
+        createEhrExtractStatusInDb(true);
         var initialDbExtract = readEhrExtractStatusFromDb();
 
         assertThat(initialDbExtract.getError()).isNotNull();
