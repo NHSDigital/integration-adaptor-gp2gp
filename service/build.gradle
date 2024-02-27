@@ -41,7 +41,7 @@ dependencies {
 	implementation ('org.springframework.boot:spring-boot-starter-webflux')
 
 	// Logging
-	implementation 'ch.qos.logback:logback-classic:1.2.9'
+	implementation 'ch.qos.logback:logback-classic:1.5.0'
 
 	// Infrastructure
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.279'
