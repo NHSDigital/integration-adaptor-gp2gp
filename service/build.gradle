@@ -51,7 +51,7 @@ dependencies {
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
 	implementation 'com.github.spullara.mustache.java:compiler:0.9.11'
-	implementation 'org.apache.tika:tika-core:1.28.4'
+	implementation 'org.apache.tika:tika-core:2.9.1'
 
 	// Fhir
 	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:6.6.2'
