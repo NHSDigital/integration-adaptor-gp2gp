@@ -1259,12 +1259,13 @@
                 "name": [
                     {
                         "use": "official",
-                        "family": "Heron",
+                        "family": "LEWTAS",
                         "given": [
-                            "Victor"
+                            "Eunice",
+                            "Doreas"
                         ],
                         "prefix": [
-                            "Mr"
+                            "Ms"
                         ]
                     },
                     {
@@ -1272,8 +1273,8 @@
                         "family": "Pwtestpatient"
                     }
                 ],
-                "gender": "male",
-                "birthDate": "2021-11-12",
+                "gender": "female",
+                "birthDate": "2020-06-12",
                 "address": [
                     {
                         "use": "home",

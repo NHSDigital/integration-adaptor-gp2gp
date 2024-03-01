@@ -7,7 +7,7 @@
       "matchesJsonPath" : "$.parameter[?(@.name == 'patientNHSNumber')]"
     },
     {
-      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9726908833')]"
+      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9729649871')]"
     }]
   },
   "response": {
