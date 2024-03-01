@@ -141,7 +141,7 @@ public class WebClientFilterService {
                 var outcomeJson = objectMapper.readTree(outcome);
                 var codes = outcomeJson.findValuesAsText("code");
                 var statusCode = clientResponse.statusCode();
-                var errorCode = getErrorCode(statusCode, codes);
+                var errorCode = getErrorCode(HttpStatus.resolve(statusCode.value()), codes);
 
                 return getMonoError(errorCode, exceptionMessage);
             } catch (JsonProcessingException e) {
@@ -229,8 +229,7 @@ public class WebClientFilterService {
                 var headers = response.headers().asHttpHeaders().entrySet().stream()
                     .map(e -> e.getKey() + ": " + e.getValue())
                     .collect(Collectors.joining(System.lineSeparator()));
-                LOGGER.debug("Response: {} {} \n{}",
-                    response.statusCode().value(), response.statusCode().getReasonPhrase(), headers);
+                LOGGER.debug("Response: {} \n{}", response.statusCode().value(), headers);
             }
             return Mono.just(response);
         });

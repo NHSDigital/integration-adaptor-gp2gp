@@ -19,8 +19,8 @@ import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.UnsupportedInteractionException;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
 
 import static uk.nhs.adaptors.gp2gp.common.utils.Jms.getJmsMessageTimestamp;
 import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.ACKNOWLEDGMENT_REQUEST;

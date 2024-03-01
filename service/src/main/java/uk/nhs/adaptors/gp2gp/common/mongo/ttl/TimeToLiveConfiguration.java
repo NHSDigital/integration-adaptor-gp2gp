@@ -2,7 +2,7 @@ package uk.nhs.adaptors.gp2gp.common.mongo.ttl;
 
 import java.time.Duration;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;

@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.18'
+	id 'org.springframework.boot' version '3.2.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id "checkstyle"
@@ -34,19 +34,18 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework:spring-jms'
 
-	implementation 'org.yaml:snakeyaml:1.33'
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.3'
 
 	// WebClient
 	implementation ('org.springframework.boot:spring-boot-starter-webflux')
 
 	// Logging
-	implementation 'ch.qos.logback:logback-classic:1.2.9'
+	implementation 'ch.qos.logback:logback-classic:1.4.14'
 
 	// Infrastructure
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.279'
 	implementation ('com.azure:azure-storage-blob:12.18.0')
-	implementation ('org.apache.qpid:qpid-jms-client:1.2.0')
+	implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
 
 	// Utils
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
@@ -68,15 +67,6 @@ dependencies {
 	testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
 
 	spotbugs 'com.github.spotbugs:spotbugs:4.7.3'
-
-	constraints {
-		implementation('org.yaml:snakeyaml:1.33') {
-			because 'to fix SNYK-JAVA-ORGYAML-3016891, SNYK-JAVA-ORGYAML-3016889, SNYK-JAVA-ORGYAML-3016888, SNYK-JAVA-ORGYAML-2806360'
-		}
-		implementation('com.fasterxml.jackson.core:jackson-databind:2.13.4.2') {
-			because 'to fix SNYK-JAVA-COMFASTERXMLJACKSONCORE-3038426'
-		}
-	}
 }
 
 test {

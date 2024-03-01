@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
 
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Component;

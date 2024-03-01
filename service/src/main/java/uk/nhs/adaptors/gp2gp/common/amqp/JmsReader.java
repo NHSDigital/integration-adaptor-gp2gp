@@ -2,8 +2,8 @@ package uk.nhs.adaptors.gp2gp.common.amqp;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
 
 import org.apache.qpid.jms.message.JmsBytesMessage;
 import org.apache.qpid.jms.message.JmsTextMessage;

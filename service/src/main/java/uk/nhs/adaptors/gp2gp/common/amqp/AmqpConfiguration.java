@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.common.amqp;
 
-import javax.jms.ConnectionFactory;
+import jakarta.jms.ConnectionFactory;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.qpid.jms.JmsConnectionFactory;
