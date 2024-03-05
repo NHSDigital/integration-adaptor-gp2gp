@@ -23,6 +23,7 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -39,8 +40,10 @@ public class EhrExtractMapper {
     private static final Mustache EHR_EXTRACT_TEMPLATE = TemplateUtils.loadTemplate("ehr_extract_template.mustache");
     private static final Mustache SKELETON_COMPONENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_skeleton_component_template.mustache");
     private static final String CONSULTATION_LIST_CODE = "325851000000107";
-    private static final String COMPONENTS_START_TAG = "<component typeCode=\"COMP\">";
-    private static final String COMPONENTS_END_TAG = "</component>";
+
+    private static final String RESPONSIBLE_PARTY_END_TAG = "</responsibleParty>";
+    private static final String EHR_FOLDER_END_TAG = "</ehrFolder>";
+
 
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
@@ -79,11 +82,11 @@ public class EhrExtractMapper {
     public String buildSkeletonEhrExtract(String realEhrExtract, String documentId) {
         var ehrCompositionWithNarrativeStatement = buildEhrCompositionForSkeletonEhrExtract(documentId);
 
-        var startTagIndex = realEhrExtract.indexOf(COMPONENTS_START_TAG);
-        var endTagIndex = realEhrExtract.lastIndexOf(COMPONENTS_END_TAG);
+        var startTagIndex = realEhrExtract.indexOf(RESPONSIBLE_PARTY_END_TAG);
+        var endTagIndex = realEhrExtract.lastIndexOf(EHR_FOLDER_END_TAG);
 
-        var start = realEhrExtract.substring(0, startTagIndex);
-        var end = realEhrExtract.substring(endTagIndex + COMPONENTS_END_TAG.length());
+        var start = realEhrExtract.substring(0, startTagIndex + RESPONSIBLE_PARTY_END_TAG.length() + 1);
+        var end = realEhrExtract.substring(endTagIndex);
 
         return tryFormatXml(start + ehrCompositionWithNarrativeStatement + end);
     }
@@ -107,7 +110,7 @@ public class EhrExtractMapper {
                     .toString()
                     .replaceAll("(?m)^[ \t]*\r?\n", "")
                     .trim();
-        } catch (Exception ignored) {
+        } catch (TransformerException ignored) {
             return skeletonEhrExtract;
         }
     }

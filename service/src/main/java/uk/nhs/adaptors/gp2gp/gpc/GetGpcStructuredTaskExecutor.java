@@ -85,7 +85,49 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             ehrExtractXml = structuredRecordMappingService
                     .mapStructuredRecordToEhrExtractXml(structuredTaskDefinition, structuredRecord);
 
-            var documentsAsExternalAttachments = structuredRecordMappingService.getExternalAttachments(structuredRecord);
+            // Part 2.
+            LOGGER.info("Checking EHR Extract size");
+            if (isLargeEhrExtract(ehrExtractXml)) {
+                LOGGER.info("EHR extract IS large");
+                var realEhrExtract = ehrExtractXml;
+
+                ehrExtractXml = Base64Utils.toBase64String(compress(ehrExtractXml));
+
+                var messageId = randomIdGeneratorService.createNewId();
+                var documentId = randomIdGeneratorService.createNewId();
+                var fileName = GpcFilenameUtils.generateLargeExrExtractFilename(documentId);
+                var compressedAndEncodedEhrExtractSize = ehrExtractXml.length();
+
+                var largeEhrExtractXmlAsExternalAttachment = buildExternalAttachmentForLargeEhrExtract(
+                        compressedAndEncodedEhrExtractSize, messageId, documentId, fileName
+                );
+
+                externalAttachments.add(largeEhrExtractXmlAsExternalAttachment);
+
+                var getDocumentTaskDefinition = buildGetDocumentTask(structuredTaskDefinition, largeEhrExtractXmlAsExternalAttachment);
+                var mhsPayload = ehrDocumentMapper.mapMhsPayloadTemplateToXml(
+                        ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getDocumentTaskDefinition, XML_CONTENT_TYPE));
+
+                uploadToStorage(ehrExtractXml, mhsPayload, fileName, getDocumentTaskDefinition);
+                ehrStatusGpcDocuments.add(EhrExtractStatus.GpcDocument.builder()
+                        .documentId(documentId)
+                        .accessDocumentUrl(null)
+                        .contentType(TEXT_XML_CONTENT_TYPE)
+                        .objectName(fileName)
+                        .fileName(fileName)
+                        .accessedAt(now)
+                        .taskId(getDocumentTaskDefinition.getTaskId())
+                        .messageId(messageId)
+                        .isSkeleton(true)
+                        .identifier(null)
+                        .build());
+
+                ehrExtractXml = structuredRecordMappingService
+                        .buildSkeletonEhrExtractXml(realEhrExtract, documentId);
+            }
+
+            var documentsAsExternalAttachments = structuredRecordMappingService
+                    .getExternalAttachments(structuredRecord);
             documentsAsExternalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isBlank(documentMetadata.getUrl()))
                 .peek(absentAttachment ->
@@ -143,47 +185,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var allExternalAttachments = Stream
             .concat(externalAttachments.stream(), absentAttachments.stream())
             .collect(Collectors.toList());
-
-        // Part 2.
-        LOGGER.info("Checking EHR Extract size");
-        if (isLargeEhrExtract(ehrExtractXml)) {
-            LOGGER.info("EHR extract IS large");
-            var realEhrExtract = ehrExtractXml;
-
-            ehrExtractXml = Base64Utils.toBase64String(compress(ehrExtractXml));
-
-            var messageId = randomIdGeneratorService.createNewId();
-            var documentId = randomIdGeneratorService.createNewId();
-            var fileName = GpcFilenameUtils.generateLargeExrExtractFilename(documentId);
-            var compressedAndEncodedEhrExtractSize = ehrExtractXml.length();
-
-            var largeEhrExtractXmlAsExternalAttachment = buildExternalAttachmentForLargeEhrExtract(
-                    compressedAndEncodedEhrExtractSize, messageId, documentId, fileName
-            );
-
-            externalAttachments.add(largeEhrExtractXmlAsExternalAttachment);
-
-            var getDocumentTaskDefinition = buildGetDocumentTask(structuredTaskDefinition, largeEhrExtractXmlAsExternalAttachment);
-            var mhsPayload = ehrDocumentMapper.mapMhsPayloadTemplateToXml(
-                    ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getDocumentTaskDefinition, XML_CONTENT_TYPE));
-
-            uploadToStorage(ehrExtractXml, mhsPayload, fileName, getDocumentTaskDefinition);
-            ehrStatusGpcDocuments.add(EhrExtractStatus.GpcDocument.builder()
-                    .documentId(documentId)
-                    .accessDocumentUrl(null)
-                    .contentType(TEXT_XML_CONTENT_TYPE)
-                    .objectName(fileName)
-                    .fileName(fileName)
-                    .accessedAt(now)
-                    .taskId(getDocumentTaskDefinition.getTaskId())
-                    .messageId(messageId)
-                    .isSkeleton(true)
-                    .identifier(null)
-                    .build());
-
-            ehrExtractXml = structuredRecordMappingService
-                    .buildSkeletonEhrExtractXml(realEhrExtract, documentId);
-        }
 
         var stringRequestBody = objectMapper.writeValueAsString(OutboundMessage.builder()
             .payload(ehrExtractXml)

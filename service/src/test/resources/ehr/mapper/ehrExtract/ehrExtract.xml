@@ -122,7 +122,6 @@
                             </agentPerson>
                             <representedOrganization classCode="ORG" determinerCode="INSTANCE">
                                 <name>National</name>
-
                             </representedOrganization>
                         </Agent>
                     </part>
