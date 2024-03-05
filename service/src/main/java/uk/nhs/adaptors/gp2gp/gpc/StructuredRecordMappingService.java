@@ -136,11 +136,8 @@ public class StructuredRecordMappingService {
         return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
     }
 
-    public String buildSkeletonEhrExtractXml(
-        GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle structuredRecord, String documentId
+    public String buildSkeletonEhrExtractXml(String realEhrExtract, String documentId
     ) {
-        String ehrExtractContent = ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, structuredRecord, documentId);
-
-        return outputMessageWrapperMapper.map(structuredTaskDefinition, ehrExtractContent);
+        return ehrExtractMapper.buildSkeletonEhrExtract(realEhrExtract, documentId);
     }
 }

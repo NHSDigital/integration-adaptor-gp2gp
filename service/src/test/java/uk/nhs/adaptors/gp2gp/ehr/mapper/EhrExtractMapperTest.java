@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
+import lombok.SneakyThrows;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +21,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrExtractMapperTest {
@@ -77,5 +79,24 @@ public class EhrExtractMapperTest {
         var bundle = mock(Bundle.class);
         var parameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(taskDef, bundle);
         assertThat(parameters.getAgentDirectory()).isEqualTo(NHS_NUMBER);
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_BuildingSkeletonForEhrExtract_Expect_XmlWithSingleSkeletonEhrCompositionComponent() {
+
+        var timeStamp = Instant.parse("2024-01-01T01:01:01.00Z");
+        when(timestampService.now()).thenReturn(timeStamp);
+
+        var documentId = "DocumentId";
+        var inputRealEhrExtract = ResourceTestFileUtils
+                .getFileContent("/ehr/mapper/ehrExtract/ehrExtract.xml");
+        var expectedSkeletonEhrExtract = ResourceTestFileUtils
+                .getFileContent("/ehr/mapper/ehrExtract/expectedSkeletonEhrExtract.xml");
+
+        var skeletonEhrExtract = ehrExtractMapper.buildSkeletonEhrExtract(inputRealEhrExtract, documentId);
+
+        assertThat(skeletonEhrExtract)
+                .isEqualTo(expectedSkeletonEhrExtract);
     }
 }
