@@ -23,8 +23,8 @@ public class RelatedProblemWrapperTest extends ConditionWrapperTestBase {
             .filter(ext -> ext.getUrl().equals(RelatedProblemWrapper.RELATED_PROBLEM_HEADER))
             .collect(Collectors.toList());
 
-        var parentConditionWrapper = new RelatedProblemWrapper(relatedConditions.get(PARENT_INDEX));
-        var siblingConditionWrapper = new RelatedProblemWrapper(relatedConditions.get(SIBLING_INDEX));
+        var parentConditionWrapper = RelatedProblemWrapper.fromExtension(relatedConditions.get(PARENT_INDEX));
+        var siblingConditionWrapper = RelatedProblemWrapper.fromExtension(relatedConditions.get(SIBLING_INDEX));
 
         assertAll(
             () -> assertThat(parentConditionWrapper.getType()).isEqualTo(PARENT),
