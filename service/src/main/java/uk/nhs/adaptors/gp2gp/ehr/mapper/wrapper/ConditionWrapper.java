@@ -59,7 +59,7 @@ public class ConditionWrapper {
             .getExtension()
             .stream()
             .filter(ext -> ext.getUrl().equals(RELATED_PROBLEM_HEADER))
-            .map(RelatedProblemWrapper::new)
+            .map(RelatedProblemWrapper::fromExtension)
             .collect(Collectors.toList());
 
         this.notes = condition.getNote()
