@@ -117,7 +117,7 @@
                             }
                         ],
                         "system": "https://fhir.nhs.uk/Id/nhs-number",
-                        "value": "{{jsonPath request.body '$.parameter[0].valueIdentifier.value'}}"
+                        "value": "9729649936"
                     }
                 ],
                 "active": true,
@@ -125,15 +125,15 @@
                 [
                     {
                         "use": "official",
-                        "text": "Horace SKELLY",
-                        "family": "SKELLY",
+                        "text": "Gwen MINTON",
+                        "family": "MINTON",
                         "given":
                         [
-                            "Horace"
+                            "Gwen"
                         ],
                         "prefix":
                         [
-                            "MR"
+                            "MS"
                         ]
                     }
                 ],
@@ -150,8 +150,8 @@
                         "use": "mobile"
                     }
                 ],
-                "gender": "male",
-                "birthDate": "1925-04-21",
+                "gender": "female",
+                "birthDate": "2019-03-31",
                 "address":
                 [
                     {
@@ -159,10 +159,10 @@
                         "type": "physical",
                         "line":
                         [
-                            "3 BOWESFIELD CRESCENT"
+                            "74 THE ROCK"
                         ],
-                        "city": "STOCKTON-ON-TEES",
-                        "postalCode": "TS18 3BL"
+                        "city": "BURY",
+                        "postalCode": "BL9 0PB"
                     }
                 ],
                 "contact":
