@@ -182,7 +182,6 @@
                     </part>
                 </agentDirectory>
             </responsibleParty>
-            <component />
         </ehrFolder>
     </component>
     <inFulfillmentOf typeCode="FLFS">

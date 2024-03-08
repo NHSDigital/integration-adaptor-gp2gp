@@ -12,6 +12,8 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 import java.util.Arrays;
 import java.util.List;
 
+import lombok.SneakyThrows;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
@@ -35,6 +37,9 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
+import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+import wiremock.org.custommonkey.xmlunit.DetailedDiff;
+import wiremock.org.custommonkey.xmlunit.XMLUnit;
 
 @ExtendWith(MockitoExtension.class)
 class StructuredRecordMappingServiceTest {
@@ -207,6 +212,51 @@ class StructuredRecordMappingServiceTest {
             documentReference -> bundle.addEntry(new Bundle.BundleEntryComponent().setResource(documentReference))
         );
         return bundle;
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_BuildingSkeletonForEhrExtract_Expect_XmlWithSingleComponent() {
+        var documentId = "DocumentId";
+        var skeletonComponent = "<component />";
+
+        var inputRealEhrExtract = ResourceTestFileUtils
+                .getFileContent("/ehr/mapper/ehrExtract/ehrExtract.xml");
+        var expectedSkeletonEhrExtract = ResourceTestFileUtils
+                .getFileContent("/ehr/mapper/ehrExtract/expectedSkeletonEhrExtract.xml");
+
+        when(ehrExtractMapper.buildEhrCompositionForSkeletonEhrExtract(any())).thenReturn(skeletonComponent);
+
+        var skeletonEhrExtract = structuredRecordMappingService
+                .buildSkeletonEhrExtractXml(inputRealEhrExtract, documentId);
+
+        assertXMLEquals(skeletonEhrExtract, expectedSkeletonEhrExtract);
+    }
+
+    @Test
+    public void When_BuildingSkeletonForEhrExtractWithoutChildComponentNodesToReplace_Expect_XMLWithSingleComponent() throws Exception {
+        var documentId = "DocumentId";
+        var skeletonComponent = "<component />";
+
+        var inputRealEhrExtract = ResourceTestFileUtils
+                .getFileContent("/ehr/mapper/ehrExtract/ehrExtractWithNoComponentsToReplaceForSkeleton.xml");
+        var expectedSkeletonEhrExtract = ResourceTestFileUtils
+                .getFileContent("/ehr/mapper/ehrExtract/expectedSkeletonEhrExtract.xml");
+
+        when(ehrExtractMapper.buildEhrCompositionForSkeletonEhrExtract(any())).thenReturn(skeletonComponent);
+
+        var skeletonEhrExtract = structuredRecordMappingService
+                .buildSkeletonEhrExtractXml(inputRealEhrExtract, documentId);
+
+        assertXMLEquals(skeletonEhrExtract, expectedSkeletonEhrExtract);
+    }
+
+    public static void assertXMLEquals(String actualXML, String expectedXML) throws Exception {
+        XMLUnit.setIgnoreWhitespace(true);
+
+        var differences = new DetailedDiff(XMLUnit.compareXML(expectedXML, actualXML))
+                .getAllDifferences();
+        AssertionsForClassTypes.assertThat(differences).isEqualTo(List.of());
     }
 
     @SuppressWarnings("checkstyle:ParameterNumber")

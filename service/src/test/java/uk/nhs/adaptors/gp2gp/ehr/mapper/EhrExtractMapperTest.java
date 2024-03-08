@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import lombok.SneakyThrows;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +20,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrExtractMapperTest {
@@ -82,21 +80,49 @@ public class EhrExtractMapperTest {
     }
 
     @Test
-    @SneakyThrows
-    public void When_BuildingSkeletonForEhrExtract_Expect_XmlWithSingleSkeletonEhrCompositionComponent() {
+    public void When_BuildEhrCompositionForSkeletonEhrExtract_Expect_ExpectedComponentBuilt() {
+        var documentId = "documentId";
 
-        var timeStamp = Instant.parse("2024-01-01T01:01:01.00Z");
-        when(timestampService.now()).thenReturn(timeStamp);
+        when(timestampService.now()).thenReturn(Instant.parse("2024-01-01T01:01:01.000Z"));
 
-        var documentId = "DocumentId";
-        var inputRealEhrExtract = ResourceTestFileUtils
-                .getFileContent("/ehr/mapper/ehrExtract/ehrExtract.xml");
-        var expectedSkeletonEhrExtract = ResourceTestFileUtils
-                .getFileContent("/ehr/mapper/ehrExtract/expectedSkeletonEhrExtract.xml");
+        var expected = """
+                <component typeCode="COMP">
+                    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                        <id root="documentId" />
+                        <code nullFlavor="UNK"/>
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime nullFlavor="UNK"/>
+                        <availabilityTime nullFlavor="UNK" />
+                        <author>
+                            <time nullFlavor="UNK" />
+                            <agentRef>
+                                <id nullFlavor="UNK"/>
+                            </agentRef>
+                        </author>
+                        <component>
+                            <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                <id root="documentId" />
+                                <text>Skeleton statement</text>
+                                <statusCode code="COMPLETE"/>
+                                <availabilityTime value="20240101010101" />
+                                <reference typeCode="REFR">
+                                    <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                                        <id root="documentId"/>
+                                        <code code="24891000000101" displayName="EDI messages" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+                                            <originalText>Original RCMR_IN03 EhrExtract message</originalText>
+                                        </code>
+                                        <text mediaType="text/xml">
+                                            <reference value="cid:documentId"/>
+                                        </text>
+                                    </referredToExternalDocument>
+                                </reference>
+                            </NarrativeStatement>
+                        </component>
+                    </ehrComposition>
+                </component>""";
 
-        var skeletonEhrExtract = ehrExtractMapper.buildSkeletonEhrExtract(inputRealEhrExtract, documentId);
+        var actual = ehrExtractMapper.buildEhrCompositionForSkeletonEhrExtract(documentId);
 
-        assertThat(skeletonEhrExtract)
-                .isEqualTo(expectedSkeletonEhrExtract);
+        assertThat(actual).isEqualTo(expected);
     }
 }

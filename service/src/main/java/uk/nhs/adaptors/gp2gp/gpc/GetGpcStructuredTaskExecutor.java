@@ -122,8 +122,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                         .identifier(null)
                         .build());
 
-                ehrExtractXml = structuredRecordMappingService
-                        .buildSkeletonEhrExtractXml(realEhrExtract, documentId);
+                ehrExtractXml = structuredRecordMappingService.buildSkeletonEhrExtractXml(realEhrExtract, documentId);
             }
 
             var documentsAsExternalAttachments = structuredRecordMappingService

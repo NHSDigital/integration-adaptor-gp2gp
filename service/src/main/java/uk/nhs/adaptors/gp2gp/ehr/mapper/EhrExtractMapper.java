@@ -10,6 +10,7 @@ import org.hl7.fhir.dstu3.model.ListResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
@@ -20,15 +21,6 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,10 +32,6 @@ public class EhrExtractMapper {
     private static final Mustache EHR_EXTRACT_TEMPLATE = TemplateUtils.loadTemplate("ehr_extract_template.mustache");
     private static final Mustache SKELETON_COMPONENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_skeleton_component_template.mustache");
     private static final String CONSULTATION_LIST_CODE = "325851000000107";
-
-    private static final String RESPONSIBLE_PARTY_END_TAG = "</responsibleParty>";
-    private static final String EHR_FOLDER_END_TAG = "</ehrFolder>";
-
 
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
@@ -77,42 +65,6 @@ public class EhrExtractMapper {
         );
 
         return ehrExtractTemplateParameters;
-    }
-
-    public String buildSkeletonEhrExtract(String realEhrExtract, String documentId) {
-        var ehrCompositionWithNarrativeStatement = buildEhrCompositionForSkeletonEhrExtract(documentId);
-
-        var startTagIndex = realEhrExtract.indexOf(RESPONSIBLE_PARTY_END_TAG);
-        var endTagIndex = realEhrExtract.lastIndexOf(EHR_FOLDER_END_TAG);
-
-        var start = realEhrExtract.substring(0, startTagIndex + RESPONSIBLE_PARTY_END_TAG.length() + 1);
-        var end = realEhrExtract.substring(endTagIndex);
-
-        return tryFormatXml(start + ehrCompositionWithNarrativeStatement + end);
-    }
-
-    private static String tryFormatXml(String skeletonEhrExtract) {
-        try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-
-            Source xmlInput = new StreamSource(new StringReader(skeletonEhrExtract));
-            StringWriter stringWriter = new StringWriter();
-
-            StreamResult xmlOutput = new StreamResult(stringWriter);
-
-            transformer.transform(xmlInput, xmlOutput);
-            return xmlOutput
-                    .getWriter()
-                    .toString()
-                    .replaceAll("(?m)^[ \t]*\r?\n", "")
-                    .trim();
-        } catch (TransformerException ignored) {
-            return skeletonEhrExtract;
-        }
     }
 
     public String buildEhrCompositionForSkeletonEhrExtract(String documentId) {
