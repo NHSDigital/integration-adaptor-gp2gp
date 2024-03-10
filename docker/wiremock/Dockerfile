@@ -1,5 +1,9 @@
-FROM wiremock/wiremock:2.33.2
+FROM gradle:8.5-jdk17
 
-COPY stubs /home/wiremock
+COPY --chown=gradle:gradle wiremock /home/gradle/wiremock
 
-CMD ["--global-response-templating", "--verbose"]
+WORKDIR /home/gradle/wiremock
+
+RUN ["gradle", "jar"]
+
+ENTRYPOINT ["java", "-jar", "build/libs/wiremock.jar"]

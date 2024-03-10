@@ -82,12 +82,11 @@ services:
   wiremock:
     networks: 
       - commonforgp2gp
-    build: ./wiremock
+    build:
+      context: ../
+      dockerfile: docker/wiremock/Dockerfile
     ports:
       - "8110:8080"
-    command:
-      - -global-response-templating
-      - -no-request-journal
 
   integration-wiremock:
     networks:

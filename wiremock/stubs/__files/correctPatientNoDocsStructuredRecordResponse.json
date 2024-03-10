@@ -101,6 +101,14 @@
                     }
                 ],
                 "active": true,
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "02123636563",
+                        "use": "home"
+                    }
+                ],
+                {{^patient}}
                 "name": [
                     {
                         "use": "official",
@@ -112,13 +120,6 @@
                         "prefix": [
                             "MR"
                         ]
-                    }
-                ],
-                "telecom": [
-                    {
-                        "system": "phone",
-                        "value": "02123636563",
-                        "use": "home"
                     }
                 ],
                 "gender": "male",
@@ -136,6 +137,35 @@
                         "postalCode": "TS21 1JG"
                     }
                 ],
+                {{/patient}}
+                {{#patient}}
+                "name": [
+                    {
+                        "use": "official",
+                        "text": "{{patient.name.0.given.0}} {{patient.name.0.family}}",
+                        "family": "{{patient.name.0.family}}",
+                        "given": [
+                            "{{patient.name.0.given.0}}"
+                        ],
+                        "prefix": [
+                            "{{patient.name.0.prefix.0}}"
+                        ]
+                    }
+                ],
+                "gender": "{{ patient.gender }}",
+                "birthDate": "{{ patient.birthDate }}",
+                "address": [
+                    {
+                        "use": "home",
+                        "type": "physical",
+                        "line": [
+                            "{{ patient.address.0.line.0 }}",
+                            "{{ patient.address.0.line.1 }}"
+                        ],
+                        "postalCode": "{{ patient.address.0.postalCode }}"
+                    }
+                ],
+                {{/patient}}
                 "generalPractitioner": [
                     {
                         "reference": "Practitioner/1"
