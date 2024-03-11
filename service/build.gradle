@@ -34,7 +34,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework:spring-jms'
 
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.3'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.2'
 
 	// WebClient
 	implementation ('org.springframework.boot:spring-boot-starter-webflux')
