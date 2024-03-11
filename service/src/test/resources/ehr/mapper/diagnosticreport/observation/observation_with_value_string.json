@@ -61,10 +61,6 @@
             "reference": "Practitioner/0D1A68BE05FC873EBCA5A9048F8E2A0861D7EF0F-XPSP"
         }
     ],
-    "valueQuantity":{
-        "value":1779.000,
-        "unit":"umol/L"
-    },
     "valueString": "Test value string",
     "referenceRange":[
         {
