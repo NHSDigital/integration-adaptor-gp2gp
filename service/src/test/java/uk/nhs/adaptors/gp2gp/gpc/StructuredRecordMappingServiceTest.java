@@ -37,7 +37,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
-import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 import wiremock.org.custommonkey.xmlunit.DetailedDiff;
 import wiremock.org.custommonkey.xmlunit.XMLUnit;
 
@@ -218,12 +217,34 @@ class StructuredRecordMappingServiceTest {
     @SneakyThrows
     public void When_BuildingSkeletonForEhrExtract_Expect_XmlWithSingleComponent() {
         var documentId = "DocumentId";
-        var skeletonComponent = "<component />";
+        var skeletonComponent = "<component>This is the newly added skeleton component</component>";
 
-        var inputRealEhrExtract = ResourceTestFileUtils
-                .getFileContent("/ehr/mapper/ehrExtract/ehrExtract.xml");
-        var expectedSkeletonEhrExtract = ResourceTestFileUtils
-                .getFileContent("/ehr/mapper/ehrExtract/expectedSkeletonEhrExtract.xml");
+        var inputRealEhrExtract = """
+                <EhrExtract classCode="EXTRACT" moodCode="EVN">
+                    <id root="test-id-1" />
+                    <statusCode code="COMPLETE" />
+                    <component typeCode="COMP">
+                        <ehrFolder classCode="FOLDER" moodCode="EVN">
+                            <id root="test-id-2" />
+                            <statusCode code="COMPLETE" />
+                            <component>This is a component to be removed</component>
+                            <component>This is also a component to be removed</component>
+                        </ehrFolder>
+                    </component>
+                </EhrExtract>""";
+
+        var expectedSkeletonEhrExtract = """
+                <EhrExtract classCode="EXTRACT" moodCode="EVN">
+                    <id root="test-id-1"/>
+                    <statusCode code="COMPLETE"/>
+                    <component typeCode="COMP">
+                        <ehrFolder classCode="FOLDER" moodCode="EVN">
+                            <id root="test-id-2"/>
+                            <statusCode code="COMPLETE"/>
+                            <component>This is the newly added skeleton component</component>
+                        </ehrFolder>
+                    </component>
+                </EhrExtract>""";
 
         when(ehrExtractMapper.buildEhrCompositionForSkeletonEhrExtract(any())).thenReturn(skeletonComponent);
 
@@ -236,12 +257,32 @@ class StructuredRecordMappingServiceTest {
     @Test
     public void When_BuildingSkeletonForEhrExtractWithoutChildComponentNodesToReplace_Expect_XMLWithSingleComponent() throws Exception {
         var documentId = "DocumentId";
-        var skeletonComponent = "<component />";
+        var skeletonComponent = "<component>This is the newly added skeleton component</component>";
 
-        var inputRealEhrExtract = ResourceTestFileUtils
-                .getFileContent("/ehr/mapper/ehrExtract/ehrExtractWithNoComponentsToReplaceForSkeleton.xml");
-        var expectedSkeletonEhrExtract = ResourceTestFileUtils
-                .getFileContent("/ehr/mapper/ehrExtract/expectedSkeletonEhrExtract.xml");
+        var inputRealEhrExtract = """
+                <EhrExtract classCode="EXTRACT" moodCode="EVN">
+                    <id root="test-id-1"/>
+                    <statusCode code="COMPLETE"/>
+                    <component typeCode="COMP">
+                        <ehrFolder classCode="FOLDER" moodCode="EVN">
+                            <id root="test-id-2"/>
+                            <statusCode code="COMPLETE"/>
+                        </ehrFolder>
+                    </component>
+                </EhrExtract>""";
+
+        var expectedSkeletonEhrExtract = """
+                <EhrExtract classCode="EXTRACT" moodCode="EVN">
+                    <id root="test-id-1"/>
+                    <statusCode code="COMPLETE"/>
+                    <component typeCode="COMP">
+                        <ehrFolder classCode="FOLDER" moodCode="EVN">
+                            <id root="test-id-2"/>
+                            <statusCode code="COMPLETE"/>
+                            <component>This is the newly added skeleton component</component>
+                        </ehrFolder>
+                    </component>
+                </EhrExtract>""";
 
         when(ehrExtractMapper.buildEhrCompositionForSkeletonEhrExtract(any())).thenReturn(skeletonComponent);
 
