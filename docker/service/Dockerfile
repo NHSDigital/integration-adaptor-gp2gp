@@ -10,7 +10,7 @@ FROM build AS package
 
 RUN gradle --build-cache bootJar
 
-FROM eclipse-temurin:17-jre-focal
+FROM eclipse-temurin:17-jre-jammy
 
 EXPOSE 8080
 
