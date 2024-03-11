@@ -1,4 +1,4 @@
-FROM gradle:8.5-jdk17
+FROM gradle:8.5-jdk21
 
 COPY --chown=gradle:gradle wiremock /home/gradle/wiremock
 
