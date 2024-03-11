@@ -172,7 +172,7 @@ We provide mocks of external APIs (GPC, SDS) for local development and testing.
 * Navigate to `docker`
 * `docker-compose up wiremock`
 
-The folder `docker/wiremock/stubs` describes the supported interactions.
+The folder `wiremock/stubs` and [README](wiremock/README.md) describe the supported interactions.
 
 ## How to use Mock MHS Adaptor
 

@@ -88,7 +88,7 @@ pipeline {
                             if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
 
                             if (publishWiremockImage) {
-                                if (sh(label: "Running ${WIREMOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/wiremock/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} docker/wiremock', returnStatus: true) != 0) {error("Failed to build ${WIREMOCK_ECR_REPO_DIR} Docker image")}
+                                if (sh(label: "Running ${WIREMOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/wiremock/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build ${WIREMOCK_ECR_REPO_DIR} Docker image")}
                             }
                             if (publishMhsMockImage) {
                                 if (sh(label: "Running ${MHS_MOCK_ECR_REPO_DIR} docker build", script: 'docker build -f docker/mock-mhs-adaptor/Dockerfile -t ${MHS_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build ${MHS_MOCK_ECR_REPO_DIR} Docker image")}

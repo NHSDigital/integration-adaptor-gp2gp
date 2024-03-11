@@ -55,6 +55,17 @@ The `migratestructuredrecord` endpoint will also respond to unknown NHS Numbers,
 by default returning a NOT FOUND response, but can also be set up to reply with
 a valid patient record.
 
+Wiremock can also be configured to fetch patient information (name, dob, address)
+from the PDS Application-Restricted FHIR API.
+
+Using the [authentication guidance], you'll need to provide the following environment variables:
+
+- PDS_KEY_ID - "Key Identifier" from Step 2
+- PDS_API_KEY - "API Key" from Step 1
+- PDS_PRIVATE_KEY - "Private key" from Step 2, as a string without whitespace, and the "---" header and footers removed.
+
+[authentication guidance]: https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication
+
 ### Changing the default record
 
 To change the patient record returned to be [No Documents](stubs/__files/correctPatientNoDocsStructuredRecordResponse.json):
