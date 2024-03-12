@@ -74,6 +74,12 @@ To change the patient record returned to be [No Documents](stubs/__files/correct
 curl --request PUT --data '{"state": "No Documents"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
 ```
 
+To change the patient record returned to be [Large Patient Record](stubs/__files/correctPatientStructuredRecordLargePayload.json):
+
+```shell
+curl --request PUT --data '{"state": "Large Patient Record"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+```
+
 To change the patient record returned to be NOT FOUND:
 
 ```shell
