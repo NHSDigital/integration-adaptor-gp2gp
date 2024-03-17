@@ -36,7 +36,6 @@ import org.junit.platform.commons.util.StringUtils;
 import org.xmlunit.assertj3.XmlAssert;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
@@ -708,8 +707,7 @@ public class EhrExtractTest {
                 }
             });
 
-            ObjectMapper objectMapper = new ObjectMapper()
-                .registerModule(new JavaTimeModule());
+            ObjectMapper objectMapper = new ObjectMapper();
 
             return objectMapper.readValue(response, EhrStatus.class);
         }

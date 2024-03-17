@@ -18,7 +18,6 @@ dependencies {
     implementation 'org.mongodb:mongo-java-driver:3.12.14'
 
     testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
-    testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4'
     testImplementation 'commons-io:commons-io:2.6'
     testImplementation 'org.awaitility:awaitility:4.2.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
