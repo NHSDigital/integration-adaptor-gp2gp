@@ -37,9 +37,6 @@ dependencies {
         implementation('io.netty:netty-handler:4.1.59.Final') {
             because 'to fix SNYK-JAVA-IONETTY-1042268'
         }
-        implementation('commons-io:commons-io:2.15.1') {
-            because 'to fix SNYK-JAVA-IONETTY-COMMONSIO-1277109'
-        }
     }
 }
 
