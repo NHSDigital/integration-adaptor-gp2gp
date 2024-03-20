@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id "io.freefair.lombok" version "6.6.3"
+    id "io.freefair.lombok" version "8.6"
 }
 
 apply plugin: 'java'
