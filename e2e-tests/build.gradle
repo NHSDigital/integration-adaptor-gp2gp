@@ -34,7 +34,7 @@ dependencies {
         implementation('io.netty:netty-codec-http:4.1.59.Final') {
             because 'to fix SNYK-JAVA-IONETTY-1070799'
         }
-        implementation('io.netty:netty-handler:4.1.59.Final') {
+        implementation('io.netty:netty-handler:4.1.107.Final') {
             because 'to fix SNYK-JAVA-IONETTY-1042268'
         }
     }
