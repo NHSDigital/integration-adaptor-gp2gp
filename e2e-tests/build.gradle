@@ -29,15 +29,6 @@ dependencies {
     testImplementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
 
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
-
-    constraints {
-        implementation('io.netty:netty-codec-http:4.1.59.Final') {
-            because 'to fix SNYK-JAVA-IONETTY-1070799'
-        }
-        implementation('io.netty:netty-handler:4.1.59.Final') {
-            because 'to fix SNYK-JAVA-IONETTY-1042268'
-        }
-    }
 }
 
 tasks.withType(Test) {
