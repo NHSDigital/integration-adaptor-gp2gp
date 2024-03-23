@@ -28,7 +28,7 @@ dependencies {
     testImplementation 'org.xmlunit:xmlunit-matchers:2.8.2'
     testImplementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
 
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
 }
 
 tasks.withType(Test) {
