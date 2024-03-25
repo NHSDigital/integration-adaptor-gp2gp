@@ -43,7 +43,7 @@ dependencies {
 	implementation 'ch.qos.logback:logback-classic:1.4.14'
 
 	// Infrastructure
-	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.673'
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.686'
 	implementation ('com.azure:azure-storage-blob:12.25.2')
 	implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
 
