@@ -12,7 +12,5 @@ jobs:
     with:
         dockerhub_name: ${{matrix.image.dockerhub_name}}
         folder: ${{matrix.image.folder}}
-        repo: ${{github.repository}}
-        ref_name: ${{ github.ref_name }}
 
     secrets: inherit
