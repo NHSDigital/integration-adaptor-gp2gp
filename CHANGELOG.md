@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.2] - 2024-04-10
+### Added Automatic build for adaptor docker image.
+
+
 ## [2.0.1] - 2024-02-22
 
 ### Fixed
