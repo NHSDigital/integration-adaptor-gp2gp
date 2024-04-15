@@ -1,0 +1,16 @@
+on:
+  push:
+    tags: "*"
+
+jobs:
+  push_to_dockerhub:
+    strategy:
+      matrix:
+        image:
+          - {folder: service, dockerhub_name: nia-gp2gp-adaptor}
+    uses: NHSDigital/integration-adaptor-actions/.github/workflows/release-adaptor-container-image.yml@main
+    with:
+        dockerhub_name: ${{matrix.image.dockerhub_name}}
+        folder: ${{matrix.image.folder}}
+
+    secrets: inherit

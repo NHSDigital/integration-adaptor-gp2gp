@@ -1,9 +1,9 @@
 plugins {
-	id 'org.springframework.boot' version '3.2.3'
+	id 'org.springframework.boot' version '3.2.4'
 	id 'io.spring.dependency-management' version '1.1.4'
 	id 'java'
 	id "checkstyle"
-	id "com.github.spotbugs" version "6.0.8"
+	id "com.github.spotbugs" version "6.0.11"
 	id "io.freefair.lombok" version "8.6"
 	id 'jacoco'
 }
@@ -40,18 +40,18 @@ dependencies {
 	implementation ('org.springframework.boot:spring-boot-starter-webflux')
 
 	// Logging
-	implementation 'ch.qos.logback:logback-classic:1.4.14'
+	implementation 'org.springframework.boot:spring-boot-starter-logging'
 
 	// Infrastructure
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.673'
-	implementation ('com.azure:azure-storage-blob:12.25.2')
+	implementation ('com.azure:azure-storage-blob:12.25.3')
 	implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
 
 	// Utils
 	implementation 'org.apache.commons:commons-lang3:3.14.0'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
 	implementation 'com.github.spullara.mustache.java:compiler:0.9.11'
-	implementation 'org.apache.tika:tika-core:2.9.1'
+	implementation 'org.apache.tika:tika-core:2.9.2'
 
 	// Fhir
 	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:7.0.2'
@@ -60,13 +60,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "org.assertj:assertj-core:3.25.3"
 	testImplementation 'org.testcontainers:testcontainers:1.19.7'
-	testImplementation 'org.awaitility:awaitility:4.2.0'
+	testImplementation 'org.awaitility:awaitility:4.2.1'
 	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.2'
 	testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:3.0.1'
 	testImplementation 'com.squareup.okhttp3:okhttp:4.12.0'
 	testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
-
-	spotbugs 'com.github.spotbugs:spotbugs:4.8.3'
 }
 
 test {
