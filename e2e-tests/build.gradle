@@ -25,7 +25,6 @@ dependencies {
     testImplementation "org.assertj:assertj-core:3.25.3"
     testImplementation 'ch.qos.logback:logback-classic:1.5.5'
     testImplementation 'org.xmlunit:xmlunit-assertj3:2.9.1'
-    testImplementation 'org.xmlunit:xmlunit-matchers:2.8.2'
     testImplementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
 
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
