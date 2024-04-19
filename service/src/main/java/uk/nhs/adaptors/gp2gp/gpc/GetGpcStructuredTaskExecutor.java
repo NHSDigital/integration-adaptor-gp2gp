@@ -77,15 +77,19 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         List<OutboundMessage.ExternalAttachment> absentAttachments = new ArrayList<>();
         List<EhrExtractStatus.GpcDocument> ehrStatusGpcDocuments = new ArrayList<>();
 
+        // Part 1.
         Bundle structuredRecord = getStructuredRecord(structuredTaskDefinition);
 
+        // TODO: Add some code which stores this `structuredRecord` variable in S3, so it can be retrieved in part2.
+
+        // Part 2.
         try {
             messageContext.initialize(structuredRecord);
 
             ehrExtractXml = structuredRecordMappingService
                     .mapStructuredRecordToEhrExtractXml(structuredTaskDefinition, structuredRecord);
 
-            // Part 2.
+
             LOGGER.info("Checking EHR Extract size");
             if (isLargeEhrExtract(ehrExtractXml)) {
                 LOGGER.info("EHR extract IS large");
@@ -102,13 +106,19 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                         compressedAndEncodedEhrExtractSize, messageId, documentId, fileName
                 );
 
+                // MODIFIES ExternalAttachments so that the EhrExtract MHS request contains a reference to the compressed XML.
+                // This is fine if we have the ExternalAttachments generation inside of Part 2.
                 externalAttachments.add(largeEhrExtractXmlAsExternalAttachment);
 
                 var getDocumentTaskDefinition = buildGetDocumentTask(structuredTaskDefinition, largeEhrExtractXmlAsExternalAttachment);
                 var mhsPayload = ehrDocumentMapper.mapMhsPayloadTemplateToXml(
                         ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getDocumentTaskDefinition, XML_CONTENT_TYPE));
 
+                // MODIFIES S3
                 uploadToStorage(ehrExtractXml, mhsPayload, fileName, getDocumentTaskDefinition);
+
+                // This following line could (in theory) be replaced with a call to:
+                // ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences
                 ehrStatusGpcDocuments.add(EhrExtractStatus.GpcDocument.builder()
                         .documentId(documentId)
                         .accessDocumentUrl(null)
@@ -122,8 +132,18 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                         .identifier(null)
                         .build());
 
+                // MODIFIES ehrExtractXML which is fine if we are generating the XML in part 2.
                 ehrExtractXml = structuredRecordMappingService.buildSkeletonEhrExtractXml(realEhrExtract, documentId);
             }
+            // End of part 2.
+
+            // Mixture of Part 1 and Part 2.
+            // We need to keep the population of ehrStatusGpcDocuments in Part 1.
+            // Move the population of externalAttachments / absentAttachments to part 2.
+
+            // Uses the structuredRecordMappingService, and needs the JSON -> XML conversion to have happened,
+            // because we depend on the IDs being the same.
+
 
             var documentsAsExternalAttachments = structuredRecordMappingService
                     .getExternalAttachments(structuredRecord);
@@ -139,7 +159,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
             documentsAsExternalAttachments.stream()
                 .map(externalAttachment -> EhrExtractStatus.GpcDocument.builder()
-                    .documentId(externalAttachment.getDocumentId())
+                    .documentId(externalAttachment.getDocumentId()) // Dependency here where we need the document ID in part 1, but the value is coming from the mapping service.
                     .accessDocumentUrl(externalAttachment.getUrl())
                     .objectName(null)
                     .accessedAt(now)
@@ -147,13 +167,18 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .messageId(structuredTaskDefinition.getConversationId())
                     .isSkeleton(false)
                     .identifier(externalAttachment.getIdentifier())
-                    .fileName(externalAttachment.getFilename())
+                    .fileName(externalAttachment.getFilename()) // Same dependency as above for documentId.
                     .contentType(externalAttachment.getContentType())
                     .originalDescription(externalAttachment.getOriginalDescription())
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
             externalAttachments.addAll(documentsAsExternalAttachments);
 
+            // Uses the structuredRecordMappingService, and needs the JSON -> XML conversion to have happened,
+            // because we depend on the IDs being the same.
+            //   The document ID is referenced in the DocumentReference within the EHR extract
+            //   The document ID is referenced by the EHR Extract external documents array.
+            // If we moved both of these into Part 2, then the IDs will still be consistent.
             absentAttachments.addAll(structuredRecordMappingService.getAbsentAttachments(structuredRecord));
 
             absentAttachments.stream()
@@ -172,19 +197,48 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                     .build())
                 .forEach(ehrStatusGpcDocuments::add);
 
+
             ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
                 structuredTaskDefinition, ehrStatusGpcDocuments
             );
             queueGetDocumentsTask(structuredTaskDefinition, documentsAsExternalAttachments);
             queueGetAbsentAttachmentTask(structuredTaskDefinition, absentAttachments);
+
+            // End Part 1.
         } finally {
             messageContext.resetMessageContext();
         }
 
+        // Part 2 would need to either Update the XML here OR do the conversion from JSON to XML.
+        // If we wanted to perform JSON to XML conversion in part 2:
+        //   - We'd have to copy all the Parameters in structuredTaskDefinition needed for the XML, which includes the ASIDs
+        //     - We believe this data is already stored within the EhrExtractStatus (Mongo)
+        //   - Store the JSON somewhere.
+        //   - Pull out the documents from the Mongo DB, and convert them to External attachments.
+        // Want to try going down this route, because we believe it'll generate simpler/cleaner code.
+        // What are the highest risks/blockers to this, and how do we prioritise those?
+        //  - When we generate the GpcDocument objects to be stored in Mongo, we use the Document ID (PK) which has
+        //    come from the XML mapping.  We'd either need to use a different PK, or somehow ensure the StructuredRecordMappingService
+        //    was populated with the FHIR ID -> Document ID mappings; in either case start storing the FHIR DocumentReference ID.
+
+        // If we wanted to perform the JSON to XML conversion in part 1:
+        //   - We'd need to iterate through each Document in DB and update the XML NarrativeStatement where an attachment is absent.
+        //   - We'd have to create a mechanism to update the contents of the structuredRecord in S3 if it were a skeleton
+        //     (Which would involve calling uploadFile with the `generateStructuredRecordFilename`)
+
+
+
+        // Fetch these attachments from the DocumentDB.
+        // Will need some mechanism to convert from EhrExtractStatus.GpcDocument to OutboundMessage.ExternalAttachment
         var allExternalAttachments = Stream
             .concat(externalAttachments.stream(), absentAttachments.stream())
             .collect(Collectors.toList());
 
+        // This stores the EHR Extract response into S3, so that we can send it as part of SendEhrExtractCoreTaskExecutor
+        // This can be moved over to Part 2.
+        // Inputs:
+        //  - The EHR Extract, which may or may not be a skeleton message.
+        //  - The list of all external attachments. Which will need to come from the DocumentDB.
         var stringRequestBody = objectMapper.writeValueAsString(OutboundMessage.builder()
             .payload(ehrExtractXml)
             .attachments(Collections.emptyList())
@@ -210,6 +264,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         );
 
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
+        // End of part 2.
     }
 
     private Bundle getStructuredRecord(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
