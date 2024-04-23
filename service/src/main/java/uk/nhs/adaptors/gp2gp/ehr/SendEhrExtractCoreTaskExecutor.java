@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -8,14 +9,18 @@ import org.apache.commons.text.StringSubstitutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
+import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.time.Instant;
 import java.util.Map;
+
+import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfString;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -26,6 +31,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     private final EhrExtractStatusService ehrExtractStatusService;
     private final StorageConnectorService storageConnectorService;
     private final SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
+    private final Gp2gpConfiguration gp2gpConfiguration;
 
     @Override
     public Class<SendEhrExtractCoreTaskDefinition> getTaskType() {
@@ -42,8 +48,15 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         var documentObjectNameAndSize = ehrExtractStatusService
             .fetchDocumentObjectNameAndSize(sendEhrExtractCoreTaskDefinition.getConversationId());
 
+        String outboundEhrExtract = replacePlaceholders(documentObjectNameAndSize, storageDataWrapper.getData());
+        final var outboundMessage = new ObjectMapper().readValue(outboundEhrExtract, OutboundMessage.class);
+        if (getBytesLengthOfString(outboundMessage.getPayload()) > gp2gpConfiguration.getLargeEhrExtractThreshold()) {
+            outboundMessage.setPayload("Skeleton");
+            outboundEhrExtract = new ObjectMapper().writeValueAsString(outboundMessage);
+        }
+
         var requestData = mhsRequestBuilder.buildSendEhrExtractCoreRequest(
-                replacePlaceholders(documentObjectNameAndSize, storageDataWrapper.getData()),
+                outboundEhrExtract,
                 sendEhrExtractCoreTaskDefinition.getConversationId(),
                 sendEhrExtractCoreTaskDefinition.getFromOdsCode(),
                 sendEhrExtractCoreTaskDefinition.getEhrExtractMessageId()

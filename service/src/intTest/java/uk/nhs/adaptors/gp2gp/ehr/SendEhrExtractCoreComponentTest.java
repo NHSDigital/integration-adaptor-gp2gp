@@ -18,6 +18,8 @@ import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_ODS_CODE;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,14 +41,17 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.StructuredRecordMappingService;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
+import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -54,11 +59,12 @@ import java.util.List;
 @SpringBootTest
 @DirtiesContext
 public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
-    private static final String PAYLOAD = "payload";
+    private static final String OUTBOUND_MESSAGE = serializeOutboundMessage("payload");
+    public static final String OUTBOUND_MESSAGE_WITH_PLACEHOLDER =
+            serializeOutboundMessage("payload ${LENGTH_PLACEHOLDER_ID=" + DOCUMENT_ID + "}");
+
     private static final String EXPECTED_STRUCTURED_RECORD_JSON_FILENAME =
         CONVERSATION_ID.concat("/").concat(CONVERSATION_ID).concat("_gpc_structured.json");
-    public static final String PAYLOAD_WITH_LENGTH_PLACEHOLDER =
-            "This is a payload. ${LENGTH_PLACEHOLDER_ID=" + DOCUMENT_ID + "}";
 
     private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
@@ -90,6 +96,9 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     @MockBean
     private SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
 
+    @MockBean
+    private StructuredRecordMappingService structuredRecordMappingService;
+
     @Test
     public void When_NewExtractCoreTask_Expect_DatabaseUpdated() {
         setupMhsClientWithSuccessfulResponse();
@@ -108,7 +117,7 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
 
-        verify(mhsRequestBuilder).buildSendEhrExtractCoreRequest(eq(PAYLOAD), anyString(), anyString(), anyString());
+        verify(mhsRequestBuilder).buildSendEhrExtractCoreRequest(eq(OUTBOUND_MESSAGE), anyString(), anyString(), anyString());
     }
 
     private void setupMhsClientWithSuccessfulResponse() {
@@ -118,9 +127,9 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     @Test
     public void When_NewExtractCoreTask_Expect_PlaceholdersWithinStructuredRecordPayloadAreReplaced() {
         setupMhsClientWithSuccessfulResponse();
-        final var expectedPayload = "This is a payload. 123456";
+        final var expectedPayload = serializeOutboundMessage("payload 123456");
 
-        when(storageDataWrapper.getData()).thenReturn(PAYLOAD_WITH_LENGTH_PLACEHOLDER);
+        when(storageDataWrapper.getData()).thenReturn(OUTBOUND_MESSAGE_WITH_PLACEHOLDER);
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
 
@@ -160,6 +169,37 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
         ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).orElseThrow();
         verify(sendAcknowledgementTaskDispatcher, times(1)).sendPositiveAcknowledgement(ehrExtractStatus);
+    }
+
+    @SneakyThrows
+    @Test
+    public void When_ExtractCoreWithLargeMessage_Expect_MhsRequestBuilderCalledWithSkeletonMessage()
+    {
+        // TODO: There is some implicit knowledge here that the £ is taking up two bytes, which takes the length to 17.
+        //       17 being the EHR Extract Threshold for the integration tests.
+        var stringRequestBody = serializeOutboundMessage("REALLY REALLY BI£");
+
+        var expectedRequestBody = serializeOutboundMessage("Skeleton");
+        setupMhsClientWithSuccessfulResponse();
+
+        when(storageDataWrapper.getData()).thenReturn(stringRequestBody);
+
+        when(structuredRecordMappingService.buildSkeletonEhrExtractXml(eq("REALLY REALLY BI£"), any())).thenReturn("Skeleton");
+
+        sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
+
+        verify(mhsRequestBuilder)
+                .buildSendEhrExtractCoreRequest(eq(expectedRequestBody), anyString(), anyString(), anyString());
+    }
+
+    @SneakyThrows
+    private static String serializeOutboundMessage(String payload) {
+        return new ObjectMapper().writeValueAsString(OutboundMessage.builder()
+            .payload(payload)
+            .attachments(Collections.emptyList())
+            .externalAttachments(Collections.emptyList())
+            .build()
+        );
     }
 
     @Test
@@ -212,7 +252,7 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         when(storageConnectorService.downloadFile(eq(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME))).thenReturn(storageDataWrapper);
-        when(storageDataWrapper.getData()).thenReturn(PAYLOAD);
+        when(storageDataWrapper.getData()).thenReturn(OUTBOUND_MESSAGE);
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
         when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
         when(sendEhrExtractCoreTaskDefinition.getEhrExtractMessageId()).thenReturn(randomIdGeneratorService.createNewId());
