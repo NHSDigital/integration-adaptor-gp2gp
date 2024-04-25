@@ -43,7 +43,7 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 @Service
 public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructuredTaskDefinition> {
 
-    public static final String SKELETON_ATTACHMENT = "X-GP2GP-Skeleton: Yes";
+    public static final String SKELETON_ATTACHMENT = "X-GP2GP-Skeleton: Yes"; // TODO: Move this constant somewhere else.
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     public static final String XML_CONTENT_TYPE = "application/xml";
     public static final String TEXT_XML_CONTENT_TYPE = "text/xml";

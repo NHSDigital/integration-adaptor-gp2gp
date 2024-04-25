@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskExecutor;
 import uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils;
 import uk.nhs.adaptors.gp2gp.gpc.StructuredRecordMappingService;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
@@ -36,6 +39,8 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     private final SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
     private final Gp2gpConfiguration gp2gpConfiguration;
     private final StructuredRecordMappingService structuredRecordMappingService;
+    private final RandomIdGeneratorService randomIdGeneratorService;
+    private final TimestampService timestampService;
 
     @Override
     public Class<SendEhrExtractCoreTaskDefinition> getTaskType() {
@@ -56,17 +61,39 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         final var outboundMessage = new ObjectMapper().readValue(outboundEhrExtract, OutboundMessage.class);
 
         if (getBytesLengthOfString(outboundMessage.getPayload()) > gp2gpConfiguration.getLargeEhrExtractThreshold()) {
+            String documentId = randomIdGeneratorService.createNewId();
+            String messageId = randomIdGeneratorService.createNewId();
+            String fileName = GpcFilenameUtils.generateLargeExrExtractFilename(documentId);
             ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
                 sendEhrExtractCoreTaskDefinition.getConversationId(), List.of(
                     EhrExtractStatus.GpcDocument.builder()
-                        .documentId("")
-                        .objectName(".gzip")
-                        .fileName(".gzip")
+                        .documentId(documentId)
+                        .messageId(messageId)
+                        .objectName(fileName)
+                        .fileName(fileName)
+                        .accessedAt(timestampService.now())
+                        .taskId(randomIdGeneratorService.createNewId())
                         .contentType("text/xml")
                         .isSkeleton(true)
                         .build()));
             outboundMessage.setPayload(structuredRecordMappingService
-                .buildSkeletonEhrExtractXml(outboundMessage.getPayload(), "4"));
+                .buildSkeletonEhrExtractXml(outboundMessage.getPayload(), documentId));
+            outboundMessage.getExternalAttachments().add(
+                OutboundMessage.ExternalAttachment.builder()
+                    .documentId("_" + documentId)
+                    .messageId(messageId)
+                    .description(OutboundMessage.AttachmentDescription.builder()
+                            .fileName(fileName)
+                            .contentType("text/xml")
+                            .length(9000)
+                            .compressed(true)
+                            .largeAttachment(9000 > gp2gpConfiguration.getLargeAttachmentThreshold())
+                            .originalBase64(false)
+                            .domainData(GetGpcStructuredTaskExecutor.SKELETON_ATTACHMENT)
+                            .build()
+                            .toString()
+                    ).build()
+            );
             outboundEhrExtract = new ObjectMapper().writeValueAsString(outboundMessage);
         }
 
