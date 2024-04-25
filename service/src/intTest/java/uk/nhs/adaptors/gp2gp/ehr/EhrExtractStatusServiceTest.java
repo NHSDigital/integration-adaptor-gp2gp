@@ -117,18 +117,20 @@ public class EhrExtractStatusServiceTest {
     }
 
     @Test
-    public void When_updateEhrExtractStatusAccessDocumentDocumentReferences_Expect_DocumentAddedToMongoDb() {
+    public void When_UpdateEhrExtractStatusAccessDocumentDocumentReferences_Expect_DocumentAddedToMongoDb() {
         var ehrStatus = addCompleteTransfer();
 
         ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
-            ehrStatus.getConversationId(), List.of(EhrExtractStatus.GpcDocument.builder().documentId("f368d574-b2aa-4255-9d98-97cca1d3502e").build()));
+            ehrStatus.getConversationId(), List.of(EhrExtractStatus.GpcDocument.builder()
+                .documentId("f368d574-b2aa-4255-9d98-97cca1d3502e").build()));
 
         assertThat(ehrExtractStatusRepository.findByConversationId(
             ehrStatus.getConversationId()).orElseThrow().getGpcAccessDocument().getDocuments().size())
             .isEqualTo(1);
 
         ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
-            ehrStatus.getConversationId(), List.of(EhrExtractStatus.GpcDocument.builder().documentId("f368d574-b2aa-4255-9d98-97cca1d3502b").build()));
+            ehrStatus.getConversationId(), List.of(EhrExtractStatus.GpcDocument.builder()
+                .documentId("f368d574-b2aa-4255-9d98-97cca1d3502b").build()));
 
         assertThat(ehrExtractStatusRepository.findByConversationId(
             ehrStatus.getConversationId()).orElseThrow().getGpcAccessDocument().getDocuments().size())
