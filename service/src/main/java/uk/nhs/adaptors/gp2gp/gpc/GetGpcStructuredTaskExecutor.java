@@ -173,7 +173,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 .forEach(ehrStatusGpcDocuments::add);
 
             ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
-                structuredTaskDefinition, ehrStatusGpcDocuments
+                structuredTaskDefinition.getConversationId(), ehrStatusGpcDocuments
             );
             queueGetDocumentsTask(structuredTaskDefinition, documentsAsExternalAttachments);
             queueGetAbsentAttachmentTask(structuredTaskDefinition, absentAttachments);
