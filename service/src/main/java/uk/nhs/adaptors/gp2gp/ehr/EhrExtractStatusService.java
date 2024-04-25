@@ -330,10 +330,10 @@ public class EhrExtractStatusService {
     }
 
     public void updateEhrExtractStatusAccessDocumentDocumentReferences(
-        GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
+        String conversationId,
         List<EhrExtractStatus.GpcDocument> documents
     ) {
-        Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
+        Query query = createQueryForConversationId(conversationId);
 
         Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
 

@@ -116,6 +116,25 @@ public class EhrExtractStatusServiceTest {
         assertThat(returnedConversationIds).isEqualTo(inProgressConversationIds);
     }
 
+    @Test
+    public void When_updateEhrExtractStatusAccessDocumentDocumentReferences_Expect_DocumentAddedToMongoDb() {
+        var ehrStatus = addCompleteTransfer();
+
+        ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
+            ehrStatus.getConversationId(), List.of(EhrExtractStatus.GpcDocument.builder().documentId("f368d574-b2aa-4255-9d98-97cca1d3502e").build()));
+
+        assertThat(ehrExtractStatusRepository.findByConversationId(
+            ehrStatus.getConversationId()).orElseThrow().getGpcAccessDocument().getDocuments().size())
+            .isEqualTo(1);
+
+        ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
+            ehrStatus.getConversationId(), List.of(EhrExtractStatus.GpcDocument.builder().documentId("f368d574-b2aa-4255-9d98-97cca1d3502b").build()));
+
+        assertThat(ehrExtractStatusRepository.findByConversationId(
+            ehrStatus.getConversationId()).orElseThrow().getGpcAccessDocument().getDocuments().size())
+            .isEqualTo(2);
+    }
+
     private void addInProgressTransfer(String conversationId) {
         EhrExtractStatus extractStatus = EhrExtractStatus.builder()
             .ackPending(buildPositiveAckPending())
@@ -234,7 +253,7 @@ public class EhrExtractStatusServiceTest {
         ehrExtractStatusRepository.save(extractStatus);
     }
 
-    public void addCompleteTransfer() {
+    public EhrExtractStatus addCompleteTransfer() {
         String ehrMessageRef = generateRandomUppercaseUUID();
 
         EhrExtractStatus extractStatus = EhrExtractStatus.builder()
@@ -282,8 +301,7 @@ public class EhrExtractStatusServiceTest {
             .updatedAt(FIVE_DAYS_AGO)
             .build();
 
-        ehrExtractStatusRepository.save(extractStatus);
-
+        return ehrExtractStatusRepository.save(extractStatus);
     }
 
     private String generateRandomUppercaseUUID() {
