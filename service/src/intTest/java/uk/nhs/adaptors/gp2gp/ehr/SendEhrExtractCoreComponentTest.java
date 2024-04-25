@@ -20,6 +20,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_ODS_CODE;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,12 +36,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 
-
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils;
 import uk.nhs.adaptors.gp2gp.gpc.StructuredRecordMappingService;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
@@ -65,6 +66,9 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
     private static final String EXPECTED_STRUCTURED_RECORD_JSON_FILENAME =
         CONVERSATION_ID.concat("/").concat(CONVERSATION_ID).concat("_gpc_structured.json");
+    public static final String TWO_BYTE_CHARACTER = "£";
+    public static final String SEVENTEEN_BYTE_PAYLOAD = "REALLY REALLY BI" + TWO_BYTE_CHARACTER;
+    public static final String TEXT_XML_CONTENT_TYPE = "text/xml";
 
     private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
@@ -142,7 +146,8 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         setupMhsClientWithSuccessfulResponse();
 
         var dummyRequestHeaderSpec = mock(RequestHeadersSpec.class);
-        when(mhsRequestBuilder.buildSendEhrExtractCoreRequest(any(), any(), any(), any())).thenReturn(dummyRequestHeaderSpec);
+        when(mhsRequestBuilder.buildSendEhrExtractCoreRequest(any(), any(), any(), any()))
+            .thenReturn(dummyRequestHeaderSpec);
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
 
@@ -175,22 +180,54 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     @Test
     public void When_ExtractCoreWithLargeMessage_Expect_MhsRequestBuilderCalledWithSkeletonMessage()
     {
-        // TODO: There is some implicit knowledge here that the £ is taking up two bytes, which takes the length to 17.
-        //       17 being the EHR Extract Threshold for the integration tests.
-        var stringRequestBody = serializeOutboundMessage("REALLY REALLY BI£");
+        var stringRequestBody = serializeOutboundMessage(SEVENTEEN_BYTE_PAYLOAD);
 
-        var expectedRequestBody = serializeOutboundMessage("Skeleton");
         setupMhsClientWithSuccessfulResponse();
 
         when(storageDataWrapper.getData()).thenReturn(stringRequestBody);
 
-        when(structuredRecordMappingService.buildSkeletonEhrExtractXml(eq("REALLY REALLY BI£"), any())).thenReturn("Skeleton");
+        when(structuredRecordMappingService.buildSkeletonEhrExtractXml(eq(SEVENTEEN_BYTE_PAYLOAD), any())).thenReturn("NotASkeleton");
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
 
         verify(mhsRequestBuilder)
-                .buildSendEhrExtractCoreRequest(eq(expectedRequestBody), anyString(), anyString(), anyString());
+                .buildSendEhrExtractCoreRequest(eq(serializeOutboundMessage("NotASkeleton")), anyString(), anyString(), anyString());
     }
+
+    @SneakyThrows
+    @Test
+    @Ignore
+    public void When_ExtractCoreWithLargeMessage_Expect_NewDocumentInDatabase()
+    {
+        var stringRequestBody = serializeOutboundMessage(SEVENTEEN_BYTE_PAYLOAD);
+
+        setupMhsClientWithSuccessfulResponse();
+
+        when(storageDataWrapper.getData()).thenReturn(stringRequestBody);
+
+        when(structuredRecordMappingService.buildSkeletonEhrExtractXml(eq(SEVENTEEN_BYTE_PAYLOAD), any())).thenReturn("NotASkeleton");
+
+        sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
+
+        ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).orElseThrow();
+
+        var fileName = GpcFilenameUtils.generateLargeExrExtractFilename(""); //TODO: this should be a UUID
+
+        assertThat(ehrExtractStatus.getGpcAccessDocument().getDocuments().get(1))
+            .isEqualTo(EhrExtractStatus.GpcDocument.builder()
+                .documentId("") //TODO: this should be a UUID
+                .accessDocumentUrl(null)
+                .contentType(TEXT_XML_CONTENT_TYPE)
+                .objectName(fileName)
+                .fileName(fileName)
+                .accessedAt(null) //TODO: Make this a timestamp
+                .taskId(null) //TODO: this should be a UUID?
+                .messageId(null) //TODO: this should be a UUID
+                .isSkeleton(true)
+                .identifier(null)
+                .build());
+    }
+
 
     @SneakyThrows
     private static String serializeOutboundMessage(String payload) {
