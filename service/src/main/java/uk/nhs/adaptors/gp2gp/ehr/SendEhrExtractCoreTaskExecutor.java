@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils;
 import uk.nhs.adaptors.gp2gp.gpc.StructuredRecordMappingService;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
@@ -19,6 +20,7 @@ import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 
 import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfString;
@@ -34,7 +36,6 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     private final SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
     private final Gp2gpConfiguration gp2gpConfiguration;
     private final StructuredRecordMappingService structuredRecordMappingService;
-    private final EhrExtractStatusRepository ehrExtractStatusRepository;
 
     @Override
     public Class<SendEhrExtractCoreTaskDefinition> getTaskType() {
@@ -55,7 +56,17 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         final var outboundMessage = new ObjectMapper().readValue(outboundEhrExtract, OutboundMessage.class);
 
         if (getBytesLengthOfString(outboundMessage.getPayload()) > gp2gpConfiguration.getLargeEhrExtractThreshold()) {
-            outboundMessage.setPayload(structuredRecordMappingService.buildSkeletonEhrExtractXml(outboundMessage.getPayload(), "blah"));
+            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
+                sendEhrExtractCoreTaskDefinition.getConversationId(), List.of(
+                    EhrExtractStatus.GpcDocument.builder()
+                        .documentId("")
+                        .objectName(".gzip")
+                        .fileName(".gzip")
+                        .contentType("text/xml")
+                        .isSkeleton(true)
+                        .build()));
+            outboundMessage.setPayload(structuredRecordMappingService
+                .buildSkeletonEhrExtractXml(outboundMessage.getPayload(), "4"));
             outboundEhrExtract = new ObjectMapper().writeValueAsString(outboundMessage);
         }
 

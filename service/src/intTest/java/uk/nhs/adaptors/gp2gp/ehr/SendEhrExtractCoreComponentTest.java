@@ -20,7 +20,6 @@ import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_ODS_CODE;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
-import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -70,7 +69,8 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     public static final String SEVENTEEN_BYTE_PAYLOAD = "REALLY REALLY BI" + TWO_BYTE_CHARACTER;
     public static final String TEXT_XML_CONTENT_TYPE = "text/xml";
 
-    private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
+    @MockBean
+    private RandomIdGeneratorService randomIdGeneratorService;
 
     @Mock
     private StorageDataWrapper storageDataWrapper;
@@ -178,15 +178,15 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
     @SneakyThrows
     @Test
-    public void When_ExtractCoreWithLargeMessage_Expect_MhsRequestBuilderCalledWithSkeletonMessage()
-    {
+    public void When_ExtractCoreWithLargeMessage_Expect_MhsRequestBuilderCalledWithSkeletonMessage() {
         var stringRequestBody = serializeOutboundMessage(SEVENTEEN_BYTE_PAYLOAD);
 
         setupMhsClientWithSuccessfulResponse();
 
         when(storageDataWrapper.getData()).thenReturn(stringRequestBody);
 
-        when(structuredRecordMappingService.buildSkeletonEhrExtractXml(eq(SEVENTEEN_BYTE_PAYLOAD), any())).thenReturn("NotASkeleton");
+        when(randomIdGeneratorService.createNewId()).thenReturn("4");
+        when(structuredRecordMappingService.buildSkeletonEhrExtractXml(SEVENTEEN_BYTE_PAYLOAD, "4")).thenReturn("NotASkeleton");
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
 
@@ -196,16 +196,12 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
     @SneakyThrows
     @Test
-    @Ignore
-    public void When_ExtractCoreWithLargeMessage_Expect_NewDocumentInDatabase()
-    {
+    public void When_ExtractCoreWithLargeMessage_Expect_NewDocumentInDatabase() {
         var stringRequestBody = serializeOutboundMessage(SEVENTEEN_BYTE_PAYLOAD);
 
         setupMhsClientWithSuccessfulResponse();
 
         when(storageDataWrapper.getData()).thenReturn(stringRequestBody);
-
-        when(structuredRecordMappingService.buildSkeletonEhrExtractXml(eq(SEVENTEEN_BYTE_PAYLOAD), any())).thenReturn("NotASkeleton");
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
 
@@ -291,8 +287,8 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         when(storageConnectorService.downloadFile(eq(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME))).thenReturn(storageDataWrapper);
         when(storageDataWrapper.getData()).thenReturn(OUTBOUND_MESSAGE);
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
-        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
-        when(sendEhrExtractCoreTaskDefinition.getEhrExtractMessageId()).thenReturn(randomIdGeneratorService.createNewId());
+        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn("4");
+        when(sendEhrExtractCoreTaskDefinition.getEhrExtractMessageId()).thenReturn("4");
         when(sendEhrExtractCoreTaskDefinition.getFromOdsCode()).thenReturn(FROM_ODS_CODE);
     }
 
