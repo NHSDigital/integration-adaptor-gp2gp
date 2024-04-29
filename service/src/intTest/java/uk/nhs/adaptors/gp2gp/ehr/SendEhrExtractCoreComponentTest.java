@@ -262,7 +262,7 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
             sendEhrExtractCoreTaskDefinition,
             COMPRESSED_EHR_EXTRACT_MESSAGE_ID,
             COMPRESSED_EHR_EXTRACT_DOCUMENT_ID,
-            "text/xml"
+            "application/xml"
         )).thenReturn("<COPC />");
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);

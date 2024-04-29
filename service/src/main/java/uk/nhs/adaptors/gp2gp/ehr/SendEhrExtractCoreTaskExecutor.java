@@ -65,8 +65,10 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
 
         String outboundEhrExtract = replacePlaceholders(documentObjectNameAndSize, storageDataWrapper.getData());
 
+        LOGGER.info("Checking EHR Extract size");
         final var outboundMessage = new ObjectMapper().readValue(outboundEhrExtract, OutboundMessage.class);
         if (getBytesLengthOfString(outboundMessage.getPayload()) > gp2gpConfiguration.getLargeEhrExtractThreshold()) {
+            LOGGER.info("EHR extract IS large");
             outboundEhrExtract = compressEhrExtractAndReplacePayloadWithSkeleton(sendEhrExtractCoreTaskDefinition, outboundMessage);
         }
 
@@ -149,7 +151,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
                     sendEhrExtractCoreTaskDefinition,
                     messageId,
                     documentId,
-                    TEXT_XML_CONTENT_TYPE
+                    "application/xml"
                 )
             ).attachments(
                 List.of(
