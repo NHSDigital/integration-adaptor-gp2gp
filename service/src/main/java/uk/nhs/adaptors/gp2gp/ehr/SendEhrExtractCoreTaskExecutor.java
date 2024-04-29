@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -35,6 +36,7 @@ import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfStr
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtractCoreTaskDefinition> {
+    public static final String TEXT_XML_CONTENT_TYPE = "text/xml";
     private final MhsClient mhsClient;
     private final MhsRequestBuilder mhsRequestBuilder;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -62,71 +64,10 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
             .fetchDocumentObjectNameAndSize(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         String outboundEhrExtract = replacePlaceholders(documentObjectNameAndSize, storageDataWrapper.getData());
+
         final var outboundMessage = new ObjectMapper().readValue(outboundEhrExtract, OutboundMessage.class);
-
         if (getBytesLengthOfString(outboundMessage.getPayload()) > gp2gpConfiguration.getLargeEhrExtractThreshold()) {
-            String documentId = randomIdGeneratorService.createNewId();
-            String messageId = randomIdGeneratorService.createNewId();
-            String taskId = randomIdGeneratorService.createNewId();
-            String fileName = GpcFilenameUtils.generateLargeExrExtractFilename(documentId);
-            final var compressedEhrExtract = Base64Utils.toBase64String(Gzip.compress(outboundMessage.getPayload()));
-            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
-                sendEhrExtractCoreTaskDefinition.getConversationId(), List.of(
-                    EhrExtractStatus.GpcDocument.builder()
-                        .documentId(documentId)
-                        .messageId(messageId)
-                        .objectName(fileName)
-                        .fileName(fileName)
-                        .accessedAt(timestampService.now())
-                        .taskId(taskId)
-                        .contentType("text/xml")
-                        .isSkeleton(true)
-                        .build()));
-
-            String data = new ObjectMapper().writeValueAsString(
-                OutboundMessage.builder()
-                .payload(
-                    ehrDocumentMapper.generateMhsPayload(
-                        sendEhrExtractCoreTaskDefinition,
-                        messageId,
-                        documentId,
-                        "text/xml"
-                    )
-                ).attachments(
-                    List.of(
-                        OutboundMessage.Attachment.builder()
-                            .contentType("text/xml")
-                            .isBase64(true)
-                            .description(documentId)
-                            .payload(compressedEhrExtract)
-                            .build()
-                    )
-                ).build()
-            );
-
-            storageConnectorService.uploadFile(
-                StorageDataWrapperProvider.buildStorageDataWrapper(sendEhrExtractCoreTaskDefinition, data, taskId),
-                fileName
-            );
-
-            outboundMessage.setPayload(structuredRecordMappingService.buildSkeletonEhrExtractXml(outboundMessage.getPayload(), documentId));
-            outboundMessage.getExternalAttachments().add(
-                OutboundMessage.ExternalAttachment.builder()
-                    .documentId("_" + documentId)
-                    .messageId(messageId)
-                    .description(OutboundMessage.AttachmentDescription.builder()
-                            .fileName(fileName)
-                            .contentType("text/xml")
-                            .length(compressedEhrExtract.length())
-                            .compressed(true)
-                            .largeAttachment(compressedEhrExtract.length() > gp2gpConfiguration.getLargeAttachmentThreshold())
-                            .originalBase64(false)
-                            .domainData(GetGpcStructuredTaskExecutor.SKELETON_ATTACHMENT)
-                            .build()
-                            .toString()
-                    ).build()
-            );
-            outboundEhrExtract = new ObjectMapper().writeValueAsString(outboundMessage);
+            outboundEhrExtract = compressEhrExtractAndReplacePayloadWithSkeleton(sendEhrExtractCoreTaskDefinition, outboundMessage);
         }
 
         var requestData = mhsRequestBuilder.buildSendEhrExtractCoreRequest(
@@ -146,6 +87,107 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         if (ehrExtractStatus.getGpcAccessDocument().getDocuments().isEmpty()) {
             sendAcknowledgementTaskDispatcher.sendPositiveAcknowledgement(ehrExtractStatus);
         }
+    }
+
+    private String compressEhrExtractAndReplacePayloadWithSkeleton(
+            SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+            OutboundMessage outboundMessage) throws JsonProcessingException {
+        String documentId = randomIdGeneratorService.createNewId();
+        String messageId = randomIdGeneratorService.createNewId();
+        String taskId = randomIdGeneratorService.createNewId();
+        String fileName = GpcFilenameUtils.generateLargeExrExtractFilename(documentId);
+        final var compressedEhrExtract = Base64Utils.toBase64String(Gzip.compress(outboundMessage.getPayload()));
+        storeCompressedEhrExtractAsDocument(sendEhrExtractCoreTaskDefinition, documentId, messageId, fileName, taskId);
+
+        uploadCompressedEhrExtractToStorageWrapper(
+                sendEhrExtractCoreTaskDefinition, messageId, documentId, compressedEhrExtract, taskId, fileName);
+
+        outboundMessage.setPayload(structuredRecordMappingService.buildSkeletonEhrExtractXml(outboundMessage.getPayload(), documentId));
+        referenceCompressedEhrExtractDocumentAsAttachmentInOutboundMessage(
+                outboundMessage, documentId, messageId, fileName, compressedEhrExtract.length());
+
+        return new ObjectMapper().writeValueAsString(outboundMessage);
+    }
+
+    private void referenceCompressedEhrExtractDocumentAsAttachmentInOutboundMessage(
+            OutboundMessage outboundMessage,
+            String documentId,
+            String messageId,
+            String fileName,
+            int compressedEhrExtractSize) {
+
+        outboundMessage.getExternalAttachments().add(
+            OutboundMessage.ExternalAttachment.builder()
+                .documentId("_" + documentId)
+                .messageId(messageId)
+                .description(OutboundMessage.AttachmentDescription.builder()
+                    .fileName(fileName)
+                    .contentType(TEXT_XML_CONTENT_TYPE)
+                    .length(compressedEhrExtractSize)
+                    .compressed(true)
+                    .largeAttachment(compressedEhrExtractSize > gp2gpConfiguration.getLargeAttachmentThreshold())
+                    .originalBase64(false)
+                    .domainData(GetGpcStructuredTaskExecutor.SKELETON_ATTACHMENT)
+                    .build()
+                    .toString()
+                ).build()
+        );
+    }
+
+    private void uploadCompressedEhrExtractToStorageWrapper(
+            SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+            String messageId,
+            String documentId,
+            String compressedEhrExtract,
+            String taskId,
+            String fileName) throws JsonProcessingException {
+
+        String data = new ObjectMapper().writeValueAsString(
+            OutboundMessage.builder()
+            .payload(
+                ehrDocumentMapper.generateMhsPayload(
+                    sendEhrExtractCoreTaskDefinition,
+                    messageId,
+                    documentId,
+                    TEXT_XML_CONTENT_TYPE
+                )
+            ).attachments(
+                List.of(
+                    OutboundMessage.Attachment.builder()
+                        .contentType(TEXT_XML_CONTENT_TYPE)
+                        .isBase64(true)
+                        .description(documentId)
+                        .payload(compressedEhrExtract)
+                        .build()
+                )
+            ).build()
+        );
+
+        storageConnectorService.uploadFile(
+            StorageDataWrapperProvider.buildStorageDataWrapper(sendEhrExtractCoreTaskDefinition, data, taskId),
+            fileName
+        );
+    }
+
+    private void storeCompressedEhrExtractAsDocument(
+        SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+        String documentId,
+        String messageId,
+        String fileName,
+        String taskId) {
+
+        ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
+            sendEhrExtractCoreTaskDefinition.getConversationId(), List.of(
+                EhrExtractStatus.GpcDocument.builder()
+                    .documentId(documentId)
+                    .messageId(messageId)
+                    .objectName(fileName)
+                    .fileName(fileName)
+                    .accessedAt(timestampService.now())
+                    .taskId(taskId)
+                    .contentType(TEXT_XML_CONTENT_TYPE)
+                    .isSkeleton(true)
+                    .build()));
     }
 
     private String replacePlaceholders(Map<String, String> replacements, String data) {
