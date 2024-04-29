@@ -2,8 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -79,6 +77,10 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     public static final String COMPRESSED_EHR_EXTRACT_MESSAGE_ID = "5";
     public static final String COMPRESSED_EHR_EXTRACT_TASK_ID = "6";
     public static final Instant NOW = Instant.parse("2024-01-01T10:00:00Z");
+    public static final String COMPRESSED_LARGE_PAYLOAD = "H4sIAAAAAAAA/wtydfTxiVQIglBOnocWAwA3VEfTEgAAAA==";
+
+    @MockBean
+    private EhrDocumentMapper ehrDocumentMapper;
 
     @MockBean
     private TimestampService timestampService;
@@ -98,7 +100,6 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     @MockBean
     private MhsClient mhsClient;
 
-    @MockBean
     private SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition;
 
     @MockBean
@@ -240,15 +241,49 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
                         OutboundMessage.AttachmentDescription.builder()
                             .fileName(GpcFilenameUtils.generateLargeExrExtractFilename(COMPRESSED_EHR_EXTRACT_DOCUMENT_ID))
                             .contentType("text/xml")
-                            .length(9000) // TODO: Fake number
+                            .length(COMPRESSED_LARGE_PAYLOAD.length())
                             .compressed(true)
-                            .largeAttachment(true) // TODO: Comparison with the Fake number above.
+                            .largeAttachment(true)
                             .originalBase64(false)
                             .domainData(GetGpcStructuredTaskExecutor.SKELETON_ATTACHMENT)
                             .build()
                             .toString()
                     ).build()
             );
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_ExtractCoreWithLargeMessage_Expect_CompressedEhrExtractUploadedToStorageAsStorageDataWrapper() {
+        setupMhsClientWithSuccessfulResponse();
+        setupEhrExtractAsLargeMessage();
+
+        when(ehrDocumentMapper.generateMhsPayload(
+            sendEhrExtractCoreTaskDefinition,
+            COMPRESSED_EHR_EXTRACT_MESSAGE_ID,
+            COMPRESSED_EHR_EXTRACT_DOCUMENT_ID,
+            "text/xml"
+        )).thenReturn("<COPC />");
+
+        sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
+
+        verify(storageConnectorService).uploadFile(
+            StorageDataWrapper.builder()
+                .type("uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition")
+                .conversationId(CONVERSATION_ID)
+                .taskId(COMPRESSED_EHR_EXTRACT_TASK_ID)
+                .data(new ObjectMapper().writeValueAsString(
+                    OutboundMessage.builder()
+                        .payload("<COPC />")
+                        .attachments(List.of(OutboundMessage.Attachment.builder()
+                            .contentType("text/xml")
+                            .isBase64(true)
+                            .description(COMPRESSED_EHR_EXTRACT_DOCUMENT_ID)
+                            .payload(COMPRESSED_LARGE_PAYLOAD)
+                            .build()
+                        )).build()
+                )).build(),
+            GpcFilenameUtils.generateLargeExrExtractFilename(COMPRESSED_EHR_EXTRACT_DOCUMENT_ID));
     }
 
     private @NotNull EhrExtractStatus reloadEhrStatus() {
@@ -330,10 +365,12 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         );
         when(storageConnectorService.downloadFile(eq(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME))).thenReturn(storageDataWrapper);
         when(storageDataWrapper.getData()).thenReturn(OUTBOUND_MESSAGE);
-        when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
-        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn("123-456");
-        when(sendEhrExtractCoreTaskDefinition.getEhrExtractMessageId()).thenReturn("789-123");
-        when(sendEhrExtractCoreTaskDefinition.getFromOdsCode()).thenReturn(FROM_ODS_CODE);
+        sendEhrExtractCoreTaskDefinition = SendEhrExtractCoreTaskDefinition.builder()
+                .conversationId(ehrExtractStatus.getConversationId())
+                .taskId("123-456")
+                .ehrExtractMessageId("789-123")
+                .fromOdsCode(FROM_ODS_CODE)
+                .build();
     }
 
     private void assertThatInitialRecordWasUpdated(EhrExtractStatus ehrExtractStatusUpdated, EhrExtractStatus ehrExtractStatus) {

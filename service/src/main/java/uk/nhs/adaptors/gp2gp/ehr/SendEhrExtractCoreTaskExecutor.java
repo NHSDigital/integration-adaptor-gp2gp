@@ -14,9 +14,12 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
+import uk.nhs.adaptors.gp2gp.common.utils.Gzip;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskExecutor;
 import uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils;
+import uk.nhs.adaptors.gp2gp.gpc.StorageDataWrapperProvider;
 import uk.nhs.adaptors.gp2gp.gpc.StructuredRecordMappingService;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
@@ -41,6 +44,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     private final StructuredRecordMappingService structuredRecordMappingService;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
+    private final EhrDocumentMapper ehrDocumentMapper;
 
     @Override
     public Class<SendEhrExtractCoreTaskDefinition> getTaskType() {
@@ -63,7 +67,9 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         if (getBytesLengthOfString(outboundMessage.getPayload()) > gp2gpConfiguration.getLargeEhrExtractThreshold()) {
             String documentId = randomIdGeneratorService.createNewId();
             String messageId = randomIdGeneratorService.createNewId();
+            String taskId = randomIdGeneratorService.createNewId();
             String fileName = GpcFilenameUtils.generateLargeExrExtractFilename(documentId);
+            final var compressedEhrExtract = Base64Utils.toBase64String(Gzip.compress(outboundMessage.getPayload()));
             ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
                 sendEhrExtractCoreTaskDefinition.getConversationId(), List.of(
                     EhrExtractStatus.GpcDocument.builder()
@@ -72,12 +78,38 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
                         .objectName(fileName)
                         .fileName(fileName)
                         .accessedAt(timestampService.now())
-                        .taskId(randomIdGeneratorService.createNewId())
+                        .taskId(taskId)
                         .contentType("text/xml")
                         .isSkeleton(true)
                         .build()));
-            outboundMessage.setPayload(structuredRecordMappingService
-                .buildSkeletonEhrExtractXml(outboundMessage.getPayload(), documentId));
+
+            String data = new ObjectMapper().writeValueAsString(
+                OutboundMessage.builder()
+                .payload(
+                    ehrDocumentMapper.generateMhsPayload(
+                        sendEhrExtractCoreTaskDefinition,
+                        messageId,
+                        documentId,
+                        "text/xml"
+                    )
+                ).attachments(
+                    List.of(
+                        OutboundMessage.Attachment.builder()
+                            .contentType("text/xml")
+                            .isBase64(true)
+                            .description(documentId)
+                            .payload(compressedEhrExtract)
+                            .build()
+                    )
+                ).build()
+            );
+
+            storageConnectorService.uploadFile(
+                StorageDataWrapperProvider.buildStorageDataWrapper(sendEhrExtractCoreTaskDefinition, data, taskId),
+                fileName
+            );
+
+            outboundMessage.setPayload(structuredRecordMappingService.buildSkeletonEhrExtractXml(outboundMessage.getPayload(), documentId));
             outboundMessage.getExternalAttachments().add(
                 OutboundMessage.ExternalAttachment.builder()
                     .documentId("_" + documentId)
@@ -85,9 +117,9 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
                     .description(OutboundMessage.AttachmentDescription.builder()
                             .fileName(fileName)
                             .contentType("text/xml")
-                            .length(9000)
+                            .length(compressedEhrExtract.length())
                             .compressed(true)
-                            .largeAttachment(9000 > gp2gpConfiguration.getLargeAttachmentThreshold())
+                            .largeAttachment(compressedEhrExtract.length() > gp2gpConfiguration.getLargeAttachmentThreshold())
                             .originalBase64(false)
                             .domainData(GetGpcStructuredTaskExecutor.SKELETON_ATTACHMENT)
                             .build()
