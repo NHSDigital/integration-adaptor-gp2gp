@@ -37,11 +37,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 
+import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
+import uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskExecutor;
 import uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils;
@@ -117,6 +119,9 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
     @MockBean
     private StructuredRecordMappingService structuredRecordMappingService;
+
+    @MockBean
+    private Gp2gpConfiguration gp2gpConfiguration;
 
     @Test
     public void When_NewExtractCoreTask_Expect_DatabaseUpdated() {
@@ -354,6 +359,8 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
     @BeforeEach
     public void prepareCommonStubbing() {
+        when(gp2gpConfiguration.getLargeEhrExtractThreshold()).thenReturn(BinaryUtils.getBytesLengthOfString(SEVENTEEN_BYTE_PAYLOAD) - 1);
+        when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(BinaryUtils.getBytesLengthOfString(SEVENTEEN_BYTE_PAYLOAD) - 1);
         ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
