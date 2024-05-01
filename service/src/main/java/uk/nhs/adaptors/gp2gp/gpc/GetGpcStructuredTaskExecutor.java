@@ -105,10 +105,18 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 externalAttachments.add(largeEhrExtractXmlAsExternalAttachment);
 
                 var getDocumentTaskDefinition = buildGetDocumentTask(structuredTaskDefinition, largeEhrExtractXmlAsExternalAttachment);
-                var mhsPayload = ehrDocumentMapper.mapMhsPayloadTemplateToXml(
-                        ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getDocumentTaskDefinition, XML_CONTENT_TYPE));
 
-                uploadToStorage(ehrExtractXml, mhsPayload, fileName, getDocumentTaskDefinition);
+                uploadToStorage(
+                    ehrExtractXml,
+                    ehrDocumentMapper.generateMhsPayload(
+                        getDocumentTaskDefinition,
+                        getDocumentTaskDefinition.getMessageId(),
+                        getDocumentTaskDefinition.getDocumentId(),
+                        XML_CONTENT_TYPE
+                    ),
+                    fileName,
+                    getDocumentTaskDefinition
+                );
                 ehrStatusGpcDocuments.add(EhrExtractStatus.GpcDocument.builder()
                         .documentId(documentId)
                         .accessDocumentUrl(null)
