@@ -158,9 +158,10 @@ public class StructuredRecordMappingService {
     }
 
     @SneakyThrows
-    public String buildSkeletonEhrExtractXml(String realEhrExtract, String documentId
+    public String buildSkeletonEhrExtractXml(String realEhrExtract, String documentIdOfCompressedEhrExtract
     ) {
-        var ehrCompositionWithNarrativeStatement = ehrExtractMapper.buildEhrCompositionForSkeletonEhrExtract(documentId);
+        var ehrCompositionWithNarrativeStatement =
+            ehrExtractMapper.buildEhrCompositionForSkeletonEhrExtract(documentIdOfCompressedEhrExtract);
 
         var documentBuilderFactory = DocumentBuilderFactory.newInstance();
         documentBuilder = documentBuilderFactory.newDocumentBuilder();
