@@ -15,9 +15,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
@@ -73,7 +71,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                 var chunk = chunks.get(i);
                 var messageId = randomIdGeneratorService.createNewId();
                 var filename = mainMessageId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
-                var chunkPayload = generateChunkPayload(taskDefinition, messageId, filename);
+                var chunkPayload = ehrDocumentMapper.generateMhsPayload(taskDefinition, messageId, filename);
 
                 var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, MimeTypes.OCTET_STREAM);
 
@@ -131,21 +129,6 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                 .build()))
             .build();
         return objectMapper.writeValueAsString(chunkOutboundMessage);
-    }
-
-    private String generateChunkPayload(DocumentTaskDefinition taskDefinition, String messageId, String filename) {
-        var templateParameters = EhrDocumentTemplateParameters.builder()
-            .resourceCreated(DateFormatUtil.toHl7Format(timestampService.now()))
-            .messageId(messageId)
-            .filename(filename)
-            .fromAsid(taskDefinition.getFromAsid())
-            .toAsid(taskDefinition.getToAsid())
-            .toOdsCode(taskDefinition.getToOdsCode())
-            .fromOdsCode(taskDefinition.getFromOdsCode())
-            .pertinentPayloadId(randomIdGeneratorService.createNewId())
-            .build();
-
-        return ehrDocumentMapper.mapMhsPayloadTemplateToXml(templateParameters);
     }
 
     public static List<String> chunkBinary(String str, int sizeThreshold) {
