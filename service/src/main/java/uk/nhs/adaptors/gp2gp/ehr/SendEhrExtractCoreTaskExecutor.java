@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import com.amazonaws.util.StringUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +49,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
     private final EhrDocumentMapper ehrDocumentMapper;
+    private final EhrExtractStatusRepository ehrExtractStatusRepository;
 
     @Override
     public Class<SendEhrExtractCoreTaskDefinition> getTaskType() {
@@ -65,6 +67,27 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
             .fetchDocumentObjectNameAndSize(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         String outboundEhrExtract = replacePlaceholders(documentObjectNameAndSize, storageDataWrapper.getData());
+
+        var retrievedEhrExtractStatus =
+            ehrExtractStatusRepository.findByConversationId(sendEhrExtractCoreTaskDefinition.getConversationId())
+                .orElseThrow();
+
+        var erroredDocuments = retrievedEhrExtractStatus.getGpcAccessDocument().getDocuments()
+            .stream()
+            .filter(document -> StringUtils.isNullOrEmpty(document.getGpConnectErrorMessage()))
+            .toList();
+
+        // Step 1
+        // now we have the errored documents, we now find the narrative statement where
+        // <id root=> = document documentId
+        // ContentType, Filename, Comment - the required fields to update
+
+        // Step 2
+        // Find outboundMessage ExternalAttachment with the same documentId
+        // Regenerate AttachmentDescription with `AbsentAttachment` filename
+
+        // The other approach is to insert placeholders when generating the narrative statements and use
+        // fetchDocumentObjectNameAndSize to add the values we need to the map.
 
         LOGGER.info("Checking EHR Extract size");
         final var outboundMessage = new ObjectMapper().readValue(outboundEhrExtract, OutboundMessage.class);
