@@ -18,7 +18,6 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
 import uk.nhs.adaptors.gp2gp.common.utils.Gzip;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskExecutor;
 import uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils;
 import uk.nhs.adaptors.gp2gp.gpc.StorageDataWrapperProvider;
 import uk.nhs.adaptors.gp2gp.gpc.StructuredRecordMappingService;
@@ -36,6 +35,8 @@ import static uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils.getBytesLengthOfStr
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtractCoreTaskDefinition> {
+    public static final String SKELETON_ATTACHMENT = "X-GP2GP-Skeleton: Yes";
+
     public static final String TEXT_XML_CONTENT_TYPE = "text/xml";
     private final MhsClient mhsClient;
     private final MhsRequestBuilder mhsRequestBuilder;
@@ -129,7 +130,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
                     .compressed(true)
                     .largeAttachment(compressedEhrExtractSize > gp2gpConfiguration.getLargeAttachmentThreshold())
                     .originalBase64(false)
-                    .domainData(GetGpcStructuredTaskExecutor.SKELETON_ATTACHMENT)
+                    .domainData(SKELETON_ATTACHMENT)
                     .build()
                     .toString()
                 ).build()

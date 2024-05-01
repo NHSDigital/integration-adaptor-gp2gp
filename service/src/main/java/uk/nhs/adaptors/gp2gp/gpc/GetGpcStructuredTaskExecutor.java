@@ -36,8 +36,6 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructuredTaskDefinition> {
-
-    public static final String SKELETON_ATTACHMENT = "X-GP2GP-Skeleton: Yes"; // TODO: Move this constant somewhere else.
     private static final String LEADING_UNDERSCORE_CHAR = "_";
 
     private final TimestampService timestampService;

@@ -45,7 +45,6 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
 import uk.nhs.adaptors.gp2gp.common.utils.BinaryUtils;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskExecutor;
 import uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils;
 import uk.nhs.adaptors.gp2gp.gpc.StructuredRecordMappingService;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
@@ -250,7 +249,7 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
                             .compressed(true)
                             .largeAttachment(true)
                             .originalBase64(false)
-                            .domainData(GetGpcStructuredTaskExecutor.SKELETON_ATTACHMENT)
+                            .domainData(SendEhrExtractCoreTaskExecutor.SKELETON_ATTACHMENT)
                             .build()
                             .toString()
                     ).build()
