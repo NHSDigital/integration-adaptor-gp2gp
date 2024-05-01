@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
@@ -19,22 +20,24 @@ public class EhrDocumentMapper {
     private final TimestampService timestampService;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
-    public EhrDocumentTemplateParameters mapToMhsPayloadTemplateParameters(
-            DocumentTaskDefinition taskDefinition, String contentType) {
 
-        return EhrDocumentTemplateParameters.builder()
-            .resourceCreated(DateFormatUtil.toHl7Format(timestampService.now()))
-            .messageId(taskDefinition.getMessageId())
-            .filename(DocumentReferenceUtils.buildPresentAttachmentFileName(taskDefinition.getDocumentId(), contentType))
-            .fromAsid(taskDefinition.getFromAsid())
-            .toAsid(taskDefinition.getToAsid())
-            .toOdsCode(taskDefinition.getToOdsCode())
-            .fromOdsCode(taskDefinition.getFromOdsCode())
-            .pertinentPayloadId(randomIdGeneratorService.createNewId())
-            .build();
+    public String generateMhsPayload(TaskDefinition taskDefinition, String messageId, String documentId, String contentType) {
+        String filename = DocumentReferenceUtils.buildPresentAttachmentFileName(documentId, contentType);
+        return generateMhsPayload(taskDefinition, messageId, filename);
     }
 
-    public String mapMhsPayloadTemplateToXml(EhrDocumentTemplateParameters ehrDocumentTemplateParameters) {
-        return TemplateUtils.fillTemplate(MHS_PAYLOAD_TEMPLATE, ehrDocumentTemplateParameters);
+    public String generateMhsPayload(TaskDefinition taskDefinition, String messageId, String filename) {
+        var templateParameters = EhrDocumentTemplateParameters.builder()
+                .resourceCreated(DateFormatUtil.toHl7Format(timestampService.now()))
+                .messageId(messageId)
+                .filename(filename)
+                .fromAsid(taskDefinition.getFromAsid())
+                .toAsid(taskDefinition.getToAsid())
+                .toOdsCode(taskDefinition.getToOdsCode())
+                .fromOdsCode(taskDefinition.getFromOdsCode())
+                .pertinentPayloadId(randomIdGeneratorService.createNewId())
+                .build();
+
+        return TemplateUtils.fillTemplate(MHS_PAYLOAD_TEMPLATE, templateParameters);
     }
 }

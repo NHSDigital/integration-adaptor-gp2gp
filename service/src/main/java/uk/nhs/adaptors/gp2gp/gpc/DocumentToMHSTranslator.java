@@ -33,12 +33,18 @@ public class DocumentToMHSTranslator {
     }
 
     private String createOutboundMessage(DocumentTaskDefinition taskDefinition, String base64Content, String contentType) {
-        var ehrDocumentTemplateParameters = ehrDocumentMapper
-            .mapToMhsPayloadTemplateParameters(taskDefinition, contentType);
-        var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
-
         try {
-            return prepareOutboundMessage(taskDefinition, base64Content, MimeTypes.OCTET_STREAM, xmlContent);
+            return prepareOutboundMessage(
+                taskDefinition,
+                base64Content,
+                MimeTypes.OCTET_STREAM,
+                ehrDocumentMapper.generateMhsPayload(
+                    taskDefinition,
+                    taskDefinition.getMessageId(),
+                    taskDefinition.getDocumentId(),
+                    contentType
+                )
+            );
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
         }
