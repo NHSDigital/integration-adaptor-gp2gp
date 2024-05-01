@@ -44,7 +44,7 @@ dependencies {
 
 	// Infrastructure
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.705'
-	implementation ('com.azure:azure-storage-blob:12.25.3')
+	implementation ('com.azure:azure-storage-blob:12.25.4')
 	implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
 
 	// Utils
