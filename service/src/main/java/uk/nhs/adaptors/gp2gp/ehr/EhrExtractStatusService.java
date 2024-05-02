@@ -173,7 +173,8 @@ public class EhrExtractStatusService {
             DocumentTaskDefinition documentTaskDefinition,
             String storagePath,
             int base64ContentLength,
-            String errorMessage
+            String errorMessage,
+            String filename
     ) {
         Query query = new Query();
         query.addCriteria(Criteria
@@ -189,6 +190,7 @@ public class EhrExtractStatusService {
         update.set(DOCUMENT_MESSAGE_ID_PATH, documentTaskDefinition.getMessageId());
         update.set(DOCUMENT_BASE64_CONTENT_LENGTH, base64ContentLength);
         update.set(GPC_DOCUMENTS + ARRAY_REFERENCE + "gpConnectErrorMessage", errorMessage);
+        update.set(GPC_DOCUMENTS + ARRAY_REFERENCE + "fileName", filename);
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query, update, returningUpdatedRecordOption,

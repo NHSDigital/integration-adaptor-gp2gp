@@ -46,7 +46,8 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
             taskDefinition.getConversationId()
         ));
 
-        var storagePath = buildAbsentAttachmentFileName(taskDefinition.getDocumentId());
+        final var storagePath = buildAbsentAttachmentFileName(taskDefinition.getDocumentId());
+        final var fileName = buildAbsentAttachmentFileName(taskDefinition.getDocumentId());
 
         var mhsOutboundRequestData = documentToMHSTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, fileContent);
 
@@ -56,7 +57,7 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, storagePath);
 
         return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, storagePath, fileContent.length(), getTitle(taskDefinition)
+            taskDefinition, storagePath, fileContent.length(), getTitle(taskDefinition), fileName
         );
     }
 

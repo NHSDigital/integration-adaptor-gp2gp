@@ -15,6 +15,7 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.GetAbsentAttachmentTaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 
 @Slf4j
@@ -74,8 +75,9 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, storagePath);
 
+        final var filename = DocumentReferenceUtils.buildPresentAttachmentFileName(taskDefinition.getDocumentId(), binary.getContentType());
         return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, storagePath, contentAsBase64.length(), null);
+            taskDefinition, storagePath, contentAsBase64.length(), null, filename);
     }
 
     private StorageDataWrapper getStorageDataWrapper(
