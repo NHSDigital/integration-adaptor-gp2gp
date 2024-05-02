@@ -62,7 +62,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
     private EhrExtractStatus handleValidGpcDocument(String response, GetGpcDocumentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
-        var documentName = GpcFilenameUtils.generateDocumentFilename(
+        var storagePath = GpcFilenameUtils.generateDocumentStoragePath(
             taskDefinition.getConversationId(), taskDefinition.getDocumentId()
         );
 
@@ -72,10 +72,10 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         var storageDataWrapperWithMhsOutboundRequest = getStorageDataWrapper(
             contentAsBase64, binary.getContentType(), taskDefinition, taskId);
 
-        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
+        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, storagePath);
 
         return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, documentName, taskId, taskDefinition.getMessageId(), contentAsBase64.length(), null);
+            taskDefinition, storagePath, taskId, taskDefinition.getMessageId(), contentAsBase64.length(), null);
     }
 
     private StorageDataWrapper getStorageDataWrapper(
