@@ -10,7 +10,7 @@ public class GpcFilenameUtils {
         return conversationId.concat(PATH_SEPARATOR).concat(conversationId).concat(GPC_STRUCTURED_FILE_EXTENSION);
     }
 
-    public static String generateDocumentFilename(String conversationId, String documentId) {
+    public static String generateDocumentStoragePath(String conversationId, String documentId) {
         return conversationId.concat(PATH_SEPARATOR).concat(documentId).concat(JSON_EXTENSION);
     }
 
