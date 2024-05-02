@@ -20,23 +20,12 @@ group Get GPC Structure
   gpc --> gp2gp: FHIR Bundle
   gp2gp -> gp2gp: Translate FHIR to HL7
 
-  opt Large EHR Extract
-    gp2gp -> gp2gp: Compress EHR Extract
-    gp2gp -> storage: Upload Large EHR Extract
-  end
-
   loop
     gp2gp -> task: Enqueue GET GPC Documents task
   end
 
   loop
     gp2gp -> task: Enqueue GET Absent Attachments task
-  end
-
-  alt Large EHR Extract
-    gp2gp -> storage: Upload EHR Extract Skeleton
-  else Regular extract
-    gp2gp -> storage: Upload EHR Extract
   end
 
   gp2gp -> mongo: Update transfer status
@@ -79,9 +68,16 @@ end
 group Send EHR Core Extract
   gp2gp -> storage: Download EHR Extract
   gp2gp -> mongo: Update transfer status
-  gp2gp -> mhs: Send EHR Extract (RCMR_IN030000UK06)
-  gp2gp -> mongo: Update transfer status
 
+  alt Large EHR Extract
+    gp2gp -> gp2gp: Compress EHR Extract
+    gp2gp -> storage: Upload Compressed EHR Extract as document
+    gp2gp -> mhs: Send EHR Extract Skeleton (RCMR_IN030000UK06)
+  else Regular extract
+    gp2gp -> mhs: Send EHR Extract (RCMR_IN030000UK06)
+  end
+
+  gp2gp -> mongo: Update transfer status
   opt no documents - transfer finished
     gp2gp -> task: Enqueue Send ACK
   end
