@@ -169,7 +169,7 @@ public class EhrExtractStatusService {
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocument(
             DocumentTaskDefinition documentTaskDefinition,
-            String documentName,
+            String storagePath,
             String taskId,
             String messageId,
             int base64ContentLength,
@@ -184,7 +184,7 @@ public class EhrExtractStatusService {
         Instant now = Instant.now();
         update.set(DOCUMENT_ACCESS_AT_PATH, now);
         update.set(DOCUMENT_TASK_ID_PATH, taskId);
-        update.set(DOCUMENT_OBJECT_NAME_PATH, documentName);
+        update.set(DOCUMENT_OBJECT_NAME_PATH, storagePath);
         update.set(DOCUMENT_MESSAGE_ID_PATH, messageId);
         update.set(DOCUMENT_BASE64_CONTENT_LENGTH, base64ContentLength);
         update.set(GPC_DOCUMENTS + ARRAY_REFERENCE + "gpConnectErrorMessage", errorMessage);
