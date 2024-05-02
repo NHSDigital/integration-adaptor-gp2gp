@@ -39,7 +39,6 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
 
     public EhrExtractStatus handleAbsentAttachment(DocumentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
-        var messageId = taskDefinition.getMessageId();
 
         var fileContent = Base64Utils.toBase64String(AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
             taskDefinition.getOriginalDescription(),
@@ -57,7 +56,7 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, storagePath);
 
         return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, storagePath, taskId, messageId, fileContent.length(), getTitle(taskDefinition)
+            taskDefinition, storagePath, fileContent.length(), getTitle(taskDefinition)
         );
     }
 
