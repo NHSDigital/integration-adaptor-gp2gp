@@ -1,12 +1,15 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
@@ -24,6 +27,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -31,6 +35,8 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class GetGpcStructuredTaskExecutorTest {
+    private static final String FILENAME_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
+
     @Mock private TimestampService timestampService;
     @Mock private GpcClient gpcClient;
     @Mock private StorageConnectorService storageConnectorService;
@@ -179,6 +185,72 @@ public class GetGpcStructuredTaskExecutorTest {
                 )
             )
         );
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_BundleContainsAbsentAttachments_Expect_FilenamesAreReplacedWithPlaceholders() {
+        when(this.structuredRecordMappingService.getAbsentAttachments(any())).thenReturn(
+            List.of(
+                OutboundMessage.ExternalAttachment.builder()
+                    .documentId("AbsentAttachmentDocument")
+                    .url("https://assets.nhs.uk/absentAttachment.jpg")
+                    .identifier(List.of(Identifier.builder().value("Identifier").build()))
+                    .originalDescription("AbsentAttachmentDocumentDescription")
+                    .filename("filenameToBeReplaced.jpg")
+                    .contentType("image/jpeg")
+                    .build()
+            )
+        );
+
+        getGpcStructuredTaskExecutor.execute(
+            GetGpcStructuredTaskDefinition.builder()
+                .conversationId("ConversationId")
+                .taskId("TaskId")
+                .build()
+        );
+
+        var capturedOutboundMessage =  getOutboundMessagePassedToObjectMapper();
+
+        assertThat(capturedOutboundMessage.getExternalAttachments().get(0).getFilename())
+            .isEqualTo(FILENAME_PLACEHOLDER + "AbsentAttachmentDocument");
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_BundleContainsExternalAttachments_Expect_FilenamesAreReplacedWithPlaceholders() {
+        when(this.structuredRecordMappingService.getExternalAttachments(any())).thenReturn(
+            List.of(
+                OutboundMessage.ExternalAttachment.builder()
+                    .documentId("ExternalAttachmentDocument")
+                    .url("https://assets.nhs.uk/ExternalAttachment.jpg")
+                    .identifier(List.of(Identifier.builder().value("Identifier").build()))
+                    .originalDescription("ExternalAttachmentDocumentOriginalDescription")
+                    .filename("filenameToBeReplaced.jpg")
+                    .contentType("image/jpeg")
+                    .build()
+            )
+        );
+
+        getGpcStructuredTaskExecutor.execute(
+            GetGpcStructuredTaskDefinition.builder()
+                .conversationId("ConversationId")
+                .taskId("TaskId")
+                .build()
+        );
+
+        var capturedOutboundMessage =  getOutboundMessagePassedToObjectMapper();
+
+        assertThat(capturedOutboundMessage.getExternalAttachments().get(0).getFilename())
+            .isEqualTo(FILENAME_PLACEHOLDER + "ExternalAttachmentDocument");
+    }
+
+    @NotNull
+    @SneakyThrows
+    private OutboundMessage getOutboundMessagePassedToObjectMapper() {
+        ArgumentCaptor<OutboundMessage> captor = ArgumentCaptor.forClass(OutboundMessage.class);
+        verify(objectMapper).writeValueAsString(captor.capture());
+        return captor.getValue();
     }
 
     @BeforeEach public void setup() {

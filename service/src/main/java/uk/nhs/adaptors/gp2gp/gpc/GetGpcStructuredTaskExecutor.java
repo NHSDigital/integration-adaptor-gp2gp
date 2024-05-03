@@ -37,6 +37,7 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 @Service
 public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructuredTaskDefinition> {
     private static final String LEADING_UNDERSCORE_CHAR = "_";
+    private static final String FILENAME_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
 
     private final TimestampService timestampService;
     private final GpcClient gpcClient;
@@ -128,14 +129,15 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             messageContext.resetMessageContext();
         }
 
-        var allExternalAttachments = Stream
-            .concat(externalAttachments.stream(), absentAttachments.stream())
-            .collect(Collectors.toList());
+        var allExternalAttachments = Stream.concat(externalAttachments.stream(), absentAttachments.stream())
+            .peek(this::replaceFilenameWithPlaceholder)
+            .peek(this::addPrefixToDocumentId)
+            .toList();
 
         var stringRequestBody = objectMapper.writeValueAsString(OutboundMessage.builder()
             .payload(ehrExtractXml)
             .attachments(Collections.emptyList())
-            .externalAttachments(mapPrefixesToDocumentIds(allExternalAttachments))
+            .externalAttachments(allExternalAttachments)
             .build()
         );
 
@@ -214,11 +216,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .build();
     }
 
-    private List<OutboundMessage.ExternalAttachment> mapPrefixesToDocumentIds(List<OutboundMessage.ExternalAttachment> extAttachments) {
-        return extAttachments.stream()
-            .peek(externalAttachment -> externalAttachment.setDocumentId(
-                LEADING_UNDERSCORE_CHAR.concat(externalAttachment.getDocumentId())
-            ))
-            .collect(Collectors.toList());
+    private void replaceFilenameWithPlaceholder(OutboundMessage.ExternalAttachment externalAttachment) {
+        externalAttachment.setFilename(FILENAME_PLACEHOLDER + externalAttachment.getDocumentId());
+    }
+
+    private void addPrefixToDocumentId(OutboundMessage.ExternalAttachment externalAttachment) {
+        externalAttachment.setDocumentId(LEADING_UNDERSCORE_CHAR.concat(externalAttachment.getDocumentId()));
     }
 }
