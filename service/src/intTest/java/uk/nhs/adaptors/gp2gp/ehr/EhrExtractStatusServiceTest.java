@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -186,7 +187,7 @@ public class EhrExtractStatusServiceTest {
     @Test
     public void When_UpdateEhrExtractStatusAccessDocument_Expect_DocumentRecordUpdated() {
         when(timestampService.now()).thenReturn(NOW);
-        var ehrStatus = addCompleteTransferWithDocuments();
+        var ehrStatus = addCompleteTransferWithDocument();
 
         updateEhrExtractStatusAccessDocument(ehrStatus.getConversationId(), DOCUMENT_ID);
 
@@ -198,7 +199,8 @@ public class EhrExtractStatusServiceTest {
             () -> assertThat(actual.getObjectName()).isEqualTo("this is a storage path.path"),
             () -> assertThat(actual.getMessageId()).isEqualTo("988290"),
             () -> assertThat(actual.getContentLength()).isEqualTo(1),
-            () -> assertThat(actual.getGpConnectErrorMessage()).isEqualTo("This is a fantastic error message")
+            () -> assertThat(actual.getGpConnectErrorMessage()).isEqualTo("This is a fantastic error message"),
+            () -> assertThat(actual.getFileName()).isEqualTo("NewUpdatedFileName.txt")
         );
     }
 
@@ -212,13 +214,14 @@ public class EhrExtractStatusServiceTest {
                 .build(),
             "this is a storage path.path",
             1,
-            "This is a fantastic error message"
+            "This is a fantastic error message",
+            "NewUpdatedFileName.txt"
         );
     }
 
     @Test
     public void When_UpdateEhrExtractStatusAccessDocument_With_InvalidConversationId_Expect_ThrowsException() {
-        addCompleteTransferWithDocuments();
+        addCompleteTransferWithDocument();
 
         assertThrows(
             EhrExtractException.class,
@@ -228,7 +231,7 @@ public class EhrExtractStatusServiceTest {
 
     @Test
     public void When_UpdateEhrExtractStatusAccessDocument_With_InvalidDocumentId_Expect_ThrowsException() {
-        final var ehrStatus = addCompleteTransferWithDocuments();
+        final var ehrStatus = addCompleteTransferWithDocument();
 
         assertThrows(
             EhrExtractException.class,
@@ -240,7 +243,7 @@ public class EhrExtractStatusServiceTest {
     @Test
     public void When_UpdateEhrExtractStatusAccessDocument_Expect_ReturnsUpdatedEhrStatusRecord() {
         when(timestampService.now()).thenReturn(NOW);
-        var ehrStatus = addCompleteTransferWithDocuments();
+        var ehrStatus = addCompleteTransferWithDocument();
 
         final var returnedRecord = updateEhrExtractStatusAccessDocument(ehrStatus.getConversationId(), DOCUMENT_ID);
 
@@ -392,59 +395,17 @@ public class EhrExtractStatusServiceTest {
         ehrExtractStatusRepository.save(extractStatus);
     }
 
-    public EhrExtractStatus addCompleteTransfer() {
-        String ehrMessageRef = generateRandomUppercaseUUID();
-
-        EhrExtractStatus extractStatus = EhrExtractStatus.builder()
-            .ackHistory(EhrExtractStatus.AckHistory.builder()
-                .acks(List.of(
-                    EhrExtractStatus.EhrReceivedAcknowledgement.builder()
-                        .rootId(generateRandomUppercaseUUID())
-                        .received(FIVE_DAYS_AGO)
-                        .conversationClosed(FIVE_DAYS_AGO)
-                        .messageRef(ehrMessageRef)
-                        .build()))
-                .build())
-            .ackPending(EhrExtractStatus.AckPending.builder()
-                .messageId(generateRandomUppercaseUUID())
-                .taskId(generateRandomUppercaseUUID())
-                .typeCode(ACK_TYPE)
-                .updatedAt(FIVE_DAYS_AGO.toString())
-                .build())
-            .ackToRequester(buildPositiveAckToRequester())
-            .conversationId(generateRandomUppercaseUUID())
-            .created(FIVE_DAYS_AGO)
-            .ehrExtractCore(EhrExtractStatus.EhrExtractCore.builder()
-                .sentAt(FIVE_DAYS_AGO)
-                .build())
-            .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
-                .sentAt(FIVE_DAYS_AGO)
-                .taskId(generateRandomUppercaseUUID())
-                .build())
-            .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
-                .conversationClosed(FIVE_DAYS_AGO)
-                .messageRef(ehrMessageRef)
-                .received(FIVE_DAYS_AGO)
-                .rootId(generateRandomUppercaseUUID())
-                .build())
-            .ehrRequest(buildEhrRequest())
-            .gpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
-                .documents(new ArrayList<>())
-                .build())
-            .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
-                .accessedAt(FIVE_DAYS_AGO)
-                .objectName(generateRandomUppercaseUUID() + ".json")
-                .taskId(generateRandomUppercaseUUID())
-                .build())
-            .messageTimestamp(FIVE_DAYS_AGO)
-            .updatedAt(FIVE_DAYS_AGO)
-            .build();
-
-        return ehrExtractStatusRepository.save(extractStatus);
+    private EhrExtractStatus addCompleteTransfer() {
+        return addCompleteTransferWithDocuments(List.of());
     }
 
+    private EhrExtractStatus addCompleteTransferWithDocument() {
+        return addCompleteTransferWithDocuments(List.of(
+            EhrExtractStatus.GpcDocument.builder().documentId(DOCUMENT_ID).build()
+        ));
+    }
 
-    public EhrExtractStatus addCompleteTransferWithDocuments() {
+    private @NotNull EhrExtractStatus addCompleteTransferWithDocuments(List<EhrExtractStatus.GpcDocument> documents) {
         String ehrMessageRef = generateRandomUppercaseUUID();
 
         EhrExtractStatus extractStatus = EhrExtractStatus.builder()
@@ -481,9 +442,7 @@ public class EhrExtractStatusServiceTest {
                         .build())
                 .ehrRequest(buildEhrRequest())
                 .gpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
-                        .documents(List.of(
-                            EhrExtractStatus.GpcDocument.builder().documentId(DOCUMENT_ID).build()
-                        ))
+                        .documents(documents)
                         .build())
                 .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
                         .accessedAt(FIVE_DAYS_AGO)
