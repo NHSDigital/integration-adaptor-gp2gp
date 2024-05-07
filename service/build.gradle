@@ -1,6 +1,6 @@
 plugins {
 	id 'org.springframework.boot' version '3.2.4'
-	id 'io.spring.dependency-management' version '1.1.4'
+	id 'io.spring.dependency-management' version '1.1.5'
 	id 'java'
 	id "checkstyle"
 	id "com.github.spotbugs" version "6.0.12"
@@ -43,14 +43,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-logging'
 
 	// Infrastructure
-	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.673'
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.705'
 	implementation ('com.azure:azure-storage-blob:12.25.4')
 	implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
 
 	// Utils
 	implementation 'org.apache.commons:commons-lang3:3.14.0'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
-	implementation 'com.github.spullara.mustache.java:compiler:0.9.11'
+	implementation 'com.github.spullara.mustache.java:compiler:0.9.13'
 	implementation 'org.apache.tika:tika-core:2.9.2'
 
 	// Fhir
