@@ -50,7 +50,7 @@ dependencies {
 	// Utils
 	implementation 'org.apache.commons:commons-lang3:3.14.0'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
-	implementation 'com.github.spullara.mustache.java:compiler:0.9.11'
+	implementation 'com.github.spullara.mustache.java:compiler:0.9.13'
 	implementation 'org.apache.tika:tika-core:2.9.2'
 
 	// Fhir
