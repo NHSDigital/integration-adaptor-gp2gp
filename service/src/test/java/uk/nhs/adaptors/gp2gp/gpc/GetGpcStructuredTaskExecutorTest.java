@@ -9,13 +9,11 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -43,9 +41,7 @@ public class GetGpcStructuredTaskExecutorTest {
     @Mock private ObjectMapper objectMapper;
     @Mock private StructuredRecordMappingService structuredRecordMappingService;
     @Mock private TaskDispatcher taskDispatcher;
-    @Mock private Gp2gpConfiguration gp2gpConfiguration;
     @Mock private RandomIdGeneratorService randomIdGeneratorService;
-    @Mock private EhrDocumentMapper ehrDocumentMapper;
 
     @Test
     public void When_BundleContainsExternalDocumentReference_Expect_DocumentAddedToEhrExtractStatusService() {
@@ -185,52 +181,10 @@ public class GetGpcStructuredTaskExecutorTest {
         );
     }
 
-    @Test
-    public void When_EhrSizeExceedsThreshold_Expect_SkeletonExtractAddedToEhrExtractStatusService() {
-        stubRandomIdGeneratorService();
-        when(this.structuredRecordMappingService.mapStructuredRecordToEhrExtractXml(any(), any())).thenReturn(
-            "<BIG EHR />"
-        );
-
-        getGpcStructuredTaskExecutor.execute(
-            GetGpcStructuredTaskDefinition.builder().conversationId("118 118").build()
-        );
-
-        verify(ehrExtractStatusService).updateEhrExtractStatusAccessDocumentDocumentReferences(
-            any(),
-            eq(
-                List.of(
-                    EhrExtractStatus.GpcDocument.builder()
-                        .messageId("1st randomly generated ID")
-                        .documentId("2nd randomly generated ID")
-                        .objectName("2nd randomly generated ID.gzip")
-                        .fileName("2nd randomly generated ID.gzip")
-                        .taskId("3rd randomly generated ID")
-                        .contentType("text/xml")
-                        .accessDocumentUrl(null)
-                        .accessedAt(stubbedTime)
-                        .isSkeleton(true)
-                        .identifier(null)
-                        .originalDescription(null)
-                        .build()
-                )
-            )
-        );
-    }
-
     @BeforeEach public void setup() {
         stubTimestampService();
         stubEhrExtractXml();
         setupIt();
-    }
-
-    private void stubRandomIdGeneratorService() {
-        when(this.randomIdGeneratorService.createNewId()).thenReturn(
-            "1st randomly generated ID",
-            "2nd randomly generated ID",
-            "3rd randomly generated ID",
-            "4th randomly generated ID"
-        );
     }
 
     private Instant stubbedTime;
@@ -252,9 +206,7 @@ public class GetGpcStructuredTaskExecutorTest {
             this.objectMapper,
             this.structuredRecordMappingService,
             this.taskDispatcher,
-            this.gp2gpConfiguration,
-            this.randomIdGeneratorService,
-            this.ehrDocumentMapper
+            this.randomIdGeneratorService
         );
     }
 
