@@ -29,6 +29,7 @@ Each scenario below can be retrieved by requesting the associated NHS Number spe
 - [No Documents](stubs/__files/correctPatientNoDocsStructuredRecordResponse.json) 9690937294
 - [1 Absent Attachment](stubs/__files/correctPatientStructuredRecordResponseAbsentAttachment.json) 9690937286
 - [3 Absent Attachments](stubs/__files/correctPatientStructuredRecordResponse3AbsentAttachmentDocuments.json) 9690937419
+- [3 Attachments with 2 Absent](stubs/__files/correctPatientStructuredRecordResponse3AttachmentsWith2Absent.json) 9690939911
 - [With three 10Kb .doc files](stubs/__files/correctPatientStructuredRecordResponse3NormalDocuments.json) 9690937420
 - [With one 20Kb document](stubs/__files/correctPatientStructuredRecordResponseForLargeDocs.json) 9690937819
 - [With one 40Kb document](stubs/__files/correctPatientStructuredRecordResponseForLargeDocs2.json) 9690937841
@@ -78,6 +79,14 @@ To change the patient record returned to be [Large Patient Record](stubs/__files
 
 ```shell
 curl --request PUT --data '{"state": "Large Patient Record"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+```
+
+
+
+To change the patient record returned to be [3 Attachments with 2 Absent](stubs/__files/correctPatientStructuredRecordResponse3AttachmentsWith2Absent.json):
+
+```shell
+curl --request PUT --data '{"state": "3 Attachments with 2 Absent"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
 ```
 
 To change the patient record returned to be NOT FOUND:
