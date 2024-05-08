@@ -23,6 +23,7 @@ import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.exception.GeneralProcessingException;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
@@ -111,6 +112,7 @@ public class EhrExtractStatusService {
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
+    private final TimestampService timestampService;
 
     public void saveEhrExtractMessageId(String conversationId, String messageId) {
         Optional<EhrExtractStatus> ehrExtractStatusOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
@@ -169,9 +171,7 @@ public class EhrExtractStatusService {
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocument(
             DocumentTaskDefinition documentTaskDefinition,
-            String documentName,
-            String taskId,
-            String messageId,
+            String storagePath,
             int base64ContentLength,
             String errorMessage
     ) {
@@ -181,11 +181,12 @@ public class EhrExtractStatusService {
             .and(DOCUMENT_ID_PATH).is(documentTaskDefinition.getDocumentId()));
 
         Update update = createUpdateWithUpdatedAt();
-        Instant now = Instant.now();
+        Instant now = timestampService.now();
+
         update.set(DOCUMENT_ACCESS_AT_PATH, now);
-        update.set(DOCUMENT_TASK_ID_PATH, taskId);
-        update.set(DOCUMENT_OBJECT_NAME_PATH, documentName);
-        update.set(DOCUMENT_MESSAGE_ID_PATH, messageId);
+        update.set(DOCUMENT_TASK_ID_PATH, documentTaskDefinition.getTaskId());
+        update.set(DOCUMENT_OBJECT_NAME_PATH, storagePath);
+        update.set(DOCUMENT_MESSAGE_ID_PATH, documentTaskDefinition.getMessageId());
         update.set(DOCUMENT_BASE64_CONTENT_LENGTH, base64ContentLength);
         update.set(GPC_DOCUMENTS + ARRAY_REFERENCE + "gpConnectErrorMessage", errorMessage);
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
@@ -330,10 +331,10 @@ public class EhrExtractStatusService {
     }
 
     public void updateEhrExtractStatusAccessDocumentDocumentReferences(
-        GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
+        String conversationId,
         List<EhrExtractStatus.GpcDocument> documents
     ) {
-        Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
+        Query query = createQueryForConversationId(conversationId);
 
         Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
 
