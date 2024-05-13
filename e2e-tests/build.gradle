@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.apache.qpid:qpid-jms-client:0.57.0'
+    implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
     implementation "org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1"
     implementation 'org.mongodb:mongo-java-driver:3.12.14'
 
