@@ -54,7 +54,16 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
             ehrExtractStatus = handleValidGpcDocument(response, taskDefinition);
         } catch (GpConnectException e) {
             LOGGER.warn("Binary request returned an unexpected response", e);
-            ehrExtractStatus = getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition);
+
+            var exceptionDisplay = e.getOperationOutcome()
+                .getIssue()
+                .get(0)
+                .getDetails()
+                .getCoding()
+                .get(0)
+                .getDisplay();
+
+            ehrExtractStatus = getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition, exceptionDisplay);
         }
 
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);

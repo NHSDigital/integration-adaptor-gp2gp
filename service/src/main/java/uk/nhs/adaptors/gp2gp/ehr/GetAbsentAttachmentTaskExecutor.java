@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.AbsentAttachmentUtils.buildAbsentAttachmentFileName;
 
+import org.junit.platform.commons.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,11 +34,11 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
 
     @Override
     public void execute(GetAbsentAttachmentTaskDefinition taskDefinition) {
-        var ehrExtractStatus = handleAbsentAttachment(taskDefinition);
+        var ehrExtractStatus = handleAbsentAttachment(taskDefinition, null);
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
-    public EhrExtractStatus handleAbsentAttachment(DocumentTaskDefinition taskDefinition) {
+    public EhrExtractStatus handleAbsentAttachment(DocumentTaskDefinition taskDefinition, String exceptionDisplay) {
         var taskId = taskDefinition.getTaskId();
 
         var fileContent = Base64Utils.toBase64String(AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
@@ -56,7 +57,10 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, storagePath);
 
         return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, storagePath, fileContent.length(), getTitle(taskDefinition)
+            taskDefinition,
+            storagePath,
+            fileContent.length(),
+            StringUtils.isBlank(exceptionDisplay) ? getTitle(taskDefinition) : exceptionDisplay
         );
     }
 

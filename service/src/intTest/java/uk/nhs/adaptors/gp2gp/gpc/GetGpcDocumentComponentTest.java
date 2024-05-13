@@ -158,7 +158,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(gpcDocuments.get(0).getAccessedAt()).isNotNull();
         assertThat(gpcDocuments.get(0).getObjectName()).isEqualTo(absentAttachmentFilename);
         assertThat(gpcDocuments.get(0).getMessageId()).isEqualTo(documentId);
-        assertThat(gpcDocuments.get(0).getGpConnectErrorMessage()).isEqualTo("The document could not be retrieved");
+        assertThat(gpcDocuments.get(0).getGpConnectErrorMessage()).isEqualTo("No Record Found");
 
         assertDoesNotThrow(() -> storageConnector.downloadFromStorage(absentAttachmentFilename));
 
