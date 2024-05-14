@@ -18,6 +18,6 @@ public class GpConnectException extends RuntimeException {
 
     public GpConnectException(String message, OperationOutcome operationOutcome) {
         super(message);
-        this.operationOutcome = operationOutcome;
+        this.operationOutcome = operationOutcome.copy();
     }
 }
