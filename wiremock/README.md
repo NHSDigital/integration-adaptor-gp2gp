@@ -83,10 +83,10 @@ curl --request PUT --data '{"state": "Large Patient Record"}' http://localhost:8
 
 
 
-To change the patient record returned to be [3 Attachments with 2 Absent](stubs/__files/correctPatientStructuredRecordResponse3AttachmentsWith2Absent.json):
+To change the patient record returned to have different Absent Attachment scenarios [Absent Attachments](stubs/__files/correctPatientStructuredRecordResponseAbsentAttachments.json):
 
 ```shell
-curl --request PUT --data '{"state": "3 Attachments with 2 Absent"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+curl --request PUT --data '{"state": "Absent Attachments"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
 ```
 
 To change the patient record returned to be NOT FOUND:

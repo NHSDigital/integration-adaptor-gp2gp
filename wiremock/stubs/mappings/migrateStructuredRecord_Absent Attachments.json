@@ -1,14 +1,14 @@
 {
   "priority": 2,
   "scenarioName": "migrateStructuredRecord",
-  "requiredScenarioState": "3 Attachments with 2 Absent",
+  "requiredScenarioState": "Absent Attachments",
   "request": {
     "method": "POST",
     "urlPattern": "/.*/STU3/1/gpconnect/fhir/Patient/[$]gpc[.]migratestructuredrecord"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "correctPatientStructuredRecordResponse3AttachmentsWith2Absent.json",
+    "bodyFileName": "correctPatientStructuredRecordResponseAbsentAttachments.json",
     "headers": {
       "Server": "nginx",
       "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",

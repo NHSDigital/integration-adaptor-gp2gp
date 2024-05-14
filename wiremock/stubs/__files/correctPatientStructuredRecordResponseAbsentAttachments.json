@@ -513,8 +513,8 @@
                 "subject": {
                     "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
                 },
-                "created": "2020-12-22T14:53:00+00:00",
-                "indexed": "2020-12-22T14:55:58.567+00:00",
+                "created": "2020-10-22T14:00:00+00:00",
+                "indexed": "2020-10-22T14:00:00.000+00:00",
                 "custodian": {
                     "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
                 },
@@ -558,8 +558,8 @@
                 "subject": {
                     "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
                 },
-                "created": "2020-12-22T14:54:00+00:00",
-                "indexed": "2020-12-22T14:56:58.567+00:00",
+                "created": "2020-11-22T14:00:00+00:00",
+                "indexed": "2020-11-22T14:00:00.000+00:00",
                 "custodian": {
                     "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
                 },
@@ -602,8 +602,8 @@
                 "subject": {
                     "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
                 },
-                "created": "2020-12-22T14:53:00+00:00",
-                "indexed": "2020-12-22T14:55:58.567+00:00",
+                "created": "2020-12-22T14:00:00+00:00",
+                "indexed": "2020-12-22T14:00:00.000+00:00",
                 "custodian": {
                     "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
                 },
@@ -612,6 +612,97 @@
                     {
                         "attachment": {
                             "contentType": "application/msword",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/43913840-7979-4554-9ab5-55a7a42f1852",
+                            "size": 13
+                        }
+                    }
+                ],
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/A44B64EA-172B-4EF5-8809-3FF24F5613C1"
+                    }
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "02b40e2d-a445-46f3-b884-1b080d10c255",
+                "meta": {
+                    "versionId": "8017752596891037527",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "02b40e2d-a445-46f3-b884-1b080d10c255"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "text": "(Absent Attachment - Unknown Content Type)"
+                },
+                "subject": {
+                    "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
+                },
+                "created": "2021-01-22T14:00:00+00:00",
+                "indexed": "2021-01-22T14:00:00.000+00:00",
+                "custodian": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "description": "(Absent Attachment - Unknown Content Type)",
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "text/vbscript",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/43913840-7979-4554-9ab5-55a7a42f1852",
+                            "size": 13
+                        }
+                    }
+                ],
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/A44B64EA-172B-4EF5-8809-3FF24F5613C1"
+                    }
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "dc1bb626-6bbe-4f15-8cd8-44486fb185bf",
+                "meta": {
+                    "versionId": "8017752596891037527",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "dc1bb626-6bbe-4f15-8cd8-44486fb185bf"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "text": "(Absent Attachment - Title field populated)"
+                },
+                "subject": {
+                    "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
+                },
+                "created": "2021-02-22T14:00:00+00:00",
+                "indexed": "2021-02-22T14:00:00.000+00:00",
+                "custodian": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "description": "(Absent Attachment - Title field populated)",
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "application/msword",
+                            "title": "Document was recalled by sender for being inflammatory.",
                             "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/43913840-7979-4554-9ab5-55a7a42f1852",
                             "size": 13
                         }
