@@ -17,6 +17,8 @@ import uk.nhs.adaptors.gp2gp.gpc.DetectTranslationCompleteService;
 import uk.nhs.adaptors.gp2gp.gpc.DocumentToMHSTranslator;
 import uk.nhs.adaptors.gp2gp.gpc.StorageDataWrapperProvider;
 
+import java.util.Optional;
+
 @Slf4j
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -34,11 +36,11 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
 
     @Override
     public void execute(GetAbsentAttachmentTaskDefinition taskDefinition) {
-        var ehrExtractStatus = handleAbsentAttachment(taskDefinition, null);
+        var ehrExtractStatus = handleAbsentAttachment(taskDefinition, Optional.empty());
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
-    public EhrExtractStatus handleAbsentAttachment(DocumentTaskDefinition taskDefinition, String exceptionDisplay) {
+    public EhrExtractStatus handleAbsentAttachment(DocumentTaskDefinition taskDefinition, Optional<String> exceptionDisplay) {
         var taskId = taskDefinition.getTaskId();
 
         var fileContent = Base64Utils.toBase64String(AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
@@ -60,12 +62,16 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
             taskDefinition,
             storagePath,
             fileContent.length(),
-            StringUtils.isBlank(exceptionDisplay) ? getTitle(taskDefinition) : exceptionDisplay
+            getErrorMessage(taskDefinition, exceptionDisplay)
         );
     }
 
-    private String getTitle(DocumentTaskDefinition taskDefinition) {
-        if (taskDefinition.getTitle() != null) {
+    private String getErrorMessage(DocumentTaskDefinition taskDefinition, Optional<String> exceptionDisplay) {
+        if (exceptionDisplay.isPresent()) {
+            return exceptionDisplay.get();
+        }
+
+        if (!StringUtils.isEmpty(taskDefinition.getTitle())) {
             return taskDefinition.getTitle();
         }
 

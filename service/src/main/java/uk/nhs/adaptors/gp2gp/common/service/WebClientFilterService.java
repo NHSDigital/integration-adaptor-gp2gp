@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.slf4j.MDC;
 
@@ -30,6 +31,7 @@ import reactor.util.retry.Retry;
 import uk.nhs.adaptors.gp2gp.common.configuration.WebClientConfiguration;
 import uk.nhs.adaptors.gp2gp.common.exception.MaximumExternalAttachmentsException;
 import uk.nhs.adaptors.gp2gp.common.exception.RetryLimitReachedException;
+import uk.nhs.adaptors.gp2gp.common.utils.OperationOutcomeIssueTypeDeserializer;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
@@ -141,11 +143,16 @@ public class WebClientFilterService {
             var exceptionMessage = String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome);
 
             try {
+                var module = new SimpleModule();
+                module.addDeserializer(OperationOutcome.IssueType.class, new OperationOutcomeIssueTypeDeserializer());
+
                 var jsonMapper = JsonMapper
                     .builder()
                     .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
                     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                     .build();
+
+                jsonMapper.registerModule(module);
 
                 var operationOutcome = jsonMapper.readValue(outcome, OperationOutcome.class);
                 var codes = jsonMapper.readTree(outcome).findValuesAsText("code");
@@ -156,6 +163,7 @@ public class WebClientFilterService {
                 return getMonoError(errorCode, exceptionMessage, operationOutcome);
             } catch (JsonProcessingException e) {
                 return Mono.error(new GpConnectException(exceptionMessage));
+
             }
         });
     }
