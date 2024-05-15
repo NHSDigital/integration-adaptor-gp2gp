@@ -98,11 +98,15 @@ services:
       - -global-response-templating
 
   gpcc:
-    image: nhsdev/nia-gpc-consumer-adaptor:1.0.0
+    image: local/gpc-consumer:latest
     networks: 
       - commonforgp2gp
     ports:
       - "8090:8090"
+    deploy:
+      resources:
+        limits:
+          memory: 4g
     environment:
       - GPC_CONSUMER_LOGGING_LEVEL
       - GPC_CONSUMER_SERVER_PORT
