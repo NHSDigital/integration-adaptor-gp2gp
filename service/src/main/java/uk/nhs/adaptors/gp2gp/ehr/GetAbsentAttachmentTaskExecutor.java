@@ -40,7 +40,8 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
-    public EhrExtractStatus handleAbsentAttachment(DocumentTaskDefinition taskDefinition, Optional<String> exceptionDisplay) {
+    public EhrExtractStatus handleAbsentAttachment(DocumentTaskDefinition taskDefinition,
+                                                   Optional<String> gpcResponseError) {
         var taskId = taskDefinition.getTaskId();
 
         var fileContent = Base64Utils.toBase64String(AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
@@ -62,7 +63,7 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
             taskDefinition,
             storagePath,
             fileContent.length(),
-            getErrorMessage(taskDefinition, exceptionDisplay)
+            getErrorMessage(taskDefinition, gpcResponseError)
         );
     }
 
