@@ -3,16 +3,12 @@ package uk.nhs.adaptors.gp2gp.utils;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.hl7.fhir.dstu3.model.OperationOutcome;
-import org.hl7.fhir.exceptions.FHIRException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 import uk.nhs.adaptors.gp2gp.common.utils.OperationOutcomeIssueTypeDeserializer;
-
-import java.io.IOException;
-
 
 public class OperationOutcomeIssueTypeDeserializerTest {
 
