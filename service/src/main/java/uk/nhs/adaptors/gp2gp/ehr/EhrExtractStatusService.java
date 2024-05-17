@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -146,7 +147,7 @@ public class EhrExtractStatusService {
 
             for (var document:ehrDocuments) {
                 String error = document.getGpConnectErrorMessage() == null ? ""
-                        : "Absent Attachment: " + document.getGpConnectErrorMessage();
+                        : "Absent Attachment: " + document.getGpConnectErrorMessage() + StringUtils.SPACE;
 
                 replacementMap.put(ERROR_MESSAGE_PLACEHOLDER + document.getDocumentId(),
                         error);
