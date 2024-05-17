@@ -76,14 +76,6 @@ public class OutboundMessage {
         private String contentType;
     }
 
-    private static String booleanToYesNo(boolean value) {
-        if (value) {
-            return "Yes";
-        } else {
-            return "No";
-        }
-    }
-
     @Builder
     public static class AttachmentDescription {
         private static final String LENGTH_PLACEHOLDER = "LENGTH_PLACEHOLDER_ID";
@@ -104,9 +96,9 @@ public class OutboundMessage {
             var descriptionElements = Stream.of(
                 "Filename=\"" + (fileName == null ? generatePlaceholder(FILENAME_PLACEHOLDER) : fileName) + "\"",
                 "ContentType=" + (contentType == null ? generatePlaceholder(CONTENT_TYPE_PLACEHOLDER) : contentType),
-                "Compressed=" + booleanToYesNo(compressed),
-                "LargeAttachment=" + booleanToYesNo(largeAttachment),
-                "OriginalBase64=" + booleanToYesNo(originalBase64),
+                "Compressed=" + (compressed ? "Yes" : "No"),
+                "LargeAttachment=" + (largeAttachment ? "Yes" : "No"),
+                "OriginalBase64=" + (originalBase64 ? "Yes" : "No"),
                 Optional.ofNullable(length).map(value -> "Length=" + value).orElse(
                         Optional.ofNullable(documentId)
                         .map(docId -> "Length=" + generatePlaceholder(LENGTH_PLACEHOLDER))
