@@ -12,13 +12,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.slf4j.MDC;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
@@ -26,6 +31,7 @@ import reactor.util.retry.Retry;
 import uk.nhs.adaptors.gp2gp.common.configuration.WebClientConfiguration;
 import uk.nhs.adaptors.gp2gp.common.exception.MaximumExternalAttachmentsException;
 import uk.nhs.adaptors.gp2gp.common.exception.RetryLimitReachedException;
+import uk.nhs.adaptors.gp2gp.common.utils.OperationOutcomeIssueTypeDeserializer;
 import uk.nhs.adaptors.gp2gp.gpc.exception.EhrRequestException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectInvalidException;
@@ -137,15 +143,27 @@ public class WebClientFilterService {
             var exceptionMessage = String.format(REQUEST_EXCEPTION_MESSAGE, requestType, outcome);
 
             try {
-                var objectMapper = new ObjectMapper();
-                var outcomeJson = objectMapper.readTree(outcome);
-                var codes = outcomeJson.findValuesAsText("code");
+                var module = new SimpleModule();
+                module.addDeserializer(OperationOutcome.IssueType.class, new OperationOutcomeIssueTypeDeserializer());
+
+                var jsonMapper = JsonMapper
+                    .builder()
+                    .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
+                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                    .build();
+
+                jsonMapper.registerModule(module);
+
+                var operationOutcome = jsonMapper.readValue(outcome, OperationOutcome.class);
+                var codes = jsonMapper.readTree(outcome).findValuesAsText("code");
+
                 var statusCode = clientResponse.statusCode();
                 var errorCode = getErrorCode(HttpStatus.resolve(statusCode.value()), codes);
 
-                return getMonoError(errorCode, exceptionMessage);
+                return getMonoError(errorCode, exceptionMessage, operationOutcome);
             } catch (JsonProcessingException e) {
                 return Mono.error(new GpConnectException(exceptionMessage));
+
             }
         });
     }
@@ -184,7 +202,7 @@ public class WebClientFilterService {
         return NACK_ERROR_20;
     }
 
-    private static Mono<ClientResponse> getMonoError(int errorCode, String exceptionMessage) {
+    private static Mono<ClientResponse> getMonoError(int errorCode, String exceptionMessage, OperationOutcome operationOutcome) {
         switch (errorCode) {
             case NACK_ERROR_6:
                 return Mono.error(new GpConnectNotFoundException(exceptionMessage));
@@ -194,7 +212,7 @@ public class WebClientFilterService {
                 return Mono.error(new EhrRequestException(exceptionMessage));
             case NACK_ERROR_20:
             default:
-                return Mono.error(new GpConnectException(exceptionMessage));
+                return Mono.error(new GpConnectException(exceptionMessage, operationOutcome));
         }
     }
 
