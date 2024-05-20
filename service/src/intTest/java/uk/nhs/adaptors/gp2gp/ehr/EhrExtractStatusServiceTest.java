@@ -23,6 +23,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -116,6 +117,13 @@ public class EhrExtractStatusServiceTest {
             "ERROR_MESSAGE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "",
             "CONTENT_TYPE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", CONTENT_TYPE_MSWORD
         ));
+    }
+
+    @Test
+    public void When_FetchDocumentObjectNameAndSize_With_InvalidConversation_Expect_EmptyMap() {
+        final var fakeConversationId = generateRandomUppercaseUUID();
+
+        assertThat(ehrExtractStatusService.fetchDocumentObjectNameAndSize(fakeConversationId)).isEqualTo(Collections.EMPTY_MAP);
     }
 
     @Test
