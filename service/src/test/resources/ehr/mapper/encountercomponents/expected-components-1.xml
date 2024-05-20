@@ -261,8 +261,7 @@
             <component typeCode="COMP">
                 <NarrativeStatement classCode="OBS" moodCode="EVN">
                     <id root="394559384658936"/>
-                    <text>Type: Referral Letter (21-Sep-2020) Description: for 2 week rule referral - skin Absent Attachment: some title
-                        Setting: Practice Setting Text
+                    <text>Type: Referral Letter (21-Sep-2020) Description: for 2 week rule referral - skin ${ERROR_MESSAGE_PLACEHOLDER_ID=394559384658936}Setting: Practice Setting Text
                     </text>
                     <statusCode code="COMPLETE"/>
                     <availabilityTime value="20200921"/>
@@ -275,8 +274,8 @@
                         <referredToExternalDocument classCode="DOC" moodCode="EVN">
                             <id root="394559384658936"/>
                             <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                            <text mediaType="text/plain">
-                                <reference value="file://localhost/AbsentAttachment394559384658936.txt"/>
+                            <text mediaType="${CONTENT_TYPE_PLACEHOLDER_ID=394559384658936}">
+                                <reference value="file://localhost/${FILENAME_PLACEHOLDER_ID=394559384658936}"/>
                             </text>
                         </referredToExternalDocument>
                     </reference>

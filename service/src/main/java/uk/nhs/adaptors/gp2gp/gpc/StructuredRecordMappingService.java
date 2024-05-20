@@ -95,8 +95,8 @@ public class StructuredRecordMappingService {
                 .documentId(documentId)
                 .messageId(messageId)
                 .description(OutboundMessage.AttachmentDescription.builder()
-                        .fileName(fileName)
-                        .contentType(contentType)
+                        .fileName(null) // These two fields are NULL so that the placeholders are generated
+                        .contentType(null)
                         .compressed(false) // always false for GPC documents
                         .largeAttachment(isLargeAttachment(attachment))
                         .originalBase64(false)

@@ -35,7 +35,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
-import uk.nhs.adaptors.gp2gp.mhs.model.Identifier;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 import wiremock.org.custommonkey.xmlunit.DetailedDiff;
 import wiremock.org.custommonkey.xmlunit.XMLUnit;
@@ -52,49 +51,7 @@ class StructuredRecordMappingServiceTest {
     private static final String ID_2 = "222";
     private static final String NEW_DOC_REF_ID_2 = "222_new_doc_ref_id";
     private static final String NEW_DOC_MANIFEST_ID_2 = "222_new_doc_manifest_id";
-    private static final String TEST_UNSUPPORTED_CONTENTTYPE = "application/text";
-
-    private static final DocumentReference DOCUMENT_REFERENCE_TYPE_1_TEXTPLAIN = buildDocumentReference(
-        ID_1, "/" + NEW_DOC_REF_ID_1, null, ATTACHMENT_1_SIZE, "text/plain");
-    private static final DocumentReference DOCUMENT_REFERENCE_TYPE_2_TEXTHTML = buildDocumentReference(
-        ID_2, "/" + NEW_DOC_REF_ID_2, null, ATTACHMENT_2_SIZE, "text/html");
-    private static final DocumentReference DOCUMENT_REFERENCE_TYPE_1_UNSUPPORTED_CONTENTTYPE = buildDocumentReference(
-        ID_1, "/" + NEW_DOC_REF_ID_1, null, ATTACHMENT_1_SIZE, TEST_UNSUPPORTED_CONTENTTYPE);
-    private static final DocumentReference DOCUMENT_REFERENCE_TYPE_1_NO_URL = buildDocumentReference(
-        ID_1, null, "some title", ATTACHMENT_1_SIZE, "text/plain");
-
-    private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_1 = buildExternalAttachment(
-        NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
-        "111_new_doc_manifest_id.txt", "text/plain", List.of(),
-        buildAttachmentDescription(
-            "111_new_doc_manifest_id.txt", "text/plain", false,
-            false, false, NEW_DOC_MANIFEST_ID_1
-        )
-    );
-    private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_PRESENT_2 = buildExternalAttachment(
-        NEW_DOC_MANIFEST_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, null,
-        "222_new_doc_manifest_id.html", "text/html", List.of(),
-        buildAttachmentDescription(
-            "222_new_doc_manifest_id.html", "text/html", false,
-            false, false, NEW_DOC_MANIFEST_ID_2
-        )
-    );
-    private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_1 = buildExternalAttachment(
-        NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, null, "some title",
-        "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", List.of(),
-        buildAttachmentDescription(
-            "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
-            false, false, NEW_DOC_MANIFEST_ID_1
-        )
-    );
-    private static final OutboundMessage.ExternalAttachment EXPECTED_ATTACHMENT_ABSENT_2 = buildExternalAttachment(
-        NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
-        "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", List.of(),
-        buildAttachmentDescription(
-            "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain", false,
-            false, false, NEW_DOC_MANIFEST_ID_1
-        )
-    );
+    private static final String UNSUPPORTED_CONTENT_TYPE = "application/text";
 
     @Mock
     private OutputMessageWrapperMapper outputMessageWrapperMapper;
@@ -129,12 +86,24 @@ class StructuredRecordMappingServiceTest {
         when(supportedContentTypes.isContentTypeSupported(any())).thenReturn(true);
 
         var mappedExternalAttachments = getMappedExternalAttachments(
-            DOCUMENT_REFERENCE_TYPE_1_TEXTPLAIN,
-            DOCUMENT_REFERENCE_TYPE_2_TEXTHTML
+            buildDocumentReference(ID_1, "/" + NEW_DOC_REF_ID_1, null, ATTACHMENT_1_SIZE, "text/plain"),
+            buildDocumentReference(ID_2, "/" + NEW_DOC_REF_ID_2, null, ATTACHMENT_2_SIZE, "text/html")
         );
 
-        assertThat(mappedExternalAttachments.get(0)).usingRecursiveComparison().isEqualTo(EXPECTED_ATTACHMENT_PRESENT_1);
-        assertThat(mappedExternalAttachments.get(1)).usingRecursiveComparison().isEqualTo(EXPECTED_ATTACHMENT_PRESENT_2);
+        assertThat(mappedExternalAttachments).usingRecursiveComparison().isEqualTo(
+            List.of(
+                buildExternalAttachment(
+                    NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
+                    "111_new_doc_manifest_id.txt", "text/plain",
+                    buildAttachmentDescription(NEW_DOC_MANIFEST_ID_1)
+                ),
+                buildExternalAttachment(
+                    NEW_DOC_MANIFEST_ID_2, NEW_DOC_MANIFEST_ID_2, "/" + NEW_DOC_REF_ID_2, null,
+                    "222_new_doc_manifest_id.html", "text/html",
+                    buildAttachmentDescription(NEW_DOC_MANIFEST_ID_2)
+                )
+            )
+        );
     }
 
     @Test
@@ -142,9 +111,15 @@ class StructuredRecordMappingServiceTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1);
         when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
 
-        var mappedExternalAttachments = getMappedAbsentAttachments(DOCUMENT_REFERENCE_TYPE_1_UNSUPPORTED_CONTENTTYPE);
+        var mappedExternalAttachments = getMappedAbsentAttachments(
+            buildDocumentReference(ID_1, "/" + NEW_DOC_REF_ID_1, null, ATTACHMENT_1_SIZE, UNSUPPORTED_CONTENT_TYPE)
+        );
 
-        assertThat(mappedExternalAttachments.get(0)).usingRecursiveComparison().isEqualTo(EXPECTED_ATTACHMENT_ABSENT_2);
+        assertThat(mappedExternalAttachments).usingRecursiveComparison().isEqualTo(List.of(buildExternalAttachment(
+            NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, "/" + NEW_DOC_REF_ID_1, null,
+            "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain",
+            buildAttachmentDescription(NEW_DOC_MANIFEST_ID_1)
+        )));
     }
 
     @Test
@@ -152,9 +127,15 @@ class StructuredRecordMappingServiceTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1);
         when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
 
-        var mappedExternalAttachments = getMappedAbsentAttachments(DOCUMENT_REFERENCE_TYPE_1_NO_URL);
+        var mappedExternalAttachments = getMappedAbsentAttachments(
+            buildDocumentReference(ID_1, null, "some title", ATTACHMENT_1_SIZE, "text/plain")
+        );
 
-        assertThat(mappedExternalAttachments.get(0)).usingRecursiveComparison().isEqualTo(EXPECTED_ATTACHMENT_ABSENT_1);
+        assertThat(mappedExternalAttachments).usingRecursiveComparison().isEqualTo(List.of(buildExternalAttachment(
+            NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1, null, "some title",
+            "AbsentAttachment111_new_doc_manifest_id.txt", "text/plain",
+            buildAttachmentDescription(NEW_DOC_MANIFEST_ID_1)
+        )));
     }
 
     @Test
@@ -303,7 +284,6 @@ class StructuredRecordMappingServiceTest {
     @SuppressWarnings("checkstyle:ParameterNumber")
     private static OutboundMessage.ExternalAttachment buildExternalAttachment(String documentID, String messageID, String url, String title,
                                                                               String filename, String contentType,
-                                                                              List<Identifier> identifier,
                                                                               OutboundMessage.AttachmentDescription description) {
         return OutboundMessage.ExternalAttachment.builder()
             .title(title)
@@ -312,19 +292,18 @@ class StructuredRecordMappingServiceTest {
             .description(description.toString())
             .url(url)
             .filename(filename)
-            .identifier(identifier)
+            .identifier(List.of())
             .contentType(contentType)
             .build();
     }
 
-    private static OutboundMessage.AttachmentDescription buildAttachmentDescription(String fileName, String contentType,
-        boolean isCompressed, boolean isLargeAttachment, boolean isOriginalBase64, String documentId) {
+    private static OutboundMessage.AttachmentDescription buildAttachmentDescription(String documentId) {
         return OutboundMessage.AttachmentDescription.builder()
-            .fileName(fileName)
-            .contentType(contentType)
-            .compressed(isCompressed)
-            .largeAttachment(isLargeAttachment)
-            .originalBase64(isOriginalBase64)
+            .fileName(null)
+            .contentType(null)
+            .compressed(false)
+            .largeAttachment(false)
+            .originalBase64(false)
             .documentId(documentId)
             .build();
     }

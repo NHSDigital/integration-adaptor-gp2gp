@@ -50,7 +50,8 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
             taskDefinition.getConversationId()
         ));
 
-        var storagePath = buildAbsentAttachmentFileName(taskDefinition.getDocumentId());
+        final var storagePath = buildAbsentAttachmentFileName(taskDefinition.getDocumentId());
+        final var fileName = buildAbsentAttachmentFileName(taskDefinition.getDocumentId());
 
         var mhsOutboundRequestData = documentToMHSTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, fileContent);
 
@@ -63,7 +64,8 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
             taskDefinition,
             storagePath,
             fileContent.length(),
-            getErrorMessage(taskDefinition, gpcResponseError)
+            getErrorMessage(taskDefinition, gpcResponseError),
+            fileName
         );
     }
 
