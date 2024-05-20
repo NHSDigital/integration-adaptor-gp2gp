@@ -1,5 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import org.hl7.fhir.dstu3.model.Base64BinaryType;
+import org.hl7.fhir.dstu3.model.Binary;
+import org.hl7.fhir.dstu3.model.CodeType;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.OperationOutcome;
@@ -20,6 +23,7 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -38,7 +42,25 @@ public class GetGpcDocumentTaskExecutorTest {
     private GetGpcDocumentTaskExecutor getGpcDocumentTaskExecutor;
 
     private final GetGpcDocumentTaskDefinition getGpcDocumentTaskDefinition =
-        GetGpcDocumentTaskDefinition.builder().build();
+        GetGpcDocumentTaskDefinition.builder().conversationId("CONVERSATION-ID").documentId("DOCUMENT-ID").build();
+
+    @Test
+    void When_ExecuteWithValidGpcDocumentResponse_Expect_EhrExtractStatusIsUpdated() {
+        String content = "12312312";
+        when(fhirParseService.parseResource(any(), any())).thenReturn(
+            new Binary(new CodeType("text/plain"), new Base64BinaryType(content))
+        );
+
+        getGpcDocumentTaskExecutor.execute(getGpcDocumentTaskDefinition);
+
+        verify(ehrExtractStatusService).updateEhrExtractStatusAccessDocument(
+            getGpcDocumentTaskDefinition,
+            "CONVERSATION-ID/DOCUMENT-ID.json",
+            content.length(),
+            null,
+            "DOCUMENT-ID.txt"
+        );
+    }
 
     @Test
     public void When_ExecuteWithGpcClientExceptionNoOperationOutcome_Expect_HandleAbsentAttachmentToUseEmptyOptional() {

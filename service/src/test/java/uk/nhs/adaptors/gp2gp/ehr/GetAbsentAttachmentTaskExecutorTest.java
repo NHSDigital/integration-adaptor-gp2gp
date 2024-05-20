@@ -39,7 +39,8 @@ public class GetAbsentAttachmentTaskExecutorTest {
             any(),
             any(),
             anyInt(),
-            eq("The document could not be retrieved")
+            eq("The document could not be retrieved"),
+            any()
         );
     }
 
@@ -55,7 +56,8 @@ public class GetAbsentAttachmentTaskExecutorTest {
             any(),
             any(),
             anyInt(),
-            eq("This-is-the-task-definition-title")
+            eq("This-is-the-task-definition-title"),
+            any()
         );
     }
 
@@ -71,7 +73,8 @@ public class GetAbsentAttachmentTaskExecutorTest {
             any(),
             any(),
             anyInt(),
-            eq("This-is-the-gpc-response-error")
+            eq("This-is-the-gpc-response-error"),
+            any()
         );
     }
 
@@ -87,7 +90,8 @@ public class GetAbsentAttachmentTaskExecutorTest {
             any(),
             any(),
             anyInt(),
-            eq("This-is-the-gpc-response-error")
+            eq("This-is-the-gpc-response-error"),
+            any()
         );
     }
 
@@ -101,7 +105,8 @@ public class GetAbsentAttachmentTaskExecutorTest {
             any(),
             eq("AbsentAttachmentDocument-Id.txt"),
             anyInt(),
-            any()
+            any(),
+            eq("AbsentAttachmentDocument-Id.txt")
         );
     }
 
