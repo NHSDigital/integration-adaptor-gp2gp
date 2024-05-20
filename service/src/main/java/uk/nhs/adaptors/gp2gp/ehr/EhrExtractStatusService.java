@@ -6,6 +6,7 @@ import static org.springframework.util.CollectionUtils.isEmpty;
 import static org.springframework.util.CollectionUtils.newHashMap;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -164,7 +165,7 @@ public class EhrExtractStatusService {
 
             return replacementMap;
         }
-        return null;
+        return Collections.emptyMap();
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessStructured(

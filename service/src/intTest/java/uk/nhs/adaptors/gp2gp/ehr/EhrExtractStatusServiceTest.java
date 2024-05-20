@@ -23,6 +23,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -47,10 +48,10 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @DirtiesContext
 @SpringBootTest
 public class EhrExtractStatusServiceTest {
-
-    public static final Instant NOW = Instant.now();
+    private static final Instant NOW = Instant.now();
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     private static final int DEFAULT_CONTENT_LENGTH = 244;
+    private static final String CONTENT_TYPE_MSWORD = "application/msword";
 
     @Autowired
     private EhrExtractStatusService ehrExtractStatusService;
@@ -77,7 +78,7 @@ public class EhrExtractStatusServiceTest {
                     .documentId("4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60")
                     .contentLength(DEFAULT_CONTENT_LENGTH)
                     .gpConnectErrorMessage("404 Not Found")
-                    .contentType("application/msword")
+                    .contentType(CONTENT_TYPE_MSWORD)
                     .build()
             )
         );
@@ -103,7 +104,7 @@ public class EhrExtractStatusServiceTest {
                     .documentId("4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60")
                     .contentLength(DEFAULT_CONTENT_LENGTH)
                     .gpConnectErrorMessage(null)
-                    .contentType("application/msword")
+                    .contentType(CONTENT_TYPE_MSWORD)
                     .build()
             )
         );
@@ -112,10 +113,17 @@ public class EhrExtractStatusServiceTest {
 
         assertThat(results).isEqualTo(Map.of(
             "FILENAME_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60.rtx",
-            "LENGTH_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "244",
+            "LENGTH_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", Integer.toString(DEFAULT_CONTENT_LENGTH),
             "ERROR_MESSAGE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "",
-            "CONTENT_TYPE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", "application/msword"
+            "CONTENT_TYPE_PLACEHOLDER_ID=4E0C8345-A9AB-48EA-8882-DC9E9F3F5F60", CONTENT_TYPE_MSWORD
         ));
+    }
+
+    @Test
+    public void When_FetchDocumentObjectNameAndSize_With_InvalidConversation_Expect_EmptyMap() {
+        final var fakeConversationId = generateRandomUppercaseUUID();
+
+        assertThat(ehrExtractStatusService.fetchDocumentObjectNameAndSize(fakeConversationId)).isEqualTo(Collections.EMPTY_MAP);
     }
 
     @Test
