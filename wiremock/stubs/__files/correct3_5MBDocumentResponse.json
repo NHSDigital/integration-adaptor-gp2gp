@@ -1,0 +1,6 @@
+{
+  "resourceType": "Binary",
+  "id": "5b99e83b-6958-439b-b16e-3b6f90046fa8",
+  "contentType": "text/plain",
+  "content": "{{#base64}}{{randomValue length=3670016 type='ALPHANUMERIC'}}{{/base64}}"
+}

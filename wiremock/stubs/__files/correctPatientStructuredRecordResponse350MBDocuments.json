@@ -1,0 +1,546 @@
+{
+    "resourceType": "Bundle",
+    "id": "6a92c467-ff0c-4089-a5d1-285d20cb9f92",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "id": "2",
+                "meta": {
+                    "versionId": "1521806400000",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1",
+                        "extension": [
+                            {
+                                "url": "registrationPeriod",
+                                "valuePeriod": {
+                                    "start": "1962-07-13T00:00:00+01:00"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "en",
+                                            "display": "English"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "preferred",
+                                "valueBoolean": false
+                            },
+                            {
+                                "url": "modeOfCommunication",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-LanguageAbilityMode-1",
+                                            "code": "RWR",
+                                            "display": "Received written"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "communicationProficiency",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-LanguageAbilityProficiency-1",
+                                            "code": "E",
+                                            "display": "Excellent"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "interpreterRequired",
+                                "valueBoolean": false
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-NHSNumberVerificationStatus-1",
+                                            "code": "01",
+                                            "display": "Number present and verified"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "system": "https://fhir.nhs.uk/Id/nhs-number",
+                        "value": "{{jsonPath request.body '$.parameter[0].valueIdentifier.value'}}"
+                    }
+                ],
+                "active": true,
+                {{^patient}}
+                "name":
+                [
+                    {
+                        "use": "official",
+                        "text": "Horace SKELLY",
+                        "family": "SKELLY",
+                        "given": [
+                            "Horace"
+                        ],
+                        "prefix": [
+                            "MR"
+                        ]
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "1925-04-21",
+                "address": [
+                    {
+                        "use": "home",
+                        "type": "physical",
+                        "line": [
+                            "3 BOWESFIELD CRESCENT"
+                        ],
+                        "city": "STOCKTON-ON-TEES",
+                        "postalCode": "TS18 3BL"
+                    }
+                ],
+                {{/patient}}
+                {{#patient}}
+                "name": [
+                    {
+                        "use": "official",
+                        "text": "{{patient.name.0.given.0}} {{patient.name.0.family}}",
+                        "family": "{{patient.name.0.family}}",
+                        "given": [
+                            "{{patient.name.0.given.0}}"
+                        ],
+                        "prefix": [
+                            "{{patient.name.0.prefix.0}}"
+                        ]
+                    }
+                ],
+                "gender": "{{ patient.gender }}",
+                "birthDate": "{{ patient.birthDate }}",
+                "address": [
+                    {
+                        "use": "home",
+                        "type": "physical",
+                        "line": [
+                            "{{ patient.address.0.line.0 }}",
+                            "{{ patient.address.0.line.1 }}"
+                        ],
+                        "postalCode": "{{ patient.address.0.postalCode }}"
+                    }
+                ],
+                {{/patient}}
+                "contact": [
+                    {
+                        "relationship": [
+                            {
+                                "text": "Emergency contact"
+                            },
+                            {
+                                "text": "Next of kin"
+                            },
+                            {
+                                "text": "Daughter"
+                            }
+                        ],
+                        "name": {
+                            "use": "official",
+                            "text": "JACKSON Jane (Miss)",
+                            "family": "Jackson",
+                            "given": [
+                                "Jane"
+                            ],
+                            "prefix": [
+                                "Miss"
+                            ]
+                        },
+                        "telecom": [
+                            {
+                                "system": "phone",
+                                "value": "07777123123",
+                                "use": "mobile"
+                            }
+                        ],
+                        "address": {
+                            "use": "home",
+                            "type": "physical",
+                            "line": [
+                                "Trevelyan Square",
+                                "Boar Ln"
+                            ],
+                            "postalCode": "LS1 6AE"
+                        },
+                        "gender": "female"
+                    }
+                ],
+                "generalPractitioner": [
+                    {
+                        "reference": "Practitioner/1"
+                    }
+                ],
+                "managingOrganization": {
+                    "reference": "Organization/7"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "1",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "de",
+                                            "display": "German"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "en",
+                                            "display": "English"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-user-id",
+                        "value": "G13579135"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "usual",
+                        "family": "Gilbert",
+                        "given": [
+                            "Nichole"
+                        ],
+                        "prefix": [
+                            "Miss"
+                        ]
+                    }
+                ],
+                "gender": "female"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "6c41ebfd-57c3-4162-9d7b-208c171a2fd7"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "7",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "B82617"
+                    }
+                ],
+                "name": "COXWOLD SURGERY",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "12345678",
+                        "use": "work"
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "line": [
+                            "NHS NPFIT Test Data Manager",
+                            "Princes Exchange"
+                        ],
+                        "city": "Leeds",
+                        "district": "West Yorkshire",
+                        "postalCode": "LS1 4HY"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "id": "e0244de8-07ef-4274-9f7a-d7067bcc8d21",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1"
+                    ]
+                },
+                "practitioner": {
+                    "reference": "Practitioner/6c41ebfd-57c3-4162-9d7b-208c171a2fd7"
+                },
+                "organization": {
+                    "reference": "Organization/db67f447-b30d-442a-8e31-6918d1367eeb"
+                },
+                "code": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/CareConnect-SDSJobRoleName-1",
+                                "code": "R0260",
+                                "display": "General Medical Practitioner"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Location",
+                "id": "17",
+                "meta": {
+                    "versionId": "636064088100870233",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Location-1"
+                    ]
+                },
+                "name": "The Trevelyan Practice",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "03003035678",
+                        "use": "work"
+                    }
+                ],
+                "address": {
+                    "line": [
+                        "Trevelyan Square",
+                        "Boar Ln",
+                        "Leeds"
+                    ],
+                    "postalCode": "LS1 6AE"
+                },
+                "managingOrganization": {
+                    "reference": "Organization/db67f447-b30d-442a-8e31-6918d1367eeb"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "1",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "de",
+                                            "display": "German"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "en",
+                                            "display": "English"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-user-id",
+                        "value": "G13579135"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "usual",
+                        "family": "Gilbert",
+                        "given": [
+                            "Nichole"
+                        ],
+                        "prefix": [
+                            "Miss"
+                        ]
+                    }
+                ],
+                "gender": "female"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "1",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "GPC001"
+                    }
+                ],
+                "name": "GP Connect Demonstrator",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "12345678",
+                        "use": "work"
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "line": [
+                            "23 Main Street",
+                            "Pudsey"
+                        ],
+                        "city": "Leeds",
+                        "district": "West Yorkshire",
+                        "postalCode": "GPC 111"
+                    }
+                ]
+            }
+        },
+        {{#each (range 0 100) as |index|}}
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "{{ randomValue type='UUID' }}",
+                "meta": {
+                    "versionId": "8017752596891037527",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "{{ randomValue type='UUID' }}"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "text": "Random text generated to test GP2GP"
+                },
+                "subject": {
+                    "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
+                },
+                "created": "2020-12-22T14:00:00+00:00",
+                "indexed": "2020-12-22T14:00:00.000+00:00",
+                "custodian": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "description": "3.5MB attachment {{index}}",
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "text/plain",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/5b99e83b-6958-439b-b16e-3b6f90046fa8",
+                            "size": 3670016
+                        }
+                    }
+                ],
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/A44B64EA-172B-4EF5-8809-3FF24F5613C1"
+                    }
+                }
+            }
+        },{{/each}}
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "5E496953-065B-41F2-9577-BE8F2FBD0757"
+            }
+        }
+    ]
+}

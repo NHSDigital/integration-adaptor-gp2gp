@@ -81,12 +81,16 @@ To change the patient record returned to be [Large Patient Record](stubs/__files
 curl --request PUT --data '{"state": "Large Patient Record"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
 ```
 
-
-
 To change the patient record returned to have different Absent Attachment scenarios [Absent Attachments](stubs/__files/correctPatientStructuredRecordResponseAbsentAttachments.json):
 
 ```shell
 curl --request PUT --data '{"state": "Absent Attachments"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+```
+
+To change the patient record returned to have 100 3.5MB = 350MB total attachments scenarios [350MBDocuments](stubs/__files/correctPatientStructuredRecordResponse350MBDocuments.json):
+
+```shell
+curl --request PUT --data '{"state": "350MB Attachments"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
 ```
 
 To change the patient record returned to be NOT FOUND:
