@@ -128,11 +128,12 @@ public class GpcRequestBuilder {
                 .addWebClientFilters(filters, WebClientFilterService.RequestType.GPC, HttpStatus.OK, gpcClientConfig))
             .filter(ExchangeFilterFunction.ofRequestProcessor(clientRequest -> Mono.defer(
                 () -> {
-                    var cr = ClientRequest.from(clientRequest).header(
-                        AUTHORIZATION,
-                        AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode())
-                    );
-                    return Mono.just(cr.build());
+                    final ClientRequest filteredRequest = ClientRequest
+                            .from(clientRequest)
+                            .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode()))
+                            .build();
+
+                    return Mono.just(filteredRequest);
                 })
             ))
             .baseUrl(baseUrl)
