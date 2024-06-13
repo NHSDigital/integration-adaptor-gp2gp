@@ -2,7 +2,6 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -114,7 +113,7 @@ public class GpcWebClientTest {
         var result = gpcWebClient.getDocumentRecord(taskDefinition);
 
         assertThat(result).isEqualTo(TEST_BODY);
-        verify(gpcTokenBuilder).buildToken(any(String.class));
+        verify(gpcTokenBuilder).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
@@ -133,7 +132,7 @@ public class GpcWebClientTest {
 
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
-        verify(gpcTokenBuilder, times(FOUR)).buildToken(any(String.class));
+        verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
@@ -152,7 +151,7 @@ public class GpcWebClientTest {
 
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
-        verify(gpcTokenBuilder, times(FOUR)).buildToken(any(String.class));
+        verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
@@ -169,7 +168,7 @@ public class GpcWebClientTest {
             .hasMessage("Retries exhausted: 3/3");
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
-        verify(gpcTokenBuilder, times(FOUR)).buildToken(any(String.class));
+        verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
@@ -181,7 +180,7 @@ public class GpcWebClientTest {
         var result = gpcWebClient.getDocumentRecord(taskDefinition);
 
         assertThat(result).isEqualTo(TEST_BODY);
-        verify(gpcTokenBuilder, times(2)).buildToken(any(String.class));
+        verify(gpcTokenBuilder, times(2)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
@@ -193,7 +192,7 @@ public class GpcWebClientTest {
         var result = gpcWebClient.getStructuredRecord(taskDefinition);
 
         assertThat(result).isEqualTo(TEST_BODY);
-        verify(gpcTokenBuilder).buildToken(any(String.class));
+        verify(gpcTokenBuilder).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
@@ -210,7 +209,7 @@ public class GpcWebClientTest {
             .hasMessage("Retries exhausted: 3/3");
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
-        verify(gpcTokenBuilder, times(FOUR)).buildToken(any(String.class));
+        verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
@@ -228,7 +227,7 @@ public class GpcWebClientTest {
             .hasRootCauseMessage("The following error occurred during GPC request: " + TEST_BODY);
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
-        verify(gpcTokenBuilder, times(FOUR)).buildToken(any(String.class));
+        verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     private GetGpcDocumentTaskDefinition buildDocumentTaskDefinition() {
