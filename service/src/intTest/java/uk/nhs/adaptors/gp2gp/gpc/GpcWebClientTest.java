@@ -9,8 +9,8 @@ import static org.springframework.http.HttpStatus.OK;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.concurrent.TimeoutException;
-import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -236,21 +236,27 @@ public class GpcWebClientTest {
     void When_GetStructuredRecord_With_HttpStatus200_Expect_AuthorizationHeaderToBePresent() throws InterruptedException {
         // given
         final GetGpcStructuredTaskDefinition taskDefinition = getStructuredDefinition();
+        final String fromOdsCode = taskDefinition.getFromOdsCode();
         final Collection<String> tokens = new ArrayList<>();
-        final Pattern jwtPattern = Pattern.compile("^[a-zA-Z0-9+/]*={0,2}\\.[a-zA-Z0-9+/]*={0,2}\\.[a-zA-Z0-9+/]*={0,2}$");
 
         // when
-        for(int i = 0; i < FOUR; i++) {
-            mockWebServer.enqueue(STUB_OK);
-            gpcWebClient.getStructuredRecord(taskDefinition);
-            tokens.add(mockWebServer.takeRequest().getHeader(HttpHeaders.AUTHORIZATION));
-        }
+        mockWebServer.enqueue(STUB_OK);
+        gpcWebClient.getStructuredRecord(taskDefinition);
+        tokens.add(Objects.requireNonNull(mockWebServer
+                        .takeRequest()
+                        .getHeader(HttpHeaders.AUTHORIZATION))
+                .split("Bearer")[1]
+                .trim()); // Add token from Authorisation header.
+
+        doAnswer(invocation -> {
+            final String tokenFromSpy = (String) invocation.callRealMethod();
+            tokens.add(tokenFromSpy);
+            return tokenFromSpy;
+        }).when(gpcTokenBuilder).buildToken(fromOdsCode);
 
         // then
-        assertThat(tokens).hasSize(FOUR);
-        tokens.stream()
-                .map(token -> token.split("Bearer")[1].trim())
-                .forEach(token -> assertThat(token).matches(jwtPattern));
+        verify(gpcTokenBuilder).buildToken(fromOdsCode);
+        assertThat(tokens).doesNotHaveDuplicates();
     }
 
     private GetGpcDocumentTaskDefinition buildDocumentTaskDefinition() {
