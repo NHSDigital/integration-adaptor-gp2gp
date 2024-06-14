@@ -2,14 +2,15 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.concurrent.TimeoutException;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -228,6 +230,27 @@ public class GpcWebClientTest {
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
         verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
+    }
+
+    @Test
+    void When_GetStructuredRecord_With_HttpStatus200_Expect_AuthorizationHeaderToBePresent() throws InterruptedException {
+        // given
+        final GetGpcStructuredTaskDefinition taskDefinition = getStructuredDefinition();
+        final Collection<String> tokens = new ArrayList<>();
+        final Pattern jwtPattern = Pattern.compile("^[a-zA-Z0-9+/]*={0,2}\\.[a-zA-Z0-9+/]*={0,2}\\.[a-zA-Z0-9+/]*={0,2}$");
+
+        // when
+        for(int i = 0; i < FOUR; i++) {
+            mockWebServer.enqueue(STUB_OK);
+            gpcWebClient.getStructuredRecord(taskDefinition);
+            tokens.add(mockWebServer.takeRequest().getHeader(HttpHeaders.AUTHORIZATION));
+        }
+
+        // then
+        assertThat(tokens).hasSize(FOUR);
+        tokens.stream()
+                .map(token -> token.split("Bearer")[1].trim())
+                .forEach(token -> assertThat(token).matches(jwtPattern));
     }
 
     private GetGpcDocumentTaskDefinition buildDocumentTaskDefinition() {
