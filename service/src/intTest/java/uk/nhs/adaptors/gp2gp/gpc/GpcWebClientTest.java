@@ -253,13 +253,10 @@ public class GpcWebClientTest {
                 .trim()); // Add token from Authorisation header.
 
         // then
-        final long distinctElements = tokens.stream()
-                .distinct()
-                .count();
-
+        final long distinctTokens = tokens.stream().distinct().count();
         verify(gpcTokenBuilder).buildToken(fromOdsCode);
         assertThat(tokens).hasSize(2).doesNotContainNull();
-        assertThat(distinctElements).isEqualTo(1);
+        assertThat(distinctTokens).isEqualTo(1);
     }
 
     private GetGpcDocumentTaskDefinition buildDocumentTaskDefinition() {
