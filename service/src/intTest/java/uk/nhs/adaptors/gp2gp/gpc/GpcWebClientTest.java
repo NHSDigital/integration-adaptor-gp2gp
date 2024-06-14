@@ -7,9 +7,7 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.jupiter.api.AfterEach;
@@ -27,6 +25,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.SocketPolicy;
+import org.springframework.util.CollectionUtils;
 import uk.nhs.adaptors.gp2gp.common.exception.RetryLimitReachedException;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcTokenBuilder;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
@@ -237,9 +236,15 @@ public class GpcWebClientTest {
         // given
         final GetGpcStructuredTaskDefinition taskDefinition = getStructuredDefinition();
         final String fromOdsCode = taskDefinition.getFromOdsCode();
-        final Collection<String> tokens = new ArrayList<>();
+        final Set<String> tokens = new HashSet<>();
 
         // when
+        doAnswer(invocation -> {
+            final String tokenFromSpy = (String) invocation.callRealMethod();
+            tokens.add(tokenFromSpy);
+            return tokenFromSpy;
+        }).when(gpcTokenBuilder).buildToken(fromOdsCode);
+
         mockWebServer.enqueue(STUB_OK);
         gpcWebClient.getStructuredRecord(taskDefinition);
         tokens.add(Objects.requireNonNull(mockWebServer
@@ -248,15 +253,9 @@ public class GpcWebClientTest {
                 .split("Bearer")[1]
                 .trim()); // Add token from Authorisation header.
 
-        doAnswer(invocation -> {
-            final String tokenFromSpy = (String) invocation.callRealMethod();
-            tokens.add(tokenFromSpy);
-            return tokenFromSpy;
-        }).when(gpcTokenBuilder).buildToken(fromOdsCode);
-
         // then
         verify(gpcTokenBuilder).buildToken(fromOdsCode);
-        assertThat(tokens).doesNotHaveDuplicates();
+        assertThat(tokens).hasSize(1);
     }
 
     private GetGpcDocumentTaskDefinition buildDocumentTaskDefinition() {
