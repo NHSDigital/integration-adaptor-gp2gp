@@ -25,7 +25,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.SocketPolicy;
-import org.springframework.util.CollectionUtils;
 import uk.nhs.adaptors.gp2gp.common.exception.RetryLimitReachedException;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcTokenBuilder;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
@@ -236,7 +235,7 @@ public class GpcWebClientTest {
         // given
         final GetGpcStructuredTaskDefinition taskDefinition = getStructuredDefinition();
         final String fromOdsCode = taskDefinition.getFromOdsCode();
-        final Set<String> tokens = new HashSet<>();
+        final Collection<String> tokens = new ArrayList<>();
 
         // when
         doAnswer(invocation -> {
@@ -254,8 +253,13 @@ public class GpcWebClientTest {
                 .trim()); // Add token from Authorisation header.
 
         // then
+        final long distinctElements = tokens.stream()
+                .distinct()
+                .count();
+
         verify(gpcTokenBuilder).buildToken(fromOdsCode);
-        assertThat(tokens).hasSize(1);
+        assertThat(tokens).hasSize(2).doesNotContainNull();
+        assertThat(distinctElements).isEqualTo(1);
     }
 
     private GetGpcDocumentTaskDefinition buildDocumentTaskDefinition() {
