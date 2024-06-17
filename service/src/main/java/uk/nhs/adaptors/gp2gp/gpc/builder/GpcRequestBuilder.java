@@ -18,9 +18,12 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ClientRequest;
+import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
@@ -85,7 +88,7 @@ public class GpcRequestBuilder {
         GetGpcStructuredTaskDefinition structuredTaskDefinition, String gpcBaseUrl) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
-        WebClient client = buildWebClient(httpClient, gpcBaseUrl);
+        WebClient client = buildWebClient(httpClient, gpcBaseUrl, structuredTaskDefinition);
 
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.POST)
@@ -101,7 +104,7 @@ public class GpcRequestBuilder {
     public RequestHeadersSpec<?> buildGetDocumentRecordRequest(GetGpcDocumentTaskDefinition documentTaskDefinition, String gpcBaseUrl) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
-        WebClient client = buildWebClient(httpClient, gpcBaseUrl);
+        WebClient client = buildWebClient(httpClient, gpcBaseUrl, documentTaskDefinition);
 
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.GET)
@@ -115,7 +118,7 @@ public class GpcRequestBuilder {
             .secure(t -> t.sslContext(sslContext));
     }
 
-    private WebClient buildWebClient(HttpClient httpClient, String baseUrl) {
+    private WebClient buildWebClient(HttpClient httpClient, String baseUrl, TaskDefinition taskDefinition) {
         return WebClient
             .builder()
             .codecs(cfg -> cfg.defaultCodecs().maxInMemorySize(gpcConfiguration.getMaxRequestSize()))
@@ -123,6 +126,16 @@ public class GpcRequestBuilder {
             .clientConnector(new ReactorClientHttpConnector(httpClient))
             .filters(filters -> WebClientFilterService
                 .addWebClientFilters(filters, WebClientFilterService.RequestType.GPC, HttpStatus.OK, gpcClientConfig))
+            .filter(ExchangeFilterFunction.ofRequestProcessor(clientRequest -> Mono.defer(
+                () -> {
+                    final ClientRequest filteredRequest = ClientRequest
+                            .from(clientRequest)
+                            .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode()))
+                            .build();
+
+                    return Mono.just(filteredRequest);
+                })
+            ))
             .baseUrl(baseUrl)
             .defaultUriVariables(Collections.singletonMap("url", baseUrl))
             .build();
@@ -133,7 +146,6 @@ public class GpcRequestBuilder {
         return uri.accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
             .header(SSP_INTERACTION_ID, interactionId)
             .header(SSP_TRACE_ID, taskDefinition.getConversationId())
-            .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode()))
             .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
     }
 

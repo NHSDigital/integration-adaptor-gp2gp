@@ -2,11 +2,17 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.jupiter.api.AfterEach;
@@ -17,6 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -24,6 +31,7 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.SocketPolicy;
 import uk.nhs.adaptors.gp2gp.common.exception.RetryLimitReachedException;
+import uk.nhs.adaptors.gp2gp.gpc.builder.GpcTokenBuilder;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpcServerErrorException;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
@@ -54,6 +62,8 @@ public class GpcWebClientTest {
     private String baseUrl;
     @SpyBean
     private GpcConfiguration gpcConfiguration;
+    @SpyBean
+    private GpcTokenBuilder gpcTokenBuilder;
     @Autowired
     private GpcClient gpcWebClient;
 
@@ -102,18 +112,17 @@ public class GpcWebClientTest {
 
     @Test
     public void When_GetDocumentRecord_With_HttpStatus200_Expect_NoException() {
-
         mockWebServer.enqueue(STUB_OK);
 
         var taskDefinition = buildDocumentTaskDefinition();
         var result = gpcWebClient.getDocumentRecord(taskDefinition);
 
         assertThat(result).isEqualTo(TEST_BODY);
+        verify(gpcTokenBuilder).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
     public void When_GetDocumentRecord_With_HttpStatus5xx_Expect_RetryExceptionWithGpcServerErrorExceptionAsRootCause() {
-
         for (int i = 0; i < FOUR; i++) {
             mockWebServer.enqueue(STUB_INTERNAL_SERVER_ERROR);
         }
@@ -128,11 +137,11 @@ public class GpcWebClientTest {
 
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
+        verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
     public void When_GetDocumentRecord_With_HttpStatus5xxAndNoBody_Expect_AlternativeExceptionMessage() {
-
         for (int i = 0; i < FOUR; i++) {
             mockWebServer.enqueue(STUB_INTERNAL_SERVER_ERROR_NO_BODY);
         }
@@ -147,11 +156,11 @@ public class GpcWebClientTest {
 
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
+        verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
     public void When_GetDocumentRecord_With_NoResponse_Expect_RetryExceptionWithTimeoutAsRootCause() {
-
         for (int i = 0; i < FOUR; i++) {
             mockWebServer.enqueue(STUB_NO_RESPONSE);
         }
@@ -164,11 +173,11 @@ public class GpcWebClientTest {
             .hasMessage("Retries exhausted: 3/3");
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
+        verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
     public void When_GetDocumentRecord_With_NoResponseBeforeHttpStatus200_Expect_RetryBeforeSuccess() {
-
         mockWebServer.enqueue(STUB_NO_RESPONSE);
         mockWebServer.enqueue(STUB_OK);
 
@@ -176,6 +185,7 @@ public class GpcWebClientTest {
         var result = gpcWebClient.getDocumentRecord(taskDefinition);
 
         assertThat(result).isEqualTo(TEST_BODY);
+        verify(gpcTokenBuilder, times(2)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
@@ -187,11 +197,11 @@ public class GpcWebClientTest {
         var result = gpcWebClient.getStructuredRecord(taskDefinition);
 
         assertThat(result).isEqualTo(TEST_BODY);
+        verify(gpcTokenBuilder).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
     public void When_GetStructuredRecord_With_NoResponse_Expect_RetryExceptionWithTimeoutAsRootCause() {
-
         for (int i = 0; i < FOUR; i++) {
             mockWebServer.enqueue(STUB_NO_RESPONSE);
         }
@@ -204,11 +214,11 @@ public class GpcWebClientTest {
             .hasMessage("Retries exhausted: 3/3");
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
+        verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
     }
 
     @Test
     public void When_GetStructuredRecord_With_HttpStatus5xx_Expect_RetryWithGpcServerErrorExceptionAsRootCause() {
-
         for (int i = 0; i < FOUR; i++) {
             mockWebServer.enqueue(STUB_INTERNAL_SERVER_ERROR);
         }
@@ -222,6 +232,34 @@ public class GpcWebClientTest {
             .hasRootCauseMessage("The following error occurred during GPC request: " + TEST_BODY);
 
         assertThat(mockWebServer.getRequestCount()).isEqualTo(FOUR);
+        verify(gpcTokenBuilder, times(FOUR)).buildToken(taskDefinition.getFromOdsCode());
+    }
+
+    @Test
+    void When_GetStructuredRecord_With_HttpStatus200_Expect_AuthorizationHeaderToBePresent() throws InterruptedException {
+        // given
+        final GetGpcStructuredTaskDefinition taskDefinition = getStructuredDefinition();
+        final String fromOdsCode = taskDefinition.getFromOdsCode();
+        final Collection<String> tokens = new ArrayList<>();
+
+        // when
+        doAnswer(invocation -> {
+            final String tokenFromSpy = (String) invocation.callRealMethod();
+            tokens.add("Bearer %s".formatted(tokenFromSpy)); // Add initial token generated by gpcTokenBuilder.buildToken();
+            return tokenFromSpy;
+        }).when(gpcTokenBuilder).buildToken(fromOdsCode);
+
+        mockWebServer.enqueue(STUB_OK);
+        gpcWebClient.getStructuredRecord(taskDefinition);
+        tokens.add(Objects.requireNonNull(mockWebServer
+                        .takeRequest()
+                        .getHeader(HttpHeaders.AUTHORIZATION))); // Add token from Authorisation header (WebClient call).
+
+        // then
+        final long distinctTokens = tokens.stream().distinct().count();
+        verify(gpcTokenBuilder).buildToken(fromOdsCode);
+        assertThat(tokens).hasSize(2).doesNotContainNull();
+        assertThat(distinctTokens).isEqualTo(1);
     }
 
     private GetGpcDocumentTaskDefinition buildDocumentTaskDefinition() {
