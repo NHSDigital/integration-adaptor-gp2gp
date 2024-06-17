@@ -7,7 +7,7 @@
     "urlPattern": "/.*/STU3/1/gpconnect/fhir/Patient/[$]gpc[.]migratestructuredrecord"
   },
   "response": {
-    "status": 200,
+    "status": 500,
     "bodyFileName": "operationOutcomeInternalServerError.json",
     "headers": {
       "Server": "nginx",
