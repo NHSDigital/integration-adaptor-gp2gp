@@ -69,6 +69,12 @@ Using the [authentication guidance], you'll need to provide the following enviro
 
 ### Changing the default record
 
+To change the patient record returned to be [Internal Server Error](stubs/__files/operationOutcomeInternalServerError.json):
+
+```shell
+curl --request PUT --data '{"state": "Internal Server Error"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+```
+
 To change the patient record returned to be [No Documents](stubs/__files/correctPatientNoDocsStructuredRecordResponse.json):
 
 ```shell
