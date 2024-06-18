@@ -6,9 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.4] - 2024-06-17
+
 ### Fixed
 
-* The GPCC Adaptor JWT token is now refreshed with every request to prevent expiration issues during retries and ensure continuous, uninterrupted access; previously, we were seeing the JWT expire when a request failed and retried.
+* The GPC Consumer Adaptor JWT token is now refreshed with every request to prevent expiration issues during retries and ensure continuous, uninterrupted access; previously, we were seeing the JWT expire when a request failed and retried.
 
 ## [2.0.3] - 2024-05-20
 
