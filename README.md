@@ -1,4 +1,5 @@
-# integration-adaptor-gp2gp
+# GP2GP Sending Adaptor
+
 National Integration Adaptor - [GP2GP Sending Adaptor](https://digital.nhs.uk/developer/api-catalogue/gp2gp/gp2gp---integration-adaptor)
 
 The existing GP2GP solution uses a legacy messaging standard and infrastructure (HL7v3 and Spine TMS). Reliance 
@@ -290,6 +291,12 @@ The response will contain a JSON array of the following:
     }
 ]
 ```
+
+## Diagrams
+
+### Sequence Diagram
+
+![Sequence diagram](documentation/sequence/sequence.svg)
 
 ## Disclaimer
 

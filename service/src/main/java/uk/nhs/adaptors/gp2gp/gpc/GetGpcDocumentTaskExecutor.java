@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Binary;
+import org.hl7.fhir.dstu3.model.Coding;
+import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +18,10 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.GetAbsentAttachmentTaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
+
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -54,15 +60,30 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
             ehrExtractStatus = handleValidGpcDocument(response, taskDefinition);
         } catch (GpConnectException e) {
             LOGGER.warn("Binary request returned an unexpected response", e);
-            ehrExtractStatus = getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition);
+
+            var gpcResponseError = getDisplayFromOperationOutcome(e.getOperationOutcome());
+
+            ehrExtractStatus = getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition, gpcResponseError);
         }
 
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
+    private Optional<String> getDisplayFromOperationOutcome(OperationOutcome operationOutcome) {
+        return Optional.ofNullable(operationOutcome)
+            .filter(oo -> oo.hasIssue() && !oo.getIssue().isEmpty())
+            .map(oo -> oo.getIssue().get(0))
+            .filter(issue -> issue.hasDetails()
+                && issue.getDetails().hasCoding()
+                && !issue.getDetails().getCoding().isEmpty())
+            .map(issue -> issue.getDetails().getCoding().get(0))
+            .filter(coding -> coding.hasDisplay() && StringUtils.isNotBlank(coding.getDisplay()))
+            .map(Coding::getDisplay);
+    }
+
     private EhrExtractStatus handleValidGpcDocument(String response, GetGpcDocumentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
-        var documentName = GpcFilenameUtils.generateDocumentFilename(
+        var storagePath = GpcFilenameUtils.generateDocumentStoragePath(
             taskDefinition.getConversationId(), taskDefinition.getDocumentId()
         );
 
@@ -72,10 +93,11 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         var storageDataWrapperWithMhsOutboundRequest = getStorageDataWrapper(
             contentAsBase64, binary.getContentType(), taskDefinition, taskId);
 
-        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
+        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, storagePath);
 
+        final var filename = DocumentReferenceUtils.buildPresentAttachmentFileName(taskDefinition.getDocumentId(), binary.getContentType());
         return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            taskDefinition, documentName, taskId, taskDefinition.getMessageId(), contentAsBase64.length(), null);
+            taskDefinition, storagePath, contentAsBase64.length(), null, filename);
     }
 
     private StorageDataWrapper getStorageDataWrapper(

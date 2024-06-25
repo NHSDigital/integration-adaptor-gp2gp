@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.mockmhsservice.configurations;
 
-import javax.jms.ConnectionFactory;
+import jakarta.jms.ConnectionFactory;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.qpid.jms.JmsConnectionFactory;

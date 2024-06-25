@@ -70,6 +70,8 @@ public class AllergyStructureMapperTest {
         + "example-allergy-intolerance-resource-20.json";
     private static final String INPUT_JSON_WITHOUT_END_DATE = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-without-endDate.json";
+    private static final String INPUT_JSON_WITHOUT_ASSERTED_DATE = TEST_FILE_DIRECTORY
+            + "example-allergy-intolerance-resource-without-assertedDate.json";
     private static final String INPUT_JSON_WITH_VALID_RECORDER_NO_ASSERTER = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-21.json";
     private static final String INPUT_JSON_WITH_INVALID_RECORDER_NO_ASSERTER = TEST_FILE_DIRECTORY
@@ -108,6 +110,8 @@ public class AllergyStructureMapperTest {
     private static final String OUTPUT_XML_USES_END_DATE = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-17.xml";
     private static final String OUTPUT_XML_USES_NO_END_DATE = TEST_FILE_DIRECTORY
         + "expected-output-allergy-structure-without-endDate.xml";
+    private static final String OUTPUT_XML_USES_NO_ASSERTED_DATE = TEST_FILE_DIRECTORY
+            + "expected-output-allergy-structure-without-assertedDate.xml";
     private static final String OUTPUT_XML_USES_RECORDER_AS_PERFORMER = TEST_FILE_DIRECTORY
         + "expected-output-allergy-structure-17.xml";
     private static final String OUTPUT_XML_USES_NO_AUTHOR_OR_PERFORMER = TEST_FILE_DIRECTORY
@@ -157,8 +161,9 @@ public class AllergyStructureMapperTest {
                 Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_ONE_NOTE, "081CE989-17CD-46C6-8C22-C90F8F2487C2"),
                 Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_TWO_NOTES, "75691D32-C7DE-4639-AA74-24B1AF61C32B"),
                 Arguments.of(INPUT_JSON_WITH_NO_RELATION_TO_CONDITION, OUTPUT_XML_USES_NO_RELATION_TO_CONDITION,"04288662-8B7A-4350-B69B-CE155E992A7C"),
-                Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NO_NAME, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER_NO_NAME)
-        );
+                Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NO_NAME, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER_NO_NAME),
+                Arguments.of(INPUT_JSON_WITHOUT_ASSERTED_DATE, OUTPUT_XML_USES_NO_ASSERTED_DATE, "2B82144D-790E-4323-A63F-F46709C6ABB0")
+          );
     }
 
     private static Stream<Arguments> resourceInvalidFileParams() {

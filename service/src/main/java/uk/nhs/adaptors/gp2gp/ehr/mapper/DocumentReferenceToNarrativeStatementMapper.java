@@ -31,7 +31,9 @@ import java.util.Optional;
 public class DocumentReferenceToNarrativeStatementMapper {
 
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
-    private static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
+    private static final String ATTACHMENT_CONTENT_TYPE_PLACEHOLDER = "CONTENT_TYPE_PLACEHOLDER_ID=";
+    private static final String ERROR_MESSAGE_TEMPLATE = "ERROR_MESSAGE_PLACEHOLDER_ID=";
+    private static final String FILENAME_TEMPLATE = "FILENAME_PLACEHOLDER_ID=";
     private static final List<String> VALID_AUTHOR_RESOURCE_TYPES = List.of("Organization", "Practitioner");
 
     private final MessageContext messageContext;
@@ -61,15 +63,9 @@ public class DocumentReferenceToNarrativeStatementMapper {
             LOGGER.info("Unsupported ContentType '{}'!", attachmentContentType);
         }
 
-        if (!isContentTypeSupported || isFileAbsent(attachment)) {
-            builder.referenceTitle(DocumentReferenceUtils.buildMissingAttachmentFileName(narrativeStatementId))
-                .comment(getComment(documentReference, attachment.getTitle()))
-                .referenceContentType(DEFAULT_ATTACHMENT_CONTENT_TYPE);
-        } else {
-            builder.referenceTitle(DocumentReferenceUtils.buildPresentAttachmentFileName(narrativeStatementId, attachmentContentType))
-                .comment(getComment(documentReference, null))
-                .referenceContentType(attachmentContentType);
-        }
+        builder.referenceTitle("${" + FILENAME_TEMPLATE + narrativeStatementId + "}")
+                .comment(getComment(documentReference, narrativeStatementId))
+                .referenceContentType("${" + ATTACHMENT_CONTENT_TYPE_PLACEHOLDER + narrativeStatementId + "}");
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
     }
@@ -95,7 +91,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
         return StringUtils.isNotBlank(attachment.getTitle());
     }
 
-    private String getComment(final DocumentReference documentReference, final String attachmentTitle) {
+    private String getComment(final DocumentReference documentReference, final String documentId) {
         StringBuilder commentBuilder = new StringBuilder();
 
         mapType(documentReference, commentBuilder);
@@ -103,8 +99,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
         mapCustodianOrg(documentReference, commentBuilder);
         mapDescription(documentReference, commentBuilder);
 
-        Optional.ofNullable(attachmentTitle)
-            .ifPresent(title -> commentBuilder.append("Absent Attachment: ").append(title).append(StringUtils.SPACE));
+        commentBuilder.append("${").append(ERROR_MESSAGE_TEMPLATE).append(documentId).append("}");
 
         mapSettings(documentReference, commentBuilder);
 

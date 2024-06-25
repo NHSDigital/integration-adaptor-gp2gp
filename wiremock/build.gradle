@@ -1,0 +1,26 @@
+apply plugin: 'java'
+apply plugin: 'application'
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation "org.wiremock:wiremock:3.7.0"
+  implementation "org.json:json:20240303"
+  implementation "com.auth0:java-jwt:4.4.0"
+  implementation "org.slf4j:slf4j-simple:2.0.13"
+}
+
+mainClassName = 'Wiremock'
+
+jar {
+  manifest {
+    attributes 'Main-Class': application.mainClass
+  }
+
+  from {
+    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

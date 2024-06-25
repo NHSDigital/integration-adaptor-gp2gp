@@ -172,7 +172,7 @@ We provide mocks of external APIs (GPC, SDS) for local development and testing.
 * Navigate to `docker`
 * `docker-compose up wiremock`
 
-The folder `docker/wiremock/stubs` describes the supported interactions.
+The folder `wiremock/stubs` and [README](wiremock/README.md) describe the supported interactions.
 
 ## How to use Mock MHS Adaptor
 
@@ -227,27 +227,10 @@ On the repository home page, navigate to **Releases** and make sure the latest r
 To create a new release within GitHub, specify a tag version to use (e.g. 0.11), and the target being the latest commit using the options available.
 Click on the `Generate release notes` button and this will list all the current changes from the recent commit.
 
-Log into **Docker Desktop** using the credentials stored within our AWS accounts Secrets Manager, secret name `nhsdev-dockerhub-credentials` in London region.
-Go to `AWS Management Console > Service Manager` then find the option `retrieve keys`
+Click "Publish Release" which will trigger a GitHub Actions job called "Push Docker Image", which will build and
+push images to DockerHub.
+
+Update the `CHANGELOG.md` file, moving the UNRELEASED entries into a line for the new release.
+Raise a PR for your changes.
 
 
-Now build the adaptor using the following commands:
-
-```shell
-git fetch
-git checkout <version tag>
-```
-Replace `<version tag>` with the version tag above. (e.g. 0.11)
-
-When running the **buildx** commands you may get an error asking you to run the following command, which you should do.
-```shell
-docker buildx create --use
-```
-
-Replace `<version>` with the version tag above. (e.g. nhsdev/nia-gp2gp-adaptor:0.11)
-
-_NOTE_ that the command may take up to 20+ minutes.
-
-```shell
-docker buildx build -f docker/service/Dockerfile . --platform linux/arm64/v8,linux/amd64 --tag nhsdev/nia-gp2gp-adaptor:<version> --push
-```

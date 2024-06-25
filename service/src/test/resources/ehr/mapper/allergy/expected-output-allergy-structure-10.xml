@@ -6,7 +6,7 @@
         <effectiveTime>
             <center value="20200724"/>
         </effectiveTime>
-        <availabilityTime value="20200724" />
+        <availabilityTime value="20200724133829"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="081CE989-17CD-46C6-8C22-C90F8F2487C2"/>
@@ -15,7 +15,7 @@
                 <effectiveTime>
                     <center value="20200724"/>
                 </effectiveTime>
-                <availabilityTime value="20200724" />
+                <availabilityTime value="20200724133829"/>
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">

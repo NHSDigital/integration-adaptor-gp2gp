@@ -117,6 +117,14 @@ public final class StatementTimeMappingUtils {
         }
     }
 
+    public static String prepareAvailabilityTimeForAllergyIntolerance(String date) {
+        if (!date.isEmpty()) {
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, date);
+        }
+
+        return DEFAULT_AVAILABILITY_TIME_VALUE;
+    }
+
     public static String prepareEffectiveTimeForMedicationRequest(MedicationRequest medicationRequest) {
         final var dispenseRequest = medicationRequest.getDispenseRequest();
         if (dispenseRequest.hasValidityPeriod() && dispenseRequest.getValidityPeriod().hasStart()) {

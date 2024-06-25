@@ -6,6 +6,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.4] - 2024-06-17
+
+### Fixed
+
+* The GPC Consumer Adaptor JWT token is now refreshed with every request to prevent expiration issues during retries and ensure continuous, uninterrupted access; previously, we were seeing the JWT expire when a request failed and retried.
+
+## [2.0.3] - 2024-05-20
+
+### Fixed
+
+- Correctly send documents which can't be fetched over GP Connect as absent attachments.
+  Previously these documents wouldn't have the correct "Content Type", or "Filename" sent according to GP2GP specification.
+  The adaptor also now sends the GP Connect error detail to the requesting practice to help diagnose the issue.
+
+## [2.0.2] - 2024-04-10
+
+### Fixed
+
+- Updated dependencies to keep adaptor secure.
+
+## [2.0.1] - 2024-02-22
+
+### Fixed
+- When mapping an `AllergyIntolerance` to an `ObservationStatement`, both the `availabilityTime` and `effectiveTime`
+  fields were previously mapped from the `onset` field and the `assertedDate` field was ignored.
+  Now, the `effectiveTime` is populated with the `onset` field, and the `availabilityTime` is populated with the
+  `assertedDate` field.
+
 ## [2.0.0] - 2024-02-19
 
 **Breaking change**: This release creates a minimum version requirement of 1.0.0 for the [GP Connect Consumer Adaptor][gpcc-adaptor].

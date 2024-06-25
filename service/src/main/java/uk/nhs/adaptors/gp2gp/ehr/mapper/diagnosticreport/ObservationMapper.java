@@ -255,8 +255,8 @@ public class ObservationMapper {
         StringBuilder interpretationTextAndComment = new StringBuilder();
 
         if (!interpretationCodeMapped && observation.hasInterpretation()) {
-            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
-                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText); });
+            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText ->
+                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText));
         }
 
         if (observation.hasComment()) {

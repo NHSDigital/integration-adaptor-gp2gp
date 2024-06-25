@@ -101,7 +101,7 @@ public class EncounterMapper {
             return messageContext
                 .getInputBundleHolder()
                 .getResource(encounter.getLocationFirstRep().getLocation().getReferenceElement())
-                .map(resource -> (Location) resource)
+                .map(Location.class::cast)
                 .map(Location::getName)
                 .orElse(StringUtils.EMPTY);
         }

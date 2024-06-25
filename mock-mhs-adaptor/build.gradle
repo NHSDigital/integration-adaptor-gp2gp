@@ -1,8 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.12'
-	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management' version '1.1.5'
 	id 'java'
-	id "io.freefair.lombok" version "6.6.3"
+	id "io.freefair.lombok" version "8.6"
 }
 
 apply plugin: 'java'
@@ -18,9 +18,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
-	implementation 'org.apache.qpid:qpid-jms-client:0.56.0'
-	implementation 'org.apache.commons:commons-lang3:3.11'
+	implementation 'org.springframework:spring-jms'
+	implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
+	implementation 'org.apache.commons:commons-lang3:3.14.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

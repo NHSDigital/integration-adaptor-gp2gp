@@ -78,4 +78,51 @@ public class EhrExtractMapperTest {
         var parameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(taskDef, bundle);
         assertThat(parameters.getAgentDirectory()).isEqualTo(NHS_NUMBER);
     }
+
+    @Test
+    public void When_BuildEhrCompositionForSkeletonEhrExtract_Expect_ExpectedComponentBuilt() {
+        var documentId = "documentId";
+
+        when(timestampService.now()).thenReturn(Instant.parse("2024-01-01T01:01:01.000Z"));
+
+        var expected = """
+                <component typeCode="COMP">
+                    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                        <id root="documentId" />
+                        <code nullFlavor="UNK"/>
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime nullFlavor="UNK"/>
+                        <availabilityTime nullFlavor="UNK" />
+                        <author>
+                            <time nullFlavor="UNK" />
+                            <agentRef>
+                                <id nullFlavor="UNK"/>
+                            </agentRef>
+                        </author>
+                        <component>
+                            <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                <id root="documentId" />
+                                <text>Skeleton statement</text>
+                                <statusCode code="COMPLETE"/>
+                                <availabilityTime value="20240101010101" />
+                                <reference typeCode="REFR">
+                                    <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                                        <id root="documentId"/>
+                                        <code code="24891000000101" displayName="EDI messages" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+                                            <originalText>Original RCMR_IN03 EhrExtract message</originalText>
+                                        </code>
+                                        <text mediaType="text/xml">
+                                            <reference value="cid:documentId"/>
+                                        </text>
+                                    </referredToExternalDocument>
+                                </reference>
+                            </NarrativeStatement>
+                        </component>
+                    </ehrComposition>
+                </component>""";
+
+        var actual = ehrExtractMapper.buildEhrCompositionForSkeletonEhrExtract(documentId);
+
+        assertThat(actual).isEqualTo(expected);
+    }
 }

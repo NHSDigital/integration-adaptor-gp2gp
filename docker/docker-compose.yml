@@ -82,12 +82,11 @@ services:
   wiremock:
     networks: 
       - commonforgp2gp
-    build: ./wiremock
+    build:
+      context: ../
+      dockerfile: docker/wiremock/Dockerfile
     ports:
       - "8110:8080"
-    command:
-      - -global-response-templating
-      - -no-request-journal
 
   integration-wiremock:
     networks:
@@ -99,7 +98,7 @@ services:
       - -global-response-templating
 
   gpcc:
-    image: nhsdev/nia-gpc-consumer-adaptor:0.3.4
+    image: nhsdev/nia-gpc-consumer-adaptor:1.0.0
     networks: 
       - commonforgp2gp
     ports:
@@ -117,6 +116,7 @@ services:
       - GPC_CONSUMER_GPC_GET_DOCUMENT_PATH
       - GPC_CONSUMER_SDS_URL
       - GPC_CONSUMER_SDS_APIKEY
+      - GPC_SUPPLIER_ODS_CODE
 
   gpconnect-db:
     image: mariadb:10.8.2

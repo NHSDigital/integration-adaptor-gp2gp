@@ -140,7 +140,7 @@ public class ImmunizationObservationStatementMapper {
     private String buildLocationPertinentInformation(Immunization immunization) {
         if (immunization.hasLocation()) {
             return messageContext.getInputBundleHolder().getResource(immunization.getLocation().getReferenceElement())
-                .map(resource -> (Location) resource)
+                .map(Location.class::cast)
                 .map(value -> LOCATION + value.getName())
                 .orElse(StringUtils.EMPTY);
         }
@@ -151,7 +151,7 @@ public class ImmunizationObservationStatementMapper {
     private String buildManufacturerPertinentInformation(Immunization immunization) {
         if (immunization.hasManufacturer()) {
             return messageContext.getInputBundleHolder().getResource(immunization.getManufacturer().getReferenceElement())
-                .map(resource -> (Organization) resource)
+                .map(Organization.class::cast)
                 .map(value -> MANUFACTURER + value.getName())
                 .orElse(StringUtils.EMPTY);
         }
@@ -225,7 +225,7 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildExplanationPertinentInformation(Immunization immunization) {
-        Optional<String> explanation;
+
         if (immunization.hasExplanation() && immunization.getExplanation().hasReason()) {
             String reasonGiven = immunization.getExplanation().getReason().stream()
                 .map(CodeableConceptMappingUtils::extractTextOrCoding)

@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
 import java.util.List;
@@ -19,6 +18,7 @@ import org.hl7.fhir.dstu3.model.StringType;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 
 public class AllergyStructureExtractor {
+
     private static final String ALLERGY_REASON_ENDED = "Reason Ended: ";
     private static final String ALLERGY_REASON_END_URL = "reasonEnded";
     private static final String ALLERGY_END_DATE_URL = "endDate";
@@ -55,6 +55,13 @@ public class AllergyStructureExtractor {
     public static String extractOnsetDate(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasOnset() && allergyIntolerance.getOnsetDateTimeType().hasValue()) {
             return toHl7Format(allergyIntolerance.getOnsetDateTimeType());
+        }
+        return StringUtils.EMPTY;
+    }
+
+    public static String extractAssertedDate(AllergyIntolerance allergyIntolerance) {
+        if (allergyIntolerance.hasAssertedDateElement() && allergyIntolerance.getAssertedDateElement().hasValue()) {
+            return toHl7Format(allergyIntolerance.getAssertedDateElement());
         }
         return StringUtils.EMPTY;
     }

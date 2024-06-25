@@ -29,11 +29,11 @@ public class EhrStatusRequestsService extends EhrStatusBaseService {
 
         var updatedAtQueryCriteria = new Criteria();
         updatedAtQueryCriteria = Criteria.where("updatedAt");
-        if (!(requestQuery.getFromDateTime() == null)) {
+        if (requestQuery.getFromDateTime() != null) {
             updatedAtQueryCriteria = updatedAtQueryCriteria.gte(requestQuery.getFromDateTime());
         }
 
-        if (!(requestQuery.getToDateTime() == null)) {
+        if (requestQuery.getToDateTime() != null) {
             updatedAtQueryCriteria = updatedAtQueryCriteria.lte(requestQuery.getToDateTime());
         }
 
@@ -41,19 +41,19 @@ public class EhrStatusRequestsService extends EhrStatusBaseService {
             query.addCriteria(updatedAtQueryCriteria);
         }
 
-        if (!(requestQuery.getFromAsid() == null)) {
+        if (requestQuery.getFromAsid() != null) {
             query.addCriteria(Criteria.where("ehrRequest.fromAsid").is(requestQuery.getFromAsid()));
         }
 
-        if (!(requestQuery.getToAsid() == null)) {
+        if (requestQuery.getToAsid() != null) {
             query.addCriteria(Criteria.where("ehrRequest.toAsid").is(requestQuery.getToAsid()));
         }
 
-        if (!(requestQuery.getFromOdsCode() == null)) {
+        if (requestQuery.getFromOdsCode() != null) {
             query.addCriteria(Criteria.where("ehrRequest.fromOdsCode").is(requestQuery.getFromOdsCode()));
         }
 
-        if (!(requestQuery.getToOdsCode() == null)) {
+        if (requestQuery.getToOdsCode() != null) {
             query.addCriteria(Criteria.where("ehrRequest.toOdsCode").is(requestQuery.getToOdsCode()));
         }
 

@@ -6825,9 +6825,9 @@
                     <effectiveTime>
                         <center value="20100113"/>
                     </effectiveTime>
-                    <availabilityTime value="20100113"/>
+                    <availabilityTime value="20100113145710"/>
                     <author typeCode="AUT" contextControlCode="OP">
-                        <time value="20100113" />
+                        <time value="20100113145710" />
                         <agentRef classCode="AGNT">
                             <id root="test-id-3" />
                         </agentRef>
@@ -6845,7 +6845,7 @@
                             <effectiveTime>
                                 <center value="20100113"/>
                             </effectiveTime>
-                            <availabilityTime value="20100113" />
+                            <availabilityTime value="20100113145710"/>
                             <component typeCode="COMP" contextConductionInd="true">
                                 <ObservationStatement classCode="OBS" moodCode="ENV">
                                     <id root="test-id-3"/>
@@ -6854,7 +6854,7 @@
                                     <effectiveTime>
                                         <center value="20100113"/>
                                     </effectiveTime>
-                                    <availabilityTime value="20100113" />
+                                    <availabilityTime value="20100113145710"/>
                                     <pertinentInformation typeCode="PERT">
                                         <sequenceNumber value="+1"/>
                                         <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -6885,9 +6885,9 @@
                     <effectiveTime>
                         <center value="20100113"/>
                     </effectiveTime>
-                    <availabilityTime value="20100113"/>
+                    <availabilityTime value="20100113140445"/>
                     <author typeCode="AUT" contextControlCode="OP">
-                        <time value="20100113" />
+                        <time value="20100113140445" />
                         <agentRef classCode="AGNT">
                             <id root="test-id-3" />
                         </agentRef>
@@ -6905,7 +6905,7 @@
                             <effectiveTime>
                                 <center value="20100113"/>
                             </effectiveTime>
-                            <availabilityTime value="20100113" />
+                            <availabilityTime value="20100113140445"/>
                             <component typeCode="COMP" contextConductionInd="true">
                                 <ObservationStatement classCode="OBS" moodCode="ENV">
                                     <id root="test-id-3"/>
@@ -6914,7 +6914,7 @@
                                     <effectiveTime>
                                         <center value="20100113"/>
                                     </effectiveTime>
-                                    <availabilityTime value="20100113" />
+                                    <availabilityTime value="20100113140445"/>
                                     <pertinentInformation typeCode="PERT">
                                         <sequenceNumber value="+1"/>
                                         <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -6945,9 +6945,9 @@
                     <effectiveTime>
                         <center value="20100113"/>
                     </effectiveTime>
-                    <availabilityTime value="20100113"/>
+                    <availabilityTime value="20100113114126"/>
                     <author typeCode="AUT" contextControlCode="OP">
-                        <time value="20100113" />
+                        <time value="20100113114126" />
                         <agentRef classCode="AGNT">
                             <id root="test-id-3" />
                         </agentRef>
@@ -6965,7 +6965,7 @@
                             <effectiveTime>
                                 <center value="20100113"/>
                             </effectiveTime>
-                            <availabilityTime value="20100113" />
+                            <availabilityTime value="20100113114126"/>
                             <component typeCode="COMP" contextConductionInd="true">
                                 <ObservationStatement classCode="OBS" moodCode="ENV">
                                     <id root="test-id-3"/>
@@ -6974,7 +6974,7 @@
                                     <effectiveTime>
                                         <center value="20100113"/>
                                     </effectiveTime>
-                                    <availabilityTime value="20100113" />
+                                    <availabilityTime value="20100113114126"/>
                                     <pertinentInformation typeCode="PERT">
                                         <sequenceNumber value="+1"/>
                                         <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -7005,9 +7005,9 @@
                     <effectiveTime>
                         <center value="20100113"/>
                     </effectiveTime>
-                    <availabilityTime value="20100113"/>
+                    <availabilityTime value="20100113113756"/>
                     <author typeCode="AUT" contextControlCode="OP">
-                        <time value="20100113" />
+                        <time value="20100113113756" />
                         <agentRef classCode="AGNT">
                             <id root="test-id-3" />
                         </agentRef>
@@ -7025,7 +7025,7 @@
                             <effectiveTime>
                                 <center value="20100113"/>
                             </effectiveTime>
-                            <availabilityTime value="20100113" />
+                            <availabilityTime value="20100113113756"/>
                             <component typeCode="COMP" contextConductionInd="true">
                                 <ObservationStatement classCode="OBS" moodCode="ENV">
                                     <id root="test-id-3"/>
@@ -7034,7 +7034,7 @@
                                     <effectiveTime>
                                         <center value="20100113"/>
                                     </effectiveTime>
-                                    <availabilityTime value="20100113" />
+                                    <availabilityTime value="20100113113756"/>
                                     <pertinentInformation typeCode="PERT">
                                         <sequenceNumber value="+1"/>
                                         <pertinentAnnotation classCode="OBS" moodCode="EVN">

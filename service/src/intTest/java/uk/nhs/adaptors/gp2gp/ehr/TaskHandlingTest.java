@@ -12,8 +12,8 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 
-import javax.jms.Message;
-import javax.jms.Session;
+import jakarta.jms.Message;
+import jakarta.jms.Session;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -126,7 +126,7 @@ public class TaskHandlingTest {
     @SneakyThrows
     public void When_ProcessIsAlreadyFailed_Expect_NonNackTaskToBeAborted() {
         mockSendEhExtractCoreTaskMessage();
-        EhrExtractStatus ehrExtractStatus = createEhrExtractStatusInDb(true);
+        createEhrExtractStatusInDb(true);
         var initialDbExtract = readEhrExtractStatusFromDb();
 
         assertThat(initialDbExtract.getError()).isNotNull();

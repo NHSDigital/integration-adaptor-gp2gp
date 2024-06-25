@@ -15,6 +15,9 @@ import java.util.List;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 public class EhrExtractStatusTestUtils {
+
+    public static final int CONTENT_LENGTH = 123456;
+
     public static EhrExtractStatus prepareEhrExtractStatus() {
         return prepareEhrExtractStatus(CONVERSATION_ID);
     }
@@ -74,6 +77,7 @@ public class EhrExtractStatusTestUtils {
                     .documentId(documentId)
                     .objectName(DOCUMENT_NAME)
                     .contentType(DOCUMENT_CONTENT_TYPE)
+                    .contentLength(CONTENT_LENGTH)
                     .accessDocumentUrl(String.format(GPC_ACCESS_DOCUMENT_URL, documentId))
                     .build()
             )).build();

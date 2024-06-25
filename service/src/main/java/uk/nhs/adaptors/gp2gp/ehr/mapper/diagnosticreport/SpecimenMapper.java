@@ -172,10 +172,10 @@ public class SpecimenMapper {
             collection.getExtensionsByUrl(FASTING_STATUS_URL).stream().findFirst()
                 .ifPresent(extension -> {
                     Type value = extension.getValue();
-                    if (value instanceof CodeableConcept) {
-                        specimenNarrativeStatementCommentBuilder.fastingStatus((CodeableConcept) value);
-                    } else if (value instanceof Duration) {
-                        specimenNarrativeStatementCommentBuilder.fastingDuration((Duration) value);
+                    if (value instanceof CodeableConcept codeableConcept) {
+                        specimenNarrativeStatementCommentBuilder.fastingStatus(codeableConcept);
+                    } else if (value instanceof Duration duration) {
+                        specimenNarrativeStatementCommentBuilder.fastingDuration(duration);
                     }
                 });
 

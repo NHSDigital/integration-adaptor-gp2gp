@@ -122,14 +122,15 @@ public class TransformJsonToXml implements CommandLineRunner {
 
             GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
+            String gp2gptest = "GP2GPTEST";
             getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
                 .nhsNumber(extractNhsNumber(jsonAsStringInput))
                 .conversationId("6910A49D-1F97-4AA0-9C69-197EE9464C76")
                 .requestId("17A3A644-A4EB-4C0A-A870-152D310FD1F8")
-                .fromOdsCode("GP2GPTEST")
-                .toOdsCode("GP2GPTEST")
-                .toAsid("GP2GPTEST")
-                .fromAsid("GP2GPTEST")
+                .fromOdsCode(gp2gptest)
+                .toOdsCode(gp2gptest)
+                .toAsid(gp2gptest)
+                .fromAsid(gp2gptest)
                 .build();
 
             final EhrExtractTemplateParameters ehrExtractTemplateParameters =

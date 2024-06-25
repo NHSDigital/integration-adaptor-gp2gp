@@ -29,6 +29,7 @@ Each scenario below can be retrieved by requesting the associated NHS Number spe
 - [No Documents](stubs/__files/correctPatientNoDocsStructuredRecordResponse.json) 9690937294
 - [1 Absent Attachment](stubs/__files/correctPatientStructuredRecordResponseAbsentAttachment.json) 9690937286
 - [3 Absent Attachments](stubs/__files/correctPatientStructuredRecordResponse3AbsentAttachmentDocuments.json) 9690937419
+- [3 Attachments with 2 Absent](stubs/__files/correctPatientStructuredRecordResponse3AttachmentsWith2Absent.json) 9690939911
 - [With three 10Kb .doc files](stubs/__files/correctPatientStructuredRecordResponse3NormalDocuments.json) 9690937420
 - [With one 20Kb document](stubs/__files/correctPatientStructuredRecordResponseForLargeDocs.json) 9690937819
 - [With one 40Kb document](stubs/__files/correctPatientStructuredRecordResponseForLargeDocs2.json) 9690937841
@@ -55,12 +56,47 @@ The `migratestructuredrecord` endpoint will also respond to unknown NHS Numbers,
 by default returning a NOT FOUND response, but can also be set up to reply with
 a valid patient record.
 
+Wiremock can also be configured to fetch patient information (name, dob, address)
+from the PDS Application-Restricted FHIR API.
+
+Using the [authentication guidance], you'll need to provide the following environment variables:
+
+- PDS_KEY_ID - "Key Identifier" from Step 2
+- PDS_API_KEY - "API Key" from Step 1
+- PDS_PRIVATE_KEY - "Private key" from Step 2, as a string without whitespace, and the "---" header and footers removed.
+
+[authentication guidance]: https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication
+
 ### Changing the default record
+
+To change the patient record returned to be [Internal Server Error](stubs/__files/operationOutcomeInternalServerError.json):
+
+```shell
+curl --request PUT --data '{"state": "Internal Server Error"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+```
 
 To change the patient record returned to be [No Documents](stubs/__files/correctPatientNoDocsStructuredRecordResponse.json):
 
 ```shell
 curl --request PUT --data '{"state": "No Documents"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+```
+
+To change the patient record returned to be [Large Patient Record](stubs/__files/correctPatientStructuredRecordLargePayload.json):
+
+```shell
+curl --request PUT --data '{"state": "Large Patient Record"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+```
+
+To change the patient record returned to have different Absent Attachment scenarios [Absent Attachments](stubs/__files/correctPatientStructuredRecordResponseAbsentAttachments.json):
+
+```shell
+curl --request PUT --data '{"state": "Absent Attachments"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
+```
+
+To change the patient record returned to have 100 3.5MB = 350MB total attachments scenarios [350MBDocuments](stubs/__files/correctPatientStructuredRecordResponse350MBDocuments.json):
+
+```shell
+curl --request PUT --data '{"state": "350MB Attachments"}' http://localhost:8110/__admin/scenarios/migrateStructuredRecord/state
 ```
 
 To change the patient record returned to be NOT FOUND:

@@ -47,8 +47,8 @@ public class CustomTrustStore {
         trustManagerFactory.init((KeyStore) null);
 
         for (TrustManager trustManager : trustManagerFactory.getTrustManagers()) {
-            if (trustManager instanceof X509TrustManager) {
-                return (X509TrustManager) trustManager;
+            if (trustManager instanceof X509TrustManager x509TrustManager) {
+                return x509TrustManager;
             }
         }
         throw new IllegalStateException("Cannot find trust manager");
@@ -70,8 +70,8 @@ public class CustomTrustStore {
         }
 
         for (TrustManager trustManager : trustManagerFactory.getTrustManagers()) {
-            if (trustManager instanceof X509TrustManager) {
-                return (X509TrustManager) trustManager;
+            if (trustManager instanceof X509TrustManager x509TrustManager) {
+                return x509TrustManager;
             }
         }
         throw new IllegalStateException("Cannot find trust manager");

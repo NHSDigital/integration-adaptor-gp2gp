@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractOnsetDate;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractReaction;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractAssertedDate;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 
@@ -95,24 +96,24 @@ public class AllergyStructureMapper {
 
     private String buildCode(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasClinicalStatus()) {
-            if (RESOLVED_CLINICAL_STATUS.equals(allergyIntolerance.getClinicalStatus().toCode())) {
-                if (allergyIntolerance.hasCode()) {
-                    var category = allergyIntolerance.getCategory()
-                        .stream()
-                        .map(PrimitiveType::getValueAsString)
-                        .filter(value -> value.equals(ENVIRONMENT_CATEGORY) || value.equals(MEDICATION_CATEGORY))
-                        .findFirst()
-                        .orElse(StringUtils.EMPTY);
+            if (RESOLVED_CLINICAL_STATUS.equals(allergyIntolerance.getClinicalStatus().toCode())
+                && allergyIntolerance.hasCode()) {
 
-                    if (category.equals(ENVIRONMENT_CATEGORY)) {
-                        return codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(allergyIntolerance.getCode(),
-                            allergyIntolerance.getClinicalStatus());
-                    } else if (category.equals(MEDICATION_CATEGORY)) {
-                        return codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(allergyIntolerance.getCode(),
-                            allergyIntolerance.getClinicalStatus());
-                    } else {
-                        throw new EhrMapperException("Category could not be mapped");
-                    }
+                var category = allergyIntolerance.getCategory()
+                    .stream()
+                    .map(PrimitiveType::getValueAsString)
+                    .filter(value -> value.equals(ENVIRONMENT_CATEGORY) || value.equals(MEDICATION_CATEGORY))
+                    .findFirst()
+                    .orElse(StringUtils.EMPTY);
+
+                if (category.equals(ENVIRONMENT_CATEGORY)) {
+                    return codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(allergyIntolerance.getCode(),
+                        allergyIntolerance.getClinicalStatus());
+                } else if (category.equals(MEDICATION_CATEGORY)) {
+                    return codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(allergyIntolerance.getCode(),
+                        allergyIntolerance.getClinicalStatus());
+                } else {
+                    throw new EhrMapperException("Category could not be mapped");
                 }
             }
             if (allergyIntolerance.hasCode()) {
@@ -124,11 +125,10 @@ public class AllergyStructureMapper {
     }
 
     private String buildAvailabilityTime(AllergyIntolerance allergyIntolerance) {
-        return Optional.of(allergyIntolerance)
-            .filter(AllergyIntolerance::hasOnsetDateTimeType)
-            .map(AllergyIntolerance::getOnsetDateTimeType)
-            .map(DateFormatUtil::toHl7Format)
-            .orElse(StringUtils.EMPTY);
+
+        var availabilityTime = extractAssertedDate(allergyIntolerance);
+
+        return StatementTimeMappingUtils.prepareAvailabilityTimeForAllergyIntolerance(availabilityTime);
     }
 
     private String buildEffectiveTime(AllergyIntolerance allergyIntolerance) {
