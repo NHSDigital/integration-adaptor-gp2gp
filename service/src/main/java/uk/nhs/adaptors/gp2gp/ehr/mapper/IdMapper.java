@@ -21,12 +21,11 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 /**
  * There exists no requirement within GP Connect FHIR specification that the `IdType`
  * field is populated with a UUID.
- * The GP2GP HL7 specification however does mandate that DCE UUIDs are used within the
+ * The GP2GP HL7 specification, however, does mandate that DCE UUIDs are used within the
  * Instance Identifier field.
- *
- * This class generates UUIDs for use within HL7, and maintains a mapping between FHIR
- * resource and UUID such that the same FHIR resource reference gets assigned the same
- * UUID.
+ * This class generates UUIDs when a non-UUID id is provided, otherwise preserving the id, for use within HL7.
+ * It also maintains a mapping between FHIR resource and UUID such that the same FHIR resource reference
+ * gets assigned the same UUID.
  */
 @Slf4j
 @AllArgsConstructor
@@ -39,23 +38,43 @@ public class IdMapper {
         ResourceType.PractitionerRole.name());
 
     public String getOrNew(ResourceType resourceType, IdType id) {
-        return getOrNew(buildReference(resourceType, id), true);
+        return getOrNew(resourceType, id, true);
     }
 
     public String newId(ResourceType unmappedResource, IdType id) {
-        return getOrNew(buildReference(unmappedResource, id), false);
+        return getOrNew(unmappedResource, id, false);
     }
 
     public String getOrNew(Reference reference) {
-        return getOrNew(reference, false);
+        return getOrNewFromReference(reference);
     }
 
-    public String getOrNew(Reference reference, Boolean isResourceMapped) {
+    public String getOrNewFromReference(Reference reference) {
         if (NOT_ALLOWED.contains(reference.getReferenceElement().getResourceType())) {
             throw new EhrMapperException("Not allowed to use agent-related resource with IdMapper");
         }
 
-        MappedId defaultResourceId = new MappedId(randomIdGeneratorService.createNewId(), isResourceMapped);
+        var referenceId = reference.getReferenceElement().getIdPart();
+
+        var id = randomIdGeneratorService.createNewOrUseExistingUUID(referenceId);
+
+        MappedId defaultResourceId = new MappedId(id, false);
+        MappedId mappedId = ids.getOrDefault(reference.getReference(), defaultResourceId);
+
+        ids.put(reference.getReference(), mappedId);
+
+        return mappedId.getId();
+    }
+
+    public String getOrNew(ResourceType resourceType, IdType id, Boolean isResourceMapped) {
+        var reference = buildReference(resourceType, id);
+        if (NOT_ALLOWED.contains(reference.getReferenceElement().getResourceType())) {
+            throw new EhrMapperException("Not allowed to use agent-related resource with IdMapper");
+        }
+
+        var calculatedId = randomIdGeneratorService.createNewOrUseExistingUUID(id.getIdPart());
+
+        MappedId defaultResourceId = new MappedId(calculatedId, isResourceMapped);
         MappedId mappedId = ids.getOrDefault(reference.getReference(), defaultResourceId);
 
         if (isResourceMapped) {
@@ -103,7 +122,7 @@ public class IdMapper {
     @Getter
     @Setter
     @AllArgsConstructor
-    private static class MappedId {
+    private static final class MappedId {
         private String id;
         private boolean isResourceMapped;
     }

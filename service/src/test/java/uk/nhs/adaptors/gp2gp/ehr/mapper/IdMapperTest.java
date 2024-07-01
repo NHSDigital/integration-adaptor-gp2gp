@@ -1,137 +1,313 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
-import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import static org.mockito.ArgumentMatchers.any;
 
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
+import java.util.UUID;
+
 @ExtendWith(MockitoExtension.class)
 public class IdMapperTest {
-    private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
     private IdMapper idMapper;
+
+    @Mock
+    private static RandomIdGeneratorService mockRandomIdGeneratorService;
+
+    private static final String NON_UUID_ID = "THIS-IS-NOT-A-UUID";
 
     @BeforeEach
     public void setUp() {
-        idMapper = new IdMapper(randomIdGeneratorService);
+        idMapper = new IdMapper(mockRandomIdGeneratorService);
     }
 
     @Test
-    public void When_FetchingSameIdTwiceForTheSameResource_Expect_SameMappedIdReturned() {
-        String fhirId = randomIdGeneratorService.createNewId();
+    public void When_FetchingSameIdTwiceForTheSameResourceAndIdIsUUID_Expect_SameMappedIdReturned() {
+        String id = UUID.randomUUID().toString().toUpperCase();
 
-        String mappedId = idMapper.getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, fhirId));
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(id)).thenReturn(id);
 
-        assertThat(idMapper.getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, fhirId))).isEqualTo(mappedId);
+        var firstMappedId = idMapper
+            .getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, id));
+        var secondMappedId = idMapper
+            .getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, id));
+
+        assertAll(
+            () -> assertThat(firstMappedId)
+                .isNotNull(),
+            () -> assertThat(firstMappedId)
+                .isEqualTo(secondMappedId)
+        );
     }
 
     @Test
-    public void When_FetchingTwoDifferentIdsForTheSameResource_Expect_NewMappedIdsReturned() {
-        String firstFhirId = randomIdGeneratorService.createNewId();
-        String secondFhirId = randomIdGeneratorService.createNewId();
+    public void When_FetchingSameIdTwiceForTheSameResourceAndIdIsNotUUID_Expect_SameMappedIdReturned() {
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(NON_UUID_ID))
+            .thenReturn(UUID.randomUUID().toString().toUpperCase());
 
-        String firstMappedId = idMapper.getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, firstFhirId));
-        String secondMappedId = idMapper.getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, secondFhirId));
+        var firstMappedId = idMapper
+            .getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, NON_UUID_ID));
+        var secondMappedId = idMapper
+            .getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, NON_UUID_ID));
 
-        assertThat(firstMappedId).isNotEqualTo(secondMappedId);
+        assertAll(
+            () -> assertThat(firstMappedId)
+                .isNotNull(),
+            () -> assertThat(firstMappedId)
+                .isEqualTo(secondMappedId)
+        );
+    }
+
+    @Test
+    public void When_FetchingTwoDifferentIdsForTheSameResourceAndIdIsUUID_Expect_NewMappedIdsReturned() {
+        String firstId = UUID.randomUUID().toString().toUpperCase();
+        String secondId = UUID.randomUUID().toString().toUpperCase();
+
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(any()))
+            .thenReturn(firstId, secondId);
+
+        String firstMappedId = idMapper
+            .getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, firstId));
+        String secondMappedId = idMapper
+            .getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, secondId));
+
+        assertAll(
+            () -> assertThat(firstMappedId)
+                .isNotNull(),
+            () -> assertThat(secondMappedId)
+                .isNotNull(),
+            () -> assertThat(firstMappedId)
+                .isEqualTo(firstId),
+            () -> assertThat(secondMappedId)
+                .isEqualTo(secondId)
+        );
+    }
+
+    @Test
+    public void When_FetchingTwoDifferentIdsForTheSameResourceAndIdIsNotUUID_Expect_NewMappedIdsReturned() {
+        String firstId = UUID.randomUUID().toString().toUpperCase();
+        String secondId = UUID.randomUUID().toString().toUpperCase();
+
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(anyString()))
+            .thenReturn(firstId, secondId);
+
+        String firstMappedId = idMapper
+            .getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, NON_UUID_ID));
+        String secondMappedId = idMapper
+            .getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, NON_UUID_ID + "1"));
+
+        assertAll(
+            () -> assertThat(firstMappedId)
+                .isNotNull(),
+            () -> assertThat(secondMappedId)
+                .isNotNull(),
+            () -> assertThat(firstMappedId)
+                .isEqualTo(firstId),
+            () -> assertThat(secondMappedId)
+                .isEqualTo(secondId)
+        );
     }
 
     @Test
     public void When_FetchingSameIdForDifferentResources_Expect_NewMappedIdsReturned() {
-        String sameFhirId = randomIdGeneratorService.createNewId();
+        var firstId = UUID.randomUUID().toString().toUpperCase();
+        var secondId = UUID.randomUUID().toString().toUpperCase();
 
-        String firstMappedId = idMapper.getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, sameFhirId));
-        String secondMappedId = idMapper.getOrNew(ResourceType.Encounter, buildIdType(ResourceType.Encounter, sameFhirId));
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(NON_UUID_ID))
+            .thenReturn(firstId, secondId);
 
-        assertThat(firstMappedId).isNotEqualTo(secondMappedId);
+        String firstMappedId = idMapper
+            .getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, NON_UUID_ID));
+        String secondMappedId = idMapper
+            .getOrNew(ResourceType.Encounter, buildIdType(ResourceType.Encounter, NON_UUID_ID));
+
+        assertAll(
+            () -> assertThat(firstMappedId)
+                .isNotNull(),
+            () -> assertThat(secondMappedId)
+                .isNotNull(),
+            () -> assertThat(firstMappedId)
+                .isNotEqualTo(NON_UUID_ID),
+            () -> assertThat(secondMappedId)
+                .isNotEqualTo(NON_UUID_ID),
+            () -> assertThat(firstMappedId)
+                .isNotEqualTo(secondMappedId)
+        );
     }
 
     @Test
-    public void When_FetchingSameIdTwiceForTheSameResourceReference_Expect_SameMappedIdReturned() {
-        String fhirId = randomIdGeneratorService.createNewId();
+    public void When_FetchingSameIdTwiceForTheSameUUIDResourceReference_Expect_SameMappedIdReturned() {
+        var id = UUID.randomUUID().toString().toUpperCase();
+        var reference = new Reference(buildIdType(ResourceType.Appointment, id));
 
-        Reference reference = new Reference(buildIdType(ResourceType.Appointment, fhirId));
-        String mappedId = idMapper.getOrNew(reference);
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(id))
+            .thenReturn(id);
 
-        assertThat(idMapper.getOrNew(reference)).isEqualTo(mappedId);
+        var firstMappedId = idMapper.getOrNew(reference);
+        var secondMappedId = idMapper.getOrNew(reference);
+
+        assertThat(firstMappedId).isEqualTo(secondMappedId);
     }
 
     @Test
-    public void When_FetchingTwoDifferentIdsForTheSameResourceReference_Expect_NewMappedIdsReturned() {
-        String firstFhirId = randomIdGeneratorService.createNewId();
-        String secondFhirId = randomIdGeneratorService.createNewId();
+    public void When_FetchingSameIdTwiceForTheSameNonUUIDResourceReference_Expect_SameMappedIdReturned() {
+        var firstId = UUID.randomUUID().toString().toUpperCase();
+        var secondId = UUID.randomUUID().toString().toUpperCase();
+        var reference = new Reference(buildIdType(ResourceType.Appointment, NON_UUID_ID));
 
-        Reference firstReference = new Reference(buildIdType(ResourceType.Appointment, firstFhirId));
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(NON_UUID_ID))
+            .thenReturn(firstId, secondId);
+
+        var firstMappedId = idMapper.getOrNew(reference);
+        var secondMappedId = idMapper.getOrNew(reference);
+
+        assertAll(
+            () -> assertThat(firstMappedId)
+                .isNotNull(),
+            () -> assertThat(firstMappedId)
+                .isNotEqualTo(NON_UUID_ID),
+            () -> assertThat(firstMappedId)
+                .isEqualTo(secondMappedId)
+        );
+    }
+
+
+    @Test
+    public void When_FetchingTwoDifferentIdsForTheSameUUIDResourceReference_Expect_NewMappedIdsReturned() {
+        String firstId = UUID.randomUUID().toString().toUpperCase();
+        String secondId = UUID.randomUUID().toString().toUpperCase();
+        Reference firstReference = new Reference(buildIdType(ResourceType.Appointment, firstId));
+        Reference secondReference = new Reference(buildIdType(ResourceType.Appointment, secondId));
+
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(anyString()))
+            .thenReturn(firstId, secondId);
+
         String firstMappedId = idMapper.getOrNew(firstReference);
-
-        Reference secondReference = new Reference(buildIdType(ResourceType.Appointment, secondFhirId));
         String secondMappedId = idMapper.getOrNew(secondReference);
 
-        assertThat(firstMappedId).isNotEqualTo(secondMappedId);
+        assertAll(
+            () -> assertThat(firstMappedId)
+                .isEqualTo(firstId),
+            () -> assertThat(secondMappedId)
+                .isEqualTo(secondId)
+        );
     }
 
     @Test
-    public void When_FetchingSameIdForDifferentResourcesReference_Expect_NewMappedIdsReturned() {
-        String sameFhirId = randomIdGeneratorService.createNewId();
+    public void When_FetchingTwoDifferentIdsForTheSameNonUUIDResourceReference_Expect_NewMappedIdsReturned() {
+        String firstId = UUID.randomUUID().toString().toUpperCase();
+        String secondId = UUID.randomUUID().toString().toUpperCase();
+        Reference firstReference = new Reference(buildIdType(ResourceType.Appointment, NON_UUID_ID));
+        Reference secondReference = new Reference(buildIdType(ResourceType.Appointment, NON_UUID_ID + "1"));
 
-        Reference firstReference = new Reference(buildIdType(ResourceType.Appointment, sameFhirId));
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(anyString()))
+            .thenReturn(firstId, secondId);
+
         String firstMappedId = idMapper.getOrNew(firstReference);
-
-        Reference secondReference = new Reference(buildIdType(ResourceType.Encounter, sameFhirId));
         String secondMappedId = idMapper.getOrNew(secondReference);
 
-        assertThat(firstMappedId).isNotEqualTo(secondMappedId);
+        assertAll(
+            () -> assertThat(firstMappedId)
+                .isEqualTo(firstId),
+            () -> assertThat(secondMappedId)
+                .isEqualTo(secondId)
+        );
     }
 
     @Test
-    public void When_GettingExtantId_Expect_ExtantIdReturned() {
-        final String id = randomIdGeneratorService.createNewId();
-        IdType idType = buildIdType(ResourceType.Person, id);
-        final String expected = idMapper.getOrNew(ResourceType.Person, idType);
+    public void When_FetchingSameIdForDifferentNonUUIDResourcesReference_Expect_NewMappedIdsReturned() {
+        String firstId = UUID.randomUUID().toString().toUpperCase();
+        String secondId = UUID.randomUUID().toString().toUpperCase();
+        Reference firstReference = new Reference(buildIdType(ResourceType.Appointment, NON_UUID_ID));
+        Reference secondReference = new Reference(buildIdType(ResourceType.Encounter, NON_UUID_ID));
 
-        final String actual = idMapper.get(ResourceType.Person, idType);
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(anyString()))
+            .thenReturn(firstId, secondId);
 
-        assertThat(actual).isEqualTo(expected);
+        String firstMappedId = idMapper.getOrNew(firstReference);
+        String secondMappedId = idMapper.getOrNew(secondReference);
+
+        assertAll(
+            () -> assertThat(firstMappedId)
+                .isEqualTo(firstId),
+            () -> assertThat(secondMappedId)
+                .isEqualTo(secondId)
+        );
+    }
+
+    @Test
+    public void When_GettingExistingId_Expect_ExistingIdReturned() {
+        var id = UUID.randomUUID().toString().toUpperCase();
+
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(anyString()))
+            .thenReturn(id);
+
+        var firstMappedId = idMapper.getOrNew(ResourceType.Person, buildIdType(ResourceType.Person, id));
+        var secondMappedId = idMapper.get(ResourceType.Person, buildIdType(ResourceType.Person, id));
+
+        assertAll(
+            () -> assertThat(firstMappedId)
+                .isEqualTo(id),
+            () -> assertThat(secondMappedId)
+                .isEqualTo(firstMappedId),
+            () -> verify(mockRandomIdGeneratorService, times(1))
+                .createNewOrUseExistingUUID(anyString())
+        );
     }
 
     @Test
     public void When_GettingMissingResourceType_Expect_Exception() {
-        final String id = randomIdGeneratorService.createNewId();
-        IdType idType = buildIdType(ResourceType.Person, id);
+        var id = UUID.randomUUID().toString().toUpperCase();
 
-        assertThrows(EhrMapperException.class, () -> idMapper.get(ResourceType.Person, idType));
+        assertThrows(
+            EhrMapperException.class,
+            () -> idMapper.get(ResourceType.Person, buildIdType(ResourceType.Person, id)));
     }
 
     @Test
     public void When_GettingIdForResourceMapping_Expect_HasBeenMappedReturnedTrue() {
-        final String id = randomIdGeneratorService.createNewId();
-        final IdType idType = buildIdType(ResourceType.Person, id);
-        final Reference reference = new Reference(idType);
+        var id = UUID.randomUUID().toString().toUpperCase();
+        var reference = new Reference(buildIdType(ResourceType.Person, id));
 
-        idMapper.getOrNew(ResourceType.Person, idType);
+        idMapper.getOrNew(ResourceType.Person, buildIdType(ResourceType.Person, id));
 
-        assertThat(idMapper.hasIdBeenMapped(reference)).isTrue();
-        assertThat(idMapper.hasIdBeenMapped(ResourceType.Person, idType)).isTrue();
+        assertAll(
+            () -> assertThat(idMapper.hasIdBeenMapped(reference))
+                .isTrue(),
+            () -> assertThat(idMapper.hasIdBeenMapped(ResourceType.Person, buildIdType(ResourceType.Person, id)))
+                .isTrue()
+        );
     }
 
     @Test
     public void When_GettingIdForReferenceMapping_Expect_HasBeenMappedReturnedFalse() {
-        final String id = randomIdGeneratorService.createNewId();
-        final Reference reference = new Reference(buildIdType(ResourceType.Person, id));
+        var id = UUID.randomUUID().toString().toUpperCase();
+        var reference = new Reference(buildIdType(ResourceType.Person, id));
 
         idMapper.getOrNew(reference);
 
-        assertThat(idMapper.hasIdBeenMapped(reference)).isFalse();
-        assertThat(idMapper.hasIdBeenMapped(ResourceType.Person, buildIdType(ResourceType.Person, id))).isFalse();
+        assertAll(
+            () -> assertThat(idMapper.hasIdBeenMapped(reference))
+                .isFalse(),
+            () -> assertThat(idMapper.hasIdBeenMapped(ResourceType.Person, buildIdType(ResourceType.Person, id)))
+                .isFalse()
+        );
     }
 }
