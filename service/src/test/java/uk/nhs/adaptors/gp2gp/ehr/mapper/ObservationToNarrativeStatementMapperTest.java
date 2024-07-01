@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildReference;
@@ -66,6 +67,8 @@ public class ObservationToNarrativeStatementMapperTest {
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(TEST_ID);
+
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(new Bundle());
         observationToNarrativeStatementMapper = new ObservationToNarrativeStatementMapper(messageContext, new ParticipantMapper());

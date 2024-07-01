@@ -33,6 +33,8 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -105,6 +107,9 @@ public class EhrExtractMapperComponentTest {
             .build();
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
+        lenient().when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString()))
+            .thenReturn(TEST_ID_3);
+
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);

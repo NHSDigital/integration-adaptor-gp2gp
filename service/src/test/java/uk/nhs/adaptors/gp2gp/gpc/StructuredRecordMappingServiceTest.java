@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -79,8 +80,12 @@ class StructuredRecordMappingServiceTest {
     @Test
     void When_GettingExternalAttachments_Expect_AllDocumentReferenceResourcesAreMapped() {
         when(randomIdGeneratorService.createNewId()).thenReturn(
-            NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_1,
-            NEW_DOC_MANIFEST_ID_2, NEW_DOC_MANIFEST_ID_2
+            NEW_DOC_MANIFEST_ID_1,
+            NEW_DOC_MANIFEST_ID_2
+        );
+        when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(
+            NEW_DOC_MANIFEST_ID_1,
+            NEW_DOC_MANIFEST_ID_2
         );
         when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
         when(supportedContentTypes.isContentTypeSupported(any())).thenReturn(true);
@@ -109,6 +114,7 @@ class StructuredRecordMappingServiceTest {
     @Test
     void When_GettingExternalAttachment_WithWrongContentType_Expect_AbsentAttachmentMapped() {
         when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1);
+        when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(NEW_DOC_MANIFEST_ID_1);
         when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
 
         var mappedExternalAttachments = getMappedAbsentAttachments(
@@ -125,6 +131,7 @@ class StructuredRecordMappingServiceTest {
     @Test
     public void When_GettingExternalAttachment_WithTitleAndNoUrl_Expect_AbsentAttachmentMapped() {
         when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1);
+        when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(NEW_DOC_MANIFEST_ID_1);
         when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
 
         var mappedExternalAttachments = getMappedAbsentAttachments(

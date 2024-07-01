@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -139,7 +140,8 @@ public class EncounterMapperTest {
 
     @BeforeEach
     public void setUp() {
-        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(TEST_ID);
+
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
         lenient().when(bundle.getEntry()).thenReturn(List.of(
