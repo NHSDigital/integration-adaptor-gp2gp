@@ -50,16 +50,15 @@ public class IdMapper {
     }
 
     public String getOrNewFromReference(Reference reference) {
-        if (NOT_ALLOWED.contains(reference.getReferenceElement().getResourceType())) {
+        var referenceElement = reference.getReferenceElement();
+        if (NOT_ALLOWED.contains(referenceElement.getResourceType())) {
             throw new EhrMapperException("Not allowed to use agent-related resource with IdMapper");
         }
 
-        var referenceId = reference.getReferenceElement().getIdPart();
-
+        var referenceId = referenceElement.getIdPart();
         var id = randomIdGeneratorService.createNewOrUseExistingUUID(referenceId);
-
-        MappedId defaultResourceId = new MappedId(id, false);
-        MappedId mappedId = ids.getOrDefault(reference.getReference(), defaultResourceId);
+        var defaultResourceId = new MappedId(id, false);
+        var mappedId = ids.getOrDefault(reference.getReference(), defaultResourceId);
 
         ids.put(reference.getReference(), mappedId);
 

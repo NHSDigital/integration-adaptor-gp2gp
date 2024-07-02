@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* When mapping resources, if a UUID identifier is provided, this will be preserved in the produced XML. If a non-UUID identifier is provided, a new UUID will continue to be generated.
+
 ## [2.0.4] - 2024-06-17
 
 ### Fixed
