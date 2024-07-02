@@ -26,6 +26,8 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -68,7 +70,8 @@ public class BloodPressureMapperTest {
 
     @BeforeEach
     public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(new Bundle());
         bloodPressureMapper = new BloodPressureMapper(
@@ -142,6 +145,9 @@ public class BloodPressureMapperTest {
 
     @Test
     public void When_MappingBloodPressureWithCodeableConcepts_Expect_CompoundStatementXmlReturned() throws IOException {
+        when(randomIdGeneratorService.createNewOrUseExistingUUID(any()))
+            .thenReturn("5E496953-065B-41F2-9577-BE8F2FBD0757");
+
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS);
         var expectedOutput = ResourceTestFileUtils.getFileContent(
             BLOOD_PRESSURE_FILE_LOCATION + EXPECTED_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS);

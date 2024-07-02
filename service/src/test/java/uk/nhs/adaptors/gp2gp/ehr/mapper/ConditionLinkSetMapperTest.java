@@ -138,7 +138,7 @@ public class ConditionLinkSetMapperTest {
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
-        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
+
         IdType conditionId = buildIdType(ResourceType.Condition, CONDITION_ID);
         IdType allergyId = buildIdType(ResourceType.AllergyIntolerance, ALLERGY_ID);
         IdType immunizationId = buildIdType(ResourceType.Immunization, IMMUNIZATION_ID);
@@ -147,6 +147,8 @@ public class ConditionLinkSetMapperTest {
         lenient().when(idMapper.getOrNew(ResourceType.Observation, immunizationId)).thenReturn(IMMUNIZATION_ID);
         lenient().when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId(ResourceType.Condition));
         lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(answerWithObjectId());
+        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
+
 
         conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper,
             new ParticipantMapper());

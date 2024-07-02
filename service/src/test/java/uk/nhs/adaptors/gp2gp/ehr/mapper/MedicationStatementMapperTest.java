@@ -2,10 +2,11 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 import java.io.IOException;
@@ -169,6 +170,8 @@ public class MedicationStatementMapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         when(mockRandomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(TEST_ID);
+
         codeableConceptCdMapper = new CodeableConceptCdMapper();
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
@@ -231,11 +234,14 @@ public class MedicationStatementMapperTest {
         var expected = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_PRESCRIBE_BASED_ON);
 
         when(mockRandomIdGeneratorService.createNewId()).thenReturn("123");
+        when(mockRandomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn("456");
+
+
         var inputAuthorise1 = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_ACUTE_PRESCRIPTION);
         var parsedMedicationRequest1 = new FhirParseService().parseResource(inputAuthorise1, MedicationRequest.class);
         medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest1);
 
-        when(mockRandomIdGeneratorService.createNewId()).thenReturn("456", "456", "123", "789");
+        when(mockRandomIdGeneratorService.createNewId()).thenReturn("456", "123", "789");
         var inputWithBasedOn = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_ORDER_BASED_ON);
         var parsedMedicationRequestWithBasedOn = new FhirParseService().parseResource(inputWithBasedOn, MedicationRequest.class);
         String outputMessageWithBasedOn =
@@ -365,12 +371,13 @@ public class MedicationStatementMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFilesWithMedicationStatement")
-    public void When_MappingMedicationRequest_WithMedicationStateMent_Expect_PrescribingAgencyMappedToSupplyType(
+    public void When_MappingMedicationRequest_WithMedicationStatement_Expect_PrescribingAgencyMappedToSupplyType(
         String inputJson, String outputXml) throws IOException {
 
         var expected = ResourceTestFileUtils.getFileContent(outputXml);
 
         when(mockRandomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+
         codeableConceptCdMapper = new CodeableConceptCdMapper();
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE_WITH_MEDICATION_STATEMENTS);
         Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);

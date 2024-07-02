@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildReference;
@@ -195,7 +197,9 @@ public class ObservationStatementMapperTest {
 
     @BeforeEach
     public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(TEST_ID);
+
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);

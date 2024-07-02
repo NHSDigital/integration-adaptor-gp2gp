@@ -24,6 +24,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
@@ -84,6 +85,8 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(TEST_ID);
+
         final String bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         final Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
