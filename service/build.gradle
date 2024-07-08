@@ -44,7 +44,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-logging'
 
 	// Infrastructure
-	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.753'
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.757'
 	implementation ('com.azure:azure-storage-blob:12.26.1')
 	implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
 
