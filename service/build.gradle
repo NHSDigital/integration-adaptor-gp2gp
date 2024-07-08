@@ -44,14 +44,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-logging'
 
 	// Infrastructure
-	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.753'
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.757'
 	implementation ('com.azure:azure-storage-blob:12.26.1')
 	implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
 
 	// Utils
 	implementation 'org.apache.commons:commons-lang3:3.14.0'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
-	implementation 'com.github.spullara.mustache.java:compiler:0.9.13'
+	implementation 'com.github.spullara.mustache.java:compiler:0.9.14'
 	implementation 'org.apache.tika:tika-core:2.9.2'
 
 	// Fhir
