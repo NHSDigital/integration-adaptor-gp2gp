@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* When mapping `ReferralRequest` supporting info and `DiagnosticReports`m NHS PMIP Report Numbers can also be provided 
+with the code system as a URN (`urn:oid:2.16.840.1.113883.2.1.4.5.5`).
+
 ## [2.0.5] - 2024-07-04
 
 ### Fixed

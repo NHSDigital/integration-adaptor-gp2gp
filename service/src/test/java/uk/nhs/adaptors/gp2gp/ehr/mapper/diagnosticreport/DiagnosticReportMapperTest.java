@@ -61,6 +61,7 @@ public class DiagnosticReportMapperTest {
     private static final String INPUT_JSON_CODED_DIAGNOSIS = "diagnostic-report-with-coded-diagnosis.json";
     private static final String INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.json";
     private static final String INPUT_JSON_EXTENSION_ID = "diagnostic-report-with-extension-id.json";
+    private static final String INPUT_JSON_URN_OID_EXTENSION_ID = "diagnostic-report-with-urn-oid-extension-id.json";
 
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
     private static final String OUTPUT_XML_STATUS_NARRATIVE = "diagnostic-report-with-status-narrative.xml";
@@ -117,7 +118,7 @@ public class DiagnosticReportMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")
-    public void When_MappingDiagnosticReportJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
+    public void When_MappingDiagnosticReportJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) {
         final CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + outputXml);
         final String jsonInput = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + inputJson);
         final DiagnosticReport diagnosticReport = new FhirParseService().parseResource(jsonInput, DiagnosticReport.class);
@@ -144,7 +145,8 @@ public class DiagnosticReportMapperTest {
             Arguments.of(INPUT_JSON_CONCLUSION, OUTPUT_XML_CONCLUSION),
             Arguments.of(INPUT_JSON_CODED_DIAGNOSIS, OUTPUT_XML_CODED_DIAGNOSIS),
             Arguments.of(INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS, OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS),
-            Arguments.of(INPUT_JSON_EXTENSION_ID, OUTPUT_XML_EXTENSION_ID)
+            Arguments.of(INPUT_JSON_EXTENSION_ID, OUTPUT_XML_EXTENSION_ID),
+            Arguments.of(INPUT_JSON_URN_OID_EXTENSION_ID, OUTPUT_XML_EXTENSION_ID)
         );
     }
 
