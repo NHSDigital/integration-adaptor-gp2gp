@@ -61,8 +61,9 @@ public class DiagnosticReportMapper {
     private static final String PREPENDED_TEXT_FOR_FILLING_DATE = "Filing Date: ";
     private static final String PREPENDED_TEXT_FOR_PARTICIPANTS = "Participants: ";
 
-    private static final String EXTENSION_ID_SYSTEM_ID = "2.16.840.1.113883.2.1.4.5.5";
+    private static final String PMIP_CODE_SYSTEM = "2.16.840.1.113883.2.1.4.5.5";
     private static final String COMMENT_NOTE = "37331000000100";
+    public static final String URN_OID_PREFIX = "urn:oid:";
 
     private final MessageContext messageContext;
     private final SpecimenMapper specimenMapper;
@@ -103,7 +104,7 @@ public class DiagnosticReportMapper {
 
     private String fetchExtensionId(List<Identifier> identifiers) {
         return identifiers.stream()
-            .filter(identifier -> EXTENSION_ID_SYSTEM_ID.equals(identifier.getSystem()))
+            .filter(DiagnosticReportMapper::isPMIPCodeSystem)
             .map(Identifier::getValue)
             .findFirst()
             .orElse(StringUtils.EMPTY);
@@ -254,7 +255,7 @@ public class DiagnosticReportMapper {
     }
 
     private void buildNarrativeStatementForMissingResults(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
-        if (reportLevelNarrativeStatements.length() == 0 && !diagnosticReport.hasResult()) {
+        if (reportLevelNarrativeStatements.isEmpty() && !diagnosticReport.hasResult()) {
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
                 diagnosticReport.getIssuedElement(), CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT"
             );
@@ -320,5 +321,11 @@ public class DiagnosticReportMapper {
         observations.stream()
             .map(Observation::getIdElement)
             .forEach(idMapper::markObservationAsMapped);
+    }
+
+    private static boolean isPMIPCodeSystem(Identifier identifier) {
+        return StringUtils
+            .removeStart(identifier.getSystem(), URN_OID_PREFIX)
+            .equals(PMIP_CODE_SYSTEM);
     }
 }
