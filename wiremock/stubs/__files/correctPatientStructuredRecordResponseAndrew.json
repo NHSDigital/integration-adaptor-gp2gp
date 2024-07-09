@@ -7981,7 +7981,7 @@
 				],
 				"valueQuantity": {
 					"value": 36.7,
-					"unit": "C",
+					"unit": "Cel",
 					"system": "http://unitsofmeasure.org",
 					"code": "Cel"
 				},
@@ -8096,7 +8096,7 @@
 				],
 				"valueQuantity": {
 					"value": 16,
-					"unit": "breaths per minute",
+					"unit": "{resps}/min",
 					"system": "http://unitsofmeasure.org",
 					"code": "{resps}/min"
 				},
@@ -8154,7 +8154,7 @@
 				],
 				"valueQuantity": {
 					"value": 70,
-					"unit": "per minute",
+					"unit": "{beats}/min",
 					"system": "http://unitsofmeasure.org",
 					"code": "{beats}/min"
 				}
@@ -11815,7 +11815,7 @@
 				],
 				"valueQuantity": {
 					"value": 37.1,
-					"unit": "C",
+					"unit": "Cel",
 					"system": "http://unitsofmeasure.org",
 					"code": "Cel"
 				}
@@ -11929,7 +11929,7 @@
 				],
 				"valueQuantity": {
 					"value": 16,
-					"unit": "breaths per minute",
+					"unit": "{resps}/min",
 					"system": "http://unitsofmeasure.org",
 					"code": "{resps}/min"
 				}
@@ -11986,7 +11986,7 @@
 				],
 				"valueQuantity": {
 					"value": 70,
-					"unit": "per minute",
+					"unit": "{beats}/min",
 					"system": "http://unitsofmeasure.org",
 					"code": "{beats}/min"
 				}
@@ -14147,7 +14147,7 @@
 				],
 				"valueQuantity": {
 					"value": 36.7,
-					"unit": "C",
+					"unit": "Cel",
 					"system": "http://unitsofmeasure.org",
 					"code": "Cel"
 				}
@@ -14269,7 +14269,7 @@
 				],
 				"valueQuantity": {
 					"value": 16,
-					"unit": "breaths per minute",
+					"unit": "{resps}/min",
 					"system": "http://unitsofmeasure.org",
 					"code": "{resps}/min"
 				}
