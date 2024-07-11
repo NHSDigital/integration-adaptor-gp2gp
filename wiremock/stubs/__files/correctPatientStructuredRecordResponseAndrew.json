@@ -6816,6 +6816,51 @@
 				"entry": [
 					{
 						"item": {
+							"reference": "List/Consultation1-Topic3-heading"
+						}
+					}
+				]
+			}
+		},
+		{
+			"resource": {
+				"resourceType": "List",
+				"id": "Consultation1-Topic3-heading",
+				"meta": {
+					"profile": [
+						"https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+					]
+				},
+				"status": "current",
+				"mode": "snapshot",
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "24781000000107",
+							"display": "Category (EHR)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/2"
+				},
+				"encounter": {
+					"reference": "Encounter/Encounter1"
+				},
+				"date": "2019-03-28T10:30:00+00:00",
+				"orderedBy": {
+					"coding": [
+						{
+							"system": "http://hl7.org/fhir/list-order",
+							"code": "system",
+							"display": "Sorted by System"
+						}
+					]
+				},
+				"entry": [
+					{
+						"item": {
 							"reference": "Observation/Consultation1-Topic3-flat-Observation-1"
 						}
 					},
