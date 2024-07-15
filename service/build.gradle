@@ -4,6 +4,7 @@ plugins {
 	id 'java'
 	id "checkstyle"
 	id "com.github.spotbugs" version "6.0.19"
+	id 'info.solidsoft.pitest' version '1.15.0'
 	id "io.freefair.lombok" version "8.6"
 	id 'jacoco'
 }
@@ -119,7 +120,7 @@ tasks.withType(Test) {
 	}
 }
 
-check.dependsOn integrationTest
+check.dependsOn integrationTest, 'pitest'
 jacocoTestReport.dependsOn integrationTest
 
 spotbugsTest.enabled = false
@@ -134,6 +135,11 @@ spotbugsMain {
 		}
 		excludeFilter.set(file("config/spotbugs/exclude.xml"))
 	}
+}
+
+pitest {
+	junit5PluginVersion = '1.2.1'
+	threads = 16
 }
 
 bootJar {
