@@ -98,7 +98,7 @@ public class StructuredRecordMappingService {
                         .fileName(null) // These two fields are NULL so that the placeholders are generated
                         .contentType(null)
                         .compressed(false) // always false for GPC documents
-                        .largeAttachment(isLargeAttachment(attachment))
+                        .largeAttachment(false)
                         .originalBase64(false)
                         .documentId(documentId)
                         .build()
