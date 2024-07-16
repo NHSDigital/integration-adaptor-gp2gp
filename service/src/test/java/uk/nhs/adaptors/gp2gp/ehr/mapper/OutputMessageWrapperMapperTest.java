@@ -1,13 +1,13 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.Instant;
 
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,32 +55,33 @@ class OutputMessageWrapperMapperTest {
     }
 
     @Test
-    void When_MappingOutputMessageWrapperWithStringContent_Expect_ProperXmlOutput() {
+    void When_MappingOutputMessageWrapperWithStringContentAndRedactionsDisabled_Expect_UK06InteractionIdToBePresentAndProperXmlOutput() {
         final String expected = ResourceTestFileUtils.getFileContent(EXPECTED_OUTPUT_MESSAGE_WRAPPER_NO_REDACTIONS_XML);
-        final String actual = outputMessageWrapperMapper.map(
-            gpcStructuredTaskDefinition,
-            TRANSFORMED_EXTRACT
-        );
+        final String actual = outputMessageWrapperMapper.map(gpcStructuredTaskDefinition, TRANSFORMED_EXTRACT);
 
-        assertThat(actual).isEqualToIgnoringWhitespace(expected);
-        assertThat(actual).contains(EHR_EXTRACT_INTERACTION_ID_NO_REDACTIONS);
+        assertAll(
+            () -> assertThat(actual).isEqualToIgnoringWhitespace(expected),
+            () -> assertThat(actual).contains(EHR_EXTRACT_INTERACTION_ID_NO_REDACTIONS),
+            () -> assertThat(actual).doesNotContain(EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS)
+        );
     }
 
     @Test
-    void When_MappingOutputMessageWrapperWithStringContentAndRedactionsEnabled_Expect_ProperXmlOutputAndUk07InteractionToBePresent() {
-        enableRedactions();
+    void When_MappingOutputMessageWrapperWithStringContentAndRedactionsEnabled_Expect_UK07InteractionIdToBePresentAndProperXmlOutput() throws IllegalAccessException, NoSuchFieldException {
         final String expected = ResourceTestFileUtils.getFileContent(EXPECTED_OUTPUT_MESSAGE_WRAPPER_WITH_REDACTIONS_XML);
-        final String result = outputMessageWrapperMapper.map(
-            gpcStructuredTaskDefinition,
-            TRANSFORMED_EXTRACT
-        );
 
-        assertThat(result).isEqualToIgnoringWhitespace(expected);
-        assertThat(result).contains(EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS);
+        enableRedactions();
+
+        final String actual = outputMessageWrapperMapper.map(gpcStructuredTaskDefinition, TRANSFORMED_EXTRACT);
+
+        assertAll(
+            () -> assertThat(actual).isEqualToIgnoringWhitespace(expected),
+            () -> assertThat(actual).contains(EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS),
+            () -> assertThat(actual).doesNotContain(EHR_EXTRACT_INTERACTION_ID_NO_REDACTIONS)
+        );
     }
 
-    @SneakyThrows
-    private void enableRedactions() {
+    private void enableRedactions() throws IllegalAccessException, NoSuchFieldException {
         final Field field = outputMessageWrapperMapper.getClass().getDeclaredField("redactionsEnabled");
         field.setAccessible(true);
         field.set(outputMessageWrapperMapper, true);
