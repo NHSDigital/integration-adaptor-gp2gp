@@ -80,35 +80,38 @@ public final class ObservationValueQuantityMapper {
     }
 
     private static String prepareQuantityValueWithoutComparator(Quantity valueQuantity) {
-        return switch (valueQuantity) {
-            case Quantity vq when UNITS_OF_MEASURE_SYSTEM.equals(vq.getSystem()) && vq.hasCode() ->
-                PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
-                    valueQuantity.getValue(),
-                    valueQuantity.getCode()
-                );
-            case Quantity vq when vq.hasSystem() && vq.hasCode() && vq.hasUnit() ->
-                PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE.formatted(
-                    vq.getValue(),
-                    vq.getValue(),
-                    vq.getCode(),
-                    vq.getSystem(),
-                    vq.getUnit()
-                );
-            case Quantity vq when vq.hasSystem() && vq.hasCode() ->
-                PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
-                    vq.getValue(),
-                    vq.getValue(),
-                    vq.getCode(),
-                    vq.getSystem()
+        if (UNITS_OF_MEASURE_SYSTEM.equals(valueQuantity.getSystem()) && valueQuantity.hasCode()) {
+            return PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
+                valueQuantity.getValue(),
+                valueQuantity.getCode()
             );
-            case Quantity vq when vq.hasSystem() && vq.hasUnit() ->
-                PQ_WITH_ANY_SYSTEM_AND_UNIT_TEMPLATE.formatted(
-                    vq.getValue(),
-                    vq.getValue(),
-                    vq.getUnit()
-                );
-            default -> PQ_WITH_ONLY_VALUE_TEMPLATE.formatted(valueQuantity.getValue());
-        };
+        }
+        if (valueQuantity.hasSystem() && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
+            return PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE.formatted(
+                valueQuantity.getValue(),
+                valueQuantity.getValue(),
+                valueQuantity.getCode(),
+                valueQuantity.getSystem(),
+                valueQuantity.getUnit()
+            );
+        }
+        if (valueQuantity.hasSystem() && valueQuantity.hasCode()) {
+            return PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
+                valueQuantity.getValue(),
+                valueQuantity.getValue(),
+                valueQuantity.getCode(),
+                valueQuantity.getSystem()
+            );
+        }
+        if (valueQuantity.hasSystem() && valueQuantity.hasUnit()) {
+            return PQ_WITH_ANY_SYSTEM_AND_UNIT_TEMPLATE.formatted(
+                valueQuantity.getValue(),
+                valueQuantity.getValue(),
+                valueQuantity.getUnit()
+            );
+        }
+
+        return PQ_WITH_ONLY_VALUE_TEMPLATE.formatted(valueQuantity.getValue());
     }
 
     private static String prepareUnit(Quantity valueQuantity) {
