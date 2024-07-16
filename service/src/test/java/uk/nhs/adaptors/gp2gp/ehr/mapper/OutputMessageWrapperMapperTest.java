@@ -67,7 +67,8 @@ class OutputMessageWrapperMapperTest {
     }
 
     @Test
-    void When_MappingOutputMessageWrapperWithStringContentAndRedactionsEnabled_Expect_UK07InteractionIdToBePresentAndProperXmlOutput() throws IllegalAccessException, NoSuchFieldException {
+    void When_MappingOutputMessageWrapperWithStringContentAndRedactionsEnabled_Expect_UK07InteractionIdToBePresentAndProperXmlOutput()
+        throws IllegalAccessException, NoSuchFieldException {
         final String expected = ResourceTestFileUtils.getFileContent(EXPECTED_OUTPUT_MESSAGE_WRAPPER_WITH_REDACTIONS_XML);
 
         enableRedactions();
