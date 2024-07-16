@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class OutputMessageWrapperTemplateParameters {
+    private String interactionId;
     private String eventId;
     private String creationTime;
     private String fromAsid;
