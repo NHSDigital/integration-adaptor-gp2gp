@@ -11,9 +11,27 @@ public final class ObservationValueQuantityMapper {
 
     private static final String UNITS_OF_MEASURE_SYSTEM = "http://unitsofmeasure.org";
     private static final String UNCERTAINTY_EXTENSION = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ValueApproximation-1";
-    private static final String IVL_PQ_ELEMENT = "<value xsi:type=\"IVL_PQ\">";
 
-    private static final String NO_COMPARATOR_VALUE_TEMPLATE = "<value xsi:type=\"PQ\" value=\"%s\" unit=\"%s\"/>";
+    public static final String PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE = """
+        <value xsi:type="PQ" value="%s" unit="%s" />""";
+    public static final String PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE = """
+        <value xsi:type="PQ" value="%s" unit="1">%n\
+            <translation value="%s" code="%s" codeSystem="%s" displayName="%s" />%n\
+        </value>""";
+    public static final String PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE = """
+        <value xsi:type="PQ" value="%s" unit="1">%n\
+            <translation value="%s" code="%s" codeSystem="%s" />%n\
+        </value>""";
+    public static final String PQ_WITH_ANY_SYSTEM_AND_UNIT_TEMPLATE = """
+        <value xsi:type="PQ" value="%s" unit="1">%n\
+            <translation value="%s">%n\
+                <originalText>%s</originalText>%n\
+            </translation>%n\
+        </value>""";
+    private static final String PQ_WITH_ONLY_VALUE_TEMPLATE =
+        "<value xsi:type=\"PQ\" value=\"%s\" unit=\"1\" />";
+    private static final String IVL_PQ_ELEMENT =
+        "<value xsi:type=\"IVL_PQ\">";
     private static final String LESS_COMPARATOR_VALUE_TEMPLATE = IVL_PQ_ELEMENT
         + "<high value=\"%s\" unit=\"%s\" inclusive=\"false\"/></value>";
     private static final String LESS_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE = IVL_PQ_ELEMENT
@@ -22,8 +40,6 @@ public final class ObservationValueQuantityMapper {
         + "unit=\"%s\" inclusive=\"false\"/></value>";
     private static final String GREATER_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\"><low value=\"%s\" "
         + "unit=\"%s\" inclusive=\"true\"/></value>";
-    private static final String NO_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"PQ\" value=\"%s\" unit=\"1\">"
-        + "<translation value=\"%s\">%s</translation></value>";
     private static final String LESS_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = IVL_PQ_ELEMENT
         + "<high value=\"%s\" unit=\"1\" inclusive=\"false\"><translation value=\"%s\">"
         + "%s</translation></high></value>";
@@ -36,8 +52,9 @@ public final class ObservationValueQuantityMapper {
     private static final String GREATER_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = IVL_PQ_ELEMENT
         + "<low value=\"%s\" unit=\"1\" inclusive=\"true\"><translation value=\"%s\">"
         + "%s</translation></low></value>";
-    private static final String UNCERTAINTY_CODE = "<uncertaintyCode code=\"U\" "
-        + "codeSystem=\"2.16.840.1.113883.5.1053\" displayName=\"Recorded as uncertain\"/>";
+    private static final String UNCERTAINTY_CODE = """
+        <uncertaintyCode code="U" codeSystem="2.16.840.1.113883.5.1053" displayName="Recorded as uncertain"/>
+        """;
     private static final String QUANTITY_UNIT = "<originalText>%s</originalText>";
 
 
@@ -45,27 +62,53 @@ public final class ObservationValueQuantityMapper {
     }
 
     public static String processQuantity(Quantity valueQuantity) {
-        String result = StringUtils.EMPTY;
+        var stringBuilder = new StringBuilder();
+
         if (isUncertaintyCodePresent(valueQuantity)) {
-            result += UNCERTAINTY_CODE;
+            stringBuilder.append(UNCERTAINTY_CODE);
         }
 
         if (!valueQuantity.hasComparator()) {
-            result += prepareQuantityValueWithoutComparator(valueQuantity);
+            var result = prepareQuantityValueWithoutComparator(valueQuantity);
+            stringBuilder.append(result);
         } else {
-            result += prepareQuantityValueAccordingToComparator(valueQuantity);
+            var result = prepareQuantityValueAccordingToComparator(valueQuantity);
+            stringBuilder.append(result);
         }
 
-        return result;
+        return stringBuilder.toString();
     }
 
     private static String prepareQuantityValueWithoutComparator(Quantity valueQuantity) {
-        BigDecimal value = valueQuantity.getValue();
-        if (valueQuantity.hasSystem() && valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)) {
-            return String.format(NO_COMPARATOR_VALUE_TEMPLATE, value, valueQuantity.getUnit());
-        } else {
-            return String.format(NO_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE, value, value, prepareUnit(valueQuantity));
-        }
+        return switch (valueQuantity) {
+            case Quantity vq when UNITS_OF_MEASURE_SYSTEM.equals(vq.getSystem()) && vq.hasCode() ->
+                PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode()
+                );
+            case Quantity vq when vq.hasSystem() && vq.hasCode() && vq.hasUnit() ->
+                PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE.formatted(
+                    vq.getValue(),
+                    vq.getValue(),
+                    vq.getCode(),
+                    vq.getSystem(),
+                    vq.getUnit()
+                );
+            case Quantity vq when vq.hasSystem() && vq.hasCode() ->
+                PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
+                    vq.getValue(),
+                    vq.getValue(),
+                    vq.getCode(),
+                    vq.getSystem()
+            );
+            case Quantity vq when vq.hasSystem() && vq.hasUnit() ->
+                PQ_WITH_ANY_SYSTEM_AND_UNIT_TEMPLATE.formatted(
+                    vq.getValue(),
+                    vq.getValue(),
+                    vq.getUnit()
+                );
+            default -> PQ_WITH_ONLY_VALUE_TEMPLATE.formatted(valueQuantity.getValue());
+        };
     }
 
     private static String prepareUnit(Quantity valueQuantity) {
