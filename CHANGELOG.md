@@ -8,9 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* A new feature flag has been introduced as an environment variable to manage redaction support. If the GP2GP_REDACTIONS_ENABLED 
-environment variable is set to true, the GP2GP Adaptor will generate EHR extracts using the RCMR_IN030000UK07 message type. 
-If not, it will continue to use the RCMR_IN030000UK06 message type for scaffolding EHR extracts.
 * When mapping `ReferralRequest` supporting info and `DiagnosticReports`m NHS PMIP Report Numbers can also be provided 
 with the code system as a URN (`urn:oid:2.16.840.1.113883.2.1.4.5.5`).
 
