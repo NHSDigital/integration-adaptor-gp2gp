@@ -5,15 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.time.Instant;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
@@ -40,14 +41,19 @@ class OutputMessageWrapperMapperTest {
     @Mock
     private TimestampService timestampService;
 
+    @Mock
+    private RedactionsConfiguration redactionsConfiguration;
+
+    @InjectMocks
     private OutputMessageWrapperMapper outputMessageWrapperMapper;
+
     private GetGpcStructuredTaskDefinition gpcStructuredTaskDefinition;
 
     @BeforeEach
     void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
-        outputMessageWrapperMapper = new OutputMessageWrapperMapper(randomIdGeneratorService, timestampService);
+
         gpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .toAsid(TO_ASID_VALUE)
             .fromAsid(FROM_ASID_VALUE)
@@ -57,6 +63,9 @@ class OutputMessageWrapperMapperTest {
     @Test
     void When_MappingOutputMessageWrapperWithStringContentAndRedactionsDisabled_Expect_UK06InteractionIdToBePresentAndProperXmlOutput() {
         final String expected = ResourceTestFileUtils.getFileContent(EXPECTED_OUTPUT_MESSAGE_WRAPPER_NO_REDACTIONS_XML);
+
+        when(redactionsConfiguration.isRedactionsEnabled()).thenReturn(false);
+
         final String actual = outputMessageWrapperMapper.map(gpcStructuredTaskDefinition, TRANSFORMED_EXTRACT);
 
         assertAll(
@@ -67,11 +76,10 @@ class OutputMessageWrapperMapperTest {
     }
 
     @Test
-    void When_MappingOutputMessageWrapperWithStringContentAndRedactionsEnabled_Expect_UK07InteractionIdToBePresentAndProperXmlOutput()
-        throws IllegalAccessException, NoSuchFieldException {
+    void When_MappingOutputMessageWrapperWithStringContentAndRedactionsEnabled_Expect_UK07InteractionIdToBePresentAndProperXmlOutput() {
         final String expected = ResourceTestFileUtils.getFileContent(EXPECTED_OUTPUT_MESSAGE_WRAPPER_WITH_REDACTIONS_XML);
 
-        enableRedactions();
+        when(redactionsConfiguration.isRedactionsEnabled()).thenReturn(true);
 
         final String actual = outputMessageWrapperMapper.map(gpcStructuredTaskDefinition, TRANSFORMED_EXTRACT);
 
@@ -80,11 +88,5 @@ class OutputMessageWrapperMapperTest {
             () -> assertThat(actual).contains(EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS),
             () -> assertThat(actual).doesNotContain(EHR_EXTRACT_INTERACTION_ID_NO_REDACTIONS)
         );
-    }
-
-    private void enableRedactions() throws IllegalAccessException, NoSuchFieldException {
-        final Field field = outputMessageWrapperMapper.getClass().getDeclaredField("redactionsEnabled");
-        field.setAccessible(true);
-        field.set(outputMessageWrapperMapper, true);
     }
 }
