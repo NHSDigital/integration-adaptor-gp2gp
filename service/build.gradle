@@ -145,6 +145,7 @@ pitest {
 	pitestVersion = '1.16.1'
 	junit5PluginVersion = '1.2.1'
 	outputFormats = ['gitci']
+	targetClasses = ['uk.nhs.adaptors.gp2gp.*']
 
 	// git feature limits analysis to contents of PR only
 	features = ["+GIT(from[HEAD~1])"]
