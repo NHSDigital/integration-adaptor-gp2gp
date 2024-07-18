@@ -1,15 +1,19 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.io.IOException;
+import java.util.List;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.BooleanType;
+import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Quantity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
@@ -70,15 +74,22 @@ public class ObservationValueQuantityMapperTest {
         + "example-observation-resource-with-quantity-16.json";
     private static final String OUTPUT_XML_WITH_NO_SYSTEM_NO_UNIT_AND_EQUAL_GREATER_COMPARATOR = TEST_FILES_DIRECTORY
         + "expected-output-quantity-16.xml";
+
+    public static final Extension UNCERTAINTY_EXTENSION = new Extension(
+        "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ValueApproximation-1",
+        new BooleanType(true)
+    );
+
     public static final double VALUE_37_1 = 37.1;
     public static final String UOM_SYSTEM = "http://unitsofmeasure.org";
     public static final String CODE_CEL = "Cel";
     public static final String UNIT_C = "C";
     public static final String NON_UOM_SYSTEM = "Non-UOM system";
 
+
     @ParameterizedTest
     @MethodSource("testFilePaths")
-    public void When_MappingParsedQuantityJson_Expect_CorrectXmlOutput(String input, String output) throws IOException {
+    public void When_MappingParsedQuantityJson_Expect_CorrectXmlOutput(String input, String output) {
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(output);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
@@ -89,7 +100,22 @@ public class ObservationValueQuantityMapperTest {
     }
 
     @Test
-    public void When_MappingQuantityWithUOMSystemAndCode_Expect_XmlWithValueAndQuantitySetAndNoTranslation() {
+    public void When_MappingQuantityWithUncertaintyExtension_Expect_XmlContainsUncertaintyCode() {
+        var quantity = (Quantity) new Quantity()
+            .setValue(VALUE_37_1)
+            .setExtension(List.of(UNCERTAINTY_EXTENSION));
+
+        var expectedXml = """
+            <uncertaintyCode code="U" codeSystem="2.16.840.1.113883.5.1053" displayName="Recorded as uncertain" />
+            <value xsi:type="PQ" value="37.1" unit="1" />""";
+
+        var mappedQuantity = ObservationValueQuantityMapper.processQuantity(quantity);
+
+        assertThat(mappedQuantity).isEqualTo(expectedXml);
+    }
+
+    @Test
+    public void When_MappingQuantityWithUOMSystemAndCode_Expect_PQXmlWithValueAndQuantitySetAndNoTranslation() {
         var quantity = new Quantity()
             .setSystem(UOM_SYSTEM)
             .setValue(VALUE_37_1)
@@ -104,7 +130,7 @@ public class ObservationValueQuantityMapperTest {
     }
 
     @Test
-    public void When_MappingQuantityWithUOMSystemAndUnit_Expect_XmlWithValueAndQuantitySetAndNoTranslation() {
+    public void When_MappingQuantityWithUOMSystemAndUnit_Expect_PQXmlWithValueAndQuantitySetAndNoTranslation() {
         var quantity = new Quantity()
             .setSystem(UOM_SYSTEM)
             .setValue(VALUE_37_1)
@@ -122,7 +148,7 @@ public class ObservationValueQuantityMapperTest {
     }
 
     @Test
-    public void When_MappingQuantityWithUOMSystemWithoutUnitOrCode_Expect_XmlWithValueSetAndUnitSetToOne() {
+    public void When_MappingQuantityWithUOMSystemWithoutUnitOrCode_Expect_PQXmlWithValueSetAndUnitSetToOne() {
         var quantity = new Quantity()
             .setSystem(UOM_SYSTEM)
             .setValue(VALUE_37_1);
@@ -136,7 +162,7 @@ public class ObservationValueQuantityMapperTest {
     }
 
     @Test
-    public void When_MappingQuantityWithNonUOMSystemAndCodeAndUnit_Expect_XmlContainsTranslationWithDisplayName() {
+    public void When_MappingQuantityWithNonUOMSystemAndCodeAndUnit_Expect_PQXmlContainsTranslationWithDisplayName() {
         var quantity = new Quantity()
             .setSystem(NON_UOM_SYSTEM)
             .setValue(VALUE_37_1)
@@ -154,7 +180,7 @@ public class ObservationValueQuantityMapperTest {
     }
 
     @Test
-    public void When_MappingQuantityWithNonUOMSystemAndCode_Expect_XmlContainsTranslation() {
+    public void When_MappingQuantityWithNonUOMSystemAndCode_Expect_PQXmlContainsTranslation() {
         var quantity = new Quantity()
             .setSystem(NON_UOM_SYSTEM)
             .setValue(VALUE_37_1)
@@ -170,10 +196,15 @@ public class ObservationValueQuantityMapperTest {
         assertThat(mappedQuantity).isEqualTo(expectedXml);
     }
 
-    @Test
-    public void When_MappingQuantityWithNonUOMSystemAndUnit_Expect_XmlContainsTranslationAndOriginalText() {
+    @ParameterizedTest
+    @ValueSource(strings = {
+        UOM_SYSTEM,
+        NON_UOM_SYSTEM
+    })
+    @NullAndEmptySource
+    public void When_MappingQuantityWithAnyOrNoSystemAndHasUnit_Expect_PQXmlContainsTranslationAndOriginalText(String system) {
         var quantity = new Quantity()
-            .setSystem(NON_UOM_SYSTEM)
+            .setSystem(system)
             .setValue(VALUE_37_1)
             .setUnit(UNIT_C);
 
@@ -189,10 +220,15 @@ public class ObservationValueQuantityMapperTest {
         assertThat(mappedQuantity).isEqualTo(expectedXml);
     }
 
-    @Test
-    public void When_MappingQuantityWithNonUOMSystemWithoutUnitOrCode_Expect_XmlWithValueSetAndUnitSetToOne() {
+    @ParameterizedTest
+    @ValueSource(strings = {
+        UOM_SYSTEM,
+        NON_UOM_SYSTEM
+    })
+    @NullAndEmptySource
+    public void When_MappingQuantityWithAnyOrNoSystemWithoutUnitOrCode_Expect_PQXmlWithValueSetAndUnitSetToOne(String system) {
         var quantity = new Quantity()
-            .setSystem(NON_UOM_SYSTEM)
+            .setSystem(system)
             .setValue(VALUE_37_1);
 
         var expectedXml = """
@@ -204,12 +240,30 @@ public class ObservationValueQuantityMapperTest {
     }
 
     @Test
-    public void When_MappingQuantityWithoutSystemOrUnitOrCode_Expect_XmlWithValueSetAndUnitSetToOne() {
+    public void When_MappingQuantityWithoutSystemOrUnitOrCode_Expect_PQXmlWithValueSetAndUnitSetToOne() {
         var quantity = new Quantity()
             .setValue(VALUE_37_1);
 
         var expectedXml = """
             <value xsi:type="PQ" value="37.1" unit="1" />""";
+
+        var mappedQuantity = ObservationValueQuantityMapper.processQuantity(quantity);
+
+        assertThat(mappedQuantity).isEqualTo(expectedXml);
+    }
+
+    @Test
+    public void When_MappingQuantityWithUncertaintyAndComparatorExtension_Expect_XmlContainsUncertaintyCode() {
+        var quantity = (Quantity) new Quantity()
+            .setValue(VALUE_37_1)
+            .setComparator(Quantity.QuantityComparator.GREATER_THAN)
+            .setExtension(List.of(UNCERTAINTY_EXTENSION));
+
+        var expectedXml = """
+            <uncertaintyCode code="U" codeSystem="2.16.840.1.113883.5.1053" displayName="Recorded as uncertain" />
+            <value xsi:type="IVL_PQ">
+                 <low value="37.1" unit="1" inclusive="false" />
+            </value>""";
 
         var mappedQuantity = ObservationValueQuantityMapper.processQuantity(quantity);
 

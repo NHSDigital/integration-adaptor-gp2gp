@@ -1,16 +1,22 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.math.BigDecimal;
-
-import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.Quantity;
 
+import static org.hl7.fhir.dstu3.model.Quantity.QuantityComparator.GREATER_OR_EQUAL;
+import static org.hl7.fhir.dstu3.model.Quantity.QuantityComparator.LESS_OR_EQUAL;
+import static org.hl7.fhir.dstu3.model.Quantity.QuantityComparator.LESS_THAN;
+
 public final class ObservationValueQuantityMapper {
 
-    private static final String UNITS_OF_MEASURE_SYSTEM = "http://unitsofmeasure.org";
-    private static final String UNCERTAINTY_EXTENSION = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ValueApproximation-1";
+    private static final String UNITS_OF_MEASURE_SYSTEM =
+        "http://unitsofmeasure.org";
+    private static final String UNCERTAINTY_EXTENSION =
+        "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ValueApproximation-1";
+    private static final String UNCERTAINTY_CODE = """
+        <uncertaintyCode code="U" codeSystem="2.16.840.1.113883.5.1053" displayName="Recorded as uncertain" />
+        """;
 
     public static final String PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE = """
         <value xsi:type="PQ" value="%s" unit="%s" />""";
@@ -22,7 +28,7 @@ public final class ObservationValueQuantityMapper {
         <value xsi:type="PQ" value="%s" unit="1">%n\
             <translation value="%s" code="%s" codeSystem="%s" />%n\
         </value>""";
-    public static final String PQ_WITH_ANY_SYSTEM_AND_UNIT_TEMPLATE = """
+    public static final String PQ_WITH_ANY_OR_NO_SYSTEM_AND_UNIT_TEMPLATE = """
         <value xsi:type="PQ" value="%s" unit="1">%n\
             <translation value="%s">%n\
                 <originalText>%s</originalText>%n\
@@ -30,33 +36,36 @@ public final class ObservationValueQuantityMapper {
         </value>""";
     private static final String PQ_WITH_ONLY_VALUE_TEMPLATE =
         "<value xsi:type=\"PQ\" value=\"%s\" unit=\"1\" />";
-    private static final String IVL_PQ_ELEMENT =
-        "<value xsi:type=\"IVL_PQ\">";
-    private static final String LESS_COMPARATOR_VALUE_TEMPLATE = IVL_PQ_ELEMENT
-        + "<high value=\"%s\" unit=\"%s\" inclusive=\"false\"/></value>";
-    private static final String LESS_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE = IVL_PQ_ELEMENT
-        + "<high value=\"%s\" unit=\"%s\" inclusive=\"true\"/></value>";
-    private static final String GREATER_COMPARATOR_VALUE_TEMPLATE = IVL_PQ_ELEMENT + "<low value=\"%s\" "
-        + "unit=\"%s\" inclusive=\"false\"/></value>";
-    private static final String GREATER_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\"><low value=\"%s\" "
-        + "unit=\"%s\" inclusive=\"true\"/></value>";
-    private static final String LESS_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = IVL_PQ_ELEMENT
-        + "<high value=\"%s\" unit=\"1\" inclusive=\"false\"><translation value=\"%s\">"
-        + "%s</translation></high></value>";
-    private static final String LESS_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\"><high "
-        + "value=\"%s\" unit=\"1\" inclusive=\"true\"><translation value=\"%s\">"
-        + "%s</translation></high></value>";
-    private static final String GREATER_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = IVL_PQ_ELEMENT
-        + "<low value=\"%s\" unit=\"1\" inclusive=\"false\"><translation value=\"%s\">%s"
-        + "</translation></low></value>";
-    private static final String GREATER_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = IVL_PQ_ELEMENT
-        + "<low value=\"%s\" unit=\"1\" inclusive=\"true\"><translation value=\"%s\">"
-        + "%s</translation></low></value>";
-    private static final String UNCERTAINTY_CODE = """
-        <uncertaintyCode code="U" codeSystem="2.16.840.1.113883.5.1053" displayName="Recorded as uncertain"/>
-        """;
-    private static final String QUANTITY_UNIT = "<originalText>%s</originalText>";
 
+    private static final String IVL_PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE = """
+        <value xsi:type="IVL_PQ">%n\
+            <%s value="%s" unit="%s" inclusive="%s" />%n\
+        </value>""";
+
+    public static final String IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE = """
+        <value xsi:type="IVL_PQ">%n\
+            <%s value="%s" unit="%s" inclusive="%s">%n\
+                <translation value="%s" code="%s" codeSystem="%s" displayName="%s" />%n\
+            </%s>%n\
+        </value>""";
+    public static final String IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE = """
+        <value xsi:type="IVL_PQ">%n\
+            <%s value="%s" unit="%s" inclusive="%s">%n\
+                <translation value="%s" code="%s" codeSystem="%s" />%n\
+            </%s>%n\
+        </value>""";
+    public static final String IVL_PQ_WITH_ANY_OR_NO_SYSTEM_AND_UNIT_TEMPLATE = """
+        <value xsi:type="IVL_PQ">%n\
+             <%s value="%s" unit="1" inclusive="%s">%n\
+                <translation value="%s">%n\
+                    <originalText>%s</originalText>%n\
+                </translation>%n\
+            </%s>%n\
+        </value>""";
+    public static final String IVL_PQ_WITH_ONLY_VALUE_TEMPLATE = """
+        <value xsi:type="IVL_PQ">%n\
+             <%s value="%s" unit="1" inclusive="%s" />%n\
+        </value>""";
 
     private ObservationValueQuantityMapper() {
     }
@@ -68,18 +77,16 @@ public final class ObservationValueQuantityMapper {
             stringBuilder.append(UNCERTAINTY_CODE);
         }
 
-        if (!valueQuantity.hasComparator()) {
-            var result = prepareQuantityValueWithoutComparator(valueQuantity);
-            stringBuilder.append(result);
-        } else {
-            var result = prepareQuantityValueAccordingToComparator(valueQuantity);
-            stringBuilder.append(result);
-        }
+        var quantityXml = valueQuantity.hasComparator()
+            ? getPhysicalQuantityIntervalXml(valueQuantity)
+            : getPhysicalQuantityXml(valueQuantity);
 
-        return stringBuilder.toString();
+        return stringBuilder
+            .append(quantityXml)
+            .toString();
     }
 
-    private static String prepareQuantityValueWithoutComparator(Quantity valueQuantity) {
+    private static String getPhysicalQuantityXml(Quantity valueQuantity) {
         if (UNITS_OF_MEASURE_SYSTEM.equals(valueQuantity.getSystem()) && valueQuantity.hasCode()) {
             return PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
                 valueQuantity.getValue(),
@@ -103,8 +110,8 @@ public final class ObservationValueQuantityMapper {
                 valueQuantity.getSystem()
             );
         }
-        if (valueQuantity.hasSystem() && valueQuantity.hasUnit()) {
-            return PQ_WITH_ANY_SYSTEM_AND_UNIT_TEMPLATE.formatted(
+        if (valueQuantity.hasUnit()) {
+            return PQ_WITH_ANY_OR_NO_SYSTEM_AND_UNIT_TEMPLATE.formatted(
                 valueQuantity.getValue(),
                 valueQuantity.getValue(),
                 valueQuantity.getUnit()
@@ -114,46 +121,66 @@ public final class ObservationValueQuantityMapper {
         return PQ_WITH_ONLY_VALUE_TEMPLATE.formatted(valueQuantity.getValue());
     }
 
-    private static String prepareUnit(Quantity valueQuantity) {
-        return valueQuantity.hasUnit() ? String.format(QUANTITY_UNIT, valueQuantity.getUnit()) : StringUtils.EMPTY;
-    }
-
-    private static String prepareQuantityValueAccordingToComparator(Quantity valueQuantity) {
-        if (valueQuantity.getComparator() == Quantity.QuantityComparator.LESS_THAN) {
-            return prepareQuantityValueByComparator(valueQuantity,
-                LESS_COMPARATOR_VALUE_TEMPLATE,
-                LESS_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE);
-        } else if (valueQuantity.getComparator() == Quantity.QuantityComparator.LESS_OR_EQUAL) {
-            return prepareQuantityValueByComparator(valueQuantity,
-                LESS_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE,
-                LESS_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE);
-        } else if (valueQuantity.getComparator() == Quantity.QuantityComparator.GREATER_THAN) {
-            return prepareQuantityValueByComparator(valueQuantity,
-                GREATER_COMPARATOR_VALUE_TEMPLATE,
-                GREATER_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE);
-        } else if (valueQuantity.getComparator() == Quantity.QuantityComparator.GREATER_OR_EQUAL) {
-            return prepareQuantityValueByComparator(valueQuantity,
-                GREATER_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE,
-                GREATER_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE);
-        }
-
-        return StringUtils.EMPTY;
-    }
-
-    private static String prepareQuantityValueByComparator(Quantity valueQuantity, String systemTemplate, String nonSystemTemplate) {
+    private static String getPhysicalQuantityIntervalXml(Quantity valueQuantity) {
         if (valueQuantity.hasSystem() && valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)) {
-            return formatSystemTemplate(systemTemplate, valueQuantity.getValue(), valueQuantity.getCode());
+            return IVL_PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
+                getHighOrLow(valueQuantity),
+                valueQuantity.getValue(),
+                valueQuantity.getCode(),
+                isInclusive(valueQuantity)
+            );
+        }
+        if (valueQuantity.hasSystem() && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
+            return IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE.formatted(
+                getHighOrLow(valueQuantity),
+                valueQuantity.getValue(),
+                valueQuantity.getCode(),
+                isInclusive(valueQuantity),
+                valueQuantity.getValue(),
+                valueQuantity.getCode(),
+                valueQuantity.getSystem(),
+                valueQuantity.getUnit(),
+                getHighOrLow(valueQuantity)
+            );
+        }
+        if (valueQuantity.hasSystem() && valueQuantity.hasCode()) {
+            return IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
+                getHighOrLow(valueQuantity),
+                valueQuantity.getValue(),
+                valueQuantity.getCode(),
+                isInclusive(valueQuantity),
+                valueQuantity.getValue(),
+                valueQuantity.getCode(),
+                valueQuantity.getSystem(),
+                getHighOrLow(valueQuantity)
+            );
+        }
+        if (valueQuantity.hasUnit()) {
+            return IVL_PQ_WITH_ANY_OR_NO_SYSTEM_AND_UNIT_TEMPLATE.formatted(
+                getHighOrLow(valueQuantity),
+                valueQuantity.getValue(),
+                isInclusive(valueQuantity),
+                valueQuantity.getValue(),
+                valueQuantity.getUnit(),
+                getHighOrLow(valueQuantity)
+            );
         }
 
-        return formatNoSystemTemplate(nonSystemTemplate, valueQuantity.getValue(), prepareUnit(valueQuantity));
+        return IVL_PQ_WITH_ONLY_VALUE_TEMPLATE.formatted(
+            getHighOrLow(valueQuantity),
+            valueQuantity.getValue(),
+            isInclusive(valueQuantity)
+        );
     }
 
-    private static String formatSystemTemplate(String template, BigDecimal value, String code) {
-        return String.format(template, value, code);
+    private static boolean isInclusive(Quantity valueQuantity) {
+        return valueQuantity.getComparator() == GREATER_OR_EQUAL || valueQuantity.getComparator() == LESS_OR_EQUAL;
     }
 
-    private static String formatNoSystemTemplate(String template, BigDecimal value, String unit) {
-        return String.format(template, value, value, unit);
+    private static String getHighOrLow(Quantity valueQuantity) {
+        return valueQuantity.getComparator() == LESS_THAN || valueQuantity.getComparator() == LESS_OR_EQUAL
+            ? "high"
+            : "low";
     }
 
     private static boolean isUncertaintyCodePresent(Quantity valueQuantity) {
@@ -164,7 +191,6 @@ public final class ObservationValueQuantityMapper {
                 }
             }
         }
-
         return false;
     }
 
