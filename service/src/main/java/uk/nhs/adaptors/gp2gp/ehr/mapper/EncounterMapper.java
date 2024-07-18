@@ -14,6 +14,7 @@ import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Encounter.EncounterParticipantComponent;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.Location;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -92,8 +93,16 @@ public class EncounterMapper {
 
         updateEhrFolderEffectiveTime(encounter);
 
+        untestedMethod(encounter, idMapper);
+
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
+    }
+
+    private static void untestedMethod(Encounter encounter, IdMapper idMapper) {
+        encounter.addStatusHistory(
+            new Encounter.StatusHistoryComponent()
+        );
     }
 
     private String buildLocationPertinentInformation(Encounter encounter) {
