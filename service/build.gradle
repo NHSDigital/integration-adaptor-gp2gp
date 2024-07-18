@@ -148,6 +148,9 @@ pitest {
 
 	// git feature limits analysis to contents of PR only
 	features = ["+GIT(from[HEAD~1])"]
+
+	mutators = ['STRONGER', 'EXTENDED_ALL']
+
 	threads = project.getGradle().getStartParameter().getMaxWorkerCount()
 }
 
