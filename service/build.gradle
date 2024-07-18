@@ -5,6 +5,7 @@ plugins {
 	id "checkstyle"
 	id "com.github.spotbugs" version "6.0.19"
 	id 'info.solidsoft.pitest' version '1.15.0'
+	id 'com.arcmutate.github' version '1.2.1'
 	id "io.freefair.lombok" version "8.6"
 	id 'jacoco'
 }
@@ -67,6 +68,9 @@ dependencies {
 	testImplementation 'org.wiremock:wiremock-standalone:3.8.0'
 	testImplementation 'com.squareup.okhttp3:okhttp:4.12.0'
 	testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+
+	pitest 'com.arcmutate:base:1.3.1'
+	pitest 'com.arcmutate:pitest-git-plugin:1.3.2'
 }
 
 test {
@@ -120,7 +124,7 @@ tasks.withType(Test) {
 	}
 }
 
-check.dependsOn integrationTest, 'pitest'
+check.dependsOn integrationTest
 jacocoTestReport.dependsOn integrationTest
 
 spotbugsTest.enabled = false
@@ -138,8 +142,13 @@ spotbugsMain {
 }
 
 pitest {
+	pitestVersion = '1.16.1'
 	junit5PluginVersion = '1.2.1'
-	threads = 16
+	outputFormats = ['gitci']
+
+	// git feature limits analysis to contents of PR only
+	features = ["+GIT(from[HEAD~1])"]
+	threads = project.getGradle().getStartParameter().getMaxWorkerCount()
 }
 
 bootJar {
