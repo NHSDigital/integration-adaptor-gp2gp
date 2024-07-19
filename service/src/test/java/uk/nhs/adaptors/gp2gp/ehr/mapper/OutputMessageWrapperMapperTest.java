@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -9,19 +10,26 @@ import java.time.Instant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
-public class OutputMessageWrapperMapperTest {
+class OutputMessageWrapperMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_DATE_TIME = "2020-02-18T17:09:46.01Z";
-    private static final String EXPECTED_OUTPUT_MESSAGE_WRAPPER_XML = "/ehr/mapper/expected-output-message-wrapper.xml";
+    private static final String EHR_EXTRACT_INTERACTION_ID_NO_REDACTIONS = "RCMR_IN030000UK06";
+    private static final String EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS = "RCMR_IN030000UK07";
+    private static final String EXPECTED_OUTPUT_MESSAGE_WRAPPER_NO_REDACTIONS_XML
+        = "/ehr/mapper/expected-output-message-wrapper-no-redactions.xml";
+    private static final String EXPECTED_OUTPUT_MESSAGE_WRAPPER_WITH_REDACTIONS_XML
+        = "/ehr/mapper/expected-output-message-wrapper-redactions.xml";
     private static final String TRANSFORMED_EXTRACT = "<EhrExtract classCode=\"EXTRACT\" moodCode=\"EVN\"><id "
         + "root=\"12345\"/></EhrExtract>";
     private static final String TO_ASID_VALUE = "to-asid-value";
@@ -29,33 +37,56 @@ public class OutputMessageWrapperMapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+
     @Mock
     private TimestampService timestampService;
 
+    @Mock
+    private RedactionsContext redactionsContext;
+
+    @InjectMocks
     private OutputMessageWrapperMapper outputMessageWrapperMapper;
-    private GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
-    private CharSequence expectedOutputMessage;
+
+    private GetGpcStructuredTaskDefinition gpcStructuredTaskDefinition;
 
     @BeforeEach
-    public void setUp() throws IOException {
+    void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
-        outputMessageWrapperMapper = new OutputMessageWrapperMapper(randomIdGeneratorService, timestampService);
 
-        getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
+        gpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .toAsid(TO_ASID_VALUE)
             .fromAsid(FROM_ASID_VALUE)
             .build();
-
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(EXPECTED_OUTPUT_MESSAGE_WRAPPER_XML);
     }
 
     @Test
-    public void When_MappingOutputMessageWrapperWithStringContent_Expect_ProperXmlOutput() {
-        String outputMessage = outputMessageWrapperMapper.map(
-            getGpcStructuredTaskDefinition,
-            TRANSFORMED_EXTRACT);
+    void When_MappingOutputMessageWrapperWithStringContentAndRedactionsDisabled_Expect_UK06InteractionIdToBePresentAndProperXmlOutput() {
+        final String expected = ResourceTestFileUtils.getFileContent(EXPECTED_OUTPUT_MESSAGE_WRAPPER_NO_REDACTIONS_XML);
 
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        when(redactionsContext.ehrExtractInteractionId()).thenReturn(EHR_EXTRACT_INTERACTION_ID_NO_REDACTIONS);
+
+        final String actual = outputMessageWrapperMapper.map(gpcStructuredTaskDefinition, TRANSFORMED_EXTRACT);
+
+        assertAll(
+            () -> assertThat(actual).isEqualToIgnoringWhitespace(expected),
+            () -> assertThat(actual).contains(EHR_EXTRACT_INTERACTION_ID_NO_REDACTIONS),
+            () -> assertThat(actual).doesNotContain(EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS)
+        );
+    }
+
+    @Test
+    void When_MappingOutputMessageWrapperWithStringContentAndRedactionsEnabled_Expect_UK07InteractionIdToBePresentAndProperXmlOutput() {
+        final String expected = ResourceTestFileUtils.getFileContent(EXPECTED_OUTPUT_MESSAGE_WRAPPER_WITH_REDACTIONS_XML);
+
+        when(redactionsContext.ehrExtractInteractionId()).thenReturn(EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS);
+
+        final String actual = outputMessageWrapperMapper.map(gpcStructuredTaskDefinition, TRANSFORMED_EXTRACT);
+
+        assertAll(
+            () -> assertThat(actual).isEqualToIgnoringWhitespace(expected),
+            () -> assertThat(actual).contains(EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS),
+            () -> assertThat(actual).doesNotContain(EHR_EXTRACT_INTERACTION_ID_NO_REDACTIONS)
+        );
     }
 }
