@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
-import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsConfiguration;
+import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -80,7 +80,7 @@ public class EhrExtractUATTest {
 
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
-    private RedactionsConfiguration redactionsConfiguration;
+    private RedactionsContext redactionsContext;
     private OutputMessageWrapperMapper outputMessageWrapperMapper;
     private GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
@@ -133,7 +133,7 @@ public class EhrExtractUATTest {
         final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorServiceStub();
         when(timestampService.now()).thenReturn(Instant.parse("2020-01-01T01:01:01.01Z"));
 
-        outputMessageWrapperMapper = new OutputMessageWrapperMapper(randomIdGeneratorService, timestampService, redactionsConfiguration);
+        outputMessageWrapperMapper = new OutputMessageWrapperMapper(randomIdGeneratorService, timestampService, redactionsContext);
         messageContext = new MessageContext(randomIdGeneratorService);
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();

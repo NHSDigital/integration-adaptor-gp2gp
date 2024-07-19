@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsConfiguration;
+import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
@@ -42,7 +42,7 @@ class OutputMessageWrapperMapperTest {
     private TimestampService timestampService;
 
     @Mock
-    private RedactionsConfiguration redactionsConfiguration;
+    private RedactionsContext redactionsContext;
 
     @InjectMocks
     private OutputMessageWrapperMapper outputMessageWrapperMapper;
@@ -64,7 +64,7 @@ class OutputMessageWrapperMapperTest {
     void When_MappingOutputMessageWrapperWithStringContentAndRedactionsDisabled_Expect_UK06InteractionIdToBePresentAndProperXmlOutput() {
         final String expected = ResourceTestFileUtils.getFileContent(EXPECTED_OUTPUT_MESSAGE_WRAPPER_NO_REDACTIONS_XML);
 
-        when(redactionsConfiguration.isRedactionsEnabled()).thenReturn(false);
+        when(redactionsContext.ehrExtractInteractionId()).thenReturn(EHR_EXTRACT_INTERACTION_ID_NO_REDACTIONS);
 
         final String actual = outputMessageWrapperMapper.map(gpcStructuredTaskDefinition, TRANSFORMED_EXTRACT);
 
@@ -79,7 +79,7 @@ class OutputMessageWrapperMapperTest {
     void When_MappingOutputMessageWrapperWithStringContentAndRedactionsEnabled_Expect_UK07InteractionIdToBePresentAndProperXmlOutput() {
         final String expected = ResourceTestFileUtils.getFileContent(EXPECTED_OUTPUT_MESSAGE_WRAPPER_WITH_REDACTIONS_XML);
 
-        when(redactionsConfiguration.isRedactionsEnabled()).thenReturn(true);
+        when(redactionsContext.ehrExtractInteractionId()).thenReturn(EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS);
 
         final String actual = outputMessageWrapperMapper.map(gpcStructuredTaskDefinition, TRANSFORMED_EXTRACT);
 

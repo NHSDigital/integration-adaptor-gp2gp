@@ -20,6 +20,7 @@ import io.netty.handler.ssl.SslContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
+import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.mhs.configuration.MhsClientConfiguration;
@@ -31,7 +32,6 @@ import uk.nhs.adaptors.gp2gp.mhs.configuration.MhsConfiguration;
 public class MhsRequestBuilder {
     private static final String ODS_CODE = "ods-code";
     private static final String INTERACTION_ID = "Interaction-Id";
-    private static final String MHS_OUTBOUND_EXTRACT_CORE_INTERACTION_ID = "RCMR_IN030000UK06";
     private static final String CORRELATION_ID = "Correlation-Id";
     private static final String WAIT_FOR_RESPONSE = "wait-for-response";
     private static final String FALSE = "false";
@@ -43,10 +43,11 @@ public class MhsRequestBuilder {
     private final MhsConfiguration mhsConfiguration;
     private final RequestBuilderService requestBuilderService;
     private final MhsClientConfiguration mhsClientConfig;
+    private final RedactionsContext redactionsContext;
 
     public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(
             String extractCoreMessage, String conversationId, String fromOdsCode, String messageId) {
-        return buildRequest(extractCoreMessage, fromOdsCode, conversationId, MHS_OUTBOUND_EXTRACT_CORE_INTERACTION_ID, messageId);
+        return buildRequest(extractCoreMessage, fromOdsCode, conversationId, redactionsContext.ehrExtractInteractionId(), messageId);
     }
 
     public RequestHeadersSpec<?> buildSendAcknowledgementRequest(
