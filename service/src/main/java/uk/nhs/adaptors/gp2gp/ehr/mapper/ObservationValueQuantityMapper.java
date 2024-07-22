@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.Quantity;
@@ -71,6 +72,10 @@ public final class ObservationValueQuantityMapper {
     }
 
     public static String processQuantity(Quantity valueQuantity) {
+        if (!valueQuantity.hasValue()) {
+            return StringUtils.EMPTY;
+        }
+
         var stringBuilder = new StringBuilder();
 
         if (isUncertaintyCodePresent(valueQuantity)) {

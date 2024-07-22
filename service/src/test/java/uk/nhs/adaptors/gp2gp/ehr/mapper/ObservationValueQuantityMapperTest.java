@@ -115,6 +115,16 @@ public class ObservationValueQuantityMapperTest {
     }
 
     @Test
+    public void When_MappingQuantityWithNullValue_Expected_EmptyString() {
+        var quantity = (Quantity) new Quantity()
+            .setSystem(UOM_SYSTEM)
+            .setCode(CODE_CEL);
+        var mappedQuantity = ObservationValueQuantityMapper.processQuantity(quantity);
+
+        assertThat(mappedQuantity).isEmpty();
+    }
+
+    @Test
     public void When_MappingQuantityWithUOMSystemAndCode_Expect_PQXmlWithValueAndQuantitySetAndNoTranslation() {
         var quantity = new Quantity()
             .setSystem(UOM_SYSTEM)
@@ -229,19 +239,6 @@ public class ObservationValueQuantityMapperTest {
     public void When_MappingQuantityWithAnyOrNoSystemWithoutUnitOrCode_Expect_PQXmlWithValueSetAndUnitSetToOne(String system) {
         var quantity = new Quantity()
             .setSystem(system)
-            .setValue(VALUE_37_1);
-
-        var expectedXml = """
-            <value xsi:type="PQ" value="37.1" unit="1" />""";
-
-        var mappedQuantity = ObservationValueQuantityMapper.processQuantity(quantity);
-
-        assertThat(mappedQuantity).isEqualTo(expectedXml);
-    }
-
-    @Test
-    public void When_MappingQuantityWithoutSystemOrUnitOrCode_Expect_PQXmlWithValueSetAndUnitSetToOne() {
-        var quantity = new Quantity()
             .setValue(VALUE_37_1);
 
         var expectedXml = """
