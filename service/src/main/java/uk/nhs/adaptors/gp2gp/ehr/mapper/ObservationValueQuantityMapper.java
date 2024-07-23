@@ -13,6 +13,13 @@ public final class ObservationValueQuantityMapper {
 
     private static final String UNITS_OF_MEASURE_SYSTEM =
         "http://unitsofmeasure.org";
+    public static final String URN_OID_PREFIX =
+        "urn:oid:";
+    public static final String OID_REGEX =
+        "(urn:oid:)?[0-2](\\.[1-9]\\d*)+";
+    public static final String UUID_REGEX =
+        "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
+
     private static final String UNCERTAINTY_EXTENSION =
         "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ValueApproximation-1";
     private static final String UNCERTAINTY_CODE = """
@@ -45,19 +52,19 @@ public final class ObservationValueQuantityMapper {
 
     public static final String IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE = """
         <value xsi:type="IVL_PQ">%n\
-            <%s value="%s" unit="%s" inclusive="%s">%n\
+            <%s value="%s" unit="1" inclusive="%s">%n\
                 <translation value="%s" code="%s" codeSystem="%s" displayName="%s" />%n\
             </%s>%n\
         </value>""";
     public static final String IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE = """
         <value xsi:type="IVL_PQ">%n\
-            <%s value="%s" unit="%s" inclusive="%s">%n\
+            <%s value="%s" unit="1" inclusive="%s">%n\
                 <translation value="%s" code="%s" codeSystem="%s" />%n\
             </%s>%n\
         </value>""";
     public static final String IVL_PQ_WITH_ANY_OR_NO_SYSTEM_AND_UNIT_TEMPLATE = """
         <value xsi:type="IVL_PQ">%n\
-             <%s value="%s" unit="1" inclusive="%s">%n\
+            <%s value="%s" unit="1" inclusive="%s">%n\
                 <translation value="%s">%n\
                     <originalText>%s</originalText>%n\
                 </translation>%n\
@@ -65,7 +72,7 @@ public final class ObservationValueQuantityMapper {
         </value>""";
     public static final String IVL_PQ_WITH_ONLY_VALUE_TEMPLATE = """
         <value xsi:type="IVL_PQ">%n\
-             <%s value="%s" unit="1" inclusive="%s" />%n\
+            <%s value="%s" unit="1" inclusive="%s" />%n\
         </value>""";
 
     private ObservationValueQuantityMapper() {
@@ -98,21 +105,21 @@ public final class ObservationValueQuantityMapper {
                 valueQuantity.getCode()
             );
         }
-        if (valueQuantity.hasSystem() && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
+        if (hasValidSystem(valueQuantity) && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
             return PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE.formatted(
                 valueQuantity.getValue(),
                 valueQuantity.getValue(),
                 valueQuantity.getCode(),
-                valueQuantity.getSystem(),
+                StringUtils.removeStart(valueQuantity.getSystem(), URN_OID_PREFIX),
                 valueQuantity.getUnit()
             );
         }
-        if (valueQuantity.hasSystem() && valueQuantity.hasCode()) {
+        if (hasValidSystem(valueQuantity) && valueQuantity.hasCode()) {
             return PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
                 valueQuantity.getValue(),
                 valueQuantity.getValue(),
                 valueQuantity.getCode(),
-                valueQuantity.getSystem()
+                StringUtils.removeStart(valueQuantity.getSystem(), URN_OID_PREFIX)
             );
         }
         if (valueQuantity.hasUnit()) {
@@ -127,7 +134,7 @@ public final class ObservationValueQuantityMapper {
     }
 
     private static String getPhysicalQuantityIntervalXml(Quantity valueQuantity) {
-        if (valueQuantity.hasSystem() && valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)) {
+        if (UNITS_OF_MEASURE_SYSTEM.equals(valueQuantity.getSystem()) && valueQuantity.hasCode()) {
             return IVL_PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
                 getHighOrLow(valueQuantity),
                 valueQuantity.getValue(),
@@ -135,28 +142,26 @@ public final class ObservationValueQuantityMapper {
                 isInclusive(valueQuantity)
             );
         }
-        if (valueQuantity.hasSystem() && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
+        if (hasValidSystem(valueQuantity) && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
             return IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE.formatted(
                 getHighOrLow(valueQuantity),
                 valueQuantity.getValue(),
-                valueQuantity.getCode(),
                 isInclusive(valueQuantity),
                 valueQuantity.getValue(),
                 valueQuantity.getCode(),
-                valueQuantity.getSystem(),
+                StringUtils.removeStart(valueQuantity.getSystem(), URN_OID_PREFIX),
                 valueQuantity.getUnit(),
                 getHighOrLow(valueQuantity)
             );
         }
-        if (valueQuantity.hasSystem() && valueQuantity.hasCode()) {
+        if (hasValidSystem(valueQuantity) && valueQuantity.hasCode()) {
             return IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
                 getHighOrLow(valueQuantity),
                 valueQuantity.getValue(),
-                valueQuantity.getCode(),
                 isInclusive(valueQuantity),
                 valueQuantity.getValue(),
                 valueQuantity.getCode(),
-                valueQuantity.getSystem(),
+                StringUtils.removeStart(valueQuantity.getSystem(), URN_OID_PREFIX),
                 getHighOrLow(valueQuantity)
             );
         }
@@ -204,5 +209,13 @@ public final class ObservationValueQuantityMapper {
             && extension.getUrl().equals(UNCERTAINTY_EXTENSION)
             && extension.getValue() instanceof BooleanType
             && ((BooleanType) extension.getValue()).booleanValue();
+    }
+
+    private static boolean hasValidSystem(Quantity valueQuantity) {
+        return valueQuantity.hasSystem() && (
+            valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)
+                || valueQuantity.getSystem().matches(OID_REGEX)
+                || valueQuantity.getSystem().matches(UUID_REGEX)
+            );
     }
 }
