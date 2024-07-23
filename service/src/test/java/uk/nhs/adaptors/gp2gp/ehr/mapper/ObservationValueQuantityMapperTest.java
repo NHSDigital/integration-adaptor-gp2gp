@@ -115,7 +115,7 @@ public class ObservationValueQuantityMapperTest {
     }
 
     @Test
-    public void When_MappingQuantityWithNullValue_Expected_EmptyString() {
+    public void When_MappingQuantityWithNullValue_Expect_EmptyString() {
         var quantity = (Quantity) new Quantity()
             .setSystem(UOM_SYSTEM)
             .setCode(CODE_CEL);
