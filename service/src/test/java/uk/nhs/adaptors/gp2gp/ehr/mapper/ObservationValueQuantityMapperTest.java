@@ -36,6 +36,7 @@ public class ObservationValueQuantityMapperTest {
     public static final String SYSTEM_OID = "1.2.3.4.5";
     public static final String SYSTEM_OID_WITH_PREFIX = "urn:oid:1.2.3.4.5";
     public static final String SYSTEM_UUID = "e1423232-5d4f-472f-8c55-271de1d6f98d";
+    public static final String SYSTEM_UUID_WITH_PREFIX = "urn:uuid:e1423232-5d4f-472f-8c55-271de1d6f98d";
     public static final String INVALID_SYSTEM = "not-a-valid-system";
 
     @Test
@@ -256,7 +257,8 @@ public class ObservationValueQuantityMapperTest {
     @CsvSource({
         SYSTEM_OID + "," + SYSTEM_OID,
         SYSTEM_OID_WITH_PREFIX + "," + SYSTEM_OID,
-        SYSTEM_UUID + "," + SYSTEM_UUID
+        SYSTEM_UUID + "," + SYSTEM_UUID,
+        SYSTEM_UUID_WITH_PREFIX + "," + SYSTEM_UUID
     })
     public void When_MappingQuantityWithValidNonUOMSystemAndCodeAndUnit_Expect_PQWithTranslationAndDisplayName(
         String system,
@@ -284,7 +286,8 @@ public class ObservationValueQuantityMapperTest {
     @CsvSource({
         SYSTEM_OID + "," + SYSTEM_OID,
         SYSTEM_OID_WITH_PREFIX + "," + SYSTEM_OID,
-        SYSTEM_UUID + "," + SYSTEM_UUID
+        SYSTEM_UUID + "," + SYSTEM_UUID,
+        SYSTEM_UUID_WITH_PREFIX + "," + SYSTEM_UUID
     })
     public void When_MappingIntervalWithValidNonUOMSystemAndCodeAndUnit_Expect_IVLPQWithTranslationAndDisplayName(
         String system,
@@ -354,7 +357,8 @@ public class ObservationValueQuantityMapperTest {
     @CsvSource({
         SYSTEM_OID + "," + SYSTEM_OID,
         SYSTEM_OID_WITH_PREFIX + "," + SYSTEM_OID,
-        SYSTEM_UUID + "," + SYSTEM_UUID
+        SYSTEM_UUID + "," + SYSTEM_UUID,
+        SYSTEM_UUID_WITH_PREFIX + "," + SYSTEM_UUID
     })
     public void When_MappingQuantityWithValidNonUOMSystemAndCode_Expect_PQXmlWithTranslation(
         String system,
@@ -380,7 +384,8 @@ public class ObservationValueQuantityMapperTest {
     @CsvSource({
         SYSTEM_OID + "," + SYSTEM_OID,
         SYSTEM_OID_WITH_PREFIX + "," + SYSTEM_OID,
-        SYSTEM_UUID + "," + SYSTEM_UUID
+        SYSTEM_UUID + "," + SYSTEM_UUID,
+        SYSTEM_UUID_WITH_PREFIX + "," + SYSTEM_UUID
     })
     public void When_MappingIntervalWithValidNonUOMSystemAndCode_Expect_IVLPQWithTranslation(
         String system,
@@ -411,6 +416,7 @@ public class ObservationValueQuantityMapperTest {
         SYSTEM_OID,
         SYSTEM_OID_WITH_PREFIX,
         SYSTEM_UUID,
+        SYSTEM_UUID_WITH_PREFIX,
         INVALID_SYSTEM
     })
     @NullAndEmptySource

@@ -15,10 +15,12 @@ public final class ObservationValueQuantityMapper {
         "http://unitsofmeasure.org";
     public static final String URN_OID_PREFIX =
         "urn:oid:";
+    public static final String URN_UUID_PREFIX =
+        "urn:uuid:";
     public static final String OID_REGEX =
         "(urn:oid:)?[0-2](\\.[1-9]\\d*)+";
     public static final String UUID_REGEX =
-        "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
+        "(urn:uuid:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
 
     private static final String UNCERTAINTY_EXTENSION =
         "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ValueApproximation-1";
@@ -110,7 +112,7 @@ public final class ObservationValueQuantityMapper {
                 valueQuantity.getValue(),
                 valueQuantity.getValue(),
                 valueQuantity.getCode(),
-                StringUtils.removeStart(valueQuantity.getSystem(), URN_OID_PREFIX),
+                getSystemWithoutPrefix(valueQuantity.getSystem()),
                 valueQuantity.getUnit()
             );
         }
@@ -119,7 +121,7 @@ public final class ObservationValueQuantityMapper {
                 valueQuantity.getValue(),
                 valueQuantity.getValue(),
                 valueQuantity.getCode(),
-                StringUtils.removeStart(valueQuantity.getSystem(), URN_OID_PREFIX)
+                getSystemWithoutPrefix(valueQuantity.getSystem())
             );
         }
         if (valueQuantity.hasUnit()) {
@@ -149,7 +151,7 @@ public final class ObservationValueQuantityMapper {
                 isInclusive(valueQuantity),
                 valueQuantity.getValue(),
                 valueQuantity.getCode(),
-                StringUtils.removeStart(valueQuantity.getSystem(), URN_OID_PREFIX),
+                getSystemWithoutPrefix(valueQuantity.getSystem()),
                 valueQuantity.getUnit(),
                 getHighOrLow(valueQuantity)
             );
@@ -161,7 +163,7 @@ public final class ObservationValueQuantityMapper {
                 isInclusive(valueQuantity),
                 valueQuantity.getValue(),
                 valueQuantity.getCode(),
-                StringUtils.removeStart(valueQuantity.getSystem(), URN_OID_PREFIX),
+                getSystemWithoutPrefix(valueQuantity.getSystem()),
                 getHighOrLow(valueQuantity)
             );
         }
@@ -217,5 +219,16 @@ public final class ObservationValueQuantityMapper {
                 || valueQuantity.getSystem().matches(OID_REGEX)
                 || valueQuantity.getSystem().matches(UUID_REGEX)
             );
+    }
+
+    private static String getSystemWithoutPrefix(String system) {
+        if (system.startsWith(URN_OID_PREFIX)) {
+            return StringUtils.removeStart(system, URN_OID_PREFIX);
+        }
+        if (system.startsWith(URN_UUID_PREFIX)) {
+            return StringUtils.removeStart(system, URN_UUID_PREFIX);
+        }
+
+        return system;
     }
 }
