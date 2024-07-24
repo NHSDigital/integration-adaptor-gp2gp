@@ -224,12 +224,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "Temperature (observable entity)"
+              "display": "UOM System with no value"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-01T10:30:00+00:00",
+        "issued": "2019-03-01T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -256,12 +256,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "Temperature (observable entity)"
+              "display": "UOM System with Value and Code"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-02T10:30:00+00:00",
+        "issued": "2019-03-02T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -289,12 +289,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "Temperature (observable entity)"
+              "display": "Invalid System with Value, Code and Unit"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-03T10:30:00+00:00",
+        "issued": "2019-03-03T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -323,12 +323,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "Temperature (observable entity)"
+              "display": "OID System with Value, Code, Unit"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-04T10:30:00+00:00",
+        "issued": "2019-03-04T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -357,12 +357,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "Temperature (observable entity)"
+              "display": "URN OID System with Value, Code, Unit"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-05T10:30:00+00:00",
+        "issued": "2019-03-05T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -391,12 +391,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "Temperature (observable entity)"
+              "display": "UUID System with Value, Code and Unit"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-06T10:30:00+00:00",
+        "issued": "2019-03-06T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -425,12 +425,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "Temperature (observable entity)"
+              "display": "Invalid System with Value and Code"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-07T10:30:00+00:00",
+        "issued": "2019-03-07T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -458,12 +458,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "valueQuantity_WithoutSystem_WithUnit_Value"
+              "display": "No System with Unit and Value"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-08T10:30:00+00:00",
+        "issued": "2019-03-08T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -490,12 +490,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "valueQuantity_WithOnlyValue"
+              "display": "No System with only Value"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-09T10:30:00+00:00",
+        "issued": "2019-03-09T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -521,12 +521,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "valueQuantity_WithUOMSystem_GreaterThanComparator_Unit_Value"
+              "display": "UOM System with GreaterThan Comparator, Code and Value"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-10T10:30:00+00:00",
+        "issued": "2019-03-10T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -555,12 +555,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "valueQuantity_WithNonUOMSystem_LessThanComparator_Code_Unit_Value"
+              "display": "Invalid system with LessThan Comparator, Value, Code and Unit"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-11T10:30:00+00:00",
+        "issued": "2019-03-11T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -572,6 +572,40 @@
           "value": 37.1,
           "code": "Cel",
           "unit": "C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000012",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "Non UOM System with GreaterOrEqual Comparator, Value and Code"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-12T10:30:00+00:00",
+        "issued": "2019-03-12T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "1.2.3.4.5",
+          "comparator": ">=",
+          "value": 37.1,
+          "code": "Cel"
         }
       }
     },
@@ -590,22 +624,21 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "valueQuantity_WithNonUOMSystem_GreaterThanEqualComparator_Code"
+              "display": "No System with LessThanEqual Comparator, Value and Unit"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-13T10:30:00+00:00",
+        "issued": "2019-03-13T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
           }
         ],
         "valueQuantity": {
-          "system": "http://notunitsofmeasure.org",
-          "comparator": ">=",
+          "comparator": "<=",
           "value": 37.1,
-          "code": "Cel"
+          "unit": "C"
         }
       }
     },
@@ -624,21 +657,20 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "valueQuantity_WithoutSystem_WithLessThanEqualComparator_Unit"
+              "display": "No System with LessThan Comparator and Value"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-14T10:30:00+00:00",
+        "issued": "2019-03-14T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
           }
         ],
         "valueQuantity": {
-          "comparator": "<=",
-          "value": 37.1,
-          "unit": "C"
+          "comparator": "<",
+          "value": 37.1
         }
       }
     },
@@ -657,44 +689,12 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "valueQuantity_WithoutSystem_WithLessThanComparator_Value"
+              "display": "UOM System with Code, Unit, and Value with Uncertainty"
             }
           ]
         },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
-        "performer": [
-          {
-            "reference": "Practitioner/1"
-          }
-        ],
-        "valueQuantity": {
-          "comparator": "<",
-          "value": 37.1
-        }
-      }
-    },
-    {
-      "resource": {
-        "resourceType": "Observation",
-        "id": "00000000-0000-4000-0000-000000000016",
-        "meta": {
-          "profile": [
-            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
-          ]
-        },
-        "status": "final",
-        "code": {
-          "coding": [
-            {
-              "system": "http://snomed.info/sct",
-              "code": "703421000",
-              "display": "valueQuantity_WithUncertainty"
-            }
-          ]
-        },
-        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
-        "issued": "2019-03-28T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-15T10:30:00+00:00",
+        "issued": "2019-03-15T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -707,7 +707,10 @@
               "valueBoolean": true
             }
           ],
-          "value": 37.1
+          "system": "http://unitsofmeasure.org",
+          "value": 37.1,
+          "code": "Cel",
+          "unit": "C"
         }
       }
     }
