@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 class RedactionsConfiguration {
-    private static final String EHR_EXTRACT_INTERACTION_ID = "RCMR_IN030000UK06";
-    private static final String EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS = "RCMR_IN030000UK07";
+    public static final String EHR_EXTRACT_INTERACTION_ID = "RCMR_IN030000UK06";
+    public static final String EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS = "RCMR_IN030000UK07";
     private boolean redactionsEnabled;
 
     @Value("${gp2gp.redactions-enabled}")
