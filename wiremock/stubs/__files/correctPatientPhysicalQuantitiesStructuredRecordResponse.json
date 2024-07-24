@@ -425,7 +425,7 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "Invalid System with Value and Code"
+              "display": "URN UUID System with Value, Code and Unit"
             }
           ]
         },
@@ -437,9 +437,10 @@
           }
         ],
         "valueQuantity": {
-          "system": "http://notunitsofmeasure.org",
+          "system": "urn:uuid:4cb42d9b-34cc-464d-9021-2462feddf077",
           "value": 37.1,
-          "code": "Cel"
+          "code": "Cel",
+          "unit": "C"
         }
       }
     },
@@ -458,7 +459,7 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "No System with Unit and Value"
+              "display": "Invalid System with Value and Code"
             }
           ]
         },
@@ -470,8 +471,9 @@
           }
         ],
         "valueQuantity": {
+          "system": "http://notunitsofmeasure.org",
           "value": 37.1,
-          "unit": "C"
+          "code": "Cel"
         }
       }
     },
@@ -490,12 +492,44 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "No System with only Value"
+              "display": "No System with Unit and Value"
             }
           ]
         },
         "effectiveDateTime": "2019-03-09T10:30:00+00:00",
         "issued": "2019-03-09T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "value": 37.1,
+          "unit": "C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000010",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "No System with only Value"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-10T10:30:00+00:00",
+        "issued": "2019-03-10T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -509,7 +543,7 @@
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "00000000-0000-4000-0000-0000000000010",
+        "id": "00000000-0000-4000-0000-0000000000011",
         "meta": {
           "profile": [
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
@@ -525,8 +559,8 @@
             }
           ]
         },
-        "effectiveDateTime": "2019-03-10T10:30:00+00:00",
-        "issued": "2019-03-10T10:30:00+00:00",
+        "effectiveDateTime": "2019-03-110T10:30:00+00:00",
+        "issued": "2019-03-11T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
@@ -537,41 +571,6 @@
           "comparator": ">",
           "value": 37.1,
           "code": "Cel"
-        }
-      }
-    },
-    {
-      "resource": {
-        "resourceType": "Observation",
-        "id": "00000000-0000-4000-0000-000000000011",
-        "meta": {
-          "profile": [
-            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
-          ]
-        },
-        "status": "final",
-        "code": {
-          "coding": [
-            {
-              "system": "http://snomed.info/sct",
-              "code": "703421000",
-              "display": "Invalid system with LessThan Comparator, Value, Code and Unit"
-            }
-          ]
-        },
-        "effectiveDateTime": "2019-03-11T10:30:00+00:00",
-        "issued": "2019-03-11T10:30:00+00:00",
-        "performer": [
-          {
-            "reference": "Practitioner/1"
-          }
-        ],
-        "valueQuantity": {
-          "system": "http://notunitsofmeasure.org",
-          "comparator": "<",
-          "value": 37.1,
-          "code": "Cel",
-          "unit": "C"
         }
       }
     },
@@ -590,7 +589,7 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "Non UOM System with GreaterOrEqual Comparator, Value and Code"
+              "display": "Invalid system with LessThan Comparator, Value, Code and Unit"
             }
           ]
         },
@@ -602,10 +601,11 @@
           }
         ],
         "valueQuantity": {
-          "system": "1.2.3.4.5",
-          "comparator": ">=",
+          "system": "http://notunitsofmeasure.org",
+          "comparator": "<",
           "value": 37.1,
-          "code": "Cel"
+          "code": "Cel",
+          "unit": "C"
         }
       }
     },
@@ -624,7 +624,7 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "No System with LessThanEqual Comparator, Value and Unit"
+              "display": "Non UOM System with GreaterOrEqual Comparator, Value and Code"
             }
           ]
         },
@@ -636,9 +636,10 @@
           }
         ],
         "valueQuantity": {
-          "comparator": "<=",
+          "system": "1.2.3.4.5",
+          "comparator": ">=",
           "value": 37.1,
-          "unit": "C"
+          "code": "Cel"
         }
       }
     },
@@ -657,7 +658,7 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "No System with LessThan Comparator and Value"
+              "display": "No System with LessThanEqual Comparator, Value and Unit"
             }
           ]
         },
@@ -669,8 +670,9 @@
           }
         ],
         "valueQuantity": {
-          "comparator": "<",
-          "value": 37.1
+          "comparator": "<=",
+          "value": 37.1,
+          "unit": "C"
         }
       }
     },
@@ -689,12 +691,44 @@
             {
               "system": "http://snomed.info/sct",
               "code": "703421000",
-              "display": "UOM System with Code, Unit, and Value with Uncertainty"
+              "display": "No System with LessThan Comparator and Value"
             }
           ]
         },
         "effectiveDateTime": "2019-03-15T10:30:00+00:00",
         "issued": "2019-03-15T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "comparator": "<",
+          "value": 37.1
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000016",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "UOM System with Code, Unit, and Value with Uncertainty"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-16T10:30:00+00:00",
+        "issued": "2019-03-16T10:30:00+00:00",
         "performer": [
           {
             "reference": "Practitioner/1"
