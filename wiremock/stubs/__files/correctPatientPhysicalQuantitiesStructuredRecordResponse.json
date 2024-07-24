@@ -1,0 +1,715 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+    ]
+  },
+  "id": "A7936B40-31FC-11EE-8BEB-F3271BAF7CF5",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "d3fc5610-31e8-11ee-9f30-0a58a9feac02",
+        "meta": {
+          "versionId": "d94e37278c6e364cee5c9fe6825b1f87",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1",
+            "extension": [
+              {
+                "url": "registrationPeriod",
+                "valuePeriod": {
+                  "start": "2023-08-03",
+                  "end": "2023-11-01"
+                }
+              },
+              {
+                "url": "registrationType",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-RegistrationType-1",
+                      "code": "T",
+                      "display": "Temporary"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "extension": [
+              {
+                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-NHSNumberVerificationStatus-1",
+                      "code": "01",
+                      "display": "Number present and verified"
+                    }
+                  ]
+                }
+              }
+            ],
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "{{jsonPath request.body '$.parameter[0].valueIdentifier.value'}}"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Wall",
+            "prefix": [
+              "Mr"
+            ],
+            "given": [
+              "Joseph"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "+441454121205",
+            "use": "home"
+          },
+          {
+            "system": "phone",
+            "value": "+447777121205",
+            "use": "mobile"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1994-03-22",
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "16 Bond Sreet",
+              "High Moor"
+            ],
+            "city": "Leeds",
+            "district": "West Yorkshire",
+            "postalCode": "LS26 1AF",
+            "country": "GBR"
+          }
+        ],
+        "managingOrganization": {
+          "reference": "Organization/B84012"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "1",
+        "meta": {
+          "versionId": "1469444400000",
+          "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+            "extension": [
+              {
+                "url": "language",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                      "code": "en",
+                      "display": "English"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/sds-user-id",
+            "value": "G13579135"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "family": "Gilbert",
+            "given": [
+              "Nichole"
+            ],
+            "prefix": [
+              "Miss"
+            ]
+          }
+        ],
+        "gender": "female"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "B84012",
+        "meta": {
+          "versionId": "29f8da7af7c6b1c51b9cd3f89d25006a",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "B84012"
+          }
+        ],
+        "active": true,
+        "name": "Spring Hall Group Practice",
+        "address": [
+          {
+            "use": "work",
+            "line": [
+              "101 Yvonne Falls"
+            ],
+            "city": "West Carey",
+            "district": "Norfolk",
+            "postalCode": "MK3 7SA",
+            "country": "GBR"
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "+441273749184",
+            "use": "work"
+          },
+          {
+            "system": "fax",
+            "value": "+441455338473",
+            "use": "work"
+          },
+          {
+            "system": "email",
+            "value": "bakers.hill@medicus.health",
+            "use": "work"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000001",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "Temperature (observable entity)"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "http://unitsofmeasure.org",
+          "unit": "Cel"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000002",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "Temperature (observable entity)"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "http://unitsofmeasure.org",
+          "value": 37,
+          "code": "C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000003",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "Temperature (observable entity)"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "http://notunitsofmeasure.org",
+          "value": 37.1,
+          "code": "Cel",
+          "unit": "C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000004",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "Temperature (observable entity)"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "1.2.3.4.5",
+          "value": 37.1,
+          "code": "Cel",
+          "unit": "C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000005",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "Temperature (observable entity)"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "urn:oid:1.2.3.4.5",
+          "value": 37.1,
+          "code": "Cel",
+          "unit": "C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000006",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "Temperature (observable entity)"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "4cb42d9b-34cc-464d-9021-2462feddf077",
+          "value": 37.1,
+          "code": "Cel",
+          "unit": "C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000007",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "Temperature (observable entity)"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "http://notunitsofmeasure.org",
+          "value": 37.1,
+          "code": "Cel"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000008",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "valueQuantity_WithoutSystem_WithUnit_Value"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "value": 37.1,
+          "unit": "C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000009",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "valueQuantity_WithOnlyValue"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "value": 37.1
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-0000000000010",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "valueQuantity_WithUOMSystem_GreaterThanComparator_Unit_Value"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "http://unitsofmeasure.org",
+          "comparator": ">",
+          "value": 37.1,
+          "code": "Cel"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000011",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "valueQuantity_WithNonUOMSystem_LessThanComparator_Code_Unit_Value"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "http://notunitsofmeasure.org",
+          "comparator": "<",
+          "value": 37.1,
+          "code": "Cel",
+          "unit": "C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000013",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "valueQuantity_WithNonUOMSystem_GreaterThanEqualComparator_Code"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "system": "http://notunitsofmeasure.org",
+          "comparator": ">=",
+          "value": 37.1,
+          "code": "Cel"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000014",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "valueQuantity_WithoutSystem_WithLessThanEqualComparator_Unit"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "comparator": "<=",
+          "value": 37.1,
+          "unit": "C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000015",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "valueQuantity_WithoutSystem_WithLessThanComparator_Value"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "comparator": "<",
+          "value": 37.1
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "00000000-0000-4000-0000-000000000016",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "703421000",
+              "display": "valueQuantity_WithUncertainty"
+            }
+          ]
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/1"
+          }
+        ],
+        "valueQuantity": {
+          "extension": [
+            {
+              "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ValueApproximation-1",
+              "valueBoolean": true
+            }
+          ],
+          "value": 37.1
+        }
+      }
+    }
+  ]
+}
