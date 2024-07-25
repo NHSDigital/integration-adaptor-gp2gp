@@ -28,55 +28,6 @@ public final class ObservationValueQuantityMapper {
         <uncertaintyCode code="U" codeSystem="2.16.840.1.113883.5.1053" displayName="Recorded as uncertain" />
         """;
 
-    public static final String PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE = """
-        <value xsi:type="PQ" value="%s" unit="%s" />""";
-    public static final String PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE = """
-        <value xsi:type="PQ" value="%s" unit="1">%n\
-            <translation value="%s" code="%s" codeSystem="%s" displayName="%s" />%n\
-        </value>""";
-    public static final String PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE = """
-        <value xsi:type="PQ" value="%s" unit="1">%n\
-            <translation value="%s" code="%s" codeSystem="%s" />%n\
-        </value>""";
-    public static final String PQ_WITH_ANY_OR_NO_SYSTEM_AND_UNIT_TEMPLATE = """
-        <value xsi:type="PQ" value="%s" unit="1">%n\
-            <translation value="%s">%n\
-                <originalText>%s</originalText>%n\
-            </translation>%n\
-        </value>""";
-    private static final String PQ_WITH_ONLY_VALUE_TEMPLATE =
-        "<value xsi:type=\"PQ\" value=\"%s\" unit=\"1\" />";
-
-    private static final String IVL_PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE = """
-        <value xsi:type="IVL_PQ">%n\
-            <%s value="%s" unit="%s" inclusive="%s" />%n\
-        </value>""";
-
-    public static final String IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE = """
-        <value xsi:type="IVL_PQ">%n\
-            <%s value="%s" unit="1" inclusive="%s">%n\
-                <translation value="%s" code="%s" codeSystem="%s" displayName="%s" />%n\
-            </%s>%n\
-        </value>""";
-    public static final String IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE = """
-        <value xsi:type="IVL_PQ">%n\
-            <%s value="%s" unit="1" inclusive="%s">%n\
-                <translation value="%s" code="%s" codeSystem="%s" />%n\
-            </%s>%n\
-        </value>""";
-    public static final String IVL_PQ_WITH_ANY_OR_NO_SYSTEM_AND_UNIT_TEMPLATE = """
-        <value xsi:type="IVL_PQ">%n\
-            <%s value="%s" unit="1" inclusive="%s">%n\
-                <translation value="%s">%n\
-                    <originalText>%s</originalText>%n\
-                </translation>%n\
-            </%s>%n\
-        </value>""";
-    public static final String IVL_PQ_WITH_ONLY_VALUE_TEMPLATE = """
-        <value xsi:type="IVL_PQ">%n\
-            <%s value="%s" unit="1" inclusive="%s" />%n\
-        </value>""";
-
     private ObservationValueQuantityMapper() {
     }
 
@@ -102,87 +53,133 @@ public final class ObservationValueQuantityMapper {
 
     private static String getPhysicalQuantityXml(Quantity valueQuantity) {
         if (UNITS_OF_MEASURE_SYSTEM.equals(valueQuantity.getSystem()) && valueQuantity.hasCode()) {
-            return PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
-                valueQuantity.getValue(),
-                valueQuantity.getCode()
-            );
+            return """
+                <value xsi:type="PQ" value="%s" unit="%s" />"""
+                .formatted(
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode()
+                );
         }
         if (hasValidSystem(valueQuantity) && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
-            return PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE.formatted(
-                valueQuantity.getValue(),
-                valueQuantity.getValue(),
-                valueQuantity.getCode(),
-                getSystemWithoutPrefix(valueQuantity.getSystem()),
-                valueQuantity.getUnit()
-            );
+            return """
+                <value xsi:type="PQ" value="%s" unit="1">%n\
+                    <translation value="%s" code="%s" codeSystem="%s" displayName="%s" />%n\
+                </value>"""
+                .formatted(
+                    valueQuantity.getValue(),
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode(),
+                    getSystemWithoutPrefix(valueQuantity.getSystem()),
+                    valueQuantity.getUnit()
+                );
         }
         if (hasValidSystem(valueQuantity) && valueQuantity.hasCode()) {
-            return PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
-                valueQuantity.getValue(),
-                valueQuantity.getValue(),
-                valueQuantity.getCode(),
-                getSystemWithoutPrefix(valueQuantity.getSystem())
-            );
+            return """
+                <value xsi:type="PQ" value="%s" unit="1">%n\
+                    <translation value="%s" code="%s" codeSystem="%s" />%n\
+                </value>"""
+                .formatted(
+                    valueQuantity.getValue(),
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode(),
+                    getSystemWithoutPrefix(valueQuantity.getSystem())
+                );
         }
         if (valueQuantity.hasUnit()) {
-            return PQ_WITH_ANY_OR_NO_SYSTEM_AND_UNIT_TEMPLATE.formatted(
-                valueQuantity.getValue(),
-                valueQuantity.getValue(),
-                valueQuantity.getUnit()
-            );
+            return """
+                <value xsi:type="PQ" value="%s" unit="1">%n\
+                    <translation value="%s">%n\
+                        <originalText>%s</originalText>%n\
+                    </translation>%n\
+                </value>"""
+                .formatted(
+                    valueQuantity.getValue(),
+                    valueQuantity.getValue(),
+                    valueQuantity.getUnit()
+                );
         }
 
-        return PQ_WITH_ONLY_VALUE_TEMPLATE.formatted(valueQuantity.getValue());
+        return """
+            <value xsi:type="PQ" value="%s" unit="1" />"""
+            .formatted(valueQuantity.getValue());
     }
 
     private static String getPhysicalQuantityIntervalXml(Quantity valueQuantity) {
         if (UNITS_OF_MEASURE_SYSTEM.equals(valueQuantity.getSystem()) && valueQuantity.hasCode()) {
-            return IVL_PQ_WITH_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
-                getHighOrLow(valueQuantity),
-                valueQuantity.getValue(),
-                valueQuantity.getCode(),
-                isInclusive(valueQuantity)
-            );
+            return """
+                <value xsi:type="IVL_PQ">%n\
+                    <%s value="%s" unit="%s" inclusive="%s" />%n\
+                </value>"""
+                .formatted(
+                    getHighOrLow(valueQuantity),
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode(),
+                    isInclusive(valueQuantity)
+                );
         }
         if (hasValidSystem(valueQuantity) && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
-            return IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_AND_UNIT_TEMPLATE.formatted(
-                getHighOrLow(valueQuantity),
-                valueQuantity.getValue(),
-                isInclusive(valueQuantity),
-                valueQuantity.getValue(),
-                valueQuantity.getCode(),
-                getSystemWithoutPrefix(valueQuantity.getSystem()),
-                valueQuantity.getUnit(),
-                getHighOrLow(valueQuantity)
+            return """
+                <value xsi:type="IVL_PQ">%n\
+                    <%s value="%s" unit="1" inclusive="%s">%n\
+                        <translation value="%s" code="%s" codeSystem="%s" displayName="%s" />%n\
+                    </%s>%n\
+                </value>"""
+                .formatted(
+                    getHighOrLow(valueQuantity),
+                    valueQuantity.getValue(),
+                    isInclusive(valueQuantity),
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode(),
+                    getSystemWithoutPrefix(valueQuantity.getSystem()),
+                    valueQuantity.getUnit(),
+                    getHighOrLow(valueQuantity)
             );
         }
         if (hasValidSystem(valueQuantity) && valueQuantity.hasCode()) {
-            return IVL_PQ_WITH_NON_UOM_SYSTEM_AND_CODE_TEMPLATE.formatted(
-                getHighOrLow(valueQuantity),
-                valueQuantity.getValue(),
-                isInclusive(valueQuantity),
-                valueQuantity.getValue(),
-                valueQuantity.getCode(),
-                getSystemWithoutPrefix(valueQuantity.getSystem()),
-                getHighOrLow(valueQuantity)
-            );
+            return """
+                <value xsi:type="IVL_PQ">%n\
+                    <%s value="%s" unit="1" inclusive="%s">%n\
+                        <translation value="%s" code="%s" codeSystem="%s" />%n\
+                    </%s>%n\
+                </value>"""
+                .formatted(
+                    getHighOrLow(valueQuantity),
+                    valueQuantity.getValue(),
+                    isInclusive(valueQuantity),
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode(),
+                    getSystemWithoutPrefix(valueQuantity.getSystem()),
+                    getHighOrLow(valueQuantity)
+                );
         }
         if (valueQuantity.hasUnit()) {
-            return IVL_PQ_WITH_ANY_OR_NO_SYSTEM_AND_UNIT_TEMPLATE.formatted(
-                getHighOrLow(valueQuantity),
-                valueQuantity.getValue(),
-                isInclusive(valueQuantity),
-                valueQuantity.getValue(),
-                valueQuantity.getUnit(),
-                getHighOrLow(valueQuantity)
-            );
+            return """
+                <value xsi:type="IVL_PQ">%n\
+                    <%s value="%s" unit="1" inclusive="%s">%n\
+                        <translation value="%s">%n\
+                            <originalText>%s</originalText>%n\
+                        </translation>%n\
+                    </%s>%n\
+                </value>"""
+                .formatted(
+                    getHighOrLow(valueQuantity),
+                    valueQuantity.getValue(),
+                    isInclusive(valueQuantity),
+                    valueQuantity.getValue(),
+                    valueQuantity.getUnit(),
+                    getHighOrLow(valueQuantity)
+                );
         }
 
-        return IVL_PQ_WITH_ONLY_VALUE_TEMPLATE.formatted(
-            getHighOrLow(valueQuantity),
-            valueQuantity.getValue(),
-            isInclusive(valueQuantity)
-        );
+        return """
+            <value xsi:type="IVL_PQ">%n\
+                <%s value="%s" unit="1" inclusive="%s" />%n\
+            </value>"""
+            .formatted(
+                getHighOrLow(valueQuantity),
+                valueQuantity.getValue(),
+                isInclusive(valueQuantity)
+            );
     }
 
     private static boolean isInclusive(Quantity valueQuantity) {
