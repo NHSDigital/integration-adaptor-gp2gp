@@ -420,7 +420,7 @@ public class ObservationValueQuantityMapperTest {
         INVALID_SYSTEM
     })
     @NullAndEmptySource
-    public void When_MappingQuantityWithAnyInvalidOrNoSystemAndHasUnit_Expect_PQWithTranslationAndOriginalText(
+    public void When_MappingQuantityWithAnyOrInvalidOrNoSystemAndHasUnit_Expect_PQWithTranslationAndOriginalText(
         String system
     ) {
         var quantity = new Quantity()
@@ -449,7 +449,7 @@ public class ObservationValueQuantityMapperTest {
         INVALID_SYSTEM
     })
     @NullAndEmptySource
-    public void When_MappingIntervalWithAnyInvalidOrNoSystemAndHasUnit_Expect_IVLPQWithTranslationAndOriginalText(
+    public void When_MappingIntervalWithAnyOrInvalidOrNoSystemAndHasUnit_Expect_IVLPQWithTranslationAndOriginalText(
         String system
     ) {
         var quantity = new Quantity()
@@ -481,7 +481,7 @@ public class ObservationValueQuantityMapperTest {
         INVALID_SYSTEM
     })
     @NullAndEmptySource
-    public void When_MappingQuantityWithAnyInvalidOrNoSystemWithoutUnitOrCode_Expect_PQWithValueSetAndUnitSetToOne(
+    public void When_MappingQuantityWithAnyOrInvalidOrNoSystemWithoutUnitOrCode_Expect_PQWithValueSetAndUnitSetToOne(
         String system
     ) {
         var quantity = new Quantity()
@@ -505,7 +505,7 @@ public class ObservationValueQuantityMapperTest {
         INVALID_SYSTEM
     })
     @NullAndEmptySource
-    public void When_MappingIntervalWithAnyInvalidOrNoSystemWithoutUnitOrCode_Expect_IVLPQWithValueSetAndUnitSetToOne(
+    public void When_MappingIntervalWithAnyOrInvalidOrNoSystemWithoutUnitOrCode_Expect_IVLPQWithValueSetAndUnitSetToOne(
         String system
     ) {
         var quantity = new Quantity()
