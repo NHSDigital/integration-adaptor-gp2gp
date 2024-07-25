@@ -171,7 +171,7 @@ public class ObservationMapperTest {
             observationAssociatedWithSpecimen
         );
 
-        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
+        assertThat(compoundStatementXml).isEqualToIgnoringWhitespace(expectedXmlOutput);
     }
 
     @Test

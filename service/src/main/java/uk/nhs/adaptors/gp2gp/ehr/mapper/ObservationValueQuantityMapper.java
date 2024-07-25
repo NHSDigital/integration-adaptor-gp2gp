@@ -1,113 +1,195 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.math.BigDecimal;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.Quantity;
 
+import static org.hl7.fhir.dstu3.model.Quantity.QuantityComparator.GREATER_OR_EQUAL;
+import static org.hl7.fhir.dstu3.model.Quantity.QuantityComparator.LESS_OR_EQUAL;
+import static org.hl7.fhir.dstu3.model.Quantity.QuantityComparator.LESS_THAN;
+
 public final class ObservationValueQuantityMapper {
 
-    private static final String UNITS_OF_MEASURE_SYSTEM = "http://unitsofmeasure.org";
-    private static final String UNCERTAINTY_EXTENSION = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ValueApproximation-1";
-    private static final String IVL_PQ_ELEMENT = "<value xsi:type=\"IVL_PQ\">";
+    private static final String UNITS_OF_MEASURE_SYSTEM =
+        "http://unitsofmeasure.org";
+    public static final String URN_OID_PREFIX =
+        "urn:oid:";
+    public static final String URN_UUID_PREFIX =
+        "urn:uuid:";
+    public static final String OID_REGEX =
+        "(urn:oid:)?[0-2](\\.[1-9]\\d*)+";
+    public static final String UUID_REGEX =
+        "(urn:uuid:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
 
-    private static final String NO_COMPARATOR_VALUE_TEMPLATE = "<value xsi:type=\"PQ\" value=\"%s\" unit=\"%s\"/>";
-    private static final String LESS_COMPARATOR_VALUE_TEMPLATE = IVL_PQ_ELEMENT
-        + "<high value=\"%s\" unit=\"%s\" inclusive=\"false\"/></value>";
-    private static final String LESS_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE = IVL_PQ_ELEMENT
-        + "<high value=\"%s\" unit=\"%s\" inclusive=\"true\"/></value>";
-    private static final String GREATER_COMPARATOR_VALUE_TEMPLATE = IVL_PQ_ELEMENT + "<low value=\"%s\" "
-        + "unit=\"%s\" inclusive=\"false\"/></value>";
-    private static final String GREATER_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\"><low value=\"%s\" "
-        + "unit=\"%s\" inclusive=\"true\"/></value>";
-    private static final String NO_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"PQ\" value=\"%s\" unit=\"1\">"
-        + "<translation value=\"%s\">%s</translation></value>";
-    private static final String LESS_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = IVL_PQ_ELEMENT
-        + "<high value=\"%s\" unit=\"1\" inclusive=\"false\"><translation value=\"%s\">"
-        + "%s</translation></high></value>";
-    private static final String LESS_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\"><high "
-        + "value=\"%s\" unit=\"1\" inclusive=\"true\"><translation value=\"%s\">"
-        + "%s</translation></high></value>";
-    private static final String GREATER_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = IVL_PQ_ELEMENT
-        + "<low value=\"%s\" unit=\"1\" inclusive=\"false\"><translation value=\"%s\">%s"
-        + "</translation></low></value>";
-    private static final String GREATER_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = IVL_PQ_ELEMENT
-        + "<low value=\"%s\" unit=\"1\" inclusive=\"true\"><translation value=\"%s\">"
-        + "%s</translation></low></value>";
-    private static final String UNCERTAINTY_CODE = "<uncertaintyCode code=\"U\" "
-        + "codeSystem=\"2.16.840.1.113883.5.1053\" displayName=\"Recorded as uncertain\"/>";
-    private static final String QUANTITY_UNIT = "<originalText>%s</originalText>";
-
+    private static final String UNCERTAINTY_EXTENSION =
+        "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ValueApproximation-1";
+    private static final String UNCERTAINTY_CODE = """
+        <uncertaintyCode code="U" codeSystem="2.16.840.1.113883.5.1053" displayName="Recorded as uncertain" />
+        """;
 
     private ObservationValueQuantityMapper() {
     }
 
     public static String processQuantity(Quantity valueQuantity) {
-        String result = StringUtils.EMPTY;
+        if (!valueQuantity.hasValue()) {
+            return StringUtils.EMPTY;
+        }
+
+        var stringBuilder = new StringBuilder();
+
         if (isUncertaintyCodePresent(valueQuantity)) {
-            result += UNCERTAINTY_CODE;
+            stringBuilder.append(UNCERTAINTY_CODE);
         }
 
-        if (!valueQuantity.hasComparator()) {
-            result += prepareQuantityValueWithoutComparator(valueQuantity);
-        } else {
-            result += prepareQuantityValueAccordingToComparator(valueQuantity);
+        var quantityXml = valueQuantity.hasComparator()
+            ? getPhysicalQuantityIntervalXml(valueQuantity)
+            : getPhysicalQuantityXml(valueQuantity);
+
+        return stringBuilder
+            .append(quantityXml)
+            .toString();
+    }
+
+    private static String getPhysicalQuantityXml(Quantity valueQuantity) {
+        if (UNITS_OF_MEASURE_SYSTEM.equals(valueQuantity.getSystem()) && valueQuantity.hasCode()) {
+            return """
+                <value xsi:type="PQ" value="%s" unit="%s" />"""
+                .formatted(
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode()
+                );
+        }
+        if (hasValidSystem(valueQuantity) && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
+            return """
+                <value xsi:type="PQ" value="%s" unit="1">%n\
+                    <translation value="%s" code="%s" codeSystem="%s" displayName="%s" />%n\
+                </value>"""
+                .formatted(
+                    valueQuantity.getValue(),
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode(),
+                    getSystemWithoutPrefix(valueQuantity.getSystem()),
+                    valueQuantity.getUnit()
+                );
+        }
+        if (hasValidSystem(valueQuantity) && valueQuantity.hasCode()) {
+            return """
+                <value xsi:type="PQ" value="%s" unit="1">%n\
+                    <translation value="%s" code="%s" codeSystem="%s" />%n\
+                </value>"""
+                .formatted(
+                    valueQuantity.getValue(),
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode(),
+                    getSystemWithoutPrefix(valueQuantity.getSystem())
+                );
+        }
+        if (valueQuantity.hasUnit()) {
+            return """
+                <value xsi:type="PQ" value="%s" unit="1">%n\
+                    <translation value="%s">%n\
+                        <originalText>%s</originalText>%n\
+                    </translation>%n\
+                </value>"""
+                .formatted(
+                    valueQuantity.getValue(),
+                    valueQuantity.getValue(),
+                    valueQuantity.getUnit()
+                );
         }
 
-        return result;
+        return """
+            <value xsi:type="PQ" value="%s" unit="1" />"""
+            .formatted(valueQuantity.getValue());
     }
 
-    private static String prepareQuantityValueWithoutComparator(Quantity valueQuantity) {
-        BigDecimal value = valueQuantity.getValue();
-        if (valueQuantity.hasSystem() && valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)) {
-            return String.format(NO_COMPARATOR_VALUE_TEMPLATE, value, valueQuantity.getUnit());
-        } else {
-            return String.format(NO_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE, value, value, prepareUnit(valueQuantity));
+    private static String getPhysicalQuantityIntervalXml(Quantity valueQuantity) {
+        if (UNITS_OF_MEASURE_SYSTEM.equals(valueQuantity.getSystem()) && valueQuantity.hasCode()) {
+            return """
+                <value xsi:type="IVL_PQ">%n\
+                    <%s value="%s" unit="%s" inclusive="%s" />%n\
+                </value>"""
+                .formatted(
+                    getHighOrLow(valueQuantity),
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode(),
+                    isInclusive(valueQuantity)
+                );
         }
-    }
-
-    private static String prepareUnit(Quantity valueQuantity) {
-        return valueQuantity.hasUnit() ? String.format(QUANTITY_UNIT, valueQuantity.getUnit()) : StringUtils.EMPTY;
-    }
-
-    private static String prepareQuantityValueAccordingToComparator(Quantity valueQuantity) {
-        if (valueQuantity.getComparator() == Quantity.QuantityComparator.LESS_THAN) {
-            return prepareQuantityValueByComparator(valueQuantity,
-                LESS_COMPARATOR_VALUE_TEMPLATE,
-                LESS_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE);
-        } else if (valueQuantity.getComparator() == Quantity.QuantityComparator.LESS_OR_EQUAL) {
-            return prepareQuantityValueByComparator(valueQuantity,
-                LESS_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE,
-                LESS_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE);
-        } else if (valueQuantity.getComparator() == Quantity.QuantityComparator.GREATER_THAN) {
-            return prepareQuantityValueByComparator(valueQuantity,
-                GREATER_COMPARATOR_VALUE_TEMPLATE,
-                GREATER_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE);
-        } else if (valueQuantity.getComparator() == Quantity.QuantityComparator.GREATER_OR_EQUAL) {
-            return prepareQuantityValueByComparator(valueQuantity,
-                GREATER_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE,
-                GREATER_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE);
+        if (hasValidSystem(valueQuantity) && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
+            return """
+                <value xsi:type="IVL_PQ">%n\
+                    <%s value="%s" unit="1" inclusive="%s">%n\
+                        <translation value="%s" code="%s" codeSystem="%s" displayName="%s" />%n\
+                    </%s>%n\
+                </value>"""
+                .formatted(
+                    getHighOrLow(valueQuantity),
+                    valueQuantity.getValue(),
+                    isInclusive(valueQuantity),
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode(),
+                    getSystemWithoutPrefix(valueQuantity.getSystem()),
+                    valueQuantity.getUnit(),
+                    getHighOrLow(valueQuantity)
+            );
+        }
+        if (hasValidSystem(valueQuantity) && valueQuantity.hasCode()) {
+            return """
+                <value xsi:type="IVL_PQ">%n\
+                    <%s value="%s" unit="1" inclusive="%s">%n\
+                        <translation value="%s" code="%s" codeSystem="%s" />%n\
+                    </%s>%n\
+                </value>"""
+                .formatted(
+                    getHighOrLow(valueQuantity),
+                    valueQuantity.getValue(),
+                    isInclusive(valueQuantity),
+                    valueQuantity.getValue(),
+                    valueQuantity.getCode(),
+                    getSystemWithoutPrefix(valueQuantity.getSystem()),
+                    getHighOrLow(valueQuantity)
+                );
+        }
+        if (valueQuantity.hasUnit()) {
+            return """
+                <value xsi:type="IVL_PQ">%n\
+                    <%s value="%s" unit="1" inclusive="%s">%n\
+                        <translation value="%s">%n\
+                            <originalText>%s</originalText>%n\
+                        </translation>%n\
+                    </%s>%n\
+                </value>"""
+                .formatted(
+                    getHighOrLow(valueQuantity),
+                    valueQuantity.getValue(),
+                    isInclusive(valueQuantity),
+                    valueQuantity.getValue(),
+                    valueQuantity.getUnit(),
+                    getHighOrLow(valueQuantity)
+                );
         }
 
-        return StringUtils.EMPTY;
+        return """
+            <value xsi:type="IVL_PQ">%n\
+                <%s value="%s" unit="1" inclusive="%s" />%n\
+            </value>"""
+            .formatted(
+                getHighOrLow(valueQuantity),
+                valueQuantity.getValue(),
+                isInclusive(valueQuantity)
+            );
     }
 
-    private static String prepareQuantityValueByComparator(Quantity valueQuantity, String systemTemplate, String nonSystemTemplate) {
-        if (valueQuantity.hasSystem() && valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)) {
-            return formatSystemTemplate(systemTemplate, valueQuantity.getValue(), valueQuantity.getCode());
-        }
-
-        return formatNoSystemTemplate(nonSystemTemplate, valueQuantity.getValue(), prepareUnit(valueQuantity));
+    private static boolean isInclusive(Quantity valueQuantity) {
+        return valueQuantity.getComparator() == GREATER_OR_EQUAL || valueQuantity.getComparator() == LESS_OR_EQUAL;
     }
 
-    private static String formatSystemTemplate(String template, BigDecimal value, String code) {
-        return String.format(template, value, code);
-    }
-
-    private static String formatNoSystemTemplate(String template, BigDecimal value, String unit) {
-        return String.format(template, value, value, unit);
+    private static String getHighOrLow(Quantity valueQuantity) {
+        return valueQuantity.getComparator() == LESS_THAN || valueQuantity.getComparator() == LESS_OR_EQUAL
+            ? "high"
+            : "low";
     }
 
     private static boolean isUncertaintyCodePresent(Quantity valueQuantity) {
@@ -118,7 +200,6 @@ public final class ObservationValueQuantityMapper {
                 }
             }
         }
-
         return false;
     }
 
@@ -127,5 +208,24 @@ public final class ObservationValueQuantityMapper {
             && extension.getUrl().equals(UNCERTAINTY_EXTENSION)
             && extension.getValue() instanceof BooleanType
             && ((BooleanType) extension.getValue()).booleanValue();
+    }
+
+    private static boolean hasValidSystem(Quantity valueQuantity) {
+        return valueQuantity.hasSystem() && (
+            valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)
+                || valueQuantity.getSystem().matches(OID_REGEX)
+                || valueQuantity.getSystem().matches(UUID_REGEX)
+            );
+    }
+
+    private static String getSystemWithoutPrefix(String system) {
+        if (system.startsWith(URN_OID_PREFIX)) {
+            return StringUtils.removeStart(system, URN_OID_PREFIX);
+        }
+        if (system.startsWith(URN_UUID_PREFIX)) {
+            return StringUtils.removeStart(system, URN_UUID_PREFIX);
+        }
+
+        return system;
     }
 }

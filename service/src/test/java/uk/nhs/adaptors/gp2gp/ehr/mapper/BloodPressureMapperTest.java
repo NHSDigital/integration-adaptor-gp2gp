@@ -109,7 +109,7 @@ public class BloodPressureMapperTest {
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, true);
 
-        assertThat(outputMessage).isEqualTo(expectedOutput);
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     @ParameterizedTest
@@ -126,7 +126,7 @@ public class BloodPressureMapperTest {
 
         assertThat(outputMessage)
             .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
-            .isEqualTo(expectedOutput);
+            .isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     private static Stream<Arguments> testArguments() {
@@ -160,7 +160,7 @@ public class BloodPressureMapperTest {
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, true);
 
-        assertThat(outputMessage).isEqualTo(expectedOutput);
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     @Test
