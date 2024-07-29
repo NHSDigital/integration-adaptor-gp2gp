@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.6] - 2024-07-29
+
 ### Added
 
 * When mapping `ReferralRequest` supporting info and `DiagnosticReports` NHS PMIP Report Numbers can also be provided 
