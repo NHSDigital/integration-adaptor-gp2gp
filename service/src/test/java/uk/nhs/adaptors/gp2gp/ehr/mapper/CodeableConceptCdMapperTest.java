@@ -2,11 +2,12 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.stream.Stream;
 
-import org.hl7.fhir.dstu3.model.*;
+import org.hl7.fhir.dstu3.model.AllergyIntolerance;
+import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.Medication;
+import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -72,7 +73,7 @@ public class CodeableConceptCdMapperTest {
 
     @ParameterizedTest
     @MethodSource("getTestArguments")
-    public void When_MappingStubbedCodeableConcept_Expect_HL7CdObjectXml(String inputJson, String outputXml) throws IOException {
+    public void When_MappingStubbedCodeableConcept_Expect_HL7CdObjectXml(String inputJson, String outputXml) {
         var observationCodeableConcept = ResourceTestFileUtils.getFileContent(inputJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var codeableConcept = fhirParseService.parseResource(observationCodeableConcept, Observation.class).getCode();
@@ -85,8 +86,7 @@ public class CodeableConceptCdMapperTest {
 
     @ParameterizedTest
     @MethodSource("getTestArgumentsActualProblem")
-    public void When_MappingStubbedCodeableConceptForActualProblemHeader_Expect_HL7CdObjectXml(String inputJson, String outputXml)
-        throws IOException {
+    public void When_MappingStubbedCodeableConceptForActualProblemHeader_Expect_HL7CdObjectXml(String inputJson, String outputXml) {
         var observationCodeableConcept = ResourceTestFileUtils.getFileContent(inputJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var codeableConcept = fhirParseService.parseResource(observationCodeableConcept, Observation.class).getCode();
@@ -99,8 +99,7 @@ public class CodeableConceptCdMapperTest {
 
     @ParameterizedTest
     @MethodSource("getTestArgumentsNullFlavor")
-    public void When_MappingStubbedCodeableConceptAsNullFlavor_Expect_HL7CdObjectXml(String inputJson, String outputXml)
-        throws IOException {
+    public void When_MappingStubbedCodeableConceptAsNullFlavor_Expect_HL7CdObjectXml(String inputJson, String outputXml) {
         var observationCodeableConcept = ResourceTestFileUtils.getFileContent(inputJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var codeableConcept = fhirParseService.parseResource(observationCodeableConcept, Observation.class).getCode();
@@ -113,8 +112,7 @@ public class CodeableConceptCdMapperTest {
 
     @ParameterizedTest
     @MethodSource("getTestArgumentsAllergyClinicalStatus")
-    public void When_MappingStubbedCodeableConceptAsAllergy_Expect_HL7CdObjectXml(String inputJson, String outputXml)
-        throws IOException {
+    public void When_MappingStubbedCodeableConceptAsAllergy_Expect_HL7CdObjectXml(String inputJson, String outputXml) {
         var allergyCodeableConcept = ResourceTestFileUtils.getFileContent(inputJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var codeableConcept = fhirParseService.parseResource(allergyCodeableConcept, AllergyIntolerance.class).getCode();

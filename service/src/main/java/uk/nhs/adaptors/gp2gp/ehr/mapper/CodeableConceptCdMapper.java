@@ -64,8 +64,7 @@ public class CodeableConceptCdMapper {
 
             if (mainCode.get().hasCode()) {
                 builder.mainCode(mainCode.get().getCode());
-            }
-            else {
+            } else {
                 var code = extension.stream()
                     .filter(descriptionExt -> DESCRIPTION_ID.equals(descriptionExt.getUrl()))
                     .map(description -> description.getValue().toString())
