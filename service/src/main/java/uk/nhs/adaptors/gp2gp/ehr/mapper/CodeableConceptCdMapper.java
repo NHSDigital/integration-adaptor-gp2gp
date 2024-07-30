@@ -62,12 +62,16 @@ public class CodeableConceptCdMapper {
 
             builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
 
-            Optional<String> code = extension.stream()
-                .filter(descriptionExt -> DESCRIPTION_ID.equals(descriptionExt.getUrl()))
-                .map(description -> description.getValue().toString())
-                .findFirst()
-                .or(() -> Optional.ofNullable(mainCode.get().getCode()));
-            code.ifPresent(builder::mainCode);
+            if (mainCode.get().hasCode()) {
+                builder.mainCode(mainCode.get().getCode());
+            }
+            else {
+                var code = extension.stream()
+                    .filter(descriptionExt -> DESCRIPTION_ID.equals(descriptionExt.getUrl()))
+                    .map(description -> description.getValue().toString())
+                    .findFirst();
+                code.ifPresent(builder::mainCode);
+            }
 
             Optional<String> displayName = extension.stream()
                 .filter(displayExtension -> DESCRIPTION_DISPLAY.equals(displayExtension.getUrl()))
