@@ -245,7 +245,7 @@ public class AllergyStructureMapperTest {
 
     @Test
     public void When_ConfidentialityServiceReturnsConfidentialityCode_Expect_MessageContainsConfidentialityCode() {
-        final var allergyIntolerance = parseAllergyIntoleranceFromJsonFile("/ehr/mapper/allergy/example-allergy-intolerance-resource-1.json");
+        final var allergyIntolerance = parseAllergyIntoleranceFromJsonFile(INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS);
         when(confidentialityService.generateConfidentialityCode(allergyIntolerance))
             .thenReturn(Optional.of(CONFIDENTIALITY_CODE));
 
@@ -255,8 +255,8 @@ public class AllergyStructureMapperTest {
     }
 
     @Test
-    public void When_ConfidentialityServiceReturnsEmptyOptionalExpect_MessageDoesNotContainConfidentialityCode() {
-        final var allergyIntolerance = parseAllergyIntoleranceFromJsonFile("/ehr/mapper/allergy/example-allergy-intolerance-resource-1.json");
+    public void When_ConfidentialityServiceReturnsEmptyOptional_Expect_MessageDoesNotContainConfidentialityCode() {
+        final var allergyIntolerance = parseAllergyIntoleranceFromJsonFile(INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS);
 
         final var message = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(allergyIntolerance);
 
