@@ -15,6 +15,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
 import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -57,6 +58,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -65,6 +67,8 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.XsdValidator.validateFileContentAgainstSchema;
 
@@ -77,10 +81,14 @@ public class EhrExtractUATTest {
 
     @Mock
     private TimestampService timestampService;
+    @Mock
+    private ConfidentialityService confidentialityService;
+    @Mock
+    private RedactionsContext redactionsContext;
 
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
-    private RedactionsContext redactionsContext;
+
     private OutputMessageWrapperMapper outputMessageWrapperMapper;
     private GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
@@ -151,7 +159,7 @@ public class EhrExtractUATTest {
 
         final EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
-            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper, confidentialityService),
             new BloodPressureMapper(
                 messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
                 codeableConceptCdMapper, new ParticipantMapper()),
@@ -186,6 +194,8 @@ public class EhrExtractUATTest {
                 new BloodPressureValidator());
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService, timestampService, encounterMapper,
             nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
+        lenient().when(confidentialityService.generateConfidentialityCode(any()))
+            .thenReturn(Optional.empty());
     }
 
     @AfterEach

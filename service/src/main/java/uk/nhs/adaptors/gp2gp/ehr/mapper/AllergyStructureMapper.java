@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AllergyStructureTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AllergyStructureTemplateParameters.AllergyStructureTemplateParametersBuilder;
@@ -61,9 +62,12 @@ public class AllergyStructureMapper {
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
+    private final ConfidentialityService confidentialityService;
 
     public String mapAllergyIntoleranceToAllergyStructure(AllergyIntolerance allergyIntolerance) {
         final IdMapper idMapper = messageContext.getIdMapper();
+
+        var confidentialityCode = confidentialityService.generateConfidentialityCode(allergyIntolerance);
 
         var allergyStructureTemplateParameters = AllergyStructureTemplateParameters.builder()
             .allergyStructureId(idMapper.getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getIdElement()))
@@ -71,7 +75,8 @@ public class AllergyStructureMapper {
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
             .code(buildCode(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
-            .availabilityTime(buildAvailabilityTime(allergyIntolerance));
+            .availabilityTime(buildAvailabilityTime(allergyIntolerance))
+            .confidentialityCode(confidentialityCode.orElse(null));
 
         buildCategory(allergyIntolerance, allergyStructureTemplateParameters);
 
@@ -235,11 +240,11 @@ public class AllergyStructureMapper {
                     .map(RelatedPerson.class::cast)
                     .filter(RelatedPerson::hasName)
                     .map(RelatedPerson::getName)
-                    .filter(names -> names.size() > 0)
-                    .map(names -> names.get(0))
+                    .filter(names -> !names.isEmpty())
+                    .map(List::getFirst)
                     .map(name -> Optional.ofNullable(name.getText())
                         .filter(StringUtils::isNotBlank)
-                        .orElseGet(() -> name.getNameAsSingleString()))
+                        .orElseGet(name::getNameAsSingleString))
                     .filter(StringUtils::isNotBlank)
                     .map(name -> RELATED_PERSON_ASSERTER + StringUtils.SPACE + name)
                     .orElse(RELATED_PERSON_ASSERTER);

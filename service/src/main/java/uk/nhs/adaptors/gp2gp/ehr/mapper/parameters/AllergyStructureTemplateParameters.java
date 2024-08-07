@@ -18,4 +18,5 @@ public class AllergyStructureTemplateParameters {
     private String code;
     private String author;
     private String performer;
+    private String confidentialityCode;
 }
