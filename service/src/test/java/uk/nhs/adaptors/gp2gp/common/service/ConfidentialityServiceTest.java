@@ -8,30 +8,31 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext.NON_REDACTION_INTERACTION_ID;
+import static uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext.REDACTION_INTERACTION_ID;
 
 @ExtendWith(MockitoExtension.class)
 public class ConfidentialityServiceTest {
-    private static final List<Coding> NO_META_SECURITY = List.of(new Coding());
-    private static final List<Coding> NOPAT_META_SECURITY = List.of(
+    private static final List<Coding> NO_META_SECURITY = Collections.singletonList(new Coding());
+    private static final List<Coding> NOPAT_META_SECURITY = Collections.singletonList(
         new Coding(
             "http://hl7.org/fhir/v3/ActCode",
             "NOPAT",
             "no disclosure to patient, family or caregivers without attending provider's authorization"
         )
     );
-    private static final List<Coding> NON_NOPAT_META_SECURITY = List.of(
+    private static final List<Coding> NON_NOPAT_META_SECURITY = Collections.singletonList(
         new Coding(
             "http://hl7.org/fhir/v3/ActCode",
             "NON-NOPAT",
             "random disclosure to patient, family or caregivers without attending provider's authorization"
         )
     );
-    public static final String NON_REDACTION_INTERACTION_ID = "RCMR_IN030000UK06";
-    public static final String REDACTION_INTERACTION_ID = "RCMR_IN030000UK07";
 
     private static Stream<List<Coding>> When_GenerateAndIsNotRedactionMessage_Expect_EmptyOptional() {
         return Stream.of(NO_META_SECURITY, NON_NOPAT_META_SECURITY, NOPAT_META_SECURITY);
