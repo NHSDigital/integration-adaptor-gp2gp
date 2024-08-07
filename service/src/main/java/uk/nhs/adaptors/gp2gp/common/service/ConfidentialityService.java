@@ -2,11 +2,11 @@ package uk.nhs.adaptors.gp2gp.common.service;
 
 import lombok.RequiredArgsConstructor;
 import org.hl7.fhir.dstu3.model.Coding;
+import org.hl7.fhir.dstu3.model.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,8 +23,8 @@ public class ConfidentialityService {
 
     private final RedactionsContext redactionsContext;
 
-    public Optional<String> generateConfidentialityCode(List<Coding> metaSecurity) {
-        return redactionsContext.isRedactionMessage() && hasNOPATMetaSecurity(metaSecurity)
+    public Optional<String> generateConfidentialityCode(Resource resource) {
+        return redactionsContext.isRedactionMessage() && hasNOPATMetaSecurity(resource)
             ? Optional.of(REDACTION_CONFIDENTIALITY_CODE)
             : Optional.empty();
     }
@@ -33,8 +33,8 @@ public class ConfidentialityService {
         return NOPAT.equals(coding.getCode()) && REDACTION_CODE_SYSTEM.equals(coding.getSystem());
     }
 
-    private boolean hasNOPATMetaSecurity(List<Coding> metaSecurity) {
-        return metaSecurity
+    private boolean hasNOPATMetaSecurity(Resource resource) {
+        return resource.getMeta().getSecurity()
             .stream()
             .anyMatch(this::isNOPATCoding);
     }
