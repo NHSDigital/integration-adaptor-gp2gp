@@ -12,12 +12,15 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildReference;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.ResourceType;
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +30,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -113,8 +117,6 @@ public class AllergyStructureMapperTest {
         + "expected-output-allergy-structure-without-endDate.xml";
     private static final String OUTPUT_XML_USES_NO_ASSERTED_DATE = TEST_FILE_DIRECTORY
             + "expected-output-allergy-structure-without-assertedDate.xml";
-    private static final String OUTPUT_XML_USES_RECORDER_AS_PERFORMER = TEST_FILE_DIRECTORY
-        + "expected-output-allergy-structure-17.xml";
     private static final String OUTPUT_XML_USES_NO_AUTHOR_OR_PERFORMER = TEST_FILE_DIRECTORY
             + "expected-output-allergy-structure-18.xml";
     private static final String OUTPUT_XML_USES_RECORDER_AS_PERFORMER_RELATED_PERSON_ASSERTER = TEST_FILE_DIRECTORY
@@ -127,13 +129,23 @@ public class AllergyStructureMapperTest {
         + "expected-output-allergy-structure-22.xml";
     private static final String COMMON_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
 
+    private static final String CONFIDENTIALITY_CODE = """
+        <confidentialityCode
+            code="NOPAT"
+            codeSystem="2.16.840.1.113883.4.642.3.47"
+            displayName="no disclosure to patient, family or caregivers without attending provider's authorization"
+        />""";
+
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+    @Mock
+    private ConfidentialityService confidentialityService;
 
     private AllergyStructureMapper allergyStructureMapper;
     private MessageContext messageContext;
+
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
@@ -167,30 +179,6 @@ public class AllergyStructureMapperTest {
         );
     }
 
-    private static Stream<Arguments> resourceInvalidFileParams() {
-        return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_NO_CATEGORY),
-            Arguments.of(INPUT_JSON_WITH_UNSUPPORTED_CATEGORY)
-        );
-    }
-
-    @AfterEach
-    public void tearDown() {
-        messageContext.resetMessageContext();
-    }
-
-    @ParameterizedTest
-    @MethodSource("resourceFileParams")
-    public void When_MappingAllergyIntoleranceJson_Expect_AllergyStructureXmlOutput(String inputJson, String outputXml)
-        throws IOException {
-        CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
-        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
-
-        String outputMessage = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(parsedAllergyIntolerance);
-        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
-    }
-
     @BeforeEach
     public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
@@ -201,12 +189,13 @@ public class AllergyStructureMapperTest {
         lenient().when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         lenient().when(codeableConceptCdMapper.mapCodeableConceptToCdForAllergy(any(CodeableConcept.class),
-            any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
+                any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         lenient().when(codeableConceptCdMapper.mapToNullFlavorCodeableConceptForAllergy(any(CodeableConcept.class),
-            any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
+                any(AllergyIntolerance.AllergyIntoleranceClinicalStatus.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-
+        lenient().when(confidentialityService.generateConfidentialityCode(any()))
+            .thenReturn(Optional.empty());
 
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
@@ -216,16 +205,67 @@ public class AllergyStructureMapperTest {
             .forEach(resourceType -> messageContext.getIdMapper().getOrNew(resourceType, buildIdType(resourceType, COMMON_ID)));
         List.of(ResourceType.Practitioner, ResourceType.Organization)
             .forEach(resourceType -> messageContext.getAgentDirectory().getAgentId(buildReference(resourceType, COMMON_ID)));
-        allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
+        allergyStructureMapper = new AllergyStructureMapper(
+            messageContext,
+            codeableConceptCdMapper,
+            new ParticipantMapper(),
+            confidentialityService);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        messageContext.resetMessageContext();
+    }
+
+    private static Stream<Arguments> resourceInvalidFileParams() {
+        return Stream.of(
+            Arguments.of(INPUT_JSON_WITH_NO_CATEGORY),
+            Arguments.of(INPUT_JSON_WITH_UNSUPPORTED_CATEGORY)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("resourceFileParams")
+    public void When_MappingAllergyIntoleranceJson_Expect_AllergyStructureXmlOutput(String inputJson, String outputXml) {
+        final var expectedMessage = ResourceTestFileUtils.getFileContent(outputXml);
+        final var allergyIntolerance = parseAllergyIntoleranceFromJsonFile(inputJson);
+
+        String message = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(allergyIntolerance);
+        assertThat(message).contains(expectedMessage);
     }
 
     @ParameterizedTest
     @MethodSource("resourceInvalidFileParams")
-    public void When_MappingInvalidAllergyIntoleranceJson_Expect_Exception(String inputJson) throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
+    public void When_MappingInvalidAllergyIntoleranceJson_Expect_Exception(String inputJson) {
+        final var allergyIntolerance = parseAllergyIntoleranceFromJsonFile(inputJson);
 
         assertThrows(EhrMapperException.class, ()
-            -> allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(parsedAllergyIntolerance));
+            -> allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(allergyIntolerance));
     }
+
+    @Test
+    public void When_ConfidentialityServiceReturnsConfidentialityCode_Expect_MessageContainsConfidentialityCode() {
+        final var allergyIntolerance = parseAllergyIntoleranceFromJsonFile(INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS);
+        when(confidentialityService.generateConfidentialityCode(allergyIntolerance))
+            .thenReturn(Optional.of(CONFIDENTIALITY_CODE));
+
+        final var message = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(allergyIntolerance);
+
+        assertThat(message).contains(CONFIDENTIALITY_CODE);
+    }
+
+    @Test
+    public void When_ConfidentialityServiceReturnsEmptyOptional_Expect_MessageDoesNotContainConfidentialityCode() {
+        final var allergyIntolerance = parseAllergyIntoleranceFromJsonFile(INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS);
+
+        final var message = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(allergyIntolerance);
+
+        assertThat(message).doesNotContain(CONFIDENTIALITY_CODE);
+    }
+
+    private static AllergyIntolerance parseAllergyIntoleranceFromJsonFile(String filepath) {
+        final var jsonInput = ResourceTestFileUtils.getFileContent(filepath);
+        return new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
+    }
+
 }

@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -30,6 +29,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -89,10 +89,11 @@ public class EncounterComponentsMapperTest {
     private TimestampService timestampService;
     @Mock
     private BloodPressureValidator bloodPressureValidator;
+    @Mock
+    private ConfidentialityService confidentialityService;
 
     private EncounterComponentsMapper encounterComponentsMapper;
     private MessageContext messageContext;
-    private ParticipantMapper participantMapper;
 
     @BeforeEach
     public void setUp() {
@@ -126,8 +127,12 @@ public class EncounterComponentsMapperTest {
         ParticipantMapper participantMapper = new ParticipantMapper();
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
 
-        AllergyStructureMapper allergyStructureMapper
-            = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper);
+        AllergyStructureMapper allergyStructureMapper = new AllergyStructureMapper(
+            messageContext,
+            codeableConceptCdMapper,
+            participantMapper,
+            confidentialityService
+        );
         BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
             messageContext,
             randomIdGeneratorService,
@@ -194,7 +199,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingEncounterComponents_Expect_ResourceMapped() throws IOException {
+    public void When_MappingEncounterComponents_Expect_ResourceMapped() {
         String expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_MAPPED_WITH_ALL_MAPPERS_USED);
 
         var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_ALL_MAPPERS_USED);
@@ -208,7 +213,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingEncounterComponents_Expect_IgnoredResourceNotMapped() throws IOException {
+    public void When_MappingEncounterComponents_Expect_IgnoredResourceNotMapped() {
         String expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_MAPPED_WITH_ALL_MAPPERS_USED);
 
         var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_IGNORED_RESOURCE);
@@ -220,7 +225,7 @@ public class EncounterComponentsMapperTest {
 
     @ParameterizedTest
     @MethodSource("emptyResult")
-    public void When_MappingEncounterComponents_Expect_NoResourceMapped(String inputJsonPath) throws IOException {
+    public void When_MappingEncounterComponents_Expect_NoResourceMapped(String inputJsonPath) {
         var bundle = initializeMessageContext(inputJsonPath);
         var encounter = extractEncounter(bundle);
 
@@ -229,7 +234,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingEncounterMissingComponents_Expect_ExceptionThrown() throws IOException {
+    public void When_MappingEncounterMissingComponents_Expect_ExceptionThrown() {
         var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE);
         var encounter = extractEncounter(bundle);
 
@@ -239,7 +244,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingEncounterUnsupportedResource_Expect_ExceptionThrown() throws IOException {
+    public void When_MappingEncounterUnsupportedResource_Expect_ExceptionThrown() {
         var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES);
         var encounter = extractEncounter(bundle);
 
@@ -249,7 +254,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingConsultation_WithNonTopicList_Expect_ExceptionThrown() throws IOException {
+    public void When_MappingConsultation_WithNonTopicList_Expect_ExceptionThrown() {
         var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_NON_TOPIC_CONSULTATION_LIST_ENTRY);
         var encounter = extractEncounter(bundle);
 
@@ -261,7 +266,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingTopic_WithNonCategoryList_Expect_ExceptionThrown() throws IOException {
+    public void When_MappingTopic_WithNonCategoryList_Expect_ExceptionThrown() {
         var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_NON_CATEGORY_TOPIC_LIST_ENTRY);
         var encounter = extractEncounter(bundle);
 
@@ -273,7 +278,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingTopic_With_RelatedProblem_Expect_MappedToCode() throws IOException {
+    public void When_MappingTopic_With_RelatedProblem_Expect_MappedToCode() {
 
         when(codeableConceptCdMapper.mapToCdForTopic(any(CodeableConcept.class), any(String.class)))
             .thenCallRealMethod();
@@ -288,7 +293,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingTopic_With_RelatedProblemAndNoTitle_Expect_MappedToCode() throws IOException {
+    public void When_MappingTopic_With_RelatedProblemAndNoTitle_Expect_MappedToCode() {
         when(codeableConceptCdMapper.mapToCdForTopic(any(CodeableConcept.class)))
             .thenCallRealMethod();
 
@@ -302,7 +307,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingTopic_With_MissingDate_Expect_DateMappedFromEncounter() throws IOException {
+    public void When_MappingTopic_With_MissingDate_Expect_DateMappedFromEncounter() {
         var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_TOPIC_AVAILABILITY_DATE_MAPPED_FROM_ENCOUNTER);
         var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_NO_DATE_PROVIDED_IN_TOPIC);
         var encounter = extractEncounter(bundle);
@@ -313,7 +318,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingCategory_WithAndWithout_Title_Expect_BothCdsPresent() throws IOException {
+    public void When_MappingCategory_WithAndWithout_Title_Expect_BothCdsPresent() {
         when(codeableConceptCdMapper.getCdForCategory()).thenCallRealMethod();
         when(codeableConceptCdMapper.mapToCdForCategory(any())).thenCallRealMethod();
 
@@ -327,7 +332,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingTopic_WithAndWithout_Title_Expect_BothCdsPresent() throws IOException {
+    public void When_MappingTopic_WithAndWithout_Title_Expect_BothCdsPresent() {
 
         when(codeableConceptCdMapper.mapToCdForTopic(any(String.class))).thenCallRealMethod();
         when(codeableConceptCdMapper.getCdForTopic()).thenCallRealMethod();
@@ -342,7 +347,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingTopic_WithoutCategory_Expect_ComponentsMapped() throws IOException {
+    public void When_MappingTopic_WithoutCategory_Expect_ComponentsMapped() {
         var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_TOPIC_NO_CATEGORIES);
         var bundle = initializeMessageContext(INPUT_BUNDLE_TOPIC_NO_CATEGORIES);
         var encounter = extractEncounter(bundle);
@@ -354,7 +359,7 @@ public class EncounterComponentsMapperTest {
 
     @ParameterizedTest
     @MethodSource("containedResourceMappingArguments")
-    public void When_MappingContainedResource_Expect_ResourcesMapped(String inputBundle, String expectedComponents) throws IOException {
+    public void When_MappingContainedResource_Expect_ResourcesMapped(String inputBundle, String expectedComponents) {
         var expectedXml = ResourceTestFileUtils.getFileContent(CONTAINED_TEST_DIRECTORY + expectedComponents);
         var bundle = initializeMessageContext(CONTAINED_TEST_DIRECTORY + inputBundle);
         var encounter = extractEncounter(bundle);
@@ -406,7 +411,7 @@ public class EncounterComponentsMapperTest {
         );
     }
 
-    private Bundle initializeMessageContext(String inputJsonPath) throws IOException {
+    private Bundle initializeMessageContext(String inputJsonPath) {
         String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
         Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);

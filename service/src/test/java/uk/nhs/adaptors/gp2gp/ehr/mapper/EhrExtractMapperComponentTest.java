@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -27,7 +28,6 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.util.stream.Stream;
 
@@ -83,7 +83,6 @@ public class EhrExtractMapperComponentTest {
     private static final String TEST_DATE_TIME = "2020-01-01T01:01:01.01Z";
 
     private static GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
-    private ParticipantMapper participantMapper;
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -91,6 +90,8 @@ public class EhrExtractMapperComponentTest {
     private TimestampService timestampService;
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+    @Mock
+    private ConfidentialityService confidentialityService;
 
     private NonConsultationResourceMapper nonConsultationResourceMapper;
     private EhrExtractMapper ehrExtractMapper;
@@ -159,7 +160,7 @@ public class EhrExtractMapperComponentTest {
 
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
-            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper, confidentialityService),
             new BloodPressureMapper(
                 messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
                 codeableConceptCdMapper, new ParticipantMapper()),
@@ -211,7 +212,7 @@ public class EhrExtractMapperComponentTest {
 
     @ParameterizedTest
     @MethodSource("testData")
-    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput(String input, String expected) throws IOException {
+    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput(String input, String expected) {
         String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + expected);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + input);
         Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
@@ -240,7 +241,7 @@ public class EhrExtractMapperComponentTest {
     }
 
     @Test
-    public void When_MappingJsonBody_Expect_OnlyOneConsultationResource() throws IOException {
+    public void When_MappingJsonBody_Expect_OnlyOneConsultationResource() {
         String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(ONE_CONSULTATION_RESOURCE_BUNDLE);
         Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
@@ -254,7 +255,7 @@ public class EhrExtractMapperComponentTest {
     }
 
     @Test
-    public void When_TransformingResourceToEhrComp_Expect_NoDuplicateMappings() throws IOException {
+    public void When_TransformingResourceToEhrComp_Expect_NoDuplicateMappings() {
         String bundle = ResourceTestFileUtils.getFileContent(DUPLICATE_RESOURCE_BUNDLE);
         Bundle parsedBundle = new FhirParseService().parseResource(bundle, Bundle.class);
         messageContext.initialize(parsedBundle);
