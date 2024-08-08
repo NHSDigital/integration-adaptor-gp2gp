@@ -17,9 +17,9 @@ public class RedactionsConfigurationTest {
         private RedactionsContext redactionsContext;
 
         @Test
-        void ehrExtractInteractionIdIsUK07() {
+        void ehrExtractInteractionIdIsUK06() {
             final String result = redactionsContext.ehrExtractInteractionId();
-            assertThat(result).isEqualTo(RedactionsConfiguration.EHR_EXTRACT_INTERACTION_ID);
+            assertThat(result).isEqualTo(RedactionsContext.NON_REDACTION_INTERACTION_ID);
         }
     }
 
@@ -32,7 +32,7 @@ public class RedactionsConfigurationTest {
         @Test
         void ehrExtractInteractionIdIsUK07() {
             final String result = redactionsContext.ehrExtractInteractionId();
-            assertThat(result).isEqualTo(RedactionsConfiguration.EHR_EXTRACT_INTERACTION_ID_WITH_REDACTIONS);
+            assertThat(result).isEqualTo(RedactionsContext.REDACTION_INTERACTION_ID);
         }
     }
 }
