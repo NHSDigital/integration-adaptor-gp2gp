@@ -25,6 +25,7 @@ sourceCompatibility = '21'
 
 checkstyle {
 	toolVersion '8.38'
+	configDirectory = 'checkstyle' as File
 }
 
 repositories {
@@ -139,7 +140,7 @@ spotbugsMain {
 		xml {
 			enabled = true
 		}
-		excludeFilter.set(file("config/spotbugs/exclude.xml"))
+		excludeFilter.set(file("spotbugs/exclude.xml"))
 	}
 }
 
