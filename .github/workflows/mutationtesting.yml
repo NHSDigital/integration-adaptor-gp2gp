@@ -1,0 +1,26 @@
+name: Mutation Testing
+on:
+  pull_request:
+
+jobs:
+  pitest:
+    # Only run on PRs from the repo. PRs from forks will fail due to lack of permissions and
+    # must use a two stage process
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+        with:
+          # important to set a fetch depth of 2. By default the checkout action make no history available
+          fetch-depth: 2
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.2
+        with:
+          distribution: 'temurin'
+          java-version: 21
+      - name: run pitest
+        working-directory: ./service
+        run: ./gradlew pitest-github
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -6,6 +6,10 @@ plugins {
 	id "com.github.spotbugs" version "6.0.20"
 	id "io.freefair.lombok" version "8.6"
 	id 'jacoco'
+
+	// Mutation testing
+	id 'info.solidsoft.pitest' version '1.15.0'
+	id 'com.arcmutate.github' version '1.2.1'
 }
 
 apply plugin: 'java'
@@ -21,6 +25,7 @@ sourceCompatibility = '21'
 
 checkstyle {
 	toolVersion '8.38'
+	configDirectory = 'checkstyle' as File
 }
 
 repositories {
@@ -66,6 +71,9 @@ dependencies {
 	testImplementation 'org.wiremock:wiremock-standalone:3.9.1'
 	testImplementation 'com.squareup.okhttp3:okhttp:4.12.0'
 	testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+
+	pitest 'com.arcmutate:base:1.3.1'
+	pitest 'com.arcmutate:pitest-git-plugin:1.3.2'
 }
 
 test {
@@ -132,8 +140,21 @@ spotbugsMain {
 		xml {
 			enabled = true
 		}
-		excludeFilter.set(file("config/spotbugs/exclude.xml"))
+		excludeFilter.set(file("spotbugs/exclude.xml"))
 	}
+}
+
+pitest {
+	pitestVersion = '1.16.1'
+	junit5PluginVersion = '1.2.1'
+	outputFormats = ['gitci']
+
+	// git feature limits analysis to contents of PR only
+	features = ["+GIT(from[HEAD~1])"]
+
+	mutators = ['STRONGER', 'EXTENDED_ALL']
+
+	threads = project.getGradle().getStartParameter().getMaxWorkerCount()
 }
 
 bootJar {

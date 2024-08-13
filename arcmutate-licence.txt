@@ -1,0 +1,7 @@
+#Licence file for pitest extensions
+#Tue Jul 16 09:22:03 BST 2024
+expires=16/07/2026
+keyVersion=1
+packages=uk.nhs.adaptors.*
+signature=LGGLekLoKiQ4JOPs2iLFzr9Xm62elcZHhKwOAtcxXlU5ofB+aoEpRkSuQt/VH0kYi44eqeAGnkcrZ2knY5OMwu2YYUxySXb+J1IXvxLpQwXNy0L7DZuTz85w6RecvyfKXIYXD/DrS3gfq+o3jwCrWGqYYajVuwl5Q3ZqFGVYk1w\=
+type=OSSS
