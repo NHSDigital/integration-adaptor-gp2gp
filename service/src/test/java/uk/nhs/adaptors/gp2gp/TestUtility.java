@@ -1,11 +1,20 @@
 package uk.nhs.adaptors.gp2gp;
 
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DomainResource;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public final class TestUtility {
     private TestUtility() { }
+    private static final String NOPAT_CONFIDENTIALITY_CODE = """
+        <confidentialityCode
+            code="NOPAT"
+            codeSystem="2.16.840.1.113883.4.642.3.47"
+            displayName="no disclosure to patient, family or caregivers without attending provider's authorization" />
+        """;
 
     /**
      * Parses a FHIR resource from a JSON file located at the specified file path.
@@ -22,5 +31,18 @@ public final class TestUtility {
     public static <T extends DomainResource> T parseResourceFromJsonFile(String filePath, Class<T> targetClass) {
         final String jsonInput = ResourceTestFileUtils.getFileContent(filePath);
         return new FhirParseService().parseResource(jsonInput, targetClass);
+    }
+
+    public static void assertThatXmlContainsConfidentialityCode(String xml) {
+        assertThat(xml).contains(NOPAT_CONFIDENTIALITY_CODE);
+    }
+
+    private static Coding getNopatCoding() {
+        final Coding coding = new Coding();
+        coding.setCode("NOPAT");
+        coding.setSystem("http://hl7.org/fhir/v3/ActCode");
+        coding.setDisplay("no disclosure to patient, family or caregivers without attending provider's authorization");
+
+        return coding;
     }
 }

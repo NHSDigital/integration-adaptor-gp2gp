@@ -131,12 +131,12 @@ class DiagnosticReportMapperTest {
 
     @Test
     void When_DiagnosticReport_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinCompoundStatement() {
+        final String testFile = "diagnostic-report-with-multi-specimens-nopat.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(testFile);
 
-    }
+        final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
-    @Test
-    void When_DiagnosticReport_With_NoscrubMetaSecurity_Expect_CompoundStatementWithNoConfidentialityCode() {
-
+        TestUtility.assertThatXmlContainsConfidentialityCode(result);
     }
 
     private DiagnosticReport getDiagnosticReportResourceFromJson(String filename) {
