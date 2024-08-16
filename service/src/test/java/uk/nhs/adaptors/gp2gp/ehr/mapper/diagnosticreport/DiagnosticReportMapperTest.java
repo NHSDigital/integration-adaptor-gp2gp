@@ -14,6 +14,7 @@ import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Specimen;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +27,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.mockito.stubbing.Answer;
 
+import uk.nhs.adaptors.gp2gp.TestUtility;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
@@ -41,7 +43,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class DiagnosticReportMapperTest {
+class DiagnosticReportMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
 
     private static final String INPUT_JSON_BUNDLE = "fhir_bundle.json";
@@ -118,13 +120,28 @@ public class DiagnosticReportMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")
-    public void When_MappingDiagnosticReportJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) {
+    void When_MappingDiagnosticReportJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) {
         final CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + outputXml);
-        final String jsonInput = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + inputJson);
-        final DiagnosticReport diagnosticReport = new FhirParseService().parseResource(jsonInput, DiagnosticReport.class);
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(inputJson);
 
         final String outputMessage = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
         assertThat(removeLineEndings(outputMessage)).isEqualTo(removeLineEndings(expectedOutputMessage.toString()));
+    }
+
+    @Test
+    void When_DiagnosticReport_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinCompoundStatement() {
+
+    }
+
+    @Test
+    void When_DiagnosticReport_With_NoscrubMetaSecurity_Expect_CompoundStatementWithNoConfidentialityCode() {
+
+    }
+
+    private DiagnosticReport getDiagnosticReportResourceFromJson(String filename) {
+        final String filePath = TEST_FILE_DIRECTORY + filename;
+        return TestUtility.parseResourceFromJsonFile(filePath, DiagnosticReport.class);
     }
 
     private String removeLineEndings(String input) {
@@ -171,5 +188,4 @@ public class DiagnosticReportMapperTest {
             return String.format("<!-- Mapped Specimen with id: %s -->", specimen.getId());
         };
     }
-
 }
