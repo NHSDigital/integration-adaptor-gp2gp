@@ -121,7 +121,8 @@ class DiagnosticReportMapperTest {
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
-        mapper = new DiagnosticReportMapper(messageContext, specimenMapper, new ParticipantMapper(), randomIdGeneratorService, confidentialityService);
+        mapper = new DiagnosticReportMapper(
+            messageContext, specimenMapper, new ParticipantMapper(), randomIdGeneratorService, confidentialityService);
     }
 
     @AfterEach

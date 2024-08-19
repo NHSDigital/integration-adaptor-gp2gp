@@ -189,7 +189,8 @@ public class EncounterComponentsMapperTest {
         );
     }
 
-    private @NotNull SpecimenMapper getSpecimenMapper(StructuredObservationValueMapper structuredObservationValueMapper, ParticipantMapper participantMapper) {
+    private @NotNull SpecimenMapper getSpecimenMapper(StructuredObservationValueMapper structuredObservationValueMapper,
+                                                      ParticipantMapper participantMapper) {
         MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
             new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
         ObservationMapper specimenObservationMapper = new ObservationMapper(

@@ -146,7 +146,8 @@ public class EhrExtractUATTest {
         messageContext = new MessageContext(randomIdGeneratorService);
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
-        final EncounterComponentsMapper encounterComponentsMapper = getEncounterComponentsMapper(randomIdGeneratorService, codeableConceptCdMapper);
+        final EncounterComponentsMapper encounterComponentsMapper =
+            getEncounterComponentsMapper(randomIdGeneratorService, codeableConceptCdMapper);
 
         AgentPersonMapper agentPersonMapper
             = new AgentPersonMapper(messageContext);
@@ -163,7 +164,8 @@ public class EhrExtractUATTest {
             .thenReturn(Optional.empty());
     }
 
-    private @NotNull EncounterComponentsMapper getEncounterComponentsMapper(RandomIdGeneratorService randomIdGeneratorService, CodeableConceptCdMapper codeableConceptCdMapper) {
+    private @NotNull EncounterComponentsMapper getEncounterComponentsMapper(RandomIdGeneratorService randomIdGeneratorService,
+                                                                            CodeableConceptCdMapper codeableConceptCdMapper) {
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ParticipantMapper participantMapper = new ParticipantMapper();
         MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
