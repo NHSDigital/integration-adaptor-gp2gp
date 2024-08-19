@@ -31,6 +31,7 @@ import org.hl7.fhir.dstu3.model.Specimen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -69,7 +70,8 @@ public class DiagnosticReportMapper {
     private final SpecimenMapper specimenMapper;
     private final ParticipantMapper participantMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
-
+    private final ConfidentialityService confidentialityService;
+ 
     public String mapDiagnosticReportToCompoundStatement(DiagnosticReport diagnosticReport) {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport);
         List<Observation> observations = fetchObservations(diagnosticReport);
@@ -87,7 +89,8 @@ public class DiagnosticReportMapper {
             .extensionId(fetchExtensionId(diagnosticReport.getIdentifier()))
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()))
             .narrativeStatements(reportLevelNarrativeStatements)
-            .specimens(mappedSpecimens);
+            .specimens(mappedSpecimens)
+            .confidentialityCode(confidentialityService.generateConfidentialityCode(diagnosticReport).orElse(null));
 
         if (diagnosticReport.hasPerformer() && diagnosticReport.getPerformerFirstRep().hasActor()) {
             final String participantReference = messageContext.getAgentDirectory().getAgentId(
