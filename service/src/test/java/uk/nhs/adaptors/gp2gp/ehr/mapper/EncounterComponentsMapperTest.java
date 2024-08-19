@@ -19,6 +19,7 @@ import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -154,12 +155,7 @@ public class EncounterComponentsMapperTest {
             = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
-        MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
-            new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
-        ObservationMapper specimenObservationMapper = new ObservationMapper(
-            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper,
-            multiStatementObservationHolderFactory);
-        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
+        SpecimenMapper specimenMapper = getSpecimenMapper(structuredObservationValueMapper, participantMapper);
 
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
@@ -172,7 +168,7 @@ public class EncounterComponentsMapperTest {
         RequestStatementMapper requestStatementMapper
             = new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DiagnosticReportMapper diagnosticReportMapper = new DiagnosticReportMapper(
-            messageContext, specimenMapper, participantMapper, randomIdGeneratorService
+            messageContext, specimenMapper, participantMapper, randomIdGeneratorService, confidentialityService
         );
 
         encounterComponentsMapper = new EncounterComponentsMapper(
@@ -191,6 +187,15 @@ public class EncounterComponentsMapperTest {
             bloodPressureValidator,
             codeableConceptCdMapper
         );
+    }
+
+    private @NotNull SpecimenMapper getSpecimenMapper(StructuredObservationValueMapper structuredObservationValueMapper, ParticipantMapper participantMapper) {
+        MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
+            new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
+        ObservationMapper specimenObservationMapper = new ObservationMapper(
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper,
+            multiStatementObservationHolderFactory);
+        return new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
     }
 
     @AfterEach

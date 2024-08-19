@@ -180,7 +180,7 @@ public class EhrExtractMapperComponentTest {
             ),
             new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new DiagnosticReportMapper(
-                messageContext, specimenMapper, participantMapper, randomIdGeneratorService
+                messageContext, specimenMapper, participantMapper, randomIdGeneratorService, confidentialityService
             ),
             new BloodPressureValidator(),
             codeableConceptCdMapper

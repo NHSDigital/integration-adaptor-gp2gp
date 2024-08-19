@@ -1,10 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -21,6 +23,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
@@ -28,6 +32,7 @@ import org.mockito.quality.Strictness;
 import org.mockito.stubbing.Answer;
 
 import uk.nhs.adaptors.gp2gp.TestUtility;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
@@ -76,6 +81,8 @@ class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_EXTENSION_ID = "diagnostic-report-with-extension-id.xml";
     private static final String OUTPUT_XML_MULTIPLE_RESULTS = "diagnostic-report-with-multiple-results.xml";
 
+    private static final String NOPAT_CONFIDENTIALITY_CODE = TestUtility.getNopatConfidentialityCode();
+
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
     @Mock
@@ -83,11 +90,15 @@ class DiagnosticReportMapperTest {
     @Mock
     private MessageContext messageContext;
     @Mock
+    private ConfidentialityService confidentialityService;
+    @Mock
     private IdMapper idMapper;
     @Mock
     private AgentDirectory agentDirectory;
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Captor
+    private ArgumentCaptor<DiagnosticReport> diagnosticReportCaptor;
 
     private DiagnosticReportMapper mapper;
 
@@ -110,7 +121,7 @@ class DiagnosticReportMapperTest {
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
-        mapper = new DiagnosticReportMapper(messageContext, specimenMapper, new ParticipantMapper(), randomIdGeneratorService);
+        mapper = new DiagnosticReportMapper(messageContext, specimenMapper, new ParticipantMapper(), randomIdGeneratorService, confidentialityService);
     }
 
     @AfterEach
@@ -134,9 +145,31 @@ class DiagnosticReportMapperTest {
         final String testFile = "diagnostic-report-with-multi-specimens-nopat.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(testFile);
 
+        when(confidentialityService.generateConfidentialityCode(diagnosticReportCaptor.capture()))
+            .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
+
         final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
-        TestUtility.assertThatXmlContainsConfidentialityCode(result);
+        assertAll(
+            () -> TestUtility.assertThatXmlContainsNopatConfidentialityCode(result),
+            () -> assertThat(TestUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOPAT")
+        );
+    }
+
+    @Test
+    void When_DiagnosticReport_With_NoscrubMetaSecurity_Expect_ConfidentialityCodeNotWithinCompoundStatement() {
+        final String testFile = "diagnostic-report-with-multi-specimens-noscrub.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(testFile);
+
+        when(confidentialityService.generateConfidentialityCode(diagnosticReportCaptor.capture()))
+            .thenReturn(Optional.empty());
+
+        final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        assertAll(
+            () -> TestUtility.assertThatXmlDoesNotContainNopatConfidentialityCode(result),
+            () -> assertThat(TestUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOSCRUB")
+        );
     }
 
     private DiagnosticReport getDiagnosticReportResourceFromJson(String filename) {

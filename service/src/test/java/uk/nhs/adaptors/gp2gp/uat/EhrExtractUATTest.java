@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.uat;
 
 import lombok.SneakyThrows;
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -145,6 +146,24 @@ public class EhrExtractUATTest {
         messageContext = new MessageContext(randomIdGeneratorService);
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
+        final EncounterComponentsMapper encounterComponentsMapper = getEncounterComponentsMapper(randomIdGeneratorService, codeableConceptCdMapper);
+
+        AgentPersonMapper agentPersonMapper
+            = new AgentPersonMapper(messageContext);
+        final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(messageContext, agentPersonMapper);
+
+        final EncounterMapper encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
+
+        final NonConsultationResourceMapper nonConsultationResourceMapper =
+            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper,
+                new BloodPressureValidator());
+        ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService, timestampService, encounterMapper,
+            nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
+        lenient().when(confidentialityService.generateConfidentialityCode(any()))
+            .thenReturn(Optional.empty());
+    }
+
+    private @NotNull EncounterComponentsMapper getEncounterComponentsMapper(RandomIdGeneratorService randomIdGeneratorService, CodeableConceptCdMapper codeableConceptCdMapper) {
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ParticipantMapper participantMapper = new ParticipantMapper();
         MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
@@ -157,7 +176,7 @@ public class EhrExtractUATTest {
             = new DocumentReferenceToNarrativeStatementMapper(
                 messageContext, new SupportedContentTypes(), timestampService, participantMapper);
 
-        final EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
+        return new EncounterComponentsMapper(
             messageContext,
             new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper, confidentialityService),
             new BloodPressureMapper(
@@ -178,24 +197,10 @@ public class EhrExtractUATTest {
                 participantMapper
             ),
             new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper, randomIdGeneratorService),
+            new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper, randomIdGeneratorService, confidentialityService),
             new BloodPressureValidator(),
             codeableConceptCdMapper
         );
-
-        AgentPersonMapper agentPersonMapper
-            = new AgentPersonMapper(messageContext);
-        final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(messageContext, agentPersonMapper);
-
-        final EncounterMapper encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
-
-        final NonConsultationResourceMapper nonConsultationResourceMapper =
-            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper,
-                new BloodPressureValidator());
-        ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService, timestampService, encounterMapper,
-            nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
-        lenient().when(confidentialityService.generateConfidentialityCode(any()))
-            .thenReturn(Optional.empty());
     }
 
     @AfterEach
