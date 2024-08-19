@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp;
 
-import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DomainResource;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
@@ -33,16 +32,22 @@ public final class TestUtility {
         return new FhirParseService().parseResource(jsonInput, targetClass);
     }
 
-    public static void assertThatXmlContainsConfidentialityCode(String xml) {
+    public static void assertThatXmlContainsNopatConfidentialityCode(String xml) {
         assertThat(xml).contains(NOPAT_CONFIDENTIALITY_CODE);
     }
 
-    private static Coding getNopatCoding() {
-        final Coding coding = new Coding();
-        coding.setCode("NOPAT");
-        coding.setSystem("http://hl7.org/fhir/v3/ActCode");
-        coding.setDisplay("no disclosure to patient, family or caregivers without attending provider's authorization");
+    public static void assertThatXmlDoesNotContainNopatConfidentialityCode(String xml) {
+        assertThat(xml).doesNotContain(NOPAT_CONFIDENTIALITY_CODE);
+    }
 
-        return coding;
+    public static <R extends DomainResource> String getSecurityCodeFromResource(R resource) {
+        return resource.getMeta()
+            .getSecurity()
+            .getFirst()
+            .getCode();
+    }
+
+    public static String getNopatConfidentialityCode() {
+        return NOPAT_CONFIDENTIALITY_CODE;
     }
 }
