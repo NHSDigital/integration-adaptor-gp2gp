@@ -25,6 +25,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
@@ -53,7 +54,6 @@ class SpecimenMapperTest {
         new InstantType(DIAGNOSTIC_REPORT_DATE)
     );
 
-    private SpecimenMapper specimenMapper;
     private List<Observation> observations;
 
     @Mock
@@ -68,6 +68,8 @@ class SpecimenMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private ConfidentialityService confidentialityService;
+    @InjectMocks
+    private SpecimenMapper specimenMapper;
 
     @BeforeEach
     void setUp() {
@@ -85,8 +87,6 @@ class SpecimenMapperTest {
             getObservationResourceFromJson(INPUT_OBSERVATION_RELATED_TO_SPECIMEN),
             getObservationResourceFromJson(INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN)
         );
-
-        specimenMapper = new SpecimenMapper(messageContext, observationMapper, randomIdGeneratorService);
     }
 
     @ParameterizedTest

@@ -173,7 +173,8 @@ public class EhrExtractUATTest {
         ObservationMapper specimenObservationMapper = new ObservationMapper(
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper,
             multiStatementObservationHolderFactory);
-        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper,
+            randomIdGeneratorService, confidentialityService);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
             = new DocumentReferenceToNarrativeStatementMapper(
                 messageContext, new SupportedContentTypes(), timestampService, participantMapper);

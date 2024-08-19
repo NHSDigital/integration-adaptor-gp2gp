@@ -196,7 +196,7 @@ public class EncounterComponentsMapperTest {
         ObservationMapper specimenObservationMapper = new ObservationMapper(
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper,
             multiStatementObservationHolderFactory);
-        return new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
+        return new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService, confidentialityService);
     }
 
     @AfterEach
