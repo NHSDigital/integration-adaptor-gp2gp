@@ -1,10 +1,10 @@
 package uk.nhs.adaptors.gp2gp;
 
+import org.hl7.fhir.dstu3.model.Meta;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DomainResource;
-import org.hl7.fhir.dstu3.model.Meta;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 
 import java.util.Collections;
 
@@ -20,29 +20,17 @@ public final class TestUtility {
             displayName="no disclosure to patient, family or caregivers without attending provider's authorization" />
         """;
 
-    /**
-     * Parses a FHIR resource from a JSON file located at the specified file path.
-     *
-     * <p>This method reads the content of the specified file, parses the JSON content into an instance
-     * of the specified FHIR resource type, and returns the parsed object.
-     *
-     * @param <T>          the type of the FHIR resource, which must extend {@code DomainResource}
-     * @param filePath     the path to the JSON file as a {@code String}
-     * @param targetClass  the {@code Class} object corresponding to the type of the FHIR resource to be parsed
-     * @return             an instance of the FHIR resource parsed from the JSON file
-     * @throws RuntimeException if there is an error reading the file or parsing the resource
-     */
-    public static <T extends DomainResource> T parseResourceFromJsonFile(String filePath, Class<T> targetClass) {
-        final String jsonInput = ResourceTestFileUtils.getFileContent(filePath);
-        return new FhirParseService().parseResource(jsonInput, targetClass);
-    }
-
     public static void assertThatXmlContainsNopatConfidentialityCode(String xml) {
         assertThat(xml).contains(NOPAT_CONFIDENTIALITY_CODE);
     }
 
     public static void assertThatXmlDoesNotContainConfidentialityCode(String xml) {
         assertThat(xml).doesNotContain(CONFIDENTIALITY_CODE);
+    }
+
+    public static <R extends DomainResource> R parseResourceFromJsonFile(String filePath, Class<R> resourceClass) {
+        final String jsonInput = ResourceTestFileUtils.getFileContent(filePath);
+        return new FhirParseService().parseResource(jsonInput, resourceClass);
     }
 
     public static <R extends DomainResource> String getSecurityCodeFromResource(R resource) {
@@ -52,7 +40,7 @@ public final class TestUtility {
             .getCode();
     }
 
-    public static <R extends DomainResource> void appendSecurityToMetaForResource(R resource) {
+    public static <R extends DomainResource> void appendNopatSecurityToMetaForResource(R resource) {
         final Meta meta = resource.getMeta();
         meta.setSecurity(
             Collections.singletonList(
@@ -61,15 +49,38 @@ public final class TestUtility {
         );
     }
 
-    public static String getNopatConfidentialityCode() {
+    public static <R extends DomainResource> void appendNoscrubSecurityToMetaForResource(R resource) {
+        final Meta meta = resource.getMeta();
+        meta.setSecurity(
+            Collections.singletonList(
+                getNoscrubCoding()
+            )
+        );
+    }
+
+    public static String getNopatHl7v3ConfidentialityCode() {
         return NOPAT_CONFIDENTIALITY_CODE;
     }
 
     private static Coding getNopatCoding() {
+        final String code = "NOPAT";
+        final String display = "no disclosure to patient, family or caregivers without attending provider's authorization";
+
+        return getCoding(code, display);
+    }
+
+    private static Coding getNoscrubCoding() {
+        final String code = "NOSCRUB";
+        final String display = "no scrubbing of the patient, family or caregivers without attending provider's authorization";
+
+        return getCoding(code, display);
+    }
+
+    private static Coding getCoding(String code, String display) {
         final Coding coding = new Coding();
-        coding.setCode("NOPAT");
-        coding.setDisplay("no disclosure to patient, family or caregivers without attending provider's authorization");
+        coding.setCode(code);
         coding.setSystem("http://hl7.org/fhir/v3/ActCode");
+        coding.setDisplay(display);
         return coding;
     }
 }

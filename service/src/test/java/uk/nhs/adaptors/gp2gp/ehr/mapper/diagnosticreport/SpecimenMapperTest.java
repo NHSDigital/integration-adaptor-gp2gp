@@ -162,10 +162,10 @@ class SpecimenMapperTest {
     void When_MappingSpecimen_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinCompoundStatement() {
         final Specimen specimen = getDefaultSpecimen();
 
-        TestUtility.appendSecurityToMetaForResource(specimen);
+        TestUtility.appendNopatSecurityToMetaForResource(specimen);
 
         when(confidentialityService.generateConfidentialityCode(specimen))
-            .thenReturn(Optional.of(TestUtility.getNopatConfidentialityCode()));
+            .thenReturn(Optional.of(TestUtility.getNopatHl7v3ConfidentialityCode()));
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
             .thenReturn("some-id");
 

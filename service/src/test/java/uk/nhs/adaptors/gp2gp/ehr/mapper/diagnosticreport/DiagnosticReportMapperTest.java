@@ -81,7 +81,7 @@ class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_EXTENSION_ID = "diagnostic-report-with-extension-id.xml";
     private static final String OUTPUT_XML_MULTIPLE_RESULTS = "diagnostic-report-with-multiple-results.xml";
 
-    private static final String NOPAT_CONFIDENTIALITY_CODE = TestUtility.getNopatConfidentialityCode();
+    private static final String NOPAT_CONFIDENTIALITY_CODE = TestUtility.getNopatHl7v3ConfidentialityCode();
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
