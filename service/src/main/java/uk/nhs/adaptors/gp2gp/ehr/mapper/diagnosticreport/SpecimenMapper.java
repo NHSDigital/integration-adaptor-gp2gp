@@ -28,6 +28,7 @@ import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
@@ -61,17 +62,21 @@ public class SpecimenMapper {
     private final MessageContext messageContext;
     private final ObservationMapper observationMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final ConfidentialityService confidentialityService;
 
     public String mapSpecimenToCompoundStatement(Specimen specimen, List<Observation> observations, DiagnosticReport diagnosticReport) {
         String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement());
         String mappedObservations = mapObservationsAssociatedWithSpecimen(specimen, observations);
+
+        final Optional<String> confidentialityCode = confidentialityService.generateConfidentialityCode(specimen);
 
         var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
             .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getIdElement()))
             .availabilityTimeElement(availabilityTimeElement)
             .specimenRoleId(randomIdGeneratorService.createNewId())
             .narrativeStatementId(randomIdGeneratorService.createNewId())
-            .observations(mappedObservations);
+            .observations(mappedObservations)
+            .confidentialityCode(confidentialityCode.orElse(null));
 
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
