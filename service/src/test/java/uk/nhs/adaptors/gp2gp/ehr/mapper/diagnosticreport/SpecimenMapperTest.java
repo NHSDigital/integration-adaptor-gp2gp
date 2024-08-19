@@ -178,6 +178,26 @@ class SpecimenMapperTest {
         );
     }
 
+    @Test
+    void When_MappingSpecimen_With_NoscrubMetaSecurity_Expect_ConfidentialityCodeWithinCompoundStatement() {
+        final Specimen specimen = getDefaultSpecimen();
+
+        TestUtility.appendNoscrubSecurityToMetaForResource(specimen);
+
+        when(confidentialityService.generateConfidentialityCode(specimen))
+            .thenReturn(Optional.empty());
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
+            .thenReturn("some-id");
+
+        final String result = specimenMapper.mapSpecimenToCompoundStatement(specimen,
+            Collections.emptyList(), DIAGNOSTIC_REPORT);
+
+        assertAll(
+            () -> TestUtility.assertThatXmlDoesNotContainConfidentialityCode(result),
+            () -> assertThat(TestUtility.getSecurityCodeFromResource(specimen)).isEqualTo("NOSCRUB")
+        );
+    }
+
     private Specimen getDefaultSpecimen() {
         return getSpecimenResourceFromJson("input_default_specimen.json");
     }
