@@ -167,7 +167,7 @@ class DiagnosticReportMapperTest {
         final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
         assertAll(
-            () -> TestUtility.assertThatXmlDoesNotContainNopatConfidentialityCode(result),
+            () -> TestUtility.assertThatXmlDoesNotContainConfidentialityCode(result),
             () -> assertThat(TestUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOSCRUB")
         );
     }

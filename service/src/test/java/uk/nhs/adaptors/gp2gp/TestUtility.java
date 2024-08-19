@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public final class TestUtility {
     private TestUtility() { }
+    private static final String CONFIDENTIALITY_CODE = "confidentialityCode";
     private static final String NOPAT_CONFIDENTIALITY_CODE = """
         <confidentialityCode
             code="NOPAT"
@@ -36,8 +37,8 @@ public final class TestUtility {
         assertThat(xml).contains(NOPAT_CONFIDENTIALITY_CODE);
     }
 
-    public static void assertThatXmlDoesNotContainNopatConfidentialityCode(String xml) {
-        assertThat(xml).doesNotContain(NOPAT_CONFIDENTIALITY_CODE);
+    public static void assertThatXmlDoesNotContainConfidentialityCode(String xml) {
+        assertThat(xml).doesNotContain(CONFIDENTIALITY_CODE);
     }
 
     public static <R extends DomainResource> String getSecurityCodeFromResource(R resource) {
