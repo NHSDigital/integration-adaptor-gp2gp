@@ -1,8 +1,12 @@
 package uk.nhs.adaptors.gp2gp;
 
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DomainResource;
+import org.hl7.fhir.dstu3.model.Meta;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,7 +52,24 @@ public final class TestUtility {
             .getCode();
     }
 
+    public static <R extends DomainResource> void appendSecurityToMetaForResource(R resource) {
+        final Meta meta = resource.getMeta();
+        meta.setSecurity(
+            Collections.singletonList(
+                getNopatCoding()
+            )
+        );
+    }
+
     public static String getNopatConfidentialityCode() {
         return NOPAT_CONFIDENTIALITY_CODE;
+    }
+
+    private static Coding getNopatCoding() {
+        final Coding coding = new Coding();
+        coding.setCode("NOPAT");
+        coding.setDisplay("no disclosure to patient, family or caregivers without attending provider's authorization");
+        coding.setSystem("http://hl7.org/fhir/v3/ActCode");
+        return coding;
     }
 }
