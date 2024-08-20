@@ -30,7 +30,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
-import uk.nhs.adaptors.gp2gp.TestUtility;
+import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
+import uk.nhs.adaptors.gp2gp.utils.FileParsingUtility;
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -50,6 +51,7 @@ class SpecimenMapperTest {
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
+    private static final String NOPAT_CONFIDENTIALITY_CODE = ConfidentialityCodeUtility.getNopatHl7v3ConfidentialityCode();
     private static final DiagnosticReport DIAGNOSTIC_REPORT = new DiagnosticReport().setIssuedElement(
         new InstantType(DIAGNOSTIC_REPORT_DATE)
     );
@@ -162,10 +164,10 @@ class SpecimenMapperTest {
     void When_MappingSpecimen_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinCompoundStatement() {
         final Specimen specimen = getDefaultSpecimen();
 
-        TestUtility.appendNopatSecurityToMetaForResource(specimen);
+        ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(specimen);
 
         when(confidentialityService.generateConfidentialityCode(specimen))
-            .thenReturn(Optional.of(TestUtility.getNopatHl7v3ConfidentialityCode()));
+            .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
             .thenReturn("some-id");
 
@@ -173,8 +175,8 @@ class SpecimenMapperTest {
             Collections.emptyList(), DIAGNOSTIC_REPORT);
 
         assertAll(
-            () -> TestUtility.assertThatXmlContainsNopatConfidentialityCode(result),
-            () -> assertThat(TestUtility.getSecurityCodeFromResource(specimen)).isEqualTo("NOPAT")
+            () -> assertThat(result).contains(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(specimen)).isEqualTo("NOPAT")
         );
     }
 
@@ -182,7 +184,7 @@ class SpecimenMapperTest {
     void When_MappingSpecimen_With_NoscrubMetaSecurity_Expect_ConfidentialityCodeWithinCompoundStatement() {
         final Specimen specimen = getDefaultSpecimen();
 
-        TestUtility.appendNoscrubSecurityToMetaForResource(specimen);
+        ConfidentialityCodeUtility.appendNoscrubSecurityToMetaForResource(specimen);
 
         when(confidentialityService.generateConfidentialityCode(specimen))
             .thenReturn(Optional.empty());
@@ -193,8 +195,8 @@ class SpecimenMapperTest {
             Collections.emptyList(), DIAGNOSTIC_REPORT);
 
         assertAll(
-            () -> TestUtility.assertThatXmlDoesNotContainConfidentialityCode(result),
-            () -> assertThat(TestUtility.getSecurityCodeFromResource(specimen)).isEqualTo("NOSCRUB")
+            () -> assertThat(result).doesNotContain(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(specimen)).isEqualTo("NOSCRUB")
         );
     }
 
@@ -208,12 +210,12 @@ class SpecimenMapperTest {
 
     private Observation getObservationResourceFromJson(String filename) {
         final String filePath = OBSERVATION_TEST_FILES_DIRECTORY + filename;
-        return TestUtility.parseResourceFromJsonFile(filePath, Observation.class);
+        return FileParsingUtility.parseResourceFromJsonFile(filePath, Observation.class);
     }
 
     private Specimen getSpecimenResourceFromJson(String filename) {
         final String filePath = SPECIMEN_TEST_FILES_DIRECTORY + filename;
-        return TestUtility.parseResourceFromJsonFile(filePath, Specimen.class);
+        return FileParsingUtility.parseResourceFromJsonFile(filePath, Specimen.class);
     }
 
     private static Stream<Arguments> testData() {

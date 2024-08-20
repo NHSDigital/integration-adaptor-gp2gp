@@ -1,37 +1,19 @@
-package uk.nhs.adaptors.gp2gp;
+package uk.nhs.adaptors.gp2gp.utils;
 
-import org.hl7.fhir.dstu3.model.Meta;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DomainResource;
-import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import org.hl7.fhir.dstu3.model.Meta;
 
 import java.util.Collections;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public final class TestUtility {
-    private TestUtility() { }
-    private static final String CONFIDENTIALITY_CODE = "confidentialityCode";
+public final class ConfidentialityCodeUtility {
+    private ConfidentialityCodeUtility() { }
     private static final String NOPAT_CONFIDENTIALITY_CODE = """
         <confidentialityCode
             code="NOPAT"
             codeSystem="2.16.840.1.113883.4.642.3.47"
             displayName="no disclosure to patient, family or caregivers without attending provider's authorization" />
         """;
-
-    public static void assertThatXmlContainsNopatConfidentialityCode(String xml) {
-        assertThat(xml).contains(NOPAT_CONFIDENTIALITY_CODE);
-    }
-
-    public static void assertThatXmlDoesNotContainConfidentialityCode(String xml) {
-        assertThat(xml).doesNotContain(CONFIDENTIALITY_CODE);
-    }
-
-    public static <R extends DomainResource> R parseResourceFromJsonFile(String filePath, Class<R> resourceClass) {
-        final String jsonInput = ResourceTestFileUtils.getFileContent(filePath);
-        return new FhirParseService().parseResource(jsonInput, resourceClass);
-    }
 
     public static <R extends DomainResource> String getSecurityCodeFromResource(R resource) {
         return resource.getMeta()

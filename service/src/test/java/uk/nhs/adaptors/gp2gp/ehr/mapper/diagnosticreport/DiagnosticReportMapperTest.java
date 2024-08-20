@@ -31,7 +31,8 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.mockito.stubbing.Answer;
 
-import uk.nhs.adaptors.gp2gp.TestUtility;
+import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
+import uk.nhs.adaptors.gp2gp.utils.FileParsingUtility;
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -81,7 +82,7 @@ class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_EXTENSION_ID = "diagnostic-report-with-extension-id.xml";
     private static final String OUTPUT_XML_MULTIPLE_RESULTS = "diagnostic-report-with-multiple-results.xml";
 
-    private static final String NOPAT_CONFIDENTIALITY_CODE = TestUtility.getNopatHl7v3ConfidentialityCode();
+    private static final String NOPAT_CONFIDENTIALITY_CODE = ConfidentialityCodeUtility.getNopatHl7v3ConfidentialityCode();
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -152,8 +153,8 @@ class DiagnosticReportMapperTest {
         final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
         assertAll(
-            () -> TestUtility.assertThatXmlContainsNopatConfidentialityCode(result),
-            () -> assertThat(TestUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOPAT")
+            () -> assertThat(result).contains(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOPAT")
         );
     }
 
@@ -168,14 +169,14 @@ class DiagnosticReportMapperTest {
         final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
         assertAll(
-            () -> TestUtility.assertThatXmlDoesNotContainConfidentialityCode(result),
-            () -> assertThat(TestUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOSCRUB")
+            () -> assertThat(result).doesNotContain(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOSCRUB")
         );
     }
 
     private DiagnosticReport getDiagnosticReportResourceFromJson(String filename) {
         final String filePath = TEST_FILE_DIRECTORY + filename;
-        return TestUtility.parseResourceFromJsonFile(filePath, DiagnosticReport.class);
+        return FileParsingUtility.parseResourceFromJsonFile(filePath, DiagnosticReport.class);
     }
 
     private String removeLineEndings(String input) {
