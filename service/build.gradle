@@ -54,7 +54,7 @@ dependencies {
 	implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
 
 	// Utils
-	implementation 'org.apache.commons:commons-lang3:3.15.0'
+	implementation 'org.apache.commons:commons-lang3:3.16.0'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
 	implementation 'com.github.spullara.mustache.java:compiler:0.9.14'
 	implementation 'org.apache.tika:tika-core:2.9.2'
