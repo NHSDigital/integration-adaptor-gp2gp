@@ -146,7 +146,7 @@ class SpecimenMapperTest {
     void When_MappingDefaultSpecimenWithNoMappableObservations_Expect_EmptySpecimenXmlOutput() {
         final Specimen specimen = getDefaultSpecimen();
         final String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
-            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_specimen_with_observations.xml"
+            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_empty_specimen.xml"
         );
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
