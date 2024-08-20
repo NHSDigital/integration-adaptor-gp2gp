@@ -152,6 +152,9 @@ pitest {
 	// git feature limits analysis to contents of PR only
 	features = ["+GIT(from[HEAD~1])"]
 
+	// PRs which don't introduce any production code changes, shouldn't fail the Mutation Testing Actions Workflow
+        failWhenNoMutations = false
+
 	mutators = ['STRONGER', 'EXTENDED_ALL']
 
 	threads = project.getGradle().getStartParameter().getMaxWorkerCount()
