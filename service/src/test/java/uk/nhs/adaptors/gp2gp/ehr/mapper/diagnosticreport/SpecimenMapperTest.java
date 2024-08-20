@@ -52,6 +52,7 @@ class SpecimenMapperTest {
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
     private static final String NOPAT_CONFIDENTIALITY_CODE = ConfidentialityCodeUtility.getNopatHl7v3ConfidentialityCode();
+    private static final String ID_FROM_ID_MAPPER = "some-id";
     private static final DiagnosticReport DIAGNOSTIC_REPORT = new DiagnosticReport().setIssuedElement(
         new InstantType(DIAGNOSTIC_REPORT_DATE)
     );
@@ -113,7 +114,7 @@ class SpecimenMapperTest {
             SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_specimen_and_default_observation.xml");
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
-            .thenReturn("some-id");
+            .thenReturn(ID_FROM_ID_MAPPER);
 
         when(observationMapper.mapObservationToCompoundStatement(observation))
             .thenAnswer(mockObservationMapping());
@@ -129,13 +130,11 @@ class SpecimenMapperTest {
     void When_MappingDefaultSpecimenWithObservations_Expect_DefaultSpecimenAndObservationsXmlOutput() {
         final Specimen specimen = getDefaultSpecimen();
         final String expectedXml = ResourceTestFileUtils.getFileContent(
-            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_specimen_and_default_observation.xml");
+            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_specimen_with_observations.xml");
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
-            .thenReturn("some-id");
-
-        when(observationMapper.mapObservationToCompoundStatement(any(Observation.class)))
-            .thenAnswer(mockObservationMapping());
+            .thenReturn(ID_FROM_ID_MAPPER);
+        when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
 
         final String actualXml = specimenMapper.mapSpecimenToCompoundStatement(
             specimen, observations, DIAGNOSTIC_REPORT);
@@ -147,11 +146,11 @@ class SpecimenMapperTest {
     void When_MappingDefaultSpecimenWithNoMappableObservations_Expect_EmptySpecimenXmlOutput() {
         final Specimen specimen = getDefaultSpecimen();
         final String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
-            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_empty_specimen.xml"
+            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_specimen_with_observations.xml"
         );
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
-            .thenReturn("some-id");
+            .thenReturn(ID_FROM_ID_MAPPER);
 
         final String actualXml = specimenMapper.mapSpecimenToCompoundStatement(
             specimen, Collections.emptyList(), DIAGNOSTIC_REPORT
@@ -169,7 +168,7 @@ class SpecimenMapperTest {
         when(confidentialityService.generateConfidentialityCode(specimen))
             .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
-            .thenReturn("some-id");
+            .thenReturn(ID_FROM_ID_MAPPER);
 
         final String result = specimenMapper.mapSpecimenToCompoundStatement(specimen,
             Collections.emptyList(), DIAGNOSTIC_REPORT);
@@ -189,7 +188,7 @@ class SpecimenMapperTest {
         when(confidentialityService.generateConfidentialityCode(specimen))
             .thenReturn(Optional.empty());
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
-            .thenReturn("some-id");
+            .thenReturn(ID_FROM_ID_MAPPER);
 
         final String result = specimenMapper.mapSpecimenToCompoundStatement(specimen,
             Collections.emptyList(), DIAGNOSTIC_REPORT);
