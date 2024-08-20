@@ -68,15 +68,13 @@ public class SpecimenMapper {
         String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement());
         String mappedObservations = mapObservationsAssociatedWithSpecimen(specimen, observations);
 
-        final Optional<String> confidentialityCode = confidentialityService.generateConfidentialityCode(specimen);
-
         var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
             .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getIdElement()))
             .availabilityTimeElement(availabilityTimeElement)
             .specimenRoleId(randomIdGeneratorService.createNewId())
             .narrativeStatementId(randomIdGeneratorService.createNewId())
             .observations(mappedObservations)
-            .confidentialityCode(confidentialityCode.orElse(null));
+            .confidentialityCode(confidentialityService.generateConfidentialityCode(diagnosticReport).orElse(null));
 
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
@@ -156,7 +154,7 @@ public class SpecimenMapper {
 
     private boolean dummySpecimenOrObservationExists(Specimen specimen, List<Observation> observations) {
         return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)
-            || (!observations.isEmpty() && observations.get(0).getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
+            || (!observations.isEmpty() && observations.getFirst().getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement,
