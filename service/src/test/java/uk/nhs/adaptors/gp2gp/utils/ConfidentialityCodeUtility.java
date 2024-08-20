@@ -59,10 +59,9 @@ public final class ConfidentialityCodeUtility {
     }
 
     private static Coding getCoding(String code, String display) {
-        final Coding coding = new Coding();
-        coding.setCode(code);
-        coding.setSystem("http://hl7.org/fhir/v3/ActCode");
-        coding.setDisplay(display);
-        return coding;
+        final String system = "http://hl7.org/fhir/v3/ActCode";
+        return new Coding().setCode(code)
+            .setSystem(system)
+            .setDisplay(display);
     }
 }
