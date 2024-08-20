@@ -74,7 +74,7 @@ public class SpecimenMapper {
             .specimenRoleId(randomIdGeneratorService.createNewId())
             .narrativeStatementId(randomIdGeneratorService.createNewId())
             .observations(mappedObservations)
-            .confidentialityCode(confidentialityService.generateConfidentialityCode(diagnosticReport).orElse(null));
+            .confidentialityCode(confidentialityService.generateConfidentialityCode(specimen).orElse(null));
 
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
