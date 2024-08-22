@@ -153,7 +153,8 @@ public class EhrExtractMapperComponentTest {
         ObservationMapper specimenObservationMapper = new ObservationMapper(
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper,
             participantMapper, multiStatementObservationHolderFactory);
-        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper,
+            randomIdGeneratorService, confidentialityService);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
             = new DocumentReferenceToNarrativeStatementMapper(
                 messageContext, new SupportedContentTypes(), timestampService, participantMapper);
@@ -180,7 +181,7 @@ public class EhrExtractMapperComponentTest {
             ),
             new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new DiagnosticReportMapper(
-                messageContext, specimenMapper, participantMapper, randomIdGeneratorService
+                messageContext, specimenMapper, participantMapper, randomIdGeneratorService, confidentialityService
             ),
             new BloodPressureValidator(),
             codeableConceptCdMapper

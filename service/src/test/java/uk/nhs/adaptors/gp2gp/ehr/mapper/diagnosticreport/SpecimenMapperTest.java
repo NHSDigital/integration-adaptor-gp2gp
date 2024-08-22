@@ -1,13 +1,14 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -24,10 +25,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
+import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
+import uk.nhs.adaptors.gp2gp.utils.FileParsingUtility;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
@@ -37,37 +42,40 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
-public class SpecimenMapperTest {
-
-    private static final String DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
+class SpecimenMapperTest {
+    private static final String BASE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
+    private static final String SPECIMEN_TEST_FILES_DIRECTORY = BASE_DIRECTORY + "/specimen/";
+    private static final String OBSERVATION_TEST_FILES_DIRECTORY = BASE_DIRECTORY + "/observation/";
     private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12T13:33:44Z";
-    private static final String FHIR_INPUT_BUNDLE = DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "fhir_bundle.json";
-
+    private static final String FHIR_INPUT_BUNDLE = BASE_DIRECTORY + "fhir_bundle.json";
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
-
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
+    private static final String NOPAT_CONFIDENTIALITY_CODE = ConfidentialityCodeUtility.getNopatHl7v3ConfidentialityCode();
+    private static final String ID_FROM_ID_MAPPER = "some-id";
+    private static final DiagnosticReport DIAGNOSTIC_REPORT = new DiagnosticReport().setIssuedElement(
+        new InstantType(DIAGNOSTIC_REPORT_DATE)
+    );
 
-    private SpecimenMapper specimenMapper;
     private List<Observation> observations;
 
     @Mock
     private MessageContext messageContext;
-
     @Mock
     private IdMapper idMapper;
-
     @Mock
     private AgentDirectory agentDirectory;
-
     @Mock
     private ObservationMapper observationMapper;
-
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private ConfidentialityService confidentialityService;
+    @InjectMocks
+    private SpecimenMapper specimenMapper;
 
     @BeforeEach
-    public void setUp() throws IOException {
+    void setUp() {
         var inputBundleString = ResourceTestFileUtils.getFileContent(FHIR_INPUT_BUNDLE);
         var inputBundle = new FhirParseService().parseResource(inputBundleString, Bundle.class);
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
@@ -79,97 +87,134 @@ public class SpecimenMapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
         observations = List.of(
-            parseObservation(INPUT_OBSERVATION_RELATED_TO_SPECIMEN),
-            parseObservation(INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN)
+            getObservationResourceFromJson(INPUT_OBSERVATION_RELATED_TO_SPECIMEN),
+            getObservationResourceFromJson(INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN)
         );
-
-        specimenMapper = new SpecimenMapper(messageContext, observationMapper, randomIdGeneratorService);
     }
 
     @ParameterizedTest
     @MethodSource("testData")
-    public void When_MappingSpecimen_Expect_XmlOutput(String inputPath, String expectedPath) throws IOException {
-        var input = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + inputPath);
-        var specimen = new FhirParseService().parseResource(input, Specimen.class);
+    void When_MappingSpecimen_Expect_XmlOutput(String inputPath, String expectedPath) {
+        final Specimen specimen = getSpecimenResourceFromJson(inputPath);
+        final String expectedXml = ResourceTestFileUtils.getFileContent(SPECIMEN_TEST_FILES_DIRECTORY + expectedPath);
 
-        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
+        when(observationMapper.mapObservationToCompoundStatement(any(Observation.class)))
+            .thenAnswer(mockObservationMapping());
 
-        var expected = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + expectedPath);
+        final String actualXml = specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, DIAGNOSTIC_REPORT);
 
+        assertThat(actualXml).isEqualTo(expectedXml);
+    }
+
+    @Test
+    public void When_MappingDefaultSpecimenWithDefaultObservation_Expect_DefaultXmlOutput() {
+        final Specimen specimen = getDefaultSpecimen();
+        final Observation observation = getDefaultObservation();
+        final String expectedXml = ResourceTestFileUtils.getFileContent(
+            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_specimen_and_default_observation.xml");
+
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
+            .thenReturn(ID_FROM_ID_MAPPER);
+
+        when(observationMapper.mapObservationToCompoundStatement(observation))
+            .thenAnswer(mockObservationMapping());
+
+        final String actualXml = specimenMapper.mapSpecimenToCompoundStatement(
+            specimen, Collections.singletonList(observation), DIAGNOSTIC_REPORT
+        );
+
+        assertThat(actualXml).isEqualTo(expectedXml);
+    }
+
+    @Test
+    void When_MappingDefaultSpecimenWithObservations_Expect_DefaultSpecimenAndObservationsXmlOutput() {
+        final Specimen specimen = getDefaultSpecimen();
+        final String expectedXml = ResourceTestFileUtils.getFileContent(
+            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_specimen_with_observations.xml");
+
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
+            .thenReturn(ID_FROM_ID_MAPPER);
         when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
 
-        String outputMessage = specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport);
+        final String actualXml = specimenMapper.mapSpecimenToCompoundStatement(
+            specimen, observations, DIAGNOSTIC_REPORT);
 
-        assertThat(outputMessage).isEqualTo(expected);
+        assertThat(actualXml).isEqualTo(expectedXml);
     }
 
     @Test
-    public void When_MappingDefaultSpecimenWithDefaultObservation_Expect_DefaultXmlOutput() throws IOException {
-        String defaultSpecimenJson = ResourceTestFileUtils.getFileContent(
-            DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "input_default_specimen.json"
-        );
-        Specimen specimen = new FhirParseService().parseResource(defaultSpecimenJson, Specimen.class);
-
-        String defaultObservationJson = ResourceTestFileUtils.getFileContent(
-            DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "observation/" + "input_default_observation.json"
-        );
-        Observation observation = new FhirParseService().parseResource(defaultObservationJson, Observation.class);
-
-        String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
-            DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_specimen_and_default_observation.xml"
-        );
-        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
-
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-        when(observationMapper.mapObservationToCompoundStatement(observation)).thenAnswer(mockObservationMapping());
-
-        String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
-            specimen, Collections.singletonList(observation), diagnosticReport
+    void When_MappingDefaultSpecimenWithNoMappableObservations_Expect_EmptySpecimenXmlOutput() {
+        final Specimen specimen = getDefaultSpecimen();
+        final String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
+            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_empty_specimen.xml"
         );
 
-        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
+            .thenReturn(ID_FROM_ID_MAPPER);
+
+        final String actualXml = specimenMapper.mapSpecimenToCompoundStatement(
+            specimen, Collections.emptyList(), DIAGNOSTIC_REPORT
+        );
+
+        assertThat(actualXml).isEqualTo(expectedXmlOutput);
     }
 
     @Test
-    public void When_MappingDefaultSpecimenWithObservations_Expect_DefaultSpecimenAndObservationsXmlOutput() throws IOException {
-        String defaultSpecimenJson = ResourceTestFileUtils.getFileContent(
-            DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "input_default_specimen.json"
+    void When_MappingSpecimen_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinCompoundStatement() {
+        final Specimen specimen = getDefaultSpecimen();
+
+        ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(specimen);
+
+        when(confidentialityService.generateConfidentialityCode(specimen))
+            .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
+            .thenReturn(ID_FROM_ID_MAPPER);
+
+        final String result = specimenMapper.mapSpecimenToCompoundStatement(specimen,
+            Collections.emptyList(), DIAGNOSTIC_REPORT);
+
+        assertAll(
+            () -> assertThat(result).contains(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(specimen)).isEqualTo("NOPAT")
         );
-        Specimen specimen = new FhirParseService().parseResource(defaultSpecimenJson, Specimen.class);
-
-        String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
-            DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_specimen_with_observations.xml"
-        );
-        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
-
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-        when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
-
-        String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
-            specimen, observations, diagnosticReport
-        );
-
-        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
     }
 
     @Test
-    public void When_MappingDefaultSpecimenWithNoMappableObservations_Expect_EmptySpecimenXmlOutput() throws IOException {
-        String defaultSpecimenJson = ResourceTestFileUtils.getFileContent(
-                DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "input_default_specimen.json"
-        );
-        Specimen specimen = new FhirParseService().parseResource(defaultSpecimenJson, Specimen.class);
-        String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
-                DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_empty_specimen.xml"
-        );
-        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
+    void When_MappingSpecimen_With_NoscrubMetaSecurity_Expect_ConfidentialityCodeWithinCompoundStatement() {
+        final Specimen specimen = getDefaultSpecimen();
 
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
+        ConfidentialityCodeUtility.appendNoscrubSecurityToMetaForResource(specimen);
 
-        String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
-                specimen, Collections.emptyList(), diagnosticReport
+        when(confidentialityService.generateConfidentialityCode(specimen))
+            .thenReturn(Optional.empty());
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
+            .thenReturn(ID_FROM_ID_MAPPER);
+
+        final String result = specimenMapper.mapSpecimenToCompoundStatement(specimen,
+            Collections.emptyList(), DIAGNOSTIC_REPORT);
+
+        assertAll(
+            () -> assertThat(result).doesNotContain(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(specimen)).isEqualTo("NOSCRUB")
         );
+    }
 
-        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
+    private Specimen getDefaultSpecimen() {
+        return getSpecimenResourceFromJson("input_default_specimen.json");
+    }
+
+    private Observation getDefaultObservation() {
+        return getObservationResourceFromJson("input_default_observation.json");
+    }
+
+    private Observation getObservationResourceFromJson(String filename) {
+        final String filePath = OBSERVATION_TEST_FILES_DIRECTORY + filename;
+        return FileParsingUtility.parseResourceFromJsonFile(filePath, Observation.class);
+    }
+
+    private Specimen getSpecimenResourceFromJson(String filename) {
+        final String filePath = SPECIMEN_TEST_FILES_DIRECTORY + filename;
+        return FileParsingUtility.parseResourceFromJsonFile(filePath, Specimen.class);
     }
 
     private static Stream<Arguments> testData() {
@@ -213,11 +258,5 @@ public class SpecimenMapperTest {
             Observation observation = invocation.getArgument(0);
             return String.format("<!-- Mapped Observation with id: %s -->", observation.getId());
         };
-    }
-
-    private Observation parseObservation(String path) throws IOException {
-        String fileContent = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "observation/" + path);
-
-        return new FhirParseService().parseResource(fileContent, Observation.class);
     }
 }

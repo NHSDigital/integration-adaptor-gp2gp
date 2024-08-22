@@ -14,4 +14,5 @@ public class DiagnosticReportCompoundStatementTemplateParameters {
     private String narrativeStatements;
     private String specimens;
     private String participant;
+    private String confidentialityCode;
 }

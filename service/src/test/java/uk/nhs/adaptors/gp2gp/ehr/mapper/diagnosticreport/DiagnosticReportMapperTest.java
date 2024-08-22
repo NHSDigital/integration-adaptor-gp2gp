@@ -1,10 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -14,6 +16,7 @@ import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Specimen;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +29,9 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.mockito.stubbing.Answer;
 
+import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
+import uk.nhs.adaptors.gp2gp.utils.FileParsingUtility;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
@@ -41,7 +47,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class DiagnosticReportMapperTest {
+class DiagnosticReportMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
 
     private static final String INPUT_JSON_BUNDLE = "fhir_bundle.json";
@@ -74,12 +80,16 @@ public class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_EXTENSION_ID = "diagnostic-report-with-extension-id.xml";
     private static final String OUTPUT_XML_MULTIPLE_RESULTS = "diagnostic-report-with-multiple-results.xml";
 
+    private static final String NOPAT_CONFIDENTIALITY_CODE = ConfidentialityCodeUtility.getNopatHl7v3ConfidentialityCode();
+
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
     @Mock
     private SpecimenMapper specimenMapper;
     @Mock
     private MessageContext messageContext;
+    @Mock
+    private ConfidentialityService confidentialityService;
     @Mock
     private IdMapper idMapper;
     @Mock
@@ -108,7 +118,8 @@ public class DiagnosticReportMapperTest {
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
-        mapper = new DiagnosticReportMapper(messageContext, specimenMapper, new ParticipantMapper(), randomIdGeneratorService);
+        mapper = new DiagnosticReportMapper(
+            messageContext, specimenMapper, new ParticipantMapper(), randomIdGeneratorService, confidentialityService);
     }
 
     @AfterEach
@@ -118,13 +129,50 @@ public class DiagnosticReportMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")
-    public void When_MappingDiagnosticReportJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) {
+    void When_MappingDiagnosticReportJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) {
         final CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + outputXml);
-        final String jsonInput = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + inputJson);
-        final DiagnosticReport diagnosticReport = new FhirParseService().parseResource(jsonInput, DiagnosticReport.class);
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(inputJson);
 
         final String outputMessage = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
         assertThat(removeLineEndings(outputMessage)).isEqualTo(removeLineEndings(expectedOutputMessage.toString()));
+    }
+
+    @Test
+    void When_DiagnosticReport_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinCompoundStatement() {
+        final String testFile = "diagnostic-report-with-multi-specimens-nopat.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(testFile);
+
+        when(confidentialityService.generateConfidentialityCode(diagnosticReport))
+            .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
+
+        final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        assertAll(
+            () -> assertThat(result).contains(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOPAT")
+        );
+    }
+
+    @Test
+    void When_DiagnosticReport_With_NoscrubMetaSecurity_Expect_ConfidentialityCodeNotWithinCompoundStatement() {
+        final String testFile = "diagnostic-report-with-multi-specimens-noscrub.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(testFile);
+
+        when(confidentialityService.generateConfidentialityCode(diagnosticReport))
+            .thenReturn(Optional.empty());
+
+        final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        assertAll(
+            () -> assertThat(result).doesNotContain(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOSCRUB")
+        );
+    }
+
+    private DiagnosticReport getDiagnosticReportResourceFromJson(String filename) {
+        final String filePath = TEST_FILE_DIRECTORY + filename;
+        return FileParsingUtility.parseResourceFromJsonFile(filePath, DiagnosticReport.class);
     }
 
     private String removeLineEndings(String input) {
@@ -171,5 +219,4 @@ public class DiagnosticReportMapperTest {
             return String.format("<!-- Mapped Specimen with id: %s -->", specimen.getId());
         };
     }
-
 }

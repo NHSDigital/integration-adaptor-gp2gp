@@ -18,4 +18,5 @@ public class SpecimenCompoundStatementTemplateParameters {
     private String narrativeStatementId;
     private String participant;
     private String observations;
+    private String confidentialityCode;
 }

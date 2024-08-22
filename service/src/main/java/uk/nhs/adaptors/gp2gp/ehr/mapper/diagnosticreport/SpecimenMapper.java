@@ -28,6 +28,7 @@ import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
@@ -61,6 +62,7 @@ public class SpecimenMapper {
     private final MessageContext messageContext;
     private final ObservationMapper observationMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final ConfidentialityService confidentialityService;
 
     public String mapSpecimenToCompoundStatement(Specimen specimen, List<Observation> observations, DiagnosticReport diagnosticReport) {
         String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement());
@@ -71,7 +73,8 @@ public class SpecimenMapper {
             .availabilityTimeElement(availabilityTimeElement)
             .specimenRoleId(randomIdGeneratorService.createNewId())
             .narrativeStatementId(randomIdGeneratorService.createNewId())
-            .observations(mappedObservations);
+            .observations(mappedObservations)
+            .confidentialityCode(confidentialityService.generateConfidentialityCode(specimen).orElse(null));
 
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
@@ -151,7 +154,7 @@ public class SpecimenMapper {
 
     private boolean dummySpecimenOrObservationExists(Specimen specimen, List<Observation> observations) {
         return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)
-            || (!observations.isEmpty() && observations.get(0).getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
+            || (!observations.isEmpty() && observations.getFirst().getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement,

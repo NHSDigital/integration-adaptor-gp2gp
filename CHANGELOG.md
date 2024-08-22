@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * When mapping `AllergyIntolerances` which contain a `NOPAT` `meta.security` tag the resultant XML for that resource
 will contain a `NOPAT` `confidentialityCode` element.
+* When mapping a `DiagnosticReport` or `Specimen` which contains a `NOPAT` `meta.security` tag the resultant XML for that resource
+  will contain a `NOPAT` `confidentialityCode` element.
 
 ## [2.0.6] - 2024-07-29
 
