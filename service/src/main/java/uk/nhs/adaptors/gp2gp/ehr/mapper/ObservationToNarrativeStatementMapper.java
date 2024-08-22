@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
@@ -24,12 +25,14 @@ public class ObservationToNarrativeStatementMapper {
 
     private final MessageContext messageContext;
     private final ParticipantMapper participantMapper;
+    private final ConfidentialityService confidentialityService;
 
     public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {
         final IdMapper idMapper = messageContext.getIdMapper();
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
             .availabilityTime(getAvailabilityTime(observation))
+            .confidentialityCode(confidentialityService.generateConfidentialityCode(observation).orElse(null))
             .comment(observation.getComment())
             .isNested(isNested);
 

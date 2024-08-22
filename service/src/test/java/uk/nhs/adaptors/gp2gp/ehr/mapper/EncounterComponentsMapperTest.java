@@ -154,7 +154,7 @@ public class EncounterComponentsMapperTest {
         MedicationStatementMapper medicationStatementMapper
             = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
-            new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
+            new ObservationToNarrativeStatementMapper(messageContext, participantMapper, confidentialityService);
         SpecimenMapper specimenMapper = getSpecimenMapper(structuredObservationValueMapper, participantMapper);
 
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(

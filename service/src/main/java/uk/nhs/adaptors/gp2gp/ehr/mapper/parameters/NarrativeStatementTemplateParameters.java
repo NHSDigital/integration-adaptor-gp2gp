@@ -10,6 +10,7 @@ import lombok.Setter;
 public class NarrativeStatementTemplateParameters {
     private String narrativeStatementId;
     private String availabilityTime;
+    private String confidentialityCode;
     private String comment;
     private boolean isNested;
     private boolean hasReference;

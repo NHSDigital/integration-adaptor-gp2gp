@@ -4,6 +4,9 @@
         <text>{{comment}}</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="{{availabilityTime}}" />
+        {{#confidentialityCode}}
+            {{{confidentialityCode}}}
+        {{/confidentialityCode}}
         {{#participant}}
         {{{.}}}
         {{/participant}}
