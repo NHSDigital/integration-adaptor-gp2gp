@@ -13,5 +13,6 @@ public class NarrativeStatementTemplateParameters {
     private String commentDate;
     private String comment;
     private String availabilityTimeElement;
+    private String confidentialityCode;
     private String participant;
 }
