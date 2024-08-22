@@ -23,8 +23,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
@@ -98,8 +96,6 @@ class DiagnosticReportMapperTest {
     private AgentDirectory agentDirectory;
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
-    @Captor
-    private ArgumentCaptor<DiagnosticReport> diagnosticReportCaptor;
 
     private DiagnosticReportMapper mapper;
 
@@ -147,7 +143,7 @@ class DiagnosticReportMapperTest {
         final String testFile = "diagnostic-report-with-multi-specimens-nopat.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(testFile);
 
-        when(confidentialityService.generateConfidentialityCode(diagnosticReportCaptor.capture()))
+        when(confidentialityService.generateConfidentialityCode(diagnosticReport))
             .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
 
         final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
@@ -163,7 +159,7 @@ class DiagnosticReportMapperTest {
         final String testFile = "diagnostic-report-with-multi-specimens-noscrub.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(testFile);
 
-        when(confidentialityService.generateConfidentialityCode(diagnosticReportCaptor.capture()))
+        when(confidentialityService.generateConfidentialityCode(diagnosticReport))
             .thenReturn(Optional.empty());
 
         final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
