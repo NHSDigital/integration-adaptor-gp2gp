@@ -1,0 +1,71 @@
+{
+  "resourceType": "Observation",
+  "id": "32685afe-1d46-4d98-8279-39b9e96ee914",
+  "meta":
+  {
+    "profile":
+    [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+    ]
+  },
+  "identifier":
+  [
+    {
+      "system": "https://tools.ietf.org/html/rfc4122",
+      "value": "2af46949-4938-4c57-bad4-c4363e1965d7"
+    }
+  ],
+  "status": "final",
+  "category":
+  [
+    {
+      "coding":
+      [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "394595002",
+          "display": "Pathology"
+        }
+      ]
+    }
+  ],
+  "code":
+  {
+    "coding":
+    [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "1022451000000103",
+        "display": "Red blood cell count"
+      }
+    ]
+  },
+  "subject":
+  {
+    "reference": "Patient/11",
+    "display": "SKELLY, Horace"
+  },
+  "issued": "2019-04-06T12:00:00+00:00",
+  "performer":
+  [
+    {
+      "reference": "Organization/7",
+      "display": "COXWOLD Surgery"
+    }
+  ],
+  "valueQuantity":
+  {
+    "value": 4.5700000000000003,
+    "unit": "10*12/L"
+  },
+  "specimen":
+  {
+    "reference": "Specimen/756a8361-79ce-4561-afcb-a91fe19df123"
+  },
+  "referenceRange":
+  [
+    {
+      "text": "less than 3.8 to 5"
+    }
+  ]
+}
