@@ -12,6 +12,7 @@ public class ObservationStatementTemplateParameters {
     private String codeElement;
     private String effectiveTime;
     private String availabilityTimeElement;
+    private String confidentialityCode;
     private String value;
     private String referenceRange;
     private String interpretation;
