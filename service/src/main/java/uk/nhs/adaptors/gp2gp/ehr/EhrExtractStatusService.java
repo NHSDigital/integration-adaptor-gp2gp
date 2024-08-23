@@ -65,7 +65,6 @@ public class EhrExtractStatusService {
     private static final String ROOT_ID = "rootId";
     private static final String CONVERSATION_CLOSED = "conversationClosed";
     private static final String MESSAGE_REF = "messageRef";
-    private static final String EHR_EXTRACT_MESSAGE_REF = "ehrExtractMessageRef";
     private static final String ERRORS = "errors";
     private static final String ERROR = "error";
     private static final String SENT_TO_MHS = "sentToMhs";
@@ -116,6 +115,8 @@ public class EhrExtractStatusService {
     private static final String FILENAME_TYPE_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
     public static final int LIMIT_OF_DAYS_SINCE_EHR_EXTRACT_WAS_SENT = 8;
+    private static final String REASON_ERROR_CODE = "04";
+    public static final String REASON_ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -310,10 +311,10 @@ public class EhrExtractStatusService {
 
         if (hasAckReceivedExceededEightDays(conversationId, ack.getReceived())) {
             updateEhrExtractStatusError(conversationId,
-                                        "04",
-                                        "There has been an error when processing the message",
-                                        TASK_TYPE
-                                        );
+                                        REASON_ERROR_CODE,
+                                        REASON_ERROR_MESSAGE,
+                                        this.getClass().getSimpleName());
+            return;
         }
 
         Query query = createQueryForConversationId(conversationId);
@@ -580,14 +581,14 @@ public class EhrExtractStatusService {
         return update;
     }
 
-    private boolean isEhrStatusWaitingForFinalAck(String conversationId) {
+    protected boolean isEhrStatusWaitingForFinalAck(String conversationId) {
         var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
             .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
 
         return ehrExtractStatus.getAckPending() != null;
     }
 
-    private boolean hasFinalAckBeenReceived(String conversationId) {
+    protected boolean hasFinalAckBeenReceived(String conversationId) {
         var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
             .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
 
@@ -598,10 +599,10 @@ public class EhrExtractStatusService {
         var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
             .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
 
-        Duration duration = Duration.between(ehrExtractStatus.getCreated(), ackReceivedTimestamp);
-        long difference_between_updates_in_days = duration.toDays();
+        Duration duration = Duration.between(ehrExtractStatus.getUpdatedAt(), ackReceivedTimestamp);
+        long differenceBetweenUpdatesInDays = duration.toDays();
 
-        return difference_between_updates_in_days > LIMIT_OF_DAYS_SINCE_EHR_EXTRACT_WAS_SENT;
+        return differenceBetweenUpdatesInDays > LIMIT_OF_DAYS_SINCE_EHR_EXTRACT_WAS_SENT;
     }
 
     private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {
