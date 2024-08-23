@@ -214,6 +214,7 @@ class ObservationMapperTest {
         final Observation observation = getObservationResourceFromJson(OBSERVATION_TEST_GROUP_HEADER_JSON);
         final String expectedXml = getXmlStringFromFile(OBSERVATION_TEST_GROUP_HEADER_XML);
 
+        ConfidentialityCodeUtility.appendNoscrubSecurityToMetaForResource(observation);
         when(confidentialityService.generateConfidentialityCode(observation))
             .thenReturn(Optional.empty());
 
