@@ -27,6 +27,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class EhrExtractStatusServiceUnitTest {
 
+    public static final int NINE_DAYS = 9;
+    public static final int EIGHT_DAYS = 8;
     @Mock
     private MongoTemplate mongoTemplate;
 
@@ -37,7 +39,7 @@ class EhrExtractStatusServiceUnitTest {
     private TimestampService timestampService;
 
     @Mock
-    EhrExtractStatus.EhrReceivedAcknowledgement ack;
+    private EhrExtractStatus.EhrReceivedAcknowledgement ack;
 
     @InjectMocks
     private EhrExtractStatusService ehrExtractStatusService;
@@ -52,7 +54,7 @@ class EhrExtractStatusServiceUnitTest {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = "11111";
         Instant currentInstant = Instant.now();
-        Instant nineDaysAgo = currentInstant.minus(Duration.ofDays(9));
+        Instant nineDaysAgo = currentInstant.minus(Duration.ofDays(NINE_DAYS));
         Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder().updatedAt(nineDaysAgo).build());
 
         doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
@@ -76,7 +78,7 @@ class EhrExtractStatusServiceUnitTest {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = "11111";
         Instant currentInstant = Instant.now();
-        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(8));
+        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
         Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder().updatedAt(eightDaysAgo).build());
 
         doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
