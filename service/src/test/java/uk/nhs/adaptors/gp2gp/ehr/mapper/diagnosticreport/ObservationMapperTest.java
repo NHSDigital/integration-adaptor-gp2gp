@@ -77,6 +77,10 @@ class ObservationMapperTest {
         "observation_associated_with_specimen_1_with_related_comment.json";
     private static final String OBSERVATION_TEST_GROUP_HEADER_JSON =
         "observation_test_group_header.json";
+    private static final String OBSERVATION_TEST_RESULT_JSON =
+        "observation_test_result.json";
+    private static final String OBSERVATION_FILING_COMMENT_JSON =
+        "observation_filing_comment.json";
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML =
         "observation_compound_statement_1.xml";
@@ -112,6 +116,14 @@ class ObservationMapperTest {
         "observation_test_group_header_nopat.xml";
     private static final String OBSERVATION_TEST_GROUP_HEADER_XML =
         "observation_test_group_header.xml";
+    private static final String OBSERVATION_TEST_RESULT_NOPAT_XML =
+        "observation_test_result_nopat.xml";
+    private static final String OBSERVATION_TEST_RESULT_XML =
+        "observation_test_result.xml";
+    private static final String OBSERVATION_FILING_COMMENT_NOPAT_XML =
+        "observation_filing_comment_nopat.xml";
+    private static final String OBSERVATION_FILING_COMMENT_XML =
+        "observation_filing_comment.xml";
 
     private static final String DIAGNOSTIC_REPORT_REFERENCE_ID = "Observation/TEST_REFERENCE_ID";
 
@@ -226,54 +238,62 @@ class ObservationMapperTest {
 
     @Test
     void When_MappingTestResult_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinObservationStatement() {
-        final Observation observation = getObservationResourceFromJson("observation_test_result.json");
-        ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(observation);
+        final Observation observation = getObservationResourceFromJson(OBSERVATION_TEST_RESULT_JSON);
+        final String expectedXml = getXmlStringFromFile(OBSERVATION_TEST_RESULT_NOPAT_XML);
 
+        ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(observation);
         when(confidentialityService.generateConfidentialityCode(observation))
             .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
+
         final String actualXml = observationMapper
             .mapObservationToCompoundStatement(observation);
 
-        assertThat(actualXml).contains(NOPAT_CONFIDENTIALITY_CODE);
+        assertThat(actualXml).isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
     void When_MappingTestResult_With_NoscrubMetaSecurity_Expect_ConfidentialityCodeNotPresent() {
-        final Observation observation = getObservationResourceFromJson("observation_test_result.json");
-        ConfidentialityCodeUtility.appendNoscrubSecurityToMetaForResource(observation);
+        final Observation observation = getObservationResourceFromJson(OBSERVATION_TEST_RESULT_JSON);
+        final String expectedXml = getXmlStringFromFile(OBSERVATION_TEST_RESULT_XML);
 
+        ConfidentialityCodeUtility.appendNoscrubSecurityToMetaForResource(observation);
         when(confidentialityService.generateConfidentialityCode(observation))
             .thenReturn(Optional.empty());
+
         final String actualXml = observationMapper
             .mapObservationToCompoundStatement(observation);
 
-        assertThat(actualXml).doesNotContain(NOPAT_CONFIDENTIALITY_CODE);
+        assertThat(actualXml).isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
-    void When_MappingNarrativeStatement_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinNarrativeStatement() {
-        final Observation observation = getObservationResourceFromJson("observation_comment.json");
-        ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(observation);
+    void When_MappingFilingComment_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinNarrativeStatement() {
+        final Observation observation = getObservationResourceFromJson(OBSERVATION_FILING_COMMENT_JSON);
+        final String expectedXml = getXmlStringFromFile(OBSERVATION_FILING_COMMENT_NOPAT_XML);
 
+        ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(observation);
         when(confidentialityService.generateConfidentialityCode(observation))
             .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
+
         final String actualXml = observationMapper
             .mapObservationToCompoundStatement(observation);
 
-        assertThat(actualXml).contains(NOPAT_CONFIDENTIALITY_CODE);
+        assertThat(actualXml).isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
-    void When_MappingNarrativeStatement_With_NopatMetaSecurity_Expect_ConfidentialityCodeNotPresent() {
-        final Observation observation = getObservationResourceFromJson("observation_comment.json");
-        ConfidentialityCodeUtility.appendNoscrubSecurityToMetaForResource(observation);
+    void When_MappingFilingComment_With_NopatMetaSecurity_Expect_ConfidentialityCodeNotPresent() {
+        final Observation observation = getObservationResourceFromJson(OBSERVATION_FILING_COMMENT_JSON);
+        final String expectedXml = getXmlStringFromFile(OBSERVATION_FILING_COMMENT_XML);
 
+        ConfidentialityCodeUtility.appendNoscrubSecurityToMetaForResource(observation);
         when(confidentialityService.generateConfidentialityCode(observation))
             .thenReturn(Optional.empty());
+
         final String actualXml = observationMapper
             .mapObservationToCompoundStatement(observation);
 
-        assertThat(actualXml).doesNotContain(NOPAT_CONFIDENTIALITY_CODE);
+        assertThat(actualXml).isEqualToIgnoringWhitespace(expectedXml);
     }
 
     private String getXmlStringFromFile(String filename) {
