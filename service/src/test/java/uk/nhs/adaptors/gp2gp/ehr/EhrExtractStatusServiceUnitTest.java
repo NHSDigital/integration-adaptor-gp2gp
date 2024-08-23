@@ -29,6 +29,7 @@ class EhrExtractStatusServiceUnitTest {
 
     public static final int NINE_DAYS = 9;
     public static final int EIGHT_DAYS = 8;
+    public static final String ERROR_CODE = "04";
     @Mock
     private MongoTemplate mongoTemplate;
 
@@ -68,7 +69,7 @@ class EhrExtractStatusServiceUnitTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(ehrExtractStatusServiceSpy).updateEhrExtractStatusError(conversationId,
-                                                                       "04",
+                                                                       ERROR_CODE,
                                                                        "The acknowledgement has been received after 8 days",
                                                                        ehrExtractStatusServiceSpy.getClass().getSimpleName());
     }
@@ -92,7 +93,7 @@ class EhrExtractStatusServiceUnitTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(ehrExtractStatusServiceSpy, never()).updateEhrExtractStatusError(conversationId,
-                                                                       "04",
+                                                                                ERROR_CODE,
                                                                        "The acknowledgement has been received after 8 days",
                                                                        ehrExtractStatusServiceSpy.getClass().getSimpleName());
     }

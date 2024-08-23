@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+* Added a scheduled delay checker to update EhrExtract to "Integration Failure" state if sentAt exceeds 192 hours and no acknowledgment is received. 
+
 ### Added
 
 * When mapping `AllergyIntolerances` which contain a `NOPAT` `meta.security` tag the resultant XML for that resource
