@@ -39,7 +39,7 @@ public final class XmlParsingUtility {
             .evaluate(document, XPathConstants.NODESET);
     }
 
-    public static boolean xPathMatchFound(String xmlString, String xPathExpression) throws
+    public static boolean xpathMatchFound(String xmlString, String xPathExpression) throws
         XPathExpressionException, IOException, ParserConfigurationException, SAXException {
         final NodeList nodeList = getW3cNodeListFromXpath(xmlString, xPathExpression);
 

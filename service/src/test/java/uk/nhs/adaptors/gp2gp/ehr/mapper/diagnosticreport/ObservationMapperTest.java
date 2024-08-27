@@ -220,7 +220,7 @@ class ObservationMapperTest {
             .filter(ConfidentialityCodeUtility::doesMetaContainNopat)
             .toList();
 
-        assertThat(XmlParsingUtility.xPathMatchFound(actualXml, xPath)).isTrue();
+        assertThat(XmlParsingUtility.xpathMatchFound(actualXml, xPath)).isTrue();
         assertThat(metaWithNopat).hasSize(1);
     }
 
@@ -257,7 +257,7 @@ class ObservationMapperTest {
         final String actualXml = observationMapper
             .mapObservationToCompoundStatement(observation);
 
-        assertThat(XmlParsingUtility.xPathMatchFound(actualXml, xpath)).isTrue();
+        assertThat(XmlParsingUtility.xpathMatchFound(actualXml, xpath)).isTrue();
     }
 
     @Test
@@ -287,7 +287,7 @@ class ObservationMapperTest {
         final String actualXml = observationMapper
             .mapObservationToCompoundStatement(observation);
 
-        assertThat(XmlParsingUtility.xPathMatchFound(actualXml, xPath)).isTrue();
+        assertThat(XmlParsingUtility.xpathMatchFound(actualXml, xPath)).isTrue();
     }
 
     @Test
