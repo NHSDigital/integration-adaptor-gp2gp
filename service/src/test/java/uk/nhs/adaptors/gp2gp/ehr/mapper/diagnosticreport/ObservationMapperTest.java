@@ -41,6 +41,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
@@ -212,15 +213,14 @@ class ObservationMapperTest {
         when(confidentialityService.generateConfidentialityCode(observationArgumentCaptor.capture()))
             .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
 
-        final String actualXml = observationMapper
-            .mapObservationToCompoundStatement(observation);
+        final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
         final var metaWithNopat = observationArgumentCaptor.getAllValues().stream()
             .map(Observation::getMeta)
             .filter(ConfidentialityCodeUtility::doesMetaContainNopat)
             .toList();
 
-        assertThat(XmlParsingUtility.xpathMatchFound(actualXml, xPath)).isTrue();
+        assertTrue(XmlParsingUtility.xpathMatchFound(actualXml, xPath));
         assertThat(metaWithNopat).hasSize(1);
     }
 
@@ -232,8 +232,7 @@ class ObservationMapperTest {
         when(confidentialityService.generateConfidentialityCode(observationArgumentCaptor.capture()))
             .thenReturn(Optional.empty());
 
-        final String actualXml = observationMapper
-            .mapObservationToCompoundStatement(observation);
+        final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
         final var metaWithNopat = observationArgumentCaptor.getAllValues().stream()
             .map(Observation::getMeta)
@@ -248,16 +247,15 @@ class ObservationMapperTest {
     void When_MappingTestResult_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinObservationStatement()
         throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
         final Observation observation = getObservationResourceFromJson(OBSERVATION_TEST_RESULT_JSON);
-        final String xpath = "/component/ObservationStatement/confidentialityCode";
+        final String xPath = "/component/ObservationStatement/confidentialityCode";
 
         ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(observation);
         when(confidentialityService.generateConfidentialityCode(observation))
             .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
 
-        final String actualXml = observationMapper
-            .mapObservationToCompoundStatement(observation);
+        final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
-        assertThat(XmlParsingUtility.xpathMatchFound(actualXml, xpath)).isTrue();
+        assertTrue(XmlParsingUtility.xpathMatchFound(actualXml, xPath));
     }
 
     @Test
@@ -268,8 +266,7 @@ class ObservationMapperTest {
         when(confidentialityService.generateConfidentialityCode(observation))
             .thenReturn(Optional.empty());
 
-        final String actualXml = observationMapper
-            .mapObservationToCompoundStatement(observation);
+        final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
         assertThat(actualXml).doesNotContainIgnoringCase(NOPAT_CONFIDENTIALITY_CODE);
     }
@@ -284,10 +281,9 @@ class ObservationMapperTest {
         when(confidentialityService.generateConfidentialityCode(observation))
             .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
 
-        final String actualXml = observationMapper
-            .mapObservationToCompoundStatement(observation);
+        final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
-        assertThat(XmlParsingUtility.xpathMatchFound(actualXml, xPath)).isTrue();
+        assertTrue(XmlParsingUtility.xpathMatchFound(actualXml, xPath));
     }
 
     @Test
@@ -298,8 +294,7 @@ class ObservationMapperTest {
         when(confidentialityService.generateConfidentialityCode(observation))
             .thenReturn(Optional.empty());
 
-        final String actualXml = observationMapper
-            .mapObservationToCompoundStatement(observation);
+        final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
         assertThat(actualXml).doesNotContainIgnoringCase(NOPAT_CONFIDENTIALITY_CODE);
     }
