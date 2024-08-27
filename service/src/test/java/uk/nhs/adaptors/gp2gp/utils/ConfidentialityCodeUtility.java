@@ -44,6 +44,15 @@ public final class ConfidentialityCodeUtility {
         return NOPAT_CONFIDENTIALITY_CODE;
     }
 
+    public static boolean doesMetaContainNopat(Meta meta) {
+        if (!meta.getSecurity().isEmpty()) {
+            final Coding coding = meta.getSecurity().getFirst();
+            return coding.getCode().equals("NOPAT");
+        }
+
+        return false;
+    }
+
     private static Coding getNopatCoding() {
         final String code = "NOPAT";
         final String display = "no disclosure to patient, family or caregivers without attending provider's authorization";

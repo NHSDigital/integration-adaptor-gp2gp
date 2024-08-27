@@ -152,7 +152,7 @@ public class EhrExtractMapperComponentTest {
             new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
         ObservationMapper specimenObservationMapper = new ObservationMapper(
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper,
-            participantMapper, multiStatementObservationHolderFactory);
+            participantMapper, multiStatementObservationHolderFactory, confidentialityService);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper,
             randomIdGeneratorService, confidentialityService);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper

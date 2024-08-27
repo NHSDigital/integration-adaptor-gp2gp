@@ -13,6 +13,7 @@ public class ObservationCompoundStatementTemplateParameters {
     private String codeElement;
     private String effectiveTime;
     private String availabilityTimeElement;
+    private String confidentialityCode;
     private String observationStatement;
     private String narrativeStatements;
     private String statementsForDerivedObservations;

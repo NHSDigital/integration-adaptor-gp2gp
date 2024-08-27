@@ -29,6 +29,7 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
@@ -87,6 +88,7 @@ public class ObservationMapper {
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
     private final MultiStatementObservationHolderFactory multiStatementObservationHolderFactory;
+    private final ConfidentialityService confidentialityService;
 
     public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen) {
         var holder = multiStatementObservationHolderFactory.newInstance(observationAssociatedWithSpecimen);
@@ -156,6 +158,7 @@ public class ObservationMapper {
             .codeElement(codeElement)
             .effectiveTime(effectiveTime)
             .availabilityTimeElement(availabilityTimeElement)
+            .confidentialityCode(confidentialityService.generateConfidentialityCode(observation).orElse(null))
             .observationStatement(observationStatement)
             .narrativeStatements(narrativeStatements)
             .statementsForDerivedObservations(statementsForDerivedObservations);
@@ -181,8 +184,10 @@ public class ObservationMapper {
 
     private String outputWithoutCompoundStatement(MultiStatementObservationHolder observationAssociatedWithSpecimen) {
         CompoundStatementClassCode classCode = CompoundStatementClassCode.CLUSTER;
+
         String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
             .orElse(StringUtils.EMPTY);
+
         String narrativeStatements = prepareNarrativeStatements(
             observationAssociatedWithSpecimen,
             isInterpretationCodeMapped(observationStatement))
@@ -205,7 +210,8 @@ public class ObservationMapper {
             .observationStatementId(holder.nextHl7InstanceIdentifier())
             .codeElement(prepareCodeElement(holder.getObservation()))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(holder.getObservation()))
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(holder.getObservation()));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(holder.getObservation()))
+            .confidentialityCode(confidentialityService.generateConfidentialityCode(holder.getObservation()).orElse(null));
 
         if (holder.getObservation().hasValue() && !holder.getObservation().hasValueStringType()) {
             Type value = holder.getObservation().getValue();
@@ -397,7 +403,8 @@ public class ObservationMapper {
             .commentType(commentType)
             .commentDate(handleEffectiveToCommentDate(observation))
             .comment(comment)
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation))
+            .confidentialityCode(confidentialityService.generateConfidentialityCode(observation).orElse(null));
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
     }
