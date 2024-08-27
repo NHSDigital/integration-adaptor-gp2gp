@@ -11,12 +11,13 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-
+import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import java.time.Duration;
 
 import java.time.Instant;
 import java.util.Optional;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -30,6 +31,7 @@ class EhrExtractStatusServiceUnitTest {
     public static final int NINE_DAYS = 9;
     public static final int EIGHT_DAYS = 8;
     public static final String ERROR_CODE = "04";
+    public static final String ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
     @Mock
     private MongoTemplate mongoTemplate;
 
@@ -70,7 +72,33 @@ class EhrExtractStatusServiceUnitTest {
 
         verify(ehrExtractStatusServiceSpy).updateEhrExtractStatusError(conversationId,
                                                                        ERROR_CODE,
-                                                                       "The acknowledgement has been received after 8 days",
+                                                                       ERROR_MESSAGE,
+                                                                       ehrExtractStatusServiceSpy.getClass().getSimpleName());
+    }
+
+    @Test
+    void ehrExtractStatusThrowsExceptionWhenConversationIdNotFound() {
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        String conversationId = "11111";
+        Instant currentInstant = Instant.now();
+        Instant nineDaysAgo = currentInstant.minus(Duration.ofDays(NINE_DAYS));
+        Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder().updatedAt(nineDaysAgo).build());
+
+        doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
+        doReturn(false).when(ehrExtractStatusServiceSpy).hasFinalAckBeenReceived(conversationId);
+        doReturn(Optional.empty()).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+        when(ack.getErrors()).thenReturn(null);
+        when(ack.getReceived()).thenReturn(currentInstant);
+
+        Exception exception = assertThrows(NonExistingInteractionIdException.class, () ->
+            ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack));
+
+        assertEquals("Received a ACK message that is not recognised with conversation_id: " + conversationId,
+                     exception.getMessage());
+
+        verify(ehrExtractStatusServiceSpy, never()).updateEhrExtractStatusError(conversationId,
+                                                                       ERROR_CODE,
+                                                                       ERROR_MESSAGE,
                                                                        ehrExtractStatusServiceSpy.getClass().getSimpleName());
     }
 
@@ -94,7 +122,7 @@ class EhrExtractStatusServiceUnitTest {
 
         verify(ehrExtractStatusServiceSpy, never()).updateEhrExtractStatusError(conversationId,
                                                                                 ERROR_CODE,
-                                                                       "The acknowledgement has been received after 8 days",
+                                                                                ERROR_MESSAGE,
                                                                        ehrExtractStatusServiceSpy.getClass().getSimpleName());
     }
 
