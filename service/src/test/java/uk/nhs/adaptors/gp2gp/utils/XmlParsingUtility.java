@@ -29,7 +29,7 @@ public final class XmlParsingUtility {
         return builder.parse(new InputSource(stringReader));
     }
 
-    public static NodeList getW3cNodelistFromXpath(String xmlString, String xPathExpression) throws
+    public static NodeList getW3cNodeListFromXpath(String xmlString, String xPathExpression) throws
         XPathExpressionException, IOException, ParserConfigurationException, SAXException {
         final XPath xPath = XPathFactory.newInstance().newXPath();
         final Document document = getW3cDocumentFromXmlString(xmlString);
@@ -39,9 +39,9 @@ public final class XmlParsingUtility {
             .evaluate(document, XPathConstants.NODESET);
     }
 
-    public static boolean xPathMatchFound(String xPath, String xPathExpression) throws
+    public static boolean xPathMatchFound(String xmlString, String xPathExpression) throws
         XPathExpressionException, IOException, ParserConfigurationException, SAXException {
-        final NodeList nodeList = getW3cNodelistFromXpath(xPath, xPathExpression);
+        final NodeList nodeList = getW3cNodeListFromXpath(xmlString, xPathExpression);
 
         return nodeList.getLength() > 0;
     }
