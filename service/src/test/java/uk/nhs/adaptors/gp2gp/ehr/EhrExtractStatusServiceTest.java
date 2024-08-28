@@ -29,7 +29,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class EhrExtractStatusServiceUnitTest {
+class EhrExtractStatusServiceTest {
 
     public static final int NINE_DAYS = 9;
     public static final int EIGHT_DAYS = 8;
