@@ -17,7 +17,9 @@ import java.time.Duration;
 
 import java.time.Instant;
 import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
@@ -118,6 +120,23 @@ class EhrExtractStatusServiceUnitTest {
                                                                                 ERROR_CODE,
                                                                                 ERROR_MESSAGE,
                                                                        ehrExtractStatusServiceSpy.getClass().getSimpleName());
+    }
+
+    @Test
+    void doesNotUpdateEhrExtractStatusWhenEhrContinueIsPresent() {
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        String conversationId = "11111";
+
+        Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder()
+                                                                      .ehrExtractCorePending(
+            EhrExtractStatus.EhrExtractCorePending.builder().sentAt(Instant.now()).taskId("22222").build())
+                                                                      .ehrContinue(EhrExtractStatus.EhrContinue.builder().build())
+                                                                      .build());
+        doReturn(ehrExtractStatus).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+
+        var ehrExtractStatusResult = ehrExtractStatusServiceSpy.updateEhrExtractStatusContinue(conversationId);
+
+        assertFalse(ehrExtractStatusResult.isPresent());
     }
 
 }
