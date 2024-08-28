@@ -21,6 +21,7 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParameters;
@@ -56,6 +57,7 @@ public class ConditionLinkSetMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
+    private final ConfidentialityService confidentialityService;
 
     public String mapConditionToLinkSet(Condition condition, boolean isNested) {
         if (!condition.hasAsserter()) {
@@ -70,6 +72,7 @@ public class ConditionLinkSetMapper {
         buildEffectiveTimeLow(condition).ifPresent(builder::effectiveTimeLow);
         buildEffectiveTimeHigh(condition).ifPresent(builder::effectiveTimeHigh);
         buildAvailabilityTime(condition).ifPresent(builder::availabilityTime);
+        builder.confidentialityCode(confidentialityService.generateConfidentialityCode(condition).orElse(null));
         builder.relatedClinicalContent(buildRelatedClinicalContent(condition));
 
         buildQualifier(condition).ifPresent(qualifier -> setQualifierProperties(builder, qualifier));

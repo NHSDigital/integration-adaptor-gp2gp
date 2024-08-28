@@ -21,6 +21,7 @@ public class ConditionLinkSetMapperParameters {
     private String effectiveTimeHigh;
     private String effectiveTimeLow;
     private String availabilityTime;
+    private String confidentialityCode;
     private List<String> relatedClinicalContent;
     private boolean generateObservationStatement;
     private String pertinentInfo;

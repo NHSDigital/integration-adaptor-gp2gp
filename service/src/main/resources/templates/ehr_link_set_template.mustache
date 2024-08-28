@@ -13,6 +13,9 @@
             {{#effectiveTimeHigh}}<high value="{{effectiveTimeHigh}}"/>{{/effectiveTimeHigh}}
         </effectiveTime>
         <availabilityTime value="{{availabilityTime}}" />
+        {{#confidentialityCode}}
+            {{{confidentialityCode}}}
+        {{/confidentialityCode}}
         {{#relatedClinicalContent}}
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
