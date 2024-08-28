@@ -12,11 +12,12 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidInboundMessageException;
-import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.UnrecognisedInteractionIdException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -34,7 +35,6 @@ public class EhrContinueTest {
     private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
     private static final String CONTINUE_ACKNOWLEDGEMENT = "Continue Acknowledgement";
-
 
     @Autowired
     private EhrExtractRequestHandler ehrExtractRequestHandler;
@@ -59,7 +59,7 @@ public class EhrContinueTest {
             }));
 
         var ehrExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId());
-        assertThat(ehrExtract.get().getEhrContinue().getReceived()).isNotNull();
+        assertNotNull(ehrExtract.get().getEhrContinue().getReceived());
     }
 
     @Test
@@ -79,11 +79,11 @@ public class EhrContinueTest {
     public void When_EhrContinueThrowsException_Expect_EhrExtractStatusNotUpdated() {
         String conversationId = randomIdGeneratorService.createNewId();
 
-        Exception exception = assertThrows(NonExistingInteractionIdException.class,
-            () -> ehrExtractRequestHandler.handleContinue(conversationId, CONTINUE_ACKNOWLEDGEMENT));
+        Exception exception = assertThrows(UnrecognisedInteractionIdException.class,
+                                           () -> ehrExtractRequestHandler.handleContinue(conversationId, CONTINUE_ACKNOWLEDGEMENT));
 
-        assertThat(exception.getMessage()).isEqualTo("Received a Continue message that is not recognised with conversation_id: '"
-            + conversationId + "'");
+        assertThat(exception.getMessage()).isEqualTo("Received an unrecognized Continue message with conversation_id: "
+            + conversationId);
         verify(taskDispatcher, never()).createTask(any());
     }
 

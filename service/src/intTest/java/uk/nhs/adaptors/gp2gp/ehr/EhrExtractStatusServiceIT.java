@@ -47,7 +47,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @ExtendWith({MongoDBExtension.class})
 @DirtiesContext
 @SpringBootTest
-public class EhrExtractStatusServiceTest {
+public class EhrExtractStatusServiceIT {
     private static final Instant NOW = Instant.now();
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     private static final int DEFAULT_CONTENT_LENGTH = 244;

@@ -5,6 +5,7 @@ import static java.lang.String.format;
 import static org.springframework.util.CollectionUtils.isEmpty;
 import static org.springframework.util.CollectionUtils.newHashMap;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +33,7 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgeme
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
-import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.UnrecognisedInteractionIdException;
 
 @Service
 @Slf4j
@@ -64,7 +65,6 @@ public class EhrExtractStatusService {
     private static final String ROOT_ID = "rootId";
     private static final String CONVERSATION_CLOSED = "conversationClosed";
     private static final String MESSAGE_REF = "messageRef";
-    private static final String EHR_EXTRACT_MESSAGE_REF = "ehrExtractMessageRef";
     private static final String ERRORS = "errors";
     private static final String ERROR = "error";
     private static final String SENT_TO_MHS = "sentToMhs";
@@ -114,6 +114,9 @@ public class EhrExtractStatusService {
     private static final String CONTENT_TYPE_PLACEHOLDER = "CONTENT_TYPE_PLACEHOLDER_ID=";
     private static final String FILENAME_TYPE_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
+    public static final int EHR_EXTRACT_SENT_DAYS_LIMIT = 8;
+    private static final String REASON_ERROR_CODE = "04";
+    public static final String REASON_ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -169,8 +172,8 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessStructured(
-        GetGpcStructuredTaskDefinition structuredTaskDefinition, String structuredRecordJsonFilename
-    ) {
+        GetGpcStructuredTaskDefinition structuredTaskDefinition, String structuredRecordJsonFilename) {
+
         Query query = createQueryForConversationId(structuredTaskDefinition.getConversationId());
         Instant now = Instant.now();
 
@@ -196,8 +199,8 @@ public class EhrExtractStatusService {
             String storagePath,
             int base64ContentLength,
             String errorMessage,
-            String filename
-    ) {
+            String filename) {
+
         Query query = new Query();
         query.addCriteria(Criteria
             .where(CONVERSATION_ID).is(documentTaskDefinition.getConversationId())
@@ -228,8 +231,8 @@ public class EhrExtractStatusService {
 
     public EhrExtractStatus updateEhrExtractStatusCore(
         SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
-        Instant requestSentAt
-    ) {
+        Instant requestSentAt) {
+
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -250,8 +253,8 @@ public class EhrExtractStatusService {
 
     public void updateEhrExtractStatusCorePending(
         SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
-        Instant requestSentAt
-    ) {
+        Instant requestSentAt) {
+
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -267,6 +270,7 @@ public class EhrExtractStatusService {
     }
 
     public Optional<EhrExtractStatus> updateEhrExtractStatusContinue(String conversationId) {
+
         var isDuplicate = checkForContinueOutOfOrderAndDuplicate(conversationId);
         if (!isDuplicate) {
             Query query = createQueryForConversationId(conversationId);
@@ -302,6 +306,14 @@ public class EhrExtractStatusService {
 
         if (hasFinalAckBeenReceived(conversationId)) {
             LOGGER.warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            return;
+        }
+
+        if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())) {
+            updateEhrExtractStatusError(conversationId,
+                                        REASON_ERROR_CODE,
+                                        REASON_ERROR_MESSAGE,
+                                        this.getClass().getSimpleName());
             return;
         }
 
@@ -356,8 +368,7 @@ public class EhrExtractStatusService {
 
     public void updateEhrExtractStatusAccessDocumentDocumentReferences(
         String conversationId,
-        List<EhrExtractStatus.GpcDocument> documents
-    ) {
+        List<EhrExtractStatus.GpcDocument> documents) {
         Query query = createQueryForConversationId(conversationId);
 
         Update.AddToSetBuilder updateBuilder = createUpdateWithUpdatedAt().addToSet(GPC_DOCUMENTS);
@@ -371,8 +382,7 @@ public class EhrExtractStatusService {
         Query query,
         List<EhrExtractStatus.GpcDocument> docs,
         Update.AddToSetBuilder updateBuilder,
-        FindAndModifyOptions returningUpdatedRecordOption
-    ) {
+        FindAndModifyOptions returningUpdatedRecordOption) {
         Update update = updateBuilder.each(docs);
 
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
@@ -402,8 +412,8 @@ public class EhrExtractStatusService {
     public void updateEhrExtractStatusAcknowledgement(
         SendAcknowledgementTaskDefinition taskDefinition,
         String ackMessageId,
-        String updatedAt
-    ) {
+        String updatedAt) {
+
         Update update = createUpdateWithUpdatedAt();
         update.set(ACK_PENDING_TASK_ID_PATH, taskDefinition.getTaskId());
         update.set(ACK_PENDING_MESSAGE_ID_PATH, ackMessageId);
@@ -417,8 +427,8 @@ public class EhrExtractStatusService {
         String conversationId,
         String errorCode,
         String errorMessage,
-        String taskType
-    ) {
+        String taskType) {
+
         Update update = createUpdateWithUpdatedAt();
         Instant now = Instant.now();
         update.set(ERROR_OCCURRED_AT_PATH, now);
@@ -571,23 +581,29 @@ public class EhrExtractStatusService {
         return update;
     }
 
-    private boolean isEhrStatusWaitingForFinalAck(String conversationId) {
-        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
+    protected boolean isEhrStatusWaitingForFinalAck(String conversationId) {
+        var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "ACK");
 
         return ehrExtractStatus.getAckPending() != null;
     }
 
-    private boolean hasFinalAckBeenReceived(String conversationId) {
-        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
+    protected boolean hasFinalAckBeenReceived(String conversationId) {
+        var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "ACK");
 
         return ehrExtractStatus.getEhrReceivedAcknowledgement() != null;
     }
 
+    private boolean hasAcknowledgementExceededEightDays(String conversationId, Instant ackReceivedTimestamp) {
+        var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "ACK");
+
+        Duration duration = Duration.between(ehrExtractStatus.getUpdatedAt(), ackReceivedTimestamp);
+        long daysSinceLastUpdate = duration.toDays();
+
+        return daysSinceLastUpdate > EHR_EXTRACT_SENT_DAYS_LIMIT;
+    }
+
     private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {
-        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new NonExistingInteractionIdException("Continue", conversationId));
+        var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "Continue");
 
         if (ehrExtractStatus.getEhrExtractCorePending() == null) {
             throw new MessageOutOfOrderException("Continue", conversationId);
@@ -600,5 +616,10 @@ public class EhrExtractStatusService {
         }
 
         return false;
+    }
+
+    private EhrExtractStatus fetchEhrExtractStatus(String conversationId, String messageType) {
+        return ehrExtractStatusRepository.findByConversationId(conversationId)
+            .orElseThrow(() -> new UnrecognisedInteractionIdException(messageType, conversationId));
     }
 }
