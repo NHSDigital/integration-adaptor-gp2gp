@@ -16,7 +16,7 @@ import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
-import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.UnrecognisedInteractionIdException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.UnsupportedInteractionException;
 
 import jakarta.jms.JMSException;
@@ -63,7 +63,7 @@ public class InboundMessageHandler {
             }
             return true;
 
-        } catch (MessageOutOfOrderException | NonExistingInteractionIdException | UnsupportedInteractionException e) {
+        } catch (MessageOutOfOrderException | UnrecognisedInteractionIdException | UnsupportedInteractionException e) {
             LOGGER.error("An error occurred while handing MHS inbound message id: {}", messageID, e);
             return false;
         } catch (DataAccessResourceFailureException e) {

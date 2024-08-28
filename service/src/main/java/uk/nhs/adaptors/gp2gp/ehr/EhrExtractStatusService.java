@@ -33,7 +33,7 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgeme
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
-import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.UnrecognisedInteractionIdException;
 
 @Service
 @Slf4j
@@ -114,7 +114,7 @@ public class EhrExtractStatusService {
     private static final String CONTENT_TYPE_PLACEHOLDER = "CONTENT_TYPE_PLACEHOLDER_ID=";
     private static final String FILENAME_TYPE_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
-    public static final int LIMIT_OF_DAYS_SINCE_EHR_EXTRACT_WAS_SENT = 8;
+    public static final int EHR_EXTRACT_SENT_DAYS_LIMIT = 8;
     private static final String REASON_ERROR_CODE = "04";
     public static final String REASON_ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
 
@@ -309,7 +309,7 @@ public class EhrExtractStatusService {
             return;
         }
 
-        if (hasAckReceivedExceededEightDays(conversationId, ack.getReceived())) {
+        if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())) {
             updateEhrExtractStatusError(conversationId,
                                         REASON_ERROR_CODE,
                                         REASON_ERROR_MESSAGE,
@@ -583,31 +583,31 @@ public class EhrExtractStatusService {
 
     protected boolean isEhrStatusWaitingForFinalAck(String conversationId) {
         var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
+            .orElseThrow(() -> new UnrecognisedInteractionIdException("ACK", conversationId));
 
         return ehrExtractStatus.getAckPending() != null;
     }
 
     protected boolean hasFinalAckBeenReceived(String conversationId) {
         var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
+            .orElseThrow(() -> new UnrecognisedInteractionIdException("ACK", conversationId));
 
         return ehrExtractStatus.getEhrReceivedAcknowledgement() != null;
     }
 
-    private boolean hasAckReceivedExceededEightDays(String conversationId, Instant ackReceivedTimestamp) {
+    private boolean hasAcknowledgementExceededEightDays(String conversationId, Instant ackReceivedTimestamp) {
         var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
+            .orElseThrow(() -> new UnrecognisedInteractionIdException("ACK", conversationId));
 
         Duration duration = Duration.between(ehrExtractStatus.getUpdatedAt(), ackReceivedTimestamp);
-        long differenceBetweenUpdatesInDays = duration.toDays();
+        long daysSinceLastUpdate = duration.toDays();
 
-        return differenceBetweenUpdatesInDays > LIMIT_OF_DAYS_SINCE_EHR_EXTRACT_WAS_SENT;
+        return daysSinceLastUpdate > EHR_EXTRACT_SENT_DAYS_LIMIT;
     }
 
     private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {
         var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new NonExistingInteractionIdException("Continue", conversationId));
+            .orElseThrow(() -> new UnrecognisedInteractionIdException("Continue", conversationId));
 
         if (ehrExtractStatus.getEhrExtractCorePending() == null) {
             throw new MessageOutOfOrderException("Continue", conversationId);

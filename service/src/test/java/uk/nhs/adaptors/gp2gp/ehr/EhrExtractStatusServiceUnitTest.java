@@ -6,12 +6,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.UnrecognisedInteractionIdException;
 import java.time.Duration;
 
 import java.time.Instant;
@@ -53,7 +54,7 @@ class EhrExtractStatusServiceUnitTest {
     }
 
     @Test
-    void ehrExtractStatusIsNotUpdatedWhenDelayBewteenAckUpdatesIsMoreThan8Days() {
+    void doesNotUpdateEhrExtractStatusWhenAckDelayExceeds8Days() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = "11111";
         Instant currentInstant = Instant.now();
@@ -66,7 +67,7 @@ class EhrExtractStatusServiceUnitTest {
         when(ack.getErrors()).thenReturn(null);
         when(ack.getReceived()).thenReturn(currentInstant);
         doReturn(ehrExtractStatus.get())
-            .when(mongoTemplate).findAndModify(any(Query.class), any(Update.class), any(), any(Class.class));
+            .when(mongoTemplate).findAndModify(any(Query.class), any(Update.class), any(FindAndModifyOptions.class), any(Class.class));
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
@@ -90,10 +91,10 @@ class EhrExtractStatusServiceUnitTest {
         when(ack.getErrors()).thenReturn(null);
         when(ack.getReceived()).thenReturn(currentInstant);
 
-        Exception exception = assertThrows(NonExistingInteractionIdException.class, () ->
+        Exception exception = assertThrows(UnrecognisedInteractionIdException.class, () ->
             ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack));
 
-        assertEquals("Received a ACK message that is not recognised with conversation_id: " + conversationId,
+        assertEquals("Received an unrecognized ACK message with conversation_id: " + conversationId,
                      exception.getMessage());
 
         verify(ehrExtractStatusServiceSpy, never()).updateEhrExtractStatusError(conversationId,
@@ -103,20 +104,16 @@ class EhrExtractStatusServiceUnitTest {
     }
 
     @Test
-    void ehrExtractStatusIsUpdatedWhenDelayBewteenAckUpdatesIsLessThan8Days() {
+    void updateEhrExtractWhenDelayBewteenAckUpdatesIsLessThan8Days() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = "11111";
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
         Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder().updatedAt(eightDaysAgo).build());
 
-        doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
-        doReturn(false).when(ehrExtractStatusServiceSpy).hasFinalAckBeenReceived(conversationId);
+
         doReturn(ehrExtractStatus).when(ehrExtractStatusRepository).findByConversationId(conversationId);
         when(ack.getErrors()).thenReturn(null);
-        when(ack.getReceived()).thenReturn(currentInstant);
-        doReturn(ehrExtractStatus.get())
-            .when(mongoTemplate).findAndModify(any(Query.class), any(Update.class), any(), any(Class.class));
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
