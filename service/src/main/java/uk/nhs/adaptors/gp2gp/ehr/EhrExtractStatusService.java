@@ -582,22 +582,19 @@ public class EhrExtractStatusService {
     }
 
     protected boolean isEhrStatusWaitingForFinalAck(String conversationId) {
-        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new UnrecognisedInteractionIdException("ACK", conversationId));
+        var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "ACK");
 
         return ehrExtractStatus.getAckPending() != null;
     }
 
     protected boolean hasFinalAckBeenReceived(String conversationId) {
-        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new UnrecognisedInteractionIdException("ACK", conversationId));
+        var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "ACK");
 
         return ehrExtractStatus.getEhrReceivedAcknowledgement() != null;
     }
 
     private boolean hasAcknowledgementExceededEightDays(String conversationId, Instant ackReceivedTimestamp) {
-        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new UnrecognisedInteractionIdException("ACK", conversationId));
+        var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "ACK");
 
         Duration duration = Duration.between(ehrExtractStatus.getUpdatedAt(), ackReceivedTimestamp);
         long daysSinceLastUpdate = duration.toDays();
@@ -606,8 +603,7 @@ public class EhrExtractStatusService {
     }
 
     private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {
-        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new UnrecognisedInteractionIdException("Continue", conversationId));
+        var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "Continue");
 
         if (ehrExtractStatus.getEhrExtractCorePending() == null) {
             throw new MessageOutOfOrderException("Continue", conversationId);
@@ -620,5 +616,10 @@ public class EhrExtractStatusService {
         }
 
         return false;
+    }
+
+    private EhrExtractStatus fetchEhrExtractStatus(String conversationId, String messageType) {
+        return ehrExtractStatusRepository.findByConversationId(conversationId)
+            .orElseThrow(() -> new UnrecognisedInteractionIdException(messageType, conversationId));
     }
 }

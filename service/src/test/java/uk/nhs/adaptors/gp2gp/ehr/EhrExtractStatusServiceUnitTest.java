@@ -82,8 +82,6 @@ class EhrExtractStatusServiceUnitTest {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = "11111";
         Instant currentInstant = Instant.now();
-        Instant nineDaysAgo = currentInstant.minus(Duration.ofDays(NINE_DAYS));
-        Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder().updatedAt(nineDaysAgo).build());
 
         doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
         doReturn(false).when(ehrExtractStatusServiceSpy).hasFinalAckBeenReceived(conversationId);
@@ -110,7 +108,6 @@ class EhrExtractStatusServiceUnitTest {
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
         Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder().updatedAt(eightDaysAgo).build());
-
 
         doReturn(ehrExtractStatus).when(ehrExtractStatusRepository).findByConversationId(conversationId);
         when(ack.getErrors()).thenReturn(null);
