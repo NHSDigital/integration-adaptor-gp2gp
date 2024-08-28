@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
+import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.NOPAT_HL7_CONFIDENTIALITY_CODE;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,7 +52,6 @@ class SpecimenMapperTest {
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
-    private static final String NOPAT_CONFIDENTIALITY_CODE = ConfidentialityCodeUtility.getNopatHl7v3ConfidentialityCode();
     private static final String ID_FROM_ID_MAPPER = "some-id";
     private static final DiagnosticReport DIAGNOSTIC_REPORT = new DiagnosticReport().setIssuedElement(
         new InstantType(DIAGNOSTIC_REPORT_DATE)
@@ -166,7 +166,7 @@ class SpecimenMapperTest {
         ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(specimen);
 
         when(confidentialityService.generateConfidentialityCode(specimen))
-            .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
+            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
             .thenReturn(ID_FROM_ID_MAPPER);
 
@@ -174,7 +174,7 @@ class SpecimenMapperTest {
             Collections.emptyList(), DIAGNOSTIC_REPORT);
 
         assertAll(
-            () -> assertThat(result).contains(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(result).contains(NOPAT_HL7_CONFIDENTIALITY_CODE),
             () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(specimen)).isEqualTo("NOPAT")
         );
     }
@@ -194,7 +194,7 @@ class SpecimenMapperTest {
             Collections.emptyList(), DIAGNOSTIC_REPORT);
 
         assertAll(
-            () -> assertThat(result).doesNotContain(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(result).doesNotContain(NOPAT_HL7_CONFIDENTIALITY_CODE),
             () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(specimen)).isEqualTo("NOSCRUB")
         );
     }
