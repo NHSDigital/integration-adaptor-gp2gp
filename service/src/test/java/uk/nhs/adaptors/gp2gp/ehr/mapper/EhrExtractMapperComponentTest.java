@@ -166,7 +166,7 @@ public class EhrExtractMapperComponentTest {
                 messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
                 codeableConceptCdMapper, new ParticipantMapper()),
             new ConditionLinkSetMapper(
-                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
+                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper, confidentialityService),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             documentReferenceToNarrativeStatementMapper,
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),

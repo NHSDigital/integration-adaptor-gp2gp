@@ -44,6 +44,7 @@ import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import static org.mockito.ArgumentMatchers.anyList;
+import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.NOPAT_HL7_CONFIDENTIALITY_CODE;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -79,8 +80,6 @@ class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.xml";
     private static final String OUTPUT_XML_EXTENSION_ID = "diagnostic-report-with-extension-id.xml";
     private static final String OUTPUT_XML_MULTIPLE_RESULTS = "diagnostic-report-with-multiple-results.xml";
-
-    private static final String NOPAT_CONFIDENTIALITY_CODE = ConfidentialityCodeUtility.getNopatHl7v3ConfidentialityCode();
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -144,12 +143,12 @@ class DiagnosticReportMapperTest {
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(testFile);
 
         when(confidentialityService.generateConfidentialityCode(diagnosticReport))
-            .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
+            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
 
         final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
         assertAll(
-            () -> assertThat(result).contains(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(result).contains(NOPAT_HL7_CONFIDENTIALITY_CODE),
             () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOPAT")
         );
     }
@@ -165,7 +164,7 @@ class DiagnosticReportMapperTest {
         final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
         assertAll(
-            () -> assertThat(result).doesNotContain(NOPAT_CONFIDENTIALITY_CODE),
+            () -> assertThat(result).doesNotContain(NOPAT_HL7_CONFIDENTIALITY_CODE),
             () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOSCRUB")
         );
     }

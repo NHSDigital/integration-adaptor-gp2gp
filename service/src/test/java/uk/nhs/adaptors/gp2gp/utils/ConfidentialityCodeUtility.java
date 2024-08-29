@@ -8,7 +8,9 @@ import java.util.Collections;
 
 public final class ConfidentialityCodeUtility {
     private ConfidentialityCodeUtility() { }
-    private static final String NOPAT_CONFIDENTIALITY_CODE = """
+    public static final String NOPAT = "NOPAT";
+    public static final String NOSCRUB = "NOSCRUB";
+    public static final String NOPAT_HL7_CONFIDENTIALITY_CODE = """
         <confidentialityCode
             code="NOPAT"
             codeSystem="2.16.840.1.113883.4.642.3.47"
@@ -40,10 +42,6 @@ public final class ConfidentialityCodeUtility {
         );
     }
 
-    public static String getNopatHl7v3ConfidentialityCode() {
-        return NOPAT_CONFIDENTIALITY_CODE;
-    }
-
     public static boolean doesMetaContainNopat(Meta meta) {
         if (!meta.getSecurity().isEmpty()) {
             final Coding coding = meta.getSecurity().getFirst();
@@ -51,6 +49,16 @@ public final class ConfidentialityCodeUtility {
         }
 
         return false;
+    }
+
+    public static String getNopatConfidentialityCodeXpathSegment() {
+        return """
+            confidentialityCode[
+                @code='NOPAT' and
+                @codeSystem='2.16.840.1.113883.4.642.3.47' and
+                @displayName="no disclosure to patient, family or caregivers without attending provider's authorization"
+            ]
+            """;
     }
 
     private static Coding getNopatCoding() {

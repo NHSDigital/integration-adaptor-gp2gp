@@ -144,7 +144,8 @@ public class EncounterComponentsMapperTest {
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
             randomIdGeneratorService,
             codeableConceptCdMapper,
-            participantMapper
+            participantMapper,
+            confidentialityService
         );
         DiaryPlanStatementMapper diaryPlanStatementMapper
             = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);

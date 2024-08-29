@@ -45,13 +45,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
+import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.NOPAT_HL7_CONFIDENTIALITY_CODE;
 
 @ExtendWith(MockitoExtension.class)
 class ObservationMapperTest {
     private static final String DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
     private static final String OBSERVATION_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/observation/";
-    private static final String NOPAT_CONFIDENTIALITY_CODE
-        = ConfidentialityCodeUtility.getNopatHl7v3ConfidentialityCode();
 
     private static final String OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_JSON =
         "observation_associated_with_specimen_1.json";
@@ -207,11 +206,12 @@ class ObservationMapperTest {
     void When_MappingTestGroupHeader_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinCompoundStatement()
         throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
         final Observation observation = getObservationResourceFromJson(OBSERVATION_TEST_GROUP_HEADER_JSON);
-        final String xPath = "/component/CompoundStatement/confidentialityCode";
+        final String xPath = "/component/CompoundStatement/" + ConfidentialityCodeUtility
+            .getNopatConfidentialityCodeXpathSegment();
 
         ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(observation);
         when(confidentialityService.generateConfidentialityCode(observationArgumentCaptor.capture()))
-            .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
+            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
 
         final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
@@ -239,7 +239,7 @@ class ObservationMapperTest {
             .filter(ConfidentialityCodeUtility::doesMetaContainNopat)
             .toList();
 
-        assertThat(actualXml).doesNotContainIgnoringCase(NOPAT_CONFIDENTIALITY_CODE);
+        assertThat(actualXml).doesNotContainIgnoringCase(NOPAT_HL7_CONFIDENTIALITY_CODE);
         assertThat(metaWithNopat).hasSize(0);
     }
 
@@ -247,11 +247,12 @@ class ObservationMapperTest {
     void When_MappingTestResult_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinObservationStatement()
         throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
         final Observation observation = getObservationResourceFromJson(OBSERVATION_TEST_RESULT_JSON);
-        final String xPath = "/component/ObservationStatement/confidentialityCode";
+        final String xPath = "/component/ObservationStatement/" + ConfidentialityCodeUtility
+            .getNopatConfidentialityCodeXpathSegment();
 
         ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(observation);
         when(confidentialityService.generateConfidentialityCode(observation))
-            .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
+            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
 
         final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
@@ -268,18 +269,19 @@ class ObservationMapperTest {
 
         final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
-        assertThat(actualXml).doesNotContainIgnoringCase(NOPAT_CONFIDENTIALITY_CODE);
+        assertThat(actualXml).doesNotContainIgnoringCase(NOPAT_HL7_CONFIDENTIALITY_CODE);
     }
 
     @Test
     void When_MappingFilingComment_With_NopatMetaSecurity_Expect_ConfidentialityCodeWithinNarrativeStatement()
         throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
         final Observation observation = getObservationResourceFromJson(OBSERVATION_FILING_COMMENT_JSON);
-        final String xPath = "/component/NarrativeStatement/confidentialityCode";
+        final String xPath = "/component/NarrativeStatement/" + ConfidentialityCodeUtility
+            .getNopatConfidentialityCodeXpathSegment();
 
         ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(observation);
         when(confidentialityService.generateConfidentialityCode(observation))
-            .thenReturn(Optional.of(NOPAT_CONFIDENTIALITY_CODE));
+            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
 
         final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
@@ -296,7 +298,7 @@ class ObservationMapperTest {
 
         final String actualXml = observationMapper.mapObservationToCompoundStatement(observation);
 
-        assertThat(actualXml).doesNotContainIgnoringCase(NOPAT_CONFIDENTIALITY_CODE);
+        assertThat(actualXml).doesNotContainIgnoringCase(NOPAT_HL7_CONFIDENTIALITY_CODE);
     }
 
     private String getXmlStringFromFile(String filename) {
