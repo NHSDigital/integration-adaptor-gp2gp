@@ -24,6 +24,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -42,14 +43,11 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-no-pertinent-information.json";
     private static final String INPUT_JSON_WITHOUT_CODEABLE_CONCEPT_TEXT = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-codeable-concepts-text.json";
-    private static final String INPUT_JSON_WITHOUT_DATE = IMMUNIZATION_FILE_LOCATIONS
-        + "immunization-no-date.json";
+    private static final String INPUT_JSON_WITHOUT_DATE = IMMUNIZATION_FILE_LOCATIONS + "immunization-no-date.json";
     private static final String INPUT_JSON_REASON_NOT_GIVEN = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-reason-not-given-coding.json";
-    private static final String INPUT_JSON_REASON_NOT_GIVEN_TEXT = IMMUNIZATION_FILE_LOCATIONS
-        + "immunization-reason-not-given-text.json";
-    private static final String INPUT_JSON_WITH_VACCINE_CODE = IMMUNIZATION_FILE_LOCATIONS
-        + "immunization-vaccine-code-given.json";
+    private static final String INPUT_JSON_REASON_NOT_GIVEN_TEXT = IMMUNIZATION_FILE_LOCATIONS + "immunization-reason-not-given-text.json";
+    private static final String INPUT_JSON_WITH_VACCINE_CODE = IMMUNIZATION_FILE_LOCATIONS + "immunization-vaccine-code-given.json";
     private static final String INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-with-relation-to-condition-with-one-note.json";
     private static final String INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES = IMMUNIZATION_FILE_LOCATIONS
@@ -154,6 +152,9 @@ public class ImmunizationObservationStatementMapperTest {
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
 
+    @Mock
+    private ConfidentialityService confidentialityService;
+
     private MessageContext messageContext;
     private ImmunizationObservationStatementMapper observationStatementMapper;
     private FhirParseService fhirParseService;
@@ -170,7 +171,7 @@ public class ImmunizationObservationStatementMapperTest {
         Bundle bundle = fhirParseService.parseResource(bundleInput, Bundle.class);
         messageContext.initialize(bundle);
         observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper,
-            new ParticipantMapper());
+            new ParticipantMapper(), confidentialityService);
     }
 
     @AfterEach
@@ -180,8 +181,7 @@ public class ImmunizationObservationStatementMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")
-    public void When_MappingImmunizationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml,
-                                                                                  boolean isNested) throws IOException {
+    public void When_MappingImmunizationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml, boolean isNested) {
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
 
@@ -232,7 +232,7 @@ public class ImmunizationObservationStatementMapperTest {
     }
 
     @Test
-    public void When_MappingImmunizationWithInvalidPractitionerReferenceType_Expect_Error() throws IOException {
+    public void When_MappingImmunizationWithInvalidPractitionerReferenceType_Expect_Error() {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PRACTITIONER_INVALID_REFERENCE_RESOURCE_TYPE);
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
 

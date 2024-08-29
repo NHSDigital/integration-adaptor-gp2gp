@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ImmunizationObservationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
@@ -63,12 +64,14 @@ public class ImmunizationObservationStatementMapper {
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
+    private final ConfidentialityService confidentialityService;
 
     public String mapImmunizationToObservationStatement(Immunization immunization, boolean isNested) {
         final IdMapper idMapper = messageContext.getIdMapper();
         var observationStatementTemplateParameters = ImmunizationObservationStatementTemplateParameters.builder()
             .observationStatementId(idMapper.getOrNew(ResourceType.Immunization, immunization.getIdElement()))
             .availabilityTime(buildAvailabilityTime(immunization))
+            .confidentialityCode(confidentialityService.generateConfidentialityCode(immunization).orElse(null))
             .effectiveTime(buildEffectiveTime(immunization))
             .pertinentInformation(buildPertinentInformation(immunization))
             .isNested(isNested)

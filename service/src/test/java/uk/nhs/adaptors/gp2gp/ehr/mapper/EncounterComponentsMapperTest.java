@@ -164,7 +164,7 @@ public class EncounterComponentsMapperTest {
             participantMapper
         );
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, confidentialityService);
         RequestStatementMapper requestStatementMapper
             = new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DiagnosticReportMapper diagnosticReportMapper = new DiagnosticReportMapper(

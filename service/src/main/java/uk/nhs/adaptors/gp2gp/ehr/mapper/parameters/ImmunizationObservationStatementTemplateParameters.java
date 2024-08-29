@@ -14,5 +14,6 @@ public class ImmunizationObservationStatementTemplateParameters {
     private String effectiveTime;
     private String pertinentInformation;
     private String code;
+    private String confidentialityCode;
     private String participant;
 }
