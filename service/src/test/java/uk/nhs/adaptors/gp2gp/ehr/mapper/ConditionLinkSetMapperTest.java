@@ -37,9 +37,6 @@ import java.io.IOException;
 
 import wiremock.org.custommonkey.xmlunit.XMLAssert;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-
 import java.util.stream.Stream;
 import java.util.Optional;
 
@@ -48,12 +45,14 @@ import static org.assertj.core.api.Assumptions.assumeThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.NOPAT_HL7_CONFIDENTIALITY_CODE;
+import static uk.nhs.adaptors.gp2gp.utils.XmlParsingUtility.wrapXmlInRootElement;
 import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.NOSCRUB;
 import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.NOPAT;
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
@@ -236,7 +235,7 @@ class ConditionLinkSetMapperTest {
     }
 
     @Test
-    void When_MappingParsedConditionWithNonExistentReferenceInRelatedClinicalContent_Expect_MapperException() {
+    void When_MappingParsedCondition_With_NonExistentReferenceInRelatedClinicalContent_Expect_MapperException() {
         final Condition parsedObservation = getConditionResourceFromJson(INPUT_JSON_RELATED_CLINICAL_CONTENT_NON_EXISTENT_REFERENCE);
 
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
@@ -257,7 +256,7 @@ class ConditionLinkSetMapperTest {
     }
 
     @Test
-    void When_MappingConditionWith_SuppressedMedReqAsRelatedClinicalContent_Expect_NoEntry() throws IOException, SAXException {
+    void When_MappingCondition_With_SuppressedMedReqAsRelatedClinicalContent_Expect_NoEntry() throws IOException, SAXException {
         final Condition condition = getConditionResourceFromJson(INPUT_JSON_SUPPRESSED_RELATED_MEDICATION_REQUEST);
         final String expectedXml = getXmlStringFromFile(OUTPUT_XML_SUPPRESSED_RELATED_MEDICATION_REQUEST);
 
@@ -267,25 +266,30 @@ class ConditionLinkSetMapperTest {
     }
 
     @Test
-    void When_MappingCondition_WithNopatMetaSecurity_Expect_ConfidentialityCodeWithinLinkset()
-        throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
-        final Condition condition = getConditionResourceFromJson(INPUT_JSON_SUPPRESSED_RELATED_MEDICATION_REQUEST);
-        final String xPath = "/component/LinkSet/" + ConfidentialityCodeUtility.getNopatConfidentialityCodeXpathSegment();
+    void When_MappingCondition_With_NopatMetaSecurity_Expect_ConfidentialityCodeInBothLinksetAndObservationStatement() {
+        final Condition condition = getConditionResourceFromJson(INPUT_JSON_WITH_ACTUAL_PROBLEM_CONDITION);
+        final String linkSetXpath = "/Root/component[1]/LinkSet/" + ConfidentialityCodeUtility.getNopatConfidentialityCodeXpathSegment();
+        final String observationStatementXpath = "/Root/component[2]/ObservationStatement/" + ConfidentialityCodeUtility
+            .getNopatConfidentialityCodeXpathSegment();
 
         ConfidentialityCodeUtility.appendNopatSecurityToMetaForResource(condition);
         when(confidentialityService.generateConfidentialityCode(conditionArgumentCaptor.capture()))
             .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
 
-        final String actualXml = conditionLinkSetMapper.mapConditionToLinkSet(condition, false);
+        final String actualXml = wrapXmlInRootElement(conditionLinkSetMapper
+            .mapConditionToLinkSet(condition, false));
         final String conditionSecurityCode = ConfidentialityCodeUtility
             .getSecurityCodeFromResource(conditionArgumentCaptor.getValue());
 
-        assertTrue(XmlParsingUtility.xpathMatchFound(actualXml, xPath));
-        assertThat(conditionSecurityCode).isEqualTo(NOPAT);
+        assertAll(
+            () -> assertTrue(XmlParsingUtility.xpathMatchFound(actualXml, observationStatementXpath)),
+            () -> assertTrue(XmlParsingUtility.xpathMatchFound(actualXml, linkSetXpath)),
+            () -> assertThat(conditionSecurityCode).isEqualTo(NOPAT)
+        );
     }
 
     @Test
-    void When_MappingCondition_With_WithNoscrubMetaSecurity_Expect_ConfidentialityCodeNotPresent() {
+    void When_MappingCondition_With_NoscrubMetaSecurity_Expect_ConfidentialityCodeNotPresent() {
         final Condition condition = getConditionResourceFromJson(INPUT_JSON_SUPPRESSED_RELATED_MEDICATION_REQUEST);
 
         ConfidentialityCodeUtility.appendNoscrubSecurityToMetaForResource(condition);

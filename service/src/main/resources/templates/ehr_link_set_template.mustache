@@ -52,6 +52,9 @@
             {{#effectiveTimeHigh}}<high value="{{effectiveTimeHigh}}"/>{{/effectiveTimeHigh}}
         </effectiveTime>
         <availabilityTime {{#observationStatementAvailabilityTime}}value="{{observationStatementAvailabilityTime}}"{{/observationStatementAvailabilityTime}}{{^observationStatementAvailabilityTime}}nullFlavor="UNK"{{/observationStatementAvailabilityTime}} />
+        {{#confidentialityCode}}
+            {{{confidentialityCode}}}
+        {{/confidentialityCode}}
         {{#pertinentInfo}}
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
