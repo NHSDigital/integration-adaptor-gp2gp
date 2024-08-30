@@ -1,0 +1,23 @@
+{
+  "priority": 2,
+  "scenarioName": "migrateStructuredRecord",
+  "requiredScenarioState": "Investigations",
+  "request": {
+    "method": "POST",
+    "urlPattern": "/.*/STU3/1/gpconnect/fhir/Patient/[$]gpc[.]migratestructuredrecord"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "EMISPatientStructurede2eResponsePWTP9.json",
+    "headers": {
+      "Server": "nginx",
+      "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",
+      "Content-Type": "application/fhir+json;charset=UTF-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-store",
+      "X-Powered-By": "HAPI FHIR 3.0.0 REST Server (FHIR Server; FHIR 3.0.1/DSTU3)",
+      "Strict-Transport-Security":"max-age=31536000"
+    }
+  }
+}
