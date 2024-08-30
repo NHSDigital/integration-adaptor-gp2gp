@@ -2085,37 +2085,64 @@
                         "value": "{{jsonPath request.body '$.parameter[0].valueIdentifier.value'}}"
                     }
                 ],
-                "name": [
-                    {
-                        "use": "official",
-                        "family": "Adams",
-                        "given": [
-                            "Chas",
-                            "Calvin"
-                        ],
-                        "prefix": [
-                            "Mr"
-                        ]
-                    },
-                    {
-                        "use": "old",
-                        "family": "Pwtestpatient"
-                    }
-                ],
-                "gender": "male",
-                "birthDate": "2021-11-10",
-                "address": [
-                    {
-                        "use": "home",
-                        "type": "physical",
-                        "line": [
-                            "Dar es Salaam",
-                            "Grimsby Road"
-                        ],
-                        "city": "Grimsby",
-                        "postalCode": "DN37 7DY"
-                    }
-                ],
+      {{^patient}}
+      "name": [
+        {
+          "use": "official",
+          "text": "Samuel HESLBY",
+          "family": "HESLBY",
+          "given": [
+            "Samuel"
+          ],
+          "prefix": [
+            "MR"
+          ]
+        }
+      ],
+      "gender": "male",
+      "birthDate": "1936-03-17",
+      "address": [
+        {
+          "use": "home",
+          "type": "physical",
+          "line": [
+            "10 MANOR DRIVE",
+            "STILLINGTON"
+          ],
+          "city": "STOCKTON-ON-TEES",
+          "district": "CLEVELAND",
+          "postalCode": "TS21 1JG"
+        }
+      ],
+      {{/patient}}
+      {{#patient}}
+      "name": [
+        {
+          "use": "official",
+          "text": "{{patient.name.0.given.0}} {{patient.name.0.family}}",
+          "family": "{{patient.name.0.family}}",
+          "given": [
+            "{{patient.name.0.given.0}}"
+          ],
+          "prefix": [
+            "{{patient.name.0.prefix.0}}"
+          ]
+        }
+      ],
+      "gender": "{{ patient.gender }}",
+      "birthDate": "{{ patient.birthDate }}",
+      "address": [
+        {
+          "use": "home",
+          "type": "physical",
+          "line": [
+            "{{ patient.address.0.line.0 }}",
+            "{{ patient.address.0.line.1 }}"
+          ],
+          "postalCode": "{{ patient.address.0.postalCode }}"
+        }
+      ],
+      {{/patient}}
                 "generalPractitioner": [
                     {
                         "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
@@ -11240,7 +11267,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
-                    ]
+                    ],
+                    "security": [{
+                      "system":"http://hl7.org/fhir/v3/ActCode",
+                      "code":"NOPAT",
+                      "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "identifier": [
                     {
@@ -11946,7 +11978,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
-                    ]
+                    ],
+                    "security": [{
+                      "system":"http://hl7.org/fhir/v3/ActCode",
+                      "code":"NOPAT",
+                      "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "identifier": [
                     {
@@ -25809,7 +25846,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
-                    ]
+                    ],
+                    "security": [{
+                      "system":"http://hl7.org/fhir/v3/ActCode",
+                      "code":"NOPAT",
+                      "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "identifier": [
                     {
