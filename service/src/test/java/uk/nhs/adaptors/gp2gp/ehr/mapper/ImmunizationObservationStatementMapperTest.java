@@ -1,14 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.util.stream.Stream;
-
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Immunization;
@@ -23,12 +14,22 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import java.io.IOException;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -148,11 +149,21 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-all-multiple-practitioners.xml";
     private static final String OUTPUT_XML_WITH_MULTIPLE_PRACTITIONERS_NO_AP_ROLE = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-all-multiple-practitioners-no-AP-role.xml";
+    private static final String CONFIDENTIALITY_CODE = """
+        <confidentialityCode
+            code="NOPAT"
+            codeSystem="2.16.840.1.113883.4.642.3.47"
+            displayName="no disclosure to patient, family or caregivers without attending provider's authorization"
+        />""";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+
+    @Mock
+    private ConfidentialityService confidentialityService;
 
     private MessageContext messageContext;
     private ImmunizationObservationStatementMapper observationStatementMapper;
@@ -169,8 +180,12 @@ public class ImmunizationObservationStatementMapperTest {
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         Bundle bundle = fhirParseService.parseResource(bundleInput, Bundle.class);
         messageContext.initialize(bundle);
-        observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper,
-            new ParticipantMapper());
+        observationStatementMapper = new ImmunizationObservationStatementMapper(
+            messageContext,
+            codeableConceptCdMapper,
+            new ParticipantMapper(),
+            confidentialityService
+        );
     }
 
     @AfterEach
@@ -181,7 +196,7 @@ public class ImmunizationObservationStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingImmunizationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml,
-                                                                                  boolean isNested) throws IOException {
+                                                                                  boolean isNested) {
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
 
@@ -232,12 +247,44 @@ public class ImmunizationObservationStatementMapperTest {
     }
 
     @Test
-    public void When_MappingImmunizationWithInvalidPractitionerReferenceType_Expect_Error() throws IOException {
+    public void When_MappingImmunizationWithInvalidPractitionerReferenceType_Expect_Error() {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PRACTITIONER_INVALID_REFERENCE_RESOURCE_TYPE);
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
 
         assertThatThrownBy(() -> observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, false))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Not supported agent reference: Patient/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
+    }
+
+    @Test
+    public void When_ConfidentialityServiceReturnsConfidentialityCode_Expect_MessageContainsConfidentialityCode() {
+        final var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
+        final var parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
+        when(confidentialityService.generateConfidentialityCode(parsedImmunization))
+            .thenReturn(Optional.of(CONFIDENTIALITY_CODE));
+
+        final var actualMessage = observationStatementMapper.mapImmunizationToObservationStatement(
+            parsedImmunization,
+            false
+        );
+
+        assertThat(actualMessage)
+            .contains(CONFIDENTIALITY_CODE);
+    }
+
+    @Test
+    public void When_ConfidentialityServiceReturnsEmptyOptional_Expect_MessageDoesNotContainConfidentialityCode() {
+        final var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
+        final var parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
+        when(confidentialityService.generateConfidentialityCode(parsedImmunization))
+            .thenReturn(Optional.empty());
+
+        final var actualMessage = observationStatementMapper.mapImmunizationToObservationStatement(
+            parsedImmunization,
+            false
+        );
+
+        assertThat(actualMessage)
+            .doesNotContain(CONFIDENTIALITY_CODE);
     }
 }

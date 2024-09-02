@@ -6,7 +6,10 @@
         <effectiveTime>
             {{#effectiveTime}}<center value="{{effectiveTime}}"/>{{/effectiveTime}}{{^effectiveTime}}<center nullFlavor="UNK"/>{{/effectiveTime}}
         </effectiveTime>
-        <availabilityTime {{#availabilityTime}}value="{{availabilityTime}}"{{/availabilityTime}}{{^availabilityTime}}nullFlavor="UNK"{{/availabilityTime}} />
+        <availabilityTime {{#availabilityTime}}value="{{availabilityTime}}" {{/availabilityTime}}{{^availabilityTime}}nullFlavor="UNK"{{/availabilityTime}} />
+        {{#confidentialityCode}}
+            {{{confidentialityCode}}}
+        {{/confidentialityCode}}
         {{#pertinentInformation}}
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>

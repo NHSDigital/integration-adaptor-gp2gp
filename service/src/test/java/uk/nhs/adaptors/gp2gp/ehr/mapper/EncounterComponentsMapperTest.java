@@ -1,17 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.when;
-
-import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
-
-import java.util.List;
-import java.util.stream.Stream;
-
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -29,7 +17,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -43,6 +30,17 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.when;
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class EncounterComponentsMapperTest {
@@ -165,7 +163,12 @@ public class EncounterComponentsMapperTest {
             participantMapper
         );
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
+            new ImmunizationObservationStatementMapper(
+                messageContext,
+                codeableConceptCdMapper,
+                participantMapper,
+                confidentialityService
+            );
         RequestStatementMapper requestStatementMapper
             = new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DiagnosticReportMapper diagnosticReportMapper = new DiagnosticReportMapper(
