@@ -7,8 +7,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import java.time.Duration;
 
@@ -16,7 +21,9 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -24,7 +31,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 
 @ExtendWith(MockitoExtension.class)
 class EhrExtractStatusServiceTest {
@@ -34,6 +40,7 @@ class EhrExtractStatusServiceTest {
     public static final int NINE_DAYS = 9;
     public static final int EIGHT_DAYS = 8;
     public static final String ERROR_CODE = "99";
+    public static final String ALTERNATIVE_ERROR_CODE = "26";
     public static final String ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
     public static final String ACK_TYPE = "AA";
     public static final int TWENTY_DAYS = 20;
@@ -95,7 +102,27 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
-    void shouldLogWarningWhenLateAcknowledgementReceivedAfter8DaysAndEhrReceivedAckHasErrors() {
+    public void whenEhrExtractStatusIsNullInterceptExceptionAndLogErrorMsg() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var inProgressConversationId = generateRandomUppercaseUUID();
+
+        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
+
+        doReturn(List.of(ehrExtractStatus)).when(ehrExtractStatusServiceSpy).findInProgressTransfers();
+        doReturn(null).when(mongoTemplate).findAndModify(any(Query.class), any(UpdateDefinition.class),
+                                                         any(FindAndModifyOptions.class), any());
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        assertDoesNotThrow(() -> ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts());
+
+        verify(logger).error(eq("An error occurred when closing a failed process for conversation_id: {}"),
+                             eq(inProgressConversationId),
+                             any(EhrExtractException.class));
+    }
+
+    @Test
+    void shouldLogWarningWithDuplicateWhenLateAcknowledgementReceivedAfter8DaysAndEhrReceivedAckErrorCodeDoNotMatch() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = "11111";
         Instant currentInstant = Instant.now();
@@ -108,6 +135,39 @@ class EhrExtractStatusServiceTest {
                                                                      .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
                                                                      .taskId(generateRandomUppercaseUUID())
                                                                      .build())
+                              .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of(
+                                  EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
+                                      .builder()
+                                      .code(ALTERNATIVE_ERROR_CODE)
+                                      .display(ERROR_MESSAGE)
+                                      .build())).build())
+                              .build());
+
+        doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
+        doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+        when(ack.getErrors()).thenReturn(null);
+        when(ack.getReceived()).thenReturn(currentInstant);
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
+
+        verify(logger, times(1)).warn("Received an ACK message with a conversation_id=11111 that is a duplicate");
+    }
+
+    @Test
+    void shouldLogWarningWhenLateAcknowledgementReceivedAfter8DaysAndEhrReceivedAckHasErrors() {
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        String conversationId = "11111";
+        Instant currentInstant = Instant.now();
+        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
+
+        Optional<EhrExtractStatus> ehrExtractStatusWithEhrReceivedAckWithErrors
+            = Optional.of(EhrExtractStatus.builder()
+                              .updatedAt(eightDaysAgo)
+                              .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
+                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                         .taskId(generateRandomUppercaseUUID())
+                                                         .build())
                               .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of(
                                   EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
                                       .builder()

@@ -46,17 +46,12 @@ public class EhrStatusBaseService {
         var errorOptional = Optional.ofNullable(ehrExtractStatus.getError());
         var receivedAcknowledgementOptional = Optional.ofNullable(ehrExtractStatus.getEhrReceivedAcknowledgement());
 
-        if (ackPendingOptional.map(ackPending -> ackPending.getTypeCode().equals(NACK_TYPE_CODE)).orElse(false)
+        if (ackPendingOptional.map(ackPending -> NACK_TYPE_CODE.equals(ackPending.getTypeCode())).orElse(false)
             && errorOptional.isPresent()) {
             return FAILED_NME;
-        } else if (ackPendingOptional
-                            .map(ackPending -> ACK_TYPE_CODE.equals(ackPending.getTypeCode())).orElse(false)
-
-                    && ackToRequestorOptional
-                            .map(ackToRequester -> ACK_TYPE_CODE.equals(ackToRequester.getTypeCode())).orElse(false)
-
+        } else if (ackPendingOptional.map(ackPending -> ACK_TYPE_CODE.equals(ackPending.getTypeCode())).orElse(false)
+                    && ackToRequestorOptional.map(ackToRequester -> ACK_TYPE_CODE.equals(ackToRequester.getTypeCode())).orElse(false)
                     && errorOptional.isEmpty()
-
                     && receivedAcknowledgementOptional
                     .map(acknowledgement ->
                         Optional.ofNullable(acknowledgement.getConversationClosed()).isPresent()
