@@ -11295,6 +11295,7 @@
                 },
                 "effectiveDateTime": "2010-06-24T12:41:27.053+01:00",
                 "issued": "2010-06-24T12:41:27.053+01:00",
+                "comment": "This is a test of the NOPAT filing comment behaviour.",
                 "performer": [
                     {
                         "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
