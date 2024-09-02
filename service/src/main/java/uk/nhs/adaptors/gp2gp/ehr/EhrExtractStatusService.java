@@ -137,7 +137,7 @@ public class EhrExtractStatusService {
             .filter(this::hasLastUpdateExceededEightDays)
             .toList();
 
-        if(!ehrExtractStatusWithExceededUpdateLimit.isEmpty()) {
+        if (!ehrExtractStatusWithExceededUpdateLimit.isEmpty()) {
             updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(ehrExtractStatusWithExceededUpdateLimit,
                                                                           REASON_ERROR_CODE,
                                                                           REASON_ERROR_MESSAGE);
@@ -470,16 +470,16 @@ public class EhrExtractStatusService {
                                                                               String errorCode,
                                                                               String errorMessage) {
 
-            ehrExtractStatusList.stream().forEach(ehrExtractStatus -> {
-                try {
-                    updateEhrExtractStatusWithEhrReceivedAcknowledgementError(ehrExtractStatus.getConversationId(),
-                                                                              errorCode,
-                                                                              errorMessage);
-                } catch (Exception e) {
-                    logger().error("An error occurred when closing a failed process for conversation_id: {}",
-                                 ehrExtractStatus.getConversationId(), e);
-                }
-            });
+        ehrExtractStatusList.stream().forEach(ehrExtractStatus -> {
+            try {
+                updateEhrExtractStatusWithEhrReceivedAcknowledgementError(ehrExtractStatus.getConversationId(),
+                                                                          errorCode,
+                                                                          errorMessage);
+            } catch (Exception e) {
+                logger().error("An error occurred when closing a failed process for conversation_id: {}",
+                               ehrExtractStatus.getConversationId(), e);
+            }
+        });
     }
 
     public EhrExtractStatus updateEhrExtractStatusWithEhrReceivedAcknowledgementError(String conversationId,
@@ -501,8 +501,8 @@ public class EhrExtractStatusService {
                 conversationId));
         }
 
-        logger().info("EHR status (EHR received acknowledgement) record successfully " +
-                    "updated in the database with error information conversation_id: {}", conversationId);
+        logger().info("EHR status (EHR received acknowledgement) record successfully "
+                    + "updated in the database with error information conversation_id: {}", conversationId);
 
         return ehrExtractStatus;
     }
