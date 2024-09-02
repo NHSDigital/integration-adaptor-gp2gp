@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -268,7 +269,7 @@ public class EhrExtractStatusService {
             throw new EhrExtractException("EHR Extract Status was not updated with Extract Core Message.");
         }
 
-        LOGGER.info("Database successfully updated after sending EhrExtract");
+        logger().info("Database successfully updated after sending EhrExtract");
         return ehrExtractStatus;
     }
 
@@ -287,7 +288,7 @@ public class EhrExtractStatusService {
         if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extract Status was not updated with Extract Core Pending.");
         }
-        LOGGER.info("Database updated for sending Extract Core Pending");
+        logger().info("Database updated for sending Extract Core Pending");
     }
 
     public Optional<EhrExtractStatus> updateEhrExtractStatusContinue(String conversationId) {
@@ -310,7 +311,7 @@ public class EhrExtractStatusService {
                 throw new EhrExtractException(UNRECOGNIZED_CONVERSATION_ID_MESSAGE.formatted(conversationId));
             }
 
-            LOGGER.info("Database successfully updated with EHRContinue");
+            logger().info("Database successfully updated with EHRContinue");
             return Optional.of(ehrExtractStatus);
         } else {
             return Optional.empty();
@@ -320,18 +321,18 @@ public class EhrExtractStatusService {
     public void updateEhrExtractStatusAck(String conversationId, EhrReceivedAcknowledgement ack) {
 
         if (ack.getErrors() == null && !isEhrStatusWaitingForFinalAck(conversationId)) {
-            LOGGER.warn("Received unexpected acknowledgement of EHR Extract with conversation id=" + conversationId);
-            return;
-        }
-
-        if (hasFinalAckBeenReceived(conversationId)) {
-            LOGGER.warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            logger().warn("Received unexpected acknowledgement of EHR Extract with conversation id=" + conversationId);
             return;
         }
 
         if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())
-            && hasEhrStatusReceivedAckTimeoutFailure(conversationId)) {
-            LOGGER.warn("Received an ACK message with a conversation_id: " + conversationId + ", but it will be ignored.");
+            && hasEhrStatusReceivedAckWithErrors(conversationId)) {
+            logger().warn("Received an ACK message with a conversation_id: " + conversationId + ", but it will be ignored.");
+            return;
+        }
+
+        if (hasFinalAckBeenReceived(conversationId)) {
+            logger().warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
             return;
         }
 
@@ -362,18 +363,33 @@ public class EhrExtractStatusService {
                 + "' that is not recognised");
         }
 
-        LOGGER.info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+        logger().info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
     }
 
-    private boolean hasEhrStatusReceivedAckTimeoutFailure(String conversationId) {
+    private boolean hasEhrStatusReceivedAckWithErrors(String conversationId) {
+
         var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "NACK");
 
-        if (EHR_EXTRACT_STATUS_ACK_TIMEOUT.equals(ehrExtractStatus.getError().getTaskType())
-        && REASON_ERROR_MESSAGE.equals(ehrExtractStatus.getError().getMessage())) {
-            return true;
+        if (ehrExtractStatus == null) {
+            return false;
         }
 
-        return false;
+        var ehrReceivedAcknowledgement = ehrExtractStatus.getEhrReceivedAcknowledgement();
+        if (ehrReceivedAcknowledgement == null) {
+            return false;
+        }
+
+        var errors = ehrReceivedAcknowledgement.getErrors();
+        if (errors == null || errors.isEmpty()) {
+            return false;
+        }
+
+        var ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg = errors.stream()
+            .filter(err -> REASON_ERROR_CODE.equals(err.getCode())
+                           && REASON_ERROR_MESSAGE.equals(err.getDisplay()))
+            .findAny();
+
+        return ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg.isPresent();
     }
 
     public void saveAckForConversation(String conversationId, EhrReceivedAcknowledgement ack) {
@@ -460,7 +476,7 @@ public class EhrExtractStatusService {
                                                                               errorCode,
                                                                               errorMessage);
                 } catch (Exception e) {
-                    LOGGER.error("An error occurred when closing a failed process for conversation_id: {}",
+                    logger().error("An error occurred when closing a failed process for conversation_id: {}",
                                  ehrExtractStatus.getConversationId(), e);
                 }
             });
@@ -485,7 +501,7 @@ public class EhrExtractStatusService {
                 conversationId));
         }
 
-        LOGGER.info("EHR status (EHR received acknowledgement) record successfully " +
+        logger().info("EHR status (EHR received acknowledgement) record successfully " +
                     "updated in the database with error information conversation_id: {}", conversationId);
 
         return ehrExtractStatus;
@@ -516,7 +532,7 @@ public class EhrExtractStatusService {
             ));
         }
 
-        LOGGER.info(
+        logger().info(
             "EHR status record successfully updated in the database with error information conversation_id: {}",
             conversationId
         );
@@ -532,7 +548,7 @@ public class EhrExtractStatusService {
         if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extract Status was not updated with Acknowledgement Message.");
         }
-        LOGGER.info("Database updated for sending application acknowledgement");
+        logger().info("Database updated for sending application acknowledgement");
     }
 
     public EhrExtractStatus updateEhrExtractStatusCommonForDocuments(SendDocumentTaskDefinition taskDefinition, List<String> messageIds) {
@@ -594,7 +610,7 @@ public class EhrExtractStatusService {
         if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status document was not updated with sentToMhs.");
         }
-        LOGGER.info("Database updated for sending EHR Common document to MHS");
+        logger().info("Database updated for sending EHR Common document to MHS");
 
         return ehrExtractStatus;
     }
@@ -620,7 +636,7 @@ public class EhrExtractStatusService {
         if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status attachment was not updated with sentToMhs.");
         }
-        LOGGER.info("Database updated for sending EHR Attachment document to MHS");
+        logger().info("Database updated for sending EHR Attachment document to MHS");
 
         return ehrExtractStatus;
     }
@@ -686,7 +702,7 @@ public class EhrExtractStatusService {
         }
 
         if (ehrExtractStatus.getEhrContinue() != null) {
-            LOGGER.warn("Received a Continue message with a conversation_id '" + conversationId
+            logger().warn("Received a Continue message with a conversation_id '" + conversationId
                 + "' that is duplicate");
             return true;
         }
@@ -697,5 +713,9 @@ public class EhrExtractStatusService {
     private EhrExtractStatus fetchEhrExtractStatus(String conversationId, String messageType) {
         return ehrExtractStatusRepository.findByConversationId(conversationId)
             .orElseThrow(() -> new UnrecognisedInteractionIdException(messageType, conversationId));
+    }
+
+    protected Logger logger() {
+        return LOGGER;
     }
 }

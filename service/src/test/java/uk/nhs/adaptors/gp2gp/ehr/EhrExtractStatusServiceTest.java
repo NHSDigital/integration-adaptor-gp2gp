@@ -3,9 +3,14 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.springframework.boot.actuate.autoconfigure.health.HealthEndpointProperties;
+import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -16,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -38,6 +44,9 @@ class EhrExtractStatusServiceTest {
 
     @Mock
     private MongoTemplate mongoTemplate;
+
+    @Mock
+    private Logger logger;
 
     @Mock
     private EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -95,17 +104,31 @@ class EhrExtractStatusServiceTest {
         String conversationId = "11111";
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
-        Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder().updatedAt(eightDaysAgo).build());
+        Optional<EhrExtractStatus> ehrExtractStatusWithEhrReceivedAckWithErrors
+            = Optional.of(EhrExtractStatus.builder()
+                              .updatedAt(eightDaysAgo)
+                              .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
+                                                                     .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                                     .taskId(generateRandomUppercaseUUID())
+                                                                     .build())
+                              .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of(
+                                  EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
+                                      .builder()
+                                      .code(ERROR_CODE)
+                                      .display(ERROR_MESSAGE)
+                                      .build())).build())
+                              .build());
 
-        doReturn(ehrExtractStatus).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+        doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
+        doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
         when(ack.getErrors()).thenReturn(null);
+        when(ack.getReceived()).thenReturn(currentInstant);
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
-        verify(ehrExtractStatusServiceSpy, never()).updateEhrExtractStatusError(conversationId,
-                                                                                ERROR_CODE,
-                                                                                ERROR_MESSAGE,
-                                                                                ehrExtractStatusServiceSpy.getClass().getSimpleName());
+        verify(logger, times(1))
+            .warn("Received an ACK message with a conversation_id: 11111, but it will be ignored.");
     }
 
     @Test
