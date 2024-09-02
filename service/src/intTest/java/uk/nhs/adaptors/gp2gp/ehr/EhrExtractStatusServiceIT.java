@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static com.mongodb.assertions.Assertions.assertTrue;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -164,7 +165,7 @@ public class EhrExtractStatusServiceIT {
 
         List<EhrExtractStatus> results = ehrExtractStatusService.findInProgressTransfers();
 
-        assertThat(results.isEmpty()).isTrue();
+        assertTrue(results.isEmpty());
     }
 
     @Test

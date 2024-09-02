@@ -62,3 +62,5 @@ gp2gp:
       min-back-off: ${GP2GP_MHS_CLIENT_MIN_BACKOFF_SECONDS:5}
       timeout: ${GP2GP_MHS_CLIENT_TIMEOUT_SECONDS:120}
 
+timeout:
+  cronTime: ${TIMEOUT_CRON_TIME:0 0 */2 * * *}

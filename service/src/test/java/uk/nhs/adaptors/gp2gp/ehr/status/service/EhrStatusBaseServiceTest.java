@@ -2,12 +2,17 @@ package uk.nhs.adaptors.gp2gp.ehr.status.service;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ERROR;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.ORIGINAL_FILE;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.PLACEHOLDER;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.SKELETON_MESSAGE;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_INCUMBENT;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,9 +23,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus;
+import uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrStatusBaseServiceTest {
+
+    public static final int TWENTY_DAYS = 20;
+    public static final String ACK_TYPE = "AA";
+    private static final Instant NOW = Instant.now();
+    private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
+    public static final int NINE_DAYS = 9;
+    public static final String DISPLAY_ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
 
     private static final EhrExtractStatus.GpcDocument SKELETON_DOCUMENT = EhrExtractStatus.GpcDocument.builder()
         .isSkeleton(true)
@@ -53,7 +66,8 @@ public class EhrStatusBaseServiceTest {
                 .display("Test Error")
                 .build()))
             .build()
-    );
+                                                                                                        );
+    public static final String ERROR_CODE = "99";
 
     @Mock
     private EhrExtractStatusRepository extractStatusRepository;
@@ -72,7 +86,6 @@ public class EhrStatusBaseServiceTest {
         FileStatus fileStatus = ehrStatusBaseService.getFileStatus(PLACEHOLDER_DOCUMENT_1, List.of());
 
         assertThat(fileStatus).isEqualTo(PLACEHOLDER);
-
     }
 
     @Test
@@ -96,6 +109,80 @@ public class EhrStatusBaseServiceTest {
         assertThat(fileStatus).isEqualTo(ERROR);
     }
 
+    @Test
+    void evaluateMigrationStatusResolvesToFailedIncumbent() {
+        var conversationId = generateRandomUppercaseUUID();
+        EhrExtractStatus ehrExtractStatus = inProgressTransfers(conversationId);
 
+        MigrationStatus migrationStatus = ehrStatusBaseService.evaluateMigrationStatus(ehrExtractStatus, List.of());
+
+        assertEquals(FAILED_INCUMBENT, migrationStatus);
+    }
+
+    private String generateRandomUppercaseUUID() {
+        return UUID.randomUUID().toString().toUpperCase();
+    }
+
+    private EhrExtractStatus inProgressTransfers(String conversationId) {
+        EhrExtractStatus extractStatus = EhrExtractStatus.builder()
+            .ackPending(buildPositiveAckPending())
+            .ackToRequester(buildPositiveAckToRequester())
+            .conversationId(conversationId)
+            .created(Instant.now().minus(Duration.ofDays(TWENTY_DAYS)))
+            .ehrExtractCore(EhrExtractStatus.EhrExtractCore.builder()
+                                .sentAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
+                                .build())
+            .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
+                                       .sentAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
+                                       .taskId(generateRandomUppercaseUUID())
+                                       .build())
+            .ehrExtractMessageId(generateRandomUppercaseUUID())
+            .ehrRequest(buildEhrRequest())
+            .gpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
+                                   .documents(List.of())
+                                   .build())
+            .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
+                                     .accessedAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
+                                     .objectName(generateRandomUppercaseUUID() + ".json")
+                                     .taskId(generateRandomUppercaseUUID())
+                                     .build())
+            .messageTimestamp(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
+            .updatedAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
+            .ehrReceivedAcknowledgement(
+                EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of(
+                                            EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
+                                                .builder()
+                                                .code(ERROR_CODE)
+                                                .display(DISPLAY_ERROR_MESSAGE)
+                                                .build())).build())
+            .build();
+
+        return extractStatus;
+    }
+
+    private EhrExtractStatus.AckPending buildPositiveAckPending() {
+        return EhrExtractStatus.AckPending.builder()
+            .messageId(generateRandomUppercaseUUID())
+            .taskId(generateRandomUppercaseUUID())
+            .typeCode(ACK_TYPE)
+            .updatedAt(FIVE_DAYS_AGO.toString())
+            .build();
+    }
+
+    private EhrExtractStatus.AckToRequester buildPositiveAckToRequester() {
+        return EhrExtractStatus.AckToRequester.builder()
+            .detail(null)
+            .messageId(generateRandomUppercaseUUID())
+            .reasonCode(null)
+            .taskId(generateRandomUppercaseUUID())
+            .typeCode(ACK_TYPE)
+            .build();
+    }
+
+    private EhrExtractStatus.EhrRequest buildEhrRequest() {
+        return EhrExtractStatus.EhrRequest.builder()
+            .messageId(generateRandomUppercaseUUID())
+            .build();
+    }
 
 }

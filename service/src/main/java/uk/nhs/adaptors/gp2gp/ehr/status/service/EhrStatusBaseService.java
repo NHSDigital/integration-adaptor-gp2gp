@@ -38,47 +38,35 @@ public class EhrStatusBaseService {
         return ackHistoryOptional.map(EhrExtractStatus.AckHistory::getAcks).orElse(new ArrayList<>());
     }
 
-    protected MigrationStatus evaluateMigrationStatus(EhrExtractStatus record, List<EhrStatus.AttachmentStatus> attachmentStatusList) {
+    protected MigrationStatus evaluateMigrationStatus(EhrExtractStatus ehrExtractStatus,
+                                                      List<EhrStatus.AttachmentStatus> attachmentStatusList) {
 
-        var ackPendingOptional = Optional.ofNullable(record.getAckPending());
-        var ackToRequestorOptional = Optional.ofNullable(record.getAckToRequester());
-        var errorOptional = Optional.ofNullable(record.getError());
-        var receivedAcknowledgementOptional = Optional.ofNullable(record.getEhrReceivedAcknowledgement());
+        var ackPendingOptional = Optional.ofNullable(ehrExtractStatus.getAckPending());
+        var ackToRequestorOptional = Optional.ofNullable(ehrExtractStatus.getAckToRequester());
+        var errorOptional = Optional.ofNullable(ehrExtractStatus.getError());
+        var receivedAcknowledgementOptional = Optional.ofNullable(ehrExtractStatus.getEhrReceivedAcknowledgement());
 
-        if (
-            ackPendingOptional
-                .map(ackPending -> ackPending.getTypeCode().equals(NACK_TYPE_CODE))
-                .orElse(false)
-
-                && errorOptional.isPresent()) {
-
+        if (ackPendingOptional.map(ackPending -> ackPending.getTypeCode().equals(NACK_TYPE_CODE)).orElse(false)
+            && errorOptional.isPresent()) {
             return FAILED_NME;
-        } else if (
-            ackPendingOptional
-                .map(ackPending -> ackPending.getTypeCode().equals(ACK_TYPE_CODE))
-                .orElse(false)
+        } else if (ackPendingOptional
+                            .map(ackPending -> ACK_TYPE_CODE.equals(ackPending.getTypeCode())).orElse(false)
 
-                && ackToRequestorOptional
-                .map(ackToRequester -> ackToRequester.getTypeCode().equals(ACK_TYPE_CODE))
-                .orElse(false)
+                    && ackToRequestorOptional
+                            .map(ackToRequester -> ACK_TYPE_CODE.equals(ackToRequester.getTypeCode())).orElse(false)
 
-                && errorOptional.isEmpty()
+                    && errorOptional.isEmpty()
 
-                && receivedAcknowledgementOptional
-                .map(acknowledgement ->
-                    Optional.ofNullable(acknowledgement.getConversationClosed()).isPresent()
-                        && Optional.ofNullable(acknowledgement.getErrors()).isEmpty())
-                .orElse(false)) {
+                    && receivedAcknowledgementOptional
+                    .map(acknowledgement ->
+                        Optional.ofNullable(acknowledgement.getConversationClosed()).isPresent()
+                            && Optional.ofNullable(acknowledgement.getErrors()).isEmpty())
+                    .orElse(false)) {
 
             return checkForPlaceholderOrError(attachmentStatusList) ? COMPLETE_WITH_ISSUES : COMPLETE;
-        } else if (
-
-            errorOptional.isEmpty()
-
-                && receivedAcknowledgementOptional
-                .map(acknowledgement ->
-                    Optional.ofNullable(acknowledgement.getErrors()).isPresent())
-                .orElse(false)) {
+        } else if (errorOptional.isEmpty()
+                   && receivedAcknowledgementOptional.map(acknowledgement -> Optional.ofNullable(acknowledgement.getErrors()).isPresent())
+                        .orElse(false)) {
 
             return FAILED_INCUMBENT;
         }
@@ -86,12 +74,12 @@ public class EhrStatusBaseService {
         return IN_PROGRESS;
     }
 
-    protected List<EhrStatus.AttachmentStatus> getAttachmentStatusList(EhrExtractStatus record,
-        List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
+    protected List<EhrStatus.AttachmentStatus> getAttachmentStatusList(EhrExtractStatus ehrExtractStatus,
+                                                                       List<EhrExtractStatus.EhrReceivedAcknowledgement> acknowledgements) {
 
         List<EhrStatus.AttachmentStatus> attachmentStatusList = new ArrayList<>();
 
-        var accessDocumentOptional = Optional.ofNullable(record.getGpcAccessDocument());
+        var accessDocumentOptional = Optional.ofNullable(ehrExtractStatus.getGpcAccessDocument());
 
         accessDocumentOptional.ifPresent(accessDocument ->
             accessDocument.getDocuments().forEach(gpcDocument ->
