@@ -12,6 +12,7 @@ public class MedicationStatementTemplateParameters {
     private String statusCode;
     private String effectiveTime;
     private String availabilityTime;
+    private String confidentialityCode;
     private String medicationReferenceCode;
     private String ehrSupplyId;
     private String medicationStatementPertinentInformation;

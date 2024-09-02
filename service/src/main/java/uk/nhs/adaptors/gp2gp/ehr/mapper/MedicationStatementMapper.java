@@ -1,25 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityText;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityTextFromQuantity;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractEhrSupplyTypeCodeableConcept;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractIdFromPlanMedicationRequestReference;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractRepeatValue;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedAvailabilityTime;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedCode;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedText;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.hasStatusReasonStopped;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.prescriptionTypeTextIsNoInfoAvailable;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+import com.github.mustachejava.Mustache;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Medication;
@@ -31,17 +14,33 @@ import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestStatus;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.github.mustachejava.Mustache;
-
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.MedicationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.UnitsOfTimeMappingUtils;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityText;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityTextFromQuantity;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractEhrSupplyTypeCodeableConcept;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractIdFromPlanMedicationRequestReference;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractRepeatValue;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedAvailabilityTime;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedCode;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedText;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.hasStatusReasonStopped;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.prescriptionTypeTextIsNoInfoAvailable;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -75,12 +74,15 @@ public class MedicationStatementMapper {
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final ConfidentialityService confidentialityService;
 
     public String mapMedicationRequestToMedicationStatement(MedicationRequest medicationRequest) {
         var medicationStatementId = messageContext.getIdMapper().getOrNew(ResourceType.MedicationRequest, medicationRequest.getIdElement());
         var statusCode = buildStatusCode(medicationRequest);
         var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForMedicationRequest(medicationRequest);
         var availabilityTime = StatementTimeMappingUtils.prepareAvailabilityTimeForMedicationRequest(medicationRequest);
+        var confidentialityCode = confidentialityService.generateConfidentialityCode(medicationRequest)
+            .orElse(null);
         var medicationReferenceCode = buildMedicationReferenceCode(medicationRequest);
         var ehrSupplyId = messageContext.getMedicationRequestIdMapper().getOrNew(medicationRequest.getId());
         var medicationStatementPertinentInformation = buildDosageInstructionPertinentInformation(medicationRequest);
@@ -102,6 +104,7 @@ public class MedicationStatementMapper {
             .statusCode(statusCode)
             .effectiveTime(effectiveTime)
             .availabilityTime(availabilityTime)
+            .confidentialityCode(confidentialityCode)
             .medicationReferenceCode(medicationReferenceCode)
             .ehrSupplyId(ehrSupplyId)
             .medicationStatementPertinentInformation(medicationStatementPertinentInformation)
