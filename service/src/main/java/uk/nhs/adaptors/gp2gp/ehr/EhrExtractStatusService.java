@@ -472,9 +472,7 @@ public class EhrExtractStatusService {
 
         ehrExtractStatusList.stream().forEach(ehrExtractStatus -> {
             try {
-                updateEhrExtractStatusWithEhrReceivedAcknowledgementError(ehrExtractStatus.getConversationId(),
-                                                                          errorCode,
-                                                                          errorMessage);
+                updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(), errorCode, errorMessage);
             } catch (Exception e) {
                 logger().error("An error occurred when closing a failed process for conversation_id: {}",
                                ehrExtractStatus.getConversationId(), e);
@@ -482,9 +480,9 @@ public class EhrExtractStatusService {
         });
     }
 
-    public EhrExtractStatus updateEhrExtractStatusWithEhrReceivedAcknowledgementError(String conversationId,
-                                                                                      String errorCode,
-                                                                                      String errorMessage) {
+    public EhrExtractStatus updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
+                                                                          String errorCode,
+                                                                          String errorMessage) {
 
         Update update = createUpdateWithUpdatedAt();
         update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder().code(errorCode).display(errorMessage).build());

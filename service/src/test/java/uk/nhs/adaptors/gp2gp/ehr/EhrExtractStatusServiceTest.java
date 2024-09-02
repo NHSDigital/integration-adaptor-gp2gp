@@ -69,7 +69,7 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
-    public void shouldUpdateStatusWithErrorWhenEhrExtractAckTimeoutOccurs() {
+    void shouldUpdateStatusWithErrorWhenEhrExtractAckTimeoutOccurs() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         var inProgressConversationId = generateRandomUppercaseUUID();
@@ -81,13 +81,13 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
 
         verify(ehrExtractStatusServiceSpy, times(1))
-            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(eq(List.of(ehrExtractStatus)),
-                                                                           eq(ERROR_CODE),
-                                                                           eq(ERROR_MESSAGE));
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus),
+                                                                           ERROR_CODE,
+                                                                           ERROR_MESSAGE);
     }
 
     @Test
-    public void shouldNotUpdateStatusWhenNoInProgressTransfersExist() {
+    void shouldNotUpdateStatusWhenNoInProgressTransfersExist() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
 
@@ -96,13 +96,11 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
 
         verify(ehrExtractStatusServiceSpy, never())
-            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(eq(List.of()),
-                                                                           eq(ERROR_CODE),
-                                                                           eq(ERROR_MESSAGE));
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(), ERROR_CODE, ERROR_MESSAGE);
     }
 
     @Test
-    public void whenEhrExtractStatusIsNullInterceptExceptionAndLogErrorMsg() {
+    void whenEhrExtractStatusIsNullInterceptExceptionAndLogErrorMsg() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         var inProgressConversationId = generateRandomUppercaseUUID();
@@ -155,6 +153,39 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
+    void shouldUpdateEhrExtractStatusWithAckInfoWhenExistingEhrExtractStatusReceivedAckIsNull() {
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        String conversationId = "11111";
+        Instant currentInstant = Instant.now();
+        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
+
+        Optional<EhrExtractStatus> ehrExtractStatusWithoutEhrReceivedAck
+            = Optional.of(EhrExtractStatus.builder()
+                              .updatedAt(eightDaysAgo)
+                              .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
+                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                         .taskId(generateRandomUppercaseUUID())
+                                                         .build())
+                              .ehrReceivedAcknowledgement(null)
+                              .build());
+
+        doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
+        doReturn(ehrExtractStatusWithoutEhrReceivedAck).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+        when(ack.getErrors()).thenReturn(null);
+        when(ack.getReceived()).thenReturn(currentInstant);
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+        doReturn(ehrExtractStatusWithoutEhrReceivedAck.get()).when(mongoTemplate).findAndModify(any(Query.class),
+                                                                                                any(UpdateDefinition.class),
+                                                                                                any(FindAndModifyOptions.class),
+                                                                                                any());
+
+        ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
+
+        verify(logger, times(1))
+            .info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+    }
+
+    @Test
     void shouldLogWarningWhenLateAcknowledgementReceivedAfter8DaysAndEhrReceivedAckHasErrors() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = "11111";
@@ -189,7 +220,7 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
-    void shouldNotLogWarningThatAckIsIgnoredWhenAcknowledgementReceivedIsNull() {
+    void shouldNotLogWarningThatAckIsIgnoredWhenAcknowledgementReceivedAfter8Days() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = "11111";
         Instant currentInstant = Instant.now();
