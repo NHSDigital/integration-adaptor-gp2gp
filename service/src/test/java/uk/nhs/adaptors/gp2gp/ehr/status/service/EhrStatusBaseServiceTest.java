@@ -10,6 +10,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus.SKELETON_MESSAGE
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.COMPLETE;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_INCUMBENT;
 import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.FAILED_NME;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.IN_PROGRESS;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -120,6 +121,17 @@ public class EhrStatusBaseServiceTest {
         MigrationStatus migrationStatus = ehrStatusBaseService.evaluateMigrationStatus(ehrExtractStatus, List.of());
 
         assertEquals(FAILED_INCUMBENT, migrationStatus);
+    }
+
+    @Test
+    void evaluateMigrationStatusResolvesToInProgress() {
+        var conversationId = generateRandomUppercaseUUID();
+        EhrExtractStatus ehrExtractStatus = inProgressTransfers(conversationId);
+        ehrExtractStatus.setEhrReceivedAcknowledgement(null);
+
+        MigrationStatus migrationStatus = ehrStatusBaseService.evaluateMigrationStatus(ehrExtractStatus, List.of());
+
+        assertEquals(IN_PROGRESS, migrationStatus);
     }
 
     @Test

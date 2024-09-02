@@ -480,9 +480,9 @@ public class EhrExtractStatusService {
         });
     }
 
-    public EhrExtractStatus updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
-                                                                          String errorCode,
-                                                                          String errorMessage) {
+    protected EhrExtractStatus updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
+                                                                            String errorCode,
+                                                                            String errorMessage) {
 
         Update update = createUpdateWithUpdatedAt();
         update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder().code(errorCode).display(errorMessage).build());
