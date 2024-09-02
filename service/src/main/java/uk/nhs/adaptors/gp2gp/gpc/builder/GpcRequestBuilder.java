@@ -10,6 +10,7 @@ import org.hl7.fhir.dstu3.model.Parameters;
 import org.hl7.fhir.dstu3.model.Parameters.ParametersParameterComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,8 +37,6 @@ import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 import java.util.Collections;
 
 import static java.lang.String.valueOf;
-import static org.apache.http.protocol.HTTP.CONTENT_LEN;
-import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -146,13 +145,13 @@ public class GpcRequestBuilder {
         return uri.accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
             .header(SSP_INTERACTION_ID, interactionId)
             .header(SSP_TRACE_ID, taskDefinition.getConversationId())
-            .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
+            .header(HttpHeaders.CONTENT_TYPE, FHIR_CONTENT_TYPE);
     }
 
     private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri, String requestBody,
         BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, TaskDefinition taskDefinition, String interactionId) {
         return buildRequestWithHeaders(uri, taskDefinition, interactionId)
             .body(bodyInserter)
-            .header(CONTENT_LEN, valueOf(requestBody.length()));
+            .header(HttpHeaders.CONTENT_LENGTH, valueOf(requestBody.length()));
     }
 }
