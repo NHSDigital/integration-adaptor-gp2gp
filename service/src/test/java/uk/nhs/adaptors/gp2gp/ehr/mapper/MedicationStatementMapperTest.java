@@ -1,6 +1,19 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import lombok.SneakyThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -18,24 +31,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
+
+import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 @ExtendWith(MockitoExtension.class)
 public class MedicationStatementMapperTest {
@@ -272,7 +274,7 @@ public class MedicationStatementMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileExpectException")
-    public void When_MappingMedicationRequestWithInvalidResource_Expect_Exception(String inputJson) {
+    public void When_MappingMedicationRequestWithInvalidResource_Expect_Exception(String inputJson) throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
 
@@ -298,7 +300,7 @@ public class MedicationStatementMapperTest {
     }
 
     @Test
-    public void When_MappingMedicationRequestWithRequesterWithOnBehalfOf_Expect_ParticipantMappedToAgent() {
+    public void When_MappingMedicationRequestWithRequesterWithOnBehalfOf_Expect_ParticipantMappedToAgent() throws IOException {
         when(mockRandomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         codeableConceptCdMapper = new CodeableConceptCdMapper();
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
@@ -346,9 +348,7 @@ public class MedicationStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFilesWithParticipant")
     public void When_MappingMedicationRequestWithParticipant_Expect_ParticipantMappedToAgent(
-        String inputJson,
-        String agentId
-    ) {
+        String inputJson, String agentId) throws IOException {
         when(mockRandomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         codeableConceptCdMapper = new CodeableConceptCdMapper();
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
@@ -395,7 +395,7 @@ public class MedicationStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFilesWithMedicationStatement")
     public void When_MappingMedicationRequest_WithMedicationStatement_Expect_PrescribingAgencyMappedToSupplyType(
-        String inputJson, String outputXml) {
+        String inputJson, String outputXml) throws IOException {
 
         var expected = ResourceTestFileUtils.getFileContent(outputXml);
 
@@ -484,6 +484,5 @@ public class MedicationStatementMapperTest {
         assertThat(diff.hasDifferences())
             .as("Xml is not equal: " + System.lineSeparator() + diff.fullDescription())
             .isFalse();
-
     }
 }
