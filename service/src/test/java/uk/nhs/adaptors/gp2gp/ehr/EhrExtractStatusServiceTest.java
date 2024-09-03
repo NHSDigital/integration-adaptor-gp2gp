@@ -81,9 +81,7 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
 
         verify(ehrExtractStatusServiceSpy, times(1))
-            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus),
-                                                                           ERROR_CODE,
-                                                                           ERROR_MESSAGE);
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE);
     }
 
     @Test
@@ -181,9 +179,9 @@ class EhrExtractStatusServiceTest {
             = Optional.of(EhrExtractStatus.builder()
                               .updatedAt(eightDaysAgo)
                               .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
-                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
-                                                         .taskId(generateRandomUppercaseUUID())
-                                                         .build())
+                                                                     .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                                     .taskId(generateRandomUppercaseUUID())
+                                                                     .build())
                               .ehrReceivedAcknowledgement(null)
                               .build());
 
@@ -214,15 +212,15 @@ class EhrExtractStatusServiceTest {
             = Optional.of(EhrExtractStatus.builder()
                               .updatedAt(eightDaysAgo)
                               .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
-                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
-                                                         .taskId(generateRandomUppercaseUUID())
-                                                         .build())
+                                                                     .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                                     .taskId(generateRandomUppercaseUUID())
+                                                                     .build())
                               .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of(
-                                  EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
-                                      .builder()
-                                      .code(ERROR_CODE)
-                                      .display(ERROR_MESSAGE)
-                                      .build())).build())
+                                                                      EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
+                                                                                      .builder()
+                                                                                      .code(ERROR_CODE)
+                                                                                      .display(ERROR_MESSAGE)
+                                                                                      .build())).build())
                               .build());
 
         doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
@@ -279,9 +277,9 @@ class EhrExtractStatusServiceTest {
             = Optional.of(EhrExtractStatus.builder()
                               .updatedAt(eightDaysAgo)
                               .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
-                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
-                                                         .taskId(generateRandomUppercaseUUID())
-                                                         .build())
+                                                                     .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                                     .taskId(generateRandomUppercaseUUID())
+                                                                     .build())
                               .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().build())
                               .build());
 
@@ -325,22 +323,22 @@ class EhrExtractStatusServiceTest {
             .conversationId(conversationId)
             .created(Instant.now().minus(Duration.ofDays(TWENTY_DAYS)))
             .ehrExtractCore(EhrExtractStatus.EhrExtractCore.builder()
-                                .sentAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
-                                .build())
+                                            .sentAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
+                                            .build())
             .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
-                                       .sentAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
-                                       .taskId(generateRandomUppercaseUUID())
-                                       .build())
+                                                   .sentAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
+                                                   .taskId(generateRandomUppercaseUUID())
+                                                   .build())
             .ehrExtractMessageId(generateRandomUppercaseUUID())
             .ehrRequest(buildEhrRequest())
             .gpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
                                    .documents(List.of())
                                    .build())
             .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
-                                     .accessedAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
-                                     .objectName(generateRandomUppercaseUUID() + ".json")
-                                     .taskId(generateRandomUppercaseUUID())
-                                     .build())
+                                                 .accessedAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
+                                                 .objectName(generateRandomUppercaseUUID() + ".json")
+                                                 .taskId(generateRandomUppercaseUUID())
+                                                 .build())
             .messageTimestamp(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
             .updatedAt(Instant.now().minus(Duration.ofDays(NINE_DAYS)))
             .build();

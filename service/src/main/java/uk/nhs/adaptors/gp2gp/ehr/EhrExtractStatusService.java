@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import com.mongodb.client.result.UpdateResult;
 
 import lombok.RequiredArgsConstructor;
@@ -42,6 +40,7 @@ import uk.nhs.adaptors.gp2gp.mhs.exception.UnrecognisedInteractionIdException;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrExtractStatusService {
+
     private static final String DOT = ".";
     private static final String ARRAY_REFERENCE = ".$.";
     private static final String CONVERSATION_ID = "conversationId";
