@@ -19,6 +19,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
+import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
@@ -31,13 +32,16 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.NOPAT_HL7_CONFIDENTIALITY_CODE;
+import static uk.nhs.adaptors.gp2gp.utils.XmlAssertion.assertThatXml;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class ImmunizationObservationStatementMapperTest {
     private static final String TEST_ID = "test-id";
-
     private static final String IMMUNIZATION_FILE_LOCATIONS = "/ehr/mapper/immunization/";
+    private static final String OBSERVATION_STATEMENT_CONFIDENTIALITY_CODE_XPATH =
+        "/component/ObservationStatement/" + ConfidentialityCodeUtility.getNopatConfidentialityCodeXpathSegment();
+
     private static final String INPUT_JSON_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-all-pertinent-information.json";
     private static final String INPUT_JSON_WITHOUT_REQUIRED_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -263,8 +267,8 @@ public class ImmunizationObservationStatementMapperTest {
             false
         );
 
-        assertThat(actualMessage)
-            .contains(NOPAT_HL7_CONFIDENTIALITY_CODE);
+        assertThatXml(actualMessage)
+            .containsXPath(OBSERVATION_STATEMENT_CONFIDENTIALITY_CODE_XPATH);
     }
 
     @Test
@@ -279,7 +283,7 @@ public class ImmunizationObservationStatementMapperTest {
             false
         );
 
-        assertThat(actualMessage)
-            .doesNotContain(NOPAT_HL7_CONFIDENTIALITY_CODE);
+        assertThatXml(actualMessage)
+            .doesNotContainXPath(OBSERVATION_STATEMENT_CONFIDENTIALITY_CODE_XPATH);
     }
 }
