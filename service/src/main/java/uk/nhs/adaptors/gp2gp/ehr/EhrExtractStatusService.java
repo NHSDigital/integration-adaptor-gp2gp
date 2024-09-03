@@ -677,6 +677,11 @@ public class EhrExtractStatusService {
     private boolean hasAcknowledgementExceededEightDays(String conversationId, Instant ackReceivedTimestamp) {
         var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "ACK");
 
+
+        if (ehrExtractStatus.getEhrExtractCorePending() == null) {
+            return false;
+        }
+
         Duration duration = Duration.between(ehrExtractStatus.getEhrExtractCorePending().getSentAt(), ackReceivedTimestamp);
         long daysSinceLastUpdate = duration.toDays();
 

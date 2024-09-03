@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static uk.nhs.adaptors.gp2gp.common.ResourceReader.asString;
 
 import java.util.Optional;
@@ -29,6 +30,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @SpringBootTest
 @DirtiesContext
 public class EhrAcknowledgementTest {
+
     private static final String ROOT_ID = "75049C80-5271-11EA-9384-E83935108FD5";
     private static final String MESSAGE_REF = "BA229526-ADC6-4F1D-970E-CD9E78A6830E";
     private static final String BUSINESS_ERROR_CODE = "99";
@@ -62,7 +64,7 @@ public class EhrAcknowledgementTest {
                 () -> assertThat(ack.getReceived()).isEqualTo(ack.getConversationClosed()),
                 () -> assertThat(ack.getMessageRef()).isEqualTo(MESSAGE_REF),
                 () -> assertThat(ack.getRootId()).isEqualTo(ROOT_ID),
-                () -> assertThat(ack.getErrors()).isNull()
+                () -> assertNull(ack.getErrors())
             ));
     }
 
