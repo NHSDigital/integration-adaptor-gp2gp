@@ -31,6 +31,7 @@ import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestStatus;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 
 import com.github.mustachejava.Mustache;
 
@@ -75,12 +76,15 @@ public class MedicationStatementMapper {
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final ConfidentialityService confidentialityService;
 
     public String mapMedicationRequestToMedicationStatement(MedicationRequest medicationRequest) {
         var medicationStatementId = messageContext.getIdMapper().getOrNew(ResourceType.MedicationRequest, medicationRequest.getIdElement());
         var statusCode = buildStatusCode(medicationRequest);
         var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForMedicationRequest(medicationRequest);
         var availabilityTime = StatementTimeMappingUtils.prepareAvailabilityTimeForMedicationRequest(medicationRequest);
+        var confidentialityCode = confidentialityService.generateConfidentialityCode(medicationRequest)
+            .orElse(null);
         var medicationReferenceCode = buildMedicationReferenceCode(medicationRequest);
         var ehrSupplyId = messageContext.getMedicationRequestIdMapper().getOrNew(medicationRequest.getId());
         var medicationStatementPertinentInformation = buildDosageInstructionPertinentInformation(medicationRequest);
@@ -102,6 +106,7 @@ public class MedicationStatementMapper {
             .statusCode(statusCode)
             .effectiveTime(effectiveTime)
             .availabilityTime(availabilityTime)
+            .confidentialityCode(confidentialityCode)
             .medicationReferenceCode(medicationReferenceCode)
             .ehrSupplyId(ehrSupplyId)
             .medicationStatementPertinentInformation(medicationStatementPertinentInformation)

@@ -11,6 +11,7 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -24,6 +25,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -31,6 +33,7 @@ import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import lombok.SneakyThrows;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -155,6 +158,12 @@ public class MedicationStatementMapperTest {
         + "medication-request-empty-prescribing-agency-coding-array.json";
     private static final String INPUT_JSON_WITH_PRESCRIBING_AGENCY_ERROR_MISSING_CODEABLE_CONCEPT = TEST_FILE_DIRECTORY
         + "medication-request-missing-prescribing-agency-codeable-concept.json";
+    private static final String CONFIDENTIALITY_CODE = """
+        <confidentialityCode
+            code="NOPAT"
+            codeSystem="2.16.840.1.113883.4.642.3.47"
+            displayName="no disclosure to patient, family or caregivers without attending provider's authorization"
+        />""";
 
     private static final String PRACTITIONER_RESOURCE_1 = "Practitioner/1";
     private static final String PRACTITIONER_RESOURCE_2 = "Practitioner/2";
@@ -162,6 +171,9 @@ public class MedicationStatementMapperTest {
 
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
+
+    @Mock
+    private ConfidentialityService confidentialityService;
 
     private MessageContext messageContext;
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -180,8 +192,13 @@ public class MedicationStatementMapperTest {
         messageContext.initialize(bundle);
         messageContext.getAgentDirectory().getAgentId(new Reference(buildIdType(ResourceType.Practitioner, "1")));
         messageContext.getAgentDirectory().getAgentId(new Reference(buildIdType(ResourceType.Organization, "2")));
-        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
-            new ParticipantMapper(), mockRandomIdGeneratorService);
+        medicationStatementMapper = new MedicationStatementMapper(
+            messageContext,
+            codeableConceptCdMapper,
+            new ParticipantMapper(),
+            mockRandomIdGeneratorService,
+            confidentialityService
+        );
     }
 
     @AfterEach
@@ -261,10 +278,6 @@ public class MedicationStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
 
-        RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
-        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
-            new ParticipantMapper(), randomIdGeneratorService);
-
         assertThrows(EhrMapperException.class, ()
             -> medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest));
     }
@@ -303,8 +316,13 @@ public class MedicationStatementMapperTest {
         when(messageContextMock.getMedicationRequestIdMapper()).thenReturn(medicationRequestIdMapper);
         when(messageContextMock.getAgentDirectory()).thenReturn(agentDirectoryMock);
 
-        medicationStatementMapper = new MedicationStatementMapper(messageContextMock, codeableConceptCdMapper,
-            new ParticipantMapper(), mockRandomIdGeneratorService);
+        medicationStatementMapper = new MedicationStatementMapper(
+            messageContextMock,
+            codeableConceptCdMapper,
+            new ParticipantMapper(),
+            mockRandomIdGeneratorService,
+            confidentialityService
+        );
 
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_REQUESTER_ON_BEHALF_OF);
         MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
@@ -346,8 +364,13 @@ public class MedicationStatementMapperTest {
         when(messageContextMock.getMedicationRequestIdMapper()).thenReturn(medicationRequestIdMapper);
         when(messageContextMock.getAgentDirectory()).thenReturn(agentDirectoryMock);
 
-        medicationStatementMapper = new MedicationStatementMapper(messageContextMock, codeableConceptCdMapper,
-            new ParticipantMapper(), mockRandomIdGeneratorService);
+        medicationStatementMapper = new MedicationStatementMapper(
+            messageContextMock,
+            codeableConceptCdMapper,
+            new ParticipantMapper(),
+            mockRandomIdGeneratorService,
+            confidentialityService
+        );
 
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
@@ -392,15 +415,63 @@ public class MedicationStatementMapperTest {
         when(messageContextMock.getMedicationRequestIdMapper()).thenReturn(medicationRequestIdMapper);
         when(messageContextMock.getAgentDirectory()).thenReturn(agentDirectoryMock);
 
-        medicationStatementMapper = new MedicationStatementMapper(messageContextMock, codeableConceptCdMapper,
-            new ParticipantMapper(), mockRandomIdGeneratorService);
+        medicationStatementMapper = new MedicationStatementMapper(
+            messageContextMock,
+            codeableConceptCdMapper,
+            new ParticipantMapper(),
+            mockRandomIdGeneratorService,
+            confidentialityService
+        );
 
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
         var outputString = medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
 
         assertXmlIsEqual(outputString, expected);
+    }
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+        INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS,
+        INPUT_JSON_WITH_ORDER_NO_OPTIONAL_FIELDS
+    })
+    public void When_ConfidentialityServiceReturnsConfidentialityCode_Expect_MessageContainsConfidentialityCode(
+        String inputJson
+    ) {
+        final var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
+        final var parsedMedicationRequest = new FhirParseService()
+            .parseResource(jsonInput, MedicationRequest.class);
+        when(confidentialityService.generateConfidentialityCode(parsedMedicationRequest))
+            .thenReturn(Optional.of(CONFIDENTIALITY_CODE));
+
+        final var actualMessage = medicationStatementMapper.mapMedicationRequestToMedicationStatement(
+            parsedMedicationRequest
+        );
+
+        assertThat(actualMessage)
+            .contains(CONFIDENTIALITY_CODE);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+        INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS,
+        INPUT_JSON_WITH_ORDER_NO_OPTIONAL_FIELDS
+    })
+    public void When_ConfidentialityServiceReturnsEmptyOptional_Expect_MessageDoesNotContainConfidentialityCode(
+        String inputJson
+    ) {
+        final var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
+        final var parsedMedicationRequest = new FhirParseService()
+            .parseResource(jsonInput, MedicationRequest.class);
+        when(confidentialityService.generateConfidentialityCode(parsedMedicationRequest))
+            .thenReturn(Optional.empty());
+
+        final var actualMessage = medicationStatementMapper.mapMedicationRequestToMedicationStatement(
+            parsedMedicationRequest
+        );
+
+        assertThat(actualMessage)
+            .doesNotContain(CONFIDENTIALITY_CODE);
     }
 
     private void assertXmlIsEqual(String outputString, String expected) {
@@ -413,6 +484,5 @@ public class MedicationStatementMapperTest {
         assertThat(diff.hasDifferences())
             .as("Xml is not equal: " + System.lineSeparator() + diff.fullDescription())
             .isFalse();
-
     }
 }

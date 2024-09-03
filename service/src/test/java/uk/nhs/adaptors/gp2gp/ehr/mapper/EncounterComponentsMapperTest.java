@@ -150,8 +150,13 @@ public class EncounterComponentsMapperTest {
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
             = new DocumentReferenceToNarrativeStatementMapper(
                 messageContext, new SupportedContentTypes(), timestampService, participantMapper);
-        MedicationStatementMapper medicationStatementMapper
-            = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
+        MedicationStatementMapper medicationStatementMapper = new MedicationStatementMapper(
+            messageContext,
+            codeableConceptCdMapper,
+            participantMapper,
+            randomIdGeneratorService,
+            confidentialityService
+        );
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
         SpecimenMapper specimenMapper = getSpecimenMapper(structuredObservationValueMapper, participantMapper);
