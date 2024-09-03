@@ -22,6 +22,9 @@ will contain a `NOPAT` `confidentialityCode` element.
 resource will contain a `NOPAT` `confidentialityCode` element.
 * When mapping a `MedicationRequest (ORDER)` which contains a `NOPAT` `meta.security` tag the resultant XML for that
 resource will contain a `NOPAT` `confidentialityCode` element.
+* * When mapping `Immunizations` which contain a `NOPAT` `meta.security` tag, the resultant XML for that resource
+    will contain a `NOPAT` `confidentialityCode` element.
+
 ## [2.0.6] - 2024-07-29
 
 ### Added
