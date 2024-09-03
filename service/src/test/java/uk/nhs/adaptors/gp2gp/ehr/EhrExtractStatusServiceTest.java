@@ -166,7 +166,8 @@ class EhrExtractStatusServiceTest {
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
-        verify(logger, times(1)).warn("Received an ACK message with a conversation_id=11111 that is a duplicate");
+        verify(logger, times(1))
+                .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     @Test
@@ -199,7 +200,7 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(logger, times(1))
-            .info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+            .info("Database successfully updated with EHRAcknowledgement, conversation_id: {}", conversationId);
     }
 
     @Test
@@ -233,13 +234,13 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id: 11111, but it will be ignored.");
+            .warn("Received an ACK message with a conversation_id: {}, but it will be ignored.", conversationId);
     }
 
     @Test
     void shouldIgnore8DaysLimitWhenExtractCorePendingIsNull() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        String conversationId = "11111";
+        String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
 
@@ -264,7 +265,7 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id=11111 that is a duplicate");
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     @Test
@@ -292,7 +293,8 @@ class EhrExtractStatusServiceTest {
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
-        verify(logger, times(1)).warn("Received an ACK message with a conversation_id=11111 that is a duplicate");
+        verify(logger, times(1))
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     @Test

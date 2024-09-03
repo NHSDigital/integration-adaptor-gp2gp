@@ -53,6 +53,7 @@ public class EhrExtractStatusServiceIT {
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     private static final int DEFAULT_CONTENT_LENGTH = 244;
     private static final String CONTENT_TYPE_MSWORD = "application/msword";
+    public static final String JSON_SUFFIX = ".json";
 
     @Autowired
     private EhrExtractStatusService ehrExtractStatusService;
@@ -124,7 +125,7 @@ public class EhrExtractStatusServiceIT {
     public void When_FetchDocumentObjectNameAndSize_With_InvalidConversation_Expect_EmptyMap() {
         final var fakeConversationId = generateRandomUppercaseUUID();
 
-        assertThat(ehrExtractStatusService.fetchDocumentObjectNameAndSize(fakeConversationId)).isEqualTo(Collections.EMPTY_MAP);
+        assertThat(ehrExtractStatusService.fetchDocumentObjectNameAndSize(fakeConversationId)).isEqualTo(Collections.emptyMap());
     }
 
     @Test
@@ -455,7 +456,7 @@ public class EhrExtractStatusServiceIT {
                         .build())
                 .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
                         .accessedAt(FIVE_DAYS_AGO)
-                        .objectName(generateRandomUppercaseUUID() + ".json")
+                        .objectName(generateRandomUppercaseUUID() + JSON_SUFFIX)
                         .taskId(generateRandomUppercaseUUID())
                         .build())
                 .messageTimestamp(FIVE_DAYS_AGO)

@@ -321,18 +321,18 @@ public class EhrExtractStatusService {
     public void updateEhrExtractStatusAck(String conversationId, EhrReceivedAcknowledgement ack) {
 
         if (ack.getErrors() == null && !isEhrStatusWaitingForFinalAck(conversationId)) {
-            logger().warn("Received unexpected acknowledgement of EHR Extract with conversation id=" + conversationId);
+            logger().warn("Received unexpected acknowledgement of EHR Extract with conversation_id: {}", conversationId);
             return;
         }
 
         if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())
             && hasEhrStatusReceivedAckWithErrors(conversationId)) {
-            logger().warn("Received an ACK message with a conversation_id: " + conversationId + ", but it will be ignored.");
+            logger().warn("Received an ACK message with a conversation_id: {}, but it will be ignored.", conversationId);
             return;
         }
 
         if (hasFinalAckBeenReceived(conversationId)) {
-            logger().warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            logger().warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
             return;
         }
 
@@ -363,7 +363,7 @@ public class EhrExtractStatusService {
                 + "' that is not recognised");
         }
 
-        logger().info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+        logger().info("Database successfully updated with EHRAcknowledgement, conversation_id: {}", conversationId);
     }
 
     private boolean hasEhrStatusReceivedAckWithErrors(String conversationId) {
@@ -563,13 +563,13 @@ public class EhrExtractStatusService {
         var failedNme = new Criteria();
         failedNme.andOperator(
             Criteria.where("ackPending.typeCode").is("AE"),
-            Criteria.where("error").exists(true));
+            Criteria.where(ERROR).exists(true));
 
         var complete = new Criteria();
         complete.andOperator(
             Criteria.where("ackPending.typeCode").is("AA"),
             Criteria.where("ackToRequester.typeCode").is("AA"),
-            Criteria.where("error").exists(false),
+            Criteria.where(ERROR).exists(false),
             Criteria.where("ehrReceivedAcknowledgement.conversationClosed").exists(true),
             Criteria.where("ehrReceivedAcknowledgement.errors").exists(false)
         );
@@ -709,8 +709,7 @@ public class EhrExtractStatusService {
         }
 
         if (ehrExtractStatus.getEhrContinue() != null) {
-            logger().warn("Received a Continue message with a conversation_id '" + conversationId
-                + "' that is duplicate");
+            logger().warn("Received a Continue message with a conversation_id: {} that is duplicate", conversationId);
             return true;
         }
 

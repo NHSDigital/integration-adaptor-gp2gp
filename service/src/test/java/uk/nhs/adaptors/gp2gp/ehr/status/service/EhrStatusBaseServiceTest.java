@@ -82,35 +82,35 @@ public class EhrStatusBaseServiceTest {
     private EhrStatusBaseService ehrStatusBaseService;
 
     @Test
-    public void When_GetFileStatus_WithSkeleton_Expect_SkeletonStatus() {
+    void When_GetFileStatus_WithSkeleton_Expect_SkeletonStatus() {
         FileStatus fileStatus = ehrStatusBaseService.getFileStatus(SKELETON_DOCUMENT, List.of());
 
         assertThat(fileStatus).isEqualTo(SKELETON_MESSAGE);
     }
 
     @Test
-    public void When_GetFileStatus_WithAbsentAttachmentInFilename_Expect_PlaceholderStatus() {
+    void When_GetFileStatus_WithAbsentAttachmentInFilename_Expect_PlaceholderStatus() {
         FileStatus fileStatus = ehrStatusBaseService.getFileStatus(PLACEHOLDER_DOCUMENT_1, List.of());
 
         assertThat(fileStatus).isEqualTo(PLACEHOLDER);
     }
 
     @Test
-    public void When_GetFileStatus_WithAbsentAttachmentInObjectName_Expect_PlaceholderStatus() {
+    void When_GetFileStatus_WithAbsentAttachmentInObjectName_Expect_PlaceholderStatus() {
         FileStatus fileStatus = ehrStatusBaseService.getFileStatus(PLACEHOLDER_DOCUMENT_2, List.of());
 
         assertThat(fileStatus).isEqualTo(PLACEHOLDER);
     }
 
     @Test
-    public void When_GetFileStatus_WithNoErrorOrPlaceholder_Expect_OriginalFileStatus() {
+    void When_GetFileStatus_WithNoErrorOrPlaceholder_Expect_OriginalFileStatus() {
         FileStatus fileStatus = ehrStatusBaseService.getFileStatus(ORIGINAL_FILE_DOCUMENT, List.of());
 
         assertThat(fileStatus).isEqualTo(ORIGINAL_FILE);
     }
 
     @Test
-    public void When_GetFileStatus_WithNACK_Expect_ErrorStatus() {
+    void When_GetFileStatus_WithNACK_Expect_ErrorStatus() {
         FileStatus fileStatus = ehrStatusBaseService.getFileStatus(ORIGINAL_FILE_DOCUMENT, ONE_FAILED_ACK_LIST);
 
         assertThat(fileStatus).isEqualTo(ERROR);
