@@ -30,6 +30,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
+import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.NOPAT_HL7_CONFIDENTIALITY_CODE;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -149,12 +150,6 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-all-multiple-practitioners.xml";
     private static final String OUTPUT_XML_WITH_MULTIPLE_PRACTITIONERS_NO_AP_ROLE = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-all-multiple-practitioners-no-AP-role.xml";
-    private static final String CONFIDENTIALITY_CODE = """
-        <confidentialityCode
-            code="NOPAT"
-            codeSystem="2.16.840.1.113883.4.642.3.47"
-            displayName="no disclosure to patient, family or caregivers without attending provider's authorization"
-        />""";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -170,7 +165,7 @@ public class ImmunizationObservationStatementMapperTest {
     private FhirParseService fhirParseService;
 
     @BeforeEach
-    public void setUp() throws IOException {
+    void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(TEST_ID);
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
@@ -189,13 +184,13 @@ public class ImmunizationObservationStatementMapperTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         messageContext.resetMessageContext();
     }
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")
-    public void When_MappingImmunizationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml,
+    void When_MappingImmunizationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml,
                                                                                   boolean isNested) {
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
@@ -247,7 +242,7 @@ public class ImmunizationObservationStatementMapperTest {
     }
 
     @Test
-    public void When_MappingImmunizationWithInvalidPractitionerReferenceType_Expect_Error() {
+    void When_MappingImmunizationWithInvalidPractitionerReferenceType_Expect_Error() {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PRACTITIONER_INVALID_REFERENCE_RESOURCE_TYPE);
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
 
@@ -257,11 +252,11 @@ public class ImmunizationObservationStatementMapperTest {
     }
 
     @Test
-    public void When_ConfidentialityServiceReturnsConfidentialityCode_Expect_MessageContainsConfidentialityCode() {
+    void When_ConfidentialityServiceReturnsConfidentialityCode_Expect_MessageContainsConfidentialityCode() {
         final var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
         final var parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
         when(confidentialityService.generateConfidentialityCode(parsedImmunization))
-            .thenReturn(Optional.of(CONFIDENTIALITY_CODE));
+            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
 
         final var actualMessage = observationStatementMapper.mapImmunizationToObservationStatement(
             parsedImmunization,
@@ -269,11 +264,11 @@ public class ImmunizationObservationStatementMapperTest {
         );
 
         assertThat(actualMessage)
-            .contains(CONFIDENTIALITY_CODE);
+            .contains(NOPAT_HL7_CONFIDENTIALITY_CODE);
     }
 
     @Test
-    public void When_ConfidentialityServiceReturnsEmptyOptional_Expect_MessageDoesNotContainConfidentialityCode() {
+    void When_ConfidentialityServiceReturnsEmptyOptional_Expect_MessageDoesNotContainConfidentialityCode() {
         final var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
         final var parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
         when(confidentialityService.generateConfidentialityCode(parsedImmunization))
@@ -285,6 +280,6 @@ public class ImmunizationObservationStatementMapperTest {
         );
 
         assertThat(actualMessage)
-            .doesNotContain(CONFIDENTIALITY_CODE);
+            .doesNotContain(NOPAT_HL7_CONFIDENTIALITY_CODE);
     }
 }
