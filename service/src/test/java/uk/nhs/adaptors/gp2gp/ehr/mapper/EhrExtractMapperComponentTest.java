@@ -169,7 +169,12 @@ public class EhrExtractMapperComponentTest {
                 messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper, confidentialityService),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             documentReferenceToNarrativeStatementMapper,
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new ImmunizationObservationStatementMapper(
+                messageContext,
+                codeableConceptCdMapper,
+                participantMapper,
+                confidentialityService
+            ),
             new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(

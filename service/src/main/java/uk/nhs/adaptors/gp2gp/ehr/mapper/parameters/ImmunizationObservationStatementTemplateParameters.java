@@ -11,6 +11,7 @@ public class ImmunizationObservationStatementTemplateParameters {
     private boolean isNested;
     private String observationStatementId;
     private String availabilityTime;
+    private String confidentialityCode;
     private String effectiveTime;
     private String pertinentInformation;
     private String code;
