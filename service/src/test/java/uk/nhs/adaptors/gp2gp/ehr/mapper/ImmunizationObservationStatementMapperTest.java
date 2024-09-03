@@ -241,7 +241,7 @@ public class ImmunizationObservationStatementMapperTest {
         );
     }
 
-    @Test
+    @Test()
     void When_MappingImmunizationWithInvalidPractitionerReferenceType_Expect_Error() {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PRACTITIONER_INVALID_REFERENCE_RESOURCE_TYPE);
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
@@ -252,7 +252,7 @@ public class ImmunizationObservationStatementMapperTest {
     }
 
     @Test
-    void When_ConfidentialityServiceReturnsConfidentialityCode_Expect_MessageContainsConfidentialityCode() {
+    void When_MappingImmunizationWithoutNopatMetaSecurity_Expect_MessageContainsConfidentialityCode() {
         final var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
         final var parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
         when(confidentialityService.generateConfidentialityCode(parsedImmunization))
@@ -268,7 +268,7 @@ public class ImmunizationObservationStatementMapperTest {
     }
 
     @Test
-    void When_ConfidentialityServiceReturnsEmptyOptional_Expect_MessageDoesNotContainConfidentialityCode() {
+    void When_MappingImmunizationWithoutNoNopatMetaSecurity_Expect_MessageDoesNotContainConfidentialityCode() {
         final var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
         final var parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
         when(confidentialityService.generateConfidentialityCode(parsedImmunization))
