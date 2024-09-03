@@ -100,6 +100,23 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
+    void shouldNotUpdateStatusWhenInProgressTransfersWithNullEhrExtractCorePendingExist() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var inProgressConversationId = generateRandomUppercaseUUID();
+
+        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
+        ehrExtractStatus.setEhrExtractCorePending(null);
+
+        doReturn(List.of(ehrExtractStatus)).when(ehrExtractStatusServiceSpy).findInProgressTransfers();
+
+        ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
+
+        verify(ehrExtractStatusServiceSpy, never())
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(), ERROR_CODE, ERROR_MESSAGE);
+    }
+
+    @Test
     void whenEhrExtractStatusIsNullInterceptExceptionAndLogErrorMsg() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
@@ -217,6 +234,37 @@ class EhrExtractStatusServiceTest {
 
         verify(logger, times(1))
             .warn("Received an ACK message with a conversation_id: 11111, but it will be ignored.");
+    }
+
+    @Test
+    void shouldIgnore8DaysLimitWhenExtractCorePendingIsNull() {
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        String conversationId = "11111";
+        Instant currentInstant = Instant.now();
+        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
+
+        Optional<EhrExtractStatus> ehrExtractStatusWithEhrReceivedAckWithErrors
+            = Optional.of(EhrExtractStatus.builder()
+                              .updatedAt(eightDaysAgo)
+                              .ehrExtractCorePending(null)
+                              .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of(
+                                  EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
+                                      .builder()
+                                      .code(ERROR_CODE)
+                                      .display(ERROR_MESSAGE)
+                                      .build())).build())
+                              .build());
+
+        doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
+        doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+        when(ack.getErrors()).thenReturn(null);
+        when(ack.getReceived()).thenReturn(currentInstant);
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
+
+        verify(logger, times(1))
+            .warn("Received an ACK message with a conversation_id=11111 that is a duplicate");
     }
 
     @Test

@@ -40,6 +40,7 @@ public class EhrStatusBaseServiceTest {
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     public static final int NINE_DAYS = 9;
     public static final String DISPLAY_ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
+    public static final String ERROR_CODE = "99";
 
     private static final EhrExtractStatus.GpcDocument SKELETON_DOCUMENT = EhrExtractStatus.GpcDocument.builder()
         .isSkeleton(true)
@@ -72,11 +73,11 @@ public class EhrStatusBaseServiceTest {
                 .display("Test Error")
                 .build()))
             .build()
-                                                                                                        );
-    public static final String ERROR_CODE = "99";
+    );
 
     @Mock
     private EhrExtractStatusRepository extractStatusRepository;
+
     @InjectMocks
     private EhrStatusBaseService ehrStatusBaseService;
 
