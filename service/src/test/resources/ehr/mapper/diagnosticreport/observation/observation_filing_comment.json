@@ -1,6 +1,6 @@
 {
   "resourceType": "Observation",
-  "id": "42A5C03B-13BB-41E9-873E-9CF3DA2DE04E-COMM",
+  "id": "B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST2",
   "meta": {
     "profile": [
       "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
@@ -9,7 +9,7 @@
   "identifier": [
     {
       "system": "https://EMISWeb/A82038",
-      "value": "E42C3D8C36174C8B88CC65AA70E09C6242A5C03B13BB41E9873E9CF3DA2DE04ECOMM"
+      "value": "B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST2"
     }
   ],
   "status": "unknown",
@@ -25,12 +25,20 @@
   "subject": {
     "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
   },
-  "effectiveDateTime": "2010-06-24T12:41:27.053+01:00",
-  "issued": "2010-06-24T12:41:27.053+01:00",
-  "comment": "This is a test of the NOPAT filing comment behaviour.",
+  "effectiveDateTime": "2020-12-15T15:17:04.917+00:00",
+  "issued": "2020-12-15T15:17:04.917+00:00",
   "performer": [
     {
       "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+    }
+  ],
+  "comment": "TEST COMMENT 2",
+  "related": [
+    {
+      "type": "derived-from",
+      "target": {
+        "reference": "Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2"
+      }
     }
   ]
 }
