@@ -168,27 +168,24 @@ class DiagnosticReportMapperTest {
         }
 
         @Test
-        void When_DiagnosticReport_With_TwoRedactedComments_Expect_ConfidentialityCodePresentWithinTwoNarrativeStatements() {
-            final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson("diagnostic-report-with-multi-results.json");
+        void When_DiagnosticReport_With_RedactedFilingComment_Expect_ConfidentialityCodePresentWithinUserCommentNarrativeStatement() {
+            final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson("diagnostic-report-with-one-result.json");
             final Bundle bundle = getBundleResourceFromJson("fhir_bundle_redacted_filing_comments.json");
 
+
+            when(confidentialityService.generateConfidentialityCode(bundle.getEntry().getFirst().getResource()))
+                .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
             when(messageContext.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
+
+            // The presence of a status withing DiagnosticReport
+            // generates an additional NarrativeStatement.
+            diagnosticReport.setStatus(null);
 
             final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
             assertAll(
-                () -> assertThat(actualXml).containsIgnoringCase(NOPAT_HL7_CONFIDENTIALITY_CODE)
+                () -> assertThat(actualXml).containsIgnoringWhitespaces(NOPAT_HL7_CONFIDENTIALITY_CODE)
             );
-        }
-
-        @Test
-        void When_DiagnosticReport_With_EffectiveDateTimeTypeAndRedactedCommentNote_Expect_NarrativeStatementWithConfidentialityCode() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Test
-        void When_DiagnosticReport_With_EffectivePeriodAndRedactedCommentNote_Expect_NarrativeStatementWithConfidentialityCode() {
-            throw new UnsupportedOperationException();
         }
     }
 
