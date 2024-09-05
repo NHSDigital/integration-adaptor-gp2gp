@@ -1,0 +1,21 @@
+on: 
+  push:
+    branches:
+      - MartinWheelerMT-patch-1
+env:
+  AWS_REGION : "eu-west"
+permissions: 
+  id-token: write
+  contents: read
+jobs:
+  S3Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::067756640211:role/openid-github-actions-role
+          role-session-name: samplerolesession
+          aws-region: {{ env.AWS-REGION }} 
+      - name: List S3 Buckets
+      run: | aws s3 ls
