@@ -16,6 +16,6 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::067756640211:role/openid-github-actions-role
           role-session-name: samplerolesession
-          aws-region: {{ env.AWS-REGION }} 
+          aws-region: "eu-west"
       - name: List S3 Buckets
-      run: | aws s3 ls
+        run: aws s3 ls
