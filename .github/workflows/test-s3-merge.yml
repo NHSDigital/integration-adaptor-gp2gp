@@ -1,3 +1,4 @@
+name: Connect to AWS and list buckets
 on: 
   push:
     branches:
