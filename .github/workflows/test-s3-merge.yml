@@ -3,7 +3,7 @@ on:
     branches:
       - MartinWheelerMT-patch-1
 env:
-  AWS_REGION : "eu-west"
+  AWS_REGION : "eu-west-1"
 permissions: 
   id-token: write
   contents: read
@@ -16,6 +16,6 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::067756640211:role/openid-github-actions-role
           role-session-name: samplerolesession
-          aws-region: "eu-west"
+          aws-region: "eu-west-1"
       - name: List S3 Buckets
         run: aws s3 ls
