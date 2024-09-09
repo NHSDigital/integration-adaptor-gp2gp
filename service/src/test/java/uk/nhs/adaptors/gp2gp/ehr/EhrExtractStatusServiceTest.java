@@ -364,13 +364,13 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
-    void receiveUnrecognisedInteractionIdExceptionWhenAcknowledgementReceivedAfter8DaysAndEhrExtractStatusIsNull() {
+    void receiveUnrecognisedInteractionIdExceptionWhenAcknowledgementReceivedAfter8DaysAndEhrExtractStatusIsEmpty() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
 
         doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
-        doReturn(null).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+        doReturn(Optional.empty()).when(ehrExtractStatusRepository).findByConversationId(conversationId);
         when(ack.getErrors()).thenReturn(null);
         when(ack.getReceived()).thenReturn(currentInstant);
 

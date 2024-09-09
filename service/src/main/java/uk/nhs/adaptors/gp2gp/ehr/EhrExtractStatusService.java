@@ -711,8 +711,8 @@ public class EhrExtractStatusService {
     }
 
     private EhrExtractStatus fetchEhrExtractStatus(String conversationId, String messageType) {
-        return Optional.ofNullable(ehrExtractStatusRepository.findByConversationId(conversationId))
-            .orElseThrow(() -> new UnrecognisedInteractionIdException(messageType, conversationId)).get();
+        return ehrExtractStatusRepository.findByConversationId(conversationId)
+            .orElseThrow(() -> new UnrecognisedInteractionIdException(messageType, conversationId));
     }
 
     protected Logger logger() {
