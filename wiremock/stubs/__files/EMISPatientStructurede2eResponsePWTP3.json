@@ -928,6 +928,7 @@
                         "value": "{{jsonPath request.body '$.parameter[0].valueIdentifier.value'}}"
                     }
                 ],
+                {{^patient}}
                 "name": [
                     {
                         "use": "official",
@@ -954,6 +955,35 @@
                         "postalCode": "DN33 2HR"
                     }
                 ],
+                {{/patient}}
+                {{#patient}}
+                "name": [
+                  {
+                    "use": "official",
+                    "text": "{{patient.name.0.given.0}} {{patient.name.0.family}}",
+                    "family": "{{patient.name.0.family}}",
+                    "given": [
+                      "{{patient.name.0.given.0}}"
+                    ],
+                    "prefix": [
+                      "{{patient.name.0.prefix.0}}"
+                    ]
+                  }
+                ],
+                "gender": "{{ patient.gender }}",
+                "birthDate": "{{ patient.birthDate }}",
+                "address": [
+                  {
+                    "use": "home",
+                    "type": "physical",
+                    "line": [
+                      "{{ patient.address.0.line.0 }}",
+                      "{{ patient.address.0.line.1 }}"
+                    ],
+                    "postalCode": "{{ patient.address.0.postalCode }}"
+                  }
+                ],
+                {{/patient}}
                 "generalPractitioner": [
                     {
                         "reference": "Practitioner/2DB481A3-306A-4133-9491-1558161D6A2B"
@@ -3078,7 +3108,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
-                    ]
+                    ],
+                    "security": [{
+                      "system":"http://hl7.org/fhir/v3/ActCode",
+                      "code":"NOPAT",
+                      "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension": [
                     {
@@ -4091,7 +4126,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension": [
                     {
@@ -4175,7 +4215,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension": [
                     {
@@ -4249,7 +4294,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension": [
                     {
@@ -4318,7 +4368,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension": [
                     {
@@ -4934,7 +4989,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension": [
                     {
@@ -5158,7 +5218,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension": [
                     {
@@ -5528,7 +5593,12 @@
                 "meta": {
                     "profile": [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension": [
                     {
