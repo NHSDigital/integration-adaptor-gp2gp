@@ -365,13 +365,9 @@ public class EhrExtractStatusService {
         logger().info("Database successfully updated with EHRAcknowledgement, conversation_id: {}", conversationId);
     }
 
-    private boolean hasEhrStatusReceivedAckWithErrors(String conversationId) {
+    boolean hasEhrStatusReceivedAckWithErrors(String conversationId) {
 
         var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "NACK");
-
-        if (ehrExtractStatus == null) {
-            return false;
-        }
 
         var ehrReceivedAcknowledgement = ehrExtractStatus.getEhrReceivedAcknowledgement();
         if (ehrReceivedAcknowledgement == null) {

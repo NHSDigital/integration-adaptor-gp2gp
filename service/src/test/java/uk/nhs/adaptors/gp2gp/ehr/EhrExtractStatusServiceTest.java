@@ -28,6 +28,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -71,6 +72,66 @@ class EhrExtractStatusServiceTest {
     @BeforeEach
     void setUp() {
         ehrExtractStatusService = new EhrExtractStatusService(mongoTemplate, ehrExtractStatusRepository, timestampService);
+    }
+
+    @Test
+    void expectFalseWhenEhrExtractStatusWithEhrReceivedAckWithErrorsDoesNotMatchExpectedErrorType() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var conversationId = generateRandomUppercaseUUID();
+        Instant currentInstant = Instant.now();
+        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
+
+        Optional<EhrExtractStatus> ehrExtractStatusWithEhrReceivedAckWithErrors
+            = Optional.of(EhrExtractStatus.builder()
+                              .updatedAt(eightDaysAgo)
+                              .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
+                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                         .taskId(generateRandomUppercaseUUID())
+                                                         .build())
+                              .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of(
+                                  EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
+                                      .builder()
+                                      .code(ALTERNATIVE_ERROR_CODE)
+                                      .display(ERROR_MESSAGE)
+                                      .build())).build())
+                              .build());
+
+        doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+
+        boolean result = ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId);
+
+        assertFalse(result);
+    }
+
+    @Test
+    void expectTrueWhenEhrExtractStatusWithEhrReceivedAckWithErrorsThatMatchExpectedErrorType() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var conversationId = generateRandomUppercaseUUID();
+        Instant currentInstant = Instant.now();
+        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
+
+        Optional<EhrExtractStatus> ehrExtractStatusWithEhrReceivedAckWithErrors
+            = Optional.of(EhrExtractStatus.builder()
+                              .updatedAt(eightDaysAgo)
+                              .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
+                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                         .taskId(generateRandomUppercaseUUID())
+                                                         .build())
+                              .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of(
+                                  EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
+                                      .builder()
+                                      .code(ERROR_CODE)
+                                      .display(ERROR_MESSAGE)
+                                      .build())).build())
+                              .build());
+
+        doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+
+        boolean result = ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId);
+
+        assertTrue(result);
     }
 
     @Test
