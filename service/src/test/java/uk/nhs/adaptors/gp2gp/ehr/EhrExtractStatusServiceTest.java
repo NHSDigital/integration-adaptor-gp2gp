@@ -12,9 +12,12 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.mhs.exception.UnrecognisedInteractionIdException;
+
 import java.time.Duration;
 
 import java.time.Instant;
@@ -22,7 +25,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -137,7 +142,7 @@ class EhrExtractStatusServiceTest {
     @Test
     void shouldLogWarningWithDuplicateWhenLateAcknowledgementReceivedAfter8DaysAndEhrReceivedAckErrorCodeDoNotMatch() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        String conversationId = "11111";
+        String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
 
@@ -171,7 +176,7 @@ class EhrExtractStatusServiceTest {
     @Test
     void shouldUpdateEhrExtractStatusWithAckInfoWhenExistingEhrExtractStatusReceivedAckIsNull() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        String conversationId = "11111";
+        String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
 
@@ -204,7 +209,7 @@ class EhrExtractStatusServiceTest {
     @Test
     void shouldLogWarningWhenLateAcknowledgementReceivedAfter8DaysAndEhrReceivedAckHasErrors() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        String conversationId = "11111";
+        String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
 
@@ -269,7 +274,7 @@ class EhrExtractStatusServiceTest {
     @Test
     void shouldNotLogWarningThatAckIsIgnoredWhenAcknowledgementReceivedAfter8Days() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        String conversationId = "11111";
+        String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
 
@@ -291,14 +296,34 @@ class EhrExtractStatusServiceTest {
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
+        verify(logger, never())
+            .warn("Received an ACK message with a conversation_id: {}, but it will be ignored.", conversationId);
         verify(logger, times(1))
             .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     @Test
+    void receiveUnrecognisedInteractionIdExceptionWhenAcknowledgementReceivedAfter8DaysAndEhrExtractStatusIsNull() {
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        String conversationId = generateRandomUppercaseUUID();
+        Instant currentInstant = Instant.now();
+
+        doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
+        doReturn(null).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+        when(ack.getErrors()).thenReturn(null);
+        when(ack.getReceived()).thenReturn(currentInstant);
+
+        Exception exception = assertThrows(UnrecognisedInteractionIdException.class, () ->
+                                    ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack));
+
+        assertEquals("Received an unrecognized ACK message with conversation_id: " + conversationId,
+                     exception.getMessage());
+    }
+
+    @Test
     void doesNotUpdateEhrExtractStatusWhenEhrContinueIsPresent() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        String conversationId = "11111";
+        String conversationId = generateRandomUppercaseUUID();
 
         Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder()
                                                                       .ehrExtractCorePending(
@@ -310,6 +335,7 @@ class EhrExtractStatusServiceTest {
         var ehrExtractStatusResult = ehrExtractStatusServiceSpy.updateEhrExtractStatusContinue(conversationId);
 
         assertFalse(ehrExtractStatusResult.isPresent());
+
     }
 
     private String generateRandomUppercaseUUID() {

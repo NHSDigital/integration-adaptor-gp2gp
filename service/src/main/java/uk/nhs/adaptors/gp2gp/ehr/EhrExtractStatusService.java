@@ -384,8 +384,7 @@ public class EhrExtractStatusService {
         }
 
         var ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg = errors.stream()
-            .filter(err -> REASON_ERROR_CODE.equals(err.getCode())
-                           && REASON_ERROR_MESSAGE.equals(err.getDisplay()))
+            .filter(err -> REASON_ERROR_CODE.equals(err.getCode()) && REASON_ERROR_MESSAGE.equals(err.getDisplay()))
             .findAny();
 
         return ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg.isPresent();
@@ -716,8 +715,8 @@ public class EhrExtractStatusService {
     }
 
     private EhrExtractStatus fetchEhrExtractStatus(String conversationId, String messageType) {
-        return ehrExtractStatusRepository.findByConversationId(conversationId)
-            .orElseThrow(() -> new UnrecognisedInteractionIdException(messageType, conversationId));
+        return Optional.ofNullable(ehrExtractStatusRepository.findByConversationId(conversationId))
+            .orElseThrow(() -> new UnrecognisedInteractionIdException(messageType, conversationId)).get();
     }
 
     protected Logger logger() {
