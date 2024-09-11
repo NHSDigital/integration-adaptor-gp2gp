@@ -5,10 +5,12 @@ import org.springframework.context.annotation.Configuration;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Getter
 @Setter
 @Configuration
+@EnableScheduling
 @ConfigurationProperties(prefix = "gp2gp")
 public class Gp2gpConfiguration {
     private int largeAttachmentThreshold;
