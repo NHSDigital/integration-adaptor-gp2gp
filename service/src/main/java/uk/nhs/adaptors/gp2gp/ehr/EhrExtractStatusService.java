@@ -162,23 +162,29 @@ public class EhrExtractStatusService {
         return ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg.isPresent();
     }
 
-    public void updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List<EhrExtractStatus> ehrExtractStatusList,
-                                                                              String errorCode,
-                                                                              String errorMessage) {
+    void updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List<EhrExtractStatus> ehrExtractStatusList,
+                                                                       String errorCode,
+                                                                       String errorMessage) {
 
         ehrExtractStatusList.stream().forEach(ehrExtractStatus -> {
             try {
                 updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(), errorCode, errorMessage);
             } catch (Exception e) {
+
                 logger().error("An error occurred when closing a failed process for conversation_id: {}",
                                ehrExtractStatus.getConversationId(), e);
+
+                if (e instanceof EhrExtractException) {
+                    throw e;
+                }
+
             }
         });
     }
 
-    protected EhrExtractStatus updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
-                                                                             String errorCode,
-                                                                             String errorMessage) {
+    private EhrExtractStatus updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
+                                                                           String errorCode,
+                                                                           String errorMessage) {
 
         Update update = createUpdateWithUpdatedAt();
         update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder().code(errorCode).display(errorMessage).build());

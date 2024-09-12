@@ -211,6 +211,29 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
+    void expectFalseWhenEhrExtractStatusWithEhrReceivedAckWithEmptyErrorsList() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var conversationId = generateRandomUppercaseUUID();
+        Instant currentInstant = Instant.now();
+        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
+
+        Optional<EhrExtractStatus> ehrExtractStatusWithEhrReceivedAckWithErrors
+            = Optional.of(EhrExtractStatus.builder()
+                              .updatedAt(eightDaysAgo)
+                              .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
+                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                         .taskId(generateRandomUppercaseUUID())
+                                                         .build())
+                              .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of()).build())
+                              .build());
+
+        doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+
+        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId));
+    }
+
+    @Test
     void expectFalseWhenhrReceivedAckIsNull() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
@@ -298,13 +321,21 @@ class EhrExtractStatusServiceTest {
         var inProgressConversationId = generateRandomUppercaseUUID();
 
         EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
+        EhrExtractStatus ehrExtractStatusUpdated = EhrExtractStatus.builder().build();
 
         doReturn(List.of(ehrExtractStatus)).when(ehrExtractStatusServiceSpy).findInProgressTransfers();
+        doReturn(ehrExtractStatusUpdated).when(mongoTemplate).findAndModify(any(Query.class), any(UpdateDefinition.class),
+                                                         any(FindAndModifyOptions.class), any());
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
 
         ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
 
         verify(ehrExtractStatusServiceSpy, times(1))
             .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE);
+        verify(logger).info(eq("EHR status (EHR received acknowledgement) record successfully "
+                               + "updated in the database with error information conversation_id: {}"),
+                             eq(inProgressConversationId));
+
     }
 
     @Test
@@ -355,6 +386,46 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
+    void shouldThrowExceptionWhenReturnedEhrExtractStatusIsNull() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var inProgressConversationId = generateRandomUppercaseUUID();
+
+        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
+        ehrExtractStatus.setEhrExtractCorePending(null);
+
+        doReturn(List.of(ehrExtractStatus)).when(ehrExtractStatusServiceSpy).findInProgressTransfers();
+
+        ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
+
+        verify(ehrExtractStatusServiceSpy, never())
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(), ERROR_CODE, ERROR_MESSAGE);
+    }
+
+    @Test
+    void updateEhrExtractStatusListWithEhrReceivedAcknowledgementError() {
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var inProgressConversationId = generateRandomUppercaseUUID();
+        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
+
+        doReturn(null).when(mongoTemplate).findAndModify(any(Query.class), any(UpdateDefinition.class),
+                                                                    any(FindAndModifyOptions.class), any());
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        var exception = assertThrows(EhrExtractException.class,
+                                     () -> ehrExtractStatusServiceSpy.updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(
+                                            List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE));
+
+
+        assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, " +
+                     "conversation_id: " + inProgressConversationId,
+                     exception.getMessage());
+        verify(logger).error(eq("An error occurred when closing a failed process for conversation_id: {}"),
+                             eq(inProgressConversationId),
+                             any(EhrExtractException.class));
+    }
+
+    @Test
     void whenEhrExtractStatusIsNullInterceptExceptionAndLogErrorMsg() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
@@ -367,8 +438,12 @@ class EhrExtractStatusServiceTest {
                                                          any(FindAndModifyOptions.class), any());
         when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
 
-        assertDoesNotThrow(() -> ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts());
+        var exception = assertThrows(EhrExtractException.class,
+                                     () -> ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts());
 
+        assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, " +
+                     "conversation_id: " + inProgressConversationId,
+                     exception.getMessage());
         verify(logger).error(eq("An error occurred when closing a failed process for conversation_id: {}"),
                              eq(inProgressConversationId),
                              any(EhrExtractException.class));
