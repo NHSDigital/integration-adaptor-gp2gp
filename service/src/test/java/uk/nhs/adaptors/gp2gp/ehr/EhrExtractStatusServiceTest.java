@@ -188,6 +188,34 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
+    void expectNoExceptionWhenEhrExtractStatusWithEhrReceivedAckWithErrorsIncludesNullValue() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var conversationId = generateRandomUppercaseUUID();
+        Instant currentInstant = Instant.now();
+        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
+
+        Optional<EhrExtractStatus> ehrExtractStatusWithEhrReceivedAckWithErrors
+            = Optional.of(EhrExtractStatus.builder()
+                              .updatedAt(eightDaysAgo)
+                              .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
+                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                         .taskId(generateRandomUppercaseUUID())
+                                                         .build())
+                              .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of(
+                                  EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
+                                      .builder()
+                                      .code(null)
+                                      .display(ERROR_MESSAGE)
+                                      .build())).build())
+                              .build());
+
+        doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+
+        assertDoesNotThrow(() -> ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId));
+    }
+
+    @Test
     void expectTrueWhenEhrExtractStatusWithEhrReceivedAckWithErrorsThatMatchExpectedErrorType() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
