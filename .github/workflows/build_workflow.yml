@@ -188,7 +188,7 @@ jobs:
           GP2GP_MONGO_URI: "mongodb://mongodb:27017"
           GP2GP_MONGO_DATABASE_NAME: "gp2gp"
           GP2GP_MHS_MOCK_BASE_URL: "http://mock-mhs-adaptor:8081"
-          GP2GP_MHS_OUTBOUND_URL: "$GP2GP_MHS_MOCK_BASE_URL/mock-mhs-endpoint"
+          GP2GP_MHS_OUTBOUND_URL: "http://mock-mhs-adaptor:8081/mock-mhs-endpoint"
           GP2GP_GPC_GET_URL: "http://gpcc:8090/@ODS_CODE@/STU3/1/gpconnect"
           GP2GP_LARGE_ATTACHMENT_THRESHOLD: "31216"
           GP2GP_LARGE_EHR_EXTRACT_THRESHOLD: "31216"
