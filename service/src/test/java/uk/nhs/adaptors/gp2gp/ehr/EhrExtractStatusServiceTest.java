@@ -11,7 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.query.UpdateDefinition;
@@ -54,9 +53,9 @@ class EhrExtractStatusServiceTest {
     public static final int TWENTY_DAYS = 20;
     private static final String RECEIVED_ACK_ERRORS = "ehrReceivedAcknowledgement.errors";
 
-    ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
-    ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
-    ArgumentCaptor<Class<EhrExtractStatus>> classCaptor = ArgumentCaptor.forClass(Class.class);
+    private ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
+    private ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
+    private ArgumentCaptor<Class<EhrExtractStatus>> classCaptor = ArgumentCaptor.forClass(Class.class);
 
     @Mock
     private Logger logger;
@@ -398,11 +397,11 @@ class EhrExtractStatusServiceTest {
                                                                             any(FindAndModifyOptions.class),
                                                                             classCaptor.capture());
 
-        assertEquals(ERROR_CODE, ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails)((Document) updateCaptor.getValue()
+        assertEquals(ERROR_CODE, ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails) ((Document) updateCaptor.getValue()
                                                                                 .getUpdateObject()
                                                                                 .get("$addToSet"))
                                                                                 .get("ehrReceivedAcknowledgement.errors")).getCode());
-        assertEquals(ERROR_MESSAGE, ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails)((Document) updateCaptor.getValue()
+        assertEquals(ERROR_MESSAGE, ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails) ((Document) updateCaptor.getValue()
                                                                                 .getUpdateObject()
                                                                                 .get("$addToSet"))
                                                                                 .get("ehrReceivedAcknowledgement.errors")).getDisplay());
