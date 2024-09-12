@@ -409,6 +409,27 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
+    void shouldNotDoAnythingIfThereAreNoEhrExtractStatusThatExceeded8Days() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var inProgressConversationId = generateRandomUppercaseUUID();
+
+        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
+        ehrExtractStatus.setEhrExtractCorePending(
+            EhrExtractStatus.EhrExtractCorePending
+                .builder()
+                .sentAt(FIVE_DAYS_AGO)
+                .build());
+
+        doReturn(List.of(ehrExtractStatus)).when(ehrExtractStatusServiceSpy).findInProgressTransfers();
+
+        ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
+
+        verify(ehrExtractStatusServiceSpy, never())
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(), ERROR_CODE, ERROR_MESSAGE);
+    }
+
+    @Test
     void updateEhrExtractStatusListWithEhrReceivedAcknowledgementError() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         var inProgressConversationId = generateRandomUppercaseUUID();
