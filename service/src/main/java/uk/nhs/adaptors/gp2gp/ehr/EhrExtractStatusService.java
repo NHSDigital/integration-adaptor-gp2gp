@@ -173,16 +173,12 @@ public class EhrExtractStatusService {
 
                 logger().error("An error occurred when closing a failed process for conversation_id: {}",
                                ehrExtractStatus.getConversationId(), e);
-
-                if (e instanceof EhrExtractException) {
-                    throw e;
-                }
-
+                throw e;
             }
         });
     }
 
-    private EhrExtractStatus updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
+    private void updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
                                                                            String errorCode,
                                                                            String errorMessage) {
 
@@ -204,7 +200,6 @@ public class EhrExtractStatusService {
         logger().info("EHR status (EHR received acknowledgement) record successfully "
                       + "updated in the database with error information conversation_id: {}", conversationId);
 
-        return ehrExtractStatus;
     }
 
     public boolean hasLastUpdateExceededEightDays(EhrExtractStatus ehrExtractStatus) {
