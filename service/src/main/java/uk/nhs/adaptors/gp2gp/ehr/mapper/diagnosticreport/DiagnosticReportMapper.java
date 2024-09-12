@@ -242,9 +242,12 @@ public class DiagnosticReportMapper {
             .filter(this::hasCommentNote)
             .map(observation -> {
                 final var comment = observation.getComment();
-                if(StringUtils.isNotBlank(comment)) {
+                if (StringUtils.isNotBlank(comment)) {
                     return buildNarrativeStatementForDiagnosticReport(
-                        issuedElement, CommentType.USER_COMMENT.getCode(), comment, confidentialityService.generateConfidentialityCode(observation).orElse(null)
+                        issuedElement,
+                        CommentType.USER_COMMENT.getCode(),
+                        comment,
+                        confidentialityService.generateConfidentialityCode(observation).orElse(null)
                     );
                 }
 
@@ -283,7 +286,10 @@ public class DiagnosticReportMapper {
         }
     }
 
-    private String buildNarrativeStatementForDiagnosticReport(InstantType issuedElement, String commentType, String comment, String confidentialityCode) {
+    private String buildNarrativeStatementForDiagnosticReport(InstantType issuedElement,
+                                                              String commentType,
+                                                              String comment,
+                                                              String confidentialityCode) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(randomIdGeneratorService.createNewId())
             .commentType(commentType)
