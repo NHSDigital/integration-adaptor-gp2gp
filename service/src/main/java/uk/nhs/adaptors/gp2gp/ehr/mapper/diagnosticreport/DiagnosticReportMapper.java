@@ -216,7 +216,7 @@ public class DiagnosticReportMapper {
             .findFirst()
             .map(this::extractDateFromObservation)
             .map(dateString -> buildNarrativeStatementForDiagnosticReport(
-                diagnosticReportIssued, CommentType.AGGREGATE_COMMENT_SET.getCode(), dateString,null))
+                diagnosticReportIssued, CommentType.AGGREGATE_COMMENT_SET.getCode(), dateString, null))
             .ifPresent(reportLevelNarrativeStatements::append);
     }
 
