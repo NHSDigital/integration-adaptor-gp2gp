@@ -1,14 +1,17 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import org.bson.Document;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.query.UpdateDefinition;
@@ -49,6 +52,11 @@ class EhrExtractStatusServiceTest {
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     public static final String ACK_TYPE = "AA";
     public static final int TWENTY_DAYS = 20;
+    private static final String RECEIVED_ACK_ERRORS = "ehrReceivedAcknowledgement.errors";
+
+    ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
+    ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
+    ArgumentCaptor<Class<EhrExtractStatus>> classCaptor = ArgumentCaptor.forClass(Class.class);
 
     @Mock
     private Logger logger;
@@ -76,7 +84,7 @@ class EhrExtractStatusServiceTest {
     @Test
     void doesNotUpdateEhrExtractStatusWhenAckDelayExceeds8Days() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        String conversationId = "11111";
+        String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
         Instant nineDaysAgo = currentInstant.minus(Duration.ofDays(NINE_DAYS));
         Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder()
@@ -104,9 +112,32 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
+    void updateEhrExtractStatusWhenEhrExtractCorePendingIsNull() {
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        String conversationId = generateRandomUppercaseUUID();
+        Instant currentInstant = Instant.now();
+        Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder().ehrExtractCorePending(null).build());
+
+        doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
+        doReturn(false).when(ehrExtractStatusServiceSpy).hasFinalAckBeenReceived(conversationId);
+        doReturn(ehrExtractStatus).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+        when(ack.getErrors()).thenReturn(null);
+        when(ack.getReceived()).thenReturn(currentInstant);
+        doReturn(ehrExtractStatus.get())
+            .when(mongoTemplate).findAndModify(any(Query.class), any(Update.class), any(FindAndModifyOptions.class), any(Class.class));
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
+
+        verify(logger, never()).warn(eq("Received an ACK message with a conversation_id={} exceeded 8 days"), eq(conversationId));
+        verify(logger, times(1))
+                            .info(eq("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId));
+    }
+
+    @Test
     void ehrExtractStatusThrowsExceptionWhenConversationIdNotFound() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        String conversationId = "11111";
+        String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
 
         doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
@@ -130,7 +161,7 @@ class EhrExtractStatusServiceTest {
     @Test
     void updateEhrExtractWhenDelayBewteenAckUpdatesIsLessThan8Days() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        String conversationId = "11111";
+        String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
         Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder().updatedAt(eightDaysAgo).build());
@@ -143,13 +174,13 @@ class EhrExtractStatusServiceTest {
         verify(ehrExtractStatusServiceSpy, never()).updateEhrExtractStatusError(conversationId,
                                                                                 ERROR_CODE,
                                                                                 ERROR_MESSAGE,
-                                                                       ehrExtractStatusServiceSpy.getClass().getSimpleName());
+                                                                                ehrExtractStatusServiceSpy.getClass().getSimpleName());
     }
 
     @Test
     void doesNotUpdateEhrExtractStatusWhenEhrContinueIsPresent() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        String conversationId = "11111";
+        String conversationId = generateRandomUppercaseUUID();
 
         Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder()
                                                                       .ehrExtractCorePending(
@@ -341,7 +372,40 @@ class EhrExtractStatusServiceTest {
         verify(logger).info(eq("EHR status (EHR received acknowledgement) record successfully "
                                + "updated in the database with error information conversation_id: {}"),
                              eq(inProgressConversationId));
+    }
 
+    @Test
+    void shouldUpdateStatusWithErrorAndSpecificErrorCodeAndMessage() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var inProgressConversationId = generateRandomUppercaseUUID();
+
+        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
+        EhrExtractStatus ehrExtractStatusUpdated = EhrExtractStatus.builder().build();
+
+        doReturn(ehrExtractStatusUpdated).when(mongoTemplate).findAndModify(any(Query.class), any(UpdateDefinition.class),
+                                                                            any(FindAndModifyOptions.class), any());
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        ehrExtractStatusServiceSpy.updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus),
+                                                                                                 ERROR_CODE,
+                                                                                                 ERROR_MESSAGE);
+
+        verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
+                            + "updated in the database with error information conversation_id: {}", inProgressConversationId);
+        verify(mongoTemplate, times(1)).findAndModify(queryCaptor.capture(),
+                                                                            updateCaptor.capture(),
+                                                                            any(FindAndModifyOptions.class),
+                                                                            classCaptor.capture());
+
+        assertEquals(ERROR_CODE, ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails)((Document) updateCaptor.getValue()
+                                                                                .getUpdateObject()
+                                                                                .get("$addToSet"))
+                                                                                .get("ehrReceivedAcknowledgement.errors")).getCode());
+        assertEquals(ERROR_MESSAGE, ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails)((Document) updateCaptor.getValue()
+                                                                                .getUpdateObject()
+                                                                                .get("$addToSet"))
+                                                                                .get("ehrReceivedAcknowledgement.errors")).getDisplay());
     }
 
     @Test

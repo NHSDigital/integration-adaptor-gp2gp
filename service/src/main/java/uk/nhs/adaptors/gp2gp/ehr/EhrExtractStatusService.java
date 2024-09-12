@@ -407,6 +407,7 @@ public class EhrExtractStatusService {
                                         REASON_ERROR_CODE,
                                         REASON_ERROR_MESSAGE,
                                         this.getClass().getSimpleName());
+            logger().warn("Received an ACK message with a conversation_id=" + conversationId + " exceeded 8 days");
             return;
         }
 
