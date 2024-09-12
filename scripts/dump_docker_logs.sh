@@ -2,7 +2,7 @@
 
 mkdir -p ./logs
 
-container_names=$(docker ps --format '{{.Names}}')
+container_names=$(docker ps -a --format '{{.Names}}')
 
 for container in $container_names; do
     docker logs "$container" > ./logs/"$container".log
