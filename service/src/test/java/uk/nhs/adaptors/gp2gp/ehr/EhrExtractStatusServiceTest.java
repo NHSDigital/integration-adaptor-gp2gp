@@ -51,7 +51,6 @@ class EhrExtractStatusServiceTest {
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     public static final String ACK_TYPE = "AA";
     public static final int TWENTY_DAYS = 20;
-    private static final String RECEIVED_ACK_ERRORS = "ehrReceivedAcknowledgement.errors";
 
     private ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
     private ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
@@ -128,7 +127,7 @@ class EhrExtractStatusServiceTest {
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
-        verify(logger, never()).warn("Received an ACK message with a conversation_id={} exceeded 8 days", eq(conversationId));
+        verify(logger, never()).warn("Received an ACK message with a conversation_id={} exceeded 8 days", conversationId);
         verify(logger, times(1))
                             .info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
     }
@@ -369,8 +368,7 @@ class EhrExtractStatusServiceTest {
         verify(ehrExtractStatusServiceSpy, times(1))
             .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE);
         verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
-                               + "updated in the database with error information conversation_id: {}",
-                             eq(inProgressConversationId));
+                               + "updated in the database with error information conversation_id: {}", inProgressConversationId);
     }
 
     @Test
