@@ -277,7 +277,7 @@ public class DiagnosticReportMapper {
             var humanNames = buildListOfHumanReadableNames(diagnosticReport.getPerformer());
             String performerNarrativeStatement = buildNarrativeStatementForDiagnosticReport(
                 diagnosticReport.getIssuedElement(), CommentType.AGGREGATE_COMMENT_SET.getCode(),
-                PREPENDED_TEXT_FOR_PARTICIPANTS + humanNames,null
+                PREPENDED_TEXT_FOR_PARTICIPANTS + humanNames, null
             );
             reportLevelNarrativeStatements.append(performerNarrativeStatement);
         }
