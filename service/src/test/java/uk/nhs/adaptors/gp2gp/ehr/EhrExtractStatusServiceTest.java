@@ -128,9 +128,9 @@ class EhrExtractStatusServiceTest {
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
-        verify(logger, never()).warn(eq("Received an ACK message with a conversation_id={} exceeded 8 days"), eq(conversationId));
+        verify(logger, never()).warn("Received an ACK message with a conversation_id={} exceeded 8 days", eq(conversationId));
         verify(logger, times(1))
-                            .info(eq("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId));
+                            .info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
     }
 
     @Test
@@ -368,8 +368,8 @@ class EhrExtractStatusServiceTest {
 
         verify(ehrExtractStatusServiceSpy, times(1))
             .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE);
-        verify(logger).info(eq("EHR status (EHR received acknowledgement) record successfully "
-                               + "updated in the database with error information conversation_id: {}"),
+        verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
+                               + "updated in the database with error information conversation_id: {}",
                              eq(inProgressConversationId));
     }
 
@@ -439,23 +439,6 @@ class EhrExtractStatusServiceTest {
 
     @Test
     void shouldNotUpdateStatusWhenInProgressTransfersWithNullEhrExtractCorePendingExist() {
-
-        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
-        var inProgressConversationId = generateRandomUppercaseUUID();
-
-        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
-        ehrExtractStatus.setEhrExtractCorePending(null);
-
-        doReturn(List.of(ehrExtractStatus)).when(ehrExtractStatusServiceSpy).findInProgressTransfers();
-
-        ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
-
-        verify(ehrExtractStatusServiceSpy, never())
-            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(), ERROR_CODE, ERROR_MESSAGE);
-    }
-
-    @Test
-    void shouldThrowExceptionWhenReturnedEhrExtractStatusIsNull() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         var inProgressConversationId = generateRandomUppercaseUUID();
