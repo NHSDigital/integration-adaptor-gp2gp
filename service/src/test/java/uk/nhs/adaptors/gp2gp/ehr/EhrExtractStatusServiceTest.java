@@ -262,6 +262,23 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
+    void shouldNotUpdateStatusWhenEhrReceivedAcknowledgementIsNotNull() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var inProgressConversationId = generateRandomUppercaseUUID();
+
+        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
+        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().build());
+
+        doReturn(List.of(ehrExtractStatus)).when(ehrExtractStatusServiceSpy).findInProgressTransfers();
+
+        ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
+
+        verify(ehrExtractStatusServiceSpy, never())
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE);
+    }
+
+    @Test
     void shouldNotUpdateStatusWhenNoInProgressTransfersExist() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
