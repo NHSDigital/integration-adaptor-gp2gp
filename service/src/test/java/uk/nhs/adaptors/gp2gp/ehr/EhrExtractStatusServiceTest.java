@@ -79,7 +79,13 @@ class EhrExtractStatusServiceTest {
         String conversationId = "11111";
         Instant currentInstant = Instant.now();
         Instant nineDaysAgo = currentInstant.minus(Duration.ofDays(NINE_DAYS));
-        Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder().updatedAt(nineDaysAgo).build());
+        Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder()
+                                                                      .ehrExtractCorePending(
+                                                                          EhrExtractStatus.EhrExtractCorePending
+                                                                              .builder()
+                                                                              .sentAt(nineDaysAgo)
+                                                                              .build())
+                                                                      .build());
 
         doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
         doReturn(false).when(ehrExtractStatusServiceSpy).hasFinalAckBeenReceived(conversationId);
@@ -416,9 +422,8 @@ class EhrExtractStatusServiceTest {
                                      () -> ehrExtractStatusServiceSpy.updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(
                                             List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE));
 
-
-        assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, " +
-                     "conversation_id: " + inProgressConversationId,
+        assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
+                     + "conversation_id: " + inProgressConversationId,
                      exception.getMessage());
         verify(logger).error(eq("An error occurred when closing a failed process for conversation_id: {}"),
                              eq(inProgressConversationId),
@@ -438,11 +443,10 @@ class EhrExtractStatusServiceTest {
                                                          any(FindAndModifyOptions.class), any());
         when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
 
-        var exception = assertThrows(EhrExtractException.class,
-                                     () -> ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts());
+        var exception = assertThrows(EhrExtractException.class, () -> ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts());
 
-        assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, " +
-                     "conversation_id: " + inProgressConversationId,
+        assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
+                     + "conversation_id: " + inProgressConversationId,
                      exception.getMessage());
         verify(logger).error(eq("An error occurred when closing a failed process for conversation_id: {}"),
                              eq(inProgressConversationId),

@@ -128,10 +128,11 @@ public class EhrExtractStatusService {
     @Scheduled(cron = "${timeout.cronTime}")
     public void checkForEhrExtractAckTimeouts() {
         List<EhrExtractStatus> inProgressEhrExtractTransfers = findInProgressTransfers();
+        var now = Instant.now();
         var ehrExtractStatusWithExceededUpdateLimit = inProgressEhrExtractTransfers
             .stream()
             .filter(ehrExtractStatus -> Objects.isNull(ehrExtractStatus.getEhrReceivedAcknowledgement()))
-            .filter(this::hasLastUpdateExceededEightDays)
+            .filter(ehrExtractStatus -> hasLastUpdateExceededEightDays(ehrExtractStatus, now))
             .toList();
 
         if (!ehrExtractStatusWithExceededUpdateLimit.isEmpty()) {
@@ -179,8 +180,8 @@ public class EhrExtractStatusService {
     }
 
     private void updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
-                                                                           String errorCode,
-                                                                           String errorMessage) {
+                                                               String errorCode,
+                                                               String errorMessage) {
 
         Update update = createUpdateWithUpdatedAt();
         update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder().code(errorCode).display(errorMessage).build());
@@ -202,15 +203,13 @@ public class EhrExtractStatusService {
 
     }
 
-    public boolean hasLastUpdateExceededEightDays(EhrExtractStatus ehrExtractStatus) {
-
-        var now = Instant.now();
+    private boolean hasLastUpdateExceededEightDays(EhrExtractStatus ehrExtractStatus, Instant time) {
 
         if (ehrExtractStatus.getEhrExtractCorePending() == null) {
             return false;
         }
 
-        Duration duration = Duration.between(ehrExtractStatus.getEhrExtractCorePending().getSentAt(), now);
+        Duration duration = Duration.between(ehrExtractStatus.getEhrExtractCorePending().getSentAt(), time);
         long daysSinceLastUpdate = duration.toDays();
 
         return daysSinceLastUpdate > EHR_EXTRACT_SENT_DAYS_LIMIT;
@@ -686,10 +685,7 @@ public class EhrExtractStatusService {
     private boolean hasAcknowledgementExceededEightDays(String conversationId, Instant ackReceivedTimestamp) {
         var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "ACK");
 
-        Duration duration = Duration.between(ehrExtractStatus.getUpdatedAt(), ackReceivedTimestamp);
-        long daysSinceLastUpdate = duration.toDays();
-
-        return daysSinceLastUpdate > EHR_EXTRACT_SENT_DAYS_LIMIT;
+        return hasLastUpdateExceededEightDays(ehrExtractStatus, ackReceivedTimestamp);
     }
 
     private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {
