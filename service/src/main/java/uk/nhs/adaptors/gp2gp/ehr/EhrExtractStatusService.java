@@ -118,8 +118,8 @@ public class EhrExtractStatusService {
     private static final String FILENAME_TYPE_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
     public static final int EHR_EXTRACT_SENT_DAYS_LIMIT = 8;
-    private static final String REASON_ERROR_CODE = "99";
-    public static final String REASON_ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
+    private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
+    public static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -137,8 +137,8 @@ public class EhrExtractStatusService {
 
         if (!ehrExtractStatusWithExceededUpdateLimit.isEmpty()) {
             updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(ehrExtractStatusWithExceededUpdateLimit,
-                                                                          REASON_ERROR_CODE,
-                                                                          REASON_ERROR_MESSAGE);
+                                                                          UNEXPECTED_CONDITION_ERROR_CODE,
+                                                                          UNEXPECTED_CONDITION_ERROR_MESSAGE);
         }
     }
 
@@ -157,7 +157,8 @@ public class EhrExtractStatusService {
         }
 
         var ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg = errors.stream()
-            .filter(err -> REASON_ERROR_CODE.equals(err.getCode()) && REASON_ERROR_MESSAGE.equals(err.getDisplay()))
+            .filter(err -> UNEXPECTED_CONDITION_ERROR_CODE.equals(err.getCode())
+                           && UNEXPECTED_CONDITION_ERROR_MESSAGE.equals(err.getDisplay()))
             .findAny();
 
         return ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg.isPresent();
@@ -170,11 +171,14 @@ public class EhrExtractStatusService {
         ehrExtractStatusList.stream().forEach(ehrExtractStatus -> {
             try {
                 updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(), errorCode, errorMessage);
-            } catch (Exception e) {
+            } catch (EhrExtractException exception) {
 
-                logger().error("An error occurred when closing a failed process for conversation_id: {}",
-                               ehrExtractStatus.getConversationId(), e);
-                throw e;
+                logger().error("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}",
+                               ehrExtractStatus.getConversationId(), exception);
+                throw exception;
+            } catch (Exception exception) {
+                logger().error("An unexpected error occurred for conversation_id: {}", ehrExtractStatus.getConversationId(), exception);
+                throw exception;
             }
         });
     }

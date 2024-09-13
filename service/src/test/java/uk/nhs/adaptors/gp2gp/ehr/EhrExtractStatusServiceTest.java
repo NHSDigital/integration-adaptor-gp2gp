@@ -33,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -560,9 +561,28 @@ class EhrExtractStatusServiceTest {
         assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
                      + "conversation_id: " + inProgressConversationId,
                      exception.getMessage());
-        verify(logger).error(eq("An error occurred when closing a failed process for conversation_id: {}"),
+        verify(logger).error(eq("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}"),
                              eq(inProgressConversationId),
                              any(EhrExtractException.class));
+    }
+
+    @Test
+    void shouldCatchExceptionIfUnexpectedConditionAriseWhileUpdatingEhrExtractStatusListWithEhrReceivedAcknowledgementError() {
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var inProgressConversationId = generateRandomUppercaseUUID();
+        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
+
+        doThrow(new NullPointerException())
+            .when(mongoTemplate).findAndModify(any(Query.class), any(UpdateDefinition.class), any(FindAndModifyOptions.class), any());
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        assertThrows(Exception.class,
+                         () -> ehrExtractStatusServiceSpy.updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(
+                             List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE));
+
+        verify(logger).error(eq("An unexpected error occurred for conversation_id: {}"),
+                             eq(inProgressConversationId),
+                             any(NullPointerException.class));
     }
 
     @Test
@@ -583,7 +603,7 @@ class EhrExtractStatusServiceTest {
         assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
                      + "conversation_id: " + inProgressConversationId,
                      exception.getMessage());
-        verify(logger).error(eq("An error occurred when closing a failed process for conversation_id: {}"),
+        verify(logger).error(eq("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}"),
                              eq(inProgressConversationId),
                              any(EhrExtractException.class));
     }
