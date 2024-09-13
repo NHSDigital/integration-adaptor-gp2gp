@@ -221,7 +221,7 @@ public class EhrExtractTest {
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_WITH_NORMAL_DR, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_WITH_NORMAL_DR);
+        assertHappyPathWithDocs(conversationId, "GPC002", "9690937288");
     }
 
     @Test
