@@ -249,7 +249,7 @@ jobs:
       - name: Collect Artifacts
         run: |
           docker cp e2e-tests:/home/gradle/e2e-tests/build/reports ./artifacts
-          cp -r ./service/build/reports ./artifacts
+          cp -r ./scripts/logs ./artifacts
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
