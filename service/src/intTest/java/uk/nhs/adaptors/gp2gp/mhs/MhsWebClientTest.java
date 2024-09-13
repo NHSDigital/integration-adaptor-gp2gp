@@ -195,7 +195,7 @@ public class MhsWebClientTest {
         assertThatThrownBy(() ->
             mhsClient.sendMessageToMHS(request))
             .isInstanceOf(RetryLimitReachedException.class)
-            .hasMessage("Retries exhausted: 3/3")
+            .hasMessage("Retries exhausted: 4/3")
             .hasRootCauseInstanceOf(MhsServerErrorException.class)
             .hasRootCauseMessage("The following error occurred during MHS_OUTBOUND request: 500 INTERNAL_SERVER_ERROR");
 
