@@ -397,17 +397,15 @@ public class EhrExtractStatusService {
             return;
         }
 
-        if (hasFinalAckBeenReceived(conversationId)) {
-            logger().warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+        if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())
+            && hasEhrStatusReceivedAckWithErrors(conversationId)) {
+
+            logger().warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
             return;
         }
 
-        if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())) {
-            updateEhrExtractStatusError(conversationId,
-                                        REASON_ERROR_CODE,
-                                        REASON_ERROR_MESSAGE,
-                                        this.getClass().getSimpleName());
-            logger().warn("Received an ACK message with a conversation_id=" + conversationId + " exceeded 8 days");
+        if (hasFinalAckBeenReceived(conversationId)) {
+            logger().warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
             return;
         }
 

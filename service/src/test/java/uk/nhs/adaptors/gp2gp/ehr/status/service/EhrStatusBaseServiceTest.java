@@ -22,10 +22,8 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
 import uk.nhs.adaptors.gp2gp.ehr.status.model.FileStatus;
@@ -76,8 +74,6 @@ public class EhrStatusBaseServiceTest {
             .build()
     );
 
-    @Mock
-    private EhrExtractStatusRepository extractStatusRepository;
     @InjectMocks
     private EhrStatusBaseService ehrStatusBaseService;
 

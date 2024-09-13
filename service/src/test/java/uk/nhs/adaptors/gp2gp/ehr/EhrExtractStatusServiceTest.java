@@ -80,33 +80,68 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
-    void doesNotUpdateEhrExtractStatusWhenAckDelayExceeds8Days() {
+    void shouldLogWarningWhenLateAcknowledgementReceivedAfter8DaysAndEhrReceivedAckHasErrors() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
-        Instant nineDaysAgo = currentInstant.minus(Duration.ofDays(NINE_DAYS));
-        Optional<EhrExtractStatus> ehrExtractStatus = Optional.of(EhrExtractStatus.builder()
-                                                                      .ehrExtractCorePending(
-                                                                          EhrExtractStatus.EhrExtractCorePending
-                                                                              .builder()
-                                                                              .sentAt(nineDaysAgo)
-                                                                              .build())
-                                                                      .build());
+        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
+
+        Optional<EhrExtractStatus> ehrExtractStatusWithEhrReceivedAckWithErrors
+            = Optional.of(EhrExtractStatus.builder()
+                              .updatedAt(eightDaysAgo)
+                              .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
+                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                         .taskId(generateRandomUppercaseUUID())
+                                                         .build())
+                              .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(List.of(
+                                  EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
+                                      .builder()
+                                      .code(ERROR_CODE)
+                                      .display(ERROR_MESSAGE)
+                                      .build())).build())
+                              .build());
 
         doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
-        doReturn(false).when(ehrExtractStatusServiceSpy).hasFinalAckBeenReceived(conversationId);
-        doReturn(ehrExtractStatus).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+        doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
         when(ack.getErrors()).thenReturn(null);
         when(ack.getReceived()).thenReturn(currentInstant);
-        doReturn(ehrExtractStatus.get())
-            .when(mongoTemplate).findAndModify(any(Query.class), any(Update.class), any(FindAndModifyOptions.class), any(Class.class));
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
-        verify(ehrExtractStatusServiceSpy).updateEhrExtractStatusError(conversationId,
-                                                                       ERROR_CODE,
-                                                                       ERROR_MESSAGE,
-                                                                       ehrExtractStatusServiceSpy.getClass().getSimpleName());
+        verify(logger, times(1))
+            .warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
+    }
+
+    @Test
+    void shouldNotLogWarningThatAckIsIgnoredWhenAcknowledgementReceivedAfter8Days() {
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        String conversationId = generateRandomUppercaseUUID();
+        Instant currentInstant = Instant.now();
+        Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
+
+        Optional<EhrExtractStatus> ehrExtractStatusWithEhrReceivedAckWithErrors
+            = Optional.of(EhrExtractStatus.builder()
+                              .updatedAt(eightDaysAgo)
+                              .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
+                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                         .taskId(generateRandomUppercaseUUID())
+                                                         .build())
+                              .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().build())
+                              .build());
+
+        doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
+        doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
+        when(ack.getErrors()).thenReturn(null);
+        when(ack.getReceived()).thenReturn(currentInstant);
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
+
+        verify(logger, never())
+            .warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
+        verify(logger, times(1))
+            .warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
     }
 
     @Test
@@ -139,7 +174,6 @@ class EhrExtractStatusServiceTest {
         Instant currentInstant = Instant.now();
 
         doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
-        doReturn(false).when(ehrExtractStatusServiceSpy).hasFinalAckBeenReceived(conversationId);
         doReturn(Optional.empty()).when(ehrExtractStatusRepository).findByConversationId(conversationId);
         when(ack.getErrors()).thenReturn(null);
         when(ack.getReceived()).thenReturn(currentInstant);
@@ -151,9 +185,9 @@ class EhrExtractStatusServiceTest {
                      exception.getMessage());
 
         verify(ehrExtractStatusServiceSpy, never()).updateEhrExtractStatusError(conversationId,
-                                                                       ERROR_CODE,
-                                                                       ERROR_MESSAGE,
-                                                                       ehrExtractStatusServiceSpy.getClass().getSimpleName());
+                                                                                ERROR_CODE,
+                                                                                ERROR_MESSAGE,
+                                                                                ehrExtractStatusServiceSpy.getClass().getSimpleName());
     }
 
     @Test
@@ -543,6 +577,7 @@ class EhrExtractStatusServiceTest {
         doReturn(true).when(ehrExtractStatusServiceSpy).isEhrStatusWaitingForFinalAck(conversationId);
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
         when(ack.getErrors()).thenReturn(null);
+        when(ack.getReceived()).thenReturn(currentInstant);
         when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
