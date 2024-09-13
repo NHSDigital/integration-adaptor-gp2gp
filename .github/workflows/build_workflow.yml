@@ -207,9 +207,10 @@ jobs:
           docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
         working-directory: ./docker
 
-#      - name: Get End-to-End Test Reports
-#        run: docker cp e2e-tests:/home/gradle/e2e-tests/build/reports/** .
-#        working-directory: ./service/build/reports
+      - name: Get End-to-End Test Reports
+        run: |
+          mkdir e2e-test-reports
+          docker cp e2e-tests:/home/gradle/e2e-tests/build/reports/** ./e2e-test-reports
 
       - name: Dump Docker Logs
         if: always()
@@ -224,7 +225,7 @@ jobs:
         with:
           name: 'End-to-End Test Results & Docker Logs'
           path: |
-            ./service/build/reports/**
+            ./e2e-test-reports/**
             ./scripts/logs/**
           compression-level: 9
 
