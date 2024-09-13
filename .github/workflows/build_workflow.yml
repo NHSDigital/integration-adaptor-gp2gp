@@ -24,19 +24,28 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Create Temporary Artifacts Directory
+        run: mkdir artifacts
+
       - name: Checkstyle
         run: |
           ./gradlew checkStyleMain
           ./gradlew checkstyleTest
         working-directory: ./service
 
+      - name: Collect Artifacts
+        run: cp -r ./service/build/reports ./artifacts
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: 'Checkstyle Reports'
-          path: "./service/build/reports/**"
+          path: ./artifacts/**
           compression-level: 9
+
+      - name: Delete Temporary Artifacts
+        run: rm -r ./artifacts
 
   spotbugs:
     name: Spotbugs
@@ -54,19 +63,28 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Create Temporary Artifacts Directory
+        run: mkdir artifacts
+
       - name: Spotbugs
         run: |
           ./gradlew spotbugsMain
           ./gradlew spotbugsTest
         working-directory: ./service
 
+      - name: Collect Artifacts
+        run: cp -r ./service/build/reports ./artifacts
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: 'Spotbugs Reports'
-          path: "./service/build/reports/**"
+          path: ./artifacts/**
           compression-level: 9
+
+      - name: Delete Temporary Artifacts
+        run: rm -r ./artifacts
 
   unit-tests:
     name: Unit Tests
@@ -85,19 +103,26 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Create Temporary Artifacts Directory
+        run: mkdir artifacts
+
       - name: Execute Unit Tests
         run: ./gradlew test
         working-directory: ./service
+
+      - name: Collect Artifacts
+        run: cp -r ./service/build/reports ./artifacts
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: 'Unit Test Reports'
-          path: |
-            ./service/build/reports/**
-            ./scripts/logs/**
+          path: ./artifacts/**
           compression-level: 9
+
+      - name: Delete Temporary Artifacts
+        run: rm -r ./artifacts
 
   integration-tests:
     name: Integration Tests
@@ -115,6 +140,9 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
+
+      - name: Create Temporary Artifacts Directory
+        run: mkdir artifacts
 
       - name: Start Docker Dependencies
         env:
@@ -149,14 +177,17 @@ jobs:
           ./dump_docker_logs.sh
         working-directory: ./scripts
 
+      - name: Collect Artifacts
+        run: |
+          cp -r ./service/build/reports ./artifacts
+          cp -r ./scripts/logs ./artifacts
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: 'Integration Test Reports & Docker Logs'
-          path: |
-            ./service/build/reports/**
-            ./scripts/logs/**
+          path: ./artifacts/**
           compression-level: 9
 
       - name: Stop Docker Dependencies
@@ -167,6 +198,9 @@ jobs:
           docker network rm commonforgp2gp
         working-directory: ./docker
 
+      - name: Delete Temporary Artifacts
+        run: rm -r ./artifacts
+
   end-to-end-tests:
     name: End-to-End Testing
     runs-on: ubuntu-latest
@@ -174,6 +208,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Create Temporary Artifacts Directory
+        run: mkdir artifacts
 
       - name: Run E2E Tests
         env:
@@ -202,11 +239,6 @@ jobs:
           docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
         working-directory: ./docker
 
-      - name: Get End-to-End Test Reports
-        run: |
-          mkdir e2e-test-reports
-          docker cp e2e-tests:/home/gradle/e2e-tests/build/reports ./e2e-test-reports
-
       - name: Dump Docker Logs
         if: always()
         run: |
@@ -214,14 +246,17 @@ jobs:
           ./dump_docker_logs.sh
         working-directory: ./scripts
 
+      - name: Collect Artifacts
+        run: |
+          docker cp e2e-tests:/home/gradle/e2e-tests/build/reports ./artifacts
+          cp -r ./service/build/reports ./artifacts
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: 'End-to-End Test Results & Docker Logs'
-          path: |
-            ./e2e-test-reports/**
-            ./scripts/logs/**
+          path: ./artifacts/**
           compression-level: 9
 
       - name: Stop Docker Dependencies
@@ -230,6 +265,9 @@ jobs:
           docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml down
           docker network rm commonforgp2gp
         working-directory: ./docker
+
+      - name: Delete Temporary Artifacts
+        run: rm -r ./artifacts
 
   build-and-publish-docker-images:
     name: Build & Publish Docker Images
