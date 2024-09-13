@@ -183,7 +183,7 @@ jobs:
       - name: Run E2E Tests
         env:
           GP2GP_SERVER_PORT: "8080"
-          GP2GP_BASE_URL: "http://gp2gp:$GP2GP_SERVER_PORT"
+          GP2GP_BASE_URL: "http://gp2gp:8080"
           GP2GP_AMQP_BROKERS: "amqp://activemq:5672"
           GP2GP_MONGO_URI: "mongodb://mongodb:27017"
           GP2GP_MONGO_DATABASE_NAME: "gp2gp"
@@ -203,8 +203,8 @@ jobs:
           MHS_MOCK_REQUEST_JOURNAL_ENABLED: "true"
         run: |
           docker network create commonforgp2gp
-          docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml build gp2gp-e2e-tests
-          docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml up --exit-code-from mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
+          docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml build
+          docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
         working-directory: ./docker
 
 #      - name: Get End-to-End Test Reports
