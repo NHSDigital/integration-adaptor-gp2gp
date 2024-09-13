@@ -324,7 +324,7 @@ jobs:
       - name: Build Docker Image
         run: |
           # Create Docker Tag
-          DOCKER_REGISTRY="https://${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com"
+          DOCKER_REGISTRY="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com"
           DOCKER_TAG="$DOCKER_REGISTRY/${{ matrix.config.repository }}:$BUILD_ID"
           echo "DOCKER_TAG=$DOCKER_TAG" >> $GITHUB_ENV
 
