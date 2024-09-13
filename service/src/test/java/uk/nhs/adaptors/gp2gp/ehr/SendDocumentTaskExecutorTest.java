@@ -155,7 +155,7 @@ public class SendDocumentTaskExecutorTest {
                 return false;
             }
             return outboundMessage.getExternalAttachments().stream().allMatch(
-                    externalAttachment -> externalAttachment.getDescription().contains("ContentType=" + contentType)
+                    externalAttachment -> externalAttachment.getDescription().contains("Fail=" + contentType)
             );
         };
     }
