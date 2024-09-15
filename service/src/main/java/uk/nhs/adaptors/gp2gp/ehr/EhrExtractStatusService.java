@@ -142,7 +142,7 @@ public class EhrExtractStatusService {
         }
     }
 
-    boolean hasEhrStatusReceivedAckWithErrors(String conversationId) {
+    boolean hasEhrStatusReceivedAckWithUnexpectedConditionErrors(String conversationId) {
 
         var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "NACK");
 
@@ -402,7 +402,7 @@ public class EhrExtractStatusService {
         }
 
         if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())
-            && hasEhrStatusReceivedAckWithErrors(conversationId)) {
+            && hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId)) {
 
             logger().warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
             return;

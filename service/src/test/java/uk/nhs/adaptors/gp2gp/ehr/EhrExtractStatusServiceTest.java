@@ -288,7 +288,7 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        boolean result = ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId);
+        boolean result = ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId);
 
         assertFalse(result);
     }
@@ -313,7 +313,7 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId));
+        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId));
     }
 
     @Test
@@ -336,7 +336,7 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId));
+        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId));
     }
 
     @Test
@@ -359,7 +359,7 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId));
+        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId));
     }
 
     @Test
@@ -387,7 +387,7 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        assertDoesNotThrow(() -> ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId));
+        assertDoesNotThrow(() -> ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId));
     }
 
     @Test
@@ -415,7 +415,7 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        boolean result = ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId);
+        boolean result = ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId);
 
         assertTrue(result);
     }
