@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.query.UpdateDefinition;
+import org.springframework.test.util.ReflectionTestUtils;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -143,12 +144,14 @@ class EhrExtractStatusServiceTest {
         verify(logger, never())
             .warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     @Test
     void shouldNotLogWarningThatAckIsIgnoredWhenAcknowledgementReceivedAfterWithinAndThereAreNoErrors() {
+
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        ReflectionTestUtils.setField(ehrExtractStatusServiceSpy, "ehrExtractSentDaysLimit", EIGHT_DAYS);
         String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
@@ -176,10 +179,9 @@ class EhrExtractStatusServiceTest {
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
-        verify(logger, never())
-            .warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
+        verify(logger, never()).warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     @Test
@@ -202,7 +204,7 @@ class EhrExtractStatusServiceTest {
 
         verify(logger, never()).warn("Received an ACK message with a conversation_id={} exceeded 8 days", conversationId);
         verify(logger, times(1))
-                            .info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+                            .info("Database successfully updated with EHRAcknowledgement, conversation_id: {}", conversationId);
     }
 
     @Test
@@ -530,6 +532,7 @@ class EhrExtractStatusServiceTest {
     void shouldNotDoAnythingIfThereAreNoEhrExtractStatusThatExceeded8Days() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        ReflectionTestUtils.setField(ehrExtractStatusServiceSpy, "ehrExtractSentDaysLimit", EIGHT_DAYS);
         var inProgressConversationId = generateRandomUppercaseUUID();
 
         EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
@@ -642,7 +645,7 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     private String generateRandomUppercaseUUID() {
