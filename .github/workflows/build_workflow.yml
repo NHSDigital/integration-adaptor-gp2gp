@@ -310,7 +310,7 @@ jobs:
           
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             GIT_BRANCH=PR
-          elif [[ "${{ github.ref_name }}" == "main" ]]; then
+          elif [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
             GIT_BRANCH=main
           fi
           
