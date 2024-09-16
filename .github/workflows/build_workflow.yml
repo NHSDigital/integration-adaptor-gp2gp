@@ -304,16 +304,21 @@ jobs:
           role-session-name: gp2gp_github_action_build_workflow
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Setup Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
       - name: Generate Build ID
         run: |
-          BUILD_ID=$(python3 ./scripts/tag.py ${{ github.head_ref || github.ref_name }} ${{ github.run_number }} ${{ github.sha }})
+          chmod +x ./create_build_id.sh
+          
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            GIT_BRANCH=PR
+          elif [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
+            GIT_BRANCH=main
+          fi
+          
+          BUILD_ID=$(./create_build_id.sh $GIT_BRANCH ${{ github.run_number }} ${{ github.sha }})
           echo "Generated the build tag: $BUILD_ID"
           echo "BUILD_ID=$BUILD_ID" >> $GITHUB_ENV
+        working-directory: ./scripts
+        shell: bash
 
       - name: Build Docker Image
         run: |
