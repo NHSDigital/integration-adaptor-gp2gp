@@ -437,6 +437,10 @@ class EhrExtractStatusServiceTest {
 
         ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
 
+        verify(ehrExtractStatusServiceSpy, times(1))
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(any(Stream.class),
+                                                                           eq(ERROR_CODE),
+                                                                           eq(ERROR_MESSAGE));
         verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
                                + "updated in the database with error information conversation_id: {}", inProgressConversationId);
     }
