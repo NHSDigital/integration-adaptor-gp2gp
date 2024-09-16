@@ -16,9 +16,6 @@ import uk.nhs.adaptors.gp2gp.ehr.status.model.EhrStatus;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrStatusService extends EhrStatusBaseService {
 
-    private static final String ACK_TYPE_CODE = "AA";
-    private static final String NACK_TYPE_CODE = "AE";
-
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
     public Optional<EhrStatus> getEhrStatus(String conversationId) {

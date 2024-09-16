@@ -68,3 +68,6 @@ gp2gp:
       max-backoff-attempts: 3
       min-back-off: 2
       timeout: 3
+
+timeout:
+  cronTime: ${TIMEOUT_CRON_TIME:0 0 */12 * * *}
