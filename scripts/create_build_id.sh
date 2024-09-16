@@ -8,9 +8,9 @@ clean_tag_element() {
 generate_tag() {
     local clean_branch_name=$(clean_tag_element "$1")
     local clean_build_id=$(clean_tag_element "$2")
-    local short_git_hash=$(${!3}:0:7)
+    local git_hash="$3"
 
-    local tag="${clean_branch_name}-${clean_build_id}-${short_git_hash}"
+    local tag="${clean_branch_name}-${clean_build_id}-${git_hash:0:7}"
 
     echo "$tag"
 }
