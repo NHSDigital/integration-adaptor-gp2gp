@@ -189,8 +189,8 @@ jobs:
       - name: Stop Docker Dependencies
         if: always()
         run: |
-          docker compose down --rmi=local --remove-orphans &&
-          docker compose rm &&
+          docker compose down --rmi=local --remove-orphans
+          docker compose rm
           docker network rm commonforgp2gp
         working-directory: ./docker
 
