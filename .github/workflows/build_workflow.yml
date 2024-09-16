@@ -311,7 +311,12 @@ jobs:
 
       - name: Generate Build ID
         run: |
-          BUILD_ID=$(python3 ./scripts/tag.py ${{ github.head_ref || github.ref_name }} ${{ github.run_number }} ${{ github.sha }})
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            GIT_BRANCH=PR
+          elif [[ "${{ github.ref_name }}" == "main" ]]; then
+            GIT_BRANCH=main
+          fi
+          BUILD_ID=$(python3 ./scripts/tag.py $GIT_BRANCH ${{ github.run_number }} ${{ github.sha }})
           echo "Generated the build tag: $BUILD_ID"
           echo "BUILD_ID=$BUILD_ID" >> $GITHUB_ENV
 
