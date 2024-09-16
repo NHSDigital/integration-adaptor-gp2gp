@@ -306,7 +306,7 @@ jobs:
 
       - name: Generate Build ID
         run: |
-          chmod +x create_build_id.sh
+          chmod +x ./create_build_id.sh
           
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             GIT_BRANCH=PR
