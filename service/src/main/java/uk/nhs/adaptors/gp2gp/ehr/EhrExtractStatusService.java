@@ -211,8 +211,7 @@ public class EhrExtractStatusService {
             return false;
         }
 
-        Duration duration = Duration.between(ehrExtractStatus.getEhrExtractCorePending().getSentAt(), time);
-        long daysSinceLastUpdate = duration.toDays();
+        long daysSinceLastUpdate = Duration.between(ehrExtractStatus.getEhrExtractCorePending().getSentAt(), time).toDays();
 
         return daysSinceLastUpdate > EHR_EXTRACT_SENT_DAYS_LIMIT;
     }
