@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -132,14 +133,11 @@ public class EhrExtractStatusService {
         var ehrExtractStatusWithExceededUpdateLimit = inProgressEhrExtractTransfers
             .stream()
             .filter(ehrExtractStatus -> Objects.isNull(ehrExtractStatus.getEhrReceivedAcknowledgement()))
-            .filter(ehrExtractStatus -> hasLastUpdateExceededEightDays(ehrExtractStatus, now))
-            .toList();
+            .filter(ehrExtractStatus -> hasLastUpdateExceededEightDays(ehrExtractStatus, now));
 
-        if (!ehrExtractStatusWithExceededUpdateLimit.isEmpty()) {
-            updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(ehrExtractStatusWithExceededUpdateLimit,
-                                                                          UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                          UNEXPECTED_CONDITION_ERROR_MESSAGE);
-        }
+        updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(ehrExtractStatusWithExceededUpdateLimit,
+                                                                      UNEXPECTED_CONDITION_ERROR_CODE,
+                                                                      UNEXPECTED_CONDITION_ERROR_MESSAGE);
     }
 
     boolean hasEhrStatusReceivedAckWithUnexpectedConditionErrors(String conversationId) {
@@ -164,11 +162,11 @@ public class EhrExtractStatusService {
         return ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg.isPresent();
     }
 
-    void updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List<EhrExtractStatus> ehrExtractStatusList,
+    void updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(Stream<EhrExtractStatus> ehrExtractStatusList,
                                                                        String errorCode,
                                                                        String errorMessage) {
 
-        ehrExtractStatusList.stream().forEach(ehrExtractStatus -> {
+        ehrExtractStatusList.forEach(ehrExtractStatus -> {
             try {
                 updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(), errorCode, errorMessage);
             } catch (EhrExtractException exception) {

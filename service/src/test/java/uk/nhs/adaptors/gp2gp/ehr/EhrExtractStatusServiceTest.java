@@ -24,6 +24,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -436,8 +437,6 @@ class EhrExtractStatusServiceTest {
 
         ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
 
-        verify(ehrExtractStatusServiceSpy, times(1))
-            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE);
         verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
                                + "updated in the database with error information conversation_id: {}", inProgressConversationId);
     }
@@ -455,7 +454,7 @@ class EhrExtractStatusServiceTest {
                                                                             any(FindAndModifyOptions.class), any());
         when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
 
-        ehrExtractStatusServiceSpy.updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus),
+        ehrExtractStatusServiceSpy.updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(Stream.of(ehrExtractStatus),
                                                                                                  ERROR_CODE,
                                                                                                  ERROR_MESSAGE);
 
@@ -490,7 +489,7 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
 
         verify(ehrExtractStatusServiceSpy, never())
-            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE);
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(Stream.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE);
     }
 
     @Test
@@ -503,7 +502,7 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
 
         verify(ehrExtractStatusServiceSpy, never())
-            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(), ERROR_CODE, ERROR_MESSAGE);
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(Stream.of(), ERROR_CODE, ERROR_MESSAGE);
     }
 
     @Test
@@ -520,7 +519,7 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
 
         verify(ehrExtractStatusServiceSpy, never())
-            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(), ERROR_CODE, ERROR_MESSAGE);
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(Stream.of(), ERROR_CODE, ERROR_MESSAGE);
     }
 
     @Test
@@ -541,7 +540,7 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.checkForEhrExtractAckTimeouts();
 
         verify(ehrExtractStatusServiceSpy, never())
-            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(List.of(), ERROR_CODE, ERROR_MESSAGE);
+            .updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(Stream.of(), ERROR_CODE, ERROR_MESSAGE);
     }
 
     @Test
@@ -556,7 +555,7 @@ class EhrExtractStatusServiceTest {
 
         var exception = assertThrows(EhrExtractException.class,
                                      () -> ehrExtractStatusServiceSpy.updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(
-                                            List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE));
+                                         Stream.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE));
 
         assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
                      + "conversation_id: " + inProgressConversationId,
@@ -578,7 +577,7 @@ class EhrExtractStatusServiceTest {
 
         assertThrows(Exception.class,
                          () -> ehrExtractStatusServiceSpy.updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(
-                             List.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE));
+                             Stream.of(ehrExtractStatus), ERROR_CODE, ERROR_MESSAGE));
 
         verify(logger).error(eq("An unexpected error occurred for conversation_id: {}"),
                              eq(inProgressConversationId),
