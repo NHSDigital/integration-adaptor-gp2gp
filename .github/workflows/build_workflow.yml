@@ -25,9 +25,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Create Temporary Artifacts Directory
-        run: mkdir artifacts
-
       - name: Checkstyle
         run: |
           ./gradlew checkStyleMain --parallel
@@ -35,7 +32,9 @@ jobs:
         working-directory: ./service
 
       - name: Collect Artifacts
-        run: cp -r ./service/build/reports ./artifacts
+        run: |
+          mkdir -p artifacts
+          cp -r ./service/build/reports ./artifacts
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -64,9 +63,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Create Temporary Artifacts Directory
-        run: mkdir artifacts
-
       - name: Spotbugs
         run: |
           ./gradlew spotbugsMain --parallel
@@ -74,7 +70,9 @@ jobs:
         working-directory: ./service
 
       - name: Collect Artifacts
-        run: cp -r ./service/build/reports ./artifacts
+        run: |
+          mkdir -p artifacts
+          cp -r ./service/build/reports ./artifacts
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -104,15 +102,14 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Create Temporary Artifacts Directory
-        run: mkdir artifacts
-
       - name: Execute Unit Tests
         run: ./gradlew test --parallel --build-cache
         working-directory: ./service
 
       - name: Collect Artifacts
-        run: cp -r ./service/build/reports ./artifacts
+        run: |
+          mkdir -p artifacts
+          cp -r ./service/build/reports ./artifacts
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -141,9 +138,6 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-
-      - name: Create Temporary Artifacts Directory
-        run: mkdir artifacts
 
       - name: Start Docker Dependencies
         env:
@@ -180,6 +174,7 @@ jobs:
 
       - name: Collect Artifacts
         run: |
+          mkdir -p artifacts
           cp -r ./service/build/reports ./artifacts
           cp -r ./scripts/logs ./artifacts
 
@@ -209,9 +204,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Create Temporary Artifacts Directory
-        run: mkdir artifacts
 
       - name: Run E2E Tests
         env:
@@ -249,6 +241,7 @@ jobs:
 
       - name: Collect Artifacts
         run: |
+          mkdir -p artifacts
           docker cp e2e-tests:/home/gradle/e2e-tests/build/reports ./artifacts
           cp -r ./scripts/logs ./artifacts
 
