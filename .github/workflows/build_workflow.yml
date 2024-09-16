@@ -30,8 +30,8 @@ jobs:
 
       - name: Checkstyle
         run: |
-          ./gradlew checkStyleMain
-          ./gradlew checkstyleTest
+          ./gradlew checkStyleMain --parallel
+          ./gradlew checkstyleTest --parallel
         working-directory: ./service
 
       - name: Collect Artifacts
@@ -46,7 +46,7 @@ jobs:
           compression-level: 9
 
       - name: Delete Temporary Artifacts
-        run: rm -r ./artifacts
+        run: rm -rf ./artifacts
 
   spotbugs:
     name: Spotbugs
@@ -69,8 +69,8 @@ jobs:
 
       - name: Spotbugs
         run: |
-          ./gradlew spotbugsMain
-          ./gradlew spotbugsTest
+          ./gradlew spotbugsMain --parallel
+          ./gradlew spotbugsTest --parallel
         working-directory: ./service
 
       - name: Collect Artifacts
@@ -85,7 +85,7 @@ jobs:
           compression-level: 9
 
       - name: Delete Temporary Artifacts
-        run: rm -r ./artifacts
+        run: rm -rf ./artifacts
 
   unit-tests:
     name: Unit Tests
@@ -108,7 +108,7 @@ jobs:
         run: mkdir artifacts
 
       - name: Execute Unit Tests
-        run: ./gradlew test
+        run: ./gradlew test --parallel --build-cache
         working-directory: ./service
 
       - name: Collect Artifacts
@@ -123,7 +123,7 @@ jobs:
           compression-level: 9
 
       - name: Delete Temporary Artifacts
-        run: rm -r ./artifacts
+        run: rm -rf ./artifacts
 
   integration-tests:
     name: Integration Tests
@@ -200,7 +200,7 @@ jobs:
         working-directory: ./docker
 
       - name: Delete Temporary Artifacts
-        run: rm -r ./artifacts
+        run: rm -rf ./artifacts
 
   end-to-end-tests:
     name: End-to-End Testing
@@ -268,7 +268,7 @@ jobs:
         working-directory: ./docker
 
       - name: Delete Temporary Artifacts
-        run: rm -r ./artifacts
+        run: rm -rf ./artifacts
 
   build-and-publish-docker-images:
     name: Build & Publish Docker Images
