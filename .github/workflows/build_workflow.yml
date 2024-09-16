@@ -171,6 +171,7 @@ jobs:
           chmod +x dump_docker_logs.sh
           ./dump_docker_logs.sh
         working-directory: ./scripts
+        shell: bash
 
       - name: Collect Artifacts
         run: |
@@ -237,6 +238,7 @@ jobs:
           chmod +x dump_docker_logs.sh
           ./dump_docker_logs.sh
         working-directory: ./scripts
+        shell: bash
 
       - name: Collect Artifacts
         run: |
@@ -332,6 +334,7 @@ jobs:
         run: docker push $DOCKER_TAG
 
       - name: Logout of AWS ECR (Clean up Credentials)
+        if: always()
         run: |
           DOCKER_REGISTRY="https://${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com"
           docker logout $DOCKER_REGISTRY
