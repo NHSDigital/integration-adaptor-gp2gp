@@ -330,3 +330,8 @@ jobs:
 
       - name: Publish image to ECR
         run: docker push $DOCKER_TAG
+
+      - name: Logout of AWS ECR (Clean up Credentials)
+        run: |
+          DOCKER_REGISTRY="https://${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com"
+          docker logout $DOCKER_REGISTRY
