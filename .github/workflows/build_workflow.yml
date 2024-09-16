@@ -1,0 +1,340 @@
+name: GP2GP Build Workflow
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  checkstyle:
+    name: Checkstyle
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21 LTS
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Checkstyle
+        run: |
+          ./gradlew checkStyleMain --parallel
+          ./gradlew checkstyleTest --parallel
+        working-directory: ./service
+
+      - name: Collect Artifacts
+        run: |
+          mkdir -p artifacts
+          cp -r ./service/build/reports ./artifacts
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 'Checkstyle Reports'
+          path: ./artifacts/**
+          compression-level: 9
+
+      - name: Temporary Artifacts Cleanup
+        run: rm -rf ./artifacts
+
+  spotbugs:
+    name: Spotbugs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21 LTS
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Spotbugs
+        run: |
+          ./gradlew spotbugsMain --parallel
+          ./gradlew spotbugsTest --parallel
+        working-directory: ./service
+
+      - name: Collect Artifacts
+        run: |
+          mkdir -p artifacts
+          cp -r ./service/build/reports ./artifacts
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 'Spotbugs Reports'
+          path: ./artifacts/**
+          compression-level: 9
+
+      - name: Temporary Artifacts Cleanup
+        run: rm -rf ./artifacts
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: [checkstyle, spotbugs]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21 LTS
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Execute Unit Tests
+        run: ./gradlew test --parallel --build-cache
+        working-directory: ./service
+
+      - name: Collect Artifacts
+        run: |
+          mkdir -p artifacts
+          cp -r ./service/build/reports ./artifacts
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 'Unit Test Reports'
+          path: ./artifacts/**
+          compression-level: 9
+
+      - name: Temporary Artifacts Cleanup
+        run: rm -rf ./artifacts
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [checkstyle, spotbugs]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21 LTS
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Start Docker Dependencies
+        env:
+          GPC_SUPPLIER_ODS_CODE: "XYZ222"
+          GP2GP_SERVER_PORT: "8080"
+          GP2GP_AMQP_BROKERS: "amqp://activemq:5672"
+          GP2GP_MONGO_URI: "mongodb://mongodb:27017"
+          GP2GP_MONGO_DATABASE_NAME: "gp2gp"
+          GP2GP_MHS_OUTBOUND_URL: "http://mock-mhs-adaptor:8081/mock-mhs-endpoint/accept-only"
+          GP2GP_GPC_GET_URL: "http://gpcc:8090/@ODS_CODE@/STU3/1/gpconnect"
+          GP2GP_LARGE_ATTACHMENT_THRESHOLD: "4500000"
+          GP2GP_LARGE_EHR_EXTRACT_THRESHOLD: "4500000"
+          GPC_CONSUMER_SERVER_PORT: "8090"
+          GPC_CONSUMER_SDS_URL: "http://wiremock:8080/spine-directory/"
+          GPC_CONSUMER_SDS_APIKEY: "anykey"
+          GP2GP_LOGGING_LEVEL: DEBUG
+          GPC_CONSUMER_LOGGING_LEVEL: DEBUG
+        run: |
+          docker network create commonforgp2gp
+          docker compose build
+          docker compose up mock-mhs-adaptor mongodb activemq wiremock gpcc gp2gp --detach
+        working-directory: ./docker
+
+      - name: Execute Integration Tests
+        run: ./gradlew integrationTest
+        working-directory: ./service
+
+      - name: Dump Docker Logs
+        if: always()
+        run: |
+          chmod +x dump_docker_logs.sh
+          ./dump_docker_logs.sh
+        working-directory: ./scripts
+        shell: bash
+
+      - name: Collect Artifacts
+        run: |
+          mkdir -p artifacts
+          cp -r ./service/build/reports ./artifacts
+          cp -r ./scripts/logs ./artifacts
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 'Integration Test Reports & Docker Logs'
+          path: ./artifacts/**
+          compression-level: 9
+
+      - name: Stop Docker Dependencies
+        if: always()
+        run: |
+          docker compose down --rmi=local --remove-orphans
+          docker compose rm
+          docker network rm commonforgp2gp
+        working-directory: ./docker
+
+      - name: Temporary Artifacts Cleanup
+        run: rm -rf ./artifacts
+
+  end-to-end-tests:
+    name: End-to-End Testing
+    runs-on: ubuntu-latest
+    needs: [checkstyle, spotbugs]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run E2E Tests
+        env:
+          GP2GP_SERVER_PORT: "8080"
+          GP2GP_BASE_URL: "http://gp2gp:8080"
+          GP2GP_AMQP_BROKERS: "amqp://activemq:5672"
+          GP2GP_MONGO_URI: "mongodb://mongodb:27017"
+          GP2GP_MONGO_DATABASE_NAME: "gp2gp"
+          GP2GP_MHS_MOCK_BASE_URL: "http://mock-mhs-adaptor:8081"
+          GP2GP_MHS_OUTBOUND_URL: "http://mock-mhs-adaptor:8081/mock-mhs-endpoint"
+          GP2GP_GPC_GET_URL: "http://gpcc:8090/@ODS_CODE@/STU3/1/gpconnect"
+          GP2GP_LARGE_ATTACHMENT_THRESHOLD: "31216"
+          GP2GP_LARGE_EHR_EXTRACT_THRESHOLD: "31216"
+          GP2GP_GPC_CLIENT_MAX_BACKOFF_ATTEMPTS: 0
+          GP2GP_MHS_CLIENT_MAX_BACKOFF_ATTEMPTS: 0
+          GPC_CONSUMER_SERVER_PORT: "8090"
+          GPC_CONSUMER_SDS_URL: "http://wiremock:8080/spine-directory/"
+          GPC_CONSUMER_SDS_APIKEY: "anykey"
+          GPC_CONSUMER_LOGGING_LEVEL: "DEBUG"
+          GPC_SUPPLIER_ODS_CODE: "XYZ222"
+          GP2GP_LOGGING_LEVEL: "DEBUG"
+          MHS_MOCK_REQUEST_JOURNAL_ENABLED: "true"
+        run: |
+          docker network create commonforgp2gp
+          docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml up --build --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
+        working-directory: ./docker
+
+      - name: Dump Docker Logs
+        if: always()
+        run: |
+          chmod +x dump_docker_logs.sh
+          ./dump_docker_logs.sh
+        working-directory: ./scripts
+        shell: bash
+
+      - name: Collect Artifacts
+        run: |
+          mkdir -p artifacts
+          docker cp e2e-tests:/home/gradle/e2e-tests/build/reports ./artifacts
+          cp -r ./scripts/logs ./artifacts
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 'End-to-End Test Results & Docker Logs'
+          path: ./artifacts/**
+          compression-level: 9
+
+      - name: Stop Docker Dependencies
+        if: always()
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml down
+          docker network rm commonforgp2gp
+        working-directory: ./docker
+
+      - name: Temporary Artifacts Cleanup
+        run: rm -rf ./artifacts
+
+  build-and-publish-docker-images:
+    name: Build & Publish Docker Images
+    runs-on: ubuntu-latest
+    needs: [unit-tests, integration-tests, end-to-end-tests]
+    permissions:
+        id-token: write
+        contents: read
+    strategy:
+      matrix:
+        config:
+          - directory: service
+            repository: gp2gp
+            build-context: .
+          - directory: wiremock
+            repository: gp2gp-wiremock
+            build-context: .
+          - directory: mock-mhs-adaptor
+            repository: gp2gp-mock-mhs
+            build-context: .
+          - directory: gpcc-mock
+            repository: gp2gp-gpcc-mock
+            build-context: ./docker/gpcc-mock
+          - directory: gpc-api-mock
+            repository: gp2gp-gpc-api-mock
+            build-context: ./docker/gpc-api-mock
+          - directory: sds-api-mock
+            repository: gp2gp-sds-api-mock
+            build-context: ./docker/sds-api-mock
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-session-name: gp2gp_github_action_build_workflow
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate Build ID
+        run: |
+          BUILD_ID=$(python3 ./scripts/tag.py ${{ github.head_ref || github.ref_name }} ${{ github.run_number }} ${{ github.sha }})
+          echo "Generated the build tag: $BUILD_ID"
+          echo "BUILD_ID=$BUILD_ID" >> $GITHUB_ENV
+
+      - name: Build Docker Image
+        run: |
+          # Create Docker Tag
+          DOCKER_REGISTRY="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com"
+          DOCKER_TAG="$DOCKER_REGISTRY/${{ matrix.config.repository }}:$BUILD_ID"
+          echo "DOCKER_TAG=$DOCKER_TAG" >> $GITHUB_ENV
+
+          # Build Image
+          docker build -f ./docker/${{ matrix.config.directory }}/Dockerfile -t $DOCKER_TAG ${{ matrix.config.build-context }}
+
+      - name: Login to AWS ECR
+        run: |
+          DOCKER_REGISTRY="https://${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com"
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+
+      - name: Publish image to ECR
+        run: docker push $DOCKER_TAG
+
+      - name: Logout of AWS ECR (Clean up Credentials)
+        if: always()
+        run: |
+          DOCKER_REGISTRY="https://${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com"
+          docker logout $DOCKER_REGISTRY
