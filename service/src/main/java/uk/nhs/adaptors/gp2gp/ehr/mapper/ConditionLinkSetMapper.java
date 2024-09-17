@@ -250,7 +250,7 @@ public class ConditionLinkSetMapper {
             return messageContext.getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(MedicationRequest.class::cast)
-                .map(MedicationRequestUtils::isMedicationRequestSuppressed)
+                .map(MedicationRequestUtils::isStoppedMedicationOrder)
                 .orElse(false);
         }
 
