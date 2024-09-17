@@ -386,6 +386,25 @@ public class EncounterComponentsMapperTest {
         assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
     }
 
+    @Test
+    public void When_MappingWithRelatedProblemWithIncorrectProblemExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
+        when(codeableConceptCdMapper.mapToCdForTopic(anyString()))
+            .thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(
+            TEST_DIRECTORY + "expected-components-18-related-problem-invalid-extension.xml"
+        );
+        var bundle = initializeMessageContext(
+            TEST_DIRECTORY + "input-bundle-18-related-problem-invalid-problem-extension.json"
+        );
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
+    }
+
     private static Stream<Arguments> containedResourceMappingArguments() {
         return Stream.of(
             Arguments.of("input-referenced-in-category.json", "output-referenced-in-category.xml"),
