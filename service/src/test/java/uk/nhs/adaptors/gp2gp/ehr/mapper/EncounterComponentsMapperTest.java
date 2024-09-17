@@ -387,7 +387,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingWithRelatedProblemWithIncorrectProblemExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
+    void When_MappingWithRelatedProblemWithIncorrectProblemExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
         when(codeableConceptCdMapper.mapToCdForTopic(anyString()))
             .thenCallRealMethod();
 
@@ -406,7 +406,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingWithRelatedProblemWithIncorrectProblemExtensionExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
+    void When_MappingWithRelatedProblemWithIncorrectProblemExtensionExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
         when(codeableConceptCdMapper.mapToCdForTopic(anyString()))
             .thenCallRealMethod();
 
