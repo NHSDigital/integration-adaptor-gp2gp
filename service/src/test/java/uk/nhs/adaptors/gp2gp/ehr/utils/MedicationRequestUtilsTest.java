@@ -28,6 +28,7 @@ public class MedicationRequestUtilsTest {
         medicationRequest.setIntent(MedicationRequest.MedicationRequestIntent.ORDER);
 
         assertThat(MedicationRequestUtils.isStoppedMedicationOrder(medicationRequest)).isTrue();
+        assertThat(1).isEqualTo(2);
     }
 
     @Test
