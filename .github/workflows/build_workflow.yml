@@ -32,6 +32,7 @@ jobs:
         working-directory: ./service
 
       - name: Collect Artifacts
+        if: always()
         run: |
           mkdir -p artifacts
           cp -r ./service/build/reports ./artifacts
@@ -70,6 +71,7 @@ jobs:
         working-directory: ./service
 
       - name: Collect Artifacts
+        if: always()
         run: |
           mkdir -p artifacts
           cp -r ./service/build/reports ./artifacts
@@ -107,6 +109,7 @@ jobs:
         working-directory: ./service
 
       - name: Collect Artifacts
+        if: always()
         run: |
           mkdir -p artifacts
           cp -r ./service/build/reports ./artifacts
@@ -174,6 +177,7 @@ jobs:
         shell: bash
 
       - name: Collect Artifacts
+        if: always()
         run: |
           mkdir -p artifacts
           cp -r ./service/build/reports ./artifacts
@@ -241,6 +245,7 @@ jobs:
         shell: bash
 
       - name: Collect Artifacts
+        if: always()
         run: |
           mkdir -p artifacts
           docker cp e2e-tests:/home/gradle/e2e-tests/build/reports ./artifacts
