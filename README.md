@@ -1,4 +1,4 @@
-# GP2GP Sending Adaptor
+# GP2GP Sending Adaptor [![GP2GP Build Workflow](https://github.com/NHSDigital/integration-adaptor-gp2gp/actions/workflows/build_workflow.yml/badge.svg)](https://github.com/NHSDigital/integration-adaptor-gp2gp/actions/workflows/build_workflow.yml)
 
 National Integration Adaptor - [GP2GP Sending Adaptor](https://digital.nhs.uk/developer/api-catalogue/gp2gp/gp2gp---integration-adaptor)
 
