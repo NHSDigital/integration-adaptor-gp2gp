@@ -22,7 +22,7 @@ public class MedicationRequestUtilsTest {
         + "condition_with_medication_request_reference.json";
 
     @Test
-    public void When_MedicationRequestHasStatusOfStoppedAndIntentOfOrder_Expect_isStoppedMedicationOrder() {
+    public void When_MedicationRequestHasStatusOfStoppedAndIntentOfOrder_Expect_IsStoppedMedicationOrder() {
         var medicationRequest = new MedicationRequest();
         medicationRequest.setStatus(MedicationRequest.MedicationRequestStatus.STOPPED);
         medicationRequest.setIntent(MedicationRequest.MedicationRequestIntent.ORDER);
@@ -31,7 +31,7 @@ public class MedicationRequestUtilsTest {
     }
 
     @Test
-    public void When_MedicationRequestHasStatusOfActiveAndIntentOfOrder_Expect_isNotStoppedMedicationOrder() {
+    public void When_MedicationRequestHasStatusOfActiveAndIntentOfOrder_Expect_IsNotStoppedMedicationOrder() {
         var medicationRequest = new MedicationRequest();
         medicationRequest.setStatus(MedicationRequest.MedicationRequestStatus.ACTIVE);
         medicationRequest.setIntent(MedicationRequest.MedicationRequestIntent.ORDER);
@@ -40,7 +40,7 @@ public class MedicationRequestUtilsTest {
     }
 
     @Test
-    public void When_MedicationRequestHasStatusOfStoppedAndIntentOfPlan_Expect_isNotStoppedMedicationOrder() {
+    public void When_MedicationRequestHasStatusOfStoppedAndIntentOfPlan_Expect_IsNotStoppedMedicationOrder() {
         var medicationRequest = new MedicationRequest();
         medicationRequest.setStatus(MedicationRequest.MedicationRequestStatus.ACTIVE);
         medicationRequest.setIntent(MedicationRequest.MedicationRequestIntent.PLAN);
