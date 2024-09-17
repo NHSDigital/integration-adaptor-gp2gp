@@ -442,6 +442,22 @@ public class EncounterComponentsMapperTest {
             .isEqualTo(Optional.of(expectedComponent));
     }
 
+    @Test
+    void When_MappingTopic_With_SuppressedMedicationRequest_Expect_MedicationRequestNotIncludedInOutput() {
+        var expectedXml = ResourceTestFileUtils.getFileContent(
+            TEST_DIRECTORY + "expected-components-20-medication-request-suppressed.xml"
+        );
+        var bundle = initializeMessageContext(
+            TEST_DIRECTORY + "input-bundle-20-medication-request-suppressed.json"
+        );
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
+    }
+
     private static Stream<Arguments> containedResourceMappingArguments() {
         return Stream.of(
             Arguments.of("input-referenced-in-category.json", "output-referenced-in-category.xml"),
