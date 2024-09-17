@@ -169,7 +169,7 @@ public class DiagnosticReportMapper {
             String comment = PREPENDED_TEXT_FOR_CONCLUSION_COMMENT + diagnosticReport.getConclusion();
 
             String narrativeStatementFromConclusion = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), comment
+                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), comment, null
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromConclusion);
@@ -184,7 +184,7 @@ public class DiagnosticReportMapper {
             String comment = PREPENDED_TEXT_FOR_CODED_DIAGNOSIS + codedDiagnosisText;
 
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), comment
+                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), comment, null
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
@@ -193,7 +193,7 @@ public class DiagnosticReportMapper {
         if (diagnosticReport.hasStatus()) {
             String status = PREPENDED_TEXT_FOR_STATUS + diagnosticReport.getStatus().toCode();
             String statusNarrativeStatement = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), status);
+                diagnosticReport.getIssuedElement(), LABORATORY_RESULT_COMMENT.getCode(), status, null);
 
             reportLevelNarrativeStatements.append(statusNarrativeStatement);
         }
@@ -207,16 +207,16 @@ public class DiagnosticReportMapper {
     }
 
     private void buildNarrativeStatementForObservationTimes(
-            List<Observation> observations,
-            StringBuilder reportLevelNarrativeStatements,
-            InstantType diagnosticReportIssued) {
+        List<Observation> observations,
+        StringBuilder reportLevelNarrativeStatements,
+        InstantType diagnosticReportIssued) {
         observations.stream()
             .filter(observation -> observation.hasEffectiveDateTimeType() || observation.hasEffectivePeriod())
             .filter(this::hasCommentNote)
             .findFirst()
             .map(this::extractDateFromObservation)
             .map(dateString -> buildNarrativeStatementForDiagnosticReport(
-                diagnosticReportIssued, CommentType.AGGREGATE_COMMENT_SET.getCode(), dateString))
+                diagnosticReportIssued, CommentType.AGGREGATE_COMMENT_SET.getCode(), dateString, null))
             .ifPresent(reportLevelNarrativeStatements::append);
     }
 
@@ -240,11 +240,20 @@ public class DiagnosticReportMapper {
         var narrativeStatementObservationComments = observations.stream()
             .filter(Observation::hasCode)
             .filter(this::hasCommentNote)
-            .map(Observation::getComment)
+            .map(observation -> {
+                final var comment = observation.getComment();
+                if (StringUtils.isNotBlank(comment)) {
+                    return buildNarrativeStatementForDiagnosticReport(
+                        issuedElement,
+                        CommentType.USER_COMMENT.getCode(),
+                        comment,
+                        confidentialityService.generateConfidentialityCode(observation).orElse(null)
+                    );
+                }
+
+                return null;
+            })
             .filter(StringUtils::isNotBlank)
-            .map(observationComment -> buildNarrativeStatementForDiagnosticReport(
-                issuedElement, CommentType.USER_COMMENT.getCode(), observationComment
-            ))
             .collect(Collectors.joining(System.lineSeparator()));
 
         reportLevelNarrativeStatements.append(narrativeStatementObservationComments);
@@ -260,7 +269,7 @@ public class DiagnosticReportMapper {
     private void buildNarrativeStatementForMissingResults(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
         if (reportLevelNarrativeStatements.isEmpty() && !diagnosticReport.hasResult()) {
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport.getIssuedElement(), CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT"
+                diagnosticReport.getIssuedElement(), CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT", null
             );
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
         }
@@ -271,19 +280,23 @@ public class DiagnosticReportMapper {
             var humanNames = buildListOfHumanReadableNames(diagnosticReport.getPerformer());
             String performerNarrativeStatement = buildNarrativeStatementForDiagnosticReport(
                 diagnosticReport.getIssuedElement(), CommentType.AGGREGATE_COMMENT_SET.getCode(),
-                PREPENDED_TEXT_FOR_PARTICIPANTS + humanNames
+                PREPENDED_TEXT_FOR_PARTICIPANTS + humanNames, null
             );
             reportLevelNarrativeStatements.append(performerNarrativeStatement);
         }
     }
 
-    private String buildNarrativeStatementForDiagnosticReport(InstantType issuedElement, String commentType, String comment) {
+    private String buildNarrativeStatementForDiagnosticReport(InstantType issuedElement,
+                                                              String commentType,
+                                                              String comment,
+                                                              String confidentialityCode) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(randomIdGeneratorService.createNewId())
             .commentType(commentType)
             .commentDate(DateFormatUtil.toHl7Format(issuedElement))
             .comment(comment)
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(issuedElement));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(issuedElement))
+            .confidentialityCode(confidentialityCode);
 
         return TemplateUtils.fillTemplate(
             NARRATIVE_STATEMENT_TEMPLATE,
