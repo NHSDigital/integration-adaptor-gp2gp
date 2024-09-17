@@ -5,6 +5,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.QuestionnaireResponse;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.jetbrains.annotations.NotNull;
@@ -29,9 +30,11 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
+import uk.nhs.adaptors.gp2gp.utils.IdUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -422,6 +425,21 @@ public class EncounterComponentsMapperTest {
 
         assertThat(mappedXml)
             .isEqualToIgnoringWhitespace(expectedXml);
+    }
+
+    @Test
+    void When_MapResourceToComponent_With_UnsupportedResource_Expect_PlaceholderCommentProduced() {
+        var resource = new QuestionnaireResponse()
+            .setIdElement(
+                IdUtil.buildIdType(ResourceType.QuestionnaireResponse, "questionnaire-response-id")
+            );
+
+        var expectedComponent = "<!-- QuestionnaireResponse/questionnaire-response-id -->";
+
+        var actualComponent = encounterComponentsMapper.mapResourceToComponent(resource);
+
+        assertThat(actualComponent)
+            .isEqualTo(Optional.of(expectedComponent));
     }
 
     private static Stream<Arguments> containedResourceMappingArguments() {
