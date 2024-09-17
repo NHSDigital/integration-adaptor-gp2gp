@@ -444,6 +444,8 @@ public class EncounterComponentsMapperTest {
 
     @Test
     void When_MappingTopic_With_StoppedMedicationRequest_Expect_MedicationStatementNotIncludedInOutput() {
+        // GP2GP Currently has no mechanism to transfer the concept that a Medication has been "stopped"
+        // Until there is some way to convey this, it makes more sense to not send the misleading medication.
         var expectedXml = ResourceTestFileUtils.getFileContent(
             TEST_DIRECTORY + "expected-components-20-medication-statement-not-included.xml"
         );

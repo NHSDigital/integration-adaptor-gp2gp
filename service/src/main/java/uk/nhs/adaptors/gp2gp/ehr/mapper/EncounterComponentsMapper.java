@@ -265,7 +265,7 @@ public class EncounterComponentsMapper {
     private Optional<String> mapMedicationRequest(Resource resource) {
         return Optional.of(resource)
             .map(MedicationRequest.class::cast)
-            .filter(not(MedicationRequestUtils::isMedicationRequestSuppressed))
+            .filter(not(MedicationRequestUtils::isStoppedMedicationOrder))
             .map(medicationStatementMapper::mapMedicationRequestToMedicationStatement);
     }
 
