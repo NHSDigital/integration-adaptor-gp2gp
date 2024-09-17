@@ -61,4 +61,3 @@ gp2gp:
       max-backoff-attempts: ${GP2GP_MHS_CLIENT_MAX_BACKOFF_ATTEMPTS:6}
       min-back-off: ${GP2GP_MHS_CLIENT_MIN_BACKOFF_SECONDS:5}
       timeout: ${GP2GP_MHS_CLIENT_TIMEOUT_SECONDS:120}
-
