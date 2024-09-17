@@ -1,6 +1,6 @@
 # GP2GP Sending Adaptor [![GP2GP Build Workflow](https://github.com/NHSDigital/integration-adaptor-gp2gp/actions/workflows/build_workflow.yml/badge.svg)](https://github.com/NHSDigital/integration-adaptor-gp2gp/actions/workflows/build_workflow.yml)
 
-National Integration Adaptor - [GP2GP Sending Adaptor](https://digital.nhs.uk/developer/api-catalogue/gp2gp/gp2gp---integration-adaptor)
+National Integration Adaptor - [GP2GP Sending Adaptor](https://digital.nhs.uk/developer/api-catalogue/gp2gp/gp2gp-sending-adaptor)
 
 The existing GP2GP solution uses a legacy messaging standard and infrastructure (HL7v3 and Spine TMS). Reliance 
 on these standards going forward presents a significant barrier to successful GP2GP implementation by new suppliers, 
