@@ -443,12 +443,12 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    void When_MappingTopic_With_SuppressedMedicationRequest_Expect_MedicationRequestNotIncludedInOutput() {
+    void When_MappingTopic_With_StoppedMedicationRequest_Expect_MedicationStatementNotIncludedInOutput() {
         var expectedXml = ResourceTestFileUtils.getFileContent(
-            TEST_DIRECTORY + "expected-components-20-medication-request-suppressed.xml"
+            TEST_DIRECTORY + "expected-components-20-medication-statement-not-included.xml"
         );
         var bundle = initializeMessageContext(
-            TEST_DIRECTORY + "input-bundle-20-medication-request-suppressed.json"
+            TEST_DIRECTORY + "input-bundle-20-medication-request-stopped-order.json"
         );
         var encounter = extractEncounter(bundle);
 
