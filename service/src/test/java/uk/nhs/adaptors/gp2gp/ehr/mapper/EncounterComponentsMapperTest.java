@@ -227,7 +227,8 @@ public class EncounterComponentsMapperTest {
 
         System.out.println(mappedXml);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -238,7 +239,8 @@ public class EncounterComponentsMapperTest {
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @ParameterizedTest
@@ -307,7 +309,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -321,7 +324,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -332,7 +336,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -346,7 +351,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -361,7 +367,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -372,7 +379,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @ParameterizedTest
@@ -386,7 +394,8 @@ public class EncounterComponentsMapperTest {
 
         System.out.println(mappedXml);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -469,17 +478,6 @@ public class EncounterComponentsMapperTest {
             Arguments.of("input-two-resources-category.json", "output-two-resources-category.xml"),
             Arguments.of("input-referenced-observation.json", "output-referenced-observation.xml")
         );
-    }
-
-    private String removeLineEndingsAndWhiteSpace(String input) {
-        return input
-            .replace("\n", " ")
-            .replace("\r", " ")
-            .replaceAll("\\s+", " ")
-            .replaceAll("\"\\s>", "\">")
-            .replaceAll("\"\\s/>", "\"/>")
-            .replaceAll("\\s+<", "<");
-
     }
 
     private Encounter extractEncounter(Bundle bundle) {
