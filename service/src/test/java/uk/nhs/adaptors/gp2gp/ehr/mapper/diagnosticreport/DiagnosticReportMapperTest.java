@@ -174,7 +174,8 @@ class DiagnosticReportMapperTest {
 
             when(confidentialityService.generateConfidentialityCode(bundle.getEntry().getFirst().getResource()))
                 .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
-            when(messageContext.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
+            when(messageContext.getInputBundleHolder())
+                .thenReturn(new InputBundle(bundle));
 
             // The presence of a status withing DiagnosticReport
             // generates an additional NarrativeStatement.
@@ -184,6 +185,27 @@ class DiagnosticReportMapperTest {
 
             assertAll(
                 () -> assertThat(actualXml).containsIgnoringWhitespaces(NOPAT_HL7_CONFIDENTIALITY_CODE)
+            );
+        }
+
+        @Test
+        void When_DiagnosticReport_With_FilingComment_Expect_ConfidentialityCodeNotPresentWithinUserCommentNarrativeStatement() {
+            final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson("diagnostic-report-with-one-result.json");
+            final Bundle bundle = getBundleResourceFromJson("fhir_bundle_filing_comment.json");
+
+            when(confidentialityService.generateConfidentialityCode(bundle.getEntry().getFirst().getResource()))
+                .thenReturn(Optional.empty());
+            when(messageContext.getInputBundleHolder())
+                .thenReturn(new InputBundle(bundle));
+
+            // The presence of a status withing DiagnosticReport
+            // generates an additional NarrativeStatement.
+            diagnosticReport.setStatus(null);
+
+            final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+            assertAll(
+                () -> assertThat(actualXml).doesNotContain(NOPAT_HL7_CONFIDENTIALITY_CODE)
             );
         }
     }
