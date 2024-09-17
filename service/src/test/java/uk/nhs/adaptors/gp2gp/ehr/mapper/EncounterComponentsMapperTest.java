@@ -78,6 +78,10 @@ public class EncounterComponentsMapperTest {
     private static final String INPUT_BUNDLE_TOPIC_NO_CATEGORIES = TEST_DIRECTORY + "input-bundle-17-topic-no-categories.json";
     private static final String EXPECTED_COMPONENTS_TOPIC_NO_CATEGORIES = TEST_DIRECTORY
         + "expected-components-17-topic-no-categories.xml";
+    public static final String INPUT_BUNDLE_TOPIC_RELATED_PROBLEM_INVALID_EXTENSION_URL =
+        TEST_DIRECTORY + "input-bundle-18-related-problem-invalid-problem-extension.json";
+    public static final String EXPECTED_COMPONENTS_TOPIC_RELATED_PROBLEM_INVALID_EXTENSIONS =
+        TEST_DIRECTORY + "expected-components-18-related-problem-invalid-extension.xml";
     private static final String CONTAINED_TEST_DIRECTORY = TEST_DIRECTORY + "contained-resources/";
 
     @Mock
@@ -384,6 +388,21 @@ public class EncounterComponentsMapperTest {
         System.out.println(mappedXml);
 
         assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+    }
+
+    @Test
+    public void When_MappingWithRelatedProblemWithIncorrectProblemExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
+        when(codeableConceptCdMapper.mapToCdForTopic(anyString()))
+            .thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_TOPIC_RELATED_PROBLEM_INVALID_EXTENSIONS);
+        var bundle = initializeMessageContext(INPUT_BUNDLE_TOPIC_RELATED_PROBLEM_INVALID_EXTENSION_URL);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     private static Stream<Arguments> containedResourceMappingArguments() {
