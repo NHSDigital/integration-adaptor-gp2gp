@@ -1,0 +1,314 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+    ]
+  },
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "List",
+        "title": "GP Surgery",
+        "id": "consultationid1",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "325851000000107",
+              "display": "Consultation"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+        },
+        "encounter": {
+          "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+        },
+        "date": "2010-01-13T15:29:50.283+00:00",
+        "orderedBy": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/list-order",
+              "code": "system",
+              "display": "Sorted by System"
+            }
+          ]
+        },
+        "entry": [
+          {
+            "item": {
+              "reference": "List/topicid1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "List",
+        "id": "topicid1",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+          ]
+        },
+        "status": "current",
+        "title": "Endometriosis of uterus",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "25851000000105",
+              "display": "Topic (EHR)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+        },
+        "encounter": {
+          "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+        },
+        "orderedBy": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/list-order",
+              "code": "system",
+              "display": "Sorted by System"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
+            "extension": [
+              {
+                "url": "this-is-not-a-target",
+                "valueReference": {
+                  "reference": "Condition/conditionid1"
+                }
+              }
+            ]
+          }
+        ],
+        "entry": [
+          {
+            "item": {
+              "reference": "List/category1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "List",
+        "id": "category1",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+          ]
+        },
+        "status": "current",
+        "mode": "snapshot",
+        "title": "History",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "24781000000107",
+              "display": "Category (EHR)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+        },
+        "encounter": {
+          "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+        },
+        "date": "2010-07-14T16:32:32.03+01:00",
+        "orderedBy": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/list-order",
+              "code": "system",
+              "display": "Sorted by System"
+            }
+          ]
+        },
+        "entry": [
+          {
+            "item": {
+              "reference": "ProcedureRequest/procedurerequestid1"
+            }
+          }
+        ]
+      }
+    },
+
+    {
+      "resource": {
+        "resourceType": "ProcedureRequest",
+        "id": "procedurerequestid1",
+        "status": "active",
+        "intent": "plan",
+        "authoredOn": "2010-01-13T15:29:50.1+00:00",
+        "code": {
+          "text": "test"
+        }
+      }
+    },
+
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "F550CC56-EF65-4934-A7B1-3DC2E02243C3",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Encounter-1"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://EMISWeb/A82038",
+            "value": "F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+          }
+        ],
+        "status": "finished",
+        "type": [
+          {
+            "text": "GP Surgery"
+          }
+        ],
+        "subject": {
+          "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+        },
+        "participant": [
+          {
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/v3/ParticipationType",
+                    "code": "PPRF",
+                    "display": "primary performer"
+                  }
+                ]
+              }
+            ],
+            "individual": {
+              "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+            }
+          },
+          {
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-ParticipantType-1",
+                    "code": "REC",
+                    "display": "recorder"
+                  }
+                ]
+              }
+            ],
+            "individual": {
+              "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+            }
+          }
+        ],
+        "period": {
+          "start": "2010-01-13T15:20:00+00:00",
+          "end": "2010-01-13T16:20:00+00:00"
+        },
+        "location": [
+          {
+            "location": {
+              "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
+            }
+          }
+        ],
+        "serviceProvider": {
+          "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "conditionid1",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
+            "valueReference": {
+              "reference": "Observation/7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB"
+            }
+          },
+          {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+              "reference": "ReferralRequest/D2EA00FC-7B85-46C5-A0B7-E49C53C054D0"
+            }
+          },
+          {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+              "reference": "ReferralRequest/82A9E6C8-20CE-48DA-B6B3-15C39E5ABB5E"
+            }
+          },
+          {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+              "reference": "DocumentReference/8747DFC5-11B7-4A77-B2F3-7720CC58C2FC"
+            }
+          },
+          {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
+            "valueCode": "minor"
+          }
+        ],
+        "clinicalStatus": "active",
+        "onsetDateTime": "2020-09-06",
+        "abatementDateTime": "2020-10-04T00:00:00+01:00",
+        "assertedDate": "2020-09-07T10:12:02.093+01:00",
+        "asserter": {
+          "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+        },
+        "note": [
+          {
+            "text": "Condition note"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "54321",
+              "display": "test display",
+              "extension": [
+                {
+                  "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                  "extension": [
+                    {
+                      "url": "descriptionId",
+                      "valueId": "1234567"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

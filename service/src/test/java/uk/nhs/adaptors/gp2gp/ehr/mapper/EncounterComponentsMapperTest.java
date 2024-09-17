@@ -387,7 +387,7 @@ public class EncounterComponentsMapperTest {
     }
 
     @Test
-    public void When_MappingWithRelatedProblemWithIncorrectProblemExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
+    void When_MappingWithRelatedProblemWithIncorrectProblemExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
         when(codeableConceptCdMapper.mapToCdForTopic(anyString()))
             .thenCallRealMethod();
 
@@ -396,6 +396,25 @@ public class EncounterComponentsMapperTest {
         );
         var bundle = initializeMessageContext(
             TEST_DIRECTORY + "input-bundle-18-related-problem-invalid-problem-extension.json"
+        );
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
+    }
+
+    @Test
+    void When_MappingWithRelatedProblemWithIncorrectProblemExtensionExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
+        when(codeableConceptCdMapper.mapToCdForTopic(anyString()))
+            .thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(
+            TEST_DIRECTORY + "expected-components-18-related-problem-invalid-extension.xml"
+        );
+        var bundle = initializeMessageContext(
+            TEST_DIRECTORY + "input-bundle-19-related-problem-invalid-problem-extension-extension-url.json"
         );
         var encounter = extractEncounter(bundle);
 
