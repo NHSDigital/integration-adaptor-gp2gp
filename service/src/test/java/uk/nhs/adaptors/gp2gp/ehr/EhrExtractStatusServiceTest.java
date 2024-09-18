@@ -48,7 +48,7 @@ class EhrExtractStatusServiceTest {
     public static final int EIGHT_DAYS = 8;
     public static final String ERROR_CODE = "99";
     public static final String ALTERNATIVE_ERROR_CODE = "26";
-    public static final String ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
+    public static final String ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
     private static final Instant NOW = Instant.now();
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     public static final String ACK_TYPE = "AA";

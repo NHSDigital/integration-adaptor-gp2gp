@@ -120,7 +120,7 @@ public class EhrExtractStatusService {
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
     public static final int EHR_EXTRACT_SENT_DAYS_LIMIT = 8;
     private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
-    public static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
+    public static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
