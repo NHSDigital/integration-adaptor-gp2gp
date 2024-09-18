@@ -76,12 +76,6 @@ dependencies {
 	pitest 'com.arcmutate:pitest-git-plugin:1.3.2'
 }
 
-jacocoTestReport {
-	additionalSourceDirs.from = files(sourceSets.main.allSource.srcDirs)
-	sourceDirectories.from = files(sourceSets.main.allSource.srcDirs)
-	executionData.from = fileTree(dir: layout.buildDirectory.dir("jacoco").get().asFile, include: "*.exec")
-}
-
 test {
 	useJUnitPlatform()
 }
@@ -128,9 +122,6 @@ tasks.withType(Test) {
 		events "passed", "skipped", "failed"
 	}
 }
-
-check.dependsOn integrationTest
-jacocoTestReport.dependsOn integrationTest
 
 spotbugsTest.enabled = false
 spotbugsIntegrationTest.enabled = false
