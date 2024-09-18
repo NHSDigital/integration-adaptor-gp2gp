@@ -10,9 +10,7 @@ import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -23,7 +21,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.client.result.UpdateResult;
@@ -124,29 +121,14 @@ public class EhrExtractStatusService {
     private int ehrExtractSentDaysLimit;
 
     private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
-    private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE
-                                    = format("The acknowledgement has been received after %s days", 8);
+    private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = format("No acknowledgement has been received within %s days", 8);
     private static final String ACK = "ACK";
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
     private final TimestampService timestampService;
 
-    @Scheduled(cron = "${timeout.cronTime}")
-    public void checkForEhrExtractAckTimeouts() {
-        List<EhrExtractStatus> inProgressEhrExtractTransfers = findInProgressTransfers();
-        var now = Instant.now();
-        var ehrExtractStatusWithExceededUpdateLimit = inProgressEhrExtractTransfers
-            .stream()
-            .filter(ehrExtractStatus -> Objects.isNull(ehrExtractStatus.getEhrReceivedAcknowledgement()))
-            .filter(ehrExtractStatus -> hasLastUpdateExceededEightDays(ehrExtractStatus, now));
-
-        updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(ehrExtractStatusWithExceededUpdateLimit,
-                                                                      UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                      UNEXPECTED_CONDITION_ERROR_MESSAGE);
-    }
-
-    boolean hasEhrStatusReceivedAckWithUnexpectedConditionErrors(String conversationId) {
+    boolean hasErrorsInEhrStatusReceivedAck(String conversationId) {
 
         var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "NACK");
 
@@ -168,50 +150,7 @@ public class EhrExtractStatusService {
         return ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg.isPresent();
     }
 
-    void updateEhrExtractStatusListWithEhrReceivedAcknowledgementError(Stream<EhrExtractStatus> ehrExtractStatusList,
-                                                                       String errorCode,
-                                                                       String errorMessage) {
-
-        ehrExtractStatusList.forEach(ehrExtractStatus -> {
-            try {
-                updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(), errorCode, errorMessage);
-            } catch (EhrExtractException exception) {
-
-                logger().error("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}",
-                               ehrExtractStatus.getConversationId(), exception);
-                throw exception;
-            } catch (Exception exception) {
-                logger().error("An unexpected error occurred for conversation_id: {}", ehrExtractStatus.getConversationId(), exception);
-                throw exception;
-            }
-        });
-    }
-
-    private void updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
-                                                               String errorCode,
-                                                               String errorMessage) {
-
-        Update update = createUpdateWithUpdatedAt();
-        update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder().code(errorCode).display(errorMessage).build());
-
-        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(
-            createQueryForConversationId(conversationId),
-            update,
-            getReturningUpdatedRecordOption(),
-            EhrExtractStatus.class);
-
-        if (ehrExtractStatus == null) {
-            throw new EhrExtractException(format(
-                "Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, conversation_id: %s",
-                conversationId));
-        }
-
-        logger().info("EHR status (EHR received acknowledgement) record successfully "
-                      + "updated in the database with error information conversation_id: {}", conversationId);
-
-    }
-
-    private boolean hasLastUpdateExceededEightDays(EhrExtractStatus ehrExtractStatus, Instant time) {
+    public boolean hasLastUpdateExceededEightDays(EhrExtractStatus ehrExtractStatus, Instant time) {
 
         if (ehrExtractStatus.getEhrExtractCorePending() == null) {
             return false;
@@ -405,9 +344,11 @@ public class EhrExtractStatusService {
         }
 
         if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())
-            && hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId)) {
+            && hasErrorsInEhrStatusReceivedAck(conversationId)) {
 
-            logger().warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
+            logger().warn("Received an ACK message with conversation_id: {}, "
+                          + "but it is being ignored because the EhrExtract has already been marked as a failure and 8 days have passed.",
+                          conversationId);
             return;
         }
 
@@ -568,35 +509,6 @@ public class EhrExtractStatusService {
         return updateEhrExtractStatusAttachmentSentToMhs(taskDefinition, messageIds);
     }
 
-    public List<EhrExtractStatus> findInProgressTransfers() {
-
-        var failedNme = new Criteria();
-        failedNme.andOperator(
-            Criteria.where("ackPending.typeCode").is("AE"),
-            Criteria.where(ERROR).exists(true));
-
-        var complete = new Criteria();
-        complete.andOperator(
-            Criteria.where("ackPending.typeCode").is("AA"),
-            Criteria.where("ackToRequester.typeCode").is("AA"),
-            Criteria.where(ERROR).exists(false),
-            Criteria.where("ehrReceivedAcknowledgement.conversationClosed").exists(true),
-            Criteria.where("ehrReceivedAcknowledgement.errors").exists(false)
-        );
-
-        var failedIncumbent = new Criteria();
-        failedIncumbent.andOperator(
-            Criteria.where("ehrReceivedAcknowledgement.errors").exists(true)
-        );
-
-        var queryCriteria = new Criteria();
-        queryCriteria.norOperator(failedNme, complete, failedIncumbent);
-
-        var query = Query.query(queryCriteria);
-
-        return mongoTemplate.find(query, EhrExtractStatus.class);
-    }
-
     private EhrExtractStatus updateEhrExtractStatusDocumentSentToMHS(SendDocumentTaskDefinition taskDefinition, List<String> messageIds) {
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
 
@@ -649,21 +561,21 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    private FindAndModifyOptions getReturningUpdatedRecordOption() {
+    public FindAndModifyOptions getReturningUpdatedRecordOption() {
         FindAndModifyOptions findAndModifyOptions = new FindAndModifyOptions();
         findAndModifyOptions.returnNew(true);
 
         return findAndModifyOptions;
     }
 
-    private Query createQueryForConversationId(String conversationId) {
+    public Query createQueryForConversationId(String conversationId) {
         Query query = new Query();
         query.addCriteria(Criteria.where(CONVERSATION_ID).is(conversationId));
 
         return query;
     }
 
-    private Update createUpdateWithUpdatedAt() {
+    public Update createUpdateWithUpdatedAt() {
         Instant now = Instant.now();
         Update update = new Update();
 
