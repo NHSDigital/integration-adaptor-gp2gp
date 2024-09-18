@@ -240,7 +240,7 @@ public class DiagnosticReportMapper {
         var narrativeStatementObservationComments = observations.stream()
             .filter(Observation::hasCode)
             .filter(this::hasCommentNote)
-            .map(observation -> StringUtils.isNotBlank(observation.getComment())
+            .map(observation -> observation.hasComment()
                 ? buildNarrativeStatementForDiagnosticReport(
                     issuedElement,
                     CommentType.USER_COMMENT.getCode(),
