@@ -80,6 +80,10 @@ test {
 	useJUnitPlatform()
 }
 
+jacocoTestReport {
+	dependsOn = []
+}
+
 sourceSets {
 	integrationTest {
 		java {

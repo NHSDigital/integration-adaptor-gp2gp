@@ -105,7 +105,11 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Execute Unit Tests
-        run: ./gradlew test jacocoTestReport --parallel --build-cache
+        run: ./gradlew test --parallel --build-cache
+        working-directory: ./service
+
+      - name: Execute Jacoco Coverage
+        run: ./gradlew jacocoTestReport
         working-directory: ./service
 
       - name: Collect Artifacts
@@ -118,7 +122,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: 'Unit Test Reports'
+          name: 'Unit Test & Jacoco Reports'
           path: ./artifacts/**
           compression-level: 9
 
@@ -165,7 +169,11 @@ jobs:
         working-directory: ./docker
 
       - name: Execute Integration Tests
-        run: ./gradlew integrationTest jacocoTestReport
+        run: ./gradlew integrationTest
+        working-directory: ./service
+
+      - name: Execute Jacoco Coverage
+        run: ./gradlew jacocoTestReport
         working-directory: ./service
 
       - name: Dump Docker Logs
@@ -187,7 +195,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: 'Integration Test Reports & Docker Logs'
+          name: 'Integration Test Reports, Jacoco Reports & Docker Logs'
           path: ./artifacts/**
           compression-level: 9
 
