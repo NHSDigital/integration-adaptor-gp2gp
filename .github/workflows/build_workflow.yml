@@ -105,7 +105,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Execute Unit Tests
-        run: ./gradlew test --parallel --build-cache
+        run: ./gradlew test jacocoTestReport --parallel --build-cache
         working-directory: ./service
 
       - name: Collect Artifacts
@@ -165,7 +165,7 @@ jobs:
         working-directory: ./docker
 
       - name: Execute Integration Tests
-        run: ./gradlew integrationTest
+        run: ./gradlew integrationTest jacocoTestReport
         working-directory: ./service
 
       - name: Dump Docker Logs
