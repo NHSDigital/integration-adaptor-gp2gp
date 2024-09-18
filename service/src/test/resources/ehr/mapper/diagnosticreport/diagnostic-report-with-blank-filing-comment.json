@@ -1,0 +1,45 @@
+{
+    "resourceType":"DiagnosticReport",
+    "id":"96B93E28-293D-46E7-B4C2-D477EEBF7098",
+    "meta":{
+      "profile":[
+        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+      ]
+    },
+    "identifier":[
+      {
+        "system":"https://EMISWeb/A82038",
+        "value":"96B93E28-293D-46E7-B4C2-D477EEBF7098"
+      }
+    ],
+    "status":"unknown",
+    "category":{
+      "coding":[
+        {
+          "system":"http://hl7.org/fhir/v2/0074",
+          "code":"PAT",
+          "display":"Pathology (gross & histopath, not surgical)"
+        }
+      ]
+    },
+    "code":{
+      "coding":[
+        {
+          "system":"http://snomed.info/sct",
+          "code":"721981007",
+          "display":"Diagnostic studies report"
+        }
+      ]
+    },
+    "subject":{
+      "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+    },
+    "issued":"2010-02-25T15:41:00+00:00",
+    "result":[
+      {
+        "reference":"Observation/6E843FD3-5E30-444A-9105-DADCA33EF177"
+      },      {
+        "reference":"Observation/6E843FD3-5E30-444A-9105-DADCA33EF177"
+      }
+    ]
+}
