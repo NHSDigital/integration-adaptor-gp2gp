@@ -401,12 +401,14 @@ public class EhrExtractStatusService {
         if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())
             && hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId)) {
 
-            logger().warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
+            logger().warn("Received an ACK message with conversation_id: {}, "
+                          + "but it is being ignored because the EhrExtract has already been marked as a failure and 8 days have passed.",
+                          conversationId);
             return;
         }
 
         if (hasFinalAckBeenReceived(conversationId)) {
-            logger().warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            logger().warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
             return;
         }
 
@@ -437,7 +439,7 @@ public class EhrExtractStatusService {
                 + "' that is not recognised");
         }
 
-        logger().info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+        logger().info("Database successfully updated with EHRAcknowledgement, conversation_id: {}", conversationId);
     }
 
     public void saveAckForConversation(String conversationId, EhrReceivedAcknowledgement ack) {
@@ -534,14 +536,10 @@ public class EhrExtractStatusService {
 
         if (ehrExtractStatus == null) {
             throw new EhrExtractException(format(
-                "Couldn't update EHR status with error information because it doesn't exist conversation_id: %s",
-                conversationId
-            ));
+                "Couldn't update EHR status with error information because it doesn't exist conversation_id: %s", conversationId));
         }
 
-        logger().info("EHR status record successfully updated in the database with error information conversation_id: {}",
-            conversationId
-        );
+        logger().info("EHR status record successfully updated in the database with error information conversation_id: {}", conversationId);
 
         return ehrExtractStatus;
     }

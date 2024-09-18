@@ -112,7 +112,9 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
+            .warn("Received an ACK message with conversation_id: {}, "
+                  + "but it is being ignored because the EhrExtract has already been marked as a failure and 8 days have passed.",
+                  conversationId);
     }
 
     @Test
@@ -143,7 +145,7 @@ class EhrExtractStatusServiceTest {
         verify(logger, never())
             .warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     @Test
@@ -179,7 +181,7 @@ class EhrExtractStatusServiceTest {
         verify(logger, never())
             .warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     @Test
@@ -202,7 +204,7 @@ class EhrExtractStatusServiceTest {
 
         verify(logger, never()).warn("Received an ACK message with a conversation_id={} exceeded 8 days", conversationId);
         verify(logger, times(1))
-                            .info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+            .info("Database successfully updated with EHRAcknowledgement, conversation_id: {}", conversationId);
     }
 
     @Test
@@ -642,7 +644,7 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     private String generateRandomUppercaseUUID() {
