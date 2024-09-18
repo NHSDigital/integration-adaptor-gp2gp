@@ -16,9 +16,9 @@ import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Specimen;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -29,6 +29,8 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.mockito.stubbing.Answer;
 
+import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
+import uk.nhs.adaptors.gp2gp.utils.FileParsingUtility;
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
@@ -38,8 +40,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
-import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
-import uk.nhs.adaptors.gp2gp.utils.FileParsingUtility;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import static org.mockito.ArgumentMatchers.anyList;
@@ -146,9 +146,8 @@ class DiagnosticReportMapperTest {
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
-        assertAll(
-            () -> assertThat(actualXml).doesNotContainPattern("<NarrativeStatement\\s+classCode=\"[^\"]+\"\\s+moodCode=\"[^\"]+\">\n")
-        );
+        assertThat(actualXml)
+            .doesNotContainPattern("<NarrativeStatement\\s+classCode=\"[^\"]+\"\\s+moodCode=\"[^\"]+\">\n");
     }
 
     @Test
@@ -199,9 +198,7 @@ class DiagnosticReportMapperTest {
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
-        assertAll(
-            () -> assertThat(actualXml).containsIgnoringWhitespaces(NOPAT_HL7_CONFIDENTIALITY_CODE)
-        );
+        assertThat(actualXml).containsIgnoringWhitespaces(NOPAT_HL7_CONFIDENTIALITY_CODE);
     }
 
     private Bundle getBundleResourceFromJson(String filename) {
