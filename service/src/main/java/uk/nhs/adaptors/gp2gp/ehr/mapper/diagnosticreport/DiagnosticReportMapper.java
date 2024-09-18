@@ -240,19 +240,15 @@ public class DiagnosticReportMapper {
         var narrativeStatementObservationComments = observations.stream()
             .filter(Observation::hasCode)
             .filter(this::hasCommentNote)
-            .map(observation -> {
-                final var comment = observation.getComment();
-                if (StringUtils.isNotBlank(comment)) {
-                    return buildNarrativeStatementForDiagnosticReport(
-                        issuedElement,
-                        CommentType.USER_COMMENT.getCode(),
-                        comment,
-                        confidentialityService.generateConfidentialityCode(observation).orElse(null)
-                    );
-                }
-
-                return null;
-            })
+            .map(observation -> StringUtils.isNotBlank(observation.getComment())
+                ? buildNarrativeStatementForDiagnosticReport(
+                    issuedElement,
+                    CommentType.USER_COMMENT.getCode(),
+                    observation.getComment(),
+                    confidentialityService.generateConfidentialityCode(observation).orElse(null)
+                )
+                : StringUtils.EMPTY
+            )
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.joining(System.lineSeparator()));
 
