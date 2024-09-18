@@ -52,6 +52,7 @@ class DiagnosticReportMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
 
     private static final String INPUT_JSON_BUNDLE = "fhir_bundle.json";
+    private static final String INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS = "fhir_bundle_with_filing_comments.json";
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
 
@@ -69,6 +70,7 @@ class DiagnosticReportMapperTest {
     private static final String INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.json";
     private static final String INPUT_JSON_EXTENSION_ID = "diagnostic-report-with-extension-id.json";
     private static final String INPUT_JSON_URN_OID_EXTENSION_ID = "diagnostic-report-with-urn-oid-extension-id.json";
+    private static final String INPUT_JSON_BLANK_FILING_COMMENT = "diagnostic-report-with-blank-filing-comment.json";
 
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
     private static final String OUTPUT_XML_STATUS_NARRATIVE = "diagnostic-report-with-status-narrative.xml";
@@ -133,6 +135,24 @@ class DiagnosticReportMapperTest {
         assertThat(removeLineEndings(outputMessage)).isEqualTo(removeLineEndings(expectedOutputMessage.toString()));
     }
 
+    @Test
+    void When_DiagnosticReport_With_BlankFilingComment_Expect_NoNarrativeStatementPresent() {
+        final String diagnosticReportFileName = "diagnostic-report-with-blank-filing-comment.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS);
+        final InputBundle inputBundle = new InputBundle(bundle);
+
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+
+        diagnosticReport.setStatus(null);
+
+        final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        assertAll(
+            () -> assertThat(actualXml).doesNotContainPattern("<NarrativeStatement\\s+classCode=\"[^\"]+\"\\s+moodCode=\"[^\"]+\">\n")
+        );
+    }
+
     @Nested
     final class ConfidentialityCodeMappingTests {
         @Test
@@ -169,13 +189,15 @@ class DiagnosticReportMapperTest {
 
         @Test
         void When_DiagnosticReport_With_RedactedFilingComment_Expect_ConfidentialityCodePresentWithinUserCommentNarrativeStatement() {
-            final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson("diagnostic-report-with-one-result.json");
-            final Bundle bundle = getBundleResourceFromJson("fhir_bundle_redacted_filing_comment.json");
+            final String diagnosticReportFileName = "diagnostic-report-with-one-result.json";
+            final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS);
+            final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+            final InputBundle inputBundle = new InputBundle(bundle);
 
             when(confidentialityService.generateConfidentialityCode(bundle.getEntry().getFirst().getResource()))
                 .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
             when(messageContext.getInputBundleHolder())
-                .thenReturn(new InputBundle(bundle));
+                .thenReturn(inputBundle);
 
             diagnosticReport.setStatus(null);
 
