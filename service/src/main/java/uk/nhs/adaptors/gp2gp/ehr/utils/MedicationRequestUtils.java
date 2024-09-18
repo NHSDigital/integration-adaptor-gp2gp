@@ -5,7 +5,7 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 
 public class MedicationRequestUtils {
-    public static boolean isMedicationRequestSuppressed(MedicationRequest medicationRequest) {
+    public static boolean isStoppedMedicationOrder(MedicationRequest medicationRequest) {
         return medicationRequest.hasStatus() && medicationRequest.hasIntent()
             && medicationRequest.getStatus().equals(MedicationRequest.MedicationRequestStatus.STOPPED)
             && medicationRequest.getIntent().equals(MedicationRequest.MedicationRequestIntent.ORDER);

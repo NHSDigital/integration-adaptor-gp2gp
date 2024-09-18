@@ -5,6 +5,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.QuestionnaireResponse;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.jetbrains.annotations.NotNull;
@@ -29,9 +30,11 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
+import uk.nhs.adaptors.gp2gp.utils.IdUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -224,7 +227,8 @@ public class EncounterComponentsMapperTest {
 
         System.out.println(mappedXml);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -235,7 +239,8 @@ public class EncounterComponentsMapperTest {
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @ParameterizedTest
@@ -304,7 +309,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -318,7 +324,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -329,7 +336,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -343,7 +351,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -358,7 +367,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
@@ -369,7 +379,8 @@ public class EncounterComponentsMapperTest {
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @ParameterizedTest
@@ -383,7 +394,79 @@ public class EncounterComponentsMapperTest {
 
         System.out.println(mappedXml);
 
-        assertThat(removeLineEndingsAndWhiteSpace(mappedXml)).isEqualTo(removeLineEndingsAndWhiteSpace(expectedXml));
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
+    }
+
+    @Test
+    void When_MappingWithRelatedProblemWithIncorrectProblemExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
+        when(codeableConceptCdMapper.mapToCdForTopic(anyString()))
+            .thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(
+            TEST_DIRECTORY + "expected-components-18-related-problem-invalid-extension.xml"
+        );
+        var bundle = initializeMessageContext(
+            TEST_DIRECTORY + "input-bundle-18-related-problem-invalid-problem-extension.json"
+        );
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
+    }
+
+    @Test
+    void When_MappingWithRelatedProblemWithIncorrectProblemExtensionExtensionUrl_Expect_UnspecifiedProblemWithOriginalText() {
+        when(codeableConceptCdMapper.mapToCdForTopic(anyString()))
+            .thenCallRealMethod();
+
+        var expectedXml = ResourceTestFileUtils.getFileContent(
+            TEST_DIRECTORY + "expected-components-18-related-problem-invalid-extension.xml"
+        );
+        var bundle = initializeMessageContext(
+            TEST_DIRECTORY + "input-bundle-19-related-problem-invalid-problem-extension-extension-url.json"
+        );
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
+    }
+
+    @Test
+    void When_MapResourceToComponent_With_UnsupportedResource_Expect_PlaceholderCommentProduced() {
+        var resource = new QuestionnaireResponse()
+            .setIdElement(
+                IdUtil.buildIdType(ResourceType.QuestionnaireResponse, "questionnaire-response-id")
+            );
+
+        var expectedComponent = "<!-- QuestionnaireResponse/questionnaire-response-id -->";
+
+        var actualComponent = encounterComponentsMapper.mapResourceToComponent(resource);
+
+        assertThat(actualComponent)
+            .isEqualTo(Optional.of(expectedComponent));
+    }
+
+    @Test
+    void When_MappingTopic_With_StoppedMedicationRequest_Expect_MedicationStatementNotIncludedInOutput() {
+        // GP2GP Currently has no mechanism to transfer the concept that a Medication has been "stopped"
+        // Until there is some way to convey this, it makes more sense to not send the misleading medication.
+        var expectedXml = ResourceTestFileUtils.getFileContent(
+            TEST_DIRECTORY + "expected-components-20-medication-statement-not-included.xml"
+        );
+        var bundle = initializeMessageContext(
+            TEST_DIRECTORY + "input-bundle-20-medication-request-stopped-order.json"
+        );
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+
+        assertThat(mappedXml)
+            .isEqualToIgnoringWhitespace(expectedXml);
     }
 
     private static Stream<Arguments> containedResourceMappingArguments() {
@@ -395,17 +478,6 @@ public class EncounterComponentsMapperTest {
             Arguments.of("input-two-resources-category.json", "output-two-resources-category.xml"),
             Arguments.of("input-referenced-observation.json", "output-referenced-observation.xml")
         );
-    }
-
-    private String removeLineEndingsAndWhiteSpace(String input) {
-        return input
-            .replace("\n", " ")
-            .replace("\r", " ")
-            .replaceAll("\\s+", " ")
-            .replaceAll("\"\\s>", "\">")
-            .replaceAll("\"\\s/>", "\"/>")
-            .replaceAll("\\s+<", "<");
-
     }
 
     private Encounter extractEncounter(Bundle bundle) {
