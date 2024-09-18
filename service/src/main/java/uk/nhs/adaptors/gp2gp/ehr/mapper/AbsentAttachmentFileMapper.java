@@ -15,6 +15,6 @@ public final class AbsentAttachmentFileMapper {
             .conversationId(conversationId)
             .build();
 
-        return TemplateUtils.fillTemplate(ABSENT_ATTACHMENT.mustacheTemplate, absentAttachment);
+        return TemplateUtils.fillTemplate(ABSENT_ATTACHMENT.getMustacheTemplate(), absentAttachment);
     }
 }
