@@ -2,32 +2,33 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.AbsentAttachmentUtils.buildAbsentAttachmentFileName;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.apache.commons.lang3.StringUtils;
+import lombok.RequiredArgsConstructor;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AbsentAttachmentFileMapper;
+import uk.nhs.adaptors.gp2gp.gpc.DetectTranslationCompleteService;
+import uk.nhs.adaptors.gp2gp.gpc.StorageDataWrapperProvider;
+import uk.nhs.adaptors.gp2gp.gpc.DocumentToMHSTranslator;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.common.utils.Base64Utils;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.AbsentAttachmentFileMapper;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.gpc.DetectTranslationCompleteService;
-import uk.nhs.adaptors.gp2gp.gpc.DocumentToMHSTranslator;
-import uk.nhs.adaptors.gp2gp.gpc.StorageDataWrapperProvider;
 
 import java.util.Optional;
 
 @Slf4j
 @Component
-@AllArgsConstructor(onConstructor = @__(@Autowired))
-public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAttachmentTaskDefinition> {
-
+@RequiredArgsConstructor
+public final class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAttachmentTaskDefinition> {
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final DocumentToMHSTranslator documentToMHSTranslator;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
+    private final AbsentAttachmentFileMapper absentAttachmentFileMapper;
 
     @Override
     public Class<GetAbsentAttachmentTaskDefinition> getTaskType() {
@@ -42,21 +43,15 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
 
     public EhrExtractStatus handleAbsentAttachment(DocumentTaskDefinition taskDefinition,
                                                    Optional<String> gpcResponseError) {
-        var taskId = taskDefinition.getTaskId();
-
-        var fileContent = Base64Utils.toBase64String(AbsentAttachmentFileMapper.mapDataToAbsentAttachment(
-            taskDefinition.getOriginalDescription(),
-            taskDefinition.getToOdsCode(),
-            taskDefinition.getConversationId()
-        ));
+        final String taskId = taskDefinition.getTaskId();
+        final String fileContent = getBase64FileContent(taskDefinition);
 
         final var storagePath = buildAbsentAttachmentFileName(taskDefinition.getDocumentId());
         final var fileName = buildAbsentAttachmentFileName(taskDefinition.getDocumentId());
 
         var mhsOutboundRequestData = documentToMHSTranslator.translateFileContentToMhsOutboundRequestData(taskDefinition, fileContent);
 
-        var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
-            .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
+        var storageDataWrapperWithMhsOutboundRequest = getStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
 
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, storagePath);
 
@@ -69,15 +64,28 @@ public class GetAbsentAttachmentTaskExecutor implements TaskExecutor<GetAbsentAt
         );
     }
 
+    private StorageDataWrapper getStorageDataWrapper(DocumentTaskDefinition taskDefinition, String mhsOutboundRequestData, String taskId) {
+        return StorageDataWrapperProvider.buildStorageDataWrapper(
+            taskDefinition,
+            mhsOutboundRequestData,
+            taskId
+        );
+    }
+
+    private String getBase64FileContent(DocumentTaskDefinition taskDefinition) {
+        final String fileContent = absentAttachmentFileMapper.mapFileDataToAbsentAttachment(
+            taskDefinition.getOriginalDescription(),
+            taskDefinition.getToOdsCode(),
+            taskDefinition.getConversationId()
+        );
+
+        return Base64Utils.toBase64String(fileContent);
+    }
+
     private String getErrorMessage(DocumentTaskDefinition taskDefinition, Optional<String> exceptionDisplay) {
-        if (exceptionDisplay.isPresent()) {
-            return exceptionDisplay.get();
-        }
+        final String fallbackMessage = "The document could not be retrieved";
+        final String message = exceptionDisplay.orElseGet(taskDefinition::getTitle);
 
-        if (!StringUtils.isEmpty(taskDefinition.getTitle())) {
-            return taskDefinition.getTitle();
-        }
-
-        return "The document could not be retrieved";
+        return StringUtils.isNotBlank(message) ? message : fallbackMessage;
     }
 }
