@@ -16,4 +16,5 @@ public class NarrativeStatementTemplateParameters {
     private String referenceContentType;
     private String referenceTitle;
     private String participant;
+    private String confidentialityCode;
 }

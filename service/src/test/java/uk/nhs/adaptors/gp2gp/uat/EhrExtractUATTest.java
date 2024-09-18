@@ -177,7 +177,7 @@ public class EhrExtractUATTest {
             randomIdGeneratorService, confidentialityService);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
             = new DocumentReferenceToNarrativeStatementMapper(
-                messageContext, new SupportedContentTypes(), timestampService, participantMapper);
+                messageContext, new SupportedContentTypes(), participantMapper, confidentialityService);
 
         return new EncounterComponentsMapper(
             messageContext,
