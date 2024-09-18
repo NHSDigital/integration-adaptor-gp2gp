@@ -77,10 +77,6 @@ dependencies {
 }
 
 jacocoTestReport {
-	reports {
-		xml.enabled false
-		html.enabled true
-	}
 	additionalSourceDirs.from = files(sourceSets.main.allSource.srcDirs)
 	sourceDirectories.from = files(sourceSets.main.allSource.srcDirs)
 	executionData.from = fileTree(dir: layout.buildDirectory.dir("jacoco").get().asFile, include: "*.exec")
