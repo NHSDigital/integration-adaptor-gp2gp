@@ -113,7 +113,8 @@ class EhrExtractStatusServiceTest {
 
         verify(logger, times(1))
             .warn("Received an ACK message with conversation_id: {}, "
-                  + "but it is being ignored because the EhrExtract has already been marked as a failure and 8 days have passed.",
+                  + "but it is being ignored because the EhrExtract has already been marked as failed "
+                  + "from not receiving an acknowledgement from the requester in time.",
                   conversationId);
     }
 
