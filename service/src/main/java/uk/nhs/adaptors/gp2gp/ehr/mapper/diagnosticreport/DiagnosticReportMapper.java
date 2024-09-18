@@ -253,7 +253,7 @@ public class DiagnosticReportMapper {
 
                 return null;
             })
-            .filter(StringUtils::isNotBlank)
+            .filter(StringUtils::isNotEmpty)
             .collect(Collectors.joining(System.lineSeparator()));
 
         reportLevelNarrativeStatements.append(narrativeStatementObservationComments);
