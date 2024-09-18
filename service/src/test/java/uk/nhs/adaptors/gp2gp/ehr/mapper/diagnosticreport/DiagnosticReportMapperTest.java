@@ -177,8 +177,6 @@ class DiagnosticReportMapperTest {
             when(messageContext.getInputBundleHolder())
                 .thenReturn(new InputBundle(bundle));
 
-            // The presence of a status withing DiagnosticReport
-            // generates an additional NarrativeStatement.
             diagnosticReport.setStatus(null);
 
             final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
