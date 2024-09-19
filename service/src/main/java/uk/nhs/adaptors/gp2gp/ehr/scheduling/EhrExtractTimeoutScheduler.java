@@ -41,8 +41,8 @@ public class EhrExtractTimeoutScheduler {
         var now = Instant.now();
         var ehrExtractStatusWithExceededUpdateLimit = inProgressEhrExtractTransfers
             .stream()
-            .filter(ehrExtractStatus -> Objects.isNull(ehrExtractStatus.getEhrReceivedAcknowledgement()))
-            .filter(ehrExtractStatus -> ehrExtractStatusService.hasLastUpdateExceededEightDays(ehrExtractStatus, now));
+            .filter(ehrExtractStatus -> Objects.isNull(ehrExtractStatus.getEhrReceivedAcknowledgement())
+                                        && ehrExtractStatusService.hasLastUpdateExceededEightDays(ehrExtractStatus, now));
 
         ehrExtractStatusWithExceededUpdateLimit.forEach(ehrExtractStatus -> {
             try {
@@ -63,8 +63,8 @@ public class EhrExtractTimeoutScheduler {
     }
 
     void updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
-                                                               String errorCode,
-                                                               String errorMessage) {
+                                                       String errorCode,
+                                                       String errorMessage) {
 
         Update update = ehrExtractStatusService.createUpdateWithUpdatedAt();
         update.addToSet(RECEIVED_ACK_ERRORS,
