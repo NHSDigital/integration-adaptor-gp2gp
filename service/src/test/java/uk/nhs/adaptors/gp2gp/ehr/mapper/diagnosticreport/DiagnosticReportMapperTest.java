@@ -32,7 +32,6 @@ import org.mockito.stubbing.Answer;
 import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
 import uk.nhs.adaptors.gp2gp.utils.FileParsingUtility;
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
@@ -52,6 +51,7 @@ class DiagnosticReportMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
 
     private static final String INPUT_JSON_BUNDLE = "fhir_bundle.json";
+    private static final String INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS = "fhir_bundle_with_filing_comments.json";
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
 
@@ -100,22 +100,18 @@ class DiagnosticReportMapperTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        final Bundle bundle = new FhirParseService()
-            .parseResource(ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + INPUT_JSON_BUNDLE), Bundle.class);
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
         when(messageContext.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
         when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockIdForResourceAndId());
         when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockIdForReference());
-
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(specimenMapper.mapSpecimenToCompoundStatement(any(Specimen.class), anyList(), any(DiagnosticReport.class)))
             .thenAnswer(mockSpecimenMapping());
-
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
         mapper = new DiagnosticReportMapper(
             messageContext, specimenMapper, new ParticipantMapper(), randomIdGeneratorService, confidentialityService);
@@ -135,6 +131,23 @@ class DiagnosticReportMapperTest {
         final String outputMessage = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
         assertThat(removeLineEndings(outputMessage)).isEqualTo(removeLineEndings(expectedOutputMessage.toString()));
+    }
+
+    @Test
+    void When_DiagnosticReport_With_BlankFilingComment_Expect_NoNarrativeStatementPresent() {
+        final String diagnosticReportFileName = "diagnostic-report-with-blank-filing-comment.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS);
+        final InputBundle inputBundle = new InputBundle(bundle);
+
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+
+        diagnosticReport.setStatus(null);
+
+        final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        assertThat(actualXml)
+            .doesNotContainPattern("<NarrativeStatement\\s+classCode=\"[^\"]+\"\\s+moodCode=\"[^\"]+\">\n");
     }
 
     @Test
@@ -167,6 +180,30 @@ class DiagnosticReportMapperTest {
             () -> assertThat(result).doesNotContain(NOPAT_HL7_CONFIDENTIALITY_CODE),
             () -> assertThat(ConfidentialityCodeUtility.getSecurityCodeFromResource(diagnosticReport)).isEqualTo("NOSCRUB")
         );
+    }
+
+    @Test
+    void When_DiagnosticReport_With_RedactedFilingComment_Expect_ConfidentialityCodePresentWithinUserCommentNarrativeStatement() {
+        final String diagnosticReportFileName = "diagnostic-report-with-one-result.json";
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS);
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+        final InputBundle inputBundle = new InputBundle(bundle);
+
+        when(confidentialityService.generateConfidentialityCode(bundle.getEntry().getFirst().getResource()))
+            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
+        when(messageContext.getInputBundleHolder())
+            .thenReturn(inputBundle);
+
+        diagnosticReport.setStatus(null);
+
+        final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        assertThat(actualXml).containsIgnoringWhitespaces(NOPAT_HL7_CONFIDENTIALITY_CODE);
+    }
+
+    private Bundle getBundleResourceFromJson(String filename) {
+        final String filePath = TEST_FILE_DIRECTORY + filename;
+        return FileParsingUtility.parseResourceFromJsonFile(filePath, Bundle.class);
     }
 
     private DiagnosticReport getDiagnosticReportResourceFromJson(String filename) {
