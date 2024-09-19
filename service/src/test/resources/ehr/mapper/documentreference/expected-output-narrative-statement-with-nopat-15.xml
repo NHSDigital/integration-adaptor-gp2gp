@@ -4,10 +4,6 @@
         <text>Type: Referral Letter (21-Sep-2020) Author Org: Organisation name Custodian Org: Organisation name Description: for 2 week rule referral - skin ${ERROR_MESSAGE_PLACEHOLDER_ID=394559384658936}Setting: Practice Setting Text</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200921" />
-        <confidentialityCode
-              code="NOPAT"
-              codeSystem="2.16.840.1.113883.4.642.3.47"
-              displayName="no disclosure to patient, family or caregivers without attending provider's authorization" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
@@ -20,6 +16,10 @@
                 <text mediaType="${CONTENT_TYPE_PLACEHOLDER_ID=394559384658936}">
                     <reference value="file://localhost/${FILENAME_PLACEHOLDER_ID=394559384658936}"/>
                 </text>
+                <confidentialityCode
+                  code="NOPAT"
+                  codeSystem="2.16.840.1.113883.4.642.3.47"
+                  displayName="no disclosure to patient, family or caregivers without attending provider's authorization" />
             </referredToExternalDocument>
         </reference>
     </NarrativeStatement>

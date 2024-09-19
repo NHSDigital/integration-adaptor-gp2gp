@@ -4,9 +4,6 @@
         <text>{{comment}}</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="{{availabilityTime}}" />
-        {{#confidentialityCode}}
-                {{{confidentialityCode}}}
-        {{/confidentialityCode}}
         {{#participant}}
         {{{.}}}
         {{/participant}}
@@ -18,6 +15,9 @@
                 <text mediaType="{{referenceContentType}}">
                     <reference value="file://localhost/{{referenceTitle}}"/>
                 </text>
+                {{#confidentialityCode}}
+                    {{{confidentialityCode}}}
+                {{/confidentialityCode}}
             </referredToExternalDocument>
         </reference>
         {{/hasReference}}
