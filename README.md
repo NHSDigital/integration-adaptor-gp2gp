@@ -17,9 +17,8 @@ GP2GP 2.2b producer, or those wishing to decommission their existing producer, m
 ## Table of contents
 
 1. [Guidance for operating the adaptor as a New Market Entrant](OPERATING.md)
-2. [Guidance on integrating with the adaptors APIs](#how-to-query-the-ehr-status-api)
-3. [Guidance for developing the adaptor](developer-information.md)
-4. [Documentation on how this adaptor maps GPConnect concepts to GP2GP concepts](https://github.com/NHSDigital/patient-switching-adaptors-mapping-documentation)
+1. [Guidance on integrating with the adaptors APIs](#how-to-query-the-ehr-status-api)
+1. [Documentation on how this adaptor maps GPConnect concepts to GP2GP concepts](https://github.com/NHSDigital/patient-switching-adaptors-mapping-documentation)
 
 ## How to query the EHR Status API
 
@@ -297,6 +296,11 @@ The response will contain a JSON array of the following:
 ### Sequence Diagram
 
 ![Sequence diagram](documentation/sequence/sequence.svg)
+
+## NIA Support (NHS England) guidance
+
+If you are are New Market Entrant, please read the guidance linked from the [table of contents](#table-of-contents).
+If you are looking to make changes to the adaptor you should first read the [guidance for developing the adaptor](nhs-england-developer-information.md).
 
 ## Disclaimer
 
