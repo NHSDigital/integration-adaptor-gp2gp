@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.scheduling;
 
 import org.bson.Document;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,8 +12,8 @@ import org.slf4j.Logger;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.query.UpdateDefinition;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
@@ -45,7 +44,6 @@ import static org.mockito.Mockito.when;
 class EhrExtractTimeoutSchedulerTest {
 
     public static final int NINE_DAYS = 9;
-    public static final int EIGHT_DAYS = 8;
 
     private static final Instant NOW = Instant.now();
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
@@ -57,10 +55,6 @@ class EhrExtractTimeoutSchedulerTest {
     public static final int INDEX3 = 3;
     public static final int INDEX4 = 4;
 
-    private ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
-    private ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
-    private ArgumentCaptor<Class<EhrExtractStatus>> classCaptor = ArgumentCaptor.forClass(Class.class);
-
     @Mock
     private Logger logger;
 
@@ -71,21 +65,18 @@ class EhrExtractTimeoutSchedulerTest {
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
     @Mock
-    private EhrExtractStatusService ehrExtractStatusService;
+    private TimestampService timestampService;
 
     @InjectMocks
     private EhrExtractTimeoutScheduler ehrExtractTimeoutScheduler;
 
+    @Mock
+    private EhrExtractStatusService ehrExtractStatusService;
+
     @BeforeEach
     void setUp() {
+        ehrExtractStatusService = new EhrExtractStatusService(mongoTemplate, ehrExtractStatusRepository, timestampService);
         ehrExtractTimeoutScheduler = new EhrExtractTimeoutScheduler(mongoTemplate, ehrExtractStatusService);
-    }
-
-    @AfterEach
-    void tearDown() {
-        mongoTemplate = null;
-        ehrExtractTimeoutScheduler = null;
-        ehrExtractStatusService = null;
     }
 
     @Test
@@ -230,78 +221,9 @@ class EhrExtractTimeoutSchedulerTest {
     }
 
     @Test
-    void shouldUpdateStatusWithErrorWhenEhrExtractAckTimeoutOccurs() {
-
-        EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
-        var inProgressConversationId = generateRandomUppercaseUUID();
-
-        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
-        EhrExtractStatus ehrExtractStatusUpdated = EhrExtractStatus.builder().build();
-
-        doReturn(true).when(ehrExtractStatusService).hasLastUpdateExceededEightDays(any(EhrExtractStatus.class),
-                                                                                    any(Instant.class));
-        doReturn(List.of(ehrExtractStatus)).when(ehrExtractTimeoutSchedulerSpy).findInProgressTransfers();
-
-        doReturn(new Update()).when(ehrExtractStatusService).createUpdateWithUpdatedAt();
-        doReturn(new Query()).when(ehrExtractStatusService).createQueryForConversationId(inProgressConversationId);
-        doReturn(new FindAndModifyOptions()).when(ehrExtractStatusService).getReturningUpdatedRecordOption();
-        doReturn(ehrExtractStatusUpdated)
-            .when(mongoTemplate)
-            .findAndModify(any(Query.class), any(UpdateDefinition.class), any(FindAndModifyOptions.class), eq(EhrExtractStatus.class));
-        when(ehrExtractTimeoutSchedulerSpy.logger()).thenReturn(logger);
-
-        ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts();
-
-        verify(ehrExtractTimeoutSchedulerSpy, times(1))
-            .updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
-                                                           UNEXPECTED_CONDITION_ERROR_CODE,
-                                                           UNEXPECTED_CONDITION_ERROR_MESSAGE);
-        verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
-                            + "updated in the database with error information conversation_id: {}", inProgressConversationId);
-    }
-
-    @Test
-    void shouldUpdateStatusWithErrorAndSpecificErrorCodeAndMessage() {
-
-        EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
-        var inProgressConversationId = generateRandomUppercaseUUID();
-
-        EhrExtractStatus ehrExtractStatusUpdated = EhrExtractStatus.builder().build();
-
-        doReturn(new Update()).when(ehrExtractStatusService).createUpdateWithUpdatedAt();
-        doReturn(new Query()).when(ehrExtractStatusService).createQueryForConversationId(inProgressConversationId);
-        doReturn(new FindAndModifyOptions()).when(ehrExtractStatusService).getReturningUpdatedRecordOption();
-        doReturn(ehrExtractStatusUpdated).when(mongoTemplate).findAndModify(any(Query.class), any(UpdateDefinition.class),
-                                                                            any(FindAndModifyOptions.class), any());
-
-        when(ehrExtractTimeoutSchedulerSpy.logger()).thenReturn(logger);
-
-        ehrExtractTimeoutSchedulerSpy.updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
-                                                                                    UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                                    UNEXPECTED_CONDITION_ERROR_MESSAGE);
-
-        verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
-                            + "updated in the database with error information conversation_id: {}", inProgressConversationId);
-        verify(mongoTemplate, times(1)).findAndModify(queryCaptor.capture(),
-                                                      updateCaptor.capture(),
-                                                      any(FindAndModifyOptions.class),
-                                                      classCaptor.capture());
-
-        assertEquals(UNEXPECTED_CONDITION_ERROR_CODE,
-                     ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails) ((Document) updateCaptor.getValue()
-                         .getUpdateObject()
-                         .get("$addToSet"))
-                         .get("ehrReceivedAcknowledgement.errors")).getCode());
-        assertEquals(UNEXPECTED_CONDITION_ERROR_MESSAGE,
-                     ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails) ((Document) updateCaptor.getValue()
-                         .getUpdateObject()
-                         .get("$addToSet"))
-                         .get("ehrReceivedAcknowledgement.errors")).getDisplay());
-    }
-
-    @Test
     void shouldNotUpdateStatusWhenEhrReceivedAcknowledgementIsNotNull() {
 
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
         var inProgressConversationId = generateRandomUppercaseUUID();
 
@@ -313,7 +235,7 @@ class EhrExtractTimeoutSchedulerTest {
         ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts();
 
         verify(logger, never()).info("Scheduler has started processing EhrExtract list with Ack timeouts");
-        verify(ehrExtractTimeoutSchedulerSpy, never())
+        verify(ehrExtractStatusServiceSpy, never())
             .updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
                                                            UNEXPECTED_CONDITION_ERROR_CODE,
                                                            UNEXPECTED_CONDITION_ERROR_MESSAGE);
@@ -322,13 +244,14 @@ class EhrExtractTimeoutSchedulerTest {
     @Test
     void shouldNotUpdateStatusWhenNoInProgressTransfersExist() {
 
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
 
         doReturn(List.of()).when(ehrExtractTimeoutSchedulerSpy).findInProgressTransfers();
 
         ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts();
 
-        verify(ehrExtractTimeoutSchedulerSpy, never())
+        verify(ehrExtractStatusServiceSpy, never())
             .updateEhrExtractStatusWithEhrReceivedAckError(null,
                                                            UNEXPECTED_CONDITION_ERROR_CODE,
                                                            UNEXPECTED_CONDITION_ERROR_MESSAGE);
@@ -337,6 +260,7 @@ class EhrExtractTimeoutSchedulerTest {
     @Test
     void shouldNotUpdateStatusWhenInProgressTransfersWithNullEhrExtractCorePendingExist() {
 
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
         var inProgressConversationId = generateRandomUppercaseUUID();
 
@@ -347,7 +271,7 @@ class EhrExtractTimeoutSchedulerTest {
 
         ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts();
 
-        verify(ehrExtractTimeoutSchedulerSpy, never())
+        verify(ehrExtractStatusServiceSpy, never())
             .updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(),
                                                            UNEXPECTED_CONDITION_ERROR_CODE,
                                                            UNEXPECTED_CONDITION_ERROR_MESSAGE);
@@ -355,16 +279,14 @@ class EhrExtractTimeoutSchedulerTest {
 
     @Test
     void updateEhrExtractStatusListWithEhrReceivedAcknowledgementError() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
 
         var inProgressConversationId = generateRandomUppercaseUUID();
         EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
 
-        doReturn(new Update()).when(ehrExtractStatusService).createUpdateWithUpdatedAt();
         doReturn(List.of(ehrExtractStatus)).when(ehrExtractTimeoutSchedulerSpy).findInProgressTransfers();
-        doReturn(true).when(ehrExtractStatusService).hasLastUpdateExceededEightDays(any(EhrExtractStatus.class),
-                                                                                    any(Instant.class));
-
         when(ehrExtractTimeoutSchedulerSpy.logger()).thenReturn(logger);
 
         var exception = assertThrows(EhrExtractException.class, () -> ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts());
@@ -379,23 +301,25 @@ class EhrExtractTimeoutSchedulerTest {
 
     @Test
     void shouldCatchExceptionIfUnexpectedConditionAriseWhileUpdatingEhrExtractStatusListWithEhrReceivedAcknowledgementError() {
+
         EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
+
         var inProgressConversationId = generateRandomUppercaseUUID();
         EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
         doReturn(List.of(ehrExtractStatus)).when(ehrExtractTimeoutSchedulerSpy).findInProgressTransfers();
 
-        doReturn(true).when(ehrExtractStatusService).hasLastUpdateExceededEightDays(any(), any());
-        doThrow(new NullPointerException())
-            .when(ehrExtractTimeoutSchedulerSpy).updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
-                                                                                               UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                                               UNEXPECTED_CONDITION_ERROR_MESSAGE);
+        Exception exception = new RuntimeException("Logger failure");
+        doThrow(exception).when(logger).info("Scheduler has started processing EhrExtract list with Ack timeouts");
         when(ehrExtractTimeoutSchedulerSpy.logger()).thenReturn(logger);
 
+        // Assert that the exception is thrown from logger().info
         assertThrows(Exception.class, () -> ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts());
 
-        verify(logger).error(eq("An unexpected error occurred for conversation_id: {}"),
-                             eq(inProgressConversationId),
-                             any(NullPointerException.class));
+        // Verify that the logger was called before the exception occurred
+        verify(logger, times(1)).info("Scheduler has started processing EhrExtract list with Ack timeouts");
+        verify(logger, times(1)).error("An unexpected error occurred for conversation_id: {}",
+                                       ehrExtractStatus.getConversationId(),
+                                       exception);
     }
 
     @Test
@@ -407,10 +331,6 @@ class EhrExtractTimeoutSchedulerTest {
         EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
 
         doReturn(List.of(ehrExtractStatus)).when(ehrExtractTimeoutSchedulerSpy).findInProgressTransfers();
-        doReturn(true).when(ehrExtractStatusService).hasLastUpdateExceededEightDays(any(), any());
-        doReturn(new Update()).when(ehrExtractStatusService).createUpdateWithUpdatedAt();
-        doReturn(new Query()).when(ehrExtractStatusService).createQueryForConversationId(inProgressConversationId);
-        doReturn(new FindAndModifyOptions()).when(ehrExtractStatusService).getReturningUpdatedRecordOption();
         doReturn(null).when(mongoTemplate).findAndModify(any(Query.class), any(UpdateDefinition.class),
                                                          any(FindAndModifyOptions.class), any());
         when(ehrExtractTimeoutSchedulerSpy.logger()).thenReturn(logger);

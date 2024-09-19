@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import org.bson.Document;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.exception.UnrecognisedInteractionIdException;
@@ -22,12 +24,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -44,6 +48,8 @@ class EhrExtractStatusServiceTest {
     public static final String ALTERNATIVE_ERROR_CODE = "26";
     public static final String ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
     private static final Instant NOW = Instant.now();
+    private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
+    private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = format("No acknowledgement has been received within %s days", 8);
 
     private ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
     private ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
@@ -141,6 +147,41 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
+    void shouldUpdateStatusWithErrorAndSpecificErrorCodeAndMessage() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var inProgressConversationId = generateRandomUppercaseUUID();
+
+        EhrExtractStatus ehrExtractStatusUpdated = EhrExtractStatus.builder().build();
+
+        doReturn(ehrExtractStatusUpdated).when(mongoTemplate).findAndModify(any(Query.class), any(UpdateDefinition.class),
+                                                                            any(FindAndModifyOptions.class), any());
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        ehrExtractStatusServiceSpy.updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
+                                                                                 UNEXPECTED_CONDITION_ERROR_CODE,
+                                                                                 UNEXPECTED_CONDITION_ERROR_MESSAGE);
+
+        verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
+                            + "updated in the database with error information conversation_id: {}", inProgressConversationId);
+        verify(mongoTemplate, times(1)).findAndModify(queryCaptor.capture(),
+                                                      updateCaptor.capture(),
+                                                      any(FindAndModifyOptions.class),
+                                                      classCaptor.capture());
+
+        assertEquals(UNEXPECTED_CONDITION_ERROR_CODE,
+                     ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails) ((Document) updateCaptor.getValue()
+                         .getUpdateObject()
+                         .get("$addToSet"))
+                         .get("ehrReceivedAcknowledgement.errors")).getCode());
+        assertEquals(UNEXPECTED_CONDITION_ERROR_MESSAGE,
+                     ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails) ((Document) updateCaptor.getValue()
+                         .getUpdateObject()
+                         .get("$addToSet"))
+                         .get("ehrReceivedAcknowledgement.errors")).getDisplay());
+    }
+
+    @Test
     void shouldNotLogWarningThatAckIsIgnoredWhenAcknowledgementReceivedAfterWithinAndThereAreNoErrors() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = generateRandomUppercaseUUID();
@@ -178,6 +219,7 @@ class EhrExtractStatusServiceTest {
 
     @Test
     void updateEhrExtractStatusWhenEhrExtractCorePendingIsNull() {
+
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
@@ -333,6 +375,30 @@ class EhrExtractStatusServiceTest {
 
         assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId));
     }
+
+    @Test
+    void shouldUpdateStatusWithErrorWhenEhrExtractAckTimeoutOccurs() {
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+
+        var inProgressConversationId = generateRandomUppercaseUUID();
+        EhrExtractStatus ehrExtractStatusUpdated = EhrExtractStatus.builder().build();
+
+        doReturn(new Update()).when(ehrExtractStatusServiceSpy).createUpdateWithUpdatedAt();
+        doReturn(new Query()).when(ehrExtractStatusServiceSpy).createQueryForConversationId(inProgressConversationId);
+        doReturn(new FindAndModifyOptions()).when(ehrExtractStatusServiceSpy).getReturningUpdatedRecordOption();
+        doReturn(ehrExtractStatusUpdated).when(mongoTemplate)
+            .findAndModify(any(Query.class), any(UpdateDefinition.class), any(FindAndModifyOptions.class), eq(EhrExtractStatus.class));
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        ehrExtractStatusServiceSpy.updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
+                                                                                 UNEXPECTED_CONDITION_ERROR_CODE,
+                                                                                 UNEXPECTED_CONDITION_ERROR_MESSAGE);
+
+        verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
+                            + "updated in the database with error information conversation_id: {}", inProgressConversationId);
+    }
+
 
     @Test
     void expectFalseWhenhrReceivedAckIsNull() {

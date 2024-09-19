@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
@@ -47,9 +46,9 @@ public class EhrExtractTimeoutScheduler {
         ehrExtractStatusWithExceededUpdateLimit.forEach(ehrExtractStatus -> {
             try {
                 logger().info("Scheduler has started processing EhrExtract list with Ack timeouts");
-                updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(),
-                                                              UNEXPECTED_CONDITION_ERROR_CODE,
-                                                              UNEXPECTED_CONDITION_ERROR_MESSAGE);
+                ehrExtractStatusService.updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(),
+                                                                                      UNEXPECTED_CONDITION_ERROR_CODE,
+                                                                                      UNEXPECTED_CONDITION_ERROR_MESSAGE);
             } catch (EhrExtractException exception) {
 
                 logger().error("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}",
@@ -60,31 +59,6 @@ public class EhrExtractTimeoutScheduler {
                 throw exception;
             }
         });
-    }
-
-    void updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
-                                                       String errorCode,
-                                                       String errorMessage) {
-
-        Update update = ehrExtractStatusService.createUpdateWithUpdatedAt();
-        update.addToSet(RECEIVED_ACK_ERRORS,
-                        EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder().code(errorCode).display(errorMessage).build());
-
-        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(
-            ehrExtractStatusService.createQueryForConversationId(conversationId),
-            update,
-            ehrExtractStatusService.getReturningUpdatedRecordOption(),
-            EhrExtractStatus.class);
-
-        if (ehrExtractStatus == null) {
-            throw new EhrExtractException(format(
-                "Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, conversation_id: %s",
-                conversationId));
-        }
-
-        logger().info("EHR status (EHR received acknowledgement) record successfully "
-                      + "updated in the database with error information conversation_id: {}", conversationId);
-
     }
 
     public List<EhrExtractStatus> findInProgressTransfers() {

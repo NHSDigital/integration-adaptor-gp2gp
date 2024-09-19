@@ -10,24 +10,17 @@ import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_ASID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_ODS_CODE;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_PARTY_ID;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.INCUMBENT_NACK_CODE;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.INCUMBENT_NACK_DISPLAY;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.NHS_NUMBER;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.NME_NACK_CODE;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.NME_NACK_DISPLAY;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.NME_NACK_TYPE;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.TO_ASID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.TO_ODS_CODE;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,6 +41,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @DirtiesContext
 @SpringBootTest
 public class EhrExtractStatusServiceIT {
+
     private static final Instant NOW = Instant.now();
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     private static final int DEFAULT_CONTENT_LENGTH = 244;
@@ -127,71 +121,7 @@ public class EhrExtractStatusServiceIT {
         assertThat(ehrExtractStatusService.fetchDocumentObjectNameAndSize(fakeConversationId)).isEqualTo(Collections.EMPTY_MAP);
     }
 
-    @Test
-    public void When_FindInProgressTransfers_With_OneInProgress_Expect_Returned() {
-        var inProgressConversationId = generateRandomUppercaseUUID();
 
-        addInProgressTransfer(inProgressConversationId);
-
-        List<EhrExtractStatus> results = ehrExtractStatusService.findInProgressTransfers();
-
-        assertThat(results.size()).isOne();
-        assertThat(results.get(0).getConversationId()).isEqualTo(inProgressConversationId);
-    }
-
-    @Test
-    public void When_FindInProgressTransfers_With_MixedTransfers_Expect_InProgressFound() {
-        var inProgressConversationId = generateRandomUppercaseUUID();
-
-        addInProgressTransfer(inProgressConversationId);
-        addCompleteTransfer();
-        addFailedIncumbentTransfer();
-        addFailedNmeTransfer();
-
-        List<EhrExtractStatus> results = ehrExtractStatusService.findInProgressTransfers();
-
-        assertThat(results.size()).isOne();
-
-        assertThat(results.get(0).getConversationId()).isEqualTo(inProgressConversationId);
-    }
-
-    @Test
-    public void When_FindInProgressTransfers_With_AllFailedOrComplete_Expect_EmptyList() {
-        addCompleteTransfer();
-        addCompleteTransfer();
-        addFailedIncumbentTransfer();
-        addFailedNmeTransfer();
-        addFailedIncumbentTransfer();
-
-        List<EhrExtractStatus> results = ehrExtractStatusService.findInProgressTransfers();
-
-        assertThat(results.isEmpty()).isTrue();
-    }
-
-    @Test
-    public void When_FindInProgressTransfers_With_MultipleInProgress_Expect_AllReturned() {
-        var inProgressConversationIds = List.of(
-            generateRandomUppercaseUUID(),
-            generateRandomUppercaseUUID(),
-            generateRandomUppercaseUUID()
-        );
-
-        addFailedIncumbentTransfer();
-
-        for (String inProgressConversationId : inProgressConversationIds) {
-            addInProgressTransfer(inProgressConversationId);
-        }
-
-        List<EhrExtractStatus> results = ehrExtractStatusService.findInProgressTransfers();
-
-        assertThat(results.size()).isEqualTo(inProgressConversationIds.size());
-
-        var returnedConversationIds = results.stream()
-            .map(EhrExtractStatus::getConversationId)
-            .collect(Collectors.toList());
-
-        assertThat(returnedConversationIds).isEqualTo(inProgressConversationIds);
-    }
 
     @Test
     public void When_UpdateEhrExtractStatusAccessDocument_Expect_DocumentRecordUpdated() {
@@ -282,9 +212,7 @@ public class EhrExtractStatusServiceIT {
             .isEqualTo(2);
     }
 
-    private void addInProgressTransfer(String conversationId) {
-        addInProgressTransfer(conversationId, List.of());
-    }
+
 
     private void addInProgressTransfer(String conversationId, List<EhrExtractStatus.GpcDocument> documents) {
         EhrExtractStatus extractStatus = EhrExtractStatus.builder()
@@ -303,94 +231,6 @@ public class EhrExtractStatusServiceIT {
             .ehrRequest(buildEhrRequest())
             .gpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
                 .documents(documents)
-                .build())
-            .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
-                .accessedAt(FIVE_DAYS_AGO)
-                .objectName(generateRandomUppercaseUUIDWithJsonSuffix())
-                .taskId(generateRandomUppercaseUUID())
-                .build())
-            .messageTimestamp(FIVE_DAYS_AGO)
-            .updatedAt(FIVE_DAYS_AGO)
-            .build();
-
-        ehrExtractStatusRepository.save(extractStatus);
-    }
-
-    private void addFailedNmeTransfer() {
-        EhrExtractStatus extractStatus = EhrExtractStatus.builder()
-            .ackPending(EhrExtractStatus.AckPending.builder()
-                .messageId(generateRandomUppercaseUUID())
-                .taskId(generateRandomUppercaseUUID())
-                .typeCode(NME_NACK_TYPE)
-                .updatedAt(FIVE_DAYS_AGO.toString())
-                .build())
-            .ackToRequester(EhrExtractStatus.AckToRequester.builder()
-                .detail(NME_NACK_DISPLAY)
-                .messageId(generateRandomUppercaseUUID())
-                .reasonCode(NME_NACK_CODE)
-                .taskId(generateRandomUppercaseUUID())
-                .typeCode(NME_NACK_TYPE)
-                .build())
-            .conversationId(generateRandomUppercaseUUID())
-            .created(FIVE_DAYS_AGO)
-            .ehrRequest(buildEhrRequest())
-            .error(EhrExtractStatus.Error.builder()
-                .code(NME_NACK_CODE)
-                .message(NME_NACK_DISPLAY)
-                .occurredAt(FIVE_DAYS_AGO)
-                .taskType("GET_GPC_STRUCTURED")
-                .build())
-            .updatedAt(FIVE_DAYS_AGO)
-            .build();
-
-        ehrExtractStatusRepository.save(extractStatus);
-    }
-
-    private void addFailedIncumbentTransfer() {
-        String ehrMessageRef = generateRandomUppercaseUUID();
-
-        EhrExtractStatus extractStatus = EhrExtractStatus.builder()
-            .ackHistory(EhrExtractStatus.AckHistory.builder()
-                .acks(List.of(
-                    EhrExtractStatus.EhrReceivedAcknowledgement.builder()
-                        .rootId(generateRandomUppercaseUUID())
-                        .received(FIVE_DAYS_AGO)
-                        .conversationClosed(FIVE_DAYS_AGO)
-                        .errors(List.of(
-                            EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
-                                .code(INCUMBENT_NACK_CODE)
-                                .display(INCUMBENT_NACK_DISPLAY)
-                                .build()))
-                        .messageRef(ehrMessageRef)
-                        .build()))
-                .build())
-            .ackPending(buildPositiveAckPending())
-            .ackToRequester(buildPositiveAckToRequester())
-            .conversationId(generateRandomUppercaseUUID())
-            .created(FIVE_DAYS_AGO)
-            .ehrExtractCore(EhrExtractStatus.EhrExtractCore.builder()
-                .sentAt(FIVE_DAYS_AGO)
-                .taskId(generateRandomUppercaseUUID())
-                .build())
-            .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
-                .sentAt(FIVE_DAYS_AGO)
-                .taskId(generateRandomUppercaseUUID())
-                .build())
-            .ehrExtractMessageId(generateRandomUppercaseUUID())
-            .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
-                .conversationClosed(FIVE_DAYS_AGO)
-                .errors(List.of(
-                    EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
-                        .code(INCUMBENT_NACK_CODE)
-                        .display(INCUMBENT_NACK_DISPLAY)
-                        .build()))
-                .messageRef(ehrMessageRef)
-                .received(FIVE_DAYS_AGO)
-                .rootId(generateRandomUppercaseUUID())
-                .build())
-            .ehrRequest(buildEhrRequest())
-            .gpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
-                .documents(new ArrayList<>())
                 .build())
             .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
                 .accessedAt(FIVE_DAYS_AGO)

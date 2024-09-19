@@ -331,6 +331,31 @@ public class EhrExtractStatusService {
         }
     }
 
+    public void updateEhrExtractStatusWithEhrReceivedAckError(String conversationId,
+                                                              String errorCode,
+                                                              String errorMessage) {
+
+        Update update = createUpdateWithUpdatedAt();
+        update.addToSet(RECEIVED_ACK_ERRORS,
+                        EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder().code(errorCode).display(errorMessage).build());
+
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(
+            createQueryForConversationId(conversationId),
+            update,
+            getReturningUpdatedRecordOption(),
+            EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
+            throw new EhrExtractException(format(
+                "Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, conversation_id: %s",
+                conversationId));
+        }
+
+        logger().info("EHR status (EHR received acknowledgement) record successfully "
+                      + "updated in the database with error information conversation_id: {}", conversationId);
+
+    }
+
     public void updateEhrExtractStatusAck(String conversationId, EhrReceivedAcknowledgement ack) {
 
         if (ack.getErrors() == null && !isEhrStatusWaitingForFinalAck(conversationId)) {
@@ -503,35 +528,6 @@ public class EhrExtractStatusService {
     public EhrExtractStatus updateEhrExtractStatusCommonForExternalEhrExtract(SendDocumentTaskDefinition taskDefinition,
         List<String> messageIds) {
         return updateEhrExtractStatusAttachmentSentToMhs(taskDefinition, messageIds);
-    }
-
-    public List<EhrExtractStatus> findInProgressTransfers() {
-
-        var failedNme = new Criteria();
-        failedNme.andOperator(
-            Criteria.where("ackPending.typeCode").is("AE"),
-            Criteria.where("error").exists(true));
-
-        var complete = new Criteria();
-        complete.andOperator(
-            Criteria.where("ackPending.typeCode").is("AA"),
-            Criteria.where("ackToRequester.typeCode").is("AA"),
-            Criteria.where("error").exists(false),
-            Criteria.where("ehrReceivedAcknowledgement.conversationClosed").exists(true),
-            Criteria.where("ehrReceivedAcknowledgement.errors").exists(false)
-        );
-
-        var failedIncumbent = new Criteria();
-        failedIncumbent.andOperator(
-            Criteria.where("ehrReceivedAcknowledgement.errors").exists(true)
-        );
-
-        var queryCriteria = new Criteria();
-        queryCriteria.norOperator(failedNme, complete, failedIncumbent);
-
-        var query = Query.query(queryCriteria);
-
-        return mongoTemplate.find(query, EhrExtractStatus.class);
     }
 
     private EhrExtractStatus updateEhrExtractStatusDocumentSentToMHS(SendDocumentTaskDefinition taskDefinition, List<String> messageIds) {
