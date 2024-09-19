@@ -15,7 +15,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.query.UpdateDefinition;
-import org.springframework.test.util.ReflectionTestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
@@ -27,6 +26,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static java.lang.String.format;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -53,6 +53,9 @@ class EhrExtractTimeoutSchedulerTest {
     public static final int TWENTY_DAYS = 20;
     private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
     private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = format("No acknowledgement has been received within %s days", 8);
+    private static final String ERROR = "error";
+    public static final int INDEX3 = 3;
+    public static final int INDEX4 = 4;
 
     private ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
     private ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
@@ -94,7 +97,7 @@ class EhrExtractTimeoutSchedulerTest {
     }
 
     @Test
-    void shouldReturnInProgressTransfersWithCorrectCriteria() {
+    void shouldReturnInProgressTransfersWithCorrectFailedIncumbentCriteria() {
 
         List<EhrExtractStatus> expectedResult = List.of(new EhrExtractStatus());
         when(mongoTemplate.find(any(Query.class), eq(EhrExtractStatus.class))).thenReturn(expectedResult);
@@ -110,17 +113,120 @@ class EhrExtractTimeoutSchedulerTest {
 
         Query capturedQuery = queryCaptor.getValue();
 
-        assertTrue(capturedQuery.getQueryObject().containsKey("$nor"), "Query should contain a NOR operator");
-        assertEquals(expectedConditions, ((List<?>) capturedQuery.getQueryObject().get("$nor")).size(),
-                                    "NOR operator should have 3 conditions");
-        assertEquals(true, ((Document) ((List<Document>) ((List<Document>) capturedQuery
+        assertAll(
+            () -> assertTrue(capturedQuery.getQueryObject().containsKey("$nor"), "Query should contain a NOR operator"),
+                () -> assertEquals(expectedConditions, ((List<?>) capturedQuery.getQueryObject().get("$nor")).size(),
+                                                            "NOR operator should have 3 conditions"),
+                () -> assertEquals(true, ((Document) ((List<Document>) ((List<Document>) capturedQuery
+                                                                                                .getQueryObject()
+                                                                                                .get("$nor"))
+                                                                                                .get(2)
+                                                                                                .get("$and"))
+                                                                                                .get(0)
+                                                                                                .get("ehrReceivedAcknowledgement.errors"))
+                                                                                                .get("$exists"))
+        );
+    }
+
+    @Test
+    void shouldReturnInProgressTransfersWithCorrectCompleteCriteria() {
+
+        List<EhrExtractStatus> expectedResult = List.of(new EhrExtractStatus());
+        when(mongoTemplate.find(any(Query.class), eq(EhrExtractStatus.class))).thenReturn(expectedResult);
+
+        ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
+        final int expectedConditions = 3;
+
+        List<EhrExtractStatus> result = ehrExtractTimeoutScheduler.findInProgressTransfers();
+
+        verify(mongoTemplate, times(1)).find(queryCaptor.capture(), eq(EhrExtractStatus.class));
+
+        assertEquals(expectedResult, result);
+
+        Query capturedQuery = queryCaptor.getValue();
+
+        assertAll(
+            () -> assertTrue(capturedQuery.getQueryObject().containsKey("$nor"), "Query should contain a NOR operator"),
+            () -> assertEquals(expectedConditions, ((List<?>) capturedQuery.getQueryObject().get("$nor")).size(),
+                                                        "NOR operator should have 3 conditions"),
+            () -> assertEquals("AA", ((List<Document>) ((List<Document>) capturedQuery
                                                                                     .getQueryObject()
                                                                                     .get("$nor"))
-                                                                                    .get(2)
+                                                                                    .get(1)
                                                                                     .get("$and"))
                                                                                     .get(0)
+                                                                                    .get("ackPending.typeCode")),
+            () -> assertEquals("AA", ((List<Document>) ((List<Document>) capturedQuery
+                                                                                    .getQueryObject()
+                                                                                    .get("$nor"))
+                                                                                    .get(1)
+                                                                                    .get("$and"))
+                                                                                    .get(1)
+                                                                                    .get("ackToRequester.typeCode")),
+            () -> assertEquals(false, ((Document) ((List<Document>) ((List<Document>) capturedQuery
+                                                                                    .getQueryObject()
+                                                                                    .get("$nor"))
+                                                                                    .get(1)
+                                                                                    .get("$and"))
+                                                                                    .get(2)
+                                                                                    .get(ERROR))
+                                                                                    .get("$exists")),
+            () -> assertEquals(true, ((Document) ((List<Document>) ((List<Document>) capturedQuery
+                                                                                    .getQueryObject()
+                                                                                    .get("$nor"))
+                                                                                    .get(1)
+                                                                                    .get("$and"))
+                                                                                    .get(INDEX3)
+                                                                                    .get("ehrReceivedAcknowledgement.conversationClosed"))
+                                                                                    .get("$exists")),
+            () -> assertEquals(false, ((Document) ((List<Document>) ((List<Document>) capturedQuery
+                                                                                    .getQueryObject()
+                                                                                    .get("$nor"))
+                                                                                    .get(1)
+                                                                                    .get("$and"))
+                                                                                    .get(INDEX4)
                                                                                     .get("ehrReceivedAcknowledgement.errors"))
-                                                                                    .get("$exists"));
+                                                                                    .get("$exists"))
+        );
+    }
+
+    @Test
+    void shouldReturnInProgressTransfersWithCorrectFailedNmeCriteria() {
+
+        List<EhrExtractStatus> expectedResult = List.of(new EhrExtractStatus());
+        when(mongoTemplate.find(any(Query.class), eq(EhrExtractStatus.class))).thenReturn(expectedResult);
+
+        ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
+        final int expectedConditions = 3;
+
+        List<EhrExtractStatus> result = ehrExtractTimeoutScheduler.findInProgressTransfers();
+
+        verify(mongoTemplate, times(1)).find(queryCaptor.capture(), eq(EhrExtractStatus.class));
+
+        assertEquals(expectedResult, result);
+
+        Query capturedQuery = queryCaptor.getValue();
+
+        assertAll(
+            () -> assertTrue(capturedQuery.getQueryObject().containsKey("$nor"), "Query should contain a NOR operator"),
+            () -> assertEquals(expectedConditions, ((List<?>) capturedQuery.getQueryObject().get("$nor")).size(),
+                               "NOR operator should have 3 conditions"),
+            () -> assertEquals("AE", ((List<Document>) ((List<Document>) capturedQuery
+                                                                                    .getQueryObject()
+                                                                                    .get("$nor"))
+                                                                                    .get(0)
+                                                                                    .get("$and"))
+                                                                                    .get(0)
+                                                                                    .get("ackPending.typeCode")),
+            () -> assertEquals(true, ((Document) ((List<Document>) ((List<Document>) capturedQuery
+                                                                                    .getQueryObject()
+                                                                                    .get("$nor"))
+                                                                                    .get(0)
+                                                                                    .get("$and"))
+                                                                                    .get(1)
+                                                                                    .get(ERROR))
+                                                                                    .get("$exists"))
+        );
     }
 
     @Test
