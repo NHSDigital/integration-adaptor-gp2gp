@@ -52,6 +52,7 @@ public class EhrExtractStatusServiceIT {
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     private static final int DEFAULT_CONTENT_LENGTH = 244;
     private static final String CONTENT_TYPE_MSWORD = "application/msword";
+    public static final String JSON_SUFFIX = ".json";
 
     @Autowired
     private EhrExtractStatusService ehrExtractStatusService;
@@ -305,7 +306,7 @@ public class EhrExtractStatusServiceIT {
                 .build())
             .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
                 .accessedAt(FIVE_DAYS_AGO)
-                .objectName(generateRandomUppercaseUUID() + ".json")
+                .objectName(generateRandomUppercaseUUIDWithJsonSuffix())
                 .taskId(generateRandomUppercaseUUID())
                 .build())
             .messageTimestamp(FIVE_DAYS_AGO)
@@ -393,7 +394,7 @@ public class EhrExtractStatusServiceIT {
                 .build())
             .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
                 .accessedAt(FIVE_DAYS_AGO)
-                .objectName(generateRandomUppercaseUUID() + ".json")
+                .objectName(generateRandomUppercaseUUIDWithJsonSuffix())
                 .taskId(generateRandomUppercaseUUID())
                 .build())
             .messageTimestamp(FIVE_DAYS_AGO)
@@ -405,6 +406,10 @@ public class EhrExtractStatusServiceIT {
 
     private EhrExtractStatus addCompleteTransfer() {
         return addCompleteTransferWithDocuments(List.of());
+    }
+
+    private @NotNull String generateRandomUppercaseUUIDWithJsonSuffix() {
+        return generateRandomUppercaseUUID() + JSON_SUFFIX;
     }
 
     private EhrExtractStatus addCompleteTransferWithDocument() {
@@ -454,7 +459,7 @@ public class EhrExtractStatusServiceIT {
                         .build())
                 .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
                         .accessedAt(FIVE_DAYS_AGO)
-                        .objectName(generateRandomUppercaseUUID() + ".json")
+                        .objectName(generateRandomUppercaseUUIDWithJsonSuffix())
                         .taskId(generateRandomUppercaseUUID())
                         .build())
                 .messageTimestamp(FIVE_DAYS_AGO)

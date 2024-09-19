@@ -120,7 +120,7 @@ public class EhrExtractStatusService {
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
     public static final int EHR_EXTRACT_SENT_DAYS_LIMIT = 8;
     private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
-    public static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
+    public static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -401,12 +401,15 @@ public class EhrExtractStatusService {
         if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())
             && hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId)) {
 
-            logger().warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
+            logger().warn("Received an ACK message with conversation_id: {}, "
+                          + "but it is being ignored because the EhrExtract has already been marked as failed "
+                          + "from not receiving an acknowledgement from the requester in time.",
+                          conversationId);
             return;
         }
 
         if (hasFinalAckBeenReceived(conversationId)) {
-            logger().warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            logger().warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
             return;
         }
 
@@ -437,7 +440,7 @@ public class EhrExtractStatusService {
                 + "' that is not recognised");
         }
 
-        logger().info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+        logger().info("Database successfully updated with EHRAcknowledgement, conversation_id: {}", conversationId);
     }
 
     public void saveAckForConversation(String conversationId, EhrReceivedAcknowledgement ack) {
@@ -534,14 +537,10 @@ public class EhrExtractStatusService {
 
         if (ehrExtractStatus == null) {
             throw new EhrExtractException(format(
-                "Couldn't update EHR status with error information because it doesn't exist conversation_id: %s",
-                conversationId
-            ));
+                "Couldn't update EHR status with error information because it doesn't exist conversation_id: %s", conversationId));
         }
 
-        logger().info("EHR status record successfully updated in the database with error information conversation_id: {}",
-            conversationId
-        );
+        logger().info("EHR status record successfully updated in the database with error information conversation_id: {}", conversationId);
 
         return ehrExtractStatus;
     }

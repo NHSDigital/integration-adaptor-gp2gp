@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static uk.nhs.adaptors.gp2gp.common.ResourceReader.asString;
 
 import java.util.Optional;
@@ -62,7 +63,7 @@ public class EhrAcknowledgementTest {
                 () -> assertThat(ack.getReceived()).isEqualTo(ack.getConversationClosed()),
                 () -> assertThat(ack.getMessageRef()).isEqualTo(MESSAGE_REF),
                 () -> assertThat(ack.getRootId()).isEqualTo(ROOT_ID),
-                () -> assertThat(ack.getErrors()).isNull()
+                () -> assertNull(ack.getErrors())
             ));
     }
 

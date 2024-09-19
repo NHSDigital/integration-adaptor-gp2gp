@@ -48,7 +48,7 @@ class EhrExtractStatusServiceTest {
     public static final int EIGHT_DAYS = 8;
     public static final String ERROR_CODE = "99";
     public static final String ALTERNATIVE_ERROR_CODE = "26";
-    public static final String ERROR_MESSAGE = "The acknowledgement has been received after 8 days";
+    public static final String ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
     private static final Instant NOW = Instant.now();
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     public static final String ACK_TYPE = "AA";
@@ -112,7 +112,10 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
+            .warn("Received an ACK message with conversation_id: {}, "
+                  + "but it is being ignored because the EhrExtract has already been marked as failed "
+                  + "from not receiving an acknowledgement from the requester in time.",
+                  conversationId);
     }
 
     @Test
@@ -143,7 +146,7 @@ class EhrExtractStatusServiceTest {
         verify(logger, never())
             .warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     @Test
@@ -179,7 +182,7 @@ class EhrExtractStatusServiceTest {
         verify(logger, never())
             .warn("Received an ACK message with a conversation_id: {}, but it will be ignored", conversationId);
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     @Test
@@ -202,7 +205,7 @@ class EhrExtractStatusServiceTest {
 
         verify(logger, never()).warn("Received an ACK message with a conversation_id={} exceeded 8 days", conversationId);
         verify(logger, times(1))
-                            .info("Database successfully updated with EHRAcknowledgement, conversation_id: " + conversationId);
+            .info("Database successfully updated with EHRAcknowledgement, conversation_id: {}", conversationId);
     }
 
     @Test
@@ -642,7 +645,7 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id=" + conversationId + " that is a duplicate");
+            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
     }
 
     private String generateRandomUppercaseUUID() {
