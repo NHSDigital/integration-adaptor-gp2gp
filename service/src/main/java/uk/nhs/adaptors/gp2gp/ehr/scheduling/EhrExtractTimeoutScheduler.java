@@ -36,9 +36,6 @@ public class EhrExtractTimeoutScheduler {
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusService ehrExtractStatusService;
 
-    @Value("${gp2gp.ehr-extract-sent-days-limit}")
-    private int ehrExtractSentDaysLimit;
-
     @Scheduled(cron = "${timeout.cronTime}")
     public void processEhrExtractAckTimeouts() {
         List<EhrExtractStatus> inProgressEhrExtractTransfers = findInProgressTransfers();
