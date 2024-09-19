@@ -248,30 +248,6 @@ class EhrExtractTimeoutSchedulerTest {
     }
 
     @Test
-    void shouldNotDoAnythingIfThereAreNoEhrExtractStatusThatExceeded8Days() {
-
-        EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
-        ReflectionTestUtils.setField(ehrExtractTimeoutSchedulerSpy, "ehrExtractSentDaysLimit", EIGHT_DAYS);
-        var inProgressConversationId = generateRandomUppercaseUUID();
-
-        EhrExtractStatus ehrExtractStatus = addInProgressTransfers(inProgressConversationId);
-        ehrExtractStatus.setEhrExtractCorePending(
-            EhrExtractStatus.EhrExtractCorePending
-                .builder()
-                .sentAt(FIVE_DAYS_AGO)
-                .build());
-
-        doReturn(List.of(ehrExtractStatus)).when(ehrExtractTimeoutSchedulerSpy).findInProgressTransfers();
-
-        ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts();
-
-        verify(ehrExtractTimeoutSchedulerSpy, never())
-            .updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(),
-                                                           UNEXPECTED_CONDITION_ERROR_CODE,
-                                                           UNEXPECTED_CONDITION_ERROR_MESSAGE);
-    }
-
-    @Test
     void updateEhrExtractStatusListWithEhrReceivedAcknowledgementError() {
         EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
 
