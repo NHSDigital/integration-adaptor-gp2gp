@@ -300,7 +300,7 @@ The response will contain a JSON array of the following:
 ## NIA Support (NHS England) guidance
 
 If you are are New Market Entrant, please read the guidance linked from the [table of contents](#table-of-contents).
-If you are looking to make changes to the adaptor you should first read the [guidance for developing the adaptor](developer-information.md).
+If you are looking to make changes to the adaptor you should first read the [guidance for developing the adaptor](nhs-england-developer-information.md).
 
 ## Disclaimer
 
