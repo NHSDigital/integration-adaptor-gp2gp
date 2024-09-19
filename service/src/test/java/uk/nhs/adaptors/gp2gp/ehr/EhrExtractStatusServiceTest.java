@@ -44,9 +44,6 @@ class EhrExtractStatusServiceTest {
     public static final String ALTERNATIVE_ERROR_CODE = "26";
     public static final String ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
     private static final Instant NOW = Instant.now();
-    private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
-    public static final String ACK_TYPE = "AA";
-    public static final int TWENTY_DAYS = 20;
 
     private ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
     private ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
