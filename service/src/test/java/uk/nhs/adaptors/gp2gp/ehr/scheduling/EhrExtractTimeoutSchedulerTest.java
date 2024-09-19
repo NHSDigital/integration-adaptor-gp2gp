@@ -28,7 +28,9 @@ import java.util.UUID;
 
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -81,6 +83,44 @@ class EhrExtractTimeoutSchedulerTest {
         mongoTemplate = null;
         ehrExtractTimeoutScheduler = null;
         ehrExtractStatusService = null;
+    }
+
+    @Test
+    void shouldReturnCorrectLoggerInstance() {
+        EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
+
+        assertNotNull(ehrExtractTimeoutSchedulerSpy.logger());
+        assertTrue(logger instanceof Logger);
+    }
+
+    @Test
+    void shouldReturnInProgressTransfersWithCorrectCriteria() {
+
+        List<EhrExtractStatus> expectedResult = List.of(new EhrExtractStatus());
+        when(mongoTemplate.find(any(Query.class), eq(EhrExtractStatus.class))).thenReturn(expectedResult);
+
+        ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
+        final int expectedConditions = 3;
+
+        List<EhrExtractStatus> result = ehrExtractTimeoutScheduler.findInProgressTransfers();
+
+        verify(mongoTemplate, times(1)).find(queryCaptor.capture(), eq(EhrExtractStatus.class));
+
+        assertEquals(expectedResult, result);
+
+        Query capturedQuery = queryCaptor.getValue();
+
+        assertTrue(capturedQuery.getQueryObject().containsKey("$nor"), "Query should contain a NOR operator");
+        assertEquals(expectedConditions, ((List<?>) capturedQuery.getQueryObject().get("$nor")).size(),
+                                    "NOR operator should have 3 conditions");
+        assertEquals(true, ((Document) ((List<Document>) ((List<Document>) capturedQuery
+                                                                                    .getQueryObject()
+                                                                                    .get("$nor"))
+                                                                                    .get(2)
+                                                                                    .get("$and"))
+                                                                                    .get(0)
+                                                                                    .get("ehrReceivedAcknowledgement.errors"))
+                                                                                    .get("$exists"));
     }
 
     @Test
