@@ -306,7 +306,7 @@ public class EhrExtractStatusServiceIT {
                 .build())
             .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
                 .accessedAt(FIVE_DAYS_AGO)
-                .objectName(generateRandomUppercaseUUID() + JSON_SUFFIX)
+                .objectName(generateRandomUppercaseUUIDWithJsonSuffix())
                 .taskId(generateRandomUppercaseUUID())
                 .build())
             .messageTimestamp(FIVE_DAYS_AGO)
@@ -394,7 +394,7 @@ public class EhrExtractStatusServiceIT {
                 .build())
             .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
                 .accessedAt(FIVE_DAYS_AGO)
-                .objectName(generateRandomUppercaseUUID() + JSON_SUFFIX)
+                .objectName(generateRandomUppercaseUUIDWithJsonSuffix())
                 .taskId(generateRandomUppercaseUUID())
                 .build())
             .messageTimestamp(FIVE_DAYS_AGO)
@@ -406,6 +406,10 @@ public class EhrExtractStatusServiceIT {
 
     private EhrExtractStatus addCompleteTransfer() {
         return addCompleteTransferWithDocuments(List.of());
+    }
+
+    private @NotNull String generateRandomUppercaseUUIDWithJsonSuffix() {
+        return generateRandomUppercaseUUID() + JSON_SUFFIX;
     }
 
     private EhrExtractStatus addCompleteTransferWithDocument() {
@@ -455,7 +459,7 @@ public class EhrExtractStatusServiceIT {
                         .build())
                 .gpcAccessStructured(EhrExtractStatus.GpcAccessStructured.builder()
                         .accessedAt(FIVE_DAYS_AGO)
-                        .objectName(generateRandomUppercaseUUID() + JSON_SUFFIX)
+                        .objectName(generateRandomUppercaseUUIDWithJsonSuffix())
                         .taskId(generateRandomUppercaseUUID())
                         .build())
                 .messageTimestamp(FIVE_DAYS_AGO)
