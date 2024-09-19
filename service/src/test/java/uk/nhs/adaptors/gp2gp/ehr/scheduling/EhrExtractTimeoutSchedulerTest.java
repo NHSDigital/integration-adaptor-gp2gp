@@ -44,7 +44,6 @@ import static org.mockito.Mockito.when;
 class EhrExtractTimeoutSchedulerTest {
 
     public static final int NINE_DAYS = 9;
-
     private static final Instant NOW = Instant.now();
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     public static final String ACK_TYPE = "AA";
@@ -280,7 +279,6 @@ class EhrExtractTimeoutSchedulerTest {
     @Test
     void updateEhrExtractStatusListWithEhrReceivedAcknowledgementError() {
 
-        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
 
         var inProgressConversationId = generateRandomUppercaseUUID();
@@ -291,7 +289,7 @@ class EhrExtractTimeoutSchedulerTest {
 
         var exception = assertThrows(EhrExtractException.class, () -> ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts());
 
-        verify(logger).info("Scheduler has started processing EhrExtract list with Ack timeouts");
+        verify(logger, times(1)).info("Scheduler has started processing EhrExtract list with Ack timeouts");
         assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
                      + "conversation_id: " + inProgressConversationId, exception.getMessage());
         verify(logger).error(eq("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}"),
