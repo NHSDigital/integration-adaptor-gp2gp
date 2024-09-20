@@ -15,6 +15,9 @@
                 <text mediaType="{{referenceContentType}}">
                     <reference value="file://localhost/{{referenceTitle}}"/>
                 </text>
+                {{#confidentialityCode}}
+                    {{{confidentialityCode}}}
+                {{/confidentialityCode}}
             </referredToExternalDocument>
         </reference>
         {{/hasReference}}
