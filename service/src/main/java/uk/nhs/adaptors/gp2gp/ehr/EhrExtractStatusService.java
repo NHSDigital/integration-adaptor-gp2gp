@@ -116,14 +116,11 @@ public class EhrExtractStatusService {
     private static final String FILENAME_TYPE_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
     public static final int EHR_EXTRACT_SENT_DAYS_LIMIT = 8;
-    private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
-    public static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
-
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
     private final TimestampService timestampService;
 
-    boolean hasEhrStatusReceivedAckWithUnexpectedConditionErrors(String conversationId) {
+    boolean hasEhrStatusReceivedAckWithErrors(String conversationId) {
 
         var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "NACK");
 
@@ -137,12 +134,7 @@ public class EhrExtractStatusService {
             return false;
         }
 
-        var ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg = errors.stream()
-            .filter(err -> UNEXPECTED_CONDITION_ERROR_CODE.equals(err.getCode())
-                           && UNEXPECTED_CONDITION_ERROR_MESSAGE.equals(err.getDisplay()))
-            .findAny();
-
-        return ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg.isPresent();
+        return true;
     }
 
     public boolean hasLastUpdateExceededEightDays(EhrExtractStatus ehrExtractStatus, Instant time) {
@@ -364,7 +356,7 @@ public class EhrExtractStatusService {
         }
 
         if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())
-            && hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId)) {
+            && hasEhrStatusReceivedAckWithErrors(conversationId)) {
 
             logger().warn("Received an ACK message with conversation_id: {}, "
                           + "but it is being ignored because the EhrExtract has already been marked as failed "

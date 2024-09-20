@@ -301,7 +301,7 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
-    void expectFalseWhenEhrExtractStatusWithEhrReceivedAckWithErrorsDoesNotMatchExpectedErrorType() {
+    void expectTrueWhenEhrExtractStatusWithEhrReceivedAckWithErrorsAndExceededTimeoutLimit() {
 
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         var conversationId = generateRandomUppercaseUUID();
@@ -325,15 +325,14 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        boolean result = ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId);
+        boolean result = ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId);
 
-        assertFalse(result);
+        assertTrue(result);
     }
 
     @Test
-    void expectFalseWhenEhrExtractStatusWithEhrReceivedAckWithErrorsIsNull() {
+    void expectFalseWhenEhrExtractStatusWithEhrReceivedAckWithNoErrors() {
 
-        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         var conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
         Instant eightDaysAgo = currentInstant.minus(Duration.ofDays(EIGHT_DAYS));
@@ -342,7 +341,7 @@ class EhrExtractStatusServiceTest {
             = Optional.of(EhrExtractStatus.builder()
                               .updatedAt(eightDaysAgo)
                               .ehrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder()
-                                                         .sentAt(currentInstant.minus(Duration.ofDays(NINE_DAYS)))
+                                                         .sentAt(currentInstant.minus(Duration.ofDays(EIGHT_DAYS)))
                                                          .taskId(generateRandomUppercaseUUID())
                                                          .build())
                               .ehrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().errors(null).build())
@@ -350,7 +349,9 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId));
+        boolean result = ehrExtractStatusService.hasEhrStatusReceivedAckWithErrors(conversationId);
+
+        assertFalse(result);
     }
 
     @Test
@@ -373,7 +374,7 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId));
+        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId));
     }
 
     @Test
@@ -420,7 +421,7 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId));
+        assertFalse(ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId));
     }
 
     @Test
@@ -448,7 +449,7 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        assertDoesNotThrow(() -> ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId));
+        assertDoesNotThrow(() -> ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId));
     }
 
     @Test
@@ -476,7 +477,7 @@ class EhrExtractStatusServiceTest {
 
         doReturn(ehrExtractStatusWithEhrReceivedAckWithErrors).when(ehrExtractStatusRepository).findByConversationId(conversationId);
 
-        boolean result = ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId);
+        boolean result = ehrExtractStatusServiceSpy.hasEhrStatusReceivedAckWithErrors(conversationId);
 
         assertTrue(result);
     }
@@ -512,7 +513,10 @@ class EhrExtractStatusServiceTest {
         ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(conversationId, ack);
 
         verify(logger, times(1))
-            .warn("Received an ACK message with a conversation_id: {} that is a duplicate", conversationId);
+                                    .warn("Received an ACK message with conversation_id: {}, "
+                                          + "but it is being ignored because the EhrExtract has already been marked as failed "
+                                          + "from not receiving an acknowledgement from the requester in time.",
+                                          conversationId);
     }
 
     private String generateRandomUppercaseUUID() {
