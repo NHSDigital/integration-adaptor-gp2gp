@@ -18,6 +18,8 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.exception.UnrecognisedInteractionIdException;
+
+import java.lang.reflect.Field;
 import java.time.Duration;
 
 import java.time.Instant;
@@ -53,6 +55,7 @@ class EhrExtractStatusServiceTest {
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     public static final String ACK_TYPE = "AA";
     public static final int TWENTY_DAYS = 20;
+    public static final int EHR_EXTRACT_SENT_DAYS_LIMIT = 8;
 
     private ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
     private ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
@@ -77,8 +80,12 @@ class EhrExtractStatusServiceTest {
     private EhrExtractStatusService ehrExtractStatusService;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws NoSuchFieldException, IllegalAccessException {
         ehrExtractStatusService = new EhrExtractStatusService(mongoTemplate, ehrExtractStatusRepository, timestampService);
+
+        Field field = EhrExtractStatusService.class.getDeclaredField("ehrExtractSentDaysLimit");
+        field.setAccessible(true);
+        field.set(ehrExtractStatusService, EHR_EXTRACT_SENT_DAYS_LIMIT);
     }
 
     @Test

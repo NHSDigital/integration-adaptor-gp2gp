@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -118,7 +119,9 @@ public class EhrExtractStatusService {
     private static final String CONTENT_TYPE_PLACEHOLDER = "CONTENT_TYPE_PLACEHOLDER_ID=";
     private static final String FILENAME_TYPE_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
-    public static final int EHR_EXTRACT_SENT_DAYS_LIMIT = 8;
+
+    @Value("${gp2gp.ehr-extract-sent-days-limit}")
+    private int ehrExtractSentDaysLimit;
     private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
     public static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
 
@@ -213,7 +216,7 @@ public class EhrExtractStatusService {
 
         long daysSinceLastUpdate = Duration.between(ehrExtractStatus.getEhrExtractCorePending().getSentAt(), time).toDays();
 
-        return daysSinceLastUpdate > EHR_EXTRACT_SENT_DAYS_LIMIT;
+        return daysSinceLastUpdate > ehrExtractSentDaysLimit;
     }
 
     public void saveEhrExtractMessageId(String conversationId, String messageId) {
