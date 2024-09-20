@@ -289,16 +289,20 @@ class EhrExtractTimeoutSchedulerTest {
 
         var exception = assertThrows(EhrExtractException.class, () -> ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts());
 
-        verify(logger, times(1)).info("Scheduler has started processing EhrExtract list with Ack timeouts");
-        verify(ehrExtractStatusServiceSpy, times(1))
+        assertAll(
+            () -> verify(logger, times(1)).info("Scheduler has started processing EhrExtract list with Ack timeouts"),
+            () -> verify(ehrExtractStatusServiceSpy, times(1))
                                             .updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
                                                                                            UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                                           UNEXPECTED_CONDITION_ERROR_MESSAGE);
-        assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
-                     + "conversation_id: " + inProgressConversationId, exception.getMessage());
-        verify(logger).error(eq("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}"),
-                             eq(inProgressConversationId),
-                             any(EhrExtractException.class));
+                                                                                           UNEXPECTED_CONDITION_ERROR_MESSAGE),
+            () -> assertEquals(
+                "Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
+                        + "conversation_id: " + inProgressConversationId, exception.getMessage()),
+            () -> verify(logger)
+                .error(eq("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}"),
+                       eq(inProgressConversationId),
+                       any(EhrExtractException.class))
+        );
     }
 
     @Test
