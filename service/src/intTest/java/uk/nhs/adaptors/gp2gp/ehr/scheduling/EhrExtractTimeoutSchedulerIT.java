@@ -17,9 +17,9 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.ACK_TYPE;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_ASID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_ODS_CODE;
@@ -54,7 +54,7 @@ public class EhrExtractTimeoutSchedulerIT {
     }
 
     @Test
-    public void When_FindInProgressTransfers_With_OneInProgress_Expect_Returned() {
+    void shouldReturnOneInProgressTransferWhenOneExists() {
         var inProgressConversationId = generateRandomUppercaseUUID();
 
         addInProgressTransfer(inProgressConversationId);
@@ -66,7 +66,7 @@ public class EhrExtractTimeoutSchedulerIT {
     }
 
     @Test
-    public void When_FindInProgressTransfers_With_MixedTransfers_Expect_InProgressFound() {
+    void When_FindInProgressTransfers_With_MixedTransfers_Expect_InProgressFound() {
         var inProgressConversationId = generateRandomUppercaseUUID();
 
         addInProgressTransfer(inProgressConversationId);
@@ -82,7 +82,7 @@ public class EhrExtractTimeoutSchedulerIT {
     }
 
     @Test
-    public void When_FindInProgressTransfers_With_AllFailedOrComplete_Expect_EmptyList() {
+    void When_FindInProgressTransfers_With_AllFailedOrComplete_Expect_EmptyList() {
         addCompleteTransfer();
         addCompleteTransfer();
         addFailedIncumbentTransfer();
@@ -91,16 +91,16 @@ public class EhrExtractTimeoutSchedulerIT {
 
         List<EhrExtractStatus> results = ehrExtractTimeoutScheduler.findInProgressTransfers();
 
-        assertThat(results.isEmpty()).isTrue();
+        assertTrue(results.isEmpty());
     }
 
     @Test
-    public void When_FindInProgressTransfers_With_MultipleInProgress_Expect_AllReturned() {
+    void When_FindInProgressTransfers_With_MultipleInProgress_Expect_AllReturned() {
         var inProgressConversationIds = List.of(
             generateRandomUppercaseUUID(),
             generateRandomUppercaseUUID(),
             generateRandomUppercaseUUID()
-                                               );
+        );
 
         addFailedIncumbentTransfer();
 
@@ -114,7 +114,7 @@ public class EhrExtractTimeoutSchedulerIT {
 
         var returnedConversationIds = results.stream()
             .map(EhrExtractStatus::getConversationId)
-            .collect(Collectors.toList());
+            .toList();
 
         assertThat(returnedConversationIds).isEqualTo(inProgressConversationIds);
     }

@@ -63,7 +63,7 @@ public class EhrExtractStatusServiceIT {
     }
 
     @Test
-    public void When_FetchDocumentObjectNameAndSize_With_OneMissingAttachment_Expect_Returned() {
+    void When_FetchDocumentObjectNameAndSize_With_OneMissingAttachment_Expect_Returned() {
         var inProgressConversationId = generateRandomUppercaseUUID();
 
         addInProgressTransfer(
@@ -89,7 +89,7 @@ public class EhrExtractStatusServiceIT {
     }
 
     @Test
-    public void When_FetchDocumentObjectNameAndSize_With_OnePresentAttachment_Expect_Returned() {
+    void When_FetchDocumentObjectNameAndSize_With_OnePresentAttachment_Expect_Returned() {
         var inProgressConversationId = generateRandomUppercaseUUID();
 
         addInProgressTransfer(
@@ -115,16 +115,14 @@ public class EhrExtractStatusServiceIT {
     }
 
     @Test
-    public void When_FetchDocumentObjectNameAndSize_With_InvalidConversation_Expect_EmptyMap() {
+    void When_FetchDocumentObjectNameAndSize_With_InvalidConversation_Expect_EmptyMap() {
         final var fakeConversationId = generateRandomUppercaseUUID();
 
         assertThat(ehrExtractStatusService.fetchDocumentObjectNameAndSize(fakeConversationId)).isEqualTo(Collections.EMPTY_MAP);
     }
 
-
-
     @Test
-    public void When_UpdateEhrExtractStatusAccessDocument_Expect_DocumentRecordUpdated() {
+    void When_UpdateEhrExtractStatusAccessDocument_Expect_DocumentRecordUpdated() {
         when(timestampService.now()).thenReturn(NOW);
         var ehrStatus = addCompleteTransferWithDocument();
 
@@ -143,23 +141,8 @@ public class EhrExtractStatusServiceIT {
         );
     }
 
-    private EhrExtractStatus updateEhrExtractStatusAccessDocument(String conversationId, String documentId) {
-        return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            GetGpcDocumentTaskDefinition.builder()
-                .conversationId(conversationId)
-                .documentId(documentId)
-                .taskId("80010")
-                .messageId("988290")
-                .build(),
-            "this is a storage path.path",
-            1,
-            "This is a fantastic error message",
-            "NewUpdatedFileName.txt"
-        );
-    }
-
     @Test
-    public void When_UpdateEhrExtractStatusAccessDocument_With_InvalidConversationId_Expect_ThrowsException() {
+    void When_UpdateEhrExtractStatusAccessDocument_With_InvalidConversationId_Expect_ThrowsException() {
         addCompleteTransferWithDocument();
 
         assertThrows(
@@ -169,7 +152,7 @@ public class EhrExtractStatusServiceIT {
     }
 
     @Test
-    public void When_UpdateEhrExtractStatusAccessDocument_With_InvalidDocumentId_Expect_ThrowsException() {
+    void When_UpdateEhrExtractStatusAccessDocument_With_InvalidDocumentId_Expect_ThrowsException() {
         final var ehrStatus = addCompleteTransferWithDocument();
 
         assertThrows(
@@ -180,7 +163,7 @@ public class EhrExtractStatusServiceIT {
 
 
     @Test
-    public void When_UpdateEhrExtractStatusAccessDocument_Expect_ReturnsUpdatedEhrStatusRecord() {
+    void When_UpdateEhrExtractStatusAccessDocument_Expect_ReturnsUpdatedEhrStatusRecord() {
         when(timestampService.now()).thenReturn(NOW);
         var ehrStatus = addCompleteTransferWithDocument();
 
@@ -192,7 +175,7 @@ public class EhrExtractStatusServiceIT {
     }
 
     @Test
-    public void When_UpdateEhrExtractStatusAccessDocumentDocumentReferences_Expect_DocumentAddedToMongoDb() {
+    void When_UpdateEhrExtractStatusAccessDocumentDocumentReferences_Expect_DocumentAddedToMongoDb() {
         var ehrStatus = addCompleteTransfer();
 
         ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(
@@ -212,7 +195,20 @@ public class EhrExtractStatusServiceIT {
             .isEqualTo(2);
     }
 
-
+    EhrExtractStatus updateEhrExtractStatusAccessDocument(String conversationId, String documentId) {
+        return ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
+            GetGpcDocumentTaskDefinition.builder()
+                .conversationId(conversationId)
+                .documentId(documentId)
+                .taskId("80010")
+                .messageId("988290")
+                .build(),
+            "this is a storage path.path",
+            1,
+            "This is a fantastic error message",
+            "NewUpdatedFileName.txt"
+                                                                           );
+    }
 
     private void addInProgressTransfer(String conversationId, List<EhrExtractStatus.GpcDocument> documents) {
         EhrExtractStatus extractStatus = EhrExtractStatus.builder()

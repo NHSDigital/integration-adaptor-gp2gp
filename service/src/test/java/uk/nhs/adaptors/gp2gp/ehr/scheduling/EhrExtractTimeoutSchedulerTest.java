@@ -24,7 +24,6 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -49,7 +48,8 @@ class EhrExtractTimeoutSchedulerTest {
     public static final String ACK_TYPE = "AA";
     public static final int TWENTY_DAYS = 20;
     private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
-    private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = format("No acknowledgement has been received within %s days", 8);
+    private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE
+                                            = String.format("No acknowledgement has been received within %s days", 8);
     private static final String ERROR = "error";
     public static final int INDEX3 = 3;
     public static final int INDEX4 = 4;

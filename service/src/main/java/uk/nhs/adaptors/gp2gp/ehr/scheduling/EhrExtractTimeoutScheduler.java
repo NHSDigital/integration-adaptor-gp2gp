@@ -17,20 +17,15 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
-import static java.lang.String.format;
-
 @Component
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrExtractTimeoutScheduler {
 
     private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
-    private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = format("No acknowledgement has been received within %s days", 8);
+    private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE
+                                            = String.format("No acknowledgement has been received within %s days", 8);
     private static final String ERROR = "error";
-    private static final String RECEIVED_ACK = "ehrReceivedAcknowledgement";
-    private static final String DOT = ".";
-    private static final String ERRORS = "errors";
-    private static final String RECEIVED_ACK_ERRORS = RECEIVED_ACK + DOT + ERRORS;
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusService ehrExtractStatusService;
 
