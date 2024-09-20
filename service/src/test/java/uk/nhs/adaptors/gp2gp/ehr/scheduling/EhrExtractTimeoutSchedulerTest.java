@@ -72,10 +72,13 @@ class EhrExtractTimeoutSchedulerTest {
     @Mock
     private EhrExtractStatusService ehrExtractStatusService;
 
+    private EhrExtractStatusService ehrExtractStatusServiceSpy;
+
     @BeforeEach
     void setUp() {
         ehrExtractStatusService = new EhrExtractStatusService(mongoTemplate, ehrExtractStatusRepository, timestampService);
-        ehrExtractTimeoutScheduler = new EhrExtractTimeoutScheduler(mongoTemplate, ehrExtractStatusService);
+        ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        ehrExtractTimeoutScheduler = new EhrExtractTimeoutScheduler(mongoTemplate, ehrExtractStatusServiceSpy);
     }
 
     @Test
@@ -222,7 +225,6 @@ class EhrExtractTimeoutSchedulerTest {
     @Test
     void shouldNotUpdateStatusWhenEhrReceivedAcknowledgementIsNotNull() {
 
-        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
         var inProgressConversationId = generateRandomUppercaseUUID();
 
@@ -235,15 +237,14 @@ class EhrExtractTimeoutSchedulerTest {
 
         verify(logger, never()).info("Scheduler has started processing EhrExtract list with Ack timeouts");
         verify(ehrExtractStatusServiceSpy, never())
-            .updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
-                                                           UNEXPECTED_CONDITION_ERROR_CODE,
-                                                           UNEXPECTED_CONDITION_ERROR_MESSAGE);
+                        .updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
+                                                                       UNEXPECTED_CONDITION_ERROR_CODE,
+                                                                       UNEXPECTED_CONDITION_ERROR_MESSAGE);
     }
 
     @Test
     void shouldNotUpdateStatusWhenNoInProgressTransfersExist() {
 
-        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
 
         doReturn(List.of()).when(ehrExtractTimeoutSchedulerSpy).findInProgressTransfers();
@@ -251,15 +252,14 @@ class EhrExtractTimeoutSchedulerTest {
         ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts();
 
         verify(ehrExtractStatusServiceSpy, never())
-            .updateEhrExtractStatusWithEhrReceivedAckError(null,
-                                                           UNEXPECTED_CONDITION_ERROR_CODE,
-                                                           UNEXPECTED_CONDITION_ERROR_MESSAGE);
+                        .updateEhrExtractStatusWithEhrReceivedAckError(null,
+                                                                       UNEXPECTED_CONDITION_ERROR_CODE,
+                                                                       UNEXPECTED_CONDITION_ERROR_MESSAGE);
     }
 
     @Test
     void shouldNotUpdateStatusWhenInProgressTransfersWithNullEhrExtractCorePendingExist() {
 
-        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         EhrExtractTimeoutScheduler ehrExtractTimeoutSchedulerSpy = spy(ehrExtractTimeoutScheduler);
         var inProgressConversationId = generateRandomUppercaseUUID();
 
@@ -290,6 +290,10 @@ class EhrExtractTimeoutSchedulerTest {
         var exception = assertThrows(EhrExtractException.class, () -> ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts());
 
         verify(logger, times(1)).info("Scheduler has started processing EhrExtract list with Ack timeouts");
+        verify(ehrExtractStatusServiceSpy, times(1))
+                                            .updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
+                                                                                           UNEXPECTED_CONDITION_ERROR_CODE,
+                                                                                           UNEXPECTED_CONDITION_ERROR_MESSAGE);
         assertEquals("Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
                      + "conversation_id: " + inProgressConversationId, exception.getMessage());
         verify(logger).error(eq("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}"),
@@ -310,10 +314,8 @@ class EhrExtractTimeoutSchedulerTest {
         doThrow(exception).when(logger).info("Scheduler has started processing EhrExtract list with Ack timeouts");
         when(ehrExtractTimeoutSchedulerSpy.logger()).thenReturn(logger);
 
-        // Assert that the exception is thrown from logger().info
         assertThrows(Exception.class, () -> ehrExtractTimeoutSchedulerSpy.processEhrExtractAckTimeouts());
 
-        // Verify that the logger was called before the exception occurred
         verify(logger, times(1)).info("Scheduler has started processing EhrExtract list with Ack timeouts");
         verify(logger, times(1)).error("An unexpected error occurred for conversation_id: {}",
                                        ehrExtractStatus.getConversationId(),
