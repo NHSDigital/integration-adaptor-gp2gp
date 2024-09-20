@@ -157,7 +157,7 @@ public class EhrExtractMapperComponentTest {
             randomIdGeneratorService, confidentialityService);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
             = new DocumentReferenceToNarrativeStatementMapper(
-                messageContext, new SupportedContentTypes(), timestampService, participantMapper);
+                messageContext, new SupportedContentTypes(), participantMapper, confidentialityService);
 
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,

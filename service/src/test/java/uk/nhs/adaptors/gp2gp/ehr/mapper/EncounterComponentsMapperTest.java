@@ -152,7 +152,7 @@ public class EncounterComponentsMapperTest {
             = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
             = new DocumentReferenceToNarrativeStatementMapper(
-                messageContext, new SupportedContentTypes(), timestampService, participantMapper);
+                messageContext, new SupportedContentTypes(), participantMapper, confidentialityService);
         MedicationStatementMapper medicationStatementMapper = new MedicationStatementMapper(
             messageContext,
             codeableConceptCdMapper,
