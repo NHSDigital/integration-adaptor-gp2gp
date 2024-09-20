@@ -40,7 +40,6 @@ public class EhrExtractTimeoutSchedulerIT {
 
     private static final Instant NOW = Instant.now();
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
-    public static final String JSON_SUFFIX = ".json";
 
     @Autowired
     private EhrExtractTimeoutScheduler ehrExtractTimeoutScheduler;
@@ -301,7 +300,7 @@ public class EhrExtractTimeoutSchedulerIT {
     }
 
     private @NotNull String generateRandomUppercaseUUIDWithJsonSuffix() {
-        return generateRandomUppercaseUUID() + JSON_SUFFIX;
+        return generateRandomUppercaseUUID() + ".json";
     }
 
     private EhrExtractStatus.AckToRequester buildPositiveAckToRequester() {
