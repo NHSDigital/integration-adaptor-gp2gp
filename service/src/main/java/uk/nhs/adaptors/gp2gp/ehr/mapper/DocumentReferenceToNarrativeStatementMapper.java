@@ -13,7 +13,7 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters.NarrativeStatementTemplateParametersBuilder;
@@ -38,8 +38,8 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
     private final MessageContext messageContext;
     private final SupportedContentTypes supportedContentTypes;
-    private final TimestampService timestampService;
     private final ParticipantMapper participantMapper;
+    private final ConfidentialityService confidentialityService;
 
     public String mapDocumentReferenceToNarrativeStatement(final DocumentReference documentReference) {
         if (documentReference.getContent().isEmpty()) {
@@ -52,6 +52,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
         final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(narrativeStatementId)
             .availabilityTime(getAvailabilityTime(documentReference))
+            .confidentialityCode(confidentialityService.generateConfidentialityCode(documentReference).orElse(null))
             .hasReference(true)
             .participant(buildParticipant(documentReference));
 
@@ -85,10 +86,6 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
     private boolean isValidAuthorReference(Reference reference) {
         return VALID_AUTHOR_RESOURCE_TYPES.contains(reference.getReferenceElement().getResourceType());
-    }
-
-    private boolean isFileAbsent(Attachment attachment) {
-        return StringUtils.isNotBlank(attachment.getTitle());
     }
 
     private String getComment(final DocumentReference documentReference, final String documentId) {
