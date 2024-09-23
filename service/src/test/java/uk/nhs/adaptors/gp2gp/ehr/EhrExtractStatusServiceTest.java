@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -46,6 +47,7 @@ class EhrExtractStatusServiceTest {
     public static final String ALTERNATIVE_ERROR_CODE = "26";
     public static final String ERROR_CODE = "99";
     public static final String ERROR_MESSAGE = "No acknowledgement has been received within ACK timeout limit";
+
 
     private ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
     private ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
@@ -480,6 +482,7 @@ class EhrExtractStatusServiceTest {
 
     @Test
     void shouldLogWarningWithMsgIgnoredWhenLateAcknowledgementReceivedAfter8DaysAndEhrReceivedAckErrorCodeDoNotMatch() {
+
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();

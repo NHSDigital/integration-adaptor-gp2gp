@@ -24,6 +24,7 @@ public class EhrExtractTimeoutScheduler {
 
     private static final String ERROR_CODE = "99";
     private static final String ERROR_MESSAGE = "No acknowledgement has been received within ACK timeout limit";
+
     private static final String ERROR = "error";
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -43,13 +44,13 @@ public class EhrExtractTimeoutScheduler {
                 ehrExtractStatusService.updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(),
                                                                                       ERROR_CODE,
                                                                                       ERROR_MESSAGE);
+
             } catch (EhrExtractException exception) {
 
                 logger().error("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}",
                                ehrExtractStatus.getConversationId(), exception);
                 throw exception;
             } catch (Exception exception) {
-
                 logger().error("An unexpected error occurred for conversation_id: {}", ehrExtractStatus.getConversationId(), exception);
                 throw exception;
             }

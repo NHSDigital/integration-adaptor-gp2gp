@@ -294,6 +294,7 @@ class EhrExtractTimeoutSchedulerTest {
                                             .updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
                                                                                            ERROR_CODE,
                                                                                            ERROR_MESSAGE),
+
             () -> assertEquals(
                 "Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
                         + "conversation_id: " + inProgressConversationId, exception.getMessage()),
