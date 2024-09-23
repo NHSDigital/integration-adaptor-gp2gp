@@ -47,9 +47,8 @@ class EhrExtractTimeoutSchedulerTest {
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     public static final String ACK_TYPE = "AA";
     public static final int TWENTY_DAYS = 20;
-    private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
-    private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE
-                                            = String.format("No acknowledgement has been received within %s days", 8);
+    private static final String ERROR_CODE = "99";
+    private static final String ERROR_MESSAGE = "No acknowledgement has been received within ACK timeout limit";
     private static final String ERROR = "error";
     public static final int INDEX3 = 3;
     public static final int INDEX4 = 4;
@@ -238,8 +237,8 @@ class EhrExtractTimeoutSchedulerTest {
         verify(logger, never()).info("Scheduler has started processing EhrExtract list with Ack timeouts");
         verify(ehrExtractStatusServiceSpy, never())
                         .updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
-                                                                       UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                       UNEXPECTED_CONDITION_ERROR_MESSAGE);
+                                                                       ERROR_CODE,
+                                                                       ERROR_MESSAGE);
     }
 
     @Test
@@ -253,8 +252,8 @@ class EhrExtractTimeoutSchedulerTest {
 
         verify(ehrExtractStatusServiceSpy, never())
                         .updateEhrExtractStatusWithEhrReceivedAckError(null,
-                                                                       UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                       UNEXPECTED_CONDITION_ERROR_MESSAGE);
+                                                                       ERROR_CODE,
+                                                                       ERROR_MESSAGE);
     }
 
     @Test
@@ -272,8 +271,8 @@ class EhrExtractTimeoutSchedulerTest {
 
         verify(ehrExtractStatusServiceSpy, never())
             .updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(),
-                                                           UNEXPECTED_CONDITION_ERROR_CODE,
-                                                           UNEXPECTED_CONDITION_ERROR_MESSAGE);
+                                                           ERROR_CODE,
+                                                           ERROR_MESSAGE);
     }
 
     @Test
@@ -293,8 +292,8 @@ class EhrExtractTimeoutSchedulerTest {
             () -> verify(logger, times(1)).info("Scheduler has started processing EhrExtract list with Ack timeouts"),
             () -> verify(ehrExtractStatusServiceSpy, times(1))
                                             .updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
-                                                                                           UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                                           UNEXPECTED_CONDITION_ERROR_MESSAGE),
+                                                                                           ERROR_CODE,
+                                                                                           ERROR_MESSAGE),
             () -> assertEquals(
                 "Couldn't update EHR received acknowledgement with error information because EHR status doesn't exist, "
                         + "conversation_id: " + inProgressConversationId, exception.getMessage()),

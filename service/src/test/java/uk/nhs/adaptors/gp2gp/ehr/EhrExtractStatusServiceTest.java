@@ -44,12 +44,9 @@ class EhrExtractStatusServiceTest {
 
     public static final int NINE_DAYS = 9;
     public static final int EIGHT_DAYS = 8;
-    public static final String ERROR_CODE = "99";
     public static final String ALTERNATIVE_ERROR_CODE = "26";
-    public static final String ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
-    private static final Instant NOW = Instant.now();
-    private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
-    private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = format("No acknowledgement has been received within %s days", 8);
+    public static final String ERROR_CODE = "99";
+    public static final String ERROR_MESSAGE = "No acknowledgement has been received within ACK timeout limit";
 
     private ArgumentCaptor<Query> queryCaptor = ArgumentCaptor.forClass(Query.class);
     private ArgumentCaptor<Update> updateCaptor = ArgumentCaptor.forClass(Update.class);
@@ -159,8 +156,8 @@ class EhrExtractStatusServiceTest {
         when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
-                                                                                 UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                                 UNEXPECTED_CONDITION_ERROR_MESSAGE);
+                                                                                 ERROR_CODE,
+                                                                                 ERROR_MESSAGE);
 
         verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
                             + "updated in the database with error information conversation_id: {}", inProgressConversationId);
@@ -169,12 +166,12 @@ class EhrExtractStatusServiceTest {
                                                       any(FindAndModifyOptions.class),
                                                       classCaptor.capture());
 
-        assertEquals(UNEXPECTED_CONDITION_ERROR_CODE,
+        assertEquals(ERROR_CODE,
                      ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails) ((Document) updateCaptor.getValue()
                          .getUpdateObject()
                          .get("$addToSet"))
                          .get("ehrReceivedAcknowledgement.errors")).getCode());
-        assertEquals(UNEXPECTED_CONDITION_ERROR_MESSAGE,
+        assertEquals(ERROR_MESSAGE,
                      ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails) ((Document) updateCaptor.getValue()
                          .getUpdateObject()
                          .get("$addToSet"))
@@ -393,8 +390,8 @@ class EhrExtractStatusServiceTest {
         when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
 
         ehrExtractStatusServiceSpy.updateEhrExtractStatusWithEhrReceivedAckError(inProgressConversationId,
-                                                                                 UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                                 UNEXPECTED_CONDITION_ERROR_MESSAGE);
+                                                                                 ERROR_CODE,
+                                                                                 ERROR_MESSAGE);
 
         verify(logger).info("EHR status (EHR received acknowledgement) record successfully "
                             + "updated in the database with error information conversation_id: {}", inProgressConversationId);
@@ -483,7 +480,7 @@ class EhrExtractStatusServiceTest {
     }
 
     @Test
-    void shouldLogWarningWithDuplicateWhenLateAcknowledgementReceivedAfter8DaysAndEhrReceivedAckErrorCodeDoNotMatch() {
+    void shouldLogWarningWithMsgIgnoredWhenLateAcknowledgementReceivedAfter8DaysAndEhrReceivedAckErrorCodeDoNotMatch() {
         EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
         String conversationId = generateRandomUppercaseUUID();
         Instant currentInstant = Instant.now();
