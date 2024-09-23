@@ -197,8 +197,8 @@ public class EhrExtractStatusService {
         return Collections.emptyMap();
     }
 
-    public EhrExtractStatus updateEhrExtractStatusAccessStructured(
-        GetGpcStructuredTaskDefinition structuredTaskDefinition, String structuredRecordJsonFilename) {
+    public EhrExtractStatus updateEhrExtractStatusAccessStructured(GetGpcStructuredTaskDefinition structuredTaskDefinition,
+                                                                   String structuredRecordJsonFilename) {
 
         Query query = createQueryForConversationId(structuredTaskDefinition.getConversationId());
         Instant now = Instant.now();
@@ -220,12 +220,11 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusAccessDocument(
-            DocumentTaskDefinition documentTaskDefinition,
-            String storagePath,
-            int base64ContentLength,
-            String errorMessage,
-            String filename) {
+    public EhrExtractStatus updateEhrExtractStatusAccessDocument(DocumentTaskDefinition documentTaskDefinition,
+                                                                 String storagePath,
+                                                                 int base64ContentLength,
+                                                                 String errorMessage,
+                                                                 String filename) {
 
         Query query = new Query();
         query.addCriteria(Criteria
@@ -255,9 +254,8 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusCore(
-        SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
-        Instant requestSentAt) {
+    public EhrExtractStatus updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+                                                       Instant requestSentAt) {
 
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
