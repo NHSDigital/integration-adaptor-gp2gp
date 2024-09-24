@@ -148,7 +148,7 @@ public class EhrExtractStatusService {
         return ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg.isPresent();
     }
 
-    public boolean hasLastUpdateExceededEightDays(EhrExtractStatus ehrExtractStatus, Instant time) {
+    public boolean hasLastUpdateExceededAckTimeoutLimit(EhrExtractStatus ehrExtractStatus, Instant time) {
 
         if (ehrExtractStatus.getEhrExtractCorePending() == null) {
             return false;
@@ -366,7 +366,7 @@ public class EhrExtractStatusService {
             return;
         }
 
-        if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())
+        if (hasAcknowledgementExceededAckTimeoutLimit(conversationId, ack.getReceived())
             && hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId)) {
 
             logger().warn("Received an ACK message with conversation_id: {}, "
@@ -620,10 +620,10 @@ public class EhrExtractStatusService {
         return ehrExtractStatus.getEhrReceivedAcknowledgement() != null;
     }
 
-    private boolean hasAcknowledgementExceededEightDays(String conversationId, Instant ackReceivedTimestamp) {
+    private boolean hasAcknowledgementExceededAckTimeoutLimit(String conversationId, Instant ackReceivedTimestamp) {
         var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "ACK");
 
-        return hasLastUpdateExceededEightDays(ehrExtractStatus, ackReceivedTimestamp);
+        return hasLastUpdateExceededAckTimeoutLimit(ehrExtractStatus, ackReceivedTimestamp);
     }
 
     private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {
