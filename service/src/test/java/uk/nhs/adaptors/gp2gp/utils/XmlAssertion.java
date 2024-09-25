@@ -5,6 +5,8 @@ import org.assertj.core.api.AbstractAssert;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+
 public class XmlAssertion extends AbstractAssert<XmlAssertion, String> {
 
     protected XmlAssertion(String xml) {
@@ -39,6 +41,14 @@ public class XmlAssertion extends AbstractAssert<XmlAssertion, String> {
                 actual
             );
         }
+    }
+
+    /**
+     * Verifies that the actual {@link String} XML contains all the given xPath values.
+     * @param xPaths A Collection of Strings (xPaths) expected to be within the provided XML.
+     */
+    public void containsAllXPaths(Collection<String> xPaths) {
+        xPaths.forEach(this::containsXPath);
     }
 
     /**
