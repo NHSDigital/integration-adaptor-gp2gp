@@ -17,6 +17,8 @@ import org.springframework.data.mongodb.core.query.UpdateDefinition;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.exception.UnrecognisedInteractionIdException;
+
+import java.lang.reflect.Field;
 import java.time.Duration;
 
 import java.time.Instant;
@@ -48,6 +50,7 @@ class EhrExtractStatusServiceTest {
     public static final String ALTERNATIVE_ERROR_CODE = "26";
     public static final String ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
     private static final Instant NOW = Instant.now();
+    public static final int EHR_EXTRACT_SENT_DAYS_LIMIT = 8;
     private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
     private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = format("No acknowledgement has been received within %s days", 8);
 
@@ -74,8 +77,12 @@ class EhrExtractStatusServiceTest {
     private EhrExtractStatusService ehrExtractStatusService;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws NoSuchFieldException, IllegalAccessException {
         ehrExtractStatusService = new EhrExtractStatusService(mongoTemplate, ehrExtractStatusRepository, timestampService);
+
+        Field field = EhrExtractStatusService.class.getDeclaredField("ehrExtractSentDaysLimit");
+        field.setAccessible(true);
+        field.set(ehrExtractStatusService, EHR_EXTRACT_SENT_DAYS_LIMIT);
     }
 
     @Test

@@ -15,6 +15,7 @@ import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -115,7 +116,9 @@ public class EhrExtractStatusService {
     private static final String CONTENT_TYPE_PLACEHOLDER = "CONTENT_TYPE_PLACEHOLDER_ID=";
     private static final String FILENAME_TYPE_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
-    public static final int EHR_EXTRACT_SENT_DAYS_LIMIT = 8;
+
+    @Value("${gp2gp.ehr-extract-sent-days-limit}")
+    private int ehrExtractSentDaysLimit;
     private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
     public static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
 
@@ -145,7 +148,7 @@ public class EhrExtractStatusService {
         return ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg.isPresent();
     }
 
-    public boolean hasLastUpdateExceededEightDays(EhrExtractStatus ehrExtractStatus, Instant time) {
+    public boolean hasLastUpdateExceededAckTimeoutLimit(EhrExtractStatus ehrExtractStatus, Instant time) {
 
         if (ehrExtractStatus.getEhrExtractCorePending() == null) {
             return false;
@@ -153,7 +156,7 @@ public class EhrExtractStatusService {
 
         long daysSinceLastUpdate = Duration.between(ehrExtractStatus.getEhrExtractCorePending().getSentAt(), time).toDays();
 
-        return daysSinceLastUpdate > EHR_EXTRACT_SENT_DAYS_LIMIT;
+        return daysSinceLastUpdate > ehrExtractSentDaysLimit;
     }
 
     public void saveEhrExtractMessageId(String conversationId, String messageId) {
@@ -363,7 +366,7 @@ public class EhrExtractStatusService {
             return;
         }
 
-        if (hasAcknowledgementExceededEightDays(conversationId, ack.getReceived())
+        if (hasAcknowledgementExceededAckTimeoutLimit(conversationId, ack.getReceived())
             && hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId)) {
 
             logger().warn("Received an ACK message with conversation_id: {}, "
@@ -617,10 +620,10 @@ public class EhrExtractStatusService {
         return ehrExtractStatus.getEhrReceivedAcknowledgement() != null;
     }
 
-    private boolean hasAcknowledgementExceededEightDays(String conversationId, Instant ackReceivedTimestamp) {
+    private boolean hasAcknowledgementExceededAckTimeoutLimit(String conversationId, Instant ackReceivedTimestamp) {
         var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "ACK");
 
-        return hasLastUpdateExceededEightDays(ehrExtractStatus, ackReceivedTimestamp);
+        return hasLastUpdateExceededAckTimeoutLimit(ehrExtractStatus, ackReceivedTimestamp);
     }
 
     private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {
