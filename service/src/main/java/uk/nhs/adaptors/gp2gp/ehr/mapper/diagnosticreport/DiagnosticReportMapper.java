@@ -214,15 +214,12 @@ public class DiagnosticReportMapper {
             .filter(observation -> observation.hasEffectiveDateTimeType() || observation.hasEffectivePeriod())
             .filter(this::hasCommentNote)
             .findFirst()
-            .map(observation -> {
-                final String date = extractDateFromObservation(observation);
-                return buildNarrativeStatementForDiagnosticReport(
-                    diagnosticReportIssued,
-                    CommentType.AGGREGATE_COMMENT_SET.getCode(),
-                    date,
-                    confidentialityService.generateConfidentialityCode(observation).orElse(null)
-                );
-            })
+            .map(observation -> buildNarrativeStatementForDiagnosticReport(
+                diagnosticReportIssued,
+                CommentType.AGGREGATE_COMMENT_SET.getCode(),
+                extractDateFromObservation(observation),
+                confidentialityService.generateConfidentialityCode(observation).orElse(null)
+            ))
             .ifPresent(reportLevelNarrativeStatements::append);
     }
 
