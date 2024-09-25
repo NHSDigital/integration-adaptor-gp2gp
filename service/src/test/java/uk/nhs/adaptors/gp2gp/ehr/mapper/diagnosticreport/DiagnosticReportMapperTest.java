@@ -6,6 +6,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -13,6 +15,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Specimen;
@@ -44,6 +47,8 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import static org.mockito.ArgumentMatchers.anyList;
 import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.NOPAT_HL7_CONFIDENTIALITY_CODE;
+import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.getNopatConfidentialityCodeXpathSegment;
+import static uk.nhs.adaptors.gp2gp.utils.XmlAssertion.assertThatXml;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -199,6 +204,52 @@ class DiagnosticReportMapperTest {
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
         assertThat(actualXml).containsIgnoringWhitespaces(NOPAT_HL7_CONFIDENTIALITY_CODE);
+    }
+
+    @Test
+    void When_DiagnosticReport_With_ObservationEffectiveDateTimeTypeAndCommentNote_Expect_NarrativeStatementConfidentialityCodePresent() {
+        final String diagnosticReportFileName = "diagnostic-report-with-effective-datetime-filing-comment.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS);
+        final Observation observation = (Observation) bundle.getEntry().get(2).getResource();
+        final InputBundle inputBundle = new InputBundle(bundle);
+        final List<String> expectedXPaths = Collections.singletonList(
+            "/component/CompoundStatement/component[1]/NarrativeStatement/" + getNopatConfidentialityCodeXpathSegment()
+        );
+
+        when(confidentialityService.generateConfidentialityCode(observation))
+            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
+        when(messageContext.getInputBundleHolder())
+            .thenReturn(inputBundle);
+
+        diagnosticReport.setStatus(null);
+
+        final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        assertThatXml(actualXml).containsAllXPaths(expectedXPaths);
+    }
+
+    @Test
+    void When_DiagnosticReport_With_ObservationEffectivePeriodAndCommentNote_Expect_NarrativeStatementConfidentialityCodePresent() {
+        final String diagnosticReportFileName = "diagnostic-report-with-effective-datetime-filing-comment.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS);
+        final Observation observation = (Observation) bundle.getEntry().get(2).getResource();
+        final InputBundle inputBundle = new InputBundle(bundle);
+        final List<String> expectedXPaths = Collections.singletonList(
+            "/component/CompoundStatement/component[1]/NarrativeStatement/" + getNopatConfidentialityCodeXpathSegment()
+        );
+
+        when(confidentialityService.generateConfidentialityCode(observation))
+            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
+        when(messageContext.getInputBundleHolder())
+            .thenReturn(inputBundle);
+
+        diagnosticReport.setStatus(null);
+
+        final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        assertThatXml(actualXml).containsAllXPaths(expectedXPaths);
     }
 
     private Bundle getBundleResourceFromJson(String filename) {
