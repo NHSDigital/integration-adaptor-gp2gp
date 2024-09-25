@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ErrorConstants;
 
 import java.time.Instant;
 import java.util.List;
@@ -22,9 +23,7 @@ import java.util.Objects;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrExtractTimeoutScheduler {
 
-    private static final String ERROR_CODE = "99";
-    private static final String ERROR_MESSAGE = "No acknowledgement has been received within ACK timeout limit";
-
+    private static final ErrorConstants ACK_TIMEOUT_ERROR = ErrorConstants.ACK_TIMEOUT;
     private static final String ERROR = "error";
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -42,8 +41,8 @@ public class EhrExtractTimeoutScheduler {
             try {
                 logger().info("Scheduler has started processing EhrExtract list with Ack timeouts");
                 ehrExtractStatusService.updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(),
-                                                                                      ERROR_CODE,
-                                                                                      ERROR_MESSAGE);
+                                                                                      ACK_TIMEOUT_ERROR.getCode(),
+                                                                                      ACK_TIMEOUT_ERROR.getMessage());
 
             } catch (EhrExtractException exception) {
 

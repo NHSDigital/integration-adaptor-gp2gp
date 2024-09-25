@@ -39,6 +39,7 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.scheduling.EhrExtractTimeoutScheduler;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ErrorConstants;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -53,6 +54,7 @@ public class EhrExtractStatusServiceIT {
     private static final int DEFAULT_CONTENT_LENGTH = 244;
     private static final String CONTENT_TYPE_MSWORD = "application/msword";
     public static final String JSON_SUFFIX = ".json";
+    private static final ErrorConstants ACK_TIMEOUT_ERROR = ErrorConstants.ACK_TIMEOUT;
 
     @Autowired
     private EhrExtractStatusService ehrExtractStatusService;
@@ -78,7 +80,7 @@ public class EhrExtractStatusServiceIT {
     void updateEhrExtractStatusAckTest() {
         var inProgressConversationId = generateRandomUppercaseUUID();
 
-        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+        var ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
 
         addInProgressTransferWithExceededAckTimeout(inProgressConversationId, List.of());
 
@@ -96,6 +98,28 @@ public class EhrExtractStatusServiceIT {
                   + "but it is being ignored because the EhrExtract has already been marked as failed "
                   + "from not receiving an acknowledgement from the requester in time.",
                   inProgressConversationId);
+    }
+
+    @Test
+    void updateEhrExtractStatusAckTest2() {
+        var inProgressConversationId = generateRandomUppercaseUUID();
+
+        EhrExtractStatusService ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
+
+        addInProgressTransferWithExceededAckTimeout(inProgressConversationId, List.of());
+
+        when(ehrExtractStatusServiceSpy.logger()).thenReturn(logger);
+
+        var ehrReceivedAcknowledgement = getEhrReceivedAcknowledgement(inProgressConversationId);
+        ehrReceivedAcknowledgement.setErrors(List.of(
+            EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails
+                .builder()
+                .code(ACK_TIMEOUT_ERROR.getCode())
+                .display(ACK_TIMEOUT_ERROR.getMessage())
+                .build()));
+
+        ehrExtractStatusServiceSpy.updateEhrExtractStatusAck(inProgressConversationId, ehrReceivedAcknowledgement);
+
     }
 
     @Test
@@ -325,7 +349,7 @@ public class EhrExtractStatusServiceIT {
 
         EhrExtractStatus extractStatus = EhrExtractStatus.builder()
                 .ackHistory(EhrExtractStatus.AckHistory.builder()
-                        .acks(List.of(getEhrReceivedAcknowledgement(ehrMessageRef)))
+                        .acks(Collections.singletonList(getEhrReceivedAcknowledgement(ehrMessageRef)))
                         .build())
                 .ackPending(EhrExtractStatus.AckPending.builder()
                         .messageId(generateRandomUppercaseUUID())
