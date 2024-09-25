@@ -36,7 +36,7 @@ public class EhrExtractTimeoutScheduler {
         var ehrExtractStatusWithExceededUpdateLimit = inProgressEhrExtractTransfers
             .stream()
             .filter(ehrExtractStatus -> Objects.isNull(ehrExtractStatus.getEhrReceivedAcknowledgement())
-                                        && ehrExtractStatusService.hasLastUpdateExceededEightDays(ehrExtractStatus, now));
+                                        && ehrExtractStatusService.hasLastUpdateExceededAckTimeoutLimit(ehrExtractStatus, now));
 
         ehrExtractStatusWithExceededUpdateLimit.forEach(ehrExtractStatus -> {
             try {
