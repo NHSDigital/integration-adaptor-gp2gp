@@ -109,6 +109,115 @@
           }
         ]
       }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AAD8F388-F020-4945-B775-89BC8D2EA354",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ],
+          "security": [
+            {
+              "system": "http://hl7.org/fhir/v3/ActCode",
+              "code": "NOPAT",
+              "display": "no disclosure to patient, family or caregivers without attending provider's authorization"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://EMISWeb/A82038",
+            "value": "AAD8F388-F020-4945-B775-89BC8D2EA354-COMM"
+          }
+        ],
+        "status": "unknown",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "37331000000100",
+              "display": "Comment note"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+        },
+        "effectiveDateTime": "2010-02-23",
+        "issued": "2020-12-15T15:17:04.917+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+          }
+        ],
+        "comment": "(q) - Normal - No Action",
+        "related": [
+          {
+            "type": "derived-from",
+            "target": {
+              "reference": "Observation/AAD8F388-F020-4945-B775-89BC8D2EA354"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "85C08A50-236F-4177-A0F8-006A6BE7163C",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ],
+          "security": [
+            {
+              "system": "http://hl7.org/fhir/v3/ActCode",
+              "code": "NOPAT",
+              "display": "no disclosure to patient, family or caregivers without attending provider's authorization"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://EMISWeb/A82038",
+            "value": "85C08A50-236F-4177-A0F8-006A6BE7163C-COMM"
+          }
+        ],
+        "status": "unknown",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "37331000000100",
+              "display": "Comment note"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+        },
+        "effectivePeriod": {
+          "start": "2021-01-01T10:30:00+00:00",
+          "end": "2021-02-01T10:30:00+00:00"
+        },
+        "issued": "2020-12-15T15:17:04.917+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+          }
+        ],
+        "comment": "(q) - Normal - No Action",
+        "related": [
+          {
+            "type": "derived-from",
+            "target": {
+              "reference": "Observation/85C08A50-236F-4177-A0F8-006A6BE7163C"
+            }
+          }
+        ]
+      }
     }
   ]
 }
