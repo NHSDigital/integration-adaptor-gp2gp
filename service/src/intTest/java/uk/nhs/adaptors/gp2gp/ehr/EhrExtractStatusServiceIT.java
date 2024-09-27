@@ -39,7 +39,7 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.scheduling.EhrExtractTimeoutScheduler;
-import uk.nhs.adaptors.gp2gp.ehr.utils.ErrorDetails;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ErrorDetail;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -54,7 +54,7 @@ public class EhrExtractStatusServiceIT {
     private static final int DEFAULT_CONTENT_LENGTH = 244;
     private static final String CONTENT_TYPE_MSWORD = "application/msword";
     public static final String JSON_SUFFIX = ".json";
-    private static final ErrorDetails ACK_TIMEOUT_ERROR = ErrorDetails.ACK_TIMEOUT;
+    private static final ErrorDetail ACK_TIMEOUT_ERROR = ErrorDetail.ACK_TIMEOUT;
 
     @Autowired
     private EhrExtractStatusService ehrExtractStatusService;
@@ -77,7 +77,7 @@ public class EhrExtractStatusServiceIT {
     }
 
     @Test
-    void When_EhrStatusWithExceededTimeout_Expect_EhrUpdateShouldIgnoreSuchEhrStatus() {
+    void When_EhrStatusWithExceededTimeout_Expect_EhrUpdateShouldIgnoreEhrStatus() {
         var inProgressConversationId = generateRandomUppercaseUUID();
 
         var ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.ehr.utils.ErrorDetails;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ErrorDetail;
 
 import java.time.Instant;
 import java.util.List;
@@ -40,8 +40,8 @@ public class EhrExtractTimeoutScheduler {
             try {
                 logger().info("Scheduler has started processing EhrExtract list with Ack timeouts");
                 ehrExtractStatusService.updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(),
-                                                                                      ErrorDetails.ACK_TIMEOUT.getCode(),
-                                                                                      ErrorDetails.ACK_TIMEOUT.getMessage());
+                                                                                      ErrorDetail.ACK_TIMEOUT.getCode(),
+                                                                                      ErrorDetail.ACK_TIMEOUT.getMessage());
 
             } catch (EhrExtractException exception) {
 
