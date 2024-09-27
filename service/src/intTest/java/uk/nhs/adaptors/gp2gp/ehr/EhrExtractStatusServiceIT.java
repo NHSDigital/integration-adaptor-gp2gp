@@ -77,7 +77,7 @@ public class EhrExtractStatusServiceIT {
     }
 
     @Test
-    void When_EhrStatusWithExceededTimeout_Expect_EhrUpdateShouldIgnoreEhrStatus() {
+    void When_EhrStatusWithExceededTimeout_Expect_EhrStatusShouldNotBeUpdated() {
         var inProgressConversationId = generateRandomUppercaseUUID();
 
         var ehrExtractStatusServiceSpy = spy(ehrExtractStatusService);
