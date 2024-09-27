@@ -227,10 +227,10 @@ class DiagnosticReportMapperTest {
 
     @Test
     void When_DiagnosticReport_With_ObservationEffectivePeriodAndCommentNote_Expect_NarrativeStatementConfidentialityCodePresent() {
-        final String diagnosticReportFileName = "diagnostic-report-with-effective-datetime-filing-comment.json";
+        final String diagnosticReportFileName = "diagnostic-report-with-effective-period-filing-comment.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS);
-        final Observation observation = (Observation) bundle.getEntry().get(2).getResource();
+        final Observation observation = (Observation) bundle.getEntry().get(3).getResource();
         final InputBundle inputBundle = new InputBundle(bundle);
         final List<String> expectedXPaths = Collections.singletonList(
             "/component/CompoundStatement/component[1]/NarrativeStatement/" + getNopatConfidentialityCodeXpathSegment()
