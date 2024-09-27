@@ -119,14 +119,12 @@ public class EhrExtractStatusService {
 
     @Value("${gp2gp.ehr-extract-sent-days-limit}")
     private int ehrExtractSentDaysLimit;
-    private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
-    public static final String UNEXPECTED_CONDITION_ERROR_MESSAGE = "No acknowledgement has been received within 8 days";
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
     private final TimestampService timestampService;
 
-    boolean hasEhrStatusReceivedAckWithUnexpectedConditionErrors(String conversationId) {
+    boolean hasEhrStatusReceivedAckWithErrors(String conversationId) {
 
         var ehrExtractStatus = fetchEhrExtractStatus(conversationId, "NACK");
 
@@ -140,12 +138,7 @@ public class EhrExtractStatusService {
             return false;
         }
 
-        var ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg = errors.stream()
-            .filter(err -> UNEXPECTED_CONDITION_ERROR_CODE.equals(err.getCode())
-                           && UNEXPECTED_CONDITION_ERROR_MESSAGE.equals(err.getDisplay()))
-            .findAny();
-
-        return ehrReceivedAckErrorDetailsThatContainsSearchedErrCodeAndMsg.isPresent();
+        return true;
     }
 
     public boolean hasLastUpdateExceededAckTimeoutLimit(EhrExtractStatus ehrExtractStatus, Instant time) {
@@ -208,8 +201,8 @@ public class EhrExtractStatusService {
         return Collections.emptyMap();
     }
 
-    public EhrExtractStatus updateEhrExtractStatusAccessStructured(
-        GetGpcStructuredTaskDefinition structuredTaskDefinition, String structuredRecordJsonFilename) {
+    public EhrExtractStatus updateEhrExtractStatusAccessStructured(GetGpcStructuredTaskDefinition structuredTaskDefinition,
+                                                                   String structuredRecordJsonFilename) {
 
         Query query = createQueryForConversationId(structuredTaskDefinition.getConversationId());
         Instant now = Instant.now();
@@ -231,12 +224,11 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusAccessDocument(
-            DocumentTaskDefinition documentTaskDefinition,
-            String storagePath,
-            int base64ContentLength,
-            String errorMessage,
-            String filename) {
+    public EhrExtractStatus updateEhrExtractStatusAccessDocument(DocumentTaskDefinition documentTaskDefinition,
+                                                                 String storagePath,
+                                                                 int base64ContentLength,
+                                                                 String errorMessage,
+                                                                 String filename) {
 
         Query query = new Query();
         query.addCriteria(Criteria
@@ -266,9 +258,8 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusCore(
-        SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
-        Instant requestSentAt) {
+    public EhrExtractStatus updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+                                                       Instant requestSentAt) {
 
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
@@ -367,7 +358,7 @@ public class EhrExtractStatusService {
         }
 
         if (hasAcknowledgementExceededAckTimeoutLimit(conversationId, ack.getReceived())
-            && hasEhrStatusReceivedAckWithUnexpectedConditionErrors(conversationId)) {
+            && hasEhrStatusReceivedAckWithErrors(conversationId)) {
 
             logger().warn("Received an ACK message with conversation_id: {}, "
                           + "but it is being ignored because the EhrExtract has already been marked as failed "

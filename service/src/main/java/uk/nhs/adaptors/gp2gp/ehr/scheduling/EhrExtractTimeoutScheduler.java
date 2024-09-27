@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ErrorDetail;
 
 import java.time.Instant;
 import java.util.List;
@@ -22,9 +23,6 @@ import java.util.Objects;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrExtractTimeoutScheduler {
 
-    private static final String UNEXPECTED_CONDITION_ERROR_CODE = "99";
-    private static final String UNEXPECTED_CONDITION_ERROR_MESSAGE
-                                            = String.format("No acknowledgement has been received within %s days", 8);
     private static final String ERROR = "error";
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -42,8 +40,9 @@ public class EhrExtractTimeoutScheduler {
             try {
                 logger().info("Scheduler has started processing EhrExtract list with Ack timeouts");
                 ehrExtractStatusService.updateEhrExtractStatusWithEhrReceivedAckError(ehrExtractStatus.getConversationId(),
-                                                                                      UNEXPECTED_CONDITION_ERROR_CODE,
-                                                                                      UNEXPECTED_CONDITION_ERROR_MESSAGE);
+                                                                                      ErrorDetail.ACK_TIMEOUT.getCode(),
+                                                                                      ErrorDetail.ACK_TIMEOUT.getMessage());
+
             } catch (EhrExtractException exception) {
 
                 logger().error("An error occurred when updating EHR Extract with Ack erorrs, EHR Extract Status conversation_id: {}",
