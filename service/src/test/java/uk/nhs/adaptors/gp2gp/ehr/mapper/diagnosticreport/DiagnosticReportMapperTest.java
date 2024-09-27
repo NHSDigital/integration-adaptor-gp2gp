@@ -176,8 +176,7 @@ class DiagnosticReportMapperTest {
         final String testFile = "diagnostic-report-with-multi-specimens-noscrub.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(testFile);
 
-        when(confidentialityService.generateConfidentialityCode(diagnosticReport))
-            .thenReturn(Optional.empty());
+        when(confidentialityService.generateConfidentialityCode(diagnosticReport)).thenReturn(Optional.empty());
 
         final String result = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
@@ -196,8 +195,7 @@ class DiagnosticReportMapperTest {
 
         when(confidentialityService.generateConfidentialityCode(bundle.getEntry().getFirst().getResource()))
             .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
-        when(messageContext.getInputBundleHolder())
-            .thenReturn(inputBundle);
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         diagnosticReport.setStatus(null);
 
@@ -217,10 +215,8 @@ class DiagnosticReportMapperTest {
             "/component/CompoundStatement/component[1]/NarrativeStatement/" + getNopatConfidentialityCodeXpathSegment()
         );
 
-        when(confidentialityService.generateConfidentialityCode(observation))
-            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
-        when(messageContext.getInputBundleHolder())
-            .thenReturn(inputBundle);
+        when(confidentialityService.generateConfidentialityCode(observation)).thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         diagnosticReport.setStatus(null);
 
@@ -240,10 +236,8 @@ class DiagnosticReportMapperTest {
             "/component/CompoundStatement/component[1]/NarrativeStatement/" + getNopatConfidentialityCodeXpathSegment()
         );
 
-        when(confidentialityService.generateConfidentialityCode(observation))
-            .thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
-        when(messageContext.getInputBundleHolder())
-            .thenReturn(inputBundle);
+        when(confidentialityService.generateConfidentialityCode(observation)).thenReturn(Optional.of(NOPAT_HL7_CONFIDENTIALITY_CODE));
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         diagnosticReport.setStatus(null);
 
