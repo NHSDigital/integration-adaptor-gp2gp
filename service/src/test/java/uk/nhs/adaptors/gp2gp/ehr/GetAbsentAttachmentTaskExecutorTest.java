@@ -1,11 +1,14 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import org.jetbrains.annotations.Nullable;
-import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.Test;
+
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AbsentAttachmentFileMapper;
 import uk.nhs.adaptors.gp2gp.gpc.DetectTranslationCompleteService;
@@ -14,7 +17,11 @@ import uk.nhs.adaptors.gp2gp.gpc.DocumentToMHSTranslator;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.eq;
 
 @ExtendWith(MockitoExtension.class)
 public class GetAbsentAttachmentTaskExecutorTest {
@@ -42,7 +49,7 @@ public class GetAbsentAttachmentTaskExecutorTest {
         when(absentAttachmentFileMapper.mapFileDataToAbsentAttachment(anyString(), anyString(), anyString()))
             .thenReturn("file content");
 
-        getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition,Optional.empty());
+        getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition, Optional.empty());
 
         verify(ehrExtractStatusService).updateEhrExtractStatusAccessDocument(
             any(),
