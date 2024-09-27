@@ -209,7 +209,8 @@ class DiagnosticReportMapperTest {
         final String diagnosticReportFileName = "diagnostic-report-with-effective-datetime-filing-comment.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS);
-        final Observation observation = (Observation) bundle.getEntry().get(2).getResource();
+        final int observationBundleEntryIndex = 2;
+        final Observation observation = (Observation) bundle.getEntry().get(observationBundleEntryIndex).getResource();
         final InputBundle inputBundle = new InputBundle(bundle);
         final List<String> expectedXPaths = Collections.singletonList(
             "/component/CompoundStatement/component[1]/NarrativeStatement/" + getNopatConfidentialityCodeXpathSegment()
@@ -230,7 +231,8 @@ class DiagnosticReportMapperTest {
         final String diagnosticReportFileName = "diagnostic-report-with-effective-period-filing-comment.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE_WITH_FILING_COMMENTS);
-        final Observation observation = (Observation) bundle.getEntry().get(3).getResource();
+        final int observationBundleEntryIndex = 3;
+        final Observation observation = (Observation) bundle.getEntry().get(observationBundleEntryIndex).getResource();
         final InputBundle inputBundle = new InputBundle(bundle);
         final List<String> expectedXPaths = Collections.singletonList(
             "/component/CompoundStatement/component[1]/NarrativeStatement/" + getNopatConfidentialityCodeXpathSegment()
