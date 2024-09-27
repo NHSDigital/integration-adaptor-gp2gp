@@ -7,22 +7,31 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AbsentAttachmentFileMapper;
 import uk.nhs.adaptors.gp2gp.gpc.DetectTranslationCompleteService;
 import uk.nhs.adaptors.gp2gp.gpc.DocumentToMHSTranslator;
 
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class GetAbsentAttachmentTaskExecutorTest {
-    @Mock private EhrExtractStatusService ehrExtractStatusService;
-    @Mock private DocumentToMHSTranslator documentToMHSTranslator;
-    @Mock private DetectTranslationCompleteService detectTranslationCompleteService;
-    @Mock private StorageConnectorService storageConnectorService;
+    @Mock
+    private EhrExtractStatusService ehrExtractStatusService;
+
+    @Mock
+    private DocumentToMHSTranslator documentToMHSTranslator;
+
+    @Mock
+    private DetectTranslationCompleteService detectTranslationCompleteService;
+
+    @Mock
+    private StorageConnectorService storageConnectorService;
+
+    @Mock
+    private AbsentAttachmentFileMapper absentAttachmentFileMapper;
 
     @InjectMocks
     private GetAbsentAttachmentTaskExecutor getAbsentAttachmentTaskExecutor;
@@ -30,10 +39,10 @@ public class GetAbsentAttachmentTaskExecutorTest {
     @Test
     public void When_HandleAbsentAttachmentWithNoError_Expect_DefaultValueIsUsedAsError() {
         var taskDefinition = buildAbsentAttachment(null);
+        when(absentAttachmentFileMapper.mapFileDataToAbsentAttachment(anyString(), anyString(), anyString()))
+            .thenReturn("file content");
 
-        getAbsentAttachmentTaskExecutor.handleAbsentAttachment(
-            taskDefinition,
-            Optional.empty());
+        getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition,Optional.empty());
 
         verify(ehrExtractStatusService).updateEhrExtractStatusAccessDocument(
             any(),
@@ -47,6 +56,8 @@ public class GetAbsentAttachmentTaskExecutorTest {
     @Test
     public void When_HandleAbsentAttachmentWithJustTaskDefinitionTitle_Expect_TitleIsUsedAsError() {
         var taskDefinition = buildAbsentAttachment("This-is-the-task-definition-title");
+        when(absentAttachmentFileMapper.mapFileDataToAbsentAttachment(anyString(), anyString(), anyString()))
+            .thenReturn("file content");
 
         getAbsentAttachmentTaskExecutor.handleAbsentAttachment(
             taskDefinition,
@@ -64,6 +75,8 @@ public class GetAbsentAttachmentTaskExecutorTest {
     @Test
     public void When_HandleAbsentAttachmentWithJustGpcResponseError_Expect_GpcResponseErrorIsUsedAsError() {
         var taskDefinition = buildAbsentAttachment(null);
+        when(absentAttachmentFileMapper.mapFileDataToAbsentAttachment(anyString(), anyString(), anyString()))
+            .thenReturn("file content");
 
         getAbsentAttachmentTaskExecutor.handleAbsentAttachment(
             taskDefinition,
@@ -81,6 +94,8 @@ public class GetAbsentAttachmentTaskExecutorTest {
     @Test
     public void When_HandleAbsentAttachmentWithGpcResponseErrorAndTitle_Expect_GpcResponseErrorIsUsedAsError() {
         var taskDefinition = buildAbsentAttachment("This-is-the-task-definition-title");
+        when(absentAttachmentFileMapper.mapFileDataToAbsentAttachment(anyString(), anyString(), anyString()))
+            .thenReturn("file content");
 
         getAbsentAttachmentTaskExecutor.handleAbsentAttachment(
             taskDefinition,
@@ -98,6 +113,8 @@ public class GetAbsentAttachmentTaskExecutorTest {
     @Test
     public void When_HandleAbsentAttachment_Expect_AbsentAttachmentFilenameIsUsed() {
         var taskDefinition = buildAbsentAttachment(null);
+        when(absentAttachmentFileMapper.mapFileDataToAbsentAttachment(anyString(), anyString(), anyString()))
+            .thenReturn("file content");
 
         getAbsentAttachmentTaskExecutor.handleAbsentAttachment(taskDefinition, Optional.empty());
 
