@@ -94,23 +94,21 @@ public class EncounterComponentsMapper {
         ResourceType.DiagnosticReport, this::mapDiagnosticReport);
 
     public String mapComponents(Encounter encounter) {
-        Optional<ListResource> listReferencedToEncounter =
-            messageContext.getInputBundleHolder().getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE);
+        return messageContext
+            .getInputBundleHolder()
+            .getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE)
+            .map(this::mapConsultationListToComponent)
+            .orElse(StringUtils.EMPTY);
+    }
 
-        if (listReferencedToEncounter.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
-
-        var entries = listReferencedToEncounter.orElseThrow().getEntry();
-        List<ListResource> topics = entries.stream()
+    private String mapConsultationListToComponent(ListResource listResource) {
+        return listResource.getEntry()
+            .stream()
             .map(entry -> entry.getItem().getReferenceElement())
             .map(reference ->
-                (ListResource) messageContext
-                    .getInputBundleHolder()
-                    .getRequiredResource(reference))
-            .collect(Collectors.toList());
-
-        return topics.stream()
+                    (ListResource) messageContext
+                            .getInputBundleHolder()
+                            .getRequiredResource(reference))
             .map(this::mapTopicListToComponent)
             .collect(Collectors.joining());
     }
