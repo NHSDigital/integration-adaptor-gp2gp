@@ -104,7 +104,7 @@ public class EncounterComponentsMapper {
     private String mapConsultationListToComponent(ListResource listResource) {
         return listResource.getEntry()
             .stream()
-            .map(entry -> entry.getItem().getReferenceElement())
+            .map(EncounterComponentsMapper::getReferenceElement)
             .map(this::getRequiredResource)
             .map(ListResource.class::cast)
             .map(this::mapTopicListToComponent)
@@ -133,7 +133,7 @@ public class EncounterComponentsMapper {
 
     private String mapCategorizedResources(ListResource topicList) {
         return topicList.getEntry().stream()
-            .map(entry -> entry.getItem().getReferenceElement())
+            .map(EncounterComponentsMapper::getReferenceElement)
             .filter(reference -> reference.getValue().matches(LIST_REFERENCE_PATTERN))
             .map(this::getRequiredResource)
             .filter(resource -> ResourceType.List.equals(resource.getResourceType()))
@@ -175,7 +175,7 @@ public class EncounterComponentsMapper {
             return Optional.empty();
         }
 
-        var reference = item.getItem().getReferenceElement();
+        var reference = getReferenceElement(item);
         if (isListResource(reference)) {
             return mapResourceContainedInList(reference, this::mapConsultationListResourceToComponent);
         }
@@ -387,6 +387,10 @@ public class EncounterComponentsMapper {
             .build();
 
         return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_TEMPLATE, params);
+    }
+
+    private static IIdType getReferenceElement(ListResource.ListEntryComponent entry) {
+        return entry.getItem().getReferenceElement();
     }
 
     private Resource getRequiredResource(IIdType reference) {
