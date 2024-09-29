@@ -266,18 +266,18 @@ public class EncounterComponentsMapper {
             .map(reference -> (Condition) getRequiredResource(reference.getReferenceElement()))
             .map(Condition::getCode);
 
-        Optional<String> title = Optional.ofNullable(topicList.getTitle());
+        final var title = topicList.getTitle();
 
-        if (relatedProblem.isPresent() && title.isPresent()) {
-            return codeableConceptCdMapper.mapToCdForTopic(relatedProblem.orElseThrow(), title.orElseThrow());
+        if (relatedProblem.isPresent() && StringUtils.isNotEmpty(title)) {
+            return codeableConceptCdMapper.mapToCdForTopic(relatedProblem.orElseThrow(), title);
         }
 
         if (relatedProblem.isPresent()) {
             return codeableConceptCdMapper.mapToCdForTopic(relatedProblem.orElseThrow());
         }
 
-        if (title.isPresent()) {
-            return codeableConceptCdMapper.mapToCdForTopic(title.orElseThrow());
+        if (StringUtils.isNotEmpty(title)) {
+            return codeableConceptCdMapper.mapToCdForTopic(title);
         }
 
         return codeableConceptCdMapper.getCdForTopic();
