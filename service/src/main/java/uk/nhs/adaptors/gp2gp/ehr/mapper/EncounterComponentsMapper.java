@@ -118,27 +118,13 @@ public class EncounterComponentsMapper {
                 + "Topic (EHR)", topicList.getId()));
         }
 
-        String components = mapTopicListComponents(topicList);
-
-        if (StringUtils.isAllEmpty(components)) {
-            return components;
-        }
-
-        String effectiveTime = prepareEffectiveTime(topicList);
-        String availabilityTime = prepareAvailabilityTime(topicList);
-
-        var params = CompoundStatementParameters.builder()
-            .nested(false)
-            .id(messageContext.getIdMapper().getOrNew(ResourceType.List, topicList.getIdElement()))
-            .classCode(TOPIC.getCode())
-            .compoundStatementCode(prepareCdForTopic(topicList))
-            .statusCode(COMPLETE_CODE)
-            .effectiveTime(effectiveTime)
-            .availabilityTime(availabilityTime)
-            .components(components)
-            .build();
-
-        return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_TEMPLATE, params);
+        return buildCompoundStatement(
+            topicList,
+            TOPIC.getCode(),
+            prepareCdForTopic(topicList),
+            false,
+            mapTopicListComponents(topicList)
+        );
     }
 
     private String mapTopicListComponents(ListResource topicList) {
@@ -159,28 +145,13 @@ public class EncounterComponentsMapper {
     }
 
     private String mapCategoryListToComponent(ListResource categoryList) {
-
-        String components = mapListResourceToComponents(categoryList);
-
-        if (StringUtils.isAllEmpty(components)) {
-            return components;
-        }
-
-        String effectiveTime = prepareEffectiveTime(categoryList);
-        String availabilityTime = prepareAvailabilityTime(categoryList);
-
-        var params = CompoundStatementParameters.builder()
-            .nested(true)
-            .id(messageContext.getIdMapper().getOrNew(ResourceType.List, categoryList.getIdElement()))
-            .classCode(CATEGORY.getCode())
-            .compoundStatementCode(prepareCdForCategory(categoryList))
-            .statusCode(COMPLETE_CODE)
-            .effectiveTime(effectiveTime)
-            .availabilityTime(availabilityTime)
-            .components(components)
-            .build();
-
-        return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_TEMPLATE, params);
+        return buildCompoundStatement(
+            categoryList,
+            CATEGORY.getCode(),
+            prepareCdForCategory(categoryList),
+            true,
+            mapListResourceToComponents(categoryList)
+        );
     }
 
     private String mapListResourceToComponents(ListResource listResource) {
@@ -389,6 +360,34 @@ public class EncounterComponentsMapper {
 
     private boolean isListResource(IIdType reference) {
         return reference.hasResourceType() && reference.getResourceType().equals(ResourceType.List.name());
+    }
+
+    private String buildCompoundStatement(
+        ListResource topicList,
+        String classCode,
+        String compoundStatementCode,
+        boolean nested,
+        String components
+    ) {
+        if (StringUtils.isEmpty(components)) {
+            return StringUtils.EMPTY;
+        }
+
+        String effectiveTime = prepareEffectiveTime(topicList);
+        String availabilityTime = prepareAvailabilityTime(topicList);
+
+        var params = CompoundStatementParameters.builder()
+            .nested(nested)
+            .id(messageContext.getIdMapper().getOrNew(ResourceType.List, topicList.getIdElement()))
+            .classCode(classCode)
+            .compoundStatementCode(compoundStatementCode)
+            .statusCode(COMPLETE_CODE)
+            .effectiveTime(effectiveTime)
+            .availabilityTime(availabilityTime)
+            .components(components)
+            .build();
+
+        return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_TEMPLATE, params);
     }
 
     private Resource getRequiredResource(IIdType reference) {
