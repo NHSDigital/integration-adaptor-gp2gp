@@ -260,16 +260,7 @@ public class EncounterComponentsMapper {
     }
 
     private String prepareCdForTopic(ListResource topicList) {
-        var extensions = topicList.getExtension();
-
-        Optional<Reference> conditionRef = extensions.stream()
-            .filter(ext -> ext.getUrl().equals(RELATED_PROBLEM_EXTENSION_URL))
-            .flatMap(ext -> ext.getExtension().stream())
-            .filter(relatedProblemExt -> relatedProblemExt.getUrl().equals(RELATED_PROBLEM_TARGET))
-            .findFirst()
-            .map(ext -> (Reference) ext.getValue());
-
-        Optional<CodeableConcept> relatedProblem = conditionRef
+        final Optional<CodeableConcept> relatedProblem = getConditionReference(topicList)
             .map(reference -> (Condition) getRequiredResource(reference.getReferenceElement()))
             .map(Condition::getCode);
 
@@ -288,6 +279,16 @@ public class EncounterComponentsMapper {
         }
 
         return codeableConceptCdMapper.getCdForTopic();
+    }
+
+    private static Optional<Reference> getConditionReference(ListResource topicList) {
+        return topicList.getExtension()
+            .stream()
+            .filter(ext -> ext.getUrl().equals(RELATED_PROBLEM_EXTENSION_URL))
+            .flatMap(ext -> ext.getExtension().stream())
+            .filter(relatedProblemExt -> relatedProblemExt.getUrl().equals(RELATED_PROBLEM_TARGET))
+            .findFirst()
+            .map(ext -> (Reference) ext.getValue());
     }
 
     private String prepareCdForCategory(ListResource categoryList) {
