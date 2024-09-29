@@ -128,8 +128,11 @@ public class EncounterComponentsMapper {
     }
 
     private String mapTopicListComponents(ListResource topicList) {
+        return mapCategorizedResources(topicList) + mapListResourceToComponents(topicList);
+    }
 
-        String categories = topicList.getEntry().stream()
+    private String mapCategorizedResources(ListResource topicList) {
+        return topicList.getEntry().stream()
             .map(entry -> entry.getItem().getReferenceElement())
             .filter(reference -> reference.getValue().matches(LIST_REFERENCE_PATTERN))
             .map(this::getRequiredResource)
@@ -138,10 +141,6 @@ public class EncounterComponentsMapper {
             .filter(listResource -> CodeableConceptMappingUtils.hasCode(listResource.getCode(), List.of(CATEGORY_LIST_CODE)))
             .map(this::mapCategoryListToComponent)
             .collect(Collectors.joining());
-
-        String uncategorisedComponents = mapListResourceToComponents(topicList);
-
-        return categories + uncategorisedComponents;
     }
 
     private String mapCategoryListToComponent(ListResource categoryList) {
