@@ -105,7 +105,8 @@ public class EncounterComponentsMapper {
         return listResource.getEntry()
             .stream()
             .map(entry -> entry.getItem().getReferenceElement())
-            .map(reference -> (ListResource) getRequiredResource(reference))
+            .map(this::getRequiredResource)
+            .map(ListResource.class::cast)
             .map(this::mapTopicListToComponent)
             .collect(Collectors.joining());
     }
