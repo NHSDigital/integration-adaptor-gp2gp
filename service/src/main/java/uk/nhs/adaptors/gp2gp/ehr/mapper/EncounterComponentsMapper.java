@@ -189,12 +189,14 @@ public class EncounterComponentsMapper {
     private Optional<String> mapConsultationListResourceToComponent(Resource resource) {
         if (encounterComponents.containsKey(resource.getResourceType())) {
             return encounterComponents.get(resource.getResourceType()).apply(resource);
-        } else if (isIgnoredResourceType(resource.getResourceType())) {
+        }
+
+        if (isIgnoredResourceType(resource.getResourceType())) {
             LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
             return Optional.empty();
-        } else {
-            throw new EhrMapperException("Unsupported resource in consultation list: " + resource.getId());
         }
+
+        throw new EhrMapperException("Unsupported resource in consultation list: " + resource.getId());
     }
 
     public Optional<String> mapResourceToComponent(Resource resource) {
