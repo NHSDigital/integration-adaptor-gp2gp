@@ -88,13 +88,13 @@
 
 ## EHR Received Acknowledgement
 
-| Field Name         | Datatype       | Constraints |
-|--------------------|----------------|-------------|
-| conversationClosed | Date           | N/A         |
-| messageRef         | String         | UUID V4     |
-| received           | Date           | N/A         |
-| rootId             | String         | UUID V4     |
-| errors             | Object (Array) | N/A         |
+| Field Name         | Datatype       | Constraints                  |
+|--------------------|----------------|------------------------------|
+| conversationClosed | Date           | N/A                          |
+| messageRef         | String         | UUID V4                      |
+| received           | Date           | N/A                          |
+| rootId             | String         | UUID V4                      |
+| errors             | Object (Array) | [Errors](database.md#errors) |
 
 ## GPC Document
 
@@ -115,6 +115,13 @@
 | messageId  | String (Array) | UUID V4's   |
 | sentAt     | Date           | N/A         |
 | taskId     | String         | UUID V4     |
+
+## Errors
+
+| Field Name | Datatype | Constraints |
+|------------|----------|-------------|
+| code       | String   | N/A         |
+| display    | String   | N/A         |
 
 ## Database entities
 
