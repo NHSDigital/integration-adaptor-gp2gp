@@ -1,7 +1,5 @@
 # Database Objects
 
-
-
 ## EHR Extract Status
 
 | Field Name                 | Datatype | Constraints                                                  |
@@ -19,8 +17,6 @@
 | ackToRequester             | Object   | [ACK To Requester](database.md#ack-to-requester)             |
 | ehrReceivedAcknowledgement | Object   | [EHR Receieved Acknowledgement](database.md#ehr-received-acknowledgement) |
 
-
-
 ## EHR Request
 
 | Field Name  | Datatype | Constraints |
@@ -35,16 +31,12 @@
 | toOdsCode   | String   | N/A         |
 | messageId   | String   | UUID V4     |
 
-
-
 ## GPC Access Document
 
 | Field Name | Datatype       | Constraints                              |
 | ---------- | -------------- | ---------------------------------------- |
 | patientId  | String         | N/A                                      |
 | documents  | Object (Array) | [GPC Document](database.md#gpc-document) |
-
-
 
 ## GPC Access Structured
 
@@ -55,8 +47,6 @@
 | objectName | String   | N/A                                      |
 | taskId     | String   | UUID V4                                  |
 
-
-
 ## EHR Extract Core Pending
 
 | Field Name | Datatype | Constraints |
@@ -64,15 +54,11 @@
 | sentAt     | Date     | N/A         |
 | taskId     | String   | UUID V4     |
 
-
-
 ## EHR Continue
 
 | Field Name | Datatype | Constraints |
 | ---------- | -------- | ----------- |
 | received   | Date     | N/A         |
-
-
 
 ## EHR Extract Core
 
@@ -80,8 +66,6 @@
 | ---------- | -------- | ----------- |
 | sentAt     | Date     | N/A         |
 | taskId     | String   | UUID V4     |
-
-
 
 ## ACK Pending
 
@@ -91,8 +75,6 @@
 | taskId     | String   | UUID V4     |
 | typeCode   | String   | AA, AE      |
 | updatedAt  | Date     | N/A         |
-
-
 
 ## ACK To Requester
 
@@ -104,18 +86,15 @@
 | taskId     | String   | UUID V4     |
 | typeCode   | String   | AA, AE      |
 
-
-
 ## EHR Received Acknowledgement
 
-| Field Name         | Datatype | Constraints |
-| ------------------ | -------- | ----------- |
-| conversationClosed | Date     | N/A         |
-| messageRef         | String   | UUID V4     |
-| received           | Date     | N/A         |
-| rootId             | String   | UUID V4     |
-
-
+| Field Name         | Datatype       | Constraints                  |
+|--------------------|----------------|------------------------------|
+| conversationClosed | Date           | N/A                          |
+| messageRef         | String         | UUID V4                      |
+| received           | Date           | N/A                          |
+| rootId             | String         | UUID V4                      |
+| errors             | Object (Array) | [Errors](database.md#errors) |
 
 ## GPC Document
 
@@ -129,8 +108,6 @@
 | objectName        | String   | N/A                                     |
 | sentToMhs         | Object   | [EHR Continue](database.md#sent-to-mhs) |
 
-
-
 ## Sent To MHS
 
 | Field Name | Datatype       | Constraints |
@@ -139,7 +116,12 @@
 | sentAt     | Date           | N/A         |
 | taskId     | String         | UUID V4     |
 
+## Errors
 
+| Field Name | Datatype | Constraints |
+|------------|----------|-------------|
+| code       | String   | N/A         |
+| display    | String   | N/A         |
 
 ## Database entities
 
