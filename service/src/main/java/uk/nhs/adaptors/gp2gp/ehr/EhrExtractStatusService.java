@@ -330,7 +330,8 @@ public class EhrExtractStatusService {
                                                               String errorMessage) {
 
         Update update = createUpdateWithUpdatedAt();
-        update.addToSet(RECEIVED_ACK_ERRORS,
+        //update.set(RECEIVED_ACK, EhrExtractStatus.EhrReceivedAcknowledgement.builder().build());
+        update.setOnInsert(RECEIVED_ACK_ERRORS,
                         EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder().code(errorCode).display(errorMessage).build());
 
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(

@@ -44,6 +44,14 @@ services:
       - GP2GP_LARGE_EHR_EXTRACT_THRESHOLD
       - GP2GP_MHS_CLIENT_MAX_BACKOFF_ATTEMPTS
       - GP2GP_GPC_CLIENT_MAX_BACKOFF_ATTEMPTS
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "1GB"
+        reservations:
+          cpus: "1"
+          memory: "512M"
 
   mock-mhs-adaptor:
     networks: 

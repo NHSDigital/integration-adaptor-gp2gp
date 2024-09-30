@@ -17,6 +17,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.ErrorDetail;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
@@ -27,7 +28,7 @@ public class EhrExtractTimeoutScheduler {
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusService ehrExtractStatusService;
 
-    @Scheduled(cron = "${timeout.cronTime}")
+    @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
     public void processEhrExtractAckTimeouts() {
         List<EhrExtractStatus> inProgressEhrExtractTransfers = findInProgressTransfers();
         var now = Instant.now();
@@ -35,6 +36,8 @@ public class EhrExtractTimeoutScheduler {
             .stream()
             .filter(ehrExtractStatus -> Objects.isNull(ehrExtractStatus.getEhrReceivedAcknowledgement())
                                         && ehrExtractStatusService.hasLastUpdateExceededAckTimeoutLimit(ehrExtractStatus, now));
+
+        logger().info("Scheduler has been initialized successfully");
 
         ehrExtractStatusWithExceededUpdateLimit.forEach(ehrExtractStatus -> {
             try {

@@ -64,5 +64,5 @@ gp2gp:
       timeout: ${GP2GP_MHS_CLIENT_TIMEOUT_SECONDS:120}
 
 timeout:
-  cronTime: ${TIMEOUT_CRON_TIME:0 0 */12 * * *}
+  cronTime: ${TIMEOUT_CRON_TIME:* */5 * * * *}
 
