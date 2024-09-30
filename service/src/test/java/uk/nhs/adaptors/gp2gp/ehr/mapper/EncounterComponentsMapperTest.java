@@ -42,6 +42,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
@@ -124,6 +125,9 @@ public class EncounterComponentsMapperTest {
                 "bloodPressureCode1", "bloodPressureCode2", "bloodPressureCode3"
             ))
         ))).thenReturn(true);
+        lenient()
+            .when(codeableConceptCdMapper.getCdForCategory())
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
