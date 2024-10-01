@@ -173,15 +173,19 @@ class EhrExtractStatusServiceTest {
                                                       classCaptor.capture());
 
         assertEquals(ERROR_CODE,
-                     ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails) ((Document) updateCaptor.getValue()
-                         .getUpdateObject()
-                         .get("$addToSet"))
-                         .get("ehrReceivedAcknowledgement.errors")).getCode());
+                     (((EhrExtractStatus.EhrReceivedAcknowledgement) ((Document)
+                              updateCaptor.getValue().getUpdateObject()
+                                  .get("$set"))
+                                  .get("ehrReceivedAcknowledgement"))
+                                  .getErrors().get(0))
+                                  .getCode());
         assertEquals(ERROR_MESSAGE,
-                     ((EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails) ((Document) updateCaptor.getValue()
-                         .getUpdateObject()
-                         .get("$addToSet"))
-                         .get("ehrReceivedAcknowledgement.errors")).getDisplay());
+                     (((EhrExtractStatus.EhrReceivedAcknowledgement) ((Document)
+                              updateCaptor.getValue().getUpdateObject()
+                                  .get("$set"))
+                                  .get("ehrReceivedAcknowledgement"))
+                                  .getErrors().get(0))
+                                  .getDisplay());
     }
 
     @Test
