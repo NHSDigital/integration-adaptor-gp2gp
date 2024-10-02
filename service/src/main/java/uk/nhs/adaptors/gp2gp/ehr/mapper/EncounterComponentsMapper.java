@@ -418,7 +418,7 @@ public class EncounterComponentsMapper {
 
         var params = CompoundStatementParameters.builder()
             .nested(nested)
-            .id(messageContext.getIdMapper().newId(ResourceType.List, topicList.getIdElement()))
+            .id(messageContext.getIdMapper().getOrNew(ResourceType.List, topicList.getIdElement()))
             .classCode(classCode)
             .compoundStatementCode(compoundStatementCode)
             .statusCode(COMPLETE_CODE)
