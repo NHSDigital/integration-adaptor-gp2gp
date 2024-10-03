@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext;
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -21,7 +22,6 @@ import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.time.Instant;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,12 +38,16 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     private static final String INPUT_JSON_BUNDLE = TEST_FILE_DIRECTORY + "input-bundle.json";
 
     private static final String INPUT_JSON_OPTIONAL_DATA = TEST_FILE_DIRECTORY + "example-document-reference-resource-1.json";
-    private static final String INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT
+    private static final String INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_AND_SECURITY_LABEL_BUT_WITHOUT_NOPAT
+                                        = TEST_FILE_DIRECTORY + "example-document-reference-resource-with-nopat-security-label-17.json";
+    private static final String INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_LABEL
+                                        = TEST_FILE_DIRECTORY + "example-document-reference-resource-with-nopat-security-label-16.json";
+    private static final String INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY
                                         = TEST_FILE_DIRECTORY + "example-document-reference-resource-with-nopat-security-15.json";
     private static final String INPUT_JSON_WITH_TYPE_TEXT_ONLY = TEST_FILE_DIRECTORY + "example-document-reference-resource-2.json";
     private static final String INPUT_JSON_WITH_TYPE_DISPLAY_ONLY = TEST_FILE_DIRECTORY + "example-document-reference-resource-3.json";
     private static final String INPUT_JSON_WITH_AVAILABILITY_TIME_CREATED = TEST_FILE_DIRECTORY
-        + "example-document-reference-resource-4.json";
+                                                                                        + "example-document-reference-resource-4.json";
     private static final String INPUT_JSON_WITH_AUTHOR_ORGANISATION = TEST_FILE_DIRECTORY + "example-document-reference-resource-5.json";
     private static final String INPUT_JSON_WITH_CUSTODIAN_AND_ORG_NAME = TEST_FILE_DIRECTORY + "example-document-reference-resource-6.json";
     private static final String INPUT_JSON_WITH_DESCRIPTION = TEST_FILE_DIRECTORY + "example-document-reference-resource-7.json";
@@ -78,11 +82,6 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     public static final String NARRATIVE_STATEMENT_REFERENCE_CONFIDENTIALITY_CODE_XPATH =
                                 "/component/NarrativeStatement/reference/referredToExternalDocument/"
                                 + ConfidentialityCodeUtility.getNopatConfidentialityCodeXpathSegment();
-    private static final String CONFIDENTIALITY_CODE = """
-                <confidentialityCode
-                    code="NOPAT"
-                    codeSystem="2.16.840.1.113883.4.642.3.47"
-                    displayName="no disclosure to patient, family or caregivers without attending provider's authorization" />""";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -91,8 +90,10 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     @Mock
     private TimestampService timestampService;
 
-    @Mock
     private ConfidentialityService confidentialityService;
+
+    @Mock
+    private RedactionsContext redactionsContext;
 
     private DocumentReferenceToNarrativeStatementMapper mapper;
     private MessageContext messageContext;
@@ -111,6 +112,8 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         lenient().when(supportedContentTypes.isContentTypeSupported("application/octet-stream")).thenReturn(false);
         lenient().when(timestampService.now()).thenReturn(Instant.parse("2021-08-18T12:00:00.00Z"));
 
+        confidentialityService = new ConfidentialityService(redactionsContext);
+
         mapper = new DocumentReferenceToNarrativeStatementMapper(
             messageContext, supportedContentTypes, new ParticipantMapper(), confidentialityService);
     }
@@ -121,15 +124,64 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-     void When_DocumentReferenceJsonPopulatedWithNoPat_Expect_NarrativeStatementPopulatesReferredToExternalDocument() {
+    void When_DocReferenceMetaSecurityAndSecurityLabelPopulatedWithoutNoPat_Expect_NarrativeStatementPopulatesReferredToExternalDocument() {
 
-        final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT);
+        final String jsonInput
+            = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_AND_SECURITY_LABEL_BUT_WITHOUT_NOPAT);
         final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
-        when(confidentialityService.generateConfidentialityCode(parsedDocumentReference)).thenReturn(Optional.of(CONFIDENTIALITY_CODE));
+        when(redactionsContext.isRedactionMessage()).thenReturn(true);
+
+        final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
+
+        assertThatXml(outputMessage).doesNotContainXPath(NARRATIVE_STATEMENT_REFERENCE_CONFIDENTIALITY_CODE_XPATH);
+    }
+
+    @Test
+    void When_DocumentReferenceSecurityLabelPopulatedWithNoPat_Expect_NarrativeStatementPopulatesReferredToExternalDocument() {
+
+        final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_LABEL);
+        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        when(redactionsContext.isRedactionMessage()).thenReturn(true);
 
         final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
 
         assertThatXml(outputMessage).containsXPath(NARRATIVE_STATEMENT_REFERENCE_CONFIDENTIALITY_CODE_XPATH);
+    }
+
+    @Test
+    void When_DocRefSecurityLabelPopulatedWithNoPatAndNotReductionType_Expect_NarrativeStatementReferredToExternalDocIsNotPopulated() {
+
+        final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_LABEL);
+        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        when(redactionsContext.isRedactionMessage()).thenReturn(false);
+
+        final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
+
+        assertThatXml(outputMessage).doesNotContainXPath(NARRATIVE_STATEMENT_REFERENCE_CONFIDENTIALITY_CODE_XPATH);
+    }
+
+    @Test
+     void When_DocumentReferenceJsonPopulatedWithNoPat_Expect_NarrativeStatementPopulatesReferredToExternalDocument() {
+
+        final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY);
+        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        when(redactionsContext.isRedactionMessage()).thenReturn(true);
+
+        final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
+
+        assertThatXml(outputMessage).containsXPath(NARRATIVE_STATEMENT_REFERENCE_CONFIDENTIALITY_CODE_XPATH);
+    }
+
+    @Test
+    void When_DocReferenceJsonPopulatedWithNoPatAndNotReductionType_Expect_NarrativeStatementDoesNotPopulateReferredToExternalDoc() {
+
+        final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY);
+        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        when(redactionsContext.isRedactionMessage()).thenReturn(false);
+
+        final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
+
+        assertThatXml(outputMessage).doesNotContainXPath(NARRATIVE_STATEMENT_REFERENCE_CONFIDENTIALITY_CODE_XPATH);
     }
 
     @Test
@@ -145,7 +197,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
 
     @ParameterizedTest
     @MethodSource("documentReferenceResourceFileParams")
-    public void When_MappingDocumentReferenceJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) {
+    void When_MappingDocumentReferenceJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) {
 
         final CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         final String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
@@ -177,7 +229,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-    public void When_MappingParsedDocumentReferenceJsonWithNoDates_Expect_MapperException() {
+    void When_MappingParsedDocumentReferenceJsonWithNoDates_Expect_MapperException() {
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
         final DocumentReference parsedDocumentReference =
             new FhirParseService().parseResource(jsonInput, DocumentReference.class);
@@ -189,7 +241,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-    public void When_MappingParsedDocumentReferenceJsonWithNoContent_Expect_MapperException() {
+    void When_MappingParsedDocumentReferenceJsonWithNoContent_Expect_MapperException() {
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
         final DocumentReference parsedDocumentReference =
             new FhirParseService().parseResource(jsonInput, DocumentReference.class);
@@ -201,7 +253,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-    public void When_MappingParsedDocumentReferenceJsonWithContentAndNoAttachment_Expect_MapperException() {
+    void When_MappingParsedDocumentReferenceJsonWithContentAndNoAttachment_Expect_MapperException() {
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
         final DocumentReference parsedDocumentReference =
             new FhirParseService().parseResource(jsonInput, DocumentReference.class);
@@ -213,7 +265,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-    public void When_MappingParsedDocumentReferenceJsonWithNoAttachmentContentType_Expect_MapperException() {
+    void When_MappingParsedDocumentReferenceJsonWithNoAttachmentContentType_Expect_MapperException() {
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
         final DocumentReference parsedDocumentReference =
             new FhirParseService().parseResource(jsonInput, DocumentReference.class);
