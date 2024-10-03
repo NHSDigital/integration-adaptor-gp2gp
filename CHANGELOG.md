@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* When mapping consultations which are "flat" (i.e., they contain a `TOPIC` without a `CATEGORY`) we now wrap the 
+  resource into a virtual `CATEGORY`.
 * Added a scheduled delay checker to update EhrExtract to "Integration Failure" state if sentAt exceeds 8 days and no acknowledgment is received. 
 
 ### Added

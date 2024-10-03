@@ -86,32 +86,44 @@
 
             </CompoundStatement>
         </component>
-
-        <component typeCode="COMP">
-            <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="394559384658936"/>
+        <component typeCode="COMP" contextConductionInd="true">
+            <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+                <id root="394559384658936" />
                 <code nullFlavor="UNK">
                     <originalText>Mocked code</originalText>
                 </code>
-                <statusCode code="COMPLETE"/>
+                <statusCode code="COMPLETE" />
                 <effectiveTime>
-                    <center value="20100630055900"/>
+                    <low value="20100113152000" />
+                    <high value="20100113162000" />
                 </effectiveTime>
-                <availabilityTime value="20100630055900"/>
-                <pertinentInformation typeCode="PERT">
-                    <sequenceNumber value="+1"/>
-                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text>Primary Source: true immunization note</text>
-                    </pertinentAnnotation>
-                </pertinentInformation>
-                <Participant typeCode="PRF" contextControlCode="OP">
-                    <agentRef classCode="AGNT">
+                <availabilityTime value="20100123140354" />
+                <component typeCode="COMP">
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
                         <id root="394559384658936"/>
-                    </agentRef>
-                </Participant>
-            </ObservationStatement>
+                        <code nullFlavor="UNK">
+                            <originalText>Mocked code</originalText>
+                        </code>
+                        <statusCode code="COMPLETE"/>
+                        <effectiveTime>
+                            <center value="20100630055900"/>
+                        </effectiveTime>
+                        <availabilityTime value="20100630055900"/>
+                        <pertinentInformation typeCode="PERT">
+                            <sequenceNumber value="+1"/>
+                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                <text>Primary Source: true immunization note</text>
+                            </pertinentAnnotation>
+                        </pertinentInformation>
+                        <Participant typeCode="PRF" contextControlCode="OP">
+                            <agentRef classCode="AGNT">
+                                <id root="394559384658936"/>
+                            </agentRef>
+                        </Participant>
+                    </ObservationStatement>
+                </component>
+            </CompoundStatement>
         </component>
-
     </CompoundStatement>
 </component>
 

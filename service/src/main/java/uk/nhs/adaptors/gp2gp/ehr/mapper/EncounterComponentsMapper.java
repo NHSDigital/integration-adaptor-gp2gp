@@ -128,28 +128,73 @@ public class EncounterComponentsMapper {
     }
 
     private String mapTopicListComponents(ListResource topicList) {
-        return mapCategorizedResources(topicList) + mapListResourceToComponents(topicList);
+        return String.join(
+            StringUtils.EMPTY,
+            mapCategorizedResources(topicList),
+            mapContainedResources(topicList),
+            mapUncategorizedResources(topicList)
+        );
     }
 
     private String mapCategorizedResources(ListResource topicList) {
         return topicList.getEntry().stream()
             .map(EncounterComponentsMapper::getReferenceElement)
-            .filter(reference -> reference.getValue().matches(LIST_REFERENCE_PATTERN))
+            .filter(reference -> reference
+                .getValue()
+                .matches(LIST_REFERENCE_PATTERN)
+            )
             .map(this::getRequiredResource)
-            .filter(resource -> ResourceType.List.equals(resource.getResourceType()))
             .map(ListResource.class::cast)
-            .filter(listResource -> CodeableConceptMappingUtils.hasCode(listResource.getCode(), List.of(CATEGORY_LIST_CODE)))
             .map(this::mapCategoryListToComponent)
             .collect(Collectors.joining());
     }
 
     private String mapCategoryListToComponent(ListResource categoryList) {
+        if (!CodeableConceptMappingUtils.hasCode(categoryList.getCode(), List.of(CATEGORY_LIST_CODE))) {
+            throw new EhrMapperException(
+                    "Unexpected list %s referenced in Consultation, expected list to be coded as Category (EHR) or be a container"
+                            .formatted(categoryList.getId())
+            );
+        }
+
         return buildCompoundStatement(
             categoryList,
             CATEGORY.getCode(),
             prepareCdForCategory(categoryList),
             true,
             mapListResourceToComponents(categoryList)
+        );
+    }
+
+    private String mapContainedResources(ListResource topicList) {
+        return topicList.getEntry().stream()
+            .filter(entry -> getReferenceElement(entry)
+                .getValue()
+                .matches(CONTAINED_RESOURCE_REFERENCE_PATTERN)
+            )
+            .map(this::mapItemToComponent)
+            .flatMap(Optional::stream)
+            .collect(Collectors.joining());
+    }
+
+    private String mapUncategorizedResources(ListResource topicList) {
+        var components = topicList.getEntry().stream()
+            .map(EncounterComponentsMapper::getReferenceElement)
+            .filter(reference ->
+                !reference.getValue().matches(LIST_REFERENCE_PATTERN)
+                && !reference.getValue().matches(CONTAINED_RESOURCE_REFERENCE_PATTERN)
+            )
+            .map(this::getRequiredResource)
+            .map(this::mapConsultationListResourceToComponent)
+            .flatMap(Optional::stream)
+            .collect(Collectors.joining());
+
+        return buildCompoundStatement(
+            topicList,
+            CATEGORY.getCode(),
+            codeableConceptCdMapper.getCdForCategory(),
+            true,
+            components
         );
     }
 
@@ -192,11 +237,11 @@ public class EncounterComponentsMapper {
         }
 
         if (isIgnoredResourceType(resource.getResourceType())) {
-            LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
+            LOGGER.info("Resource of type: {} has been ignored", resource.getResourceType());
             return Optional.empty();
         }
 
-        throw new EhrMapperException("Unsupported resource in consultation list: " + resource.getId());
+        throw new EhrMapperException("Unsupported resource in consultation list: %s".formatted(resource.getId()));
     }
 
     public Optional<String> mapResourceToComponent(Resource resource) {
@@ -325,14 +370,7 @@ public class EncounterComponentsMapper {
         var matcher = pattern.matcher(fullReference.getValue());
 
         if (!matcher.find()) {
-            var listResource = (ListResource) getRequiredResource(fullReference);
-
-            if (CodeableConceptMappingUtils.hasCode(listResource.getCode(), List.of(CATEGORY_LIST_CODE))) {
-                return Optional.empty();
-            }
-
-            throw new EhrMapperException("Unexpected list " + fullReference
-                + " referenced in Consultation, expected list to be coded as Category (EHR) or be a container");
+            return Optional.empty();
         }
 
         var listId = matcher.group(1);
