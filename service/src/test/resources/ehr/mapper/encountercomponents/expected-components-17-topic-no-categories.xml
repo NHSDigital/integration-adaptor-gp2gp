@@ -10,19 +10,32 @@
             <high value="20100113162000"/>
         </effectiveTime>
         <availabilityTime value="20100113152000"/>
-
-        <component typeCode="COMP">
-            <PlanStatement classCode="OBS" moodCode="INT">
-                <id root="394559384658936"/>
+        <component typeCode="COMP" contextConductionInd="true">
+            <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+                <id root="394559384658936" />
                 <code nullFlavor="UNK">
                     <originalText>Mocked code</originalText>
                 </code>
-                <statusCode code="COMPLETE"/>
+                <statusCode code="COMPLETE" />
                 <effectiveTime>
-                    <center nullFlavor="UNK"/>
+                    <low value="20100113152000" />
+                    <high value="20100113162000" />
                 </effectiveTime>
-                <availabilityTime value="20100113152950"/>
-            </PlanStatement>
+                <availabilityTime value="20100113152000" />
+                <component typeCode="COMP">
+                    <PlanStatement classCode="OBS" moodCode="INT">
+                        <id root="394559384658936"/>
+                        <code nullFlavor="UNK">
+                            <originalText>Mocked code</originalText>
+                        </code>
+                        <statusCode code="COMPLETE"/>
+                        <effectiveTime>
+                            <center nullFlavor="UNK"/>
+                        </effectiveTime>
+                        <availabilityTime value="20100113152950"/>
+                    </PlanStatement>
+                </component>
+            </CompoundStatement>
         </component>
     </CompoundStatement>
 </component>
