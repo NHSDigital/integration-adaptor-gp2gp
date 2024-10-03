@@ -10,7 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * When mapping consultations which are "flat" (i.e., they contain a `TOPIC` without a `CATEGORY`) we now wrap the 
   resource into a virtual `CATEGORY`.
-* Added a scheduled delay checker to update EhrExtract to "Integration Failure" state if sentAt exceeds 8 days and no acknowledgment is received. 
+* Added a scheduled delay checker to update EhrExtract to "Integration Failure" state if sentAt exceeds 8 days and no acknowledgment is received.
+* When mapping a `DocumentReference` which contains a `NOPAT` `meta.security` or `NOPAT` `securityLabel` tag the resultant XML for that resource
+  will contain a `NOPAT` `confidentialityCode` element.
 
 ### Added
 
