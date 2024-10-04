@@ -39,49 +39,49 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
 
     private static final String INPUT_JSON_OPTIONAL_DATA = TEST_FILE_DIRECTORY + "example-document-reference-resource-1.json";
     private static final String INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_AND_SECURITY_LABEL_BUT_WITHOUT_NOPAT
-                                        = TEST_FILE_DIRECTORY + "example-document-reference-resource-with-nopat-security-label-17.json";
+        = TEST_FILE_DIRECTORY + "example-document-reference-resource-with-nopat-security-label-17.json";
     private static final String INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_LABEL
-                                        = TEST_FILE_DIRECTORY + "example-document-reference-resource-with-nopat-security-label-16.json";
+        = TEST_FILE_DIRECTORY + "example-document-reference-resource-with-nopat-security-label-16.json";
     private static final String INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY
-                                        = TEST_FILE_DIRECTORY + "example-document-reference-resource-with-nopat-security-15.json";
+        = TEST_FILE_DIRECTORY + "example-document-reference-resource-with-nopat-security-15.json";
     private static final String INPUT_JSON_WITH_TYPE_TEXT_ONLY = TEST_FILE_DIRECTORY + "example-document-reference-resource-2.json";
     private static final String INPUT_JSON_WITH_TYPE_DISPLAY_ONLY = TEST_FILE_DIRECTORY + "example-document-reference-resource-3.json";
     private static final String INPUT_JSON_WITH_AVAILABILITY_TIME_CREATED = TEST_FILE_DIRECTORY
-                                                                                        + "example-document-reference-resource-4.json";
+                                                                            + "example-document-reference-resource-4.json";
     private static final String INPUT_JSON_WITH_AUTHOR_ORGANISATION = TEST_FILE_DIRECTORY + "example-document-reference-resource-5.json";
     private static final String INPUT_JSON_WITH_CUSTODIAN_AND_ORG_NAME = TEST_FILE_DIRECTORY + "example-document-reference-resource-6.json";
     private static final String INPUT_JSON_WITH_DESCRIPTION = TEST_FILE_DIRECTORY + "example-document-reference-resource-7.json";
     private static final String INPUT_JSON_WITH_PRACTICE_SETTING_TEXT_ONLY = TEST_FILE_DIRECTORY
-        + "example-document-reference-resource-8.json";
+                                                                             + "example-document-reference-resource-8.json";
     private static final String INPUT_JSON_WITH_PRACTICE_SETTING_DISPLAY_ONLY = TEST_FILE_DIRECTORY
-        + "example-document-reference-resource-9.json";
+                                                                                + "example-document-reference-resource-9.json";
     private static final String INPUT_JSON_WITH_ATTACHMENT_TITLE = TEST_FILE_DIRECTORY + "example-document-reference-resource-10.json";
     private static final String INPUT_JSON_REQUIRED_DATA = TEST_FILE_DIRECTORY + "example-document-reference-resource-11.json";
     private static final String INPUT_JSON_WITH_CUSTODIAN_AND_NO_ORG_NAME = TEST_FILE_DIRECTORY
-        + "example-document-reference-resource-12.json";
+                                                                            + "example-document-reference-resource-12.json";
     private static final String INPUT_JSON_WITH_AUTHOR_PRACTITIONER = TEST_FILE_DIRECTORY + "example-document-reference-resource-13.json";
     private static final String INPUT_JSON_WITH_NOT_SUPPORTED_CONTENT_TYPE = TEST_FILE_DIRECTORY
-        + "example-document-reference-resource-14.json";
+                                                                             + "example-document-reference-resource-14.json";
 
     private static final String OUTPUT_XML_OPTIONAL_DATA = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
     private static final String OUTPUT_XML_WITH_TYPE_TEXT_ONLY = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
     private static final String OUTPUT_XML_WITH_TYPE_DISPLAY_ONLY = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-3.xml";
     private static final String OUTPUT_XML_WITH_AVAILABILITY_TIME_CREATED = TEST_FILE_DIRECTORY
-        + "expected-output-narrative-statement-4.xml";
+                                                                            + "expected-output-narrative-statement-4.xml";
     private static final String OUTPUT_XML_WITH_AUTHOR_ORGANISATION = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-5.xml";
     private static final String OUTPUT_XML_WITH_CUSTODIAN_ORG_NAME = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-6.xml";
     private static final String OUTPUT_XML_WITH_DESCRIPTION = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-7.xml";
     private static final String OUTPUT_XML_WITH_PRACTICE_SETTING_TEXT_ONLY = TEST_FILE_DIRECTORY
-        + "expected-output-narrative-statement-8.xml";
+                                                                             + "expected-output-narrative-statement-8.xml";
     private static final String OUTPUT_XML_WITH_PRACTICE_SETTING_DISPLAY_ONLY = TEST_FILE_DIRECTORY
-        + "expected-output-narrative-statement-9.xml";
+                                                                                + "expected-output-narrative-statement-9.xml";
     private static final String OUTPUT_XML_WITH_ABSENT_ATTACHMENT_TITLE = TEST_FILE_DIRECTORY
-        + "expected-output-narrative-statement-10.xml";
+                                                                          + "expected-output-narrative-statement-10.xml";
     private static final String OUTPUT_XML_REQUIRED_DATA = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-11.xml";
     private static final String OUTPUT_XML_NOT_SUPPORTED_CONTENT_TYPE = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-12.xml";
     public static final String NARRATIVE_STATEMENT_REFERENCE_CONFIDENTIALITY_CODE_XPATH =
-                                "/component/NarrativeStatement/reference/referredToExternalDocument/"
-                                + ConfidentialityCodeUtility.getNopatConfidentialityCodeXpathSegment();
+        "/component/NarrativeStatement/reference/referredToExternalDocument/"
+        + ConfidentialityCodeUtility.getNopatConfidentialityCodeXpathSegment();
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -149,7 +149,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-    void When_DocRefSecurityLabelPopulatedWithNoPatAndNotReductionType_Expect_NarrativeStatementReferredToExternalDocIsNotPopulated() {
+    void When_DocRefSecurityLabelPopulatedWithNoPatAndNotReduction_Expect_NarrativeStatementReferredToExternalDocIsNotPopulated() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_LABEL);
         final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
@@ -173,7 +173,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-    void When_DocReferenceJsonPopulatedWithNoPatAndNotReductionType_Expect_NarrativeStatementDoesNotPopulateReferredToExternalDoc() {
+    void When_DocReferenceJsonPopulatedWithNoPatAndNotReduction_Expect_NarrativeStatementDoesNotPopulateReferredToExternalDoc() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY);
         final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
