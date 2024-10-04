@@ -46,7 +46,7 @@ public class ConfidentialityService {
         return (resource instanceof DocumentReference documentReference)
                && documentReference
                    .getSecurityLabel()
-                   .stream().filter(Objects::nonNull)
+                   .stream()
                    .anyMatch(codeableConcept -> codeableConcept.getCoding().stream().anyMatch(this::isNOPATCoding));
     }
 }
