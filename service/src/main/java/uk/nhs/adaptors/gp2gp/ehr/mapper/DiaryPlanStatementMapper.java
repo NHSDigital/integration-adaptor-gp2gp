@@ -60,11 +60,11 @@ public class DiaryPlanStatementMapper {
         PlanStatementMapperParametersBuilder builder = PlanStatementMapperParameters.builder()
             .isNested(isNested)
             .id(idMapper.getOrNew(ResourceType.ProcedureRequest, procedureRequest.getIdElement()))
-            .availabilityTime(availabilityTime);
+            .availabilityTime(availabilityTime)
+            .effectiveTime(buildEffectiveTime(procedureRequest))
+            .text(buildText(procedureRequest))
+            .code(buildCode(procedureRequest));
 
-        buildEffectiveTime(procedureRequest).ifPresent(builder::effectiveTime);
-        buildText(procedureRequest).ifPresent(builder::text);
-        builder.code(buildCode(procedureRequest));
         buildParticipant(procedureRequest).ifPresent(builder::participant);
 
         return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
@@ -80,7 +80,7 @@ public class DiaryPlanStatementMapper {
         );
     }
 
-    private Optional<String> buildEffectiveTime(ProcedureRequest procedureRequest) {
+    private String buildEffectiveTime(ProcedureRequest procedureRequest) {
         DateTimeType date = null;
         if (procedureRequest.hasOccurrenceDateTimeType()) {
             date = procedureRequest.getOccurrenceDateTimeType();
@@ -89,11 +89,11 @@ public class DiaryPlanStatementMapper {
             date = occurrencePeriod.hasEnd() ? occurrencePeriod.getEndElement() : occurrencePeriod.getStartElement();
         }
 
-        return Optional.of(formatEffectiveDate(date));
+        return formatEffectiveDate(date);
     }
 
-    private Optional<String> buildText(ProcedureRequest procedureRequest) {
-        return Optional.of(Stream.of(
+    private String buildText(ProcedureRequest procedureRequest) {
+        return Stream.of(
             getSupportingInformation(procedureRequest),
             getEarliestRecallDate(procedureRequest),
             getRequester(procedureRequest),
@@ -102,7 +102,7 @@ public class DiaryPlanStatementMapper {
         )
             .filter(Optional::isPresent)
             .map(Optional::get)
-            .collect(Collectors.joining(StringUtils.SPACE)));
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private String buildCode(ProcedureRequest procedureRequest) {
