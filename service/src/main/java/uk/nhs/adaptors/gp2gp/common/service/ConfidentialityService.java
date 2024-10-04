@@ -26,7 +26,7 @@ public class ConfidentialityService {
 
     public Optional<String> generateConfidentialityCode(Resource resource) {
         return redactionsContext.isRedactionMessage()
-               && (hasNOPATMetaSecurity(resource) || getNOPATSecurityLabels(resource))
+               && (hasNOPATMetaSecurity(resource) || hasNOPATSecurityLabel(resource))
                ? Optional.of(REDACTION_CONFIDENTIALITY_CODE)
                : Optional.empty();
     }
@@ -41,7 +41,7 @@ public class ConfidentialityService {
             .anyMatch(this::isNOPATCoding);
     }
 
-    public boolean getNOPATSecurityLabels(Resource resource) {
+    public boolean hasNOPATSecurityLabel(Resource resource) {
         return (resource instanceof DocumentReference documentReference)
                && documentReference
                    .getSecurityLabel()
