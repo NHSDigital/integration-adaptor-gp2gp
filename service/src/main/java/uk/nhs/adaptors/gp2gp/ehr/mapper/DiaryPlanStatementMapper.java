@@ -50,11 +50,15 @@ public class DiaryPlanStatementMapper {
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
 
-    public String mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
-        if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
-            return null;
+    public String mapProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
+        if (procedureRequest.getIntent() == ProcedureRequest.ProcedureRequestIntent.PLAN) {
+            return mapDiaryEntryToPlanStatement(procedureRequest, isNested);
         }
 
+        return null;
+    }
+
+    private String mapDiaryEntryToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         var idMapper = messageContext.getIdMapper();
         var availabilityTime = buildAvailabilityTime(procedureRequest);
         PlanStatementMapperParametersBuilder builder = PlanStatementMapperParameters.builder()

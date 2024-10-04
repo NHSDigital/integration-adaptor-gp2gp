@@ -93,7 +93,7 @@ public class DiaryPlanStatementMapperTest {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_PROCEDURE_REQUEST_WITH_ALL_DATA);
         ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
 
-        var mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, true);
+        var mappedXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(inputProcedureRequest, true);
         assertThat(mappedXml).contains(expectedXml);
     }
 
@@ -102,7 +102,7 @@ public class DiaryPlanStatementMapperTest {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_PROCEDURE_REQUEST_IS_NOT_PLAN);
         ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
 
-        var mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, true);
+        var mappedXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(inputProcedureRequest, true);
         assertThat(mappedXml).isNull();
     }
 
@@ -112,7 +112,7 @@ public class DiaryPlanStatementMapperTest {
         ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
 
         assertThrows(EhrMapperException.class, ()
-            -> diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, true));
+            -> diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(inputProcedureRequest, true));
     }
 
     @Test
@@ -281,7 +281,7 @@ public class DiaryPlanStatementMapperTest {
         String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
         ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
 
-        var mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, false);
+        var mappedXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(inputProcedureRequest, false);
         assertThat(mappedXml).contains(expectedXml);
     }
 

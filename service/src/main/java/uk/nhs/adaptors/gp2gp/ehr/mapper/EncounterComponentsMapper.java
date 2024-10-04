@@ -294,7 +294,7 @@ public class EncounterComponentsMapper {
 
     private Optional<String> mapProcedureRequest(Resource resource) {
         return Optional.ofNullable(
-            diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement((ProcedureRequest) resource, IS_NESTED)
+            diaryPlanStatementMapper.mapProcedureRequestToPlanStatement((ProcedureRequest) resource, IS_NESTED)
         );
     }
 
