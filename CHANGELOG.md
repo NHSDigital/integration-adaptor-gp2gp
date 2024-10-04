@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added a scheduled delay checker to update EhrExtract to "Integration Failure" state if sentAt exceeds 8 days and no acknowledgment is received.
 * When mapping a `DocumentReference` which contains a `NOPAT` `meta.security` or `NOPAT` `securityLabel` tag the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
+  
+### Fixed
+
+* When mapping `ProcedureRequests` with an `occurrencePeriod` which contains only a start date, then the `text` element
+in the resultant XML will no longer contain the superfluous 'Earliest Recall Date: <startDate>' value.
 
 ### Added
 
