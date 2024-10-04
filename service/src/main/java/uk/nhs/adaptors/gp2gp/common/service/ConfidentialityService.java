@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -45,7 +46,7 @@ public class ConfidentialityService {
         return (resource instanceof DocumentReference documentReference)
                && documentReference
                    .getSecurityLabel()
-                   .stream()
+                   .stream().filter(Objects::nonNull)
                    .anyMatch(codeableConcept -> codeableConcept.getCoding().stream().anyMatch(this::isNOPATCoding));
     }
 }
