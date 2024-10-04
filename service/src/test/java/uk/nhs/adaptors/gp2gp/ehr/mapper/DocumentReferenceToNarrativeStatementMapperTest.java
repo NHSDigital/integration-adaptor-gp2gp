@@ -137,7 +137,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-    void When_DocumentReferenceSecurityLabelPopulatedWithNoPat_Expect_NarrativeStatementPopulatesReferredToExternalDocument() {
+    void When_DocReferenceSecurityLabelPopulatedWithNoPat_Expect_NarrativeStatementPopulatesReferredToExternalDocument() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_LABEL);
         final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
@@ -149,7 +149,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-    void When_DocRefSecurityLabelPopulatedWithNoPatAndNotReduction_Expect_NarrativeStatementReferredToExternalDocIsNotPopulated() {
+    void When_DocReferenceSecurityLabelPopulatedWithNoPatAndNotReduction_Expect_NarrativeStatementReferredToExternalDocIsNotPopulated() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_LABEL);
         final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
@@ -161,7 +161,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-     void When_DocumentReferenceJsonPopulatedWithNoPat_Expect_NarrativeStatementPopulatesReferredToExternalDocument() {
+     void When_DocReferenceJsonPopulatedWithNoPat_Expect_NarrativeStatementPopulatesReferredToExternalDocument() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY);
         final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
@@ -185,7 +185,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     }
 
     @Test
-    void When_DocumentReferenceJsonNotPopulatedWithNoPat_Expect_NarrativeStatementDoesNotPopulateReferredToExternalDocumentWithNopat() {
+    void When_DocReferenceJsonNotPopulatedWithNoPat_Expect_NarrativeStatementDoesNotPopulateReferredToExternalDocumentWithNopat() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA);
         final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
@@ -197,7 +197,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
 
     @ParameterizedTest
     @MethodSource("documentReferenceResourceFileParams")
-    void When_MappingDocumentReferenceJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) {
+    void When_MappingDocReferenceJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) {
 
         final CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         final String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
