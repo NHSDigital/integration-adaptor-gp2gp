@@ -142,12 +142,17 @@ public class DiaryPlanStatementMapper {
     }
 
     private Optional<String> getEarliestRecallDate(ProcedureRequest procedureRequest) {
-        if (procedureRequest.hasOccurrencePeriod()
-            && procedureRequest.getOccurrencePeriod().hasStart()) {
+        if (hasOccurrencePeriodWithStartAndEndValues(procedureRequest)) {
             return Optional.of(formatStartDate(procedureRequest));
         }
 
         return Optional.empty();
+    }
+
+    private static boolean hasOccurrencePeriodWithStartAndEndValues(ProcedureRequest procedureRequest) {
+        return procedureRequest.hasOccurrencePeriod()
+            && procedureRequest.getOccurrencePeriod().hasEnd()
+            && procedureRequest.getOccurrencePeriod().hasStart();
     }
 
     private Optional<String> getRequester(ProcedureRequest procedureRequest) {
