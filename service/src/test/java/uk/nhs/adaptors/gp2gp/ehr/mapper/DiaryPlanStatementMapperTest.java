@@ -118,7 +118,7 @@ public class DiaryPlanStatementMapperTest {
     }
 
     @Test
-    public void When_MappingProcedureRequestWithOccurrenceWithStartAndEnd_Expect_TextContainsEarliestRecallDateOfOccurrenceStart() {
+    public void When_MappingWithOccurrenceWithStartAndEnd_Expect_TextContainsEarliestRecallDateOfStartAndEffectiveTimeOfEnd() {
         var inputJson = """
             {
                 "resourceType": "ProcedureRequest",
@@ -158,7 +158,7 @@ public class DiaryPlanStatementMapperTest {
     }
 
     @Test
-    public void When_MappingProcedureRequestWithOccurrenceWithOnlyStart_Expect_TextDoesNotContainEarliestRecallDate() {
+    public void When_MappingWithOccurrenceWithOnlyStart_Expect_TextDoesNotContainEarliestRecallDateAndEffectiveTimeOfStart() {
         var inputJson = """
             {
                 "resourceType": "ProcedureRequest",
