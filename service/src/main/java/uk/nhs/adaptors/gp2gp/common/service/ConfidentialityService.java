@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.RedactionsContext;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
