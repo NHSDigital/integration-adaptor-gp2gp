@@ -1,0 +1,69 @@
+{
+  "resourceType": "DocumentReference",
+  "id": "AECD4BBE-F45C-42A0-BB77-AB77BAEE3E66",
+  "meta": {
+    "versionId": "5774557612980378259",
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+    ]
+  },
+  "securityLabel": [
+    {
+      "coding": [
+        {
+          "system": "http://hl7.org/fhir/v3/ActCode",
+          "code": "NOPAT",
+          "display": "no disclosure to patient, family or caregivers without attending provider's authorization"
+        }
+      ],
+      "text": "no disclosure to patient, family or caregivers without attending provider's authorization"
+    }
+  ],
+  "identifier": [
+    {
+      "system": "https://EMISWeb/A82038",
+      "value": "AECD4BBE-F45C-42A0-BB77-AB77BAEE3E66"
+    }
+  ],
+  "status": "current",
+  "type": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "25611000000107",
+        "display": "Referral letter",
+        "userSelected": true
+      }
+    ],
+    "text": "Referral Letter (21-Sep-2020)"
+  },
+  "created": "2020-09-21",
+  "indexed": "2020-09-21T14:17:59.607+01:00",
+  "custodian": {
+    "reference": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+  },
+  "content": [
+    {
+      "attachment": {
+        "contentType": "text/richtext",
+        "title": "some title"
+      }
+    }
+  ],
+  "description": "for 2 week rule referral - skin",
+  "author": [
+    {
+      "reference": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+    }
+  ],
+  "context": {
+    "practiceSetting": {
+      "coding": [
+        {
+          "display": "Practice Setting Display"
+        }
+      ],
+      "text": "Practice Setting Text"
+    }
+  }
+}
