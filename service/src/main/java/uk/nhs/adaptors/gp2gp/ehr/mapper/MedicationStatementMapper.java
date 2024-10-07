@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.COMPLETE_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.COMPLETE_CODE;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityText;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityTextFromQuantity;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractEhrSupplyTypeCodeableConcept;

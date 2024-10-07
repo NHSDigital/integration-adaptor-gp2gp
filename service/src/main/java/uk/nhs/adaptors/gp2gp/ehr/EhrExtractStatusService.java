@@ -4,9 +4,9 @@ import static java.lang.String.format;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 import static org.springframework.util.CollectionUtils.newHashMap;
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.CONTENT_TYPE_PLACEHOLDER;
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.ERROR_MESSAGE_PLACEHOLDER;
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.FILENAME_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.CONTENT_TYPE_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.ERROR_MESSAGE_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.FILENAME_PLACEHOLDER;
 
 import java.time.Duration;
 import java.time.Instant;

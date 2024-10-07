@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.COMPLETE_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.COMPLETE_CODE;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

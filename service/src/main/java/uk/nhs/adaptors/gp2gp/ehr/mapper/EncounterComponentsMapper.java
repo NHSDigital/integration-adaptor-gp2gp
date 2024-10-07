@@ -2,7 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static java.util.function.Predicate.not;
 
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.COMPLETE_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.COMPLETE_CODE;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode.CATEGORY;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode.TOPIC;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils.isIgnoredResourceType;

@@ -25,11 +25,11 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import java.util.List;
 import java.util.Optional;
 
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.CONTENT_TYPE_PLACEHOLDER;
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.ERROR_MESSAGE_PLACEHOLDER;
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.FILENAME_PLACEHOLDER;
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.ORGANIZATION;
-import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.PRACTITIONER;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.CONTENT_TYPE_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.ERROR_MESSAGE_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.FILENAME_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.ORGANIZATION;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.EhrConstants.PRACTITIONER;
 
 @Slf4j
 @Component
