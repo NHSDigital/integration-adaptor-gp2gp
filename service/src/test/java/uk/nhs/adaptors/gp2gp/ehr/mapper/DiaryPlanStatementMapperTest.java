@@ -193,6 +193,95 @@ public class DiaryPlanStatementMapperTest {
         assertThat(actualXml).isEqualTo(expectedXml);
     }
 
+    @Test
+    public void When_MappingWithDeviceReferenceWhereDeviceHasManufacturer_Expect_TextContainsDeviceTypeTextAndManufacturer() {
+
+        var inputJson = """
+            {
+                "resourceType": "ProcedureRequest",
+                "id": "1B1C6F50-D8BE-4480-83D6-EF25AC5F1836",
+                "status": "active",
+                "intent": "plan",
+                "authoredOn": "2010-01-13T15:29:50.1+00:00",
+                "requester": {
+                    "agent": {
+                        "reference": "Device/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                },
+                "code": {
+                    "text": "test"
+                }
+            }""";
+
+        final var expectedXml = """
+            <component typeCode="COMP" >
+                <PlanStatement classCode="OBS" moodCode="INT">
+                    <id root="394559384658936" />
+                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                    <text>
+                        Recall Device: Device type text Device name
+                    </text>
+                    <statusCode code="COMPLETE" />
+                    <effectiveTime>
+                        <center nullFlavor="UNK"/>
+                    </effectiveTime>
+                    <availabilityTime value="20100113152950"/>
+                </PlanStatement>
+            </component>""";
+
+        final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        var actualXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(procedureRequest, false);
+
+        assertThat(actualXml).isEqualTo(expectedXml);
+    }
+
+    @Test
+    public void When_MappingWithDeviceReferenceWhereDeviceHasNoManufacturer_Expect_TextOnlyContainsDeviceTypeText() {
+        String inputBundle = ResourceTestFileUtils.getFileContent(
+            TEST_DIRECTORY + "input-bundle-no-manufacturer.json"
+        );
+        Bundle bundle = new FhirParseService().parseResource(inputBundle, Bundle.class);
+        messageContext.initialize(bundle);
+
+        var inputJson = """
+            {
+                "resourceType": "ProcedureRequest",
+                "id": "1B1C6F50-D8BE-4480-83D6-EF25AC5F1836",
+                "status": "active",
+                "intent": "plan",
+                "authoredOn": "2010-01-13T15:29:50.1+00:00",
+                "requester": {
+                    "agent": {
+                        "reference": "Device/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                },
+                "code": {
+                    "text": "test"
+                }
+            }""";
+
+        final var expectedXml = """
+            <component typeCode="COMP" >
+                <PlanStatement classCode="OBS" moodCode="INT">
+                    <id root="394559384658936" />
+                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                    <text>
+                        Recall Device: Device type text
+                    </text>
+                    <statusCode code="COMPLETE" />
+                    <effectiveTime>
+                        <center nullFlavor="UNK"/>
+                    </effectiveTime>
+                    <availabilityTime value="20100113152950"/>
+                </PlanStatement>
+            </component>""";
+
+        final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        var actualXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(procedureRequest, false);
+
+        assertThat(actualXml).isEqualTo(expectedXml);
+    }
+
     @ParameterizedTest
     @MethodSource("testData")
     public void When_MappingProcedureRequest_Expect_ResourceMapped(String inputJsonPath, String expectedXmlPath) throws IOException {
