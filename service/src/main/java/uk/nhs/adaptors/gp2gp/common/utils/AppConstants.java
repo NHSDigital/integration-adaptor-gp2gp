@@ -1,5 +1,9 @@
 package uk.nhs.adaptors.gp2gp.common.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AppConstants {
 
     public static final String COMPLETE_CODE = "COMPLETE";
