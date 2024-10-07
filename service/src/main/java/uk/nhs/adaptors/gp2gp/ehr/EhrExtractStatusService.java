@@ -4,6 +4,9 @@ import static java.lang.String.format;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 import static org.springframework.util.CollectionUtils.newHashMap;
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.CONTENT_TYPE_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.ERROR_MESSAGE_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.FILENAME_PLACEHOLDER;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -112,9 +115,6 @@ public class EhrExtractStatusService {
     private static final String ERROR_MESSAGE_PATH = ERROR + DOT + MESSAGE;
     private static final String ERROR_TASK_TYPE_PATH = ERROR + DOT + TASK_TYPE;
     private static final String LENGTH_PLACEHOLDER = "LENGTH_PLACEHOLDER_ID=";
-    private static final String ERROR_MESSAGE_PLACEHOLDER = "ERROR_MESSAGE_PLACEHOLDER_ID=";
-    private static final String CONTENT_TYPE_PLACEHOLDER = "CONTENT_TYPE_PLACEHOLDER_ID=";
-    private static final String FILENAME_TYPE_PLACEHOLDER = "FILENAME_PLACEHOLDER_ID=";
     private static final String ACKS_SET = ACK_HISTORY + DOT + ACKS;
 
     @Value("${gp2gp.ehr-extract-sent-days-limit}")
@@ -193,7 +193,7 @@ public class EhrExtractStatusService {
                 } else {
                     replacementMap.put(CONTENT_TYPE_PLACEHOLDER + document.getDocumentId(), document.getContentType());
                 }
-                replacementMap.put(FILENAME_TYPE_PLACEHOLDER + document.getDocumentId(), document.getFileName());
+                replacementMap.put(FILENAME_PLACEHOLDER + document.getDocumentId(), document.getFileName());
             }
 
             return replacementMap;

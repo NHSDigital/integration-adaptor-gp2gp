@@ -25,16 +25,19 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import java.util.List;
 import java.util.Optional;
 
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.CONTENT_TYPE_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.ERROR_MESSAGE_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.FILENAME_PLACEHOLDER;
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.ORGANIZATION;
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.PRACTITIONER;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DocumentReferenceToNarrativeStatementMapper {
 
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
-    private static final String ATTACHMENT_CONTENT_TYPE_PLACEHOLDER = "CONTENT_TYPE_PLACEHOLDER_ID=";
-    private static final String ERROR_MESSAGE_TEMPLATE = "ERROR_MESSAGE_PLACEHOLDER_ID=";
-    private static final String FILENAME_TEMPLATE = "FILENAME_PLACEHOLDER_ID=";
-    private static final List<String> VALID_AUTHOR_RESOURCE_TYPES = List.of("Organization", "Practitioner");
+    private static final List<String> VALID_AUTHOR_RESOURCE_TYPES = List.of(ORGANIZATION, PRACTITIONER);
 
     private final MessageContext messageContext;
     private final SupportedContentTypes supportedContentTypes;
@@ -61,12 +64,14 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
         boolean isContentTypeSupported = supportedContentTypes.isContentTypeSupported(attachmentContentType);
         if (!isContentTypeSupported) {
-            LOGGER.info("Unsupported ContentType '{}'!", attachmentContentType);
+            LOGGER.info("Unsupported ContentType '{}' for DocumentReference ID: {} !",
+                        attachmentContentType,
+                        documentReference.getIdElement().getIdPart());
         }
 
-        builder.referenceTitle("${" + FILENAME_TEMPLATE + narrativeStatementId + "}")
+        builder.referenceTitle("${" + FILENAME_PLACEHOLDER + narrativeStatementId + "}")
                 .comment(getComment(documentReference, narrativeStatementId))
-                .referenceContentType("${" + ATTACHMENT_CONTENT_TYPE_PLACEHOLDER + narrativeStatementId + "}");
+                .referenceContentType("${" + CONTENT_TYPE_PLACEHOLDER + narrativeStatementId + "}");
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
     }
@@ -96,7 +101,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
         mapCustodianOrg(documentReference, commentBuilder);
         mapDescription(documentReference, commentBuilder);
 
-        commentBuilder.append("${").append(ERROR_MESSAGE_TEMPLATE).append(documentId).append("}");
+        commentBuilder.append("${").append(ERROR_MESSAGE_PLACEHOLDER).append(documentId).append("}");
 
         mapSettings(documentReference, commentBuilder);
 
@@ -121,12 +126,10 @@ public class DocumentReferenceToNarrativeStatementMapper {
         Optional.ofNullable(documentReference.getCustodian())
             .map(BaseReference::getReferenceElement)
             .filter(IIdType::hasResourceType)
-            .filter(idType -> idType.getResourceType().equals(ResourceType.Organization.name()))
-            .ifPresent(idType -> messageContext.getInputBundleHolder()
-                .getResource(idType)
-                .map(Organization.class::cast)
-                .map(Organization::getName)
-                .map(name -> commentBuilder.append("Custodian Org: ").append(name).append(StringUtils.SPACE)));
+            .filter(idType -> ResourceType.Organization.name().equals(idType.getResourceType()))
+            .flatMap(idType -> messageContext.getInputBundleHolder().getResource(idType).map(Organization.class::cast))
+            .map(Organization::getName)
+            .ifPresent(name -> commentBuilder.append("Custodian Org: ").append(name).append(StringUtils.SPACE));
     }
 
     private void mapAuthorOrg(final DocumentReference documentReference, final StringBuilder commentBuilder) {

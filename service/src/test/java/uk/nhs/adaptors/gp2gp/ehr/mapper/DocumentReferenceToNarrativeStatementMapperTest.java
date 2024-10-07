@@ -257,7 +257,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
         final DocumentReference parsedDocumentReference =
             new FhirParseService().parseResource(jsonInput, DocumentReference.class);
-        parsedDocumentReference.getContent().get(0).setAttachment(null);
+        parsedDocumentReference.getContent().getFirst().setAttachment(null);
 
         assertThatThrownBy(() -> mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference))
             .isExactlyInstanceOf(EhrMapperException.class)
@@ -269,7 +269,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
         final DocumentReference parsedDocumentReference =
             new FhirParseService().parseResource(jsonInput, DocumentReference.class);
-        final Attachment attachment = parsedDocumentReference.getContent().get(0).getAttachment();
+        final Attachment attachment = parsedDocumentReference.getContent().getFirst().getAttachment();
         attachment.setTitle("some title");
         attachment.setContentType(null);
 

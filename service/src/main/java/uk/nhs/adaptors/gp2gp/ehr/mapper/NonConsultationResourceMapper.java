@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.COMPLETE_CODE;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
 
 import java.util.List;
@@ -39,7 +40,6 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.XpathExtractor;
 public class NonConsultationResourceMapper {
     private static final Mustache ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE =
         TemplateUtils.loadTemplate("ehr_encounter_to_ehr_composition_template.mustache");
-    private static final String COMPLETE_CODE = "COMPLETE";
     private static final String DEFAULT_CODE = "<code code=\"196401000000100\" displayName=\"Non-consultation data\" codeSystem=\"2.16"
         + ".840.1.113883.2.1.3.2.4.15\"/>";
     private static final String OBSERVATION_COMMENT_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication "

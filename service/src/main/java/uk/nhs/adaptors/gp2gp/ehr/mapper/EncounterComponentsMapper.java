@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static java.util.function.Predicate.not;
 
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.COMPLETE_CODE;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode.CATEGORY;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode.TOPIC;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils.isIgnoredResourceType;
@@ -63,7 +64,7 @@ public class EncounterComponentsMapper {
     private static final String RELATED_PROBLEM_EXTENSION_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
         + "-RelatedProblemHeader-1";
     private static final String RELATED_PROBLEM_TARGET = "target";
-    private static final String COMPLETE_CODE = "COMPLETE";
+
     private static final String LIST_REFERENCE_PATTERN = "^List/[\\da-zA-z-]+$";
     private static final String CONTAINED_RESOURCE_REFERENCE_PATTERN = "^List/([\\da-zA-Z-]+)(#[\\da-zA-Z-]+)$";
 

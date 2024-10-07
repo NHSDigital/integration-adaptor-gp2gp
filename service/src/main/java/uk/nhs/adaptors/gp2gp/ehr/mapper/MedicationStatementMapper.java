@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.common.utils.AppConstants.COMPLETE_CODE;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityText;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityTextFromQuantity;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractEhrSupplyTypeCodeableConcept;
@@ -61,7 +62,6 @@ public class MedicationStatementMapper {
         display -> Optional.ofNullable(TEMPLATE_MAPPINGS.get(display));
 
     private static final String ACTIVE_STATUS_CODE = "ACTIVE";
-    private static final String COMPLETE_STATUS_CODE = "COMPLETE";
     private static final String NOTES = "Notes: %s";
     private static final String EXPECTED_SUPPLY_DURATION = "Expected Supply Duration: %s %s";
     private static final String PATIENT_INSTRUCTION = "Patient Instruction: %s";
@@ -135,7 +135,7 @@ public class MedicationStatementMapper {
             if (MedicationRequestStatus.ACTIVE.getDisplay().equals(medicationRequest.getStatus().getDisplay())) {
                 return ACTIVE_STATUS_CODE;
             }
-            return COMPLETE_STATUS_CODE;
+            return COMPLETE_CODE;
         }
         throw new EhrMapperException("Could not resolve Medication Request status");
     }
