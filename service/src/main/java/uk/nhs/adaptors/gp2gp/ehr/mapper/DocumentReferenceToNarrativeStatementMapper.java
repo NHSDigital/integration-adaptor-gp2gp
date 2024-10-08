@@ -61,7 +61,9 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
         boolean isContentTypeSupported = supportedContentTypes.isContentTypeSupported(attachmentContentType);
         if (!isContentTypeSupported) {
-            LOGGER.info("Unsupported ContentType '{}'!", attachmentContentType);
+            LOGGER.info("Unsupported ContentType '{}' for DocumentReference ID: {} !",
+                        attachmentContentType,
+                        documentReference.getIdElement().getIdPart());
         }
 
         builder.referenceTitle("${" + FILENAME_TEMPLATE + narrativeStatementId + "}")
