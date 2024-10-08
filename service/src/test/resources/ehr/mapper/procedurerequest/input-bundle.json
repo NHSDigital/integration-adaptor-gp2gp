@@ -17,7 +17,7 @@
         {
             "resource": {
                 "resourceType": "Device",
-                "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+                "id": "device-with-manufacturer",
                 "type": {
                     "coding": [
                         {
@@ -25,9 +25,24 @@
                             "display": "Device type display"
                         }
                     ],
-                    "text": "Device type text"
+                    "text": "DeviceTypeText"
                 },
-                "manufacturer": "Device name"
+                "manufacturer": "DeviceManufacturer"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Device",
+                "id": "device-without-manufacturer",
+                "type": {
+                    "coding": [
+                        {
+                            "code": "Device type code",
+                            "display": "Device type display"
+                        }
+                    ],
+                    "text": "DeviceTypeText"
+                }
             }
         },
         {

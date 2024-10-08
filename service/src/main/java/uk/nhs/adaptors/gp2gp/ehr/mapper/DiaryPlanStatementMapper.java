@@ -205,7 +205,10 @@ public class DiaryPlanStatementMapper {
     }
 
     private String formatDevice(Device device) {
-        return String.format(RECALL_DEVICE, extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY), device.getManufacturer());
+        return RECALL_DEVICE.formatted(
+            extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY),
+            device.hasManufacturer() ? device.getManufacturer() : StringUtils.EMPTY
+        ).stripTrailing();
     }
 
     private String formatReason(String value) {
