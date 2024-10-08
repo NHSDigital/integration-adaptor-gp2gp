@@ -39,8 +39,6 @@ public class DiaryPlanStatementMapperTest {
     private static final String EXPECTED_PLAN_STATEMENT_WITH_ALL_DATA = TEST_DIRECTORY + "expected-plan-statement-1.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITH_NO_OPTIONAL_DATA = TEST_DIRECTORY + "procedure-request-resource-2.json";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_EMPTY_DATA = TEST_DIRECTORY + "expected-plan-statement-2.xml";
-    private static final String INPUT_PROCEDURE_REQUEST_WITH_DEVICE = TEST_DIRECTORY + "procedure-request-resource-3.json";
-    private static final String EXPECTED_PLAN_STATEMENT_WITH_DEVICE = TEST_DIRECTORY + "expected-plan-statement-3.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITH_PRACTITIONER = TEST_DIRECTORY + "procedure-request-resource-4.json";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_PRACTITIONER = TEST_DIRECTORY + "expected-plan-statement-4.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITH_MULTIPLE_REASON_CODES = TEST_DIRECTORY + "procedure-request-resource-5.json";
@@ -195,7 +193,6 @@ public class DiaryPlanStatementMapperTest {
 
     @Test
     public void When_MappingWithDeviceReferenceWhereDeviceHasManufacturer_Expect_TextContainsDeviceTypeTextAndManufacturer() {
-
         var inputJson = """
             {
                 "resourceType": "ProcedureRequest",
@@ -205,7 +202,7 @@ public class DiaryPlanStatementMapperTest {
                 "authoredOn": "2010-01-13T15:29:50.1+00:00",
                 "requester": {
                     "agent": {
-                        "reference": "Device/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                        "reference": "Device/device-with-manufacturer"
                     }
                 },
                 "code": {
@@ -219,7 +216,7 @@ public class DiaryPlanStatementMapperTest {
                     <id root="394559384658936" />
                     <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                     <text>
-                        Recall Device: Device type text Device name
+                        Recall Device: DeviceTypeText DeviceManufacturer
                     </text>
                     <statusCode code="COMPLETE" />
                     <effectiveTime>
@@ -237,12 +234,6 @@ public class DiaryPlanStatementMapperTest {
 
     @Test
     public void When_MappingWithDeviceReferenceWhereDeviceHasNoManufacturer_Expect_TextOnlyContainsDeviceTypeText() {
-        String inputBundle = ResourceTestFileUtils.getFileContent(
-            TEST_DIRECTORY + "input-bundle-no-manufacturer.json"
-        );
-        Bundle bundle = new FhirParseService().parseResource(inputBundle, Bundle.class);
-        messageContext.initialize(bundle);
-
         var inputJson = """
             {
                 "resourceType": "ProcedureRequest",
@@ -252,7 +243,7 @@ public class DiaryPlanStatementMapperTest {
                 "authoredOn": "2010-01-13T15:29:50.1+00:00",
                 "requester": {
                     "agent": {
-                        "reference": "Device/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                        "reference": "Device/device-without-manufacturer"
                     }
                 },
                 "code": {
@@ -266,7 +257,7 @@ public class DiaryPlanStatementMapperTest {
                     <id root="394559384658936" />
                     <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                     <text>
-                        Recall Device: Device type text
+                        Recall Device: DeviceTypeText
                     </text>
                     <statusCode code="COMPLETE" />
                     <effectiveTime>
@@ -298,7 +289,6 @@ public class DiaryPlanStatementMapperTest {
         return Stream.of(
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_ALL_DATA, EXPECTED_PLAN_STATEMENT_WITH_ALL_DATA),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_NO_OPTIONAL_DATA, EXPECTED_PLAN_STATEMENT_WITH_EMPTY_DATA),
-            Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_DEVICE, EXPECTED_PLAN_STATEMENT_WITH_DEVICE),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_PRACTITIONER, EXPECTED_PLAN_STATEMENT_WITH_PRACTITIONER),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_MULTIPLE_REASON_CODES, EXPECTED_PLAN_STATEMENT_WITH_MULTIPLE_REASON_CODES),
             Arguments.of(INPUT_PROCEDURE_REQUEST_SINGLE_REASON_CODE, EXPECTED_PROCEDURE_REQUEST_SINGLE_REASON_CODE),
