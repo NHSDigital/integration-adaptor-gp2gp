@@ -39,8 +39,6 @@ public class DiaryPlanStatementMapperTest {
     private static final String EXPECTED_PLAN_STATEMENT_WITH_ALL_DATA = TEST_DIRECTORY + "expected-plan-statement-1.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITH_NO_OPTIONAL_DATA = TEST_DIRECTORY + "procedure-request-resource-2.json";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_EMPTY_DATA = TEST_DIRECTORY + "expected-plan-statement-2.xml";
-    private static final String INPUT_PROCEDURE_REQUEST_WITH_DEVICE = TEST_DIRECTORY + "procedure-request-resource-3.json";
-    private static final String EXPECTED_PLAN_STATEMENT_WITH_DEVICE = TEST_DIRECTORY + "expected-plan-statement-3.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITH_PRACTITIONER = TEST_DIRECTORY + "procedure-request-resource-4.json";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_PRACTITIONER = TEST_DIRECTORY + "expected-plan-statement-4.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITH_MULTIPLE_REASON_CODES = TEST_DIRECTORY + "procedure-request-resource-5.json";
@@ -193,6 +191,88 @@ public class DiaryPlanStatementMapperTest {
         assertThat(actualXml).isEqualTo(expectedXml);
     }
 
+    @Test
+    public void When_MappingWithDeviceReferenceWhereDeviceHasManufacturer_Expect_TextContainsDeviceTypeTextAndManufacturer() {
+        var inputJson = """
+            {
+                "resourceType": "ProcedureRequest",
+                "id": "1B1C6F50-D8BE-4480-83D6-EF25AC5F1836",
+                "status": "active",
+                "intent": "plan",
+                "authoredOn": "2010-01-13T15:29:50.1+00:00",
+                "requester": {
+                    "agent": {
+                        "reference": "Device/device-with-manufacturer"
+                    }
+                },
+                "code": {
+                    "text": "test"
+                }
+            }""";
+
+        final var expectedXml = """
+            <component typeCode="COMP" >
+                <PlanStatement classCode="OBS" moodCode="INT">
+                    <id root="394559384658936" />
+                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                    <text>
+                        Recall Device: DeviceTypeText DeviceManufacturer
+                    </text>
+                    <statusCode code="COMPLETE" />
+                    <effectiveTime>
+                        <center nullFlavor="UNK"/>
+                    </effectiveTime>
+                    <availabilityTime value="20100113152950"/>
+                </PlanStatement>
+            </component>""";
+
+        final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        var actualXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(procedureRequest, false);
+
+        assertThat(actualXml).isEqualTo(expectedXml);
+    }
+
+    @Test
+    public void When_MappingWithDeviceReferenceWhereDeviceHasNoManufacturer_Expect_TextOnlyContainsDeviceTypeText() {
+        var inputJson = """
+            {
+                "resourceType": "ProcedureRequest",
+                "id": "1B1C6F50-D8BE-4480-83D6-EF25AC5F1836",
+                "status": "active",
+                "intent": "plan",
+                "authoredOn": "2010-01-13T15:29:50.1+00:00",
+                "requester": {
+                    "agent": {
+                        "reference": "Device/device-without-manufacturer"
+                    }
+                },
+                "code": {
+                    "text": "test"
+                }
+            }""";
+
+        final var expectedXml = """
+            <component typeCode="COMP" >
+                <PlanStatement classCode="OBS" moodCode="INT">
+                    <id root="394559384658936" />
+                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                    <text>
+                        Recall Device: DeviceTypeText
+                    </text>
+                    <statusCode code="COMPLETE" />
+                    <effectiveTime>
+                        <center nullFlavor="UNK"/>
+                    </effectiveTime>
+                    <availabilityTime value="20100113152950"/>
+                </PlanStatement>
+            </component>""";
+
+        final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        var actualXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(procedureRequest, false);
+
+        assertThat(actualXml).isEqualTo(expectedXml);
+    }
+
     @ParameterizedTest
     @MethodSource("testData")
     public void When_MappingProcedureRequest_Expect_ResourceMapped(String inputJsonPath, String expectedXmlPath) throws IOException {
@@ -209,7 +289,6 @@ public class DiaryPlanStatementMapperTest {
         return Stream.of(
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_ALL_DATA, EXPECTED_PLAN_STATEMENT_WITH_ALL_DATA),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_NO_OPTIONAL_DATA, EXPECTED_PLAN_STATEMENT_WITH_EMPTY_DATA),
-            Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_DEVICE, EXPECTED_PLAN_STATEMENT_WITH_DEVICE),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_PRACTITIONER, EXPECTED_PLAN_STATEMENT_WITH_PRACTITIONER),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_MULTIPLE_REASON_CODES, EXPECTED_PLAN_STATEMENT_WITH_MULTIPLE_REASON_CODES),
             Arguments.of(INPUT_PROCEDURE_REQUEST_SINGLE_REASON_CODE, EXPECTED_PROCEDURE_REQUEST_SINGLE_REASON_CODE),
