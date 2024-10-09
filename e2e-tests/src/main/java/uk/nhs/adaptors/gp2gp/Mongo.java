@@ -29,9 +29,9 @@ public class Mongo {
             var connectionString = System.getenv().getOrDefault("GP2GP_MONGO_URI", "mongodb://localhost:27017");
             var database = System.getenv().getOrDefault("GP2GP_MONGO_DATABASE_NAME", "gp2gp");
 
-                var client = create(connectionString);
+            try(var client = create(connectionString)) {
                 sharedDatabaseConnection = client.getDatabase(database);
-
+            }
         }
         return sharedDatabaseConnection;
     }
