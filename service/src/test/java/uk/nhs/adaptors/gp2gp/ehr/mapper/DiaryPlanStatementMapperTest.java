@@ -150,7 +150,7 @@ public class DiaryPlanStatementMapperTest {
             </component>""";
 
         final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
-        var actualXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(procedureRequest, false);
+        var actualXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(procedureRequest, false);
 
         assertThat(actualXml).isEqualTo(expectedXml);
     }
@@ -186,7 +186,7 @@ public class DiaryPlanStatementMapperTest {
                 </component>""";
 
         final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
-        var actualXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(procedureRequest, false);
+        var actualXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(procedureRequest, false);
 
         assertThat(actualXml).isEqualTo(expectedXml);
     }
@@ -227,7 +227,7 @@ public class DiaryPlanStatementMapperTest {
             </component>""";
 
         final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
-        var actualXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(procedureRequest, false);
+        var actualXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(procedureRequest, false);
 
         assertThat(actualXml).isEqualTo(expectedXml);
     }
@@ -268,7 +268,7 @@ public class DiaryPlanStatementMapperTest {
             </component>""";
 
         final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
-        var actualXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(procedureRequest, false);
+        var actualXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(procedureRequest, false);
 
         assertThat(actualXml).isEqualTo(expectedXml);
     }
