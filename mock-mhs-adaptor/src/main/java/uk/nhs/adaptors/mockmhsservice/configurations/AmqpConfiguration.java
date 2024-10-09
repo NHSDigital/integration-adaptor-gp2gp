@@ -56,11 +56,11 @@ public class AmqpConfiguration {
             (JmsDefaultDeserializationPolicy) factory.getDeserializationPolicy();
 
         if (StringUtils.isNotBlank(properties.getDeserializationPolicy().getWhiteList())) {
-            deserializationPolicy.setWhiteList(properties.getDeserializationPolicy().getWhiteList());
+            deserializationPolicy.setAllowList(properties.getDeserializationPolicy().getWhiteList());
         }
 
         if (StringUtils.isNotBlank(properties.getDeserializationPolicy().getBlackList())) {
-            deserializationPolicy.setBlackList(properties.getDeserializationPolicy().getBlackList());
+            deserializationPolicy.setDenyList(properties.getDeserializationPolicy().getBlackList());
         }
     }
 
