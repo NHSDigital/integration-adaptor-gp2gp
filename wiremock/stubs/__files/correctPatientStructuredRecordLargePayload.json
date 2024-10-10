@@ -7437,7 +7437,12 @@
                     "profile":
                     [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension":
                 [
@@ -8561,6 +8566,46 @@
                         }
                     ]
                 },
+                "entry":
+                [
+                    {
+                        "item":
+                        {
+                            "reference": "List/Consultation1-Topic3-heading"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource":
+            {
+
+				"resourceType": "List",
+				"id": "Consultation1-Topic3-heading",
+				"meta": {
+					"profile": [
+						"https://fhir.nhs.uk/STU3/StructureDefinition/Consultation1-Topic3-heading"
+					]
+				},
+				"status": "current",
+				"mode": "snapshot",
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "24781000000107",
+							"display": "Category (EHR)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/2"
+				},
+				"encounter": {
+					"reference": "Encounter/Encounter1"
+				},
+				"date": "2019-03-28T10:30:00+00:00",
                 "entry":
                 [
                     {
@@ -15136,7 +15181,12 @@
                     "profile":
                     [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension":
                 [
@@ -16891,7 +16941,12 @@
                     "profile":
                     [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension":
                 [
