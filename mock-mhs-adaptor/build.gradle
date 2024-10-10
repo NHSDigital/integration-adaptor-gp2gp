@@ -20,7 +20,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework:spring-jms'
 	implementation 'org.apache.qpid:qpid-jms-client:2.5.0'
-	implementation 'org.apache.commons:commons-lang3:3.16.0'
+	implementation 'org.apache.commons:commons-lang3:3.17.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
