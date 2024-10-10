@@ -23,6 +23,7 @@ import org.hl7.fhir.dstu3.model.Location;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -223,6 +224,7 @@ public class EncounterMapperTest {
             .hasMessage("Not supported agent reference: Patient/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
     }
 
+    @Disabled("Testing to see what GP2GP systems do when we don't have an encounter specified")
     @Test
     public void When_MappingEncounterWithoutRecorderParticipant_Expect_Exception() throws IOException {
         var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);

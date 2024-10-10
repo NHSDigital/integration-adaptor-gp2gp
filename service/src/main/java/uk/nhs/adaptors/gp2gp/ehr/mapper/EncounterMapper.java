@@ -73,10 +73,9 @@ public class EncounterMapper {
             .originalText(buildOriginalText(encounter))
             .locationName(buildLocationPertinentInformation(encounter));
 
-        final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
-            .map(agentDirectory::getAgentId)
-            .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
-        encounterStatementTemplateParameters.author(recReference);
+        final Optional<String> recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
+            .map(agentDirectory::getAgentId);
+        recReference.map(encounterStatementTemplateParameters::author);
 
         messageContext.getInputBundleHolder()
             .getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE)
@@ -88,7 +87,7 @@ public class EncounterMapper {
         final Optional<String> pprfReference = findParticipantWithCoding(encounter, ParticipantCoding.PERFORMER)
             .map(agentDirectory::getAgentId);
 
-        encounterStatementTemplateParameters.participant2(pprfReference.orElse(recReference));
+        encounterStatementTemplateParameters.participant2(pprfReference.orElse(recReference.orElse(null)));
 
         updateEhrFolderEffectiveTime(encounter);
 
