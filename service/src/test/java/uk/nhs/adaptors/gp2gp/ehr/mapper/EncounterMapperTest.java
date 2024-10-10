@@ -127,6 +127,7 @@ public class EncounterMapperTest {
         + "example-encounter-resource-18.json";
     private static final String OUTPUT_XML_WITH_NO_EHR_COMPOSITION_COMPONENTS = TEST_FILES_DIRECTORY
         + "expected-output-encounter-14.xml";
+    public static final String OUTPUT_XML_WITH_NUL_AUTHOR_PARTICIPANT2 = TEST_FILES_DIRECTORY + "expected-output-encounter-15.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -159,7 +160,7 @@ public class EncounterMapperTest {
     @ParameterizedTest
     @MethodSource("testFilePaths")
     public void When_MappingParsedEncounterJson_Expect_EhrCompositionXmlOutput(String input, String output) throws IOException {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
 
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(output);
@@ -189,6 +190,7 @@ public class EncounterMapperTest {
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT),
             Arguments.of(INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2),
+            Arguments.of(INPUT_JSON_WITHOUT_RECORDER_PARTICIPANT, OUTPUT_XML_WITH_NUL_AUTHOR_PARTICIPANT2),
             Arguments.of(INPUT_JSON_WITH_NO_LOCATION_REFERENCE, OUTPUT_XML_WITH_NO_LOCATION_REFERENCE)
         );
     }
@@ -221,21 +223,6 @@ public class EncounterMapperTest {
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Not supported agent reference: Patient/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
-    }
-
-    @Test
-    public void When_MappingEncounterWithoutRecorderParticipant_Expect_Exception() throws IOException {
-        var sampleComponent = ResourceTestFileUtils.getFileContent(SAMPLE_EHR_COMPOSITION_COMPONENT);
-
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITHOUT_RECORDER_PARTICIPANT);
-
-        Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
-
-        when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
-
-        assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
-            .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessage("Encounter.participant recorder is required");
     }
 
     @Test
