@@ -740,40 +740,7 @@
                 "subject": {
                     "reference": "Patient/3"
                 },
-                "participant": [
-                    {
-                        "type": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-ParticipantType-1",
-                                        "code": "PPRF",
-                                        "display": "primary performer"
-                                    }
-                                ]
-                            }
-                        ],
-                        "individual": {
-                            "reference": "Practitioner/1"
-                        }
-                    },
-                    {
-                        "type": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-ParticipantType-1",
-                                        "code": "REC",
-                                        "display": "recorder"
-                                    }
-                                ]
-                            }
-                        ],
-                        "individual": {
-                            "reference": "Practitioner/1"
-                        }
-                    }
-                ],
+                "participant": [],
                 "period": {
                     "start": "2019-03-28T10:30:00+00:00",
                     "end": "2019-03-28T10:38:00+00:00"
