@@ -3395,7 +3395,6 @@
                 "subject": {
                     "reference": "Patient/4C903809-CADA-442E-8FA5-655E5EFEB1F5"
                 },
-                "occurrenceDateTime": "2025-07-28",
                 "authoredOn": "2020-10-26T12:31:22.087+00:00",
                 "occurrencePeriod": {
                     "start": "2010-01-13"
