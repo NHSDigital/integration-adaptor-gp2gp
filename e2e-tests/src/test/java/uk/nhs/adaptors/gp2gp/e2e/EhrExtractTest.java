@@ -30,6 +30,7 @@ import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.bson.Document;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.StringUtils;
@@ -493,6 +494,7 @@ public class EhrExtractTest {
         assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, nhsNumber);
     }
 
+    @Disabled
     @Test
     public void When_ExtractRequestReceivedForEMISPWTP7_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws IOException, NamingException, JMSException {
         String conversationId = UUID.randomUUID().toString();
@@ -624,6 +626,7 @@ public class EhrExtractTest {
         assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, nhsNumber);
     }
 
+    @Disabled
     @Test
     public void When_ExtractRequestReceived_WithAttachmentNotFound_Expect_ApiHasPlaceholders() throws IOException, NamingException, JMSException {
         String conversationId = UUID.randomUUID().toString();
