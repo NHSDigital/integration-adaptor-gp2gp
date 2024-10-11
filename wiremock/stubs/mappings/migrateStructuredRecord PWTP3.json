@@ -1,7 +1,7 @@
 {
   "priority": 2,
   "scenarioName": "migrateStructuredRecord",
-  "requiredScenarioState": "NIAD3151",
+  "requiredScenarioState": "NAID1615",
   "request": {
     "method": "POST",
     "urlPattern": "/.*/STU3/1/gpconnect/fhir/Patient/[$]gpc[.]migratestructuredrecord"
