@@ -1,6 +1,3 @@
-# An override for docker-compose.yml to run all tests
-version: '3.4'
-
 services:
   gp2gp:
     container_name: tests

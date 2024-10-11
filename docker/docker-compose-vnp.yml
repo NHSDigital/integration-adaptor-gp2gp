@@ -1,6 +1,3 @@
-# An override for docker-compose.yml to run e2e tests
-version: '3.4'
-
 services:
   gpcc-mock:
     container_name: gpcc-mock

@@ -50,21 +50,25 @@ public class DiaryPlanStatementMapper {
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
 
-    public String mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
-        if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
-            return null;
+    public String mapProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
+        if (procedureRequest.getIntent() == ProcedureRequest.ProcedureRequestIntent.PLAN) {
+            return mapDiaryEntryToPlanStatement(procedureRequest, isNested);
         }
 
+        return null;
+    }
+
+    private String mapDiaryEntryToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         var idMapper = messageContext.getIdMapper();
         var availabilityTime = buildAvailabilityTime(procedureRequest);
         PlanStatementMapperParametersBuilder builder = PlanStatementMapperParameters.builder()
             .isNested(isNested)
             .id(idMapper.getOrNew(ResourceType.ProcedureRequest, procedureRequest.getIdElement()))
-            .availabilityTime(availabilityTime);
+            .availabilityTime(availabilityTime)
+            .effectiveTime(buildEffectiveTime(procedureRequest))
+            .text(buildText(procedureRequest))
+            .code(buildCode(procedureRequest));
 
-        buildEffectiveTime(procedureRequest).ifPresent(builder::effectiveTime);
-        buildText(procedureRequest).ifPresent(builder::text);
-        builder.code(buildCode(procedureRequest));
         buildParticipant(procedureRequest).ifPresent(builder::participant);
 
         return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
@@ -80,7 +84,7 @@ public class DiaryPlanStatementMapper {
         );
     }
 
-    private Optional<String> buildEffectiveTime(ProcedureRequest procedureRequest) {
+    private String buildEffectiveTime(ProcedureRequest procedureRequest) {
         DateTimeType date = null;
         if (procedureRequest.hasOccurrenceDateTimeType()) {
             date = procedureRequest.getOccurrenceDateTimeType();
@@ -89,11 +93,11 @@ public class DiaryPlanStatementMapper {
             date = occurrencePeriod.hasEnd() ? occurrencePeriod.getEndElement() : occurrencePeriod.getStartElement();
         }
 
-        return Optional.of(formatEffectiveDate(date));
+        return formatEffectiveDate(date);
     }
 
-    private Optional<String> buildText(ProcedureRequest procedureRequest) {
-        return Optional.of(Stream.of(
+    private String buildText(ProcedureRequest procedureRequest) {
+        return Stream.of(
             getSupportingInformation(procedureRequest),
             getEarliestRecallDate(procedureRequest),
             getRequester(procedureRequest),
@@ -102,7 +106,7 @@ public class DiaryPlanStatementMapper {
         )
             .filter(Optional::isPresent)
             .map(Optional::get)
-            .collect(Collectors.joining(StringUtils.SPACE)));
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private String buildCode(ProcedureRequest procedureRequest) {
@@ -142,13 +146,13 @@ public class DiaryPlanStatementMapper {
     }
 
     private Optional<String> getEarliestRecallDate(ProcedureRequest procedureRequest) {
-        if (procedureRequest.hasOccurrencePeriod()
-            && procedureRequest.getOccurrencePeriod().hasStart()) {
+        if (procedureRequest.hasOccurrencePeriod() && procedureRequest.getOccurrencePeriod().hasEnd()) {
             return Optional.of(formatStartDate(procedureRequest));
         }
 
         return Optional.empty();
     }
+
 
     private Optional<String> getRequester(ProcedureRequest procedureRequest) {
         Reference agent = procedureRequest.getRequester().getAgent();
@@ -205,7 +209,10 @@ public class DiaryPlanStatementMapper {
     }
 
     private String formatDevice(Device device) {
-        return String.format(RECALL_DEVICE, extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY), device.getManufacturer());
+        return RECALL_DEVICE.formatted(
+            extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY),
+            device.hasManufacturer() ? device.getManufacturer() : StringUtils.EMPTY
+        ).stripTrailing();
     }
 
     private String formatReason(String value) {

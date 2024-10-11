@@ -1,5 +1,3 @@
-version: '3.4'
-
 services:
   gp2gp:
     image: ${GP2GP_IMAGE:-local/gp2gp:latest}

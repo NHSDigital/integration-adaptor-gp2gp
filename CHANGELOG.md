@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* When mapping `ProcedureRequests` with an `occurrencePeriod` which contains only a start date, then the `text` element
+  in the resultant XML will no longer contain the superfluous 'Earliest Recall Date: <startDate>' value.
+* When mapping `ProcedureRequests` with a `requestor` referencing a `device` without a `manufacturer` a spurious 
+  `"null"` is no longer output in the generated `"Recall Device:"` text.
+
 ### Added
 
 * When mapping consultations which are "flat" (i.e., they contain a `TOPIC` without a `CATEGORY`) we now wrap the 
@@ -13,11 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added a scheduled delay checker to update EhrExtract to "Integration Failure" state if sentAt exceeds 8 days and no acknowledgment is received.
 * When mapping a `DocumentReference` which contains a `NOPAT` `meta.security` or `NOPAT` `securityLabel` tag the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
-
-### Added
-
 * When mapping `AllergyIntolerances` which contain a `NOPAT` `meta.security` tag the resultant XML for that resource
-will contain a `NOPAT` `confidentialityCode` element.
+  will contain a `NOPAT` `confidentialityCode` element.
 * When mapping a `DiagnosticReport` or `Specimen` which contains a `NOPAT` `meta.security` tag the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
 * When mapping a `TestResult`, `TestGroupHeader` or `FilingComment` which contains a `NOPAT` `meta.security` tag the resultant XML 
@@ -25,11 +29,11 @@ will contain a `NOPAT` `confidentialityCode` element.
 * When mapping a `Condition` which contains a `NOPAT` `meta.security` tag the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
 * When mapping a `MedicationRequest (PLAN)` which contains a `NOPAT` `meta.security` tag the resultant XML for that 
-resource will contain a `NOPAT` `confidentialityCode` element.
+  resource will contain a `NOPAT` `confidentialityCode` element.
 * When mapping a `MedicationRequest (ORDER)` which contains a `NOPAT` `meta.security` tag the resultant XML for that
-resource will contain a `NOPAT` `confidentialityCode` element.
-* * When mapping `Immunizations` which contain a `NOPAT` `meta.security` tag, the resultant XML for that resource
-    will contain a `NOPAT` `confidentialityCode` element.
+  resource will contain a `NOPAT` `confidentialityCode` element.
+* When mapping `Immunizations` which contain a `NOPAT` `meta.security` tag, the resultant XML for that resource
+  will contain a `NOPAT` `confidentialityCode` element.
 
 ## [2.0.6] - 2024-07-29
 
