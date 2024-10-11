@@ -3397,9 +3397,6 @@
                 },
                 "occurrenceDateTime": "2025-07-28",
                 "authoredOn": "2020-10-26T12:31:22.087+00:00",
-                "occurrencePeriod": {
-                    "start": "2010-01-13"
-                },
                 "requester": {
                     "agent": {
                         "reference": "Practitioner/744B53BD-299D-4604-AC81-167DEBC49E4B"
