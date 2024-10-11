@@ -3397,7 +3397,8 @@
                 },
                 "authoredOn": "2020-10-26T12:31:22.087+00:00",
                 "occurrencePeriod": {
-                    "start": "2010-01-13"
+                    "start": "2010-01-13",
+                    "end": "2010-01-15"
                 },
                 "requester": {
                     "agent": {
