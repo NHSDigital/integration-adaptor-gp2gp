@@ -3402,10 +3402,34 @@
                 },
                 "requester": {
                     "agent": {
-                        "reference": "Practitioner/744B53BD-299D-4604-AC81-167DEBC49E4B"
+                        "reference": "Device/204953D6-8A3A-4C18-9604-54B5B8F49B6F"
                     }
                 }
             }
+        },
+        {
+            "resource": {
+                "resourceType": "Device",
+                "id": "204953D6-8A3A-4C18-9604-54B5B8F49B6F",
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "204953D6-8A3A-4C18-9604-54B5B8F49B6F"
+                    }
+
+                ],
+                "type": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "715811000000101",
+                            "display": "General practitioner computer system",
+                            "userSelected": true
+                        }
+                    ]
+                }
+            }
+
         },
         {
             "resource": {
