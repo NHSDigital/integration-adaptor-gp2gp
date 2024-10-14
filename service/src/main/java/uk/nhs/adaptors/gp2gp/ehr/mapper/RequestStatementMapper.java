@@ -90,7 +90,7 @@ public class RequestStatementMapper {
     }
 
     @RequiredArgsConstructor
-    private class InnerMapper {
+    private final class InnerMapper {
         private final ReferralRequest referralRequest;
         private final boolean isNested;
         private final RequestStatementTemplateParametersBuilder templateParameters = RequestStatementTemplateParameters.builder();

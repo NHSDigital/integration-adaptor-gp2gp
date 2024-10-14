@@ -78,7 +78,7 @@ public class CustomTrustStore {
     }
 
     @RequiredArgsConstructor
-    private static class CombinedTrustManager implements X509TrustManager {
+    private static final class CombinedTrustManager implements X509TrustManager {
         private final X509TrustManager primaryTrustManager;
         private final X509TrustManager secondaryTrustManager;
 
