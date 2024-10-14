@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   in the resultant XML will no longer contain the superfluous 'Earliest Recall Date: <startDate>' value.
 * When mapping `ProcedureRequests` with a `requestor` referencing a `device` without a `manufacturer` a spurious 
   `"null"` is no longer output in the generated `"Recall Device:"` text.
+* When mapping an `Encounter` without a Recorder `participant`, now send the author as `nulFlavor=UNK`.
+  Previously this would raise the error "EhrMapperException: Encounter.participant recorder is required" and send a
+  failure to the requesting system.
 
 ### Added
 
