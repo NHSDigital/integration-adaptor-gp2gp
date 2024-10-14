@@ -60,10 +60,6 @@ public class ConditionLinkSetMapper {
     private final ConfidentialityService confidentialityService;
 
     public String mapConditionToLinkSet(Condition condition, boolean isNested) {
-        if (!condition.hasAsserter()) {
-            throw new EhrMapperException("Condition.asserter is required");
-        }
-
         final IdMapper idMapper = messageContext.getIdMapper();
         var builder = ConditionLinkSetMapperParameters.builder()
             .isNested(isNested)
@@ -91,17 +87,19 @@ public class ConditionLinkSetMapper {
 
         builder.code(buildCode(condition));
 
-        var asserterReference = condition.getAsserter();
-        var performerReference = messageContext.getAgentDirectory().getAgentId(asserterReference);
+        if (condition.hasAsserter()) {
+            var asserterReference = condition.getAsserter();
+            var performerReference = messageContext.getAgentDirectory().getAgentId(asserterReference);
 
-        var referenceElement = asserterReference.getReferenceElement();
-        messageContext.getInputBundleHolder().getResource(referenceElement)
-            .map(Resource::getResourceType)
-            .filter(ResourceType.Practitioner::equals)
-            .orElseThrow(() -> new EhrMapperException("Condition.asserter must be a Practitioner"));
+            var referenceElement = asserterReference.getReferenceElement();
+            messageContext.getInputBundleHolder().getResource(referenceElement)
+                    .map(Resource::getResourceType)
+                    .filter(ResourceType.Practitioner::equals)
+                    .orElseThrow(() -> new EhrMapperException("Condition.asserter must be a Practitioner"));
 
-        var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
-        builder.performer(performerParameter);
+            var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
+            builder.performer(performerParameter);
+        }
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder.build());
     }

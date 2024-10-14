@@ -1,0 +1,37 @@
+<component typeCode="COMP">
+    <LinkSet classCode="OBS" moodCode="EVN">
+        <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20200906"/>
+            <high value="20201004000000"/>
+        </effectiveTime>
+        <availabilityTime value="20200907101202" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="D2EA00FC-7B85-46C5-A0B7-E49C53C054D0-Condition-new-ID"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="82A9E6C8-20CE-48DA-B6B3-15C39E5ABB5E-Condition-new-ID"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="8747DFC5-11B7-4A77-B2F3-7720CC58C2FC-Condition-new-ID"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-Condition-new-ID"/>
+            </namedStatementRef>
+        </conditionNamed>
+    </LinkSet>
+</component>

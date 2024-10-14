@@ -108,6 +108,7 @@ class ConditionLinkSetMapperTest {
     private static final String OUTPUT_XML_WITH_NULL_FLAVOR_OBSERVATION_STATEMENT_AVAILABILITY_TIME = EXPECTED_OUTPUT_LINKSET + "18.xml";
     private static final String OUTPUT_XML_WITH_STATEMENT_REF_LINK_ALLERGY_OBSERVATION = EXPECTED_OUTPUT_LINKSET + "19.xml";
     private static final String OUTPUT_XML_MEDICATION_REQUEST_ACTUAL_PROBLEM = EXPECTED_OUTPUT_LINKSET + "20.xml";
+    private static final String OUTPUT_XML_NO_PARTICIPANT = EXPECTED_OUTPUT_LINKSET + "21.xml";
 
     @Mock
     private IdMapper idMapper;
@@ -171,15 +172,6 @@ class ConditionLinkSetMapperTest {
 
         assertThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(condition, false))
             .isSameAs(propagatedException);
-    }
-
-    @Test
-    void When_MappingParsedConditionWithoutAsserter_Expect_EhrMapperException() {
-        final Condition condition = getConditionResourceFromJson(INPUT_JSON_ASSERTER_NOT_PRESENT);
-
-        assertThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(condition, false))
-            .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessage("Condition.asserter is required");
     }
 
     @Test
@@ -307,6 +299,7 @@ class ConditionLinkSetMapperTest {
             Arguments.of(INPUT_JSON_STATUS_INACTIVE, OUTPUT_XML_WITH_STATUS_INACTIVE, false),
             Arguments.of(INPUT_JSON_DATES_PRESENT, OUTPUT_XML_WITH_DATES_PRESENT, false),
             Arguments.of(INPUT_JSON_DATES_NOT_PRESENT, OUTPUT_XML_WITH_DATES_NOT_PRESENT, false),
+            Arguments.of(INPUT_JSON_ASSERTER_NOT_PRESENT, OUTPUT_XML_NO_PARTICIPANT, false),
             Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_LIST_REFERENCE, OUTPUT_XML_WITH_NO_RELATED_CLINICAL_CONTENT, false),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_ALLERGY_INTOLERANCE, OUTPUT_XML_ALLERGY_INTOLERANCE_ACTUAL_PROBLEM, false),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_IMMUNIZATION, OUTPUT_XML_IMMUNIZATION_ACTUAL_PROBLEM, false),
