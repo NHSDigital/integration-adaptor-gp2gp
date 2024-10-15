@@ -134,6 +134,8 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-extension-status-reason-with-text.json";
     private static final String OUTPUT_XML_WITH_STATUS_REASON_TEXT = TEST_FILE_DIRECTORY
         + "medication-statement-with-status-reason-text.xml";
+    private static final String OUTPUT_XML_WITH_NO_PARTICIPANT = TEST_FILE_DIRECTORY
+            + "medication-statement-with-no-participant.xml";
     private static final String INPUT_JSON_WITH_REQUESTER_ON_BEHALF_OF = TEST_FILE_DIRECTORY
         + "medication-request-with-requester-on-behalf-of.json";
     private static final String INPUT_JSON_WITH_REQUESTER = TEST_FILE_DIRECTORY
@@ -230,7 +232,9 @@ public class MedicationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS, OUTPUT_XML_WITH_AUTHORISE_NO_OPTIONAL_FIELDS),
             Arguments.of(INPUT_JSON_WITH_PLAN_NO_STATUS_REASON_CODE, OUTPUT_XML_WITH_AUTHORISE_DEFAULT_STATUS_REASON_CODE),
             Arguments.of(INPUT_JSON_WITH_PLAN_NO_INFO_PRESCRIPTION_TEXT, OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION),
-            Arguments.of(INPUT_JSON_WITH_EXTENSION_STATUS_REASON_TEXT, OUTPUT_XML_WITH_STATUS_REASON_TEXT)
+            Arguments.of(INPUT_JSON_WITH_EXTENSION_STATUS_REASON_TEXT, OUTPUT_XML_WITH_STATUS_REASON_TEXT),
+            Arguments.of(INPUT_JSON_WITH_NO_RECORDER_REFERENCE, OUTPUT_XML_WITH_NO_PARTICIPANT),
+            Arguments.of(INPUT_JSON_WITH_INVALID_RECORDER_REFERENCE_TYPE, OUTPUT_XML_WITH_NO_PARTICIPANT)
         );
     }
 
@@ -242,7 +246,7 @@ public class MedicationStatementMapperTest {
 
         String outputMessage = medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
 
-        assertThat(outputMessage).isEqualTo(expected);
+        assertThat(outputMessage).isEqualToNormalizingWhitespace(expected);
     }
 
     @SneakyThrows
@@ -293,9 +297,7 @@ public class MedicationStatementMapperTest {
             INPUT_JSON_WITH_NO_DOSAGE_INSTRUCTION,
             INPUT_JSON_WITH_NO_DISPENSE_REQUEST,
             INPUT_JSON_WITH_ORDER_NO_BASED_ON,
-            INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE,
-            INPUT_JSON_WITH_NO_RECORDER_REFERENCE,
-            INPUT_JSON_WITH_INVALID_RECORDER_REFERENCE_TYPE
+            INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE
         );
     }
 

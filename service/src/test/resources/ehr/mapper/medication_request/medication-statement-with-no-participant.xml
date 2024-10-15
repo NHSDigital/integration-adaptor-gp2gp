@@ -1,0 +1,46 @@
+<component typeCode="COMP">
+    <MedicationStatement classCode="SBADM" moodCode="ORD">
+        <id root="394559384658936"/>
+        <statusCode code="ACTIVE"/>
+        <effectiveTime>
+            <low value="20171110000000"/><high value="20180815000000"/>
+        </effectiveTime>
+        <availabilityTime value="20171110000000"/>
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    <code code="430127000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Oral Form Oxycodone (product)">
+                    </code>
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyPrescribe>
+                <id root="394559384658936"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="ACTIVE"/>
+                <availabilityTime value="20171110000000"/>
+                <quantity value="1" unit="1">
+                    <translation value="1">
+                        <originalText>Unk UoM</originalText>
+                    </translation>
+                </quantity>
+                <inFulfillmentOf typeCode="FLFS">
+                    <priorMedicationRef moodCode="INT">
+                        <id root="394559384658936"/>
+                    </priorMedicationRef>
+                </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Patient Instruction: Take in morning</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+            </ehrSupplyPrescribe>
+        </component>
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>1 tablet once a day</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+    </MedicationStatement>
+</component>

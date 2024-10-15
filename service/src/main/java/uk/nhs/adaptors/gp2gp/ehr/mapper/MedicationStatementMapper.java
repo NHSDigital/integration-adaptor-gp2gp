@@ -299,8 +299,7 @@ public class MedicationStatementMapper {
                     messageContext.getAgentDirectory().getAgentId(reference), ParticipantType.AUTHOR);
             }
         }
-        throw new EhrMapperException("MedicationRequest " + medicationRequest.getId()
-            + " missing recorder of type Practitioner, PractitionerRole or Organization");
+        return StringUtils.EMPTY;
     }
 
     private static Predicate<Reference> buildPredicateReferenceIsA(@NonNull ResourceType type) {
