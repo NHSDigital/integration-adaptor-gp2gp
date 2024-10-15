@@ -334,7 +334,7 @@ public class XpathExtractor {
 
     @Data
     @Builder
-    private static class EhrTemplateArgs {
+    private static final class EhrTemplateArgs {
         private String availabilityTime;
         private String effectiveTime;
         private String effectiveTimeBackup;

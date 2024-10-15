@@ -68,7 +68,7 @@ public class TaskExecutorFactoryTest {
     }
 
     @SuperBuilder
-    private static class NoExecutorTaskDefinition extends TaskDefinition {
+    private static final class NoExecutorTaskDefinition extends TaskDefinition {
         @Override
         public TaskType getTaskType() {
             return null;
