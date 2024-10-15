@@ -119,7 +119,16 @@ The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adapt
 ### MHS Adaptor and GP Connect Consumer Adaptor Client Options
 Options for configuring the web client making requests to the MHS Adaptor and the GP Connect Consumer Adaptor.
 
-Backoff options are used when the client experiences a timeout or 5xx response. Timeout is measured as total time for the HTTP request and response to complete.
+Backoff options are used to perform retries of a HTTP request when the client experiences a timeout or 5xx response.
+The client will perform retries up to the number provided by `MAX_BACKOFF_ATTEMPTS`.
+Time to wait before making the next request attempt is calculated using the equation below, with `retryNumber` starting
+at 0 for the first failure, and `jitter` being a random number in the range 0.5 - 1.5
+
+```math
+\text{timeToWait} = \text{minBackoffSeconds} \times 2.0^\text{retryNumber} \times jitter
+```
+
+Timeout is measured as total time for the HTTP request and response to complete.
 
 #### GP Connect Consumer Adaptor client
 
