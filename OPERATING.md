@@ -121,7 +121,7 @@ Options for configuring the web client making requests to the MHS Adaptor and th
 
 Backoff options are used when the client experiences a timeout or 5xx response. Timeout is measured as total time for the HTTP request and response to complete.
 
-#### MHS Adaptor client
+#### GP Connect Consumer Adaptor client
 
 | Environment Variable                  | Default | Description                 |
 |---------------------------------------|---------|-----------------------------|
@@ -129,7 +129,7 @@ Backoff options are used when the client experiences a timeout or 5xx response. 
 | GP2GP_GPC_CLIENT_MIN_BACKOFF_SECONDS  | 5       | Min Backoff time (seconds)  |
 | GP2GP_GPC_CLIENT_TIMEOUT_SECONDS      | 1200    | Request timeout (seconds)   |
 
-#### GP Connect Consumer Adaptor client
+#### MHS Adaptor client
 
 | Environment Variable                  | Default | Description                 |
 |---------------------------------------|---------|-----------------------------|
