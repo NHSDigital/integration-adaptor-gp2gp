@@ -9,7 +9,7 @@ plugins {
 
 	// Mutation testing
 	id 'info.solidsoft.pitest' version '1.15.0'
-	id 'com.arcmutate.github' version '1.2.1'
+	id 'com.arcmutate.github' version '1.2.2'
 }
 
 apply plugin: 'java'
