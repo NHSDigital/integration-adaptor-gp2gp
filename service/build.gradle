@@ -127,7 +127,7 @@ tasks.withType(Test) {
 	}
 }
 
-check.dependsOn integrationTest
+check.dependsOn integrationTest, 'pitest'
 jacocoTestReport.dependsOn integrationTest
 
 spotbugsTest.enabled = false
