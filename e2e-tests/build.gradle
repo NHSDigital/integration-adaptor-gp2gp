@@ -22,7 +22,7 @@ dependencies {
     testImplementation 'org.awaitility:awaitility:4.2.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0'
     testImplementation "org.assertj:assertj-core:3.26.3"
-    testImplementation 'ch.qos.logback:logback-classic:1.5.7'
+    testImplementation 'ch.qos.logback:logback-classic:1.5.10'
     testImplementation 'org.xmlunit:xmlunit-assertj3:2.10.0'
     testImplementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
 
