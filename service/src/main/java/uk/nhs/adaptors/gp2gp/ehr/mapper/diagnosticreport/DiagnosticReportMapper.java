@@ -212,7 +212,7 @@ public class DiagnosticReportMapper {
         InstantType diagnosticReportIssued) {
         observations.stream()
             .filter(observation -> observation.hasEffectiveDateTimeType() || observation.hasEffectivePeriod())
-            .filter(this::hasCommentNote)
+            .filter(DiagnosticReportMapper::hasCommentNote)
             .findFirst()
             .map(observation -> buildNarrativeStatementForDiagnosticReport(
                 diagnosticReportIssued,
@@ -242,7 +242,7 @@ public class DiagnosticReportMapper {
 
         var narrativeStatementObservationComments = observations.stream()
             .filter(Observation::hasCode)
-            .filter(this::hasCommentNote)
+            .filter(DiagnosticReportMapper::hasCommentNote)
             .filter(Observation::hasComment)
             .map(observation -> buildNarrativeStatementForDiagnosticReport(
                     issuedElement,
@@ -256,7 +256,7 @@ public class DiagnosticReportMapper {
         reportLevelNarrativeStatements.append(narrativeStatementObservationComments);
     }
 
-    private boolean hasCommentNote(Observation observation) {
+    static boolean hasCommentNote(Observation observation) {
         return observation.getCode().hasCoding()
             && observation.getCode().getCoding().stream()
             .filter(Coding::hasCode)
