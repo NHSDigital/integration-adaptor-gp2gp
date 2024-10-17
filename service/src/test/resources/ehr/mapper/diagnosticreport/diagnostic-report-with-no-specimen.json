@@ -1,0 +1,61 @@
+{
+  "resourceType": "DiagnosticReport",
+  "id": "461839A4-9B28-46D4-BC27-297C46F4F80E",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "https://EMISWeb/A82038",
+      "value": "E42C3D8C36174C8B88CC65AA70E09C62461839A49B2846D4BC27297C46F4F80E"
+    },
+    {
+      "system": "2.16.840.1.113883.2.1.4.5.5",
+      "value": "1019/HA3701201C/200103301627"
+    }
+  ],
+  "status": "unknown",
+  "category": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/v2/0074",
+        "code": "PAT",
+        "display": "Pathology (gross & histopath, not surgical)"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "721981007",
+        "display": "Diagnostic studies report"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+  },
+  "context": {
+    "reference": "Encounter/D0E4D145-F0A7-463C-BEF6-A768CAE0D735"
+  },
+  "issued": "2001-03-30T16:27:00+01:00",
+  "performer": [
+    {
+      "actor": {
+        "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+      }
+    }
+  ],
+  "result": [
+    {
+      "reference": "Observation/FILING-COMMENT-WITH-NO-COMMENT"
+    },
+    {
+      "reference": "Observation/6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78"
+    }
+  ],
+  "conclusion": "COELIAC"
+}
