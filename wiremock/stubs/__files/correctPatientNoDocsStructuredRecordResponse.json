@@ -7895,19 +7895,8 @@
                         }
                     }
                 ],
-                "specimen": [
-                    {
-                        "reference": "Specimen/756a8361-79ce-4561-afcb-a91fe19df123"
-                    }
-                ],
-                "result": [
-                    {
-                        "reference": "Observation/7ec12071-b737-4ce8-8a91-2ea36d94464f"
-                    },
-                    {
-                        "reference": "Observation/dacb177a-9501-4dcc-8b22-b941791ae0db"
-                    }
-                ]
+                "specimen": [],
+                "result": []
             }
         },
         {
@@ -9328,11 +9317,7 @@
                         }
                     }
                 ],
-                "specimen": [
-                    {
-                        "reference": "Specimen/756a8361-79ce-4561-afcb-a91fe19df124"
-                    }
-                ],
+                "specimen": [],
                 "result": [
                     {
                         "reference": "Observation/dacb177a-9501-4dcc-8b22-b941791ae0db"
