@@ -12,19 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.model.Annotation;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.DateTimeType;
-import org.hl7.fhir.dstu3.model.DiagnosticReport;
-import org.hl7.fhir.dstu3.model.Duration;
-import org.hl7.fhir.dstu3.model.Observation;
-import org.hl7.fhir.dstu3.model.PrimitiveType;
-import org.hl7.fhir.dstu3.model.Practitioner;
-import org.hl7.fhir.dstu3.model.Resource;
-import org.hl7.fhir.dstu3.model.ResourceType;
-import org.hl7.fhir.dstu3.model.SimpleQuantity;
-import org.hl7.fhir.dstu3.model.Specimen;
-import org.hl7.fhir.dstu3.model.Type;
+import org.hl7.fhir.dstu3.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -43,6 +31,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -141,6 +130,7 @@ public class SpecimenMapper {
         if (dummySpecimenOrObservationExists(specimen, observations)) {
             observationsAssociatedWithSpecimen = observations;
         } else {
+            // Implicitly filtering out filing comments.
             observationsAssociatedWithSpecimen = observations.stream()
                 .filter(Observation::hasSpecimen)
                 .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
@@ -148,6 +138,7 @@ public class SpecimenMapper {
         }
 
         return observationsAssociatedWithSpecimen.stream()
+            .filter(Predicate.not(DiagnosticReportMapper::hasCommentNote))
             .map(observationMapper::mapObservationToCompoundStatement)
             .collect(Collectors.joining());
     }
