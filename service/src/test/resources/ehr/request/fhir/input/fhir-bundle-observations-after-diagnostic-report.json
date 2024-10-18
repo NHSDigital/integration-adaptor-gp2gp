@@ -292,9 +292,6 @@
                 "subject": {
                     "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
                 },
-                "specimen": {
-                    "reference": "Specimen/7E5D5E50-D1CE-41FE-B30D-45D287174031-SPEC-0"
-                },
                 "effectivePeriod": {
                     "start": "2010-01-13",
                     "end": "2010-01-15"

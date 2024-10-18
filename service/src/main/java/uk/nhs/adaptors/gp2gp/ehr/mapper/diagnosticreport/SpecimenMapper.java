@@ -18,8 +18,8 @@ import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Duration;
 import org.hl7.fhir.dstu3.model.Observation;
-import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.Practitioner;
+import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SimpleQuantity;
@@ -43,6 +43,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -141,6 +142,7 @@ public class SpecimenMapper {
         if (dummySpecimenOrObservationExists(specimen, observations)) {
             observationsAssociatedWithSpecimen = observations;
         } else {
+            // Implicitly filtering out filing comments.
             observationsAssociatedWithSpecimen = observations.stream()
                 .filter(Observation::hasSpecimen)
                 .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
@@ -148,6 +150,7 @@ public class SpecimenMapper {
         }
 
         return observationsAssociatedWithSpecimen.stream()
+            .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
             .map(observationMapper::mapObservationToCompoundStatement)
             .collect(Collectors.joining());
     }
