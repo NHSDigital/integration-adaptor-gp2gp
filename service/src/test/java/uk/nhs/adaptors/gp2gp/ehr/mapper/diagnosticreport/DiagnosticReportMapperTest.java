@@ -250,7 +250,7 @@ class DiagnosticReportMapperTest {
     }
 
     @Test
-    void When_DiagnosticReport_With_NoReferencedSpecimenAndFilingCommentWithNoComment_Expect_ValidCompoundStatementOutput() {
+    void When_DiagnosticReport_With_NoReferencedSpecimenAndFilingCommentWithNoComment_Expect_MatchesSnapshotXml() {
         final String diagnosticReportFileName = "diagnostic-report-with-no-specimen.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
