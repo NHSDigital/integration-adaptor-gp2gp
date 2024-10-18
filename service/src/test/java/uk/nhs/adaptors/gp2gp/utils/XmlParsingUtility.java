@@ -64,4 +64,10 @@ public final class XmlParsingUtility {
 
         return nodeList.getLength() > 0;
     }
+
+    public static String getXmlStringFromFile(String directory, String filename) {
+        return ResourceTestFileUtils.getFileContent(
+            directory + filename
+        );
+    }
 }
