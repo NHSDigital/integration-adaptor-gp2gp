@@ -127,10 +127,10 @@ class SpecimenMapperTest {
     }
 
     @Test
-    void When_MappingDefaultSpecimenWithObservations_Expect_DefaultSpecimenAndObservationsXmlOutput() {
+    void When_MappingDefaultSpecimenWithObservation_Expect_DefaultSpecimenAndObservationXmlOutput() {
         final Specimen specimen = getDefaultSpecimen();
         final String expectedXml = ResourceTestFileUtils.getFileContent(
-            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_specimen_with_observations.xml");
+            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_specimen_with_observation.xml");
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
             .thenReturn(ID_FROM_ID_MAPPER);
