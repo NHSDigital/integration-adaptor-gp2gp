@@ -212,7 +212,7 @@ public class DiagnosticReportMapper {
         InstantType diagnosticReportIssued) {
         observations.stream()
             .filter(observation -> observation.hasEffectiveDateTimeType() || observation.hasEffectivePeriod())
-            .filter(DiagnosticReportMapper::hasCommentNote)
+            .filter(DiagnosticReportMapper::isFilingComment)
             .findFirst()
             .map(observation -> buildNarrativeStatementForDiagnosticReport(
                 diagnosticReportIssued,
@@ -242,7 +242,7 @@ public class DiagnosticReportMapper {
 
         var narrativeStatementObservationComments = observations.stream()
             .filter(Observation::hasCode)
-            .filter(DiagnosticReportMapper::hasCommentNote)
+            .filter(DiagnosticReportMapper::isFilingComment)
             .filter(Observation::hasComment)
             .map(observation -> buildNarrativeStatementForDiagnosticReport(
                     issuedElement,
@@ -256,7 +256,16 @@ public class DiagnosticReportMapper {
         reportLevelNarrativeStatements.append(narrativeStatementObservationComments);
     }
 
-    static boolean hasCommentNote(Observation observation) {
+    /**
+     * See the
+     * <a href="https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--CareConnect-GPC-Observation-1?version=current">
+     *  GP Connect 1.6.2
+     * </a>
+     * specification for more details on filing comments.
+     * @param observation The Observation to check.
+     * @return True if the Observation is a filing comment, otherwise false.
+     */
+    static boolean isFilingComment(Observation observation) {
         return observation.getCode().hasCoding()
             && observation.getCode().getCoding().stream()
             .filter(Coding::hasCode)

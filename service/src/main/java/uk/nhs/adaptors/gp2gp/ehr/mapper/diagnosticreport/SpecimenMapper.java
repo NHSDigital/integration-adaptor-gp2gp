@@ -138,7 +138,7 @@ public class SpecimenMapper {
         }
 
         return observationsAssociatedWithSpecimen.stream()
-            .filter(Predicate.not(DiagnosticReportMapper::hasCommentNote))
+            .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
             .map(observationMapper::mapObservationToCompoundStatement)
             .collect(Collectors.joining());
     }
