@@ -325,7 +325,6 @@
         ],
         "related":[
           {
-            "type":"derived-from",
             "target":{
               "reference":"Observation/461839A4-9B28-46D4-BC27-297C46F4F80E"
             }
