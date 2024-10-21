@@ -16,6 +16,7 @@ GP2GP 2.2b producer, or those wishing to decommission their existing producer, m
 
 ## Table of contents
 
+1. [Guidance for setting up the GP2GP adaptors in INT](https://github.com/NHSDigital/nia-patient-switching-standard-adaptor/blob/main/getting-started-instructions.md)
 1. [Guidance for operating the adaptor as a New Market Entrant](OPERATING.md)
 1. [Guidance on integrating with the adaptors APIs](#how-to-query-the-ehr-status-api)
 1. [Documentation on how this adaptor maps GPConnect concepts to GP2GP concepts](https://github.com/NHSDigital/patient-switching-adaptors-mapping-documentation)
