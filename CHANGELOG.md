@@ -25,6 +25,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * When mapping `Immunizations` which contain a `NOPAT` `meta.security` tag, the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
 
+## [2.1.2] - 2014-10-21
+
+### Fixed
+
+* When mapping a `DiagnosticReport` which didn't contain any `Specimen` references, the adaptor would
+  previously throw an error "EhrMapperException: Observation/ref was not mapped to a statement in the EHR" when mapping
+  a filing comment and abort the GP2GP transfer.
+  The adaptor is now able to handle this situation correctly.
+
 ## [2.1.1] - 2024-10-15
 
 ### Fixed
