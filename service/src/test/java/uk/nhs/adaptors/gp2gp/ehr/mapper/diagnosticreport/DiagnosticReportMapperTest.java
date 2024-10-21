@@ -32,23 +32,25 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.mockito.stubbing.Answer;
 
-import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
-import uk.nhs.adaptors.gp2gp.utils.FileParsingUtility;
-import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
+import uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility;
+import uk.nhs.adaptors.gp2gp.utils.FileParsingUtility;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import static org.mockito.ArgumentMatchers.anyList;
 import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.NOPAT_HL7_CONFIDENTIALITY_CODE;
 import static uk.nhs.adaptors.gp2gp.utils.ConfidentialityCodeUtility.getNopatConfidentialityCodeXpathSegment;
 import static uk.nhs.adaptors.gp2gp.utils.XmlAssertion.assertThatXml;
+import static uk.nhs.adaptors.gp2gp.utils.XmlParsingUtility.getXmlStringFromFile;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -246,6 +248,44 @@ class DiagnosticReportMapperTest {
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
         assertThatXml(actualXml).containsAllXPaths(expectedXPaths);
+    }
+
+    @Test
+    void When_DiagnosticReport_With_NoReferencedSpecimenAndFilingCommentWithNoComment_Expect_MatchesSnapshotXml() {
+        final String diagnosticReportFileName = "diagnostic-report-with-no-specimen.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
+        final InputBundle inputBundle = new InputBundle(bundle);
+        final String expectedXml = getXmlStringFromFile(TEST_FILE_DIRECTORY, "diagnostic-report-with-no-specimen.xml");
+
+        when(specimenMapper.mapSpecimenToCompoundStatement(any(), anyList(), any()))
+            .thenCallRealMethod();
+
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+
+        mapper = new DiagnosticReportMapper(
+            messageContext,
+            new SpecimenMapper(
+                messageContext,
+                new ObservationMapper(
+                    messageContext,
+                    new StructuredObservationValueMapper(),
+                    codeableConceptCdMapper,
+                    new ParticipantMapper(),
+                    new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService),
+                    confidentialityService
+                ),
+                randomIdGeneratorService,
+                confidentialityService
+            ),
+            new ParticipantMapper(),
+            randomIdGeneratorService,
+            confidentialityService
+        );
+
+        final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        assertThat(actualXml).isEqualToIgnoringWhitespace(expectedXml);
     }
 
     private Bundle getBundleResourceFromJson(String filename) {
