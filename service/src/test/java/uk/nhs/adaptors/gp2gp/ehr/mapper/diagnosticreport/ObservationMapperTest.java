@@ -159,15 +159,12 @@ class ObservationMapperTest {
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
             .thenAnswer(params -> "Mapped-From-" + ((IdType) params.getArgument(1)).getValue());
 
-        MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
-            new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
-
         observationMapper = new ObservationMapper(
             messageContext,
             new StructuredObservationValueMapper(),
             new CodeableConceptCdMapper(),
             new ParticipantMapper(),
-            multiStatementObservationHolderFactory,
+            randomIdGeneratorService,
             confidentialityService
         );
     }

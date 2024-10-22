@@ -30,6 +30,7 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
@@ -87,12 +88,11 @@ public class ObservationMapper {
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
-    private final MultiStatementObservationHolderFactory multiStatementObservationHolderFactory;
+    private final RandomIdGeneratorService randomIdGeneratorService;
     private final ConfidentialityService confidentialityService;
 
     public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen) {
-        var holder = multiStatementObservationHolderFactory.newInstance(observationAssociatedWithSpecimen);
-        return mapAndVerify(holder);
+        return mapAndVerify(createHolder(observationAssociatedWithSpecimen));
     }
 
     private String mapAndVerify(MultiStatementObservationHolder observationAssociatedWithSpecimen) {
@@ -178,7 +178,7 @@ public class ObservationMapper {
             .map(referenceElement -> messageContext.getInputBundleHolder().getResource(referenceElement))
             .flatMap(Optional::stream)
             .map(Observation.class::cast)
-            .map(multiStatementObservationHolderFactory::newInstance)
+            .map(observation -> createHolder(observation))
             .collect(Collectors.toList());
     }
 
@@ -547,5 +547,9 @@ public class ObservationMapper {
 
     private boolean hasValidComment(Observation observation) {
         return observation.hasComment() && hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE));
+    }
+
+    private MultiStatementObservationHolder createHolder(Observation observationAssociatedWithSpecimen) {
+        return new MultiStatementObservationHolder(observationAssociatedWithSpecimen, messageContext, randomIdGeneratorService);
     }
 }
