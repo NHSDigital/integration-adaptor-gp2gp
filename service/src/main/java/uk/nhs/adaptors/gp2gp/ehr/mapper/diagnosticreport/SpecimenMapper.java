@@ -142,7 +142,6 @@ public class SpecimenMapper {
         if (dummySpecimenOrObservationExists(specimen, observations)) {
             observationsAssociatedWithSpecimen = observations;
         } else {
-            // Implicitly filtering out filing comments.
             observationsAssociatedWithSpecimen = observations.stream()
                 .filter(Observation::hasSpecimen)
                 .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))

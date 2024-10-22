@@ -258,8 +258,11 @@ class DiagnosticReportMapperTest {
         final InputBundle inputBundle = new InputBundle(bundle);
         final String expectedXml = getXmlStringFromFile(TEST_FILE_DIRECTORY, "diagnostic-report-with-no-specimen.xml");
 
-        when(specimenMapper.mapSpecimenToCompoundStatement(any(), anyList(), any()))
-            .thenCallRealMethod();
+        when(specimenMapper.mapSpecimenToCompoundStatement(
+            any(Specimen.class),
+            anyList(),
+            any(DiagnosticReport.class)
+        )).thenCallRealMethod();
 
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
