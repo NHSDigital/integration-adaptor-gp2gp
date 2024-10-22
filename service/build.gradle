@@ -73,7 +73,7 @@ dependencies {
 	testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
 
 	pitest 'com.arcmutate:base:1.3.1'
-	pitest 'com.arcmutate:pitest-git-plugin:1.3.2'
+	pitest 'com.arcmutate:pitest-git-plugin:1.3.3'
 }
 
 test {
