@@ -1,0 +1,52 @@
+<component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="BATTERY" moodCode="EVN">
+        <id root="Mapped-From-Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2"/>
+        <code code="2564081000000118" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urine pregnancy test">
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100223"/>
+        </effectiveTime>
+        <availabilityTime value="20100223"/>
+        <component typeCode="COMP" contextConductionInd="true">
+            <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+                <id root="random-unmapped-id"/>
+                <code code="2551971000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum oestradiol level">
+                </code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20201215151704"/>
+                </effectiveTime>
+                <availabilityTime value="20201215151704"/>
+                <component typeCode="COMP" contextConductionInd="true">
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="Mapped-From-Observation/TestResult-WithRelatedMember-WhichIsntAFilingComment"/>
+                        <code code="2551971000000110" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum oestradiol level">
+                        </code>
+                        <statusCode code="COMPLETE"/>
+                        <effectiveTime>
+                            <center value="20201215151704"/>
+                        </effectiveTime>
+                        <availabilityTime value="20201215151704"/>
+                        <value xsi:type="PQ" value="8.800" unit="1">
+                            <translation value="8.800">
+                                <originalText>mmol/L</originalText>
+                            </translation>
+                        </value>
+                    </ObservationStatement>
+                </component>
+                <component typeCode="COMP" contextConductionInd="true">
+                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                        <id root="random-unmapped-id"/>
+                        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+                            CommentDate:20201215151704
+
+                            Notes provided alongside test result</text>
+                        <statusCode code="COMPLETE"/>
+                        <availabilityTime value="20201215151704"/>
+                    </NarrativeStatement>
+                </component>
+            </CompoundStatement>
+        </component>
+    </CompoundStatement>
+</component>
