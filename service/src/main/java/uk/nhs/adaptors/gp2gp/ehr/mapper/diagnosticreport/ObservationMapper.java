@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.hasCode;
 
 import java.util.List;
 import java.util.Objects;
@@ -73,8 +72,6 @@ public class ObservationMapper {
 
     private static final String RANGE_LOW_PREFIX = "Low: ";
     private static final String RANGE_HIGH_PREFIX = "High: ";
-
-    private static final String COMMENT_NOTE_CODE = "37331000000100";
 
     private static final String HL7_UNKNOWN_VALUE = "UNK";
     private static final String HAS_MEMBER_TYPE = "HASMEMBER";
@@ -364,7 +361,7 @@ public class ObservationMapper {
     }
 
     private CommentType prepareCommentType(Observation observation) {
-        return hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE))
+        return DiagnosticReportMapper.isFilingComment(observation)
             ? CommentType.USER_COMMENT : CommentType.AGGREGATE_COMMENT_SET;
     }
 
@@ -483,7 +480,7 @@ public class ObservationMapper {
     }
 
     private boolean observationHasNonCommentNoteCode(Observation observation) {
-        return observation.hasCode() && !hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE));
+        return observation.hasCode() && !DiagnosticReportMapper.isFilingComment(observation);
     }
 
     private String prepareCodeElement(Observation observation) {
@@ -546,7 +543,7 @@ public class ObservationMapper {
     }
 
     private boolean hasValidComment(Observation observation) {
-        return observation.hasComment() && hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE));
+        return observation.hasComment() && DiagnosticReportMapper.isFilingComment(observation);
     }
 
     private MultiStatementObservationHolder createHolder(Observation observationAssociatedWithSpecimen) {
