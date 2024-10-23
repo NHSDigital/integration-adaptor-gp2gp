@@ -138,7 +138,7 @@ public final class StatementTimeMappingUtils {
             return String.format(EFFECTIVE_TIME_LOW_TEMPLATE, toHl7Format(startElement));
         }
         throw new EhrMapperException("""
-            Could not map EffectiveTime when mapping MedicationRequest resource with id: {%s} \n
+            Could not map EffectiveTime when mapping MedicationRequest resource with id: {%s} %n\
             Resource must contain a dispense request with a validityPeriod which has a start element."""
             .formatted(medicationRequest.getId())
         );
@@ -151,7 +151,7 @@ public final class StatementTimeMappingUtils {
                 medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
         }
         throw new EhrMapperException("""
-            Could not map AvailabilityTime when mapping MedicationRequest resource with id: {%s} \n
+            Could not map AvailabilityTime when mapping MedicationRequest resource with id: {%s} %n\
             Resource must contain a dispense request with a validityPeriod which has a start element."""
             .formatted(medicationRequest.getId())
         );
