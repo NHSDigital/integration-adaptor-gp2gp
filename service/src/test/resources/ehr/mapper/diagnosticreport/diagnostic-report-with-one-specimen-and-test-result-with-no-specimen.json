@@ -1,0 +1,41 @@
+{
+  "resource": {
+    "resourceType": "DiagnosticReport",
+    "id": "486785FA-C3A5-4AB2-B317-FF9C24A3FDBC",
+    "meta": {
+      "profile": [
+        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+      ]
+    },
+    "identifier": [
+      {
+        "system": "https://wiremock/",
+        "value": "486785FA-C3A5-4AB2-B317-FF9C24A3FDBC"
+      }
+    ],
+    "status": "unknown",
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "721981007",
+          "display": "Diagnostic studies report"
+        }
+      ]
+    },
+    "subject": {
+      "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+    },
+    "issued": "2001-02-03T09:00:00+00:00",
+    "specimen": [
+      {
+        "reference": "Specimen/NON-SIGNIFICANT-SPECIMEN"
+      }
+    ],
+    "result": [
+      {
+        "reference": "Observation/TEST-RESULT-NO-SPECIMEN"
+      }
+    ]
+  }
+}
