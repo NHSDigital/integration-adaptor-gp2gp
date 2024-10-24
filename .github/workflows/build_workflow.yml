@@ -94,7 +94,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of Sonar reporting
+          fetch-depth: 0
       - name: Setup Java 21 LTS
         uses: actions/setup-java@v4
         with:
@@ -105,8 +107,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Execute Unit Tests
-        run: ./gradlew test --parallel --build-cache
+        run: ./gradlew test jacocoTestReport sonar --parallel --build-cache
         working-directory: ./service
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Collect Artifacts
         if: always()
