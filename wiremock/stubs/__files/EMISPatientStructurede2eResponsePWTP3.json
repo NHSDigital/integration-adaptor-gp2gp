@@ -1151,12 +1151,6 @@
                         "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatusReason-1",
                         "extension": [
                             {
-                                "url": "statusReason",
-                                "valueCodeableConcept": {
-                                    "text": "Expired"
-                                }
-                            },
-                            {
                                 "url": "statusChangeDate",
                                 "valueDateTime": "2019-05-10T02:00:09.943+01:00"
                             }
