@@ -275,7 +275,7 @@ class DiagnosticReportMapperTest {
                     new StructuredObservationValueMapper(),
                     codeableConceptCdMapper,
                     new ParticipantMapper(),
-                    new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService),
+                    randomIdGeneratorService,
                     confidentialityService
                 ),
                 randomIdGeneratorService,

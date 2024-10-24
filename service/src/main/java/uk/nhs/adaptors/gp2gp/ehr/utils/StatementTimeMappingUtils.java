@@ -137,7 +137,9 @@ public final class StatementTimeMappingUtils {
             }
             return String.format(EFFECTIVE_TIME_LOW_TEMPLATE, toHl7Format(startElement));
         }
-        throw new EhrMapperException("Could not map Effective Time for Medication Request");
+        throw new EhrMapperException(
+            "MedicationRequest/{%s} must contain a dispenseRequest.validityPeriod.start".formatted(medicationRequest.getId())
+        );
     }
 
     public static String prepareAvailabilityTimeForMedicationRequest(MedicationRequest medicationRequest) {
@@ -146,7 +148,9 @@ public final class StatementTimeMappingUtils {
             return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, toHl7Format(
                 medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
         }
-        throw new EhrMapperException("Could not map Availability Time for Medication Request");
+        throw new EhrMapperException(
+            "MedicationRequest/{%s} must contain a dispenseRequest.validityPeriod.start".formatted(medicationRequest.getId())
+        );
     }
 
     public static String prepareEffectiveTimeForEhrFolder(EhrFolderEffectiveTime effectiveTime) {
