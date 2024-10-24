@@ -60,8 +60,8 @@
                     </priorMedicationRef>
                 </reversalOf>
                 <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
-                        {{#ehrSupplyDiscontinueReasonText}}<text>{{{ehrSupplyDiscontinueReasonText}}}</text>{{/ehrSupplyDiscontinueReasonText}}{{^ehrSupplyDiscontinueReasonText}}<code nullFlavor="UNK"><text>Stopped</text></code>{{/ehrSupplyDiscontinueReasonText}}
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN"{{^ehrSupplyDiscontinueReasonText}} nullFlavor="UNK"{{/ehrSupplyDiscontinueReasonText}}>
+                        {{#ehrSupplyDiscontinueReasonText}}<text>{{{ehrSupplyDiscontinueReasonText}}}</text>{{/ehrSupplyDiscontinueReasonText}}{{^ehrSupplyDiscontinueReasonText}}<text>Stopped</text>{{/ehrSupplyDiscontinueReasonText}}
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
             </ehrSupplyDiscontinue>
