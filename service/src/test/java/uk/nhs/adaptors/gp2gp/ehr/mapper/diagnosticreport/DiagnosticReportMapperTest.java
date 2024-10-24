@@ -291,6 +291,11 @@ class DiagnosticReportMapperTest {
         assertThat(actualXml).isEqualToIgnoringWhitespace(expectedXml);
     }
 
+    @Test
+    void When_DiagnosticReport_With_SpecimenAndTestResultWithNoSpecimen_Expect_TestResultDataToBePresentWithinObservationStatement() {
+
+    }
+
     private Bundle getBundleResourceFromJson(String filename) {
         final String filePath = TEST_FILE_DIRECTORY + filename;
         return FileParsingUtility.parseResourceFromJsonFile(filePath, Bundle.class);
