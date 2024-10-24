@@ -1,0 +1,23 @@
+{
+    "resourceType" : "Observation",
+    "code": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "2164006",
+                "display": "Injection of aorta",
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "4741017"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
