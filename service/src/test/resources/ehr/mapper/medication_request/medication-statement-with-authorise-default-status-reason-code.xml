@@ -39,7 +39,7 @@
         <component typeCode="COMP">
             <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
                 <id root="394559384658936"/>
-                <code nullFlavor="UNK"><originalText>Stopped</originalText></code>
+                <code><originalText>Stopped</originalText></code>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100118143316"/>
                 <reversalOf typeCode="REV">
@@ -48,7 +48,7 @@
                     </priorMedicationRef>
                 </reversalOf>
                 <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN" nullFlavor="UNK">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
                         <text>Stopped</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>

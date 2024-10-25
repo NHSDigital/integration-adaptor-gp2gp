@@ -51,7 +51,7 @@
         <component typeCode="COMP">
             <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
                 <id root="{{ehrSupplyDiscontinueId}}"/>
-                {{#ehrSupplyDiscontinueCode}}{{{ehrSupplyDiscontinueCode}}}{{/ehrSupplyDiscontinueCode}}{{^ehrSupplyDiscontinueCode}}<code nullFlavor="UNK"><originalText>Stopped</originalText></code>{{/ehrSupplyDiscontinueCode}}
+                {{#ehrSupplyDiscontinueCode}}{{{ehrSupplyDiscontinueCode}}}{{/ehrSupplyDiscontinueCode}}{{^ehrSupplyDiscontinueCode}}<code><originalText>Stopped</originalText></code>{{/ehrSupplyDiscontinueCode}}
                 <statusCode code="COMPLETE"/>
                 {{{ehrSupplyDiscontinueAvailabilityTime}}}
                 <reversalOf typeCode="REV">
@@ -60,7 +60,7 @@
                     </priorMedicationRef>
                 </reversalOf>
                 <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN"{{^ehrSupplyDiscontinueReasonText}} nullFlavor="UNK"{{/ehrSupplyDiscontinueReasonText}}>
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
                         {{#ehrSupplyDiscontinueReasonText}}<text>{{{ehrSupplyDiscontinueReasonText}}}</text>{{/ehrSupplyDiscontinueReasonText}}{{^ehrSupplyDiscontinueReasonText}}<text>Stopped</text>{{/ehrSupplyDiscontinueReasonText}}
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
