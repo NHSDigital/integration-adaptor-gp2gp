@@ -291,9 +291,29 @@ class DiagnosticReportMapperTest {
         assertThat(actualXml).isEqualToIgnoringWhitespace(expectedXml);
     }
 
+    /**
+     * TODO
+     *
+     * It makes no sense whatsoever to place any logic within the SpecimenMapper - what we care
+     * about here is a DiagnosticReport with a Test Result (Observation). If the Observation has
+     * a related specimen - then this should be picked up by the SpecimenMapper.
+     *
+     * If there is an Observation (Test Result) WITHOUT a Specimen, then this I think should be handled
+     * within the ObservationMapper.
+     */
+
     @Test
     void When_DiagnosticReport_With_SpecimenAndTestResultWithNoSpecimen_Expect_TestResultDataToBePresentWithinObservationStatement() {
+        final String diagnosticReportFileName = "diagnostic-report-with-one-specimen-and-test-result-with-no-specimen.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
+        final InputBundle inputBundle = new InputBundle(bundle);
 
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+
+        final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        assertThat(actualXml).contains("ObservationStatement");
     }
 
     private Bundle getBundleResourceFromJson(String filename) {
