@@ -453,7 +453,6 @@
         },
         {
             "resource": {
-                "resourceType": "Organization",
                 "id": "1",
                 "meta": {
                     "versionId": "1469444400000",
