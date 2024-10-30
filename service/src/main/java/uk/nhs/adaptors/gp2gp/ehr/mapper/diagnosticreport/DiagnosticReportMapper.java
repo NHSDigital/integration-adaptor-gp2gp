@@ -33,11 +33,7 @@ import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.*;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.DiagnosticReportCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
@@ -114,6 +110,9 @@ public class DiagnosticReportMapper {
     }
 
     private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport) {
+
+        //if there are any orphan diagnostic reports, add a dummy specimen to each of them
+
         if (!diagnosticReport.hasSpecimen()) {
             return Collections.singletonList(generateDefaultSpecimen(diagnosticReport));
         }
@@ -143,7 +142,7 @@ public class DiagnosticReportMapper {
             return Collections.singletonList(generateDefaultObservation(diagnosticReport));
         }
 
-        var inputBundleHolder = messageContext.getInputBundleHolder();
+        InputBundle inputBundleHolder = messageContext.getInputBundleHolder();
         return diagnosticReport.getResult().stream()
             .map(Reference::getReferenceElement)
             .map(inputBundleHolder::getResource)
