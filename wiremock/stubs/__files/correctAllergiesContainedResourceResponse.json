@@ -774,7 +774,7 @@
           },
           "quantity": {
             "value": 96,
-            "unit": "capsule"
+            "unit": "<None>"
           },
           "expectedSupplyDuration": {
             "value": 28,
