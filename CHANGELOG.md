@@ -25,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * When mapping `Immunizations` which contain a `NOPAT` `meta.security` tag, the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
 
+### Fixed
+* Removed the 20 MB data processing limit to enable the GP2GP Adaptor to handle larger documents.
+
 ## [2.1.3] - 2014-10-25
 
 ### Fixed
