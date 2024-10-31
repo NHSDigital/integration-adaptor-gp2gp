@@ -1,14 +1,10 @@
 {
-    "priority": 1,
+    "priority": 2,
+    "scenarioName": "migrateStructuredRecord",
+    "requiredScenarioState": "Incorrect Allergy",
     "request": {
         "method": "POST",
-        "urlPattern": "/.*/STU3/1/gpconnect/fhir/Patient/[$]gpc[.]migratestructuredrecord",
-        "bodyPatterns" : [ {
-            "matchesJsonPath" : "$.parameter[?(@.name == 'patientNHSNumber')]"
-        },
-            {
-                "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9728951256')]"
-            }]
+        "urlPattern": "/.*/STU3/1/gpconnect/fhir/Patient/[$]gpc[.]migratestructuredrecord"
     },
     "response": {
         "status": 200,
