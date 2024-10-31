@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 
@@ -34,6 +35,9 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @DirtiesContext
 public class SendDocumentComponentTest {
     private static final String DOCUMENT_NAME = "some-conversation-id/document-name.json";
+    public static final String OUTBOUND_MESSAGE_JSON = "src/intTest/resources/outboundMessage.json";
+    public static final String OUTBOUND_MESSAGE_WITH_OVER_20MB_PAYLOAD_JSON
+                                        = "src/intTest/resources/outboundMessageWithOver20MbPayload.json";
 
     @MockBean
     private MhsClient mhsClient;
@@ -48,8 +52,20 @@ public class SendDocumentComponentTest {
     private LocalMockConnector localMockConnector;
 
     @Test
+    public void When_SendDocumentTaskRunsWithOver20MbPayloadMessage_Expect_NoException() throws IOException {
+        var inputStream = readMessageAsInputStream(OUTBOUND_MESSAGE_WITH_OVER_20MB_PAYLOAD_JSON);
+        localMockConnector.uploadToStorage(inputStream, inputStream.available(), DOCUMENT_NAME);
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        var sendDocumentTaskDefinition = prepareTaskDefinition(ehrExtractStatus);
+
+        assertDoesNotThrow(() -> sendDocumentTaskExecutor.execute(sendDocumentTaskDefinition));
+    }
+
+    @Test
     public void When_SendDocumentTaskRunsTwice_Expect_DatabaseOverwritesEhrExtractStatus() throws IOException {
-        var inputStream = readMessageAsInputStream();
+        var inputStream = readMessageAsInputStream(OUTBOUND_MESSAGE_JSON);
         localMockConnector.uploadToStorage(inputStream, inputStream.available(), DOCUMENT_NAME);
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
@@ -67,7 +83,7 @@ public class SendDocumentComponentTest {
 
     @Test
     public void When_SendDocumentTask_WithMhsConnectionException_Expect_ExceptionThrownAndDatabaseNotUpdated() throws IOException {
-        var inputStream = readMessageAsInputStream();
+        var inputStream = readMessageAsInputStream(OUTBOUND_MESSAGE_JSON);
         localMockConnector.uploadToStorage(inputStream, inputStream.available(), DOCUMENT_NAME);
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
@@ -87,7 +103,7 @@ public class SendDocumentComponentTest {
 
     @Test
     public void When_SendDocumentTask_WithMhsServerFailureException_Expect_ExceptionThrownAndDataBaseNotUpdated() throws IOException {
-        var inputStream = readMessageAsInputStream();
+        var inputStream = readMessageAsInputStream(OUTBOUND_MESSAGE_JSON);
         localMockConnector.uploadToStorage(inputStream, inputStream.available(), DOCUMENT_NAME);
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
@@ -105,8 +121,8 @@ public class SendDocumentComponentTest {
         assertThat(ehrExtractStatusHasSentDocuments(ehrExtractUpdated)).isFalse();
     }
 
-    private InputStream readMessageAsInputStream() throws IOException {
-        File file = new File("src/intTest/resources/outboundMessage.json");
+    private InputStream readMessageAsInputStream(String pathname) throws IOException {
+        File file = new File(pathname);
         return new FileInputStream(file);
     }
 

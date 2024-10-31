@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ObjectMapperConfigTest {
 
     @Test
-    void objectMapperConfigTest() {
+    void objectMapperConfigSetToWorkWithUnlimitedDataSizeTest() {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ObjectMapperConfig.class);
 
@@ -19,7 +19,7 @@ class ObjectMapperConfigTest {
         StreamReadConstraints constraints = objectMapper.getFactory().streamReadConstraints();
 
         assertEquals(Integer.MAX_VALUE, constraints.getMaxStringLength(),
-                     "Expected maxStringLength to be set to Integer.MAX_VALUE");
+                     "Expected objectMapper read constraint to be practically unlimited");
 
         context.close();
     }
