@@ -1454,6 +1454,58 @@
           }
         ]
       }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "Consultation1-Topic1-Category-Social-Observation-2",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://provider.nhs.uk/data-identifier",
+            "value": "f85ad281-0d1a-44e1-995f-5fd91806adb9"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "extension": [
+                {
+                  "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                  "extension": [
+                    {
+                      "url": "DescriptionID",
+                      "valueId": "2713011000000113"
+                    }
+                  ]
+                }
+              ],
+              "system": "http://snomed.info/sct",
+              "code": "1082641000000106",
+              "display": "Alcohol units consumed per week"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/d3fc5610-31e8-11ee-9f30-0a58a9feac02"
+        },
+        "effectiveDateTime": "2019-03-28T10:30:00+00:00",
+        "issued": "2019-03-28T10:30:00+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/31a0239e-59fb-11ed-946f-0a58a9feac02"
+          }
+        ],
+        "valueQuantity": {
+          "value": 0,
+          "unit": "<value>This is invalid</value>"
+        }
+      }
     }
   ]
 }
