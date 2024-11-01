@@ -8,6 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ObjectMapperConfigTest {
 
@@ -24,6 +25,15 @@ class ObjectMapperConfigTest {
                      "Expected objectMapper read constraint to be practically unlimited");
 
         context.close();
+    }
+
+    @Test
+    public void javaTimeModuleIsRegisteredTest() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ObjectMapperConfig.class);
+        ObjectMapper objectMapper = context.getBean(ObjectMapper.class);
+
+        boolean javaTimeModuleRegistered = objectMapper.getRegisteredModuleIds().contains("jackson-datatype-jsr310");
+        assertTrue(javaTimeModuleRegistered);
     }
 
     @Test
