@@ -39,9 +39,7 @@
     "reference": "Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0"
   }],
   "result": [
-    {
-      "reference": "Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2",
-      "reference": "Observation/AD373CA7-3940-4249-85A2-D3A22E9F17C7"
-    }
+    { "reference": "Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2" },
+    { "reference": "Observation/AD373CA7-3940-4249-85A2-D3A22E9F17C7" }
   ]
 }
