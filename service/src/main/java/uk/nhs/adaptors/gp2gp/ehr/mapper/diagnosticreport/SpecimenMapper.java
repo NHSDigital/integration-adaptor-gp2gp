@@ -137,18 +137,8 @@ public class SpecimenMapper {
     }
 
     private String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
-        List<Observation> observationsAssociatedWithSpecimen;
 
-        if (dummySpecimenOrObservationExists(specimen, observations)) {
-            observationsAssociatedWithSpecimen = observations;
-        } else {
-            observationsAssociatedWithSpecimen = observations.stream()
-                .filter(Observation::hasSpecimen)
-                .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
-                .collect(Collectors.toList());
-        }
-
-        return observationsAssociatedWithSpecimen.stream()
+        return observations.stream()
             .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
             .map(observationMapper::mapObservationToCompoundStatement)
             .collect(Collectors.joining());

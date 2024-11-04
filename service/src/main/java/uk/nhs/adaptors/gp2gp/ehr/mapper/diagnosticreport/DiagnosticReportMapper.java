@@ -111,19 +111,37 @@ public class DiagnosticReportMapper {
 
     private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport) {
 
-        //if there are any orphan diagnostic reports, add a dummy specimen to each of them
+        //if there are any orphan observations, add a dummy specimen to each of them
 
         if (!diagnosticReport.hasSpecimen()) {
             return Collections.singletonList(generateDefaultSpecimen(diagnosticReport));
         }
 
-        var inputBundleHolder = messageContext.getInputBundleHolder();
+        fixOrphanedTestResults(diagnosticReport);
+
+        InputBundle inputBundleHolder = messageContext.getInputBundleHolder();
         return diagnosticReport.getSpecimen()
             .stream()
             .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
             .flatMap(Optional::stream)
             .map(Specimen.class::cast)
             .collect(Collectors.toList());
+    }
+
+    private void fixOrphanedTestResults(DiagnosticReport diagnosticReport) {
+
+
+        if (diagnosticReport.hasResult()){
+            List<Reference> results = diagnosticReport.getResult();
+            List<Reference> specimens = diagnosticReport.getSpecimen();
+            for (Reference specimen : specimens){
+
+            }
+            for (Reference result : results) {
+                //
+                    //check each test result one by one, and if it doesn't have a dummy assigned to it, assign it.
+            }
+        }
     }
 
     private Specimen generateDefaultSpecimen(DiagnosticReport diagnosticReport) {

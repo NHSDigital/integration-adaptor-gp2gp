@@ -308,6 +308,19 @@ class DiagnosticReportMapperTest {
         assertThat(actualXml).contains("Mapped Specimen with id: DUMMY-SPECIMEN-");
     }
 
+    @Test
+    void When_DiagnosticReport_Has_SpecimenAndUnlinkedTestResult_ExpectScenario2() {
+        final String diagnosticReportFileName = "diagnostic-report-with-one-specimen-one-linked-observation-and-one-unlinked-observation.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
+        final InputBundle inputBundle = new InputBundle(bundle);
+
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+
+        final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+        assertThat(actualXml).contains("Mapped Specimen with id: DUMMY-SPECIMEN-");
+    }
+
     private Bundle getBundleResourceFromJson(String filename) {
         final String filePath = TEST_FILE_DIRECTORY + filename;
         return FileParsingUtility.parseResourceFromJsonFile(filePath, Bundle.class);
@@ -359,7 +372,18 @@ class DiagnosticReportMapperTest {
     private Answer<String> mockSpecimenMapping() {
         return invocation -> {
             Specimen specimen = invocation.getArgument(0);
-            return String.format("<!-- Mapped Specimen with id: %s -->", specimen.getId());
+            List<Observation> observations = invocation.getArgument(1);
+
+            String linkedObservations = "";
+
+            for (Observation observation : observations) {
+                if(observation.getSpecimen().getReference() != null && observation.getSpecimen().getReference().equals(specimen.getId())){
+                    linkedObservations = linkedObservations + observation.getId() + ", ";
+                }
+            }
+
+
+            return String.format("<!-- Mapped Specimen with id: %s with linked Observations: %s-->", specimen.getId(), linkedObservations);
         };
     }
 }
