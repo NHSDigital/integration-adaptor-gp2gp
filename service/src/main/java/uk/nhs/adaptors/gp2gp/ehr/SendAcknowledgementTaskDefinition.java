@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import static uk.nhs.adaptors.gp2gp.common.task.TaskType.SEND_ACKNOWLEDGEMENT;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -12,6 +13,7 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 /**
  * Task definition for sending acknowledgment
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Jacksonized
 @SuperBuilder
 @Getter
