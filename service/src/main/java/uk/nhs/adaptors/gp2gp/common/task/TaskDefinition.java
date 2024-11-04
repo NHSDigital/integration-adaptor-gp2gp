@@ -43,7 +43,5 @@ public abstract class TaskDefinition {
      */
     private final String toOdsCode;
 
-    private final TaskType taskType;
-
     public abstract TaskType getTaskType();
 }

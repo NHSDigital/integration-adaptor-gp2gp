@@ -3,12 +3,11 @@ package uk.nhs.adaptors.gp2gp.common.configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.StreamReadConstraints;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ObjectMapperConfigTest {
@@ -38,14 +37,14 @@ class ObjectMapperConfigTest {
     }
 
     @Test
-    void objectMapperConfigDoesNotIgnoreUnknownPropertiesTest() {
+    void objectMapperConfigIgnoresUnknownPropertiesTest() {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ObjectMapperConfig.class);
         ObjectMapper objectMapper = context.getBean(ObjectMapper.class);
 
         String jsonWithUnknownProperty = "{\"knownProperty\":\"testValue\", \"unknownProperty\":\"extraValue\"}";
 
-        assertThrows(UnrecognizedPropertyException.class, () -> {
+        assertDoesNotThrow(() -> {
             TestClass result = objectMapper.readValue(jsonWithUnknownProperty, TestClass.class);
             assertEquals("testValue", result.knownProperty);
         });
