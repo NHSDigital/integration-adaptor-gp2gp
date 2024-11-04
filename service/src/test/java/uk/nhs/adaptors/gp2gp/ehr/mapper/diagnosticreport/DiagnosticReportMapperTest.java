@@ -115,6 +115,8 @@ class DiagnosticReportMapperTest {
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockIdForResourceAndId());
         when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockIdForReference());
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(specimenMapper.mapSpecimenToCompoundStatement(any(Specimen.class), anyList(), any(DiagnosticReport.class)))
+                .thenAnswer(mockSpecimenMapping());
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
@@ -290,19 +292,12 @@ class DiagnosticReportMapperTest {
     }
 
     /**
-     * TODO
-     *
-     * It makes no sense whatsoever to place any logic within the SpecimenMapper - what we care
-     * about here is a DiagnosticReport with a Test Result (Observation). If the Observation has
-     * a related specimen - then this should be picked up by the SpecimenMapper.
-     *
-     * If there is an Observation (Test Result) WITHOUT a Specimen, then this I think should be handled
-     * within the ObservationMapper.
+     * A Diagnosis Report may have an Observation (Test Result) and Specimen. If the result and specimen are not
+     * linked then we need to create a dummy specimen linked to the result.
      */
-
     @Test
-    void When_DiagnosticReport_With_SpecimenAndTestResultWithNoSpecimen_Expect_TestResultDataToBePresentWithinObservationStatement() {
-        final String diagnosticReportFileName = "diagnostic-report-with-one-specimen-and-test-result-with-no-specimen.json";
+    void When_DiagnosticReport_Has_SpecimenAndUnlinkedTestResult_ExpectADummySpecimenLinkedToTestResult() {
+        final String diagnosticReportFileName = "diagnostic-report-with-one-specimen-and-one-unrelated-observation.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
         final InputBundle inputBundle = new InputBundle(bundle);
@@ -310,8 +305,7 @@ class DiagnosticReportMapperTest {
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
-
-        assertThat(actualXml).contains("ObservationStatement");
+        assertThat(actualXml).contains("Mapped Specimen with id: DUMMY-SPECIMEN-");
     }
 
     private Bundle getBundleResourceFromJson(String filename) {
