@@ -112,7 +112,7 @@ public class DiagnosticReportMapper {
     }
 
     private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport, List<Observation> observations) {
-        
+
         List<Specimen> specimens = new ArrayList<>();
 
         if (hasOrphanedTestResults(observations)) {
@@ -141,6 +141,10 @@ public class DiagnosticReportMapper {
     }
 
     private List<Observation> assignDummySpecimensToOrphanedTestResults(List<Observation> observations, List<Specimen> specimens, DiagnosticReport diagnosticReport) {
+
+        if (!hasOrphanedTestResults(observations)) {
+            return observations;
+        }
 
         // The assumption was made that all test results without a specimen will have the same specimen referenced
         Specimen dummySpecimen = specimens.stream()
