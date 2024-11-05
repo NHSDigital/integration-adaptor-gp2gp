@@ -69,20 +69,18 @@ public class DiagnosticReportMapper {
     private final ConfidentialityService confidentialityService;
 
     public String mapDiagnosticReportToCompoundStatement(DiagnosticReport diagnosticReport) {
-        List<Observation> observations = fetchObservations(diagnosticReport);
-        List<Specimen> specimens = fetchSpecimens(diagnosticReport, observations);
+        List<Observation> initialObservations = fetchObservations(diagnosticReport);
+        List<Specimen> specimens = fetchSpecimens(diagnosticReport, initialObservations);
         final IdMapper idMapper = messageContext.getIdMapper();
-        markObservationsAsProcessed(idMapper, observations);
+        markObservationsAsProcessed(idMapper, initialObservations);
 
-        observations = fixOrphanedTestResults(observations, specimens, diagnosticReport);
-
-        final List<Observation> finalObservations = observations;
+        final List<Observation> processedObservations = assignDummySpecimensToOrphanedTestResults(initialObservations, specimens, diagnosticReport);
 
         String mappedSpecimens = specimens.stream()
-            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, finalObservations, diagnosticReport))
+            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, processedObservations, diagnosticReport))
             .collect(Collectors.joining());
 
-        String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, observations);
+        String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, processedObservations);
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getIdElement()))
@@ -114,9 +112,7 @@ public class DiagnosticReportMapper {
     }
 
     private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport, List<Observation> observations) {
-
-        // If there are any orphan observations, add a dummy specimen to each of them
-
+        
         List<Specimen> specimens = new ArrayList<>();
 
         if (hasOrphanedTestResults(observations)) {
@@ -129,7 +125,7 @@ public class DiagnosticReportMapper {
                 .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
                 .flatMap(Optional::stream)
                 .map(Specimen.class::cast)
-                .collect(Collectors.toList());
+                .toList();
 
         specimens.addAll(preExistingSpecimens);
 
@@ -138,32 +134,23 @@ public class DiagnosticReportMapper {
     }
 
     private boolean hasOrphanedTestResults(List<Observation> observations) {
-        for (Observation observation : observations) {
-            if (!observation.hasSpecimen()){
-                return true;
-            }
-        }
 
-        return false;
+        return observations
+                .stream()
+                .anyMatch(observation -> !observation.hasSpecimen());
     }
 
-    private List<Observation> fixOrphanedTestResults(List<Observation> observations, List<Specimen> specimens, DiagnosticReport diagnosticReport) {
+    private List<Observation> assignDummySpecimensToOrphanedTestResults(List<Observation> observations, List<Specimen> specimens, DiagnosticReport diagnosticReport) {
 
-        Specimen dummySpecimen = new Specimen();
+        // The assumption was made that all test results without a specimen will have the same specimen referenced
+        Specimen dummySpecimen = specimens.stream()
+                .filter(specimen -> specimen.getId().contains(DUMMY_SPECIMEN_ID_PREFIX))
+                .toList().getFirst();
 
-        for (Specimen specimen : specimens) {
-            if (specimen.getId().contains(DUMMY_SPECIMEN_ID_PREFIX)){
-                dummySpecimen = specimen;
-                break;
-            }
-        }
+        Reference dummySpecimenReference = new Reference(dummySpecimen.getId());
 
         for (Observation observation : observations) {
             if (!observation.hasSpecimen()){
-                Reference dummySpecimenReference = new Reference();
-                dummySpecimenReference.setReference(dummySpecimen.getId());
-                dummySpecimenReference.setResource(dummySpecimen);
-
                 observation.setSpecimen(dummySpecimenReference);
             }
         }
