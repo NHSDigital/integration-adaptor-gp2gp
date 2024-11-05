@@ -41,7 +41,6 @@ dependencies {
 
 	// Use version specified in spring-boot-starter-web
 	implementation 'com.fasterxml.jackson.core:jackson-databind'
-	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.2'
 
 	// WebClient
 	implementation ('org.springframework.boot:spring-boot-starter-webflux')
