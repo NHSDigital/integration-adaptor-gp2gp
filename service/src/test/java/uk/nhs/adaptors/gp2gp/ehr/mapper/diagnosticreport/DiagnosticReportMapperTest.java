@@ -318,7 +318,9 @@ class DiagnosticReportMapperTest {
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
-        assertThat(actualXml).contains("Mapped Specimen with id: DUMMY-SPECIMEN-");
+
+        assertThat(actualXml).matches("(?s).*<!-- Mapped Specimen with id: DUMMY-SPECIMEN-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12} with linked Observations: Observation/AD373CA7-3940-4249-85A2-D3A22E9F17C7, -->.*");
+
     }
 
     private Bundle getBundleResourceFromJson(String filename) {
