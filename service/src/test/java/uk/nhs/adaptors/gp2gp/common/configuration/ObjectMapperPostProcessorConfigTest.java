@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 
+import static com.mongodb.assertions.Assertions.assertFalse;
+import static com.mongodb.assertions.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -17,6 +20,9 @@ public class ObjectMapperPostProcessorConfigTest {
 
     @Mock
     private ObjectMapper objectMapper;
+
+    @Mock
+    private EhrExtractStatusService ehrExtractStatusService;
 
     @Mock
     private JsonFactory mockJsonFactory;
@@ -34,9 +40,22 @@ public class ObjectMapperPostProcessorConfigTest {
 
         when(objectMapper.getFactory()).thenReturn(mockJsonFactory);
 
-        objectMapperPostProcessorConfig.postProcessAfterInitialization(objectMapper, "objectMapper");
+        var objectMapperWithoutDataLimit = objectMapperPostProcessorConfig.postProcessAfterInitialization(objectMapper, "objectMapper");
 
+        assertTrue(objectMapperWithoutDataLimit instanceof ObjectMapper);
         verify(mockJsonFactory, times(1))
             .setStreamReadConstraints(argThat(constraints -> constraints.getMaxStringLength() == Integer.MAX_VALUE));
     }
+
+    @Test
+    public void limitInObjectMapperPostProcessSetOnlyForObjectMapperTest() {
+
+        var objectMapperWithoutDataLimit
+            = objectMapperPostProcessorConfig.postProcessAfterInitialization(ehrExtractStatusService, "service");
+
+        assertFalse(objectMapperWithoutDataLimit instanceof ObjectMapper);
+        verify(mockJsonFactory, times(0))
+            .setStreamReadConstraints(argThat(constraints -> constraints.getMaxStringLength() == Integer.MAX_VALUE));
+    }
+
 }
