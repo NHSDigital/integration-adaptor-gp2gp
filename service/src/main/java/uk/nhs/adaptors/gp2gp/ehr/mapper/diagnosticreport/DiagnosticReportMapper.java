@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType.LABORATORY_RESULT_COMMENT;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -69,13 +70,17 @@ public class DiagnosticReportMapper {
     private final ConfidentialityService confidentialityService;
 
     public String mapDiagnosticReportToCompoundStatement(DiagnosticReport diagnosticReport) {
-        List<Specimen> specimens = fetchSpecimens(diagnosticReport);
         List<Observation> observations = fetchObservations(diagnosticReport);
+        List<Specimen> specimens = fetchSpecimens(diagnosticReport, observations);
         final IdMapper idMapper = messageContext.getIdMapper();
         markObservationsAsProcessed(idMapper, observations);
 
+        observations = fixOrphanedTestResults(observations, specimens, diagnosticReport);
+
+        final List<Observation> finalObservations = observations;
+
         String mappedSpecimens = specimens.stream()
-            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport))
+            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, finalObservations, diagnosticReport))
             .collect(Collectors.joining());
 
         String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, observations);
@@ -109,39 +114,62 @@ public class DiagnosticReportMapper {
             .orElse(StringUtils.EMPTY);
     }
 
-    private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport) {
+    private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport, List<Observation> observations) {
 
-        //if there are any orphan observations, add a dummy specimen to each of them
+        // If there are any orphan observations, add a dummy specimen to each of them
 
-        if (!diagnosticReport.hasSpecimen()) {
-            return Collections.singletonList(generateDefaultSpecimen(diagnosticReport));
+        List<Specimen> specimens = new ArrayList<>();
+
+        if (hasOrphanedTestResults(observations)) {
+            specimens.add(generateDefaultSpecimen(diagnosticReport));
         }
-
-        fixOrphanedTestResults(diagnosticReport);
 
         InputBundle inputBundleHolder = messageContext.getInputBundleHolder();
-        return diagnosticReport.getSpecimen()
-            .stream()
-            .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
-            .flatMap(Optional::stream)
-            .map(Specimen.class::cast)
-            .collect(Collectors.toList());
+        List<Specimen> preExistingSpecimens = diagnosticReport.getSpecimen()
+                .stream()
+                .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
+                .flatMap(Optional::stream)
+                .map(Specimen.class::cast)
+                .collect(Collectors.toList());
+
+        specimens.addAll(preExistingSpecimens);
+
+        return specimens;
+
     }
 
-    private void fixOrphanedTestResults(DiagnosticReport diagnosticReport) {
-
-
-        if (diagnosticReport.hasResult()){
-            List<Reference> results = diagnosticReport.getResult();
-            List<Reference> specimens = diagnosticReport.getSpecimen();
-            for (Reference specimen : specimens){
-
-            }
-            for (Reference result : results) {
-                //
-                    //check each test result one by one, and if it doesn't have a dummy assigned to it, assign it.
+    private boolean hasOrphanedTestResults(List<Observation> observations) {
+        for (Observation observation : observations) {
+            if (!observation.hasSpecimen()){
+                return true;
             }
         }
+
+        return false;
+    }
+
+    private List<Observation> fixOrphanedTestResults(List<Observation> observations, List<Specimen> specimens, DiagnosticReport diagnosticReport) {
+
+        Specimen dummySpecimen = new Specimen();
+
+        for (Specimen specimen : specimens) {
+            if (specimen.getId().contains(DUMMY_SPECIMEN_ID_PREFIX)){
+                dummySpecimen = specimen;
+                break;
+            }
+        }
+
+        for (Observation observation : observations) {
+            if (!observation.hasSpecimen()){
+                Reference dummySpecimenReference = new Reference();
+                dummySpecimenReference.setReference(dummySpecimen.getId());
+                dummySpecimenReference.setResource(dummySpecimen);
+
+                observation.setSpecimen(dummySpecimenReference);
+            }
+        }
+
+        return observations;
     }
 
     private Specimen generateDefaultSpecimen(DiagnosticReport diagnosticReport) {
@@ -156,10 +184,6 @@ public class DiagnosticReportMapper {
     }
 
     private List<Observation> fetchObservations(DiagnosticReport diagnosticReport) {
-        if (!diagnosticReport.hasResult()) {
-            return Collections.singletonList(generateDefaultObservation(diagnosticReport));
-        }
-
         InputBundle inputBundleHolder = messageContext.getInputBundleHolder();
         return diagnosticReport.getResult().stream()
             .map(Reference::getReferenceElement)
