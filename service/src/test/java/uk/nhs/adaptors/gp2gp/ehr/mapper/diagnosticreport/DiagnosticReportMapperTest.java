@@ -330,11 +330,11 @@ class DiagnosticReportMapperTest {
         );
         
         // This checks that the linked test result has its correct specimen.
-        assertThat(actualXml).matches("(?s).*<!-- Mapped Specimen with id: " +
+        assertThat(actualXml).containsIgnoringWhitespaces("<!-- Mapped Specimen with id: " +
                 "Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0" +
                 " with linked Observations: " +
                 "Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2" +
-                ", -->.*"
+                ", -->"
         );
 
     }
