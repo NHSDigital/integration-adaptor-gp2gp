@@ -202,8 +202,7 @@ public class SendDocumentTaskExecutorTest {
                 new ObjectMapper(),
                 this.detectDocumentsSentService,
                 gp2gpConfiguration,
-                new EhrDocumentMapper(new TimestampService(), new RandomIdGeneratorServiceStub()),
-                new TimestampService()
+                new EhrDocumentMapper(new TimestampService(), new RandomIdGeneratorServiceStub())
         );
     }
 

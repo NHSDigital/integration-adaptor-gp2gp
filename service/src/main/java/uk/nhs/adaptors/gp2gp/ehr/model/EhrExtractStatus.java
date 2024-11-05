@@ -58,7 +58,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -75,7 +74,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -99,7 +97,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -111,7 +108,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -120,7 +116,6 @@ public class EhrExtractStatus implements TimeToLive {
         private String patientId;
 
         @Data
-        @NoArgsConstructor
         @AllArgsConstructor
         @Document
         @Builder
@@ -132,7 +127,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -142,7 +136,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -152,7 +145,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -161,7 +153,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -174,7 +165,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -186,7 +176,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -199,7 +188,6 @@ public class EhrExtractStatus implements TimeToLive {
         private String messageRef;
 
         @Data
-        @NoArgsConstructor
         @AllArgsConstructor
         @Document
         @Builder
@@ -210,7 +198,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
@@ -219,7 +206,6 @@ public class EhrExtractStatus implements TimeToLive {
     }
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
     @Document
     @Builder
