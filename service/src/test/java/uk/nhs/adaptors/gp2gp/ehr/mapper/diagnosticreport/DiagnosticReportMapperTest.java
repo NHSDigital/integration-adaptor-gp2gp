@@ -320,11 +320,20 @@ class DiagnosticReportMapperTest {
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
-
+        
+        // This checks that the unlinked test result is given a dummy specimen.
         assertThat(actualXml).matches("(?s).*<!-- Mapped Specimen with id: DUMMY-SPECIMEN-" +
                 regexpUuid +
                 " with linked Observations: " +
-                expectObservation + 
+                expectObservation +
+                ", -->.*"
+        );
+        
+        // This checks that the linked test result has its correct specimen.
+        assertThat(actualXml).matches("(?s).*<!-- Mapped Specimen with id: " +
+                "Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0" +
+                " with linked Observations: " +
+                "Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2" +
                 ", -->.*"
         );
 
