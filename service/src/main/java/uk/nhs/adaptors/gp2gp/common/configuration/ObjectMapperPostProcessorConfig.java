@@ -11,8 +11,7 @@ public class ObjectMapperPostProcessorConfig implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if (bean instanceof ObjectMapper) {
-            ObjectMapper objectMapper = (ObjectMapper) bean;
+        if (bean instanceof ObjectMapper objectMapper) {
             objectMapper.getFactory().setStreamReadConstraints(StreamReadConstraints.builder().maxStringLength(Integer.MAX_VALUE).build());
         }
         return bean;
