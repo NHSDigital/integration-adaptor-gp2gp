@@ -321,7 +321,12 @@ class DiagnosticReportMapperTest {
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
-        assertThat(actualXml).matches("(?s).*<!-- Mapped Specimen with id: DUMMY-SPECIMEN-" + regexpUuid + " with linked Observations: " + expectObservation + ", -->.*");
+        assertThat(actualXml).matches("(?s).*<!-- Mapped Specimen with id: DUMMY-SPECIMEN-" +
+                regexpUuid +
+                " with linked Observations: " +
+                expectObservation + 
+                ", -->.*"
+        );
 
     }
 
