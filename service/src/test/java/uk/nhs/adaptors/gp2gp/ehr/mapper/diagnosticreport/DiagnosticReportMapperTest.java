@@ -87,6 +87,7 @@ class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.xml";
     private static final String OUTPUT_XML_EXTENSION_ID = "diagnostic-report-with-extension-id.xml";
     private static final String OUTPUT_XML_MULTIPLE_RESULTS = "diagnostic-report-with-multiple-results.xml";
+    private static final String REGEXP_UUID = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -301,11 +302,19 @@ class DiagnosticReportMapperTest {
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
         final InputBundle inputBundle = new InputBundle(bundle);
+        final String expectObservation = "Observation/AD373CA7-3940-4249-85A2-D3A22E9F17C7";
 
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
-        assertThat(actualXml).contains("Mapped Specimen with id: DUMMY-SPECIMEN-");
+
+        // This checks that the unlinked test result is given a dummy specimen.
+        assertThat(actualXml).matches("(?s).*<!-- Mapped Specimen with id: DUMMY-SPECIMEN-" +
+                REGEXP_UUID +
+                " with linked Observations: " +
+                expectObservation +
+                ", -->.*"
+        );
     }
 
     @Test
@@ -314,7 +323,6 @@ class DiagnosticReportMapperTest {
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
         final InputBundle inputBundle = new InputBundle(bundle);
-        final String regexpUuid = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
         final String expectObservation = "Observation/AD373CA7-3940-4249-85A2-D3A22E9F17C7";
 
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
@@ -323,7 +331,7 @@ class DiagnosticReportMapperTest {
         
         // This checks that the unlinked test result is given a dummy specimen.
         assertThat(actualXml).matches("(?s).*<!-- Mapped Specimen with id: DUMMY-SPECIMEN-" +
-                regexpUuid +
+                REGEXP_UUID +
                 " with linked Observations: " +
                 expectObservation +
                 ", -->.*"
