@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.Quantity;
@@ -52,12 +53,15 @@ public final class ObservationValueQuantityMapper {
     }
 
     private static String getPhysicalQuantityXml(Quantity valueQuantity) {
+        var escapedCode = StringEscapeUtils.escapeXml11(valueQuantity.getCode());
+        var escapedUnit = StringEscapeUtils.escapeXml11(valueQuantity.getUnit());
+
         if (UNITS_OF_MEASURE_SYSTEM.equals(valueQuantity.getSystem()) && valueQuantity.hasCode()) {
             return """
                 <value xsi:type="PQ" value="%s" unit="%s" />"""
                 .formatted(
                     valueQuantity.getValue(),
-                    valueQuantity.getCode()
+                    escapedCode
                 );
         }
         if (hasValidSystem(valueQuantity) && valueQuantity.hasCode() && valueQuantity.hasUnit()) {
@@ -68,9 +72,9 @@ public final class ObservationValueQuantityMapper {
                 .formatted(
                     valueQuantity.getValue(),
                     valueQuantity.getValue(),
-                    valueQuantity.getCode(),
+                    escapedCode,
                     getSystemWithoutPrefix(valueQuantity.getSystem()),
-                    valueQuantity.getUnit()
+                    escapedUnit
                 );
         }
         if (hasValidSystem(valueQuantity) && valueQuantity.hasCode()) {
@@ -81,7 +85,7 @@ public final class ObservationValueQuantityMapper {
                 .formatted(
                     valueQuantity.getValue(),
                     valueQuantity.getValue(),
-                    valueQuantity.getCode(),
+                    escapedCode,
                     getSystemWithoutPrefix(valueQuantity.getSystem())
                 );
         }
@@ -95,7 +99,7 @@ public final class ObservationValueQuantityMapper {
                 .formatted(
                     valueQuantity.getValue(),
                     valueQuantity.getValue(),
-                    valueQuantity.getUnit()
+                    escapedUnit
                 );
         }
 
@@ -105,6 +109,9 @@ public final class ObservationValueQuantityMapper {
     }
 
     private static String getPhysicalQuantityIntervalXml(Quantity valueQuantity) {
+        var escapedCode = StringEscapeUtils.escapeXml11(valueQuantity.getCode());
+        var escapedUnit = StringEscapeUtils.escapeXml11(valueQuantity.getUnit());
+
         if (UNITS_OF_MEASURE_SYSTEM.equals(valueQuantity.getSystem()) && valueQuantity.hasCode()) {
             return """
                 <value xsi:type="IVL_PQ">%n\
@@ -113,7 +120,7 @@ public final class ObservationValueQuantityMapper {
                 .formatted(
                     getHighOrLow(valueQuantity),
                     valueQuantity.getValue(),
-                    valueQuantity.getCode(),
+                    escapedCode,
                     isInclusive(valueQuantity)
                 );
         }
@@ -129,9 +136,9 @@ public final class ObservationValueQuantityMapper {
                     valueQuantity.getValue(),
                     isInclusive(valueQuantity),
                     valueQuantity.getValue(),
-                    valueQuantity.getCode(),
+                    escapedCode,
                     getSystemWithoutPrefix(valueQuantity.getSystem()),
-                    valueQuantity.getUnit(),
+                    escapedUnit,
                     getHighOrLow(valueQuantity)
             );
         }
@@ -147,7 +154,7 @@ public final class ObservationValueQuantityMapper {
                     valueQuantity.getValue(),
                     isInclusive(valueQuantity),
                     valueQuantity.getValue(),
-                    valueQuantity.getCode(),
+                    escapedCode,
                     getSystemWithoutPrefix(valueQuantity.getSystem()),
                     getHighOrLow(valueQuantity)
                 );
@@ -166,7 +173,7 @@ public final class ObservationValueQuantityMapper {
                     valueQuantity.getValue(),
                     isInclusive(valueQuantity),
                     valueQuantity.getValue(),
-                    valueQuantity.getUnit(),
+                    escapedUnit,
                     getHighOrLow(valueQuantity)
                 );
         }

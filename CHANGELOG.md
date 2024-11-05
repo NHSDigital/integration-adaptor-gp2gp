@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Fixed
+
+* When mapping a `valueQuantity` contained in an `Observation`, the produced XML `<value>` element now correctly escapes
+  any contained XML characters.
+
 ## Added
 
 * When mapping a `DocumentReference` which contains a `NOPAT` `meta.security` or `NOPAT` `securityLabel` tag the resultant XML for that resource
