@@ -314,12 +314,14 @@ class DiagnosticReportMapperTest {
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
         final InputBundle inputBundle = new InputBundle(bundle);
+        final String regexpUuid = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
+        final String expectObservation = "Observation/AD373CA7-3940-4249-85A2-D3A22E9F17C7";
 
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
-        assertThat(actualXml).matches("(?s).*<!-- Mapped Specimen with id: DUMMY-SPECIMEN-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12} with linked Observations: Observation/AD373CA7-3940-4249-85A2-D3A22E9F17C7, -->.*");
+        assertThat(actualXml).matches("(?s).*<!-- Mapped Specimen with id: DUMMY-SPECIMEN-" + regexpUuid + " with linked Observations: " + expectObservation + ", -->.*");
 
     }
 
