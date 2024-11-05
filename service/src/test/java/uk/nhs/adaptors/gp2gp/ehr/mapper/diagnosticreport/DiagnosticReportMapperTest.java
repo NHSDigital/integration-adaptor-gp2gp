@@ -309,7 +309,7 @@ class DiagnosticReportMapperTest {
     }
 
     @Test
-    void When_DiagnosticReport_Has_SpecimenAndUnlinkedTestResult_ExpectScenario2() {
+    void When_DiagnosticReport_Has_SpecimenALinkedTestResultAndAnUnlinkedTestResult_ExpectASpecimenOnAllTestResults() {
         final String diagnosticReportFileName = "diagnostic-report-with-one-specimen-one-linked-observation-and-one-unlinked-observation.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
