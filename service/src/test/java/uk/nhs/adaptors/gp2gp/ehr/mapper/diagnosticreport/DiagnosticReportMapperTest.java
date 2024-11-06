@@ -300,7 +300,7 @@ class DiagnosticReportMapperTest {
      * linked then we need to create a dummy specimen linked to the result.
      */
     @Test
-    void When_DiagnosticReport_Has_SpecimenAndUnlinkedTestResult_ExpectADummySpecimenLinkedToTestResult() {
+    void When_DiagnosticReport_Has_SpecimenAndUnlinkedTestResult_Expect_ADummySpecimenLinkedToTestResult() {
         final String diagnosticReportFileName = "diagnostic-report-with-one-specimen-and-one-unrelated-observation.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
@@ -313,17 +313,18 @@ class DiagnosticReportMapperTest {
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
         // This checks that the unlinked test result is given a dummy specimen.
-        assertThat(actualXml).matches("(?s).*<!-- " + MOCKED_SPECIMEN_PREFIX + ": " + dummyNamePrefix +
-                REGEXP_UUID +
-                " " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": " +
-                expectObservation +
-                "-->.*"
+        assertThat(actualXml).matches("(?s).*<!-- " + MOCKED_SPECIMEN_PREFIX + ": " + dummyNamePrefix
+                + REGEXP_UUID
+                + " " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": "
+                + expectObservation
+                + "-->.*"
         );
     }
 
     @Test
-    void When_DiagnosticReport_Has_SpecimenALinkedTestResultAndAnUnlinkedTestResult_ExpectASpecimenOnAllTestResults() {
-        final String diagnosticReportFileName = "diagnostic-report-with-one-specimen-one-linked-observation-and-one-unlinked-observation.json";
+    void When_DiagnosticReport_Has_SpecimenALinkedTestResultAndAnUnlinkedTestResult_Expect_ASpecimenOnAllTestResults() {
+        final String diagnosticReportFileName =
+                "diagnostic-report-with-one-specimen-one-linked-observation-and-one-unlinked-observation.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
         final InputBundle inputBundle = new InputBundle(bundle);
@@ -332,21 +333,19 @@ class DiagnosticReportMapperTest {
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
-        
         // This checks that the unlinked test result is given a dummy specimen.
-        assertThat(actualXml).matches("(?s).*<!-- " + MOCKED_SPECIMEN_PREFIX + ": " + dummyNamePrefix +
-                REGEXP_UUID +
-                " " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": " +
-                expectObservation +
-                "-->.*"
+        assertThat(actualXml).matches("(?s).*<!-- " + MOCKED_SPECIMEN_PREFIX + ": " + dummyNamePrefix
+                + REGEXP_UUID
+                + " " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": "
+                + expectObservation
+                + "-->.*"
         );
-        
         // This checks that the linked test result has its correct specimen.
-        assertThat(actualXml).containsIgnoringWhitespaces("<!-- " + MOCKED_SPECIMEN_PREFIX + ": " +
-                "Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0" +
-                MOCKED_SPECIMEN_LINKED_OBSERVATION + ":" +
-                "Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2" +
-                " -->"
+        assertThat(actualXml).containsIgnoringWhitespaces("<!-- " + MOCKED_SPECIMEN_PREFIX + ": "
+                + "Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0"
+                + MOCKED_SPECIMEN_LINKED_OBSERVATION + ":"
+                + "Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2"
+                + " -->"
         );
 
     }
@@ -407,16 +406,19 @@ class DiagnosticReportMapperTest {
             List<String> linkedObservations = new ArrayList<>();
 
             for (Observation observation : observations) {
-                if(observation.getSpecimen().getReference() != null && observation.getSpecimen().getReference().equals(specimen.getId())){
+                if (observation.getSpecimen().getReference() != null
+                        && observation.getSpecimen().getReference().equals(specimen.getId())) {
                     linkedObservations.add(observation.getId());
                 }
             }
 
-            if(linkedObservations.isEmpty()){
+            if (linkedObservations.isEmpty()) {
                 return String.format("<!-- " + MOCKED_SPECIMEN_PREFIX + ": %s -->", specimen.getId());
             }
-            
-            return String.format("<!-- " + MOCKED_SPECIMEN_PREFIX + ": %s " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": %s-->", specimen.getId(), String.join(",", linkedObservations));
+            return String.format("<!-- " + MOCKED_SPECIMEN_PREFIX + ": %s "
+                    + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": %s-->",
+                    specimen.getId(),
+                    String.join(",", linkedObservations));
         };
     }
 }
