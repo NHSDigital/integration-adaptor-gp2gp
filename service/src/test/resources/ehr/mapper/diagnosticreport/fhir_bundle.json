@@ -778,6 +778,74 @@
         ],
         "name": "TEMPLE SOWERBY MEDICAL PRACTICE"
       }
+    },
+    {
+      "resource":{
+        "resourceType":"Observation",
+        "id":"TestResult-WithRelatedMember-WhichIsntAFilingComment",
+        "meta":{
+          "profile":[
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "identifier":[
+          {
+            "system":"https://EMISWeb/A82038",
+            "value":"TestResult-WithRelatedMember-WhichIsntAFilingComment"
+          }
+        ],
+        "code":{
+          "coding":[
+            {
+              "system":"http://read.info/readv2",
+              "code":"4465.00",
+              "display":"Serum oestradiol level",
+              "userSelected":true
+            },
+            {
+              "extension":[
+                {
+                  "url":"https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                  "extension":[
+                    {
+                      "url":"descriptionId",
+                      "valueId":"2551971000000110"
+                    }
+                  ]
+                }
+              ],
+              "system":"http://snomed.info/sct",
+              "code":"1010521000000102",
+              "display":"Serum oestradiol level"
+            }
+          ]
+        },
+        "valueQuantity":{
+          "value":8.800,
+          "unit":"mmol/L"
+        },
+        "comment": "Notes provided alongside test result",
+        "status":"unknown",
+        "subject":{
+          "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+        },
+        "effectiveDateTime":"2020-12-15T15:17:04.917+00:00",
+        "issued":"2020-12-15T15:17:04.917+00:00",
+        "performer":[
+          {
+            "reference":"Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+          }
+        ],
+        "related":[
+          {
+            "type":"has-member",
+            "target":{
+              "display": "Referencing itself as a member, as opposed to a filing comment. This is invalid according to GP Connect.",
+              "reference":"Observation/TestResult-WithRelatedMember-WhichIsntAFilingComment"
+            }
+          }
+        ]
+      }
     }
   ]
 }
