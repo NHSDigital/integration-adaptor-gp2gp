@@ -33,7 +33,12 @@ import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.*;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.DiagnosticReportCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
@@ -74,7 +79,8 @@ public class DiagnosticReportMapper {
         final IdMapper idMapper = messageContext.getIdMapper();
         markObservationsAsProcessed(idMapper, initialObservations);
 
-        final List<Observation> processedObservations = assignDummySpecimensToOrphanedTestResults(initialObservations, specimens, diagnosticReport);
+        final List<Observation> processedObservations =
+                assignDummySpecimensToOrphanedTestResults(initialObservations, specimens);
 
         String mappedSpecimens = specimens.stream()
             .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, processedObservations, diagnosticReport))
@@ -140,7 +146,8 @@ public class DiagnosticReportMapper {
                 .anyMatch(observation -> !observation.hasSpecimen());
     }
 
-    private List<Observation> assignDummySpecimensToOrphanedTestResults(List<Observation> observations, List<Specimen> specimens, DiagnosticReport diagnosticReport) {
+    private List<Observation> assignDummySpecimensToOrphanedTestResults(
+            List<Observation> observations, List<Specimen> specimens) {
 
         if (!hasOrphanedTestResults(observations)) {
             return observations;
@@ -154,7 +161,7 @@ public class DiagnosticReportMapper {
         Reference dummySpecimenReference = new Reference(dummySpecimen.getId());
 
         for (Observation observation : observations) {
-            if (!observation.hasSpecimen()){
+            if (!observation.hasSpecimen()) {
                 observation.setSpecimen(dummySpecimenReference);
             }
         }
