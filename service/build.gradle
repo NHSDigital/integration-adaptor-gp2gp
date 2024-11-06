@@ -160,6 +160,10 @@ pitest {
 	threads = project.getGradle().getStartParameter().getMaxWorkerCount()
 }
 
+pitestGithub {
+	deleteOldSummaries = true
+}
+
 bootJar {
 	exclude("**/TransformJsonToXml*")
 }
