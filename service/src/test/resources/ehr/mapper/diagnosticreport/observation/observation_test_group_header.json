@@ -6,6 +6,15 @@
       "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
     ]
   },
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "242247008",
+        "display": "Collision of spacecraft with meteorite"
+      }
+    ]
+  },
   "identifier": [
     {
       "system": "https://EMISWeb/A82038",

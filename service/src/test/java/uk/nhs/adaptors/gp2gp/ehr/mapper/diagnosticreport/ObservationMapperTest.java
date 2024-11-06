@@ -21,6 +21,7 @@ import org.mockito.stubbing.Answer;
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -36,6 +37,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
@@ -222,8 +224,19 @@ class ObservationMapperTest {
 
         assertAll(
             () -> assertThatXml(actualXml).containsXPath(COMPOUND_STATEMENT_CONFIDENTIALITY_CODE_XPATH),
-            () -> assertThat(metaWithNopat).hasSize(1)
+            () -> assertThat(metaWithNopat).hasSize(2)
         );
+    }
+
+    @Test
+    void When_MappingTestGroupHeader_WithoutCode_Expect_ExceptionThrownContainingId() {
+        final Observation observation = getObservationResourceFromJson(OBSERVATION_TEST_GROUP_HEADER_JSON);
+        observation.setCode(null);
+
+        assertThatExceptionOfType(EhrMapperException.class)
+            .isThrownBy(() -> observationMapper.mapObservationToCompoundStatement(observation))
+            .withMessageContaining(observation.getId());
+
     }
 
     @Test
