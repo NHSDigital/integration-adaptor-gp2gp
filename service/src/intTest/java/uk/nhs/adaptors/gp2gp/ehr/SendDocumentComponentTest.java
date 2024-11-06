@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 
@@ -10,6 +11,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -21,10 +25,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import uk.nhs.adaptors.gp2gp.common.storage.LocalMockConnector;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsConnectionException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MhsServerErrorException;
+import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -34,6 +40,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @DirtiesContext
 public class SendDocumentComponentTest {
     private static final String DOCUMENT_NAME = "some-conversation-id/document-name.json";
+    public static final String OUTBOUND_MESSAGE_JSON = "src/intTest/resources/outboundMessage.json";
 
     @MockBean
     private MhsClient mhsClient;
@@ -46,6 +53,30 @@ public class SendDocumentComponentTest {
 
     @Autowired
     private LocalMockConnector localMockConnector;
+
+    @SuppressWarnings("checkstyle:MagicNumber")
+    @Test
+    public void When_SendDocumentTaskRunsWithOver20MbPayloadMessage_Expect_NoException() throws IOException {
+        InputStream inputStream = createInputStreamWithAttachmentOfSize(22 * 1024 * 1024);
+        localMockConnector.uploadToStorage(inputStream, inputStream.available(), DOCUMENT_NAME);
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        var sendDocumentTaskDefinition = prepareTaskDefinition(ehrExtractStatus);
+
+        assertDoesNotThrow(() -> sendDocumentTaskExecutor.execute(sendDocumentTaskDefinition));
+    }
+
+    private @NotNull InputStream createInputStreamWithAttachmentOfSize(int sizeOfAttachmentInBytes) throws IOException {
+        var inputStream = readMessageAsInputStream();
+        ObjectMapper mapper = new ObjectMapper();
+        StorageDataWrapper wrapper = mapper.readValue(inputStream, StorageDataWrapper.class);
+        OutboundMessage outboundMessage = mapper.readValue(wrapper.getData(), OutboundMessage.class);
+        outboundMessage.getAttachments().getFirst().setPayload("1".repeat(sizeOfAttachmentInBytes));
+        wrapper.setData(mapper.writeValueAsString(outboundMessage));
+
+        return IOUtils.toInputStream(mapper.writeValueAsString(wrapper), "UTF-8");
+    }
 
     @Test
     public void When_SendDocumentTaskRunsTwice_Expect_DatabaseOverwritesEhrExtractStatus() throws IOException {
@@ -106,7 +137,7 @@ public class SendDocumentComponentTest {
     }
 
     private InputStream readMessageAsInputStream() throws IOException {
-        File file = new File("src/intTest/resources/outboundMessage.json");
+        File file = new File(OUTBOUND_MESSAGE_JSON);
         return new FileInputStream(file);
     }
 

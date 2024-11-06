@@ -18,8 +18,8 @@ import java.util.Collections;
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class DocumentToMHSTranslator {
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
+    private final ObjectMapper objectMapper;
     private final EhrDocumentMapper ehrDocumentMapper;
 
     public String translateGpcResponseToMhsOutboundRequestData(
@@ -66,6 +66,6 @@ public class DocumentToMHSTranslator {
             .attachments(attachments)
             .build();
 
-        return OBJECT_MAPPER.writeValueAsString(outboundMessage);
+        return objectMapper.writeValueAsString(outboundMessage);
     }
 }

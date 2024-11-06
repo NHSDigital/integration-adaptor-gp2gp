@@ -48,6 +48,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
     private final EhrDocumentMapper ehrDocumentMapper;
+    private final ObjectMapper objectMapper;
 
     @Override
     public Class<SendEhrExtractCoreTaskDefinition> getTaskType() {
@@ -67,7 +68,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         String outboundEhrExtract = replacePlaceholders(documentObjectNameAndSize, storageDataWrapper.getData());
 
         LOGGER.info("Checking EHR Extract size");
-        final var outboundMessage = new ObjectMapper().readValue(outboundEhrExtract, OutboundMessage.class);
+        final var outboundMessage = objectMapper.readValue(outboundEhrExtract, OutboundMessage.class);
         if (getBytesLengthOfString(outboundMessage.getPayload()) > gp2gpConfiguration.getLargeEhrExtractThreshold()) {
             LOGGER.info("EHR extract IS large");
             outboundEhrExtract = compressEhrExtractAndReplacePayloadWithSkeleton(sendEhrExtractCoreTaskDefinition, outboundMessage);
@@ -109,7 +110,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         referenceCompressedEhrExtractDocumentAsAttachmentInOutboundMessage(
                 outboundMessage, documentId, messageId, fileName, compressedEhrExtract.length());
 
-        return new ObjectMapper().writeValueAsString(outboundMessage);
+        return objectMapper.writeValueAsString(outboundMessage);
     }
 
     private void referenceCompressedEhrExtractDocumentAsAttachmentInOutboundMessage(
@@ -145,7 +146,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
             String taskId,
             String fileName) throws JsonProcessingException {
 
-        String data = new ObjectMapper().writeValueAsString(
+        String data = objectMapper.writeValueAsString(
             OutboundMessage.builder()
             .payload(
                 ehrDocumentMapper.generateMhsPayload(
