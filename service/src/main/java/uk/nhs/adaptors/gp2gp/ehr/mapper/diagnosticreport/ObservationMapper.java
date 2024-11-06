@@ -488,7 +488,7 @@ public class ObservationMapper {
             return codeableConceptCdMapper.mapCodeableConceptToCd(observation.getCode());
         }
 
-        return StringUtils.EMPTY;
+        throw new EhrMapperException("%s must contain a code element.".formatted(observation.getId()));
     }
 
     private CompoundStatementClassCode prepareClassCode(List<MultiStatementObservationHolder> derivedObservations) {

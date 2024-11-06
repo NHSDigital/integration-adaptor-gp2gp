@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 
+* When mapping an `Observation` related to a diagnostic report which does not contain a `code` element, the adaptor will
+  now throw an error reporting that an observation requires a code element and provide the affected resource ID.
 * When mapping a `valueQuantity` contained in an `Observation`, the produced XML `<value>` element now correctly escapes
   any contained XML characters.
 
