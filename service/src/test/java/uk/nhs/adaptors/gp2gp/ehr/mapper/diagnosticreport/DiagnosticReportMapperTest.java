@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -316,7 +317,7 @@ class DiagnosticReportMapperTest {
                 REGEXP_UUID +
                 " " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": " +
                 expectObservation +
-                ", -->.*"
+                "-->.*"
         );
     }
 
@@ -337,7 +338,7 @@ class DiagnosticReportMapperTest {
                 REGEXP_UUID +
                 " " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": " +
                 expectObservation +
-                ", -->.*"
+                "-->.*"
         );
         
         // This checks that the linked test result has its correct specimen.
@@ -345,7 +346,7 @@ class DiagnosticReportMapperTest {
                 "Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0" +
                 MOCKED_SPECIMEN_LINKED_OBSERVATION + ":" +
                 "Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2" +
-                ", -->"
+                " -->"
         );
 
     }
@@ -403,15 +404,19 @@ class DiagnosticReportMapperTest {
             Specimen specimen = invocation.getArgument(0);
             List<Observation> observations = invocation.getArgument(1);
 
-            String linkedObservations = "";
+            List<String> linkedObservations = new ArrayList<>();
 
             for (Observation observation : observations) {
                 if(observation.getSpecimen().getReference() != null && observation.getSpecimen().getReference().equals(specimen.getId())){
-                    linkedObservations = linkedObservations + observation.getId() + ", ";
+                    linkedObservations.add(observation.getId());
                 }
             }
+
+            if(linkedObservations.isEmpty()){
+                return String.format("<!-- " + MOCKED_SPECIMEN_PREFIX + ": %s -->", specimen.getId());
+            }
             
-            return String.format("<!-- " + MOCKED_SPECIMEN_PREFIX + ": %s " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": %s-->", specimen.getId(), linkedObservations);
+            return String.format("<!-- " + MOCKED_SPECIMEN_PREFIX + ": %s " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": %s-->", specimen.getId(), String.join(",", linkedObservations));
         };
     }
 }

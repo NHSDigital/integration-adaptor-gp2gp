@@ -115,7 +115,7 @@ public class DiagnosticReportMapper {
 
         List<Specimen> specimens = new ArrayList<>();
 
-        if (hasOrphanedTestResults(observations)) {
+        if (!diagnosticReport.hasSpecimen() || hasOrphanedTestResults(observations)) {
             specimens.add(generateDefaultSpecimen(diagnosticReport));
         }
 
