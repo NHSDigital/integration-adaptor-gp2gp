@@ -21,6 +21,7 @@ import org.mockito.stubbing.Answer;
 import uk.nhs.adaptors.gp2gp.common.service.ConfidentialityService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -36,6 +37,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
@@ -90,6 +92,8 @@ class ObservationMapperTest {
         "observation_test_result.json";
     private static final String OBSERVATION_FILING_COMMENT_JSON =
         "observation_filing_comment.json";
+    private static final String OBSERVATION_ASSOCIATED_WITH_IGNORED_MEMBER_JSON =
+        "observation_associated_with_specimen_1_with_ignored_member.json";
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML =
         "observation_compound_statement_1.xml";
@@ -121,6 +125,8 @@ class ObservationMapperTest {
         "observation_compound_statement_clustered_by_diagnosticreport_reference.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_WITH_RELATED_COMMENT_XML =
         "observation_compound_statement_1_with_related_comment.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_BATTERY_TEST_RESULT_XML =
+        "observation_compound_statement_with_battery_test_result.xml";
     private static final String DIAGNOSTIC_REPORT_REFERENCE_ID = "Observation/TEST_REFERENCE_ID";
 
     @Mock
@@ -180,7 +186,7 @@ class ObservationMapperTest {
         final Observation observationAssociatedWithSpecimen = getObservationResourceFromJson(inputJson);
         final String expectedXml = getXmlStringFromFile(outputXml);
 
-        when(randomIdGeneratorService.createNewId())
+        lenient().when(randomIdGeneratorService.createNewId())
             .thenReturn("random-unmapped-id");
 
         final String actualXml = observationMapper.mapObservationToCompoundStatement(
@@ -218,8 +224,19 @@ class ObservationMapperTest {
 
         assertAll(
             () -> assertThatXml(actualXml).containsXPath(COMPOUND_STATEMENT_CONFIDENTIALITY_CODE_XPATH),
-            () -> assertThat(metaWithNopat).hasSize(1)
+            () -> assertThat(metaWithNopat).hasSize(2)
         );
+    }
+
+    @Test
+    void When_MappingTestGroupHeader_WithoutCode_Expect_ExceptionThrownContainingId() {
+        final Observation observation = getObservationResourceFromJson(OBSERVATION_TEST_GROUP_HEADER_JSON);
+        observation.setCode(null);
+
+        assertThatExceptionOfType(EhrMapperException.class)
+            .isThrownBy(() -> observationMapper.mapObservationToCompoundStatement(observation))
+            .withMessageContaining(observation.getId());
+
     }
 
     @Test
@@ -306,7 +323,6 @@ class ObservationMapperTest {
         return FileParsingUtility.parseResourceFromJsonFile(filePath, Observation.class);
     }
 
-    @SuppressWarnings("unused")
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
             Arguments.of(OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_JSON, OBSERVATION_COMPOUND_STATEMENT_1_XML),
@@ -353,6 +369,10 @@ class ObservationMapperTest {
             Arguments.of(
                 OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_WITH_RELATED_COMMENT_JSON,
                 OBSERVATION_COMPOUND_STATEMENT_1_WITH_RELATED_COMMENT_XML
+            ),
+            Arguments.of(
+                OBSERVATION_ASSOCIATED_WITH_IGNORED_MEMBER_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_WITH_BATTERY_TEST_RESULT_XML
             )
         );
     }

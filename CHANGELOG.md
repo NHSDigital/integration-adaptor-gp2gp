@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Fixed
+
+* When mapping an `Observation` related to a diagnostic report which does not contain a `code` element, the adaptor will
+  now throw an error reporting that an observation requires a code element and provide the affected resource ID.
+* When mapping a `valueQuantity` contained in an `Observation`, the produced XML `<value>` element now correctly escapes
+  any contained XML characters.
+
 ## Added
 
 * When mapping a `DocumentReference` which contains a `NOPAT` `meta.security` or `NOPAT` `securityLabel` tag the resultant XML for that resource
@@ -24,6 +31,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   resource will contain a `NOPAT` `confidentialityCode` element.
 * When mapping `Immunizations` which contain a `NOPAT` `meta.security` tag, the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
+
+### Fixed
+* Removed the 20 MB data processing limit to enable the GP2GP Adaptor to handle larger documents.
+
+## [2.1.3] - 2014-10-25
 
 ### Fixed
 

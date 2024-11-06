@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -74,6 +75,7 @@ public class DocumentToMHSTranslatorTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
         documentToMHSTranslator = new DocumentToMHSTranslator(
+            new ObjectMapper(),
             new EhrDocumentMapper(timestampService, randomIdGeneratorService));
     }
 

@@ -12,7 +12,6 @@ import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -39,7 +38,6 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     private final DetectDocumentsSentService detectDocumentsSentService;
     private final Gp2gpConfiguration gp2gpConfiguration;
     private final EhrDocumentMapper ehrDocumentMapper;
-    private final TimestampService timestampService;
 
     @Override
     public Class<SendDocumentTaskDefinition> getTaskType() {

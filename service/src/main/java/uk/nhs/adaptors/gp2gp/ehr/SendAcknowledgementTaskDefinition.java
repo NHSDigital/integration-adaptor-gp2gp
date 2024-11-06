@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import static uk.nhs.adaptors.gp2gp.common.task.TaskType.SEND_ACKNOWLEDGEMENT;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;

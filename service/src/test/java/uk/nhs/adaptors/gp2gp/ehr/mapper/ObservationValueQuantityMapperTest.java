@@ -38,6 +38,7 @@ public class ObservationValueQuantityMapperTest {
     public static final String SYSTEM_UUID = "e1423232-5d4f-472f-8c55-271de1d6f98d";
     public static final String SYSTEM_UUID_WITH_PREFIX = "urn:uuid:e1423232-5d4f-472f-8c55-271de1d6f98d";
     public static final String INVALID_SYSTEM = "not-a-valid-system";
+    public static final String STRING_WITH_XML_TO_BE_ESCAPED = "\" ' & < >";
 
     @Test
     public void When_MappingQuantityWithUncertaintyExtension_Expect_XmlContainsUncertaintyCode() {
@@ -518,6 +519,39 @@ public class ObservationValueQuantityMapperTest {
                 <low value="37.1" unit="1" inclusive="false" />
             </value>""";
 
+        var mappedQuantity = ObservationValueQuantityMapper.processQuantity(quantity);
+
+        assertThat(mappedQuantity).isEqualTo(expectedXml);
+    }
+
+    @Test
+    public void When_MappingWithXmlCharactersInCode_Expect_XmlCharactersAreEscaped() {
+        var quantity = new Quantity()
+            .setSystem(UOM_SYSTEM)
+            .setValue(VALUE_37_1)
+            .setCode(STRING_WITH_XML_TO_BE_ESCAPED);
+
+        var expectedXml = """
+            <value xsi:type="PQ" value="37.1" unit="&quot; &apos; &amp; &lt; &gt;" />""";
+
+        var mappedQuantity = ObservationValueQuantityMapper.processQuantity(quantity);
+
+        assertThat(mappedQuantity).isEqualTo(expectedXml);
+    }
+
+    @Test
+    public void When_MappingWithXmlCharactersInUnit_Expect_XmlCharactersAreEscaped() {
+        var quantity = new Quantity()
+            .setSystem(UOM_SYSTEM)
+            .setValue(VALUE_37_1)
+            .setUnit(STRING_WITH_XML_TO_BE_ESCAPED);
+
+        var expectedXml = """
+            <value xsi:type="PQ" value="37.1" unit="1">
+                <translation value="37.1">
+                    <originalText>&quot; &apos; &amp; &lt; &gt;</originalText>
+                </translation>
+            </value>""";
         var mappedQuantity = ObservationValueQuantityMapper.processQuantity(quantity);
 
         assertThat(mappedQuantity).isEqualTo(expectedXml);
