@@ -129,11 +129,11 @@ public class DiagnosticReportMapper {
 
         var inputBundleHolder = messageContext.getInputBundleHolder();
         List<Specimen> preExistingSpecimens = diagnosticReport.getSpecimen()
-                .stream()
-                .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
-                .flatMap(Optional::stream)
-                .map(Specimen.class::cast)
-                .toList();
+            .stream()
+            .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
+            .flatMap(Optional::stream)
+            .map(Specimen.class::cast)
+            .toList();
 
         specimens.addAll(preExistingSpecimens);
 
