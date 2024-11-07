@@ -2,5 +2,5 @@
   "resourceType": "Binary",
   "id": "2cb1f113-3b15-41e8-b6b1-21e761838b19",
   "contentType": "text/plain",
-  "content": "{{#base64}}{{randomValue length=10485760 type='ALPHANUMERIC'}}{{/base64}}"
+  "content": "{{#base64}}{{randomValue length=31457280 type='ALPHANUMERIC'}}{{/base64}}"
 }

@@ -524,7 +524,7 @@
                         "attachment": {
                             "contentType": "text/plain",
                             "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/2cb1f113-3b15-41e8-b6b1-21e761838b19",
-                            "size": 10485760
+                            "size": 31457280
                         }
                     }
                 ],
