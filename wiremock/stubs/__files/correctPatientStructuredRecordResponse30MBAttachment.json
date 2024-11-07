@@ -518,7 +518,7 @@
                 "custodian": {
                     "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
                 },
-                "description": "10MB attachment",
+                "description": "30MB attachment",
                 "content": [
                     {
                         "attachment": {
