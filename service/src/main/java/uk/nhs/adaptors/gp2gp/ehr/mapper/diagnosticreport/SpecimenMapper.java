@@ -137,16 +137,26 @@ public class SpecimenMapper {
     }
 
     private String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
+        List<Observation> observationsAssociatedWithSpecimen;
 
-        return observations.stream()
-            .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
-            .map(observationMapper::mapObservationToCompoundStatement)
-            .collect(Collectors.joining());
+        if (dummySpecimenOrObservationExists(specimen, observations)) {
+            observationsAssociatedWithSpecimen = observations;
+        } else {
+            observationsAssociatedWithSpecimen = observations.stream()
+                    .filter(Observation::hasSpecimen)
+                    .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
+                    .collect(Collectors.toList());
+        }
+
+        return observationsAssociatedWithSpecimen.stream()
+                .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
+                .map(observationMapper::mapObservationToCompoundStatement)
+                .collect(Collectors.joining());
     }
 
     private boolean dummySpecimenOrObservationExists(Specimen specimen, List<Observation> observations) {
         return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)
-            || (!observations.isEmpty() && observations.getFirst().getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
+                || (!observations.isEmpty() && observations.getFirst().getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement,

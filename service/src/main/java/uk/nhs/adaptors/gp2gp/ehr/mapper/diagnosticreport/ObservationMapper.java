@@ -421,7 +421,7 @@ public class ObservationMapper {
         StringBuilder derivedObservationsBlock = new StringBuilder();
 
         derivedObservations.forEach(derivedObservationHolder -> {
-            Observation derivedObservation = derivedObservationHolder.getObservation();
+            var derivedObservation = derivedObservationHolder.getObservation();
             Optional<String> observationStatement =
                 prepareObservationStatement(derivedObservationHolder, CompoundStatementClassCode.CLUSTER);
             Optional<String> narrativeStatements = prepareNarrativeStatements(

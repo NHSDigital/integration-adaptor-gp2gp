@@ -9,6 +9,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType.LABORATORY_RESULT_COM
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -74,13 +75,13 @@ public class DiagnosticReportMapper {
     private final ConfidentialityService confidentialityService;
 
     public String mapDiagnosticReportToCompoundStatement(DiagnosticReport diagnosticReport) {
-        List<Observation> initialObservations = fetchObservations(diagnosticReport);
-        List<Specimen> specimens = fetchSpecimens(diagnosticReport, initialObservations);
+        List<Observation> observations = fetchObservations(diagnosticReport);
+        List<Specimen> specimens = fetchSpecimens(diagnosticReport, observations);
         final IdMapper idMapper = messageContext.getIdMapper();
-        markObservationsAsProcessed(idMapper, initialObservations);
+        markObservationsAsProcessed(idMapper, observations);
 
         final List<Observation> processedObservations =
-                assignDummySpecimensToOrphanedTestResults(initialObservations, specimens);
+                assignDummySpecimensToOrphanedTestResults(observations, specimens);
 
         String mappedSpecimens = specimens.stream()
             .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, processedObservations, diagnosticReport))
@@ -121,11 +122,12 @@ public class DiagnosticReportMapper {
 
         List<Specimen> specimens = new ArrayList<>();
 
+        // At least one specimen is required to exist for any DiagnosticReport
         if (!diagnosticReport.hasSpecimen() || hasOrphanedTestResults(observations)) {
-            specimens.add(generateDefaultSpecimen(diagnosticReport));
+            specimens.add(generateDummySpecimen(diagnosticReport));
         }
 
-        InputBundle inputBundleHolder = messageContext.getInputBundleHolder();
+        var inputBundleHolder = messageContext.getInputBundleHolder();
         List<Specimen> preExistingSpecimens = diagnosticReport.getSpecimen()
                 .stream()
                 .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
@@ -140,7 +142,6 @@ public class DiagnosticReportMapper {
     }
 
     private boolean hasOrphanedTestResults(List<Observation> observations) {
-
         return observations
                 .stream()
                 .anyMatch(observation -> !observation.hasSpecimen());
@@ -153,7 +154,7 @@ public class DiagnosticReportMapper {
             return observations;
         }
 
-        // The assumption was made that all test results without a specimen will have the same specimen referenced
+        // The assumption was made that all test results without a specimen will have the same dummy specimen referenced
         Specimen dummySpecimen = specimens.stream()
                 .filter(specimen -> specimen.getId().contains(DUMMY_SPECIMEN_ID_PREFIX))
                 .toList().getFirst();
@@ -169,7 +170,7 @@ public class DiagnosticReportMapper {
         return observations;
     }
 
-    private Specimen generateDefaultSpecimen(DiagnosticReport diagnosticReport) {
+    private Specimen generateDummySpecimen(DiagnosticReport diagnosticReport) {
         Specimen specimen = new Specimen();
 
         specimen.setId(DUMMY_SPECIMEN_ID_PREFIX + randomIdGeneratorService.createNewId());
@@ -181,7 +182,11 @@ public class DiagnosticReportMapper {
     }
 
     private List<Observation> fetchObservations(DiagnosticReport diagnosticReport) {
-        InputBundle inputBundleHolder = messageContext.getInputBundleHolder();
+        if (!diagnosticReport.hasResult()) {
+            return Collections.singletonList(generateDefaultObservation(diagnosticReport));
+        }
+
+        var inputBundleHolder = messageContext.getInputBundleHolder();
         return diagnosticReport.getResult().stream()
             .map(Reference::getReferenceElement)
             .map(inputBundleHolder::getResource)
