@@ -6,7 +6,7 @@
   },
   "response": {
     "status": 200,
-    "bodyFileName": "correct10MBDocumentResponse.json",
+    "bodyFileName": "correct30MBDocumentResponse.json",
     "headers": {
       "Server":"nginx",
       "Date":"Tue, 12 Jan 2021 11:36:57 GMT",

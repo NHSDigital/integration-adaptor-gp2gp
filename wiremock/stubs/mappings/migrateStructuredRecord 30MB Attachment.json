@@ -1,14 +1,14 @@
 {
   "priority": 2,
   "scenarioName": "migrateStructuredRecord",
-  "requiredScenarioState": "10MB Attachment",
+  "requiredScenarioState": "30MB Attachment",
   "request": {
     "method": "POST",
     "urlPattern": "/.*/STU3/1/gpconnect/fhir/Patient/[$]gpc[.]migratestructuredrecord"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "correctPatientStructuredRecordResponse10MBAttachment.json",
+    "bodyFileName": "correctPatientStructuredRecordResponse30MBAttachment.json",
     "headers": {
       "Server": "nginx",
       "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",
