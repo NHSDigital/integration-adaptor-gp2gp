@@ -6,6 +6,7 @@ plugins {
 	id "com.github.spotbugs" version "6.0.25"
 	id "io.freefair.lombok" version "8.10.2"
 	id 'jacoco'
+	id 'org.sonarqube' version '5.1.0.4882'
 
 	// Mutation testing
 	id 'info.solidsoft.pitest' version '1.15.0'
@@ -128,7 +129,6 @@ tasks.withType(Test) {
 }
 
 check.dependsOn integrationTest
-jacocoTestReport.dependsOn integrationTest
 
 spotbugsTest.enabled = false
 spotbugsIntegrationTest.enabled = false
@@ -162,6 +162,14 @@ pitest {
 
 pitestGithub {
 	deleteOldSummaries = true
+}
+
+sonar {
+	properties {
+		property("sonar.host.url", "https://sonarcloud.io")
+		property("sonar.projectKey", "NHSDigital_integration-adaptor-gp2gp")
+		property("sonar.organization", "nhsdigital")
+	}
 }
 
 bootJar {
