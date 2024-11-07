@@ -133,7 +133,7 @@ public class DiagnosticReportMapper {
             .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
             .flatMap(Optional::stream)
             .map(Specimen.class::cast)
-            .toList();
+            .collect(Collectors.toList());
 
         specimens.addAll(preExistingSpecimens);
 
