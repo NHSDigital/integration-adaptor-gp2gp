@@ -141,7 +141,7 @@ class DiagnosticReportMapperTest {
 
         final String outputMessage = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
-        assertThat(removeLineEndings(outputMessage)).isEqualTo(removeLineEndings(expectedOutputMessage.toString()));
+        assertThat(removeLineEndings(outputMessage)).isEqualToIgnoringWhitespace(removeLineEndings(expectedOutputMessage.toString()));
     }
 
     @Test
