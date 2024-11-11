@@ -148,7 +148,7 @@
             </effectiveTime>
             <availabilityTime value="20100714163232"/>
 
-            <component typeCode="COMP" >
+            <component typeCode="COMP">
                 <ObservationStatement classCode="OBS" moodCode="EVN">
                     <id root="394559384658936"/>
                     <code nullFlavor="UNK">
@@ -157,10 +157,10 @@
                     <statusCode code="COMPLETE"/>
                     <effectiveTime>
                         <center nullFlavor="UNK"/>
-
-
                     </effectiveTime>
                     <availabilityTime nullFlavor="UNK"/>
+
+
                     <pertinentInformation typeCode="PERT">
                         <sequenceNumber value="+1"/>
                         <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -454,7 +454,6 @@
                             <availabilityTime value="20100225154100"/>
                         </NarrativeStatement>
                     </component>
-
                     <component typeCode="COMP" contextConductionInd="true">
                         <CompoundStatement classCode="CLUSTER" moodCode="EVN">
                             <id root="394559384658936"/>
