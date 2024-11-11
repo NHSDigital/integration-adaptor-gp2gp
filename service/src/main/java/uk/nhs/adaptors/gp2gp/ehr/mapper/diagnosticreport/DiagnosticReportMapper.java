@@ -39,7 +39,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.DiagnosticReportCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
