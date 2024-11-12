@@ -53,7 +53,7 @@
         </agentPerson>
     </Agent>
 </part>
-                  <part typeCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="test-id-3"/>
         <code nullFlavor="UNK">
@@ -124,7 +124,7 @@ Status: unknown</text>
         <specimen typeCode="SPC">
             <specimenRole classCode="SPEC">
                 <id root="test-id-3"/>
-        <id root="2.16.840.1.113883.2.1.4.5.2" extension="DUMMY"/>
+                <id root="2.16.840.1.113883.2.1.4.5.2" extension="DUMMY"/>
                 <effectiveTime>
                     <center value="20030221115000"/>
                 </effectiveTime>
@@ -133,7 +133,7 @@ Status: unknown</text>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-<component typeCode="COMP" contextConductionInd="true">
+            <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
