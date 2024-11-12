@@ -133,17 +133,17 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="test-id-3"/>
-                <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-                    CommentDate:UNK
+<component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="test-id-3"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+            CommentDate:UNK
 
-                                                EMPTY REPORT</text>
-                                            <statusCode code="COMPLETE"/>
-                                            <availabilityTime nullFlavor="UNK"/>
-                                        </NarrativeStatement>
-                                    </component>
+                                        EMPTY REPORT</text>
+                                    <statusCode code="COMPLETE"/>
+                                    <availabilityTime nullFlavor="UNK"/>
+                                </NarrativeStatement>
+                            </component>
                                 </CompoundStatement>
                             </component><component typeCode="COMP" contextConductionInd="true">
                             <CompoundStatement classCode="CLUSTER" moodCode="EVN">
