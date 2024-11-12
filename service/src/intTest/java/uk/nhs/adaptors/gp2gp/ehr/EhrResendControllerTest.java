@@ -10,10 +10,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -25,6 +28,8 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hl7.fhir.dstu3.model.OperationOutcome.IssueType;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.INCUMBENT_NACK_CODE;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.INCUMBENT_NACK_DISPLAY;
 
@@ -43,6 +48,9 @@ public class EhrResendControllerTest {
 
     @Autowired
     private EhrResendController ehrResendController;
+
+    @MockBean
+    private TaskDispatcher taskDispatcher;
 
     @Test
     public void When_AnEhrExtractHasFailed_Expect_RespondsWith202() {
@@ -69,6 +77,34 @@ public class EhrResendControllerTest {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
         assertThat(response.getBody()).isNull();
+    }
+
+    @Test
+    public void When_AnEhrExtractHasFailed_Expect_GetGpcStructuredTaskScheduled() {
+
+        String ehrMessageRef = generateRandomUppercaseUUID();
+        var ehrExtractStatus = new EhrExtractStatus();
+
+        ehrExtractStatus.setConversationId(CONVERSATION_ID);
+        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
+                                                           .conversationClosed(FIVE_DAYS_AGO)
+                                                           .errors(List.of(
+                                                               EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
+                                                                   .code(INCUMBENT_NACK_CODE)
+                                                                   .display(INCUMBENT_NACK_DISPLAY)
+                                                                   .build()))
+                                                           .messageRef(ehrMessageRef)
+                                                           .received(FIVE_DAYS_AGO)
+                                                           .rootId(generateRandomUppercaseUUID())
+                                                           .build());
+
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
+
+        var taskDefinition = GetGpcStructuredTaskDefinition.builder().build();
+        verify(taskDispatcher, times(1)).createTask(taskDefinition);
+
     }
 
     @Test

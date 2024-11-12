@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +29,7 @@ public class EhrResendController {
     private static final String OPERATION_OUTCOME_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";
 
     private EhrExtractStatusRepository ehrExtractStatusRepository;
+    private TaskDispatcher taskDispatcher;
 
     @PostMapping("/{conversationId}")
     public ResponseEntity<OperationOutcome> scheduleEhrExtractResend(@PathVariable String conversationId) {
@@ -48,9 +51,12 @@ public class EhrResendController {
             return new ResponseEntity<>(operationOutcome, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        var taskDefinition = GetGpcStructuredTaskDefinition.builder().build();
+        taskDispatcher.createTask(taskDefinition);
 
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
+
 
     public static OperationOutcome createOperationOutcome(
         OperationOutcome.IssueType type, OperationOutcome.IssueSeverity severity, CodeableConcept details, String diagnostics) {
