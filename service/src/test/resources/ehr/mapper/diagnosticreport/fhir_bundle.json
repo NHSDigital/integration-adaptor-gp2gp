@@ -905,21 +905,21 @@
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
           ]
         },
-        "extension":[
+        "extension": [
           {
-            "url":"https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MainLocation-1",
-            "valueReference":{
-              "reference":"Location/EB3994A6-5A87-4B53-A414-913137072F57"
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MainLocation-1",
+            "valueReference": {
+              "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
             }
           }
         ],
-        "identifier":[
+        "identifier": [
           {
-            "system":"https://fhir.nhs.uk/Id/ods-organization-code",
-            "value":"A82038"
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "A82038"
           }
         ],
-        "name":"TEMPLE SOWERBY MEDICAL PRACTICE"
+        "name": "TEMPLE SOWERBY MEDICAL PRACTICE"
       }
     },
     {
@@ -967,7 +967,7 @@
           "value":8.800,
           "unit":"mmol/L"
         },
-        "comment":"Notes provided alongside test result",
+        "comment": "Notes provided alongside test result",
         "status":"unknown",
         "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
@@ -983,7 +983,7 @@
           {
             "type":"has-member",
             "target":{
-              "display":"Referencing itself as a member, as opposed to a filing comment. This is invalid according to GP Connect.",
+              "display": "Referencing itself as a member, as opposed to a filing comment. This is invalid according to GP Connect.",
               "reference":"Observation/TestResult-WithRelatedMember-WhichIsntAFilingComment"
             }
           }
