@@ -16,7 +16,7 @@
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
           ]
         },
-        "identifier":
+        "identifier":[
           {
             "system":"https://EMISWeb/A82038",
             "value":"96B93E28-293D-46E7-B4C2-D477EEBF7098"
