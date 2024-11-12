@@ -137,9 +137,9 @@ Status: unknown</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:UNK
+CommentDate:UNK
 
-            EMPTY REPORT</text>
+EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime nullFlavor="UNK"/>
     </NarrativeStatement>
@@ -250,8 +250,8 @@ Status: unknown</text>
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
     </agentRef>
-</Participant2>
-<component typeCode="COMP" >
+        </Participant2>
+        <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
