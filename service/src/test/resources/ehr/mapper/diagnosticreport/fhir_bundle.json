@@ -1,12 +1,12 @@
 {
-  "resourceType":"Bundle",
-  "meta":{
-    "profile":[
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
       "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-Searchset-Bundle-1"
     ]
   },
-  "type":"searchset",
-  "entry":[
+  "type": "searchset",
+  "entry": [
     {
       "resource":{
         "resourceType":"DiagnosticReport",
@@ -17,10 +17,10 @@
           ]
         },
         "identifier":
-        {
-          "system":"https://EMISWeb/A82038",
-          "value":"96B93E28-293D-46E7-B4C2-D477EEBF7098"
-        }
+          {
+            "system":"https://EMISWeb/A82038",
+            "value":"96B93E28-293D-46E7-B4C2-D477EEBF7098"
+          }
         ],
         "status":"unknown",
         "category":{
@@ -880,28 +880,28 @@
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
           ]
         },
-        "name":[
+        "name": [
           {
-            "use":"official",
-            "family":"Test",
-            "given":[
+            "use": "official",
+            "family": "Test",
+            "given": [
               "NHS"
             ],
-            "prefix":[
+            "prefix": [
               "Mr"
             ]
           }
         ],
-        "gender":"male"
+        "gender": "male"
       }
     },
     {
-      "resource":{
-        "resourceType":"Organization",
-        "id":"5E496953-065B-41F2-9577-BE8F2FBD0757",
-        "meta":{
-          "versionId":"1112974926854455048",
-          "profile":[
+      "resource": {
+        "resourceType": "Organization",
+        "id": "5E496953-065B-41F2-9577-BE8F2FBD0757",
+        "meta": {
+          "versionId": "1112974926854455048",
+          "profile": [
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
           ]
         },
