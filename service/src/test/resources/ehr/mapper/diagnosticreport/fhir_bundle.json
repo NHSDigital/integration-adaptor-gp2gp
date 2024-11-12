@@ -1,6 +1,6 @@
 {
   "resourceType":"Bundle",
-  "meta": {
+  "meta":{
     "profile":[
       "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-Searchset-Bundle-1"
     ]
@@ -23,7 +23,7 @@
         }
         ],
         "status":"unknown",
-        "category": {
+        "category":{
           "coding":[
             {
               "system":"http://hl7.org/fhir/v2/0074",
@@ -32,7 +32,7 @@
             }
           ]
         },
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://snomed.info/sct",
@@ -41,7 +41,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "issued":"2010-02-25T15:41:00+00:00",
@@ -79,10 +79,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Specimen",
         "id":"96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
           ]
@@ -93,26 +93,26 @@
             "value":"96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0"
           }
         ],
-        "accessionIdentifier": {
+        "accessionIdentifier":{
           "value":"CH000056DN"
         },
-        "type": {
+        "type":{
           "text":"URINE"
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "receivedTime":"2010-02-24T15:41:00+00:00",
-        "collection": {
+        "collection":{
           "collectedDateTime":"2010-02-23T00:00:00+00:00"
         }
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Specimen",
         "id":"96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-1",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
           ]
@@ -123,26 +123,26 @@
             "value":"96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-1"
           }
         ],
-        "accessionIdentifier": {
+        "accessionIdentifier":{
           "value":"CH000056DO"
         },
-        "type": {
+        "type":{
           "text":"SERUM"
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "receivedTime":"2001-03-30T12:21:00+01:00",
-        "collection": {
+        "collection":{
           "collectedDateTime":"2010-02-23T15:41:00+00:00"
         }
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Specimen",
         "id":"96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-2",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
           ]
@@ -153,23 +153,23 @@
             "value":"96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-2"
           }
         ],
-        "accessionIdentifier": {
+        "accessionIdentifier":{
           "value":"CH000056DP"
         },
-        "type": {
+        "type":{
           "text":"SERUM"
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "receivedTime":"2010-02-24T15:41:00+00:00"
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -192,13 +192,13 @@
             ]
           }
         ],
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://read.info/readv2",
               "code":"465..00",
               "display":"Urine pregnancy test",
-              "userSelected": true
+              "userSelected":true
             },
             {
               "extension":[
@@ -218,7 +218,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2010-02-23",
@@ -229,13 +229,13 @@
           }
         ],
         "comment":"NEGATIVE\n     In normal pregnancies the test will usually be positive from the\n     second day after the expected menstruation.",
-        "specimen": {
+        "specimen":{
           "reference":"Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0"
         },
         "related":[
           {
             "type":"has-member",
-            "target": {
+            "target":{
               "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-COMM"
             }
           }
@@ -243,10 +243,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Specimen",
         "id":"NON-SIGNIFICANT-SPECIMEN",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
           ]
@@ -257,20 +257,20 @@
             "value":"NON-SIGNIFICANT-SPECIMEN"
           }
         ],
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "receivedTime":"2001-02-03T10:00:00+00:00",
-        "collection": {
+        "collection":{
           "collectedDateTime":"2001-02-03T11:00:00+00:00"
         }
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-COMM",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -282,7 +282,7 @@
           }
         ],
         "status":"unknown",
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://snomed.info/sct",
@@ -291,7 +291,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2020-12-15T15:17:04.917+00:00",
@@ -305,7 +305,7 @@
         "related":[
           {
             "type":"derived-from",
-            "target": {
+            "target":{
               "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2"
             }
           }
@@ -313,10 +313,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"FILING-COMMENT-WITH-NO-COMMENT",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -328,7 +328,7 @@
           }
         ],
         "status":"unknown",
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://snomed.info/sct",
@@ -337,7 +337,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2020-12-15T15:17:04.917+00:00",
@@ -349,7 +349,7 @@
         ],
         "related":[
           {
-            "target": {
+            "target":{
               "reference":"Observation/461839A4-9B28-46D4-BC27-297C46F4F80E"
             }
           }
@@ -357,10 +357,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TEST",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -372,7 +372,7 @@
           }
         ],
         "status":"unknown",
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2020-12-15T15:17:04.917+00:00",
@@ -385,13 +385,13 @@
         "related":[
           {
             "type":"has-member",
-            "target": {
+            "target":{
               "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST1"
             }
           },
           {
             "type":"has-member",
-            "target": {
+            "target":{
               "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST2"
             }
           }
@@ -399,10 +399,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST1",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -414,7 +414,7 @@
           }
         ],
         "status":"unknown",
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://snomed.info/sct",
@@ -423,7 +423,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2020-12-15T15:17:04.917+00:00",
@@ -437,7 +437,7 @@
         "related":[
           {
             "type":"derived-from",
-            "target": {
+            "target":{
               "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2"
             }
           }
@@ -445,10 +445,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-TST2",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -460,7 +460,7 @@
           }
         ],
         "status":"unknown",
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://snomed.info/sct",
@@ -469,7 +469,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2020-12-15T15:17:04.917+00:00",
@@ -483,7 +483,7 @@
         "related":[
           {
             "type":"derived-from",
-            "target": {
+            "target":{
               "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2"
             }
           }
@@ -491,10 +491,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -517,13 +517,13 @@
             ]
           }
         ],
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://read.info/readv2",
               "code":"4465.00",
               "display":"Serum oestradiol level",
-              "userSelected": true
+              "userSelected":true
             },
             {
               "extension":[
@@ -543,7 +543,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2010-02-23",
@@ -553,21 +553,21 @@
             "reference":"Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
           }
         ],
-        "valueQuantity": {
-          "value": 8.800,
+        "valueQuantity":{
+          "value":8.800,
           "unit":"mmol/L"
         },
-        "specimen": {
+        "specimen":{
           "reference":"Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-1"
         },
         "referenceRange":[
           {
-            "low": {
-              "value": 10.000,
+            "low":{
+              "value":10.000,
               "unit":"mmol/L"
             },
-            "high": {
-              "value": 90.000,
+            "high":{
+              "value":90.000,
               "unit":"mmol/L"
             }
           }
@@ -575,7 +575,7 @@
         "related":[
           {
             "type":"has-member",
-            "target": {
+            "target":{
               "reference":"Observation/6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78-COMM"
             }
           }
@@ -583,10 +583,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78-COMM",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -598,7 +598,7 @@
           }
         ],
         "status":"unknown",
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://snomed.info/sct",
@@ -607,7 +607,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2020-12-15T15:17:13.46+00:00",
@@ -621,7 +621,7 @@
         "related":[
           {
             "type":"derived-from",
-            "target": {
+            "target":{
               "reference":"Observation/6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78"
             }
           }
@@ -632,7 +632,7 @@
       "resource":{
         "resourceType":"Observation",
         "id":"AD373CA7-3940-4249-85A2-D3A22E9F17C7",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -655,13 +655,13 @@
             ]
           }
         ],
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://read.info/readv2",
               "code":"4483.00",
               "display":"Serum ACTH",
-              "userSelected": true
+              "userSelected":true
             },
             {
               "extension":[
@@ -681,7 +681,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2010-02-23",
@@ -695,10 +695,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"D0A358C9-4833-4827-B14B-E8515C25CB12",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -721,13 +721,13 @@
             ]
           }
         ],
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://read.info/readv2",
               "code":"4483.00",
               "display":"Serum ACTH",
-              "userSelected": true
+              "userSelected":true
             },
             {
               "extension":[
@@ -747,7 +747,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2010-02-23",
@@ -758,13 +758,13 @@
           }
         ],
         "comment":"Test not available",
-        "specimen": {
+        "specimen":{
           "reference":"Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-2"
         },
         "related":[
           {
             "type":"has-member",
-            "target": {
+            "target":{
               "reference":"Observation/D0A358C9-4833-4827-B14B-E8515C25CB12-COMM"
             }
           }
@@ -772,10 +772,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"D0A358C9-4833-4827-B14B-E8515C25CB12-COMM",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -787,7 +787,7 @@
           }
         ],
         "status":"unknown",
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://snomed.info/sct",
@@ -796,7 +796,7 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2020-12-15T15:17:13.51+00:00",
@@ -810,7 +810,7 @@
         "related":[
           {
             "type":"derived-from",
-            "target": {
+            "target":{
               "reference":"Observation/D0A358C9-4833-4827-B14B-E8515C25CB12"
             }
           }
@@ -818,10 +818,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"TEST-RESULT-NO-SPECIMEN",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -833,13 +833,13 @@
           }
         ],
         "status":"final",
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://read.info/readv2",
               "code":"42R5.00",
               "display":"Serum TIBC",
-              "userSelected": true
+              "userSelected":true
             },
             {
               "extension":[
@@ -859,22 +859,22 @@
             }
           ]
         },
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2001-02-03T12:00:00+00:00",
         "issued":"2001-02-03T13:00:00+00:00",
-        "valueQuantity": {
-          "value": 42.000,
+        "valueQuantity":{
+          "value":42.000,
           "unit":"umol/L"
         }
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Practitioner",
         "id":"89890-1985-45D9-993E-C5FF51F36828",
-        "meta": {
+        "meta":{
           "versionId":"7786052607397903776",
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
@@ -896,10 +896,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Organization",
         "id":"5E496953-065B-41F2-9577-BE8F2FBD0757",
-        "meta": {
+        "meta":{
           "versionId":"1112974926854455048",
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
@@ -908,7 +908,7 @@
         "extension":[
           {
             "url":"https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MainLocation-1",
-            "valueReference": {
+            "valueReference":{
               "reference":"Location/EB3994A6-5A87-4B53-A414-913137072F57"
             }
           }
@@ -923,10 +923,10 @@
       }
     },
     {
-      "resource": {
+      "resource":{
         "resourceType":"Observation",
         "id":"TestResult-WithRelatedMember-WhichIsntAFilingComment",
-        "meta": {
+        "meta":{
           "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
           ]
@@ -937,13 +937,13 @@
             "value":"TestResult-WithRelatedMember-WhichIsntAFilingComment"
           }
         ],
-        "code": {
+        "code":{
           "coding":[
             {
               "system":"http://read.info/readv2",
               "code":"4465.00",
               "display":"Serum oestradiol level",
-              "userSelected": true
+              "userSelected":true
             },
             {
               "extension":[
@@ -963,13 +963,13 @@
             }
           ]
         },
-        "valueQuantity": {
-          "value": 8.800,
+        "valueQuantity":{
+          "value":8.800,
           "unit":"mmol/L"
         },
         "comment":"Notes provided alongside test result",
         "status":"unknown",
-        "subject": {
+        "subject":{
           "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
         },
         "effectiveDateTime":"2020-12-15T15:17:04.917+00:00",
@@ -982,7 +982,7 @@
         "related":[
           {
             "type":"has-member",
-            "target": {
+            "target":{
               "display":"Referencing itself as a member, as opposed to a filing comment. This is invalid according to GP Connect.",
               "reference":"Observation/TestResult-WithRelatedMember-WhichIsntAFilingComment"
             }
