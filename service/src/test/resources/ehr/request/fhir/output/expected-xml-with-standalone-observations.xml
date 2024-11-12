@@ -268,15 +268,15 @@
                                 </pertinentAnnotation>
                             </pertinentInformation>
 
-                            <Participant typeCode="PRF" contextControlCode="OP">
-                                <agentRef classCode="AGNT">
-                                    <id root="test-id-3"/>
-                                </agentRef>
-                            </Participant>
-                        </ObservationStatement>
-                    </component>
-                </ehrComposition>
-            </component>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
         </ehrFolder>
     </component>
     <inFulfillmentOf typeCode="FLFS">
