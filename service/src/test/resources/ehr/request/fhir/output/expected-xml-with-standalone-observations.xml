@@ -41,33 +41,33 @@
             <responsibleParty typeCode="RESP">
     <agentDirectory classCode="AGNT">
         <part typeCode="PART">
-            <Agent classCode="AGNT">
-                <id root="test-id-3"/>
-                <code nullFlavor="UNK">
-                    <originalText>Unknown</originalText>
-                </code>
-                <agentPerson classCode="PSN" determinerCode="INSTANCE">
-                    <name>
-                        <family>TEMPLE SOWERBY MEDICAL PRACTICE</family>
-                    </name>
-                </agentPerson>
-            </Agent>
-        </part>
-        <part typeCode="PART">
-            <Agent classCode="AGNT">
-                <id root="test-id-3"/>
-                <code nullFlavor="UNK">
-                    <originalText>Unknown</originalText>
-                </code>
-                <agentPerson classCode="PSN" determinerCode="INSTANCE">
-                    <name>
-                        <prefix>Dr</prefix>
-                        <given>David</given>
-                        <family>McAvenue</family>
-                    </name>
-                </agentPerson>
-            </Agent>
-        </part>
+    <Agent classCode="AGNT">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK">
+            <originalText>Unknown</originalText>
+        </code>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>TEMPLE SOWERBY MEDICAL PRACTICE</family>
+            </name>
+        </agentPerson>
+    </Agent>
+</part>
+<part typeCode="PART">
+    <Agent classCode="AGNT">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK">
+            <originalText>Unknown</originalText>
+        </code>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <prefix>Dr</prefix>
+                <given>David</given>
+                <family>McAvenue</family>
+            </name>
+        </agentPerson>
+    </Agent>
+</part>
     </agentDirectory>
 </responsibleParty>
 <component typeCode="COMP">
