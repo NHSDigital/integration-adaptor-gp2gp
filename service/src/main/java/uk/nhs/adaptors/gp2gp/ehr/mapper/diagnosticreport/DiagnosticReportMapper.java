@@ -79,7 +79,7 @@ public class DiagnosticReportMapper {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport, observations);
         final IdMapper idMapper = messageContext.getIdMapper();
         markObservationsAsProcessed(idMapper, observations);
-        observations = assignDummySpecimensToOrphanedTestResults(observations, specimens);
+        observations = assignDummySpecimensToObservationsWithNoSpecimen(observations, specimens);
 
         var processedObservations = observations.stream()
                 .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
@@ -125,7 +125,7 @@ public class DiagnosticReportMapper {
         List<Specimen> specimens = new ArrayList<>();
 
         // At least one specimen is required to exist for any DiagnosticReport, according to the mim
-        if (!diagnosticReport.hasSpecimen() || hasOrphanedTestResults(observations)) {
+        if (!diagnosticReport.hasSpecimen() || hasObservationsWithoutSpecimen(observations)) {
             specimens.add(generateDummySpecimen(diagnosticReport));
         }
 
@@ -143,17 +143,17 @@ public class DiagnosticReportMapper {
 
     }
 
-    private boolean hasOrphanedTestResults(List<Observation> observations) {
+    private boolean hasObservationsWithoutSpecimen(List<Observation> observations) {
         return observations
                 .stream()
                 .filter(observation -> !isFilingComment(observation))
                 .anyMatch(observation -> !observation.hasSpecimen());
     }
 
-    private List<Observation> assignDummySpecimensToOrphanedTestResults(
+    private List<Observation> assignDummySpecimensToObservationsWithNoSpecimen(
             List<Observation> observations, List<Specimen> specimens) {
 
-        if (!hasOrphanedTestResults(observations)) {
+        if (!hasObservationsWithoutSpecimen(observations)) {
             return observations;
         }
 
