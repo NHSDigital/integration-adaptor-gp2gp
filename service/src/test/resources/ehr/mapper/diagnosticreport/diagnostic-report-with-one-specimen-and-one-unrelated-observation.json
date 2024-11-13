@@ -37,7 +37,7 @@
   "issued": "2010-02-25T15:41:00+00:00",
   "result": [
     {
-      "reference": "Observation/AD373CA7-3940-4249-85A2-D3A22E9F17C7"
+      "reference": "Observation/TestResult-WithoutSpecimenReference"
     }
   ],
   "specimen":[
