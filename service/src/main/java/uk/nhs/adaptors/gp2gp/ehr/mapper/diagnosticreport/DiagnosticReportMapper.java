@@ -81,12 +81,12 @@ public class DiagnosticReportMapper {
         markObservationsAsProcessed(idMapper, observations);
         observations = assignDummySpecimensToObservationsWithNoSpecimen(observations, specimens);
 
-        var processedObservations = observations.stream()
+        List<Observation> observationsExcludingFilingComments = observations.stream()
                 .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
                 .toList();
 
         String mappedSpecimens = specimens.stream()
-            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, processedObservations, diagnosticReport))
+            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observationsExcludingFilingComments, diagnosticReport))
             .collect(Collectors.joining());
 
         String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, observations);
