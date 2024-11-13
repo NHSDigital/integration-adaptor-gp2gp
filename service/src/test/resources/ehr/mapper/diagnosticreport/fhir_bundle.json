@@ -861,65 +861,12 @@
       }
     },
     {
-      "resource":{
-        "resourceType":"Observation",
-        "id":"TEST-RESULT-NO-SPECIMEN",
-        "meta":{
-          "profile":[
-            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
-          ]
-        },
-        "identifier":[
-          {
-            "system":"https://wiremock/",
-            "value":"TEST-RESULT-NO-SPECIMEN"
-          }
-        ],
-        "status":"final",
-        "code":{
-          "coding":[
-            {
-              "system":"http://read.info/readv2",
-              "code":"42R5.00",
-              "display":"Serum TIBC",
-              "userSelected":true
-            },
-            {
-              "extension":[
-                {
-                  "url":"https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
-                  "extension":[
-                    {
-                      "url":"descriptionId",
-                      "valueId":"2580111000000118"
-                    }
-                  ]
-                }
-              ],
-              "system":"http://snomed.info/sct",
-              "code":"1015451000000101",
-              "display":"Serum total iron binding capacity"
-            }
-          ]
-        },
-        "subject":{
-          "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
-        },
-        "effectiveDateTime":"2001-02-03T12:00:00+00:00",
-        "issued":"2001-02-03T13:00:00+00:00",
-        "valueQuantity":{
-          "value":42.000,
-          "unit":"umol/L"
-        }
-      }
-    },
-    {
-      "resource":{
-        "resourceType":"Practitioner",
-        "id":"89890-1985-45D9-993E-C5FF51F36828",
-        "meta":{
-          "versionId":"7786052607397903776",
-          "profile":[
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "89890-1985-45D9-993E-C5FF51F36828",
+        "meta": {
+          "versionId": "7786052607397903776",
+          "profile": [
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
           ]
         },
