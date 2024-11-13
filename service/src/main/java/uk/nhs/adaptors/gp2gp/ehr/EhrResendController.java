@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
@@ -30,6 +31,7 @@ public class EhrResendController {
 
     private EhrExtractStatusRepository ehrExtractStatusRepository;
     private TaskDispatcher taskDispatcher;
+    private RandomIdGeneratorService randomIdGeneratorService;
 
     @PostMapping("/{conversationId}")
     public ResponseEntity<OperationOutcome> scheduleEhrExtractResend(@PathVariable String conversationId) {
@@ -51,7 +53,8 @@ public class EhrResendController {
             return new ResponseEntity<>(operationOutcome, HttpStatus.NOT_FOUND);
         }
 
-        var taskDefinition = GetGpcStructuredTaskDefinition.builder().build();
+        var taskDefinition = GetGpcStructuredTaskDefinition.getGetGpcStructuredTaskDefinition(randomIdGeneratorService,
+                                                                                              ehrExtractStatus.get());
         taskDispatcher.createTask(taskDefinition);
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);

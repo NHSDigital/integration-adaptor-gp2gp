@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
@@ -42,12 +43,16 @@ public class EhrResendControllerTest {
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     private static final String URI_TYPE = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";
     private static final String CONVERSATION_ID = "123-456";
+    public static final String NHS_NUMBER = "12345";
 
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
     @Autowired
     private EhrResendController ehrResendController;
+
+    @MockBean
+    private RandomIdGeneratorService randomIdGeneratorService;
 
     @MockBean
     private TaskDispatcher taskDispatcher;
@@ -70,6 +75,7 @@ public class EhrResendControllerTest {
                                         .received(FIVE_DAYS_AGO)
                                         .rootId(generateRandomUppercaseUUID())
                                         .build());
+        ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
 
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
@@ -97,12 +103,14 @@ public class EhrResendControllerTest {
                                                            .received(FIVE_DAYS_AGO)
                                                            .rootId(generateRandomUppercaseUUID())
                                                            .build());
+        ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
 
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
-        var taskDefinition = GetGpcStructuredTaskDefinition.builder().build();
+        var taskDefinition = GetGpcStructuredTaskDefinition.getGetGpcStructuredTaskDefinition(randomIdGeneratorService,
+                                                                                              ehrExtractStatus);
         verify(taskDispatcher, times(1)).createTask(taskDefinition);
 
     }
