@@ -119,7 +119,7 @@ class DiagnosticReportMapperTest {
         when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockIdForReference());
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(specimenMapper.mapSpecimenToCompoundStatement(any(Specimen.class), anyList(), any(DiagnosticReport.class)))
-                .thenAnswer(mockSpecimenMapping());
+            .thenAnswer(mockSpecimenMapping());
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
