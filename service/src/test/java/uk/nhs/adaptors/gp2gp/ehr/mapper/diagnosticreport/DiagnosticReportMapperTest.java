@@ -330,7 +330,7 @@ class DiagnosticReportMapperTest {
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
         final InputBundle inputBundle = new InputBundle(bundle);
-        final String expectObservation = "Observation/AD373CA7-3940-4249-85A2-D3A22E9F17C7";
+        final String expectObservation = "Observation/TestResult-WithoutSpecimenReference";
         final String dummyNamePrefix = DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
