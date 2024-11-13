@@ -6,8 +6,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskType;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 /**
  * Task definition for downloading Structured Record from GCP
@@ -25,5 +27,20 @@ public class GetGpcStructuredTaskDefinition extends TaskDefinition {
     @Override
     public TaskType getTaskType() {
         return GET_GPC_STRUCTURED;
+    }
+
+    public static GetGpcStructuredTaskDefinition getGetGpcStructuredTaskDefinition(RandomIdGeneratorService randomIdGeneratorService,
+                                                                                   EhrExtractStatus ehrExtractStatus) {
+        var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
+            .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
+            .taskId(randomIdGeneratorService.createNewId())
+            .conversationId(ehrExtractStatus.getConversationId())
+            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
+            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .build();
+        return getGpcStructuredTaskDefinition;
     }
 }
