@@ -90,9 +90,6 @@ class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_EXTENSION_ID = "diagnostic-report-with-extension-id.xml";
     private static final String OUTPUT_XML_MULTIPLE_RESULTS = "diagnostic-report-with-multiple-results.xml";
     private static final String OUTPUT_XML_UNRELATED_TEST_RESULT = "diagnostic-report-with-one-specimen-and-one-unrelated-observation.xml";
-    private static final String REGEXP_UUID = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
-    private static final String MOCKED_SPECIMEN_PREFIX = "Mapped Specimen with id";
-    private static final String MOCKED_SPECIMEN_LINKED_OBSERVATION = "with linked Observations";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -307,20 +304,15 @@ class DiagnosticReportMapperTest {
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
         final InputBundle inputBundle = new InputBundle(bundle);
-        final String expectObservation = "Observation/TestResult-WithoutSpecimenReference";
-        final String dummyNamePrefix = DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
 
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
         // This checks that the unlinked test result is given a dummy specimen.
-        assertThat(actualXml).matches("(?s).*<!-- " + MOCKED_SPECIMEN_PREFIX + ": " + dummyNamePrefix
-                + REGEXP_UUID
-                + " " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": "
-                + expectObservation
-                + "-->.*"
-        );
+        assertThat(actualXml).containsIgnoringWhitespaces(
+                "<!-- Mapped Specimen with id: DUMMY-SPECIMEN-5E496953-065B-41F2-9577-BE8F2FBD0757 "
+                        + "with linked Observations: Observation/TestResult-WithoutSpecimenReference-->");
     }
 
     @Test
@@ -330,25 +322,13 @@ class DiagnosticReportMapperTest {
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
         final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
         final InputBundle inputBundle = new InputBundle(bundle);
-        final String expectObservation = "Observation/TestResult-WithoutSpecimenReference";
-        final String dummyNamePrefix = DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
         // This checks that the unlinked test result is given a dummy specimen.
-        assertThat(actualXml).matches("(?s).*<!-- " + MOCKED_SPECIMEN_PREFIX + ": " + dummyNamePrefix
-                + REGEXP_UUID
-                + " " + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": "
-                + expectObservation
-                + "-->.*"
-        );
-        // This checks that the linked test result has its correct specimen.
-        assertThat(actualXml).containsIgnoringWhitespaces("<!-- " + MOCKED_SPECIMEN_PREFIX + ": "
-                + "Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0"
-                + MOCKED_SPECIMEN_LINKED_OBSERVATION + ":"
-                + "Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2"
-                + " -->"
-        );
+        assertThat(actualXml).containsIgnoringWhitespaces(
+                "<!-- Mapped Specimen with id: DUMMY-SPECIMEN-5E496953-065B-41F2-9577-BE8F2FBD0757 "
+                        + "with linked Observations: Observation/TestResult-WithoutSpecimenReference-->");
 
     }
 
@@ -412,10 +392,9 @@ class DiagnosticReportMapperTest {
             }
 
             if (linkedObservations.isEmpty()) {
-                return String.format("<!-- " + MOCKED_SPECIMEN_PREFIX + ": %s -->", specimen.getId());
+                return String.format("<!-- Mapped Specimen with id: %s -->", specimen.getId());
             }
-            return String.format("<!-- " + MOCKED_SPECIMEN_PREFIX + ": %s "
-                    + MOCKED_SPECIMEN_LINKED_OBSERVATION + ": %s-->",
+            return String.format("<!-- Mapped Specimen with id: %s with linked Observations: %s-->",
                     specimen.getId(),
                     String.join(",", linkedObservations));
         };

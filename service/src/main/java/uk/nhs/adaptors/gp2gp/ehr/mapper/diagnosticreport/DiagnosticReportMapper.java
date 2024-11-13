@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -121,7 +122,7 @@ public class DiagnosticReportMapper {
 
         List<Specimen> specimens = new ArrayList<>();
 
-        // At least one specimen is required to exist for any DiagnosticReport
+        // At least one specimen is required to exist for any DiagnosticReport, according to the mim
         if (!diagnosticReport.hasSpecimen() || hasOrphanedTestResults(observations)) {
             specimens.add(generateDummySpecimen(diagnosticReport));
         }
@@ -143,6 +144,7 @@ public class DiagnosticReportMapper {
     private boolean hasOrphanedTestResults(List<Observation> observations) {
         return observations
                 .stream()
+                .filter(observation -> !isFilingComment(observation))
                 .anyMatch(observation -> !observation.hasSpecimen());
     }
 
@@ -161,7 +163,7 @@ public class DiagnosticReportMapper {
         Reference dummySpecimenReference = new Reference(dummySpecimen.getId());
 
         for (Observation observation : observations) {
-            if (!observation.hasSpecimen()) {
+            if (!observation.hasSpecimen() && !isFilingComment(observation)) {
                 observation.setSpecimen(dummySpecimenReference);
             }
         }
