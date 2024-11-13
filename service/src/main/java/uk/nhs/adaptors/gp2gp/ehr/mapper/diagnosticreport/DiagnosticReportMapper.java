@@ -130,14 +130,14 @@ public class DiagnosticReportMapper {
         }
 
         var inputBundleHolder = messageContext.getInputBundleHolder();
-        List<Specimen> preExistingSpecimens = diagnosticReport.getSpecimen()
+        List<Specimen> nonDummySpecimens = diagnosticReport.getSpecimen()
             .stream()
             .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
             .flatMap(Optional::stream)
             .map(Specimen.class::cast)
             .collect(Collectors.toList());
 
-        specimens.addAll(preExistingSpecimens);
+        specimens.addAll(nonDummySpecimens);
 
         return specimens;
 
