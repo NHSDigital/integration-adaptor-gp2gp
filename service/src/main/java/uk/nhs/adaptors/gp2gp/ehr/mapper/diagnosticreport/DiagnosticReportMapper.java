@@ -79,15 +79,17 @@ public class DiagnosticReportMapper {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport, observations);
         final IdMapper idMapper = messageContext.getIdMapper();
         markObservationsAsProcessed(idMapper, observations);
+        observations = assignDummySpecimensToOrphanedTestResults(observations, specimens);
 
-        final List<Observation> processedObservations =
-                assignDummySpecimensToOrphanedTestResults(observations, specimens);
+        var processedObservations = observations.stream()
+                .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
+                .toList();
 
         String mappedSpecimens = specimens.stream()
             .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, processedObservations, diagnosticReport))
             .collect(Collectors.joining());
 
-        String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, processedObservations);
+        String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, observations);
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getIdElement()))
