@@ -76,6 +76,7 @@ class DiagnosticReportMapperTest {
     private static final String INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.json";
     private static final String INPUT_JSON_EXTENSION_ID = "diagnostic-report-with-extension-id.json";
     private static final String INPUT_JSON_URN_OID_EXTENSION_ID = "diagnostic-report-with-urn-oid-extension-id.json";
+    private static final String INPUT_JSON_UNRELATED_TEST_RESULT = "diagnostic-report-with-one-specimen-and-one-unrelated-observation.json";
 
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
     private static final String OUTPUT_XML_STATUS_NARRATIVE = "diagnostic-report-with-status-narrative.xml";
@@ -87,6 +88,7 @@ class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.xml";
     private static final String OUTPUT_XML_EXTENSION_ID = "diagnostic-report-with-extension-id.xml";
     private static final String OUTPUT_XML_MULTIPLE_RESULTS = "diagnostic-report-with-multiple-results.xml";
+    private static final String OUTPUT_XML_UNRELATED_TEST_RESULT = "diagnostic-report-with-one-specimen-and-one-unrelated-observation.xml";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -137,7 +139,7 @@ class DiagnosticReportMapperTest {
 
         final String outputMessage = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
-        assertThat(removeLineEndings(outputMessage)).isEqualTo(removeLineEndings(expectedOutputMessage.toString()));
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage.toString());
     }
 
     @Test
@@ -301,10 +303,6 @@ class DiagnosticReportMapperTest {
         return FileParsingUtility.parseResourceFromJsonFile(filePath, DiagnosticReport.class);
     }
 
-    private String removeLineEndings(String input) {
-        return input.replace("\n", "").replace("\r", "");
-    }
-
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
             Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_STATUS_NARRATIVE),
@@ -320,7 +318,8 @@ class DiagnosticReportMapperTest {
             Arguments.of(INPUT_JSON_CODED_DIAGNOSIS, OUTPUT_XML_CODED_DIAGNOSIS),
             Arguments.of(INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS, OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS),
             Arguments.of(INPUT_JSON_EXTENSION_ID, OUTPUT_XML_EXTENSION_ID),
-            Arguments.of(INPUT_JSON_URN_OID_EXTENSION_ID, OUTPUT_XML_EXTENSION_ID)
+            Arguments.of(INPUT_JSON_URN_OID_EXTENSION_ID, OUTPUT_XML_EXTENSION_ID),
+            Arguments.of(INPUT_JSON_UNRELATED_TEST_RESULT, OUTPUT_XML_UNRELATED_TEST_RESULT)
         );
     }
 

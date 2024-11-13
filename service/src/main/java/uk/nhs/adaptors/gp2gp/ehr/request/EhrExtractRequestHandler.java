@@ -97,18 +97,12 @@ public class EhrExtractRequestHandler {
     }
 
     private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
-        var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
-            .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
-            .taskId(randomIdGeneratorService.createNewId())
-            .conversationId(ehrExtractStatus.getConversationId())
-            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
-            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
-            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
-            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
-            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
-            .build();
+        var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.getGetGpcStructuredTaskDefinition(randomIdGeneratorService,
+                                                                                                              ehrExtractStatus);
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
     }
+
+
 
     private EhrExtractStatus.EhrRequest prepareMinimalEhrRequest(Document header, Document payload) {
         return EhrExtractStatus.EhrRequest.builder()
