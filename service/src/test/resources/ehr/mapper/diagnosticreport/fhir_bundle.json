@@ -244,30 +244,6 @@
     },
     {
       "resource":{
-        "resourceType":"Specimen",
-        "id":"NON-SIGNIFICANT-SPECIMEN",
-        "meta":{
-          "profile":[
-            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
-          ]
-        },
-        "identifier":[
-          {
-            "system":"https://wiremock/",
-            "value":"NON-SIGNIFICANT-SPECIMEN"
-          }
-        ],
-        "subject":{
-          "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
-        },
-        "receivedTime":"2001-02-03T10:00:00+00:00",
-        "collection":{
-          "collectedDateTime":"2001-02-03T11:00:00+00:00"
-        }
-      }
-    },
-    {
-      "resource":{
         "resourceType":"Observation",
         "id":"B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-COMM",
         "meta":{
