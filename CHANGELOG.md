@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## Added
-
+* When mapping a `DiagnosticReport` which contains a `TestResult` without a `Specimen` attached to it, a new `Specimen` is 
+created to allow the `TestResult` to be mapped correctly.
 * When mapping a `DocumentReference` which contains a `NOPAT` `meta.security` or `NOPAT` `securityLabel` tag the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
 * When mapping `AllergyIntolerances` which contain a `NOPAT` `meta.security` tag the resultant XML for that resource
