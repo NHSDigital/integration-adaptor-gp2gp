@@ -79,11 +79,12 @@ public class DiagnosticReportMapper {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport, observations);
         final IdMapper idMapper = messageContext.getIdMapper();
         markObservationsAsProcessed(idMapper, observations);
-        observations = assignDummySpecimensToObservationsWithNoSpecimen(observations, specimens);
 
-        List<Observation> observationsExcludingFilingComments = observations.stream()
-                .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
-                .toList();
+        List<Observation> observationsExcludingFilingComments = assignDummySpecimensToObservationsWithNoSpecimen(
+                observations.stream()
+                    .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
+                    .toList(),
+                specimens);
 
         String mappedSpecimens = specimens.stream()
             .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observationsExcludingFilingComments, diagnosticReport))
