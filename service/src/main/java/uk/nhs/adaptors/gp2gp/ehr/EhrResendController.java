@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Meta;
@@ -22,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(path = "/ehr-resend")
@@ -53,13 +55,17 @@ public class EhrResendController {
             return new ResponseEntity<>(operationOutcome, HttpStatus.NOT_FOUND);
         }
 
-        var taskDefinition = GetGpcStructuredTaskDefinition.getGetGpcStructuredTaskDefinition(randomIdGeneratorService,
-                                                                                              ehrExtractStatus.get());
-        taskDispatcher.createTask(taskDefinition);
+        LOGGER.info("Creating tasks to start the EHR Extract process resend");
+        createGetGpcStructuredTask(ehrExtractStatus.get());
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
+    private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
+        var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.getGetGpcStructuredTaskDefinition(randomIdGeneratorService,
+                                                                                                              ehrExtractStatus);
+        taskDispatcher.createTask(getGpcStructuredTaskDefinition);
+    }
 
     public static OperationOutcome createOperationOutcome(
         OperationOutcome.IssueType type, OperationOutcome.IssueSeverity severity, CodeableConcept details, String diagnostics) {
