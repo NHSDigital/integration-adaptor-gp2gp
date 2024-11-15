@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +21,7 @@ import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.SimpleQuantity;
+import org.hl7.fhir.dstu3.model.Specimen;
 import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -235,6 +237,28 @@ public class ObservationMapper {
             OBSERVATION_STATEMENT_TEMPLATE,
             observationStatementTemplateParametersBuilder.build()
         );
+    }
+
+    public String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
+        List<Observation> observationsAssociatedWithSpecimen;
+
+        if (dummySpecimenOrObservationExists(specimen, observations)) {
+            observationsAssociatedWithSpecimen = observations;
+        } else {
+            observationsAssociatedWithSpecimen = observations.stream()
+                    .filter(Observation::hasSpecimen)
+                    .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
+                    .collect(Collectors.toList());
+        }
+
+        return observationsAssociatedWithSpecimen.stream()
+                .map(this::mapObservationToCompoundStatement)
+                .collect(Collectors.joining());
+    }
+
+    private boolean dummySpecimenOrObservationExists(Specimen specimen, List<Observation> observations) {
+        return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)
+                || (!observations.isEmpty() && observations.getFirst().getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
     private Optional<String> prepareNarrativeStatements(MultiStatementObservationHolder holder, boolean interpretationCodeMapped) {
