@@ -81,9 +81,7 @@ public class DiagnosticReportMapper {
         markObservationsAsProcessed(idMapper, observations);
 
         List<Observation> observationsExcludingFilingComments = assignDummySpecimensToObservationsWithNoSpecimen(
-                observations.stream()
-                    .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
-                    .toList(),
+                filterOutFilingComments(observations),
                 specimens);
 
         String mappedSpecimens = specimens.stream()
@@ -111,6 +109,12 @@ public class DiagnosticReportMapper {
             DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE,
             diagnosticReportCompoundStatementTemplateParameters.build()
         );
+    }
+
+    private List<Observation> filterOutFilingComments(List<Observation> observations) {
+        return observations.stream()
+                .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
+                .toList();
     }
 
     private String fetchExtensionId(List<Identifier> identifiers) {
