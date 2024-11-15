@@ -8,9 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType.LABORATORY_RESULT_COMMENT;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -73,13 +75,19 @@ public class DiagnosticReportMapper {
     private final ConfidentialityService confidentialityService;
 
     public String mapDiagnosticReportToCompoundStatement(DiagnosticReport diagnosticReport) {
-        List<Specimen> specimens = fetchSpecimens(diagnosticReport);
         List<Observation> observations = fetchObservations(diagnosticReport);
+        List<Specimen> specimens = fetchSpecimens(diagnosticReport, observations);
         final IdMapper idMapper = messageContext.getIdMapper();
         markObservationsAsProcessed(idMapper, observations);
 
+        List<Observation> observationsExcludingFilingComments = assignDummySpecimensToObservationsWithNoSpecimen(
+                observations.stream()
+                    .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
+                    .toList(),
+                specimens);
+
         String mappedSpecimens = specimens.stream()
-            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport))
+            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observationsExcludingFilingComments, diagnosticReport))
             .collect(Collectors.joining());
 
         String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, observations);
@@ -113,21 +121,60 @@ public class DiagnosticReportMapper {
             .orElse(StringUtils.EMPTY);
     }
 
-    private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport) {
-        if (!diagnosticReport.hasSpecimen()) {
-            return Collections.singletonList(generateDefaultSpecimen(diagnosticReport));
+    private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport, List<Observation> observations) {
+
+        List<Specimen> specimens = new ArrayList<>();
+
+        // At least one specimen is required to exist for any DiagnosticReport, according to the mim
+        if (!diagnosticReport.hasSpecimen() || hasObservationsWithoutSpecimen(observations)) {
+            specimens.add(generateDummySpecimen(diagnosticReport));
         }
 
         var inputBundleHolder = messageContext.getInputBundleHolder();
-        return diagnosticReport.getSpecimen()
+        List<Specimen> nonDummySpecimens = diagnosticReport.getSpecimen()
             .stream()
             .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
             .flatMap(Optional::stream)
             .map(Specimen.class::cast)
             .collect(Collectors.toList());
+
+        specimens.addAll(nonDummySpecimens);
+
+        return specimens;
+
     }
 
-    private Specimen generateDefaultSpecimen(DiagnosticReport diagnosticReport) {
+    private boolean hasObservationsWithoutSpecimen(List<Observation> observations) {
+        return observations
+                .stream()
+                .filter(observation -> !isFilingComment(observation))
+                .anyMatch(observation -> !observation.hasSpecimen());
+    }
+
+    private List<Observation> assignDummySpecimensToObservationsWithNoSpecimen(
+            List<Observation> observations, List<Specimen> specimens) {
+
+        if (!hasObservationsWithoutSpecimen(observations)) {
+            return observations;
+        }
+
+        // The assumption was made that all test results without a specimen will have the same dummy specimen referenced
+        Specimen dummySpecimen = specimens.stream()
+                .filter(specimen -> specimen.getId().contains(DUMMY_SPECIMEN_ID_PREFIX))
+                .toList().getFirst();
+
+        Reference dummySpecimenReference = new Reference(dummySpecimen.getId());
+
+        for (Observation observation : observations) {
+            if (!observation.hasSpecimen() && !isFilingComment(observation)) {
+                observation.setSpecimen(dummySpecimenReference);
+            }
+        }
+
+        return observations;
+    }
+
+    private Specimen generateDummySpecimen(DiagnosticReport diagnosticReport) {
         Specimen specimen = new Specimen();
 
         specimen.setId(DUMMY_SPECIMEN_ID_PREFIX + randomIdGeneratorService.createNewId());
