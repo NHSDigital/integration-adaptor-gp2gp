@@ -81,11 +81,11 @@ public class DiagnosticReportMapper {
         final IdMapper idMapper = messageContext.getIdMapper();
         markObservationsAsProcessed(idMapper, observations);
 
-        List<Observation> observationsExcludingFilingComments = assignDummySpecimensToObservationsWithNoSpecimen(
-                observations.stream()
-                    .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
-                    .toList(),
-                specimens);
+        List<Observation> observationsExcludingFilingComments = observationMapper
+                .assignDummySpecimensToObservationsWithNoSpecimen(
+                        observationMapper.filterOutFilingComments(observations),
+                        specimens
+                );
 
         String mappedSpecimens = specimens.stream()
             .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observationsExcludingFilingComments, diagnosticReport))
@@ -167,34 +167,11 @@ public class DiagnosticReportMapper {
                 || (!observations.isEmpty() && observations.getFirst().getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
-    private boolean hasObservationsWithoutSpecimen(List<Observation> observations) {
+    public boolean hasObservationsWithoutSpecimen(List<Observation> observations) {
         return observations
                 .stream()
                 .filter(observation -> !isFilingComment(observation))
                 .anyMatch(observation -> !observation.hasSpecimen());
-    }
-
-    private List<Observation> assignDummySpecimensToObservationsWithNoSpecimen(
-            List<Observation> observations, List<Specimen> specimens) {
-
-        if (!hasObservationsWithoutSpecimen(observations)) {
-            return observations;
-        }
-
-        // The assumption was made that all test results without a specimen will have the same dummy specimen referenced
-        Specimen dummySpecimen = specimens.stream()
-                .filter(specimen -> specimen.getId().contains(DUMMY_SPECIMEN_ID_PREFIX))
-                .toList().getFirst();
-
-        Reference dummySpecimenReference = new Reference(dummySpecimen.getId());
-
-        for (Observation observation : observations) {
-            if (!observation.hasSpecimen() && !isFilingComment(observation)) {
-                observation.setSpecimen(dummySpecimenReference);
-            }
-        }
-
-        return observations;
     }
 
     private Specimen generateDummySpecimen(DiagnosticReport diagnosticReport) {

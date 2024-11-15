@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,6 +21,7 @@ import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.SimpleQuantity;
+import org.hl7.fhir.dstu3.model.Specimen;
 import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -81,6 +83,8 @@ public class ObservationMapper {
     private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
     private static final Set<String> INTERPRETATION_CODES = Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA");
 
+    private final DiagnosticReportMapper diagnosticReportMapper;
+
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
@@ -90,6 +94,35 @@ public class ObservationMapper {
 
     public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen) {
         return mapAndVerify(createHolder(observationAssociatedWithSpecimen));
+    }
+    
+    public List<Observation> filterOutFilingComments(List<Observation> observations) {
+        return observations.stream()
+                .filter(Predicate.not(DiagnosticReportMapper::isFilingComment))
+                .toList();
+    }
+
+    public List<Observation> assignDummySpecimensToObservationsWithNoSpecimen(
+            List<Observation> observations, List<Specimen> specimens) {
+
+        if (!diagnosticReportMapper.hasObservationsWithoutSpecimen(observations)) {
+            return observations;
+        }
+
+        // The assumption was made that all test results without a specimen will have the same dummy specimen referenced
+        Specimen dummySpecimen = specimens.stream()
+                .filter(specimen -> specimen.getId().contains(diagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX))
+                .toList().getFirst();
+
+        Reference dummySpecimenReference = new Reference(dummySpecimen.getId());
+
+        for (Observation observation : observations) {
+            if (!observation.hasSpecimen() && !diagnosticReportMapper.isFilingComment(observation)) {
+                observation.setSpecimen(dummySpecimenReference);
+            }
+        }
+
+        return observations;
     }
 
     private String mapAndVerify(MultiStatementObservationHolder observationAssociatedWithSpecimen) {
