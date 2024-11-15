@@ -70,6 +70,7 @@ public class DiagnosticReportMapper {
 
     private final MessageContext messageContext;
     private final SpecimenMapper specimenMapper;
+    private final ObservationMapper observationMapper;
     private final ParticipantMapper participantMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final ConfidentialityService confidentialityService;
@@ -142,6 +143,28 @@ public class DiagnosticReportMapper {
 
         return specimens;
 
+    }
+
+    public String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
+        List<Observation> observationsAssociatedWithSpecimen;
+
+        if (dummySpecimenOrObservationExists(specimen, observations)) {
+            observationsAssociatedWithSpecimen = observations;
+        } else {
+            observationsAssociatedWithSpecimen = observations.stream()
+                    .filter(Observation::hasSpecimen)
+                    .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
+                    .collect(Collectors.toList());
+        }
+
+        return observationsAssociatedWithSpecimen.stream()
+                .map(observationMapper::mapObservationToCompoundStatement)
+                .collect(Collectors.joining());
+    }
+
+    private boolean dummySpecimenOrObservationExists(Specimen specimen, List<Observation> observations) {
+        return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)
+                || (!observations.isEmpty() && observations.getFirst().getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
     private boolean hasObservationsWithoutSpecimen(List<Observation> observations) {

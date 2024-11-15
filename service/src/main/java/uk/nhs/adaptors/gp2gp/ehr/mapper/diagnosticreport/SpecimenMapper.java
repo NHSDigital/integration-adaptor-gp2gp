@@ -61,12 +61,13 @@ public class SpecimenMapper {
 
     private final MessageContext messageContext;
     private final ObservationMapper observationMapper;
+    private final DiagnosticReportMapper diagnosticreportMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final ConfidentialityService confidentialityService;
 
     public String mapSpecimenToCompoundStatement(Specimen specimen, List<Observation> observations, DiagnosticReport diagnosticReport) {
         String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement());
-        String mappedObservations = mapObservationsAssociatedWithSpecimen(specimen, observations);
+        String mappedObservations = diagnosticreportMapper.mapObservationsAssociatedWithSpecimen(specimen, observations);
 
         var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
             .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getIdElement()))
@@ -133,28 +134,6 @@ public class SpecimenMapper {
         }
 
         return Optional.empty();
-    }
-
-    private String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
-        List<Observation> observationsAssociatedWithSpecimen;
-
-        if (dummySpecimenOrObservationExists(specimen, observations)) {
-            observationsAssociatedWithSpecimen = observations;
-        } else {
-            observationsAssociatedWithSpecimen = observations.stream()
-                .filter(Observation::hasSpecimen)
-                .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
-                .collect(Collectors.toList());
-        }
-
-        return observationsAssociatedWithSpecimen.stream()
-            .map(observationMapper::mapObservationToCompoundStatement)
-            .collect(Collectors.joining());
-    }
-
-    private boolean dummySpecimenOrObservationExists(Specimen specimen, List<Observation> observations) {
-        return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)
-            || (!observations.isEmpty() && observations.getFirst().getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement,
