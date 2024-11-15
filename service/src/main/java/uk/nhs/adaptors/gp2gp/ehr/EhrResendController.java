@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -34,17 +34,14 @@ public class EhrResendController {
     private EhrExtractStatusRepository ehrExtractStatusRepository;
     private TaskDispatcher taskDispatcher;
     private RandomIdGeneratorService randomIdGeneratorService;
+    private final TimestampService timestampService;
 
     @PostMapping("/{conversationId}")
     public ResponseEntity<OperationOutcome> scheduleEhrExtractResend(@PathVariable String conversationId) {
-        Optional<EhrExtractStatus> ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId);
+        EhrExtractStatus ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId).orElseGet(() -> null);
 
-        if (ehrExtractStatus.isEmpty()) {
-            var details = new CodeableConcept();
-            var codeableConceptCoding = new Coding();
-            codeableConceptCoding.setSystem("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1");
-            codeableConceptCoding.setCode("INVALID_IDENTIFIER_VALUE");
-            details.setCoding(List.of(codeableConceptCoding));
+        if (ehrExtractStatus == null) {
+            var details = getCodeableConcept("INVALID_IDENTIFIER_VALUE");
             var diagnostics = "Provide a conversationId that exists and retry the operation";
 
             var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.VALUE,
@@ -55,10 +52,59 @@ public class EhrResendController {
             return new ResponseEntity<>(operationOutcome, HttpStatus.NOT_FOUND);
         }
 
+        if (noErrorsInEhrReceivedAcknowledgement(ehrExtractStatus) && ehrExtractStatus.getError() == null) {
+
+            var details = getCodeableConcept("INTERNAL_SERVER_ERROR");
+            var diagnostics = "The current resend operation is still in progress. Please wait for it to complete before retrying";
+            var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.BUSINESSRULE,
+                                                          OperationOutcome.IssueSeverity.ERROR,
+                                                          details,
+                                                          diagnostics);
+            return new ResponseEntity<>(operationOutcome, HttpStatus.FORBIDDEN);
+        }
+
         LOGGER.info("Creating tasks to start the EHR Extract process resend");
-        createGetGpcStructuredTask(ehrExtractStatus.get());
+        var updatedEhrExtractStatus = prepareEhrExtractStatusForNewResend(ehrExtractStatus);
+        ehrExtractStatusRepository.save(updatedEhrExtractStatus);
+        createGetGpcStructuredTask(updatedEhrExtractStatus);
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    private static CodeableConcept getCodeableConcept(String codeableConceptCode) {
+        var details = new CodeableConcept();
+        var codeableConceptCoding = new Coding();
+        codeableConceptCoding.setSystem("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1");
+        codeableConceptCoding.setCode(codeableConceptCode);
+        details.setCoding(List.of(codeableConceptCoding));
+        return details;
+    }
+
+    private static boolean noErrorsInEhrReceivedAcknowledgement(EhrExtractStatus ehrExtractStatus) {
+        var ehrReceivedAcknowledgement = ehrExtractStatus.getEhrReceivedAcknowledgement();
+        if (ehrReceivedAcknowledgement == null) {
+            return true;
+        }
+
+        var errors = ehrReceivedAcknowledgement.getErrors();
+        if (errors == null || errors.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private EhrExtractStatus prepareEhrExtractStatusForNewResend(EhrExtractStatus ehrExtractStatus) {
+
+        var now = timestampService.now();
+        ehrExtractStatus.setCreated(now);
+        ehrExtractStatus.setUpdatedAt(now);
+        ehrExtractStatus.setMessageTimestamp(now);
+        ehrExtractStatus.setEhrExtractCorePending(null);
+        ehrExtractStatus.setEhrContinue(null);
+        ehrExtractStatus.setAckPending(null);
+        ehrExtractStatus.setEhrReceivedAcknowledgement(null);
+
+        return ehrExtractStatus;
     }
 
     private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
