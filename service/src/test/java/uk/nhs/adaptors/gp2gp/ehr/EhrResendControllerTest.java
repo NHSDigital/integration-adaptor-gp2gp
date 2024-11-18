@@ -94,6 +94,8 @@ public class EhrResendControllerTest {
 
         verify(taskDispatcher, times(1)).createTask(taskDefinition);
         assertEquals(now, updatedEhrExtractStatus.get().getMessageTimestamp());
+        assertEquals(now, updatedEhrExtractStatus.get().getCreated());
+        assertEquals(now, updatedEhrExtractStatus.get().getUpdatedAt());
         assertNull(updatedEhrExtractStatus.get().getEhrExtractCorePending());
         assertNull(updatedEhrExtractStatus.get().getEhrContinue());
         assertNull(updatedEhrExtractStatus.get().getAckPending());

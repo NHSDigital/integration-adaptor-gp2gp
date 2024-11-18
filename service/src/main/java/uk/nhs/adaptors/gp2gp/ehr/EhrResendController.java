@@ -101,7 +101,6 @@ public class EhrResendController {
         ehrExtractStatus.setMessageTimestamp(now);
         ehrExtractStatus.setEhrExtractCorePending(null);
         ehrExtractStatus.setEhrContinue(null);
-        ehrExtractStatus.setAckPending(null);
         ehrExtractStatus.setEhrReceivedAcknowledgement(null);
 
         return ehrExtractStatus;
