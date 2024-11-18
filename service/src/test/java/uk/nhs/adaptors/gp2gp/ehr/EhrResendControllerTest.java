@@ -15,17 +15,22 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrResendControllerTest {
@@ -54,6 +59,46 @@ public class EhrResendControllerTest {
 
     @InjectMocks
     private EhrResendController ehrResendController;
+
+    @Test
+    public void When_AnEhrExtractHasFailed_Expect_GetGpcStructuredTaskScheduled() {
+
+        String ehrMessageRef = generateRandomUppercaseUUID();
+        var ehrExtractStatus = new EhrExtractStatus();
+
+        ehrExtractStatus.setConversationId(CONVERSATION_ID);
+        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
+                                                           .conversationClosed(FIVE_DAYS_AGO)
+                                                           .errors(List.of(
+                                                               EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
+                                                                   .code(INCUMBENT_NACK_CODE)
+                                                                   .display(INCUMBENT_NACK_DISPLAY)
+                                                                   .build()))
+                                                           .messageRef(ehrMessageRef)
+                                                           .received(FIVE_DAYS_AGO)
+                                                           .rootId(generateRandomUppercaseUUID())
+                                                           .build());
+        ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
+        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
+        ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
+
+        doReturn(Optional.of(ehrExtractStatus)).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
+
+        Instant now = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+        doReturn(now).when(timestampService).now();
+
+        ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
+
+        var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId());
+        var taskDefinition = GetGpcStructuredTaskDefinition.getGetGpcStructuredTaskDefinition(randomIdGeneratorService, ehrExtractStatus);
+
+        verify(taskDispatcher, times(1)).createTask(taskDefinition);
+        assertEquals(now, updatedEhrExtractStatus.get().getMessageTimestamp());
+        assertNull(updatedEhrExtractStatus.get().getEhrExtractCorePending());
+        assertNull(updatedEhrExtractStatus.get().getEhrContinue());
+        assertNull(updatedEhrExtractStatus.get().getAckPending());
+        assertNull(updatedEhrExtractStatus.get().getEhrReceivedAcknowledgement());
+    }
 
     @Test
     public void When_AnEhrExtractHasNotFailedAndAnotherResendRequestArrives_Expect_FailedOperationOutcome() {
@@ -112,6 +157,42 @@ public class EhrResendControllerTest {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
         assertNull(response.getBody());
+    }
+
+    @Test
+    public void When_AnEhrExtractHasNotFailed_Expect_RespondsWith403() {
+
+        var details = new CodeableConcept();
+        var codeableConceptCoding = new Coding();
+        codeableConceptCoding.setSystem("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1");
+        codeableConceptCoding.setCode("INTERNAL_SERVER_ERROR");
+        details.setCoding(List.of(codeableConceptCoding));
+        var diagnostics = "The current resend operation is still in progress. Please wait for it to complete before retrying";
+
+        var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.BUSINESSRULE,
+                                                      OperationOutcome.IssueSeverity.ERROR,
+                                                      details,
+                                                      diagnostics);
+
+        String ehrMessageRef = generateRandomUppercaseUUID();
+        var ehrExtractStatus = new EhrExtractStatus();
+
+        ehrExtractStatus.setConversationId(CONVERSATION_ID);
+        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
+                                                           .conversationClosed(FIVE_DAYS_AGO)
+                                                           .errors(List.of())
+                                                           .messageRef(ehrMessageRef)
+                                                           .received(FIVE_DAYS_AGO)
+                                                           .rootId(generateRandomUppercaseUUID())
+                                                           .build());
+        ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
+
+        doReturn(Optional.of(ehrExtractStatus)).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
+
+        var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+        assertThat(response.getBody()).usingRecursiveComparison().isEqualTo(operationOutcome);
     }
 
     @Test
