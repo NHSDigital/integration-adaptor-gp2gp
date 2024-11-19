@@ -6133,7 +6133,7 @@
         },
         {
             "resource": {
-                "resourceType": "Condition",
+                "resourceType": "",
                 "id": "62658072-28AF-47E5-B81C-BC0521D5C41C-PROB",
                 "meta": {
                     "profile": [
