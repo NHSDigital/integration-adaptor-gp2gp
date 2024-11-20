@@ -165,6 +165,140 @@
         "receivedTime":"2010-02-24T15:41:00+00:00"
       }
     },
+
+    {
+      "resource": {
+        "resourceType": "Specimen",
+        "id": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://wiremock/",
+            "value": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached"
+          }
+        ],
+        "subject": {
+          "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+        },
+        "receivedTime": "2001-02-04T10:00:00+00:00",
+        "collection": {
+          "collectedDateTime": "2001-02-04T11:00:00+00:00"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached-1",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://wiremock/",
+            "value": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached-1"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://read.info/readv2",
+              "code": "42R5.00",
+              "display": "Serum TIBC",
+              "userSelected": true
+            },
+            {
+              "extension": [
+                {
+                  "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                  "extension": [
+                    {
+                      "url": "descriptionId",
+                      "valueId": "2580111000000118"
+                    }
+                  ]
+                }
+              ],
+              "system": "http://snomed.info/sct",
+              "code": "1015451000000101",
+              "display": "Serum total iron binding capacity"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+        },
+        "effectiveDateTime": "2001-02-04T12:00:00+00:00",
+        "issued": "2001-02-04T13:00:00+00:00",
+        "valueQuantity": {
+          "value": 43.000,
+          "unit": "umol/L"
+        },
+        "specimen": {
+          "reference": "Specimen/OneSpecimen-OneTestResultAttached-OneTestResultUnattached"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached-2",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://wiremock/",
+            "value": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached-2"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://read.info/readv2",
+              "code": "42R5.00",
+              "display": "Serum TIBC",
+              "userSelected": true
+            },
+            {
+              "extension": [
+                {
+                  "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                  "extension": [
+                    {
+                      "url": "descriptionId",
+                      "valueId": "2580111000000118"
+                    }
+                  ]
+                }
+              ],
+              "system": "http://snomed.info/sct",
+              "code": "1015451000000101",
+              "display": "Serum total iron binding capacity"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+        },
+        "effectiveDateTime": "2001-02-04T12:00:00+00:00",
+        "issued": "2001-02-04T13:00:00+00:00",
+        "valueQuantity": {
+          "value": 44.000,
+          "unit": "umol/L"
+        }
+      }
+    },
     {
       "resource":{
         "resourceType":"Observation",

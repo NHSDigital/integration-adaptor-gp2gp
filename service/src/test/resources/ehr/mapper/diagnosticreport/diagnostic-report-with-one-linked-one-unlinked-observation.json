@@ -1,0 +1,42 @@
+{
+  "resourceType": "DiagnosticReport",
+  "id": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "https://wiremock/",
+      "value": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached"
+    }
+  ],
+  "status": "unknown",
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "721981007",
+        "display": "Diagnostic studies report"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/1"
+  },
+  "issued": "2001-02-04T09:00:00+00:00",
+  "specimen": [
+    {
+      "reference": "Specimen/OneSpecimen-OneTestResultAttached-OneTestResultUnattached"
+    }
+  ],
+  "result": [
+    {
+      "reference": "Observation/OneSpecimen-OneTestResultAttached-OneTestResultUnattached-1"
+    },
+    {
+      "reference": "Observation/OneSpecimen-OneTestResultAttached-OneTestResultUnattached-2"
+    }
+  ]
+}
