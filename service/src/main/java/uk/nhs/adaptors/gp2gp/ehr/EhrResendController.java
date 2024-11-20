@@ -100,6 +100,7 @@ public class EhrResendController {
         ehrExtractStatus.setUpdatedAt(now);
         ehrExtractStatus.setMessageTimestamp(now);
         ehrExtractStatus.setEhrExtractCorePending(null);
+        ehrExtractStatus.setGpcAccessDocument(null);
         ehrExtractStatus.setEhrContinue(null);
         ehrExtractStatus.setEhrReceivedAcknowledgement(null);
 

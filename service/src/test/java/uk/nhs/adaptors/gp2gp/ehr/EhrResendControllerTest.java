@@ -81,6 +81,7 @@ public class EhrResendControllerTest {
         ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
         ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
+        ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder().build());
 
         doReturn(Optional.of(ehrExtractStatus)).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
 
@@ -100,6 +101,7 @@ public class EhrResendControllerTest {
         assertNull(updatedEhrExtractStatus.get().getEhrContinue());
         assertNull(updatedEhrExtractStatus.get().getAckPending());
         assertNull(updatedEhrExtractStatus.get().getEhrReceivedAcknowledgement());
+        assertNull(updatedEhrExtractStatus.get().getGpcAccessDocument());
     }
 
     @Test
