@@ -116,6 +116,8 @@ class DiagnosticReportMapperTest {
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockIdForResourceAndId());
         when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockIdForReference());
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(specimenMapper.mapSpecimenToCompoundStatement(any(Specimen.class), anyList(), any(DiagnosticReport.class)))
+                .thenAnswer(mockSpecimenMapping());
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
@@ -329,7 +331,7 @@ class DiagnosticReportMapperTest {
     }
 
     @Test
-    void When_DiagnosticReport_Has_SpecimenALinkedTestResultAndAnUnlinkedTestResult2_Expect_ASpecimenOnAllTestResults() {
+    void When_DiagnosticReport_Has_SpecimenALinkedTestResultAndAnUnlinkedTestResult_Expect_TwoSpecimensAndTwoTestResults() {
         final String diagnosticReportFileName =
                 "diagnostic-report-with-one-linked-one-unlinked-observation.json";
         final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
@@ -340,8 +342,8 @@ class DiagnosticReportMapperTest {
         final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
         // This checks that the unlinked test result is given a dummy specimen.
         assertThat(actualXml).containsIgnoringWhitespaces(
-                "<!-- Mapped Specimen with id: DUMMY-SPECIMEN-5E496953-065B-41F2-9577-BE8F2FBD0757 "
-                        + "with linked Observations: Observation/TestResult-WithoutSpecimenReference-->");
+                "<!-- Mapped Specimen with id: DUMMY-SPECIMEN-5E496953-065B-41F2-9577-BE8F2FBD0757 with linked Observations: Observation/OneSpecimen-OneTestResultAttached-OneTestResultUnattached-2-->" +
+                        "<!-- Mapped Specimen with id: Specimen/OneSpecimen-OneTestResultAttached-OneTestResultUnattached with linked Observations: Observation/OneSpecimen-OneTestResultAttached-OneTestResultUnattached-1-->");
 
     }
 
