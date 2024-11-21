@@ -21,10 +21,7 @@ public class FhirParseService {
     }
 
     public String encodeToJson(IBaseResource resource) {
-        IParser jsonParser = prepareParser();
-        return jsonParser
-            .setPrettyPrint(true)
-            .encodeResourceToString(resource);
+        return jsonParser.setPrettyPrint(true).encodeResourceToString(resource);
     }
 
     private IParser prepareParser() {
