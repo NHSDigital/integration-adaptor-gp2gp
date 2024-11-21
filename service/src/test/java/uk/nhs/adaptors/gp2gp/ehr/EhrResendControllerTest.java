@@ -1,16 +1,22 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Meta;
 import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.hl7.fhir.dstu3.model.UriType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import uk.nhs.adaptors.gp2gp.common.configuration.ObjectMapperBean;
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
@@ -44,6 +50,11 @@ public class EhrResendControllerTest {
     private static final String FROM_ASID_CODE = "test-from-asid";
     public static final String INCUMBENT_NACK_CODE = "99";
     public static final String INCUMBENT_NACK_DISPLAY = "Unexpected condition.";
+    public static final String INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR";
+    public static final String GPCONNECT_ERROR_OR_WARNING_CODE = "http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1";
+    public static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
+
+    private ObjectMapper objectMapper;
 
     @Mock
     private EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -57,11 +68,23 @@ public class EhrResendControllerTest {
     @Mock
     private TaskDispatcher taskDispatcher;
 
-    @InjectMocks
     private EhrResendController ehrResendController;
 
+
+    @BeforeEach
+    void setUp() {
+        ObjectMapperBean objectMapperBean = new ObjectMapperBean();
+        objectMapper = objectMapperBean.objectMapper(new Jackson2ObjectMapperBuilder());
+        FhirParseService fhirParseService = new FhirParseService();
+        ehrResendController = new EhrResendController(ehrExtractStatusRepository,
+                                                      taskDispatcher,
+                                                      randomIdGeneratorService,
+                                                      timestampService,
+                                                      fhirParseService);
+    }
+
     @Test
-    public void When_AnEhrExtractHasFailed_Expect_GetGpcStructuredTaskScheduled() {
+    void When_AnEhrExtractHasFailed_Expect_GetGpcStructuredTaskScheduled() {
 
         String ehrMessageRef = generateRandomUppercaseUUID();
         var ehrExtractStatus = new EhrExtractStatus();
@@ -105,14 +128,13 @@ public class EhrResendControllerTest {
     }
 
     @Test
-    public void When_AnEhrExtractHasNotFailedAndAnotherResendRequestArrives_Expect_FailedOperationOutcome() {
+    void When_AnEhrExtractHasNotFailedAndAnotherResendRequestArrives_Expect_FailedOperationOutcome() throws JsonProcessingException {
 
         var details = new CodeableConcept();
         var codeableConceptCoding = new Coding();
-        codeableConceptCoding.setSystem("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1");
-        codeableConceptCoding.setCode("INTERNAL_SERVER_ERROR");
+        codeableConceptCoding.setSystem(GPCONNECT_ERROR_OR_WARNING_CODE);
+        codeableConceptCoding.setCode(INTERNAL_SERVER_ERROR);
         details.setCoding(List.of(codeableConceptCoding));
-        var diagnostics = "The current resend operation is still in progress. Please wait for it to complete before retrying";
 
         final EhrExtractStatus IN_PROGRESS_EXTRACT_STATUS = EhrExtractStatus.builder()
             .conversationId(CONVERSATION_ID)
@@ -123,20 +145,23 @@ public class EhrResendControllerTest {
 
         doReturn(Optional.of(IN_PROGRESS_EXTRACT_STATUS)).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
 
-        var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.BUSINESSRULE,
-                                                      OperationOutcome.IssueSeverity.ERROR,
-                                                      details,
-                                                      diagnostics);
 
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+        JsonNode rootNode = objectMapper.readTree(response.getBody());
+        JsonNode jsonCodingSection = rootNode.path("issue").get(0).path("details").path("coding").get(0);
+        var code = jsonCodingSection.path("code").asText();
+        var system = jsonCodingSection.path("system").asText();
+        var operationOutcomeUrl = rootNode.path("meta").path("profile").get(0).asText();
 
-        assertThat(response.getBody()).usingRecursiveComparison().isEqualTo(operationOutcome);
+        assertEquals(INTERNAL_SERVER_ERROR, code);
+        assertEquals(GPCONNECT_ERROR_OR_WARNING_CODE, system);
+        assertEquals(URI_TYPE, operationOutcomeUrl);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }
 
     @Test
-    public void When_AnEhrExtractHasFailed_Expect_RespondsWith202() {
+    void When_AnEhrExtractHasFailed_Expect_RespondsWith202() {
 
         String ehrMessageRef = generateRandomUppercaseUUID();
         var ehrExtractStatus = new EhrExtractStatus();
@@ -164,19 +189,13 @@ public class EhrResendControllerTest {
     }
 
     @Test
-    public void When_AnEhrExtractHasNotFailed_Expect_RespondsWith403() {
+    void When_AnEhrExtractHasNotFailed_Expect_RespondsWith403() throws JsonProcessingException {
 
         var details = new CodeableConcept();
         var codeableConceptCoding = new Coding();
-        codeableConceptCoding.setSystem("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1");
-        codeableConceptCoding.setCode("INTERNAL_SERVER_ERROR");
+        codeableConceptCoding.setSystem(GPCONNECT_ERROR_OR_WARNING_CODE);
+        codeableConceptCoding.setCode(INTERNAL_SERVER_ERROR);
         details.setCoding(List.of(codeableConceptCoding));
-        var diagnostics = "The current resend operation is still in progress. Please wait for it to complete before retrying";
-
-        var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.BUSINESSRULE,
-                                                      OperationOutcome.IssueSeverity.ERROR,
-                                                      details,
-                                                      diagnostics);
 
         String ehrMessageRef = generateRandomUppercaseUUID();
         var ehrExtractStatus = new EhrExtractStatus();
@@ -195,32 +214,41 @@ public class EhrResendControllerTest {
 
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
+        JsonNode rootNode = objectMapper.readTree(response.getBody());
+        JsonNode jsonCodingSection = rootNode.path("issue").get(0).path("details").path("coding").get(0);
+        var code = jsonCodingSection.path("code").asText();
+        var system = jsonCodingSection.path("system").asText();
+        var operationOutcomeUrl = rootNode.path("meta").path("profile").get(0).asText();
+
+        assertEquals(INTERNAL_SERVER_ERROR, code);
+        assertEquals(GPCONNECT_ERROR_OR_WARNING_CODE, system);
+        assertEquals(URI_TYPE, operationOutcomeUrl);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
-        assertThat(response.getBody()).usingRecursiveComparison().isEqualTo(operationOutcome);
     }
 
     @Test
-    public void When_AnEhrExtractDoesNotExist_Expect_RespondsWith404() {
+    void When_AnEhrExtractDoesNotExist_Expect_RespondsWith404() throws JsonProcessingException {
 
         var details = new CodeableConcept();
         var codeableConceptCoding = new Coding();
-        codeableConceptCoding.setSystem("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1");
+        codeableConceptCoding.setSystem(GPCONNECT_ERROR_OR_WARNING_CODE);
         codeableConceptCoding.setCode("INVALID_IDENTIFIER_VALUE");
         details.setCoding(List.of(codeableConceptCoding));
-        var diagnostics = "Provide a conversationId that exists and retry the operation";
 
-        var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.VALUE,
-                                                      OperationOutcome.IssueSeverity.ERROR,
-                                                      details,
-                                                      diagnostics);
         doReturn(Optional.empty()).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
-
 
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        JsonNode rootNode = objectMapper.readTree(response.getBody());
+        JsonNode jsonCodingSection = rootNode.path("issue").get(0).path("details").path("coding").get(0);
+        var code = jsonCodingSection.path("code").asText();
+        var system = jsonCodingSection.path("system").asText();
+        var operationOutcomeUrl = rootNode.path("meta").path("profile").get(0).asText();
 
-        assertThat(response.getBody()).usingRecursiveComparison().isEqualTo(operationOutcome);
+        assertEquals(INVALID_IDENTIFIER_VALUE, code);
+        assertEquals(GPCONNECT_ERROR_OR_WARNING_CODE, system);
+        assertEquals(URI_TYPE, operationOutcomeUrl);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 
     private String generateRandomUppercaseUUID() {

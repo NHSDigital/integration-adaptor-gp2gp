@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
@@ -30,37 +31,42 @@ import java.util.List;
 public class EhrResendController {
 
     private static final String OPERATION_OUTCOME_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";
+    public static final String INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR";
+    public static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
 
     private EhrExtractStatusRepository ehrExtractStatusRepository;
     private TaskDispatcher taskDispatcher;
     private RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
+    private final FhirParseService fhirParseService;
 
     @PostMapping("/{conversationId}")
-    public ResponseEntity<OperationOutcome> scheduleEhrExtractResend(@PathVariable String conversationId) {
+    public ResponseEntity<String> scheduleEhrExtractResend(@PathVariable String conversationId) {
         EhrExtractStatus ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId).orElseGet(() -> null);
 
         if (ehrExtractStatus == null) {
-            var details = getCodeableConcept("INVALID_IDENTIFIER_VALUE");
+            var details = getCodeableConcept(INVALID_IDENTIFIER_VALUE);
             var diagnostics = "Provide a conversationId that exists and retry the operation";
 
             var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.VALUE,
                                                           OperationOutcome.IssueSeverity.ERROR,
                                                           details,
                                                           diagnostics);
+            var errorBody = fhirParseService.encodeToJson(operationOutcome);
 
-            return new ResponseEntity<>(operationOutcome, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
         }
 
         if (noErrorsInEhrReceivedAcknowledgement(ehrExtractStatus) && ehrExtractStatus.getError() == null) {
 
-            var details = getCodeableConcept("INTERNAL_SERVER_ERROR");
+            var details = getCodeableConcept(INTERNAL_SERVER_ERROR);
             var diagnostics = "The current resend operation is still in progress. Please wait for it to complete before retrying";
             var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.BUSINESSRULE,
                                                           OperationOutcome.IssueSeverity.ERROR,
                                                           details,
                                                           diagnostics);
-            return new ResponseEntity<>(operationOutcome, HttpStatus.FORBIDDEN);
+            var errorBody = fhirParseService.encodeToJson(operationOutcome);
+            return new ResponseEntity<>(errorBody, HttpStatus.FORBIDDEN);
         }
 
         LOGGER.info("Creating tasks to start the EHR Extract process resend");
