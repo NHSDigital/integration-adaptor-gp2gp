@@ -39,20 +39,20 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class EhrResendControllerTest {
+class EhrResendControllerTest {
 
-    public static final Instant NOW = Instant.parse("2024-01-01T10:00:00Z");
+    private static final Instant NOW = Instant.parse("2024-01-01T10:00:00Z");
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     private static final String URI_TYPE = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";
     private static final String CONVERSATION_ID = "123-456";
-    public static final String NHS_NUMBER = "12345";
+    private static final String NHS_NUMBER = "12345";
     private static final String TO_ASID_CODE = "test-to-asid";
     private static final String FROM_ASID_CODE = "test-from-asid";
-    public static final String INCUMBENT_NACK_CODE = "99";
-    public static final String INCUMBENT_NACK_DISPLAY = "Unexpected condition.";
-    public static final String INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR";
-    public static final String GPCONNECT_ERROR_OR_WARNING_CODE = "http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1";
-    public static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
+    private static final String INCUMBENT_NACK_CODE = "99";
+    private static final String INCUMBENT_NACK_DISPLAY = "Unexpected condition.";
+    private static final String INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR";
+    private static final String GPCONNECT_ERROR_OR_WARNING_CODE = "http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1";
+    private static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
 
     private ObjectMapper objectMapper;
 
@@ -255,7 +255,7 @@ public class EhrResendControllerTest {
         return UUID.randomUUID().toString().toUpperCase();
     }
 
-    public static OperationOutcome createOperationOutcome(
+    static OperationOutcome createOperationOutcome(
         OperationOutcome.IssueType type, OperationOutcome.IssueSeverity severity, CodeableConcept details, String diagnostics) {
         var operationOutcome = new OperationOutcome();
         Meta meta = new Meta();
