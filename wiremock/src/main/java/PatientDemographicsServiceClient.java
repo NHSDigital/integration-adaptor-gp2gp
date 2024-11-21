@@ -1,5 +1,6 @@
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
 import org.apache.hc.client5.http.utils.Base64;
@@ -7,13 +8,13 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.security.KeyFactory;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -37,7 +38,7 @@ public class PatientDemographicsServiceClient {
 
         String patientData = getPatientData(nhsNumber, accessToken);
 
-        return new ObjectMapper().readValue(patientData, HashMap.class);
+        return new ObjectMapper().readValue(patientData, new TypeReference<>() {});
     }
 
     private String generateJwtToken() throws Exception {
@@ -52,16 +53,17 @@ public class PatientDemographicsServiceClient {
                 .sign(algorithm);
     }
 
-    private static String getPatientData(String nhsNumber, String accessToken) throws IOException {
-        var connection = (HttpURLConnection) (new URL("https://int.api.service.nhs.uk/personal-demographics/FHIR/R4/Patient/" + nhsNumber)).openConnection();
+    private static String getPatientData(String nhsNumber, String accessToken) throws IOException, URISyntaxException {
+        var connection = (HttpURLConnection) new URI("https://int.api.service.nhs.uk/personal-demographics/FHIR/R4/Patient/" + nhsNumber)
+            .toURL().openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("X-Request-Id", UUID.randomUUID().toString());
         connection.setRequestProperty("Authorization", "Bearer " + accessToken);
         return new String(connection.getInputStream().readAllBytes(), Charsets.UTF_8);
     }
 
-    private static String getOauthToken(String token) throws IOException {
-        var connection = (HttpURLConnection) new URL(OAUTH_ENDPOINT).openConnection();
+    private static String getOauthToken(String token) throws IOException, URISyntaxException {
+        var connection = (HttpURLConnection) new URI(OAUTH_ENDPOINT).toURL().openConnection();
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
         connection.setRequestProperty("content-type", "application/x-www-form-urlencoded");
