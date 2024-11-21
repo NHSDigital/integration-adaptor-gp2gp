@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.doReturn;
@@ -41,6 +40,8 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class EhrResendControllerTest {
 
+    public static final String DIAGNOSTICS_MSG =
+        "The current resend operation is still in progress. Please wait for it to complete before retrying";
     private static final Instant NOW = Instant.parse("2024-01-01T10:00:00Z");
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     private static final String URI_TYPE = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";
@@ -53,6 +54,8 @@ class EhrResendControllerTest {
     private static final String INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR";
     private static final String GPCONNECT_ERROR_OR_WARNING_CODE = "http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1";
     private static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
+    public static final String ISSUE_CODE_VALUE = "value";
+    public static final String ISSUE_CODE_BUSINESS_RULE = "business-rule";
 
     private ObjectMapper objectMapper;
 
@@ -149,15 +152,9 @@ class EhrResendControllerTest {
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
         JsonNode rootNode = objectMapper.readTree(response.getBody());
-        JsonNode jsonCodingSection = rootNode.path("issue").get(0).path("details").path("coding").get(0);
-        var code = jsonCodingSection.path("code").asText();
-        var system = jsonCodingSection.path("system").asText();
-        var operationOutcomeUrl = rootNode.path("meta").path("profile").get(0).asText();
 
-        assertEquals(INTERNAL_SERVER_ERROR, code);
-        assertEquals(GPCONNECT_ERROR_OR_WARNING_CODE, system);
-        assertEquals(URI_TYPE, operationOutcomeUrl);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+        assertResponseHasExpectedOperationOutcome(rootNode, INTERNAL_SERVER_ERROR, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE);
+        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
     }
 
     @Test
@@ -184,7 +181,7 @@ class EhrResendControllerTest {
 
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
+        assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
         assertNull(response.getBody());
     }
 
@@ -215,15 +212,9 @@ class EhrResendControllerTest {
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
         JsonNode rootNode = objectMapper.readTree(response.getBody());
-        JsonNode jsonCodingSection = rootNode.path("issue").get(0).path("details").path("coding").get(0);
-        var code = jsonCodingSection.path("code").asText();
-        var system = jsonCodingSection.path("system").asText();
-        var operationOutcomeUrl = rootNode.path("meta").path("profile").get(0).asText();
 
-        assertEquals(INTERNAL_SERVER_ERROR, code);
-        assertEquals(GPCONNECT_ERROR_OR_WARNING_CODE, system);
-        assertEquals(URI_TYPE, operationOutcomeUrl);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+        assertResponseHasExpectedOperationOutcome(rootNode, INTERNAL_SERVER_ERROR, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE);
+        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
     }
 
     @Test
@@ -234,21 +225,27 @@ class EhrResendControllerTest {
         codeableConceptCoding.setSystem(GPCONNECT_ERROR_OR_WARNING_CODE);
         codeableConceptCoding.setCode("INVALID_IDENTIFIER_VALUE");
         details.setCoding(List.of(codeableConceptCoding));
+        var diagnosticsMsg = "Provide a conversationId that exists and retry the operation";
 
         doReturn(Optional.empty()).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
 
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
         JsonNode rootNode = objectMapper.readTree(response.getBody());
-        JsonNode jsonCodingSection = rootNode.path("issue").get(0).path("details").path("coding").get(0);
-        var code = jsonCodingSection.path("code").asText();
-        var system = jsonCodingSection.path("system").asText();
-        var operationOutcomeUrl = rootNode.path("meta").path("profile").get(0).asText();
 
-        assertEquals(INVALID_IDENTIFIER_VALUE, code);
-        assertEquals(GPCONNECT_ERROR_OR_WARNING_CODE, system);
-        assertEquals(URI_TYPE, operationOutcomeUrl);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertResponseHasExpectedOperationOutcome(rootNode, INVALID_IDENTIFIER_VALUE, diagnosticsMsg, ISSUE_CODE_VALUE);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    private void assertResponseHasExpectedOperationOutcome(JsonNode rootNode, String serverErrMsg,
+                                                           String diagnosticsMsg, String issueCode) {
+        var coding = rootNode.path("issue").get(0).path("details").path("coding").get(0);
+        assertEquals(serverErrMsg, coding.path("code").asText());
+        assertEquals("error", rootNode.path("issue").get(0).path("severity").asText());
+        assertEquals(issueCode, rootNode.path("issue").get(0).path("code").asText());
+        assertEquals(GPCONNECT_ERROR_OR_WARNING_CODE, coding.path("system").asText());
+        assertEquals(URI_TYPE, rootNode.path("meta").path("profile").get(0).asText());
+        assertEquals(diagnosticsMsg, rootNode.path("issue").get(0).path("diagnostics").asText());
     }
 
     private String generateRandomUppercaseUUID() {
