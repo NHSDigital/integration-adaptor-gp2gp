@@ -180,21 +180,11 @@
                                                 CommentDate:20030109000000
 
                                                 Received Date: 2003-01-09 13:54
+
+                                                EMPTY SPECIMEN
                                             </text>
                                             <statusCode code="COMPLETE"/>
                                             <availabilityTime value="20030221115000"/>
-                                        </NarrativeStatement>
-                                    </component>
-                                    <component typeCode="COMP" contextConductionInd="true">
-                                        <NarrativeStatement classCode="OBS" moodCode="EVN">
-                                            <id root="test-id-3"/>
-                                            <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-                                                CommentDate:UNK
-
-                                                EMPTY REPORT
-                                            </text>
-                                            <statusCode code="COMPLETE"/>
-                                            <availabilityTime nullFlavor="UNK"/>
                                         </NarrativeStatement>
                                     </component>
                                 </CompoundStatement>

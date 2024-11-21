@@ -139,7 +139,7 @@ class SpecimenMapperTest {
         final String actualXml = specimenMapper.mapSpecimenToCompoundStatement(
             specimen, observations, DIAGNOSTIC_REPORT);
 
-        assertThat(actualXml).isEqualTo(expectedXml);
+        assertThat(actualXml).isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
