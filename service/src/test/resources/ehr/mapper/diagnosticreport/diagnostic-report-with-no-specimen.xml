@@ -68,8 +68,8 @@
                     </specimenRole>
                 </specimen>
                 <component typeCode="COMP" contextConductionInd="true">
-                    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-                        <id root="II-for-Observation-Observation/6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78"/>
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="II-for-Observation-Observation/TestResult-WithoutSpecimenReference"/>
                         <code nullFlavor="UNK">
                             <originalText>Mocked code</originalText>
                         </code>
@@ -78,46 +78,19 @@
                             <center value="20100223"/>
                         </effectiveTime>
                         <availabilityTime value="20100223"/>
-                        <component typeCode="COMP" contextConductionInd="true">
-                            <ObservationStatement classCode="OBS" moodCode="EVN">
-                                <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-                                <code nullFlavor="UNK">
-                                    <originalText>Mocked code</originalText>
-                                </code>
-                                <statusCode code="COMPLETE"/>
-                                <effectiveTime>
-                                    <center value="20100223"/>
-                                </effectiveTime>
-                                <availabilityTime value="20100223"/>
-                                <value xsi:type="PQ" value="8.800" unit="1">
-                                    <translation value="8.800">
-                                        <originalText>mmol/L</originalText>
-                                    </translation>
-                                </value>
-                                <referenceRange typeCode="REFV">
-                                    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
-                                        <value>
-                                            <low value="10.000"/>
-                                            <high value="90.000"/>
-                                        </value>
-                                    </referenceInterpretationRange>
-                                </referenceRange>
+                    </ObservationStatement>
+                </component>
+                <component typeCode="COMP" contextConductionInd="true">
+                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+                        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+                            CommentDate:20100223
 
-                            </ObservationStatement>
-                        </component>
-                        <component typeCode="COMP" contextConductionInd="true">
-                            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                                <id root="II-for-Observation-Observation/6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78-COMM"/>
-                                <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-                                    CommentDate:20201215151713
-
-                                    (q) - Normal - No Action
-                                </text>
-                                <statusCode code="COMPLETE"/>
-                                <availabilityTime value="20201215151713"/>
-                            </NarrativeStatement>
-                        </component>
-                    </CompoundStatement>
+                            This is a test result without a specimen.
+                        </text>
+                        <statusCode code="COMPLETE"/>
+                        <availabilityTime value="20100223"/>
+                    </NarrativeStatement>
                 </component>
             </CompoundStatement>
         </component>
