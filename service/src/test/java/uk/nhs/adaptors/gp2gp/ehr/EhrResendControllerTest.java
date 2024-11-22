@@ -3,11 +3,6 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
-import org.hl7.fhir.dstu3.model.Meta;
-import org.hl7.fhir.dstu3.model.OperationOutcome;
-import org.hl7.fhir.dstu3.model.UriType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,16 +21,16 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class EhrResendControllerTest {
@@ -109,35 +104,31 @@ class EhrResendControllerTest {
         ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
         ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder().build());
 
-        doReturn(Optional.of(ehrExtractStatus)).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
+        when(ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID)).thenReturn(Optional.of(ehrExtractStatus));
 
         Instant now = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-        doReturn(now).when(timestampService).now();
+        when(timestampService.now()).thenReturn(now);
 
         ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
         var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId());
         var taskDefinition = GetGpcStructuredTaskDefinition.getGetGpcStructuredTaskDefinition(randomIdGeneratorService, ehrExtractStatus);
 
-        verify(taskDispatcher, times(1)).createTask(taskDefinition);
-        assertEquals(now, updatedEhrExtractStatus.get().getMessageTimestamp());
-        assertEquals(now, updatedEhrExtractStatus.get().getCreated());
-        assertEquals(now, updatedEhrExtractStatus.get().getUpdatedAt());
-        assertNull(updatedEhrExtractStatus.get().getEhrExtractCorePending());
-        assertNull(updatedEhrExtractStatus.get().getEhrContinue());
-        assertNull(updatedEhrExtractStatus.get().getAckPending());
-        assertNull(updatedEhrExtractStatus.get().getEhrReceivedAcknowledgement());
-        assertNull(updatedEhrExtractStatus.get().getGpcAccessDocument());
+        assertAll(
+            () -> verify(taskDispatcher, times(1)).createTask(taskDefinition),
+            () -> assertEquals(now, updatedEhrExtractStatus.get().getMessageTimestamp()),
+            () -> assertEquals(now, updatedEhrExtractStatus.get().getCreated()),
+            () -> assertEquals(now, updatedEhrExtractStatus.get().getUpdatedAt()),
+            () -> assertNull(updatedEhrExtractStatus.get().getEhrExtractCorePending()),
+            () -> assertNull(updatedEhrExtractStatus.get().getEhrContinue()),
+            () -> assertNull(updatedEhrExtractStatus.get().getAckPending()),
+            () -> assertNull(updatedEhrExtractStatus.get().getEhrReceivedAcknowledgement()),
+            () -> assertNull(updatedEhrExtractStatus.get().getGpcAccessDocument())
+        );
     }
 
     @Test
     void When_AnEhrExtractHasNotFailedAndAnotherResendRequestArrives_Expect_FailedOperationOutcome() throws JsonProcessingException {
-
-        var details = new CodeableConcept();
-        var codeableConceptCoding = new Coding();
-        codeableConceptCoding.setSystem(GPCONNECT_ERROR_OR_WARNING_CODE);
-        codeableConceptCoding.setCode(INTERNAL_SERVER_ERROR);
-        details.setCoding(List.of(codeableConceptCoding));
 
         final EhrExtractStatus IN_PROGRESS_EXTRACT_STATUS = EhrExtractStatus.builder()
             .conversationId(CONVERSATION_ID)
@@ -146,15 +137,16 @@ class EhrResendControllerTest {
             .ehrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).toAsid(TO_ASID_CODE).fromAsid(FROM_ASID_CODE).build())
             .build();
 
-        doReturn(Optional.of(IN_PROGRESS_EXTRACT_STATUS)).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
-
+        when(ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID)).thenReturn(Optional.of(IN_PROGRESS_EXTRACT_STATUS));
 
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
         JsonNode rootNode = objectMapper.readTree(response.getBody());
 
-        assertResponseHasExpectedOperationOutcome(rootNode, INTERNAL_SERVER_ERROR, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE);
-        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
+        assertAll(
+            () -> assertResponseHasExpectedOperationOutcome(rootNode, INTERNAL_SERVER_ERROR, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE),
+            () -> assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode())
+        );
     }
 
     @Test
@@ -177,7 +169,7 @@ class EhrResendControllerTest {
                                                            .build());
         ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
 
-        doReturn(Optional.of(ehrExtractStatus)).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
+        when(ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID)).thenReturn(Optional.of(ehrExtractStatus));
 
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
@@ -188,15 +180,8 @@ class EhrResendControllerTest {
     @Test
     void When_AnEhrExtractHasNotFailed_Expect_RespondsWith403() throws JsonProcessingException {
 
-        var details = new CodeableConcept();
-        var codeableConceptCoding = new Coding();
-        codeableConceptCoding.setSystem(GPCONNECT_ERROR_OR_WARNING_CODE);
-        codeableConceptCoding.setCode(INTERNAL_SERVER_ERROR);
-        details.setCoding(List.of(codeableConceptCoding));
-
         String ehrMessageRef = generateRandomUppercaseUUID();
         var ehrExtractStatus = new EhrExtractStatus();
-
         ehrExtractStatus.setConversationId(CONVERSATION_ID);
         ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
                                                            .conversationClosed(FIVE_DAYS_AGO)
@@ -207,63 +192,50 @@ class EhrResendControllerTest {
                                                            .build());
         ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
 
-        doReturn(Optional.of(ehrExtractStatus)).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
+        when(ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID)).thenReturn(Optional.of(ehrExtractStatus));
 
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
         JsonNode rootNode = objectMapper.readTree(response.getBody());
 
-        assertResponseHasExpectedOperationOutcome(rootNode, INTERNAL_SERVER_ERROR, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE);
-        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
+        assertAll(
+            () -> assertResponseHasExpectedOperationOutcome(rootNode, INTERNAL_SERVER_ERROR, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE),
+            () -> assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode())
+        );
     }
 
     @Test
     void When_AnEhrExtractDoesNotExist_Expect_RespondsWith404() throws JsonProcessingException {
 
-        var details = new CodeableConcept();
-        var codeableConceptCoding = new Coding();
-        codeableConceptCoding.setSystem(GPCONNECT_ERROR_OR_WARNING_CODE);
-        codeableConceptCoding.setCode("INVALID_IDENTIFIER_VALUE");
-        details.setCoding(List.of(codeableConceptCoding));
         var diagnosticsMsg = "Provide a conversationId that exists and retry the operation";
 
-        doReturn(Optional.empty()).when(ehrExtractStatusRepository).findByConversationId(CONVERSATION_ID);
+        when(ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID)).thenReturn(Optional.empty());
 
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
         JsonNode rootNode = objectMapper.readTree(response.getBody());
 
-        assertResponseHasExpectedOperationOutcome(rootNode, INVALID_IDENTIFIER_VALUE, diagnosticsMsg, ISSUE_CODE_VALUE);
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertAll(
+            () -> assertResponseHasExpectedOperationOutcome(rootNode, INVALID_IDENTIFIER_VALUE, diagnosticsMsg, ISSUE_CODE_VALUE),
+            () -> assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode())
+        );
     }
 
     private void assertResponseHasExpectedOperationOutcome(JsonNode rootNode, String serverErrMsg,
                                                            String diagnosticsMsg, String issueCode) {
         var coding = rootNode.path("issue").get(0).path("details").path("coding").get(0);
-        assertEquals(serverErrMsg, coding.path("code").asText());
-        assertEquals("error", rootNode.path("issue").get(0).path("severity").asText());
-        assertEquals(issueCode, rootNode.path("issue").get(0).path("code").asText());
-        assertEquals(GPCONNECT_ERROR_OR_WARNING_CODE, coding.path("system").asText());
-        assertEquals(URI_TYPE, rootNode.path("meta").path("profile").get(0).asText());
-        assertEquals(diagnosticsMsg, rootNode.path("issue").get(0).path("diagnostics").asText());
+        assertAll(
+            () -> assertEquals(serverErrMsg, coding.path("code").asText()),
+            () -> assertEquals("error", rootNode.path("issue").get(0).path("severity").asText()),
+            () -> assertEquals(issueCode, rootNode.path("issue").get(0).path("code").asText()),
+            () -> assertEquals(GPCONNECT_ERROR_OR_WARNING_CODE, coding.path("system").asText()),
+            () -> assertEquals(URI_TYPE, rootNode.path("meta").path("profile").get(0).asText()),
+            () -> assertEquals(diagnosticsMsg, rootNode.path("issue").get(0).path("diagnostics").asText())
+        );
     }
 
     private String generateRandomUppercaseUUID() {
         return UUID.randomUUID().toString().toUpperCase();
-    }
-
-    static OperationOutcome createOperationOutcome(
-        OperationOutcome.IssueType type, OperationOutcome.IssueSeverity severity, CodeableConcept details, String diagnostics) {
-        var operationOutcome = new OperationOutcome();
-        Meta meta = new Meta();
-        meta.setProfile(Collections.singletonList(new UriType(URI_TYPE)));
-        operationOutcome.setMeta(meta);
-        operationOutcome.addIssue()
-            .setCode(type)
-            .setSeverity(severity)
-            .setDetails(details)
-            .setDiagnostics(diagnostics);
-        return operationOutcome;
     }
 
 }

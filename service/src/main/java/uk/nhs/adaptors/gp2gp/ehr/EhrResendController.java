@@ -22,7 +22,6 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import java.util.Collections;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -57,7 +56,7 @@ public class EhrResendController {
             return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
         }
 
-        if (noErrorsInEhrReceivedAcknowledgement(ehrExtractStatus) && ehrExtractStatus.getError() == null) {
+        if (hasNoErrorsInEhrReceivedAcknowledgement(ehrExtractStatus) && ehrExtractStatus.getError() == null) {
 
             var details = getCodeableConcept(INTERNAL_SERVER_ERROR);
             var diagnostics = "The current resend operation is still in progress. Please wait for it to complete before retrying";
@@ -78,15 +77,11 @@ public class EhrResendController {
     }
 
     private static CodeableConcept getCodeableConcept(String codeableConceptCode) {
-        var details = new CodeableConcept();
-        var codeableConceptCoding = new Coding();
-        codeableConceptCoding.setSystem("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1");
-        codeableConceptCoding.setCode(codeableConceptCode);
-        details.setCoding(List.of(codeableConceptCoding));
-        return details;
+        return new CodeableConcept().addCoding(
+            new Coding("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1", codeableConceptCode, null));
     }
 
-    private static boolean noErrorsInEhrReceivedAcknowledgement(EhrExtractStatus ehrExtractStatus) {
+    private static boolean hasNoErrorsInEhrReceivedAcknowledgement(EhrExtractStatus ehrExtractStatus) {
         var ehrReceivedAcknowledgement = ehrExtractStatus.getEhrReceivedAcknowledgement();
         if (ehrReceivedAcknowledgement == null) {
             return true;
