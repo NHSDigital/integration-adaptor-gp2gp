@@ -11,6 +11,7 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildReference;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -56,6 +57,7 @@ public class ObservationToNarrativeStatementMapperTest {
     private static final String OUTPUT_XML_USES_AGENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-5.xml";
     private static final String INPUT_JSON_WITH_SAMPLED_DATA_VALUE = TEST_FILE_DIRECTORY + "example-observation-with-sampleddata.json";
     private static final String INPUT_JSON_WITH_ATTACHMENT_VALUE = TEST_FILE_DIRECTORY + "example-observation-with-attachment.json";
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -87,7 +89,7 @@ public class ObservationToNarrativeStatementMapperTest {
 
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation parsedObservation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         String outputMessage = observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
 
@@ -111,7 +113,7 @@ public class ObservationToNarrativeStatementMapperTest {
     public void When_MappingObservationJsonWithNestedTrue_Expect_NarrativeStatementXmlOutput() throws IOException {
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NESTED_COMPONENT);
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation parsedObservation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         String outputMessage = observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true);
 
@@ -121,7 +123,7 @@ public class ObservationToNarrativeStatementMapperTest {
     @Test
     public void When_MappingParsedObservationJsonWithNoDates_Expect_MapperException() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_DATES);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation parsedObservation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         assertThrows(EhrMapperException.class, ()
             -> observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
@@ -130,7 +132,7 @@ public class ObservationToNarrativeStatementMapperTest {
     @Test
     public void When_MappingObservationWithInvalidParticipantResourceType_Expect_MapperException() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation parsedObservation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         assertThatThrownBy(() -> observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true))
             .isExactlyInstanceOf(EhrMapperException.class)
@@ -142,7 +144,7 @@ public class ObservationToNarrativeStatementMapperTest {
     public void When_MappingObservationWithAttachmentAndSampleData_Expect_MapperException(String inputJson, Class expectedClass)
         throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation parsedObservation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         var exception = assertThrows(EhrMapperException.class, () ->
             observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));

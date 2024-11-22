@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -54,12 +55,13 @@ public class PertinentInformationObservationValueMapperTest {
     private static final String EXPECTED_REFERENCE_RANGE_WITH_HIGH = "Range: Text: Test reference range text High: 20 ";
     private static final PertinentInformationObservationValueMapper PERTINENT_INFORMATION_OBSERVATION_VALUE_MAPPER =
         new PertinentInformationObservationValueMapper();
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     @ParameterizedTest
     @MethodSource("testValueFilePaths")
     public void When_MappingParsedObservationValueJson_Expect_CorrectXmlOutput(String input, String output) throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         boolean isProperValue =
             PERTINENT_INFORMATION_OBSERVATION_VALUE_MAPPER.isPertinentInformation(observation.getValue());
@@ -75,7 +77,7 @@ public class PertinentInformationObservationValueMapperTest {
     public void When_MappingParsedObservationJsonWithReferenceRange_Expect_CorrectXmlOutput(String input,
             String output) throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         String outputMessage =
             PERTINENT_INFORMATION_OBSERVATION_VALUE_MAPPER.mapReferenceRangeToPertinentInformation(observation.getReferenceRangeFirstRep());
@@ -85,7 +87,7 @@ public class PertinentInformationObservationValueMapperTest {
     @Test
     public void When_MappingParsedObservationInvalidValueJson_Expect_IllegalArgumentException() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_INVALID_VALUE);
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         boolean isProperValue =
             PERTINENT_INFORMATION_OBSERVATION_VALUE_MAPPER.isPertinentInformation(observation.getValue());

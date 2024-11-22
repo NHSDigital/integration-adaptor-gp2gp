@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.uat;
 
+import ca.uhn.fhir.context.FhirContext;
 import lombok.SneakyThrows;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.jetbrains.annotations.NotNull;
@@ -78,6 +79,7 @@ public class EhrExtractUATTest {
     private static final String INPUT_PATH = "/uat/input/";
     private static final String OUTPUT_PATH = "/uat/output/";
     private static final boolean OVERWRITE_XML = false;
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     @Mock
     private TimestampService timestampService;
@@ -227,7 +229,7 @@ public class EhrExtractUATTest {
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC4/" + inputJson);
         inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
-        final Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
+        final Bundle bundle = new FhirParseService(fhirCtx).parseResource(inputJsonFileContent, Bundle.class);
 
         messageContext.initialize(bundle);
 
@@ -261,7 +263,7 @@ public class EhrExtractUATTest {
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + "TC7/" + inputJson);
         inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
-        final Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
+        final Bundle bundle = new FhirParseService(fhirCtx).parseResource(inputJsonFileContent, Bundle.class);
 
         messageContext.initialize(bundle);
 

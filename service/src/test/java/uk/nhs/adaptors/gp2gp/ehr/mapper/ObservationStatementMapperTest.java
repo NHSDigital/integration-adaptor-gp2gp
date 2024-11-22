@@ -13,6 +13,7 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildReference;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -185,6 +186,7 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-32.xml";
     private static final String OUTPUT_XML_WITH_BODY_SITE = TEST_FILE_DIRECTORY
             + "expected-output-observation-with-body-site.xml";
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -223,7 +225,7 @@ public class ObservationStatementMapperTest {
 
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation parsedObservation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
@@ -235,7 +237,7 @@ public class ObservationStatementMapperTest {
         messageContext.getAgentDirectory().getAgentId(buildReference(ResourceType.Practitioner, "something"));
 
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation parsedObservation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         var exception = assertThrows(EhrMapperException.class, () ->
             observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false));
@@ -248,7 +250,7 @@ public class ObservationStatementMapperTest {
     public void When_MappingParsedObservationJsonWithNestedTrue_Expect_ObservationStatementXmlOutput() throws IOException {
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NESTED_COMPONENT);
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation parsedObservation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true);
 
@@ -258,7 +260,7 @@ public class ObservationStatementMapperTest {
     @Test
     public void When_MappingObservationWithInvalidParticipantResourceType_Expect_Exception() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation parsedObservation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         assertThatThrownBy(() -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true))
             .isExactlyInstanceOf(EhrMapperException.class)

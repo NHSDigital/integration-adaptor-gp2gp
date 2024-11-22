@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Period;
@@ -14,7 +15,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 
 public class EhrFolderEffectiveTimeTest {
 
-    private static final FhirParseService FHIR_PARSER = new FhirParseService();
+    private static final FhirParseService FHIR_PARSER = new FhirParseService(FhirContext.forDstu3());
 
     private static final String INITIAL_START_DATE_HL7 = "20190828103005";
     private static final String EARLIER_START_DATE_HL7 = "20180828103005";

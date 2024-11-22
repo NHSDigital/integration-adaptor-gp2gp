@@ -10,7 +10,12 @@ import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 
 @Service
 public class FhirParseService {
-    private final IParser jsonParser = prepareParser();
+
+    private final IParser jsonParser;
+
+    public FhirParseService(FhirContext fhirContext) {
+        this.jsonParser = prepareParser(fhirContext);
+    }
 
     public <T extends IBaseResource> T parseResource(String body, Class<T> fhirClass) {
         try {
@@ -20,10 +25,9 @@ public class FhirParseService {
         }
     }
 
-    private IParser prepareParser() {
-        FhirContext ctx = FhirContext.forDstu3();
-        ctx.newJsonParser();
-        ctx.setParserErrorHandler(new StrictErrorHandler());
-        return ctx.newJsonParser();
+    private IParser prepareParser(FhirContext fhirContext) {
+        fhirContext.newJsonParser();
+        fhirContext.setParserErrorHandler(new StrictErrorHandler());
+        return fhirContext.newJsonParser();
     }
 }

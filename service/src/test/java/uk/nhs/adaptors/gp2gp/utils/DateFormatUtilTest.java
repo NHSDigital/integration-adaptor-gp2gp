@@ -9,6 +9,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormatStraigh
 
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.BaseDateTimeType;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -25,7 +26,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 
 @ExtendWith(MockitoExtension.class)
 public class DateFormatUtilTest {
-    private static final FhirParseService FHIR_PARSER = new FhirParseService();
+    private static final FhirParseService FHIR_PARSER = new FhirParseService(FhirContext.forDstu3());
     private static final String INSTANT_OBSERVATION_TEMPLATE = "{\"resourceType\": \"Observation\", \"issued\": \"%s\"}";
     private static final String DATETYPE_IMMUNIZATION_TEMPLATE = "{\"resourceType\": \"Immunization\", \"expirationDate\": \"%s\"}";
     private static final String DATETIME_OBSERVATION_TEMPLATE = "{\"resourceType\": \"Observation\", \"valueDateTime\": \"%s\"}";

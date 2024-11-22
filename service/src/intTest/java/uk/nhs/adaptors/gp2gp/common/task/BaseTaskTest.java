@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -17,7 +18,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @SuppressWarnings("checkstyle:VisibilityModifier")
 public abstract class BaseTaskTest {
     public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    public static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
+    public static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService(FhirContext.forDstu3());
 
     @MockBean
     protected TaskDispatcher taskDispatcher;

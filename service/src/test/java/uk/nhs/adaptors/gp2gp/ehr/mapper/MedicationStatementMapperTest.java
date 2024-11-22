@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -166,6 +167,7 @@ public class MedicationStatementMapperTest {
             codeSystem="2.16.840.1.113883.4.642.3.47"
             displayName="no disclosure to patient, family or caregivers without attending provider's authorization"
         />""";
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     private static final String PRACTITIONER_RESOURCE_1 = "Practitioner/1";
     private static final String PRACTITIONER_RESOURCE_2 = "Practitioner/2";
@@ -188,7 +190,7 @@ public class MedicationStatementMapperTest {
 
         codeableConceptCdMapper = new CodeableConceptCdMapper();
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        Bundle bundle = new FhirParseService(fhirCtx).parseResource(bundleInput, Bundle.class);
 
         messageContext = new MessageContext(mockRandomIdGeneratorService);
         messageContext.initialize(bundle);
@@ -242,7 +244,7 @@ public class MedicationStatementMapperTest {
     private void assertThatInputMapsToExpectedOutput(String inputJsonResourcePath, String outputXmlResourcePath) {
         var expected = ResourceTestFileUtils.getFileContent(outputXmlResourcePath);
         var input = ResourceTestFileUtils.getFileContent(inputJsonResourcePath);
-        var parsedMedicationRequest = new FhirParseService().parseResource(input, MedicationRequest.class);
+        var parsedMedicationRequest = new FhirParseService(fhirCtx).parseResource(input, MedicationRequest.class);
 
         String outputMessage = medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
 
@@ -259,18 +261,18 @@ public class MedicationStatementMapperTest {
 
 
         var inputAuthorise1 = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_ACUTE_PRESCRIPTION);
-        var parsedMedicationRequest1 = new FhirParseService().parseResource(inputAuthorise1, MedicationRequest.class);
+        var parsedMedicationRequest1 = new FhirParseService(fhirCtx).parseResource(inputAuthorise1, MedicationRequest.class);
         medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest1);
 
         when(mockRandomIdGeneratorService.createNewId()).thenReturn("456", "123", "789");
         var inputWithBasedOn = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_ORDER_BASED_ON);
-        var parsedMedicationRequestWithBasedOn = new FhirParseService().parseResource(inputWithBasedOn, MedicationRequest.class);
+        var parsedMedicationRequestWithBasedOn = new FhirParseService(fhirCtx).parseResource(inputWithBasedOn, MedicationRequest.class);
         String outputMessageWithBasedOn =
             medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequestWithBasedOn);
 
         when(mockRandomIdGeneratorService.createNewId()).thenReturn("789");
         var inputAuthorise2 = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_REPEAT_PRESCRIPTION);
-        var parsedMedicationRequest2 = new FhirParseService().parseResource(inputAuthorise2, MedicationRequest.class);
+        var parsedMedicationRequest2 = new FhirParseService(fhirCtx).parseResource(inputAuthorise2, MedicationRequest.class);
         medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest2);
 
         assertThat(outputMessageWithBasedOn).isEqualTo(expected);
@@ -280,7 +282,7 @@ public class MedicationStatementMapperTest {
     @MethodSource("resourceFileExpectException")
     public void When_MappingMedicationRequestWithInvalidResource_Expect_Exception(String inputJson) throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
+        MedicationRequest parsedMedicationRequest = new FhirParseService(fhirCtx).parseResource(jsonInput, MedicationRequest.class);
 
         assertThrows(EhrMapperException.class, ()
             -> medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest));
@@ -306,7 +308,7 @@ public class MedicationStatementMapperTest {
         when(mockRandomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         codeableConceptCdMapper = new CodeableConceptCdMapper();
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        Bundle bundle = new FhirParseService(fhirCtx).parseResource(bundleInput, Bundle.class);
 
         var messageContextMock = mock(MessageContext.class);
         var agentDirectoryMock = mock(AgentDirectory.class);
@@ -327,7 +329,7 @@ public class MedicationStatementMapperTest {
         );
 
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_REQUESTER_ON_BEHALF_OF);
-        MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
+        MedicationRequest parsedMedicationRequest = new FhirParseService(fhirCtx).parseResource(jsonInput, MedicationRequest.class);
         medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
 
         ArgumentCaptor<Reference> agent = ArgumentCaptor.forClass(Reference.class);
@@ -354,7 +356,7 @@ public class MedicationStatementMapperTest {
         when(mockRandomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         codeableConceptCdMapper = new CodeableConceptCdMapper();
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        Bundle bundle = new FhirParseService(fhirCtx).parseResource(bundleInput, Bundle.class);
 
         var messageContextMock = mock(MessageContext.class);
         var agentDirectoryMock = mock(AgentDirectory.class);
@@ -375,7 +377,7 @@ public class MedicationStatementMapperTest {
         );
 
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
+        MedicationRequest parsedMedicationRequest = new FhirParseService(fhirCtx).parseResource(jsonInput, MedicationRequest.class);
         medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
 
         ArgumentCaptor<Reference> agent = ArgumentCaptor.forClass(Reference.class);
@@ -405,7 +407,7 @@ public class MedicationStatementMapperTest {
 
         codeableConceptCdMapper = new CodeableConceptCdMapper();
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE_WITH_MEDICATION_STATEMENTS);
-        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        Bundle bundle = new FhirParseService(fhirCtx).parseResource(bundleInput, Bundle.class);
 
         var messageContextMock = mock(MessageContext.class);
         var agentDirectoryMock = mock(AgentDirectory.class);
@@ -426,7 +428,7 @@ public class MedicationStatementMapperTest {
         );
 
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
+        MedicationRequest parsedMedicationRequest = new FhirParseService(fhirCtx).parseResource(jsonInput, MedicationRequest.class);
         var outputString = medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
 
         assertXmlIsEqual(outputString, expected);
@@ -441,7 +443,7 @@ public class MedicationStatementMapperTest {
         String inputJson
     ) {
         final var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        final var parsedMedicationRequest = new FhirParseService()
+        final var parsedMedicationRequest = new FhirParseService(fhirCtx)
             .parseResource(jsonInput, MedicationRequest.class);
         when(confidentialityService.generateConfidentialityCode(parsedMedicationRequest))
             .thenReturn(Optional.of(CONFIDENTIALITY_CODE));
@@ -463,7 +465,7 @@ public class MedicationStatementMapperTest {
         String inputJson
     ) {
         final var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        final var parsedMedicationRequest = new FhirParseService()
+        final var parsedMedicationRequest = new FhirParseService(fhirCtx)
             .parseResource(jsonInput, MedicationRequest.class);
         when(confidentialityService.generateConfidentialityCode(parsedMedicationRequest))
             .thenReturn(Optional.empty());

@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
@@ -147,7 +148,7 @@ class ObservationMapperTest {
     @BeforeEach
     void setUp() {
         String bundleJsonInput = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "fhir_bundle.json");
-        Bundle bundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
+        Bundle bundle = new FhirParseService(FhirContext.forDstu3()).parseResource(bundleJsonInput, Bundle.class);
 
         bundle.addEntry(new Bundle.BundleEntryComponent().setResource(
             new DiagnosticReport().addResult(

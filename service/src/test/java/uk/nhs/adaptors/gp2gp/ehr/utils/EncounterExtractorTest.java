@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
+import ca.uhn.fhir.context.FhirContext;
 import com.google.common.collect.ImmutableList;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
@@ -28,7 +29,7 @@ public class EncounterExtractorTest {
         "D81C5E8F-CB3A-4A78-92EA-51EC3665648E",
         "8FEB11AA-5785-43D3-99A9-E9D49EAF2161",
         "4088F3A1-CE58-4374-AABA-763C31738281");
-    private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
+    private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService(FhirContext.forDstu3());
 
     private static Bundle fullBundle;
     private static Bundle bundleWithEmptyConsultationList;

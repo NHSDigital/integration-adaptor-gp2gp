@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Immunization;
@@ -174,7 +175,7 @@ public class ImmunizationObservationStatementMapperTest {
         when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(TEST_ID);
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        fhirParseService = new FhirParseService();
+        fhirParseService = new FhirParseService(FhirContext.forDstu3());
         messageContext = new MessageContext(randomIdGeneratorService);
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         Bundle bundle = fhirParseService.parseResource(bundleInput, Bundle.class);

@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -99,7 +100,7 @@ public class NonConsultationResourceMapperTest {
     public void setUp() {
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
-        fhirParseService = new FhirParseService();
+        fhirParseService = new FhirParseService(FhirContext.forDstu3());
     }
 
     @AfterEach

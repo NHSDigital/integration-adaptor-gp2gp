@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -45,6 +46,7 @@ public class EncounterMapperTest {
     private static final Date CONSULTATION_DATE = Date.from(Instant.parse("2010-01-13T15:13:32Z"));
     private static final String TEST_LOCATION_NAME = "Test Location";
     private static final String TEST_LOCATION_ID = "EB3994A6-5A87-4B53-A414-913137072F57";
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     public static final Bundle.BundleEntryComponent BUNDLE_ENTRY_WITH_CONSULTATION = new Bundle.BundleEntryComponent()
         .setResource(new ListResource()
@@ -166,7 +168,7 @@ public class EncounterMapperTest {
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(output);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
-        Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+        Encounter parsedEncounter = new FhirParseService(fhirCtx).parseResource(jsonInput, Encounter.class);
         when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
         String outputMessage = encounterMapper.mapEncounterToEhrComposition(parsedEncounter);
@@ -201,7 +203,7 @@ public class EncounterMapperTest {
 
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_TYPE);
 
-        Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+        Encounter parsedEncounter = new FhirParseService(fhirCtx).parseResource(jsonInput, Encounter.class);
 
         when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
@@ -216,7 +218,7 @@ public class EncounterMapperTest {
 
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE);
 
-        Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+        Encounter parsedEncounter = new FhirParseService(fhirCtx).parseResource(jsonInput, Encounter.class);
 
         when(encounterComponentsMapper.mapComponents(parsedEncounter)).thenReturn(sampleComponent);
 
@@ -228,7 +230,7 @@ public class EncounterMapperTest {
     @Test
     public void When_MappingEmptyConsultation_Expect_NoEhrCompositionGenerated() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_ENCOUNTER_NO_ASSOCIATED_CONSULTATION);
-        Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+        Encounter parsedEncounter = new FhirParseService(fhirCtx).parseResource(jsonInput, Encounter.class);
 
         String outputMessage = encounterMapper.mapEncounterToEhrComposition(parsedEncounter);
         assertThat(outputMessage).isEqualTo(StringUtils.EMPTY);

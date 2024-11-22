@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -80,6 +81,7 @@ public class EhrExtractMapperComponentTest {
     private static final String TEST_FROM_ODS_CODE = "test-from-ods-code";
     private static final String TEST_TO_ODS_CODE = "test-to-ods-code";
     private static final String TEST_DATE_TIME = "2020-01-01T01:01:01.01Z";
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     private static GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
@@ -224,7 +226,7 @@ public class EhrExtractMapperComponentTest {
     public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput(String input, String expected) {
         String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + expected);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + input);
-        Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
+        Bundle bundle = new FhirParseService(fhirCtx).parseResource(inputJsonFileContent, Bundle.class);
         messageContext.initialize(bundle);
 
         EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
@@ -253,7 +255,7 @@ public class EhrExtractMapperComponentTest {
     public void When_MappingJsonBody_Expect_OnlyOneConsultationResource() {
         String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(ONE_CONSULTATION_RESOURCE_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
+        Bundle bundle = new FhirParseService(fhirCtx).parseResource(inputJsonFileContent, Bundle.class);
         messageContext.initialize(bundle);
 
         EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
@@ -266,7 +268,7 @@ public class EhrExtractMapperComponentTest {
     @Test
     public void When_TransformingResourceToEhrComp_Expect_NoDuplicateMappings() {
         String bundle = ResourceTestFileUtils.getFileContent(DUPLICATE_RESOURCE_BUNDLE);
-        Bundle parsedBundle = new FhirParseService().parseResource(bundle, Bundle.class);
+        Bundle parsedBundle = new FhirParseService(fhirCtx).parseResource(bundle, Bundle.class);
         messageContext.initialize(parsedBundle);
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
         assertThat(translatedOutput.size()).isEqualTo(1);

@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Practitioner;
@@ -52,7 +53,7 @@ public class AgentPersonMapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         agentPersonMapper = new AgentPersonMapper(messageContext);
-        fhirParseService = new FhirParseService();
+        fhirParseService = new FhirParseService(FhirContext.forDstu3());
     }
 
     @ParameterizedTest
@@ -149,12 +150,12 @@ public class AgentPersonMapperTest {
 
     private static Practitioner getPractitionerResource() throws IOException {
         String jsonPractitioner = ResourceTestFileUtils.getFileContent(PRACTITIONER);
-        return new FhirParseService().parseResource(jsonPractitioner, Practitioner.class);
+        return new FhirParseService(FhirContext.forDstu3()).parseResource(jsonPractitioner, Practitioner.class);
     }
 
     private static Organization getOrganizationResource() throws IOException {
         String jsonOrganization = ResourceTestFileUtils.getFileContent(ORGANIZATION);
-        return new FhirParseService().parseResource(jsonOrganization, Organization.class);
+        return new FhirParseService(FhirContext.forDstu3()).parseResource(jsonOrganization, Organization.class);
     }
 
     @AfterEach

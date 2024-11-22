@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.IdType;
@@ -188,6 +189,7 @@ public class RequestStatementMapperTest {
         + "expected-output-request-statement-no-supportingInfo.xml";
     private static final String OUTPUT_XML_WITH_NO_AUTHOR_AND_TIME = TEST_FILE_DIRECTORY
         + "expected-output-request-statement-no-author-and-time.xml";
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -274,7 +276,7 @@ public class RequestStatementMapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        Bundle bundle = new FhirParseService(fhirCtx).parseResource(bundleInput, Bundle.class);
         inputBundle = new InputBundle(bundle);
 
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
@@ -326,7 +328,7 @@ public class RequestStatementMapperTest {
     private void assertThatInputMapsToExpectedOutput(String inputJsonResourcePath, String outputXmlResourcePath) {
         var expected = ResourceTestFileUtils.getFileContent(outputXmlResourcePath);
         var input = ResourceTestFileUtils.getFileContent(inputJsonResourcePath);
-        var referralRequest = new FhirParseService().parseResource(input, ReferralRequest.class);
+        var referralRequest = new FhirParseService(fhirCtx).parseResource(input, ReferralRequest.class);
 
         String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(referralRequest, false);
 
@@ -345,7 +347,7 @@ public class RequestStatementMapperTest {
     public void When_MappingReferralRequestJsonWithNestedTrue_Expect_RequestStatementXmlOutput() throws IOException {
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NO_OPTIONAL_FIELDS_NESTED);
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS);
-        ReferralRequest parsedReferralRequest = new FhirParseService().parseResource(jsonInput, ReferralRequest.class);
+        ReferralRequest parsedReferralRequest = new FhirParseService(fhirCtx).parseResource(jsonInput, ReferralRequest.class);
 
         String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(parsedReferralRequest, true);
 
@@ -357,7 +359,7 @@ public class RequestStatementMapperTest {
     public void When_MappingReferralRequestJsonWithInvalidData_Expect_Exception(String inputJson, String exceptionMessage)
         throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        ReferralRequest parsedReferralRequest = new FhirParseService().parseResource(jsonInput, ReferralRequest.class);
+        ReferralRequest parsedReferralRequest = new FhirParseService(fhirCtx).parseResource(jsonInput, ReferralRequest.class);
 
         assertThatThrownBy(() -> requestStatementMapper.mapReferralRequestToRequestStatement(parsedReferralRequest, false))
             .isExactlyInstanceOf(EhrMapperException.class)

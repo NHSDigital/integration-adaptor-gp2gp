@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +45,7 @@ public class AgentDirectoryTest {
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID_1, GENERATED_ID_2);
 
         String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE);
-        inputBundle = new FhirParseService().parseResource(jsonInput, Bundle.class);
+        inputBundle = new FhirParseService(FhirContext.forDstu3()).parseResource(jsonInput, Bundle.class);
     }
 
     @Test

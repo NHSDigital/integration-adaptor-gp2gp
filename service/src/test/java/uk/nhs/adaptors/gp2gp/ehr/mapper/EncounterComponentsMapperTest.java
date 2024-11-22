@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -501,7 +502,7 @@ public class EncounterComponentsMapperTest {
 
     private Bundle initializeMessageContext(String inputJsonPath) {
         String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
-        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+        Bundle bundle = new FhirParseService(FhirContext.forDstu3()).parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);
 
         IdType conditionId = buildIdType(ResourceType.Practitioner, PRACTITIONER_ID);

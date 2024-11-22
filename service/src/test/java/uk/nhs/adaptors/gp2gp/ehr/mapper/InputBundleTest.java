@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.io.IOException;
 import java.util.Optional;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
@@ -42,7 +43,7 @@ public class InputBundleTest {
     @BeforeEach
     public void setUp() throws IOException {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_PATH);
-        bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+        bundle = new FhirParseService(FhirContext.forDstu3()).parseResource(inputJson, Bundle.class);
     }
 
     @Test

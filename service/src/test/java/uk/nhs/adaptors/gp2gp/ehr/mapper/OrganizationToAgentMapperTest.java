@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +33,7 @@ public class OrganizationToAgentMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_ORGANIZATION_JSON);
         var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_ORGANIZATION_AS_AGENT_PERSON_JSON);
 
-        Organization organization = new FhirParseService().parseResource(jsonInput, Organization.class);
+        Organization organization = new FhirParseService(FhirContext.forDstu3()).parseResource(jsonInput, Organization.class);
         var outputMessage = OrganizationToAgentMapper.mapOrganizationToAgent(organization, TEST_ID);
         assertThat(outputMessage)
             .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, INPUT_ORGANIZATION_JSON, OUTPUT_ORGANIZATION_AS_AGENT_PERSON_JSON)

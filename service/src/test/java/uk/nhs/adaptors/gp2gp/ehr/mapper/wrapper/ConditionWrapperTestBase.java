@@ -4,6 +4,7 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 import java.io.IOException;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -33,7 +34,7 @@ public abstract class ConditionWrapperTestBase {
     @BeforeAll
     public static void setUp() throws IOException {
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        bundle = new FhirParseService(FhirContext.forDstu3()).parseResource(bundleInput, Bundle.class);
         inputBundle = new InputBundle(bundle);
     }
 

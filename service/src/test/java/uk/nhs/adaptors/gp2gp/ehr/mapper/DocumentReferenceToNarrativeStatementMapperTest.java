@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
@@ -82,6 +83,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     public static final String NARRATIVE_STATEMENT_REFERENCE_CONFIDENTIALITY_CODE_XPATH =
         "/component/NarrativeStatement/reference/referredToExternalDocument/"
         + ConfidentialityCodeUtility.getNopatConfidentialityCodeXpathSegment();
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -104,7 +106,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         lenient().when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(TEST_ID);
 
         final String bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        final Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        final Bundle bundle = new FhirParseService(fhirCtx).parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
 
@@ -128,7 +130,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
 
         final String jsonInput
             = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_AND_SECURITY_LABEL_BUT_WITHOUT_NOPAT);
-        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        final DocumentReference parsedDocumentReference = new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
         when(redactionsContext.isRedactionMessage()).thenReturn(true);
 
         final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
@@ -140,7 +142,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     void When_DocReferenceSecurityLabelPopulatedWithNoPat_Expect_NarrativeStatementPopulatesReferredToExternalDocument() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_LABEL);
-        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        final DocumentReference parsedDocumentReference = new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
         when(redactionsContext.isRedactionMessage()).thenReturn(true);
 
         final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
@@ -152,7 +154,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     void When_DocReferenceSecurityLabelPopulatedWithNoPatAndNotReduction_Expect_NarrativeStatementReferredToExternalDocIsNotPopulated() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY_LABEL);
-        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        final DocumentReference parsedDocumentReference = new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
         when(redactionsContext.isRedactionMessage()).thenReturn(false);
 
         final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
@@ -164,7 +166,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
      void When_DocReferenceJsonPopulatedWithNoPat_Expect_NarrativeStatementPopulatesReferredToExternalDocument() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY);
-        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        final DocumentReference parsedDocumentReference = new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
         when(redactionsContext.isRedactionMessage()).thenReturn(true);
 
         final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
@@ -176,7 +178,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     void When_DocReferenceJsonPopulatedWithNoPatAndNotReduction_Expect_NarrativeStatementDoesNotPopulateReferredToExternalDoc() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA_WITH_NOPAT_WITH_SECURITY);
-        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        final DocumentReference parsedDocumentReference = new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
         when(redactionsContext.isRedactionMessage()).thenReturn(false);
 
         final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
@@ -188,7 +190,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     void When_DocReferenceJsonNotPopulatedWithNoPat_Expect_NarrativeStatementDoesNotPopulateReferredToExternalDocumentWithNopat() {
 
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_OPTIONAL_DATA);
-        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        final DocumentReference parsedDocumentReference = new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
 
         final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
 
@@ -202,7 +204,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         final CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         final String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         final DocumentReference parsedDocumentReference =
-            new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+            new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
 
         final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
 
@@ -232,7 +234,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     void When_MappingParsedDocumentReferenceJsonWithNoDates_Expect_MapperException() {
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
         final DocumentReference parsedDocumentReference =
-            new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+            new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
         parsedDocumentReference.setIndexedElement(null);
 
         assertThatThrownBy(() -> mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference))
@@ -244,7 +246,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     void When_MappingParsedDocumentReferenceJsonWithNoContent_Expect_MapperException() {
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
         final DocumentReference parsedDocumentReference =
-            new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+            new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
         parsedDocumentReference.setContent(null);
 
         assertThatThrownBy(() -> mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference))
@@ -256,7 +258,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     void When_MappingParsedDocumentReferenceJsonWithContentAndNoAttachment_Expect_MapperException() {
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
         final DocumentReference parsedDocumentReference =
-            new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+            new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
         parsedDocumentReference.getContent().getFirst().setAttachment(null);
 
         assertThatThrownBy(() -> mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference))
@@ -268,7 +270,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     void When_MappingParsedDocumentReferenceJsonWithNoAttachmentContentType_Expect_MapperException() {
         final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
         final DocumentReference parsedDocumentReference =
-            new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+            new FhirParseService(fhirCtx).parseResource(jsonInput, DocumentReference.class);
         final Attachment attachment = parsedDocumentReference.getContent().getFirst().getAttachment();
         attachment.setTitle("some title").setContentType(null);
 

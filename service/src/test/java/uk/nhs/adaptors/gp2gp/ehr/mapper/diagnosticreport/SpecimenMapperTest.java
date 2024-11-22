@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
@@ -77,7 +78,7 @@ class SpecimenMapperTest {
     @BeforeEach
     void setUp() {
         var inputBundleString = ResourceTestFileUtils.getFileContent(FHIR_INPUT_BUNDLE);
-        var inputBundle = new FhirParseService().parseResource(inputBundleString, Bundle.class);
+        var inputBundle = new FhirParseService(FhirContext.forDstu3()).parseResource(inputBundleString, Bundle.class);
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(new InputBundle(inputBundle));

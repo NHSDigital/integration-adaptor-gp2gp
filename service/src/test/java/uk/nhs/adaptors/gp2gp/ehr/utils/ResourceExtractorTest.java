@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.ListResource;
@@ -26,6 +27,7 @@ class ResourceExtractorTest {
 
     private static final String LIST_RESOURCE_TEST_FILE_DIRECTORY = "/ehr/mapper/listresource/";
     private static final String LIST_REFERENCE_ID = "List/ended-allergies#eb306f14-31e9-11ee-b912-0a58a9feac02";
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     @Mock
     private MessageContext messageContext;
@@ -34,7 +36,7 @@ class ResourceExtractorTest {
     void extractListWithContainedAllergiesResourceByReference() throws IOException {
 
         String bundleJsonInput = ResourceTestFileUtils.getFileContent(LIST_RESOURCE_TEST_FILE_DIRECTORY + "fhir_bundle.json");
-        Bundle allBundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
+        Bundle allBundle = new FhirParseService(fhirCtx).parseResource(bundleJsonInput, Bundle.class);
 
         IIdType reference = createAllergyIntoleranceReference(LIST_REFERENCE_ID);
         Optional<Resource> resources = ResourceExtractor.extractResourceByReference(allBundle, reference);
@@ -49,7 +51,7 @@ class ResourceExtractorTest {
 
         final String LIST_REFERENCE_ID_WITH_WRONG_RESOURCE_TYPE = "Organization/ended-allergies#eb306f14-31e9-11ee-b912-0a58a9feac02";
         String bundleJsonInput = ResourceTestFileUtils.getFileContent(LIST_RESOURCE_TEST_FILE_DIRECTORY + "fhir_bundle.json");
-        Bundle allBundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
+        Bundle allBundle = new FhirParseService(fhirCtx).parseResource(bundleJsonInput, Bundle.class);
 
         IIdType reference = createAllergyIntoleranceReference(LIST_REFERENCE_ID_WITH_WRONG_RESOURCE_TYPE);
         Optional<Resource> resources = ResourceExtractor.extractResourceByReference(allBundle, reference);
@@ -62,7 +64,7 @@ class ResourceExtractorTest {
 
         final String NON_EXISTED_LIST_REFERENCE_ID = "List/ended-allergies#eb306f14-31e9-11ee-b912-0a58a9feac04";
         String bundleJsonInput = ResourceTestFileUtils.getFileContent(LIST_RESOURCE_TEST_FILE_DIRECTORY + "fhir_bundle.json");
-        Bundle allBundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
+        Bundle allBundle = new FhirParseService(fhirCtx).parseResource(bundleJsonInput, Bundle.class);
 
         IIdType reference = createAllergyIntoleranceReference(NON_EXISTED_LIST_REFERENCE_ID);
         Optional<Resource> resources = ResourceExtractor.extractResourceByReference(allBundle, reference);

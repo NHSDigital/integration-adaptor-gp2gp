@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.apache.commons.io.FilenameUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -116,7 +117,7 @@ public class TransformJsonToXml implements CommandLineRunner {
     final String mapJsonToXml(String jsonAsStringInput) {
         String hl7TranslatedResponse;
         try {
-            final Bundle bundle = new FhirParseService().parseResource(jsonAsStringInput, Bundle.class);
+            final Bundle bundle = new FhirParseService(FhirContext.forDstu3()).parseResource(jsonAsStringInput, Bundle.class);
 
             messageContext.initialize(bundle);
 

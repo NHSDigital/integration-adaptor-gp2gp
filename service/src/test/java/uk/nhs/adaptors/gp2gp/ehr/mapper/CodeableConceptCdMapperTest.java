@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Medication;
@@ -68,7 +69,7 @@ public class CodeableConceptCdMapperTest {
 
     @BeforeEach
     public void setUp() {
-        fhirParseService = new FhirParseService();
+        fhirParseService = new FhirParseService(FhirContext.forDstu3());
         codeableConceptCdMapper = new CodeableConceptCdMapper();
     }
 

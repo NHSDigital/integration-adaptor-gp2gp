@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +44,7 @@ public class StructuredObservationValueMapperTest {
         + "example-output-observation-with-reference-range-high-only.xml";
     private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_LOW_ONLY = TEST_FILES_DIRECTORY
         + "example-output-observation-with-reference-range-low-only.xml";
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     private static final StructuredObservationValueMapper XML_OBSERVATION_VALUE_MAPPER = new StructuredObservationValueMapper();
 
@@ -51,7 +53,7 @@ public class StructuredObservationValueMapperTest {
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_STRING_TYPE);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_STRING_TYPE);
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         boolean isProperValue = XML_OBSERVATION_VALUE_MAPPER.isStructuredValueType(observation.getValue());
         assertThat(isProperValue).isTrue();
@@ -69,7 +71,7 @@ public class StructuredObservationValueMapperTest {
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(expectedOutputXmlPath);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJsonPath);
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         String outputMessage = XML_OBSERVATION_VALUE_MAPPER.mapReferenceRangeType(observation.getReferenceRangeFirstRep());
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
@@ -80,7 +82,7 @@ public class StructuredObservationValueMapperTest {
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_INTERPRETATION);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_INTERPRETATION);
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         String outputMessage = XML_OBSERVATION_VALUE_MAPPER.mapInterpretation(observation.getInterpretation()
             .getCodingFirstRep());
@@ -90,7 +92,7 @@ public class StructuredObservationValueMapperTest {
     @Test
     public void When_MappingParsedObservationInvalidValueJson_Expect_IllegalArgumentException() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_INVALID_VALUE);
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         boolean isProperValue =
             XML_OBSERVATION_VALUE_MAPPER.isStructuredValueType(observation.getValue());

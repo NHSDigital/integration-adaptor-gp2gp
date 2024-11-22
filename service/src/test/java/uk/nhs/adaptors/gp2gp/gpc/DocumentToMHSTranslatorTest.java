@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Binary;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -85,7 +86,7 @@ public class DocumentToMHSTranslatorTest {
             .messageId(MESSAGE_ID)
             .documentId(TEST_DOCUMENT_ID)
             .build();
-        Binary binary = new FhirParseService().parseResource(jsonBinaryContent, Binary.class);
+        Binary binary = new FhirParseService(FhirContext.forDstu3()).parseResource(jsonBinaryContent, Binary.class);
         String payload = documentToMHSTranslator.translateGpcResponseToMhsOutboundRequestData(
             taskDefinition, binary.getContentAsBase64(), binary.getContentType());
 

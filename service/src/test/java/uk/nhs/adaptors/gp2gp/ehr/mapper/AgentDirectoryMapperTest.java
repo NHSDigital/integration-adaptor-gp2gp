@@ -10,6 +10,7 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildReference;
 
 import java.io.IOException;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
@@ -56,7 +57,7 @@ public class AgentDirectoryMapperTest {
         lenient().when(agentPersonMapper.mapAgentPerson(any(), any())).thenAnswer(answerWithObjectId());
 
         agentDirectoryMapper = new AgentDirectoryMapper(messageContext, agentPersonMapper);
-        fhirParseService = new FhirParseService();
+        fhirParseService = new FhirParseService(FhirContext.forDstu3());
     }
 
     private Answer<String> answerWithObjectId() {

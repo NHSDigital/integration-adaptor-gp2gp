@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -198,7 +199,7 @@ public class AllergyStructureMapperTest {
             .thenReturn(Optional.empty());
 
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        Bundle bundle = new FhirParseService(FhirContext.forDstu3()).parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
         List.of(ResourceType.Patient, ResourceType.Device)
@@ -265,7 +266,7 @@ public class AllergyStructureMapperTest {
 
     private static AllergyIntolerance parseAllergyIntoleranceFromJsonFile(String filepath) {
         final var jsonInput = ResourceTestFileUtils.getFileContent(filepath);
-        return new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
+        return new FhirParseService(FhirContext.forDstu3()).parseResource(jsonInput, AllergyIntolerance.class);
     }
 
 }

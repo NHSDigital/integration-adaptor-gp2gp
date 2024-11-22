@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -59,6 +60,7 @@ public class BloodPressureMapperTest {
     private static final String INPUT_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS = "blood-pressure-with-codeable-concepts.json";
     private static final String EXPECTED_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS = "blood-pressure-with-codeable-concepts.xml";
     private static final String INPUT_BLOOD_PRESSURE_WITH_NO_CODEABLE_CONCEPTS = "blood-pressure-with-no-codeable-concepts.json";
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -92,7 +94,7 @@ public class BloodPressureMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_EMPTY_OBSERVATION);
         var expectedOutput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + EXPECTED_EMPTY_OBSERVATION);
 
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, false);
 
         assertThat(outputMessage).isEqualTo(expectedOutput);
@@ -106,7 +108,7 @@ public class BloodPressureMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_BLOOD_PRESSURE_WITH_DATA);
         var expectedOutput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + EXPECTED_NESTED_BLOOD_PRESSURE);
 
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, true);
 
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
@@ -121,7 +123,7 @@ public class BloodPressureMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + inputJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + outputXml);
 
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, false);
 
         assertThat(outputMessage)
@@ -157,7 +159,7 @@ public class BloodPressureMapperTest {
             messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
             codeableConceptCdMapper, new ParticipantMapper());
 
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, true);
 
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
@@ -172,7 +174,7 @@ public class BloodPressureMapperTest {
             messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
             codeableConceptCdMapper, new ParticipantMapper());
 
-        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService(fhirCtx).parseResource(jsonInput, Observation.class);
 
         assertThrows(EhrMapperException.class, ()
             -> bloodPressureMapper.mapBloodPressure(observation, true));

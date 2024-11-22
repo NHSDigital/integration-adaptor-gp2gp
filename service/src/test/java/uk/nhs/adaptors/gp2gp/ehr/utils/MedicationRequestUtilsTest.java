@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -15,7 +16,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 public class MedicationRequestUtilsTest {
 
-    private final FhirParseService fhirParseService = new FhirParseService();
+    private final FhirParseService fhirParseService = new FhirParseService(FhirContext.forDstu3());
 
     private static final String FILES_ROOT = "/ehr/utils/";
     private static final String JSON_CONDITION_WITH_MEDICATION_REQUEST_REF = FILES_ROOT

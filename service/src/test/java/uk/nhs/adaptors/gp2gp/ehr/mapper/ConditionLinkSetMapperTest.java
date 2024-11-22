@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
@@ -131,7 +132,7 @@ class ConditionLinkSetMapperTest {
     @BeforeEach
     void setUp() throws IOException {
         var bundleInput = ResourceTestFileUtils.getFileContent(TEST_FILES_DIRECTORY + INPUT_JSON_BUNDLE);
-        final Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        final Bundle bundle = new FhirParseService(FhirContext.forDstu3()).parseResource(bundleInput, Bundle.class);
         inputBundle = new InputBundle(bundle);
 
         lenient().when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))

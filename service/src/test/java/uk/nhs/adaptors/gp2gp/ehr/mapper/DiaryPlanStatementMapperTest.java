@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.ProcedureRequest;
@@ -56,6 +57,7 @@ public class DiaryPlanStatementMapperTest {
     private static final String OUTPUT_JSON_WITH_MULTIPLE_SUPPORTING_INFO = TEST_DIRECTORY
         + "expected-output-procedure-request-resource-with-multiple-supportInfo.xml";
     private static final String INPUT_BUNDLE = TEST_DIRECTORY + "input-bundle.json";
+    private FhirContext fhirCtx = FhirContext.forDstu3();
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -68,7 +70,7 @@ public class DiaryPlanStatementMapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+        Bundle bundle = new FhirParseService(fhirCtx).parseResource(inputJson, Bundle.class);
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(randomIdGeneratorService.createNewOrUseExistingUUID(anyString())).thenReturn(TEST_ID);
@@ -91,7 +93,7 @@ public class DiaryPlanStatementMapperTest {
         String expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_PLAN_STATEMENT_WITH_IS_NESTED);
 
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_PROCEDURE_REQUEST_WITH_ALL_DATA);
-        ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        ProcedureRequest inputProcedureRequest = new FhirParseService(fhirCtx).parseResource(inputJson, ProcedureRequest.class);
 
         var mappedXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(inputProcedureRequest, true);
         assertThat(mappedXml).contains(expectedXml);
@@ -100,7 +102,7 @@ public class DiaryPlanStatementMapperTest {
     @Test
     public void When_MappingProcedureRequestThatIsNotPlan_Expect_ResourceNotMapped() throws IOException {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_PROCEDURE_REQUEST_IS_NOT_PLAN);
-        ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        ProcedureRequest inputProcedureRequest = new FhirParseService(fhirCtx).parseResource(inputJson, ProcedureRequest.class);
 
         var mappedXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(inputProcedureRequest, true);
         assertThat(mappedXml).isNull();
@@ -109,7 +111,7 @@ public class DiaryPlanStatementMapperTest {
     @Test
     public void When_MappingProcedureRequestWithoutRequiredAuthoredOn_Expect_MapperException() throws IOException {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_PROCEDURE_REQUEST_WITHOUT_REQUIRED_AUTHORED_ON);
-        ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        ProcedureRequest inputProcedureRequest = new FhirParseService(fhirCtx).parseResource(inputJson, ProcedureRequest.class);
 
         assertThrows(EhrMapperException.class, ()
             -> diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(inputProcedureRequest, true));
@@ -149,7 +151,7 @@ public class DiaryPlanStatementMapperTest {
                 </PlanStatement>
             </component>""";
 
-        final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        final var procedureRequest = new FhirParseService(fhirCtx).parseResource(inputJson, ProcedureRequest.class);
         var actualXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(procedureRequest, false);
 
         assertThat(actualXml).isEqualTo(expectedXml);
@@ -185,7 +187,7 @@ public class DiaryPlanStatementMapperTest {
                     </PlanStatement>
                 </component>""";
 
-        final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        final var procedureRequest = new FhirParseService(fhirCtx).parseResource(inputJson, ProcedureRequest.class);
         var actualXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(procedureRequest, false);
 
         assertThat(actualXml).isEqualTo(expectedXml);
@@ -226,7 +228,7 @@ public class DiaryPlanStatementMapperTest {
                 </PlanStatement>
             </component>""";
 
-        final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        final var procedureRequest = new FhirParseService(fhirCtx).parseResource(inputJson, ProcedureRequest.class);
         var actualXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(procedureRequest, false);
 
         assertThat(actualXml).isEqualTo(expectedXml);
@@ -267,7 +269,7 @@ public class DiaryPlanStatementMapperTest {
                 </PlanStatement>
             </component>""";
 
-        final var procedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        final var procedureRequest = new FhirParseService(fhirCtx).parseResource(inputJson, ProcedureRequest.class);
         var actualXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(procedureRequest, false);
 
         assertThat(actualXml).isEqualTo(expectedXml);
@@ -279,7 +281,7 @@ public class DiaryPlanStatementMapperTest {
         String expectedXml = ResourceTestFileUtils.getFileContent(expectedXmlPath);
 
         String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
-        ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
+        ProcedureRequest inputProcedureRequest = new FhirParseService(fhirCtx).parseResource(inputJson, ProcedureRequest.class);
 
         var mappedXml = diaryPlanStatementMapper.mapProcedureRequestToPlanStatement(inputProcedureRequest, false);
         assertThat(mappedXml).contains(expectedXml);
