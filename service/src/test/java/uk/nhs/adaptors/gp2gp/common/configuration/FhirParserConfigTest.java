@@ -3,11 +3,11 @@ package uk.nhs.adaptors.gp2gp.common.configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class FhirParserConfigTest {
 
-    FhirParserConfig fhirParserConfig;
+    private FhirParserConfig fhirParserConfig;
 
     @BeforeEach
     void setUp() {
