@@ -46,7 +46,7 @@ class EhrResendControllerTest {
     private static final String FROM_ASID_CODE = "test-from-asid";
     private static final String INCUMBENT_NACK_CODE = "99";
     private static final String INCUMBENT_NACK_DISPLAY = "Unexpected condition.";
-    private static final String FORBIDDEN = "FORBIDDEN";
+    private static final String CONFLICT = "CONFLICT";
     private static final String GPCONNECT_ERROR_OR_WARNING_CODE = "http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1";
     private static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
     public static final String ISSUE_CODE_VALUE = "value";
@@ -144,8 +144,8 @@ class EhrResendControllerTest {
         JsonNode rootNode = objectMapper.readTree(response.getBody());
 
         assertAll(
-            () -> assertResponseHasExpectedOperationOutcome(rootNode, FORBIDDEN, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE),
-            () -> assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode())
+            () -> assertResponseHasExpectedOperationOutcome(rootNode, CONFLICT, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE),
+            () -> assertEquals(HttpStatus.CONFLICT, response.getStatusCode())
         );
     }
 
@@ -199,8 +199,8 @@ class EhrResendControllerTest {
         JsonNode rootNode = objectMapper.readTree(response.getBody());
 
         assertAll(
-            () -> assertResponseHasExpectedOperationOutcome(rootNode, FORBIDDEN, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE),
-            () -> assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode())
+            () -> assertResponseHasExpectedOperationOutcome(rootNode, CONFLICT, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE),
+            () -> assertEquals(HttpStatus.CONFLICT, response.getStatusCode())
         );
     }
 
