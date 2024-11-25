@@ -30,8 +30,8 @@ import java.util.Collections;
 public class EhrResendController {
 
     private static final String OPERATION_OUTCOME_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";
-    public static final String FORBIDDEN = "FORBIDDEN";
-    public static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
+    private static final String FORBIDDEN = "FORBIDDEN";
+    private static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
 
     private EhrExtractStatusRepository ehrExtractStatusRepository;
     private TaskDispatcher taskDispatcher;
