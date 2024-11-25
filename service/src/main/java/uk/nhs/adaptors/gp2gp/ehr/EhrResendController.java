@@ -30,7 +30,7 @@ import java.util.Collections;
 public class EhrResendController {
 
     private static final String OPERATION_OUTCOME_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";
-    public static final String INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR";
+    public static final String FORBIDDEN = "FORBIDDEN";
     public static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
 
     private EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -58,7 +58,7 @@ public class EhrResendController {
 
         if (hasNoErrorsInEhrReceivedAcknowledgement(ehrExtractStatus) && ehrExtractStatus.getError() == null) {
 
-            var details = getCodeableConcept(INTERNAL_SERVER_ERROR);
+            var details = getCodeableConcept(FORBIDDEN);
             var diagnostics = "The current resend operation is still in progress. Please wait for it to complete before retrying";
             var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.BUSINESSRULE,
                                                           OperationOutcome.IssueSeverity.ERROR,
