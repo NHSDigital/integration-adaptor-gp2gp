@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -76,7 +77,6 @@ class DiagnosticReportMapperTest {
     private static final String INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.json";
     private static final String INPUT_JSON_EXTENSION_ID = "diagnostic-report-with-extension-id.json";
     private static final String INPUT_JSON_URN_OID_EXTENSION_ID = "diagnostic-report-with-urn-oid-extension-id.json";
-    private static final String INPUT_JSON_UNRELATED_TEST_RESULT = "diagnostic-report-with-one-specimen-and-one-unrelated-observation.json";
 
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
     private static final String OUTPUT_XML_STATUS_NARRATIVE = "diagnostic-report-with-status-narrative.xml";
@@ -88,7 +88,6 @@ class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.xml";
     private static final String OUTPUT_XML_EXTENSION_ID = "diagnostic-report-with-extension-id.xml";
     private static final String OUTPUT_XML_MULTIPLE_RESULTS = "diagnostic-report-with-multiple-results.xml";
-    private static final String OUTPUT_XML_UNRELATED_TEST_RESULT = "diagnostic-report-with-one-specimen-and-one-unrelated-observation.xml";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -293,6 +292,44 @@ class DiagnosticReportMapperTest {
         assertThat(actualXml).isEqualToIgnoringWhitespace(expectedXml);
     }
 
+    /**
+     * A Diagnosis Report may have an Observation (Test Result) and Specimen. If the result and specimen are not
+     * linked then we need to create a dummy specimen linked to the result.
+     */
+    @Test
+    void When_DiagnosticReport_Has_SpecimenAndUnlinkedTestResult_Expect_ADummySpecimenLinkedToTestResult() {
+        final String diagnosticReportFileName = "diagnostic-report-with-one-specimen-and-one-unrelated-observation.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
+        final InputBundle inputBundle = new InputBundle(bundle);
+
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+
+        final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+
+        // This checks that the unlinked test result is given a dummy specimen.
+        assertThat(actualXml).containsIgnoringWhitespaces(
+                "<!-- Mapped Specimen with id: DUMMY-SPECIMEN-5E496953-065B-41F2-9577-BE8F2FBD0757 "
+                        + "with linked Observations: Observation/TestResult-WithoutSpecimenReference-->");
+    }
+
+    @Test
+    void When_DiagnosticReport_Has_SpecimenALinkedTestResultAndAnUnlinkedTestResult_Expect_ASpecimenOnAllTestResults() {
+        final String diagnosticReportFileName =
+                "diagnostic-report-with-one-specimen-one-linked-observation-and-one-unlinked-observation.json";
+        final DiagnosticReport diagnosticReport = getDiagnosticReportResourceFromJson(diagnosticReportFileName);
+        final Bundle bundle = getBundleResourceFromJson(INPUT_JSON_BUNDLE);
+        final InputBundle inputBundle = new InputBundle(bundle);
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+
+        final String actualXml = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
+        // This checks that the unlinked test result is given a dummy specimen.
+        assertThat(actualXml).containsIgnoringWhitespaces(
+                "<!-- Mapped Specimen with id: DUMMY-SPECIMEN-5E496953-065B-41F2-9577-BE8F2FBD0757 "
+                        + "with linked Observations: Observation/TestResult-WithoutSpecimenReference-->");
+
+    }
+
     private Bundle getBundleResourceFromJson(String filename) {
         final String filePath = TEST_FILE_DIRECTORY + filename;
         return FileParsingUtility.parseResourceFromJsonFile(filePath, Bundle.class);
@@ -318,8 +355,7 @@ class DiagnosticReportMapperTest {
             Arguments.of(INPUT_JSON_CODED_DIAGNOSIS, OUTPUT_XML_CODED_DIAGNOSIS),
             Arguments.of(INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS, OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS),
             Arguments.of(INPUT_JSON_EXTENSION_ID, OUTPUT_XML_EXTENSION_ID),
-            Arguments.of(INPUT_JSON_URN_OID_EXTENSION_ID, OUTPUT_XML_EXTENSION_ID),
-            Arguments.of(INPUT_JSON_UNRELATED_TEST_RESULT, OUTPUT_XML_UNRELATED_TEST_RESULT)
+            Arguments.of(INPUT_JSON_URN_OID_EXTENSION_ID, OUTPUT_XML_EXTENSION_ID)
         );
     }
 
@@ -341,7 +377,23 @@ class DiagnosticReportMapperTest {
     private Answer<String> mockSpecimenMapping() {
         return invocation -> {
             Specimen specimen = invocation.getArgument(0);
-            return String.format("<!-- Mapped Specimen with id: %s -->", specimen.getId());
+            List<Observation> observations = invocation.getArgument(1);
+
+            List<String> linkedObservations = new ArrayList<>();
+
+            for (Observation observation : observations) {
+                if (observation.getSpecimen().getReference() != null
+                        && observation.getSpecimen().getReference().equals(specimen.getId())) {
+                    linkedObservations.add(observation.getId());
+                }
+            }
+
+            if (linkedObservations.isEmpty()) {
+                return String.format("<!-- Mapped Specimen with id: %s -->", specimen.getId());
+            }
+            return String.format("<!-- Mapped Specimen with id: %s with linked Observations: %s-->",
+                    specimen.getId(),
+                    String.join(",", linkedObservations));
         };
     }
 }

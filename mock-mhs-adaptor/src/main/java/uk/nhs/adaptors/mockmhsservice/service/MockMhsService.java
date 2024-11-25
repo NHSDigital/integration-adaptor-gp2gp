@@ -75,7 +75,7 @@ public class MockMhsService {
                 EHR_EXTRACT_ID_MAP.put(correlationId, messageId);
                 var inboundMessage = STUB_CONTINUE_REPLY_INBOUND_MESSAGE.replace("%%ConversationId%%", correlationId);
                 inboundProducer.sendToMhsInboundQueue(inboundMessage);
-                LOGGER.info("Placed message on Inbound Queue, conversationId: " + correlationId);
+                LOGGER.info("Placed message on Inbound Queue, conversationId: {}", correlationId);
                 headers.setContentType(MediaType.TEXT_XML);
                 return new ResponseEntity<>(STUB_ACCEPTED_RESPONSE, headers, ACCEPTED);
             } catch (JmsException e) {
@@ -94,7 +94,7 @@ public class MockMhsService {
                 }
 
                 inboundProducer.sendToMhsInboundQueue(inboundMessage);
-                LOGGER.info("Message acknowledgement sent to Inbound Queue, conversationId: " + correlationId);
+                LOGGER.info("Message acknowledgement sent to Inbound Queue, conversationId: {}", correlationId);
                 headers.setContentType(MediaType.TEXT_XML);
                 return new ResponseEntity<>(STUB_ACCEPTED_RESPONSE, headers, ACCEPTED);
             } catch (JmsException e) {
