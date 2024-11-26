@@ -68,10 +68,10 @@ public class EhrResendController {
             return new ResponseEntity<>(errorBody, HttpStatus.CONFLICT);
         }
 
-        LOGGER.info("Creating tasks to start the EHR Extract process resend");
         var updatedEhrExtractStatus = prepareEhrExtractStatusForNewResend(ehrExtractStatus);
         ehrExtractStatusRepository.save(updatedEhrExtractStatus);
         createGetGpcStructuredTask(updatedEhrExtractStatus);
+        LOGGER.info("Scheduled GetGpcStructuredTask for resend of ConversationId: {}", conversationId);
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
