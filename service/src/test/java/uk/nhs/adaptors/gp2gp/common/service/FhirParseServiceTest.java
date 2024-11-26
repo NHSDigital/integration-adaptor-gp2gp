@@ -1,33 +1,65 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
-import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.parser.IParser;
-import ca.uhn.fhir.parser.StrictErrorHandler;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
+import org.hl7.fhir.dstu3.model.OperationOutcome;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import uk.nhs.adaptors.gp2gp.common.configuration.ObjectMapperBean;
+import uk.nhs.adaptors.gp2gp.ehr.EhrResendController;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class FhirParseServiceTest {
 
-    private ArgumentCaptor<StrictErrorHandler> captor = ArgumentCaptor.forClass(StrictErrorHandler.class);
+    public static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
+    private static final String OPERATION_OUTCOME_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";
+    private OperationOutcome operationOutcome;
+    private ObjectMapper objectMapper;
+
+    @BeforeEach
+    void setUp() {
+        ObjectMapperBean objectMapperBean = new ObjectMapperBean();
+        objectMapper = objectMapperBean.objectMapper(new Jackson2ObjectMapperBuilder());
+
+        var details = getCodeableConcept();
+        var diagnostics = "Provide a conversationId that exists and retry the operation";
+        operationOutcome = EhrResendController.createOperationOutcome(OperationOutcome.IssueType.VALUE,
+                                                      OperationOutcome.IssueSeverity.ERROR,
+                                                      details,
+                                                      diagnostics);
+    }
 
     @Test
-    void fhirParseServiceInitializedWithStrictErrorHandlerAndNewJsonParserTest() {
+    void ableToEncodeOperationOutcomeToJson() throws JsonProcessingException {
+        FhirParseService fhirParseService = new FhirParseService();
 
-        FhirContext fhirContext = mock(FhirContext.class);
-        IParser parser = mock(IParser.class);
-        when(fhirContext.newJsonParser()).thenReturn(parser);
+        String convertedToJsonOperationOutcome = fhirParseService.encodeToJson(operationOutcome);
 
-        FhirParseService service = new FhirParseService(fhirContext);
+        JsonNode rootNode = objectMapper.readTree(convertedToJsonOperationOutcome);
+        String code =
+            rootNode.path("issue").get(0).path("details").path("coding").get(0).path("code").asText();
+        String operationOutcomeUrl = rootNode.path("meta").path("profile").get(0).asText();
 
-        verify(fhirContext).setParserErrorHandler(captor.capture());
-        StrictErrorHandler strictErrorHandler = captor.getValue();
-        assertNotNull(strictErrorHandler, "StrictErrorHandler should not be null");
-        verify(fhirContext, times(2)).newJsonParser();
+        assertEquals(INVALID_IDENTIFIER_VALUE, code);
+        assertEquals(OPERATION_OUTCOME_URL, operationOutcomeUrl);
     }
+
+    private static CodeableConcept getCodeableConcept() {
+        var details = new CodeableConcept();
+        var codeableConceptCoding = new Coding();
+        codeableConceptCoding.setSystem("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1");
+        codeableConceptCoding.setCode(FhirParseServiceTest.INVALID_IDENTIFIER_VALUE);
+        details.setCoding(List.of(codeableConceptCoding));
+        return details;
+    }
+  
 }
