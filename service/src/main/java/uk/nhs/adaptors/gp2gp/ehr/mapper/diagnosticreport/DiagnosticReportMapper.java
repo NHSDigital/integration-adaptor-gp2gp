@@ -87,7 +87,9 @@ public class DiagnosticReportMapper {
                 specimens);
 
         String mappedSpecimens = specimens.stream()
-            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observationsExcludingFilingComments, diagnosticReport))
+            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen,
+                    observationsForSpecimen(specimen, observationsExcludingFilingComments),
+                    diagnosticReport))
             .collect(Collectors.joining());
 
         String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport, observations);
@@ -111,6 +113,13 @@ public class DiagnosticReportMapper {
             DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE,
             diagnosticReportCompoundStatementTemplateParameters.build()
         );
+    }
+
+    private List<Observation> observationsForSpecimen(Specimen specimen, List<Observation> observations) {
+        return observations.stream()
+                .filter(Observation::hasSpecimen)
+                .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
+                .collect(Collectors.toList());
     }
 
     private String fetchExtensionId(List<Identifier> identifiers) {
