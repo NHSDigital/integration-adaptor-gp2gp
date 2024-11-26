@@ -97,7 +97,6 @@ public class EhrResendController {
     private EhrExtractStatus prepareEhrExtractStatusForNewResend(EhrExtractStatus ehrExtractStatus) {
 
         var now = timestampService.now();
-        ehrExtractStatus.setCreated(now);
         ehrExtractStatus.setUpdatedAt(now);
         ehrExtractStatus.setMessageTimestamp(now);
         ehrExtractStatus.setEhrExtractCorePending(null);

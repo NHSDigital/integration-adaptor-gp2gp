@@ -103,6 +103,7 @@ class EhrResendControllerTest {
         ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
         ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder().build());
+        ehrExtractStatus.setCreated(FIVE_DAYS_AGO);
 
         when(ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID)).thenReturn(Optional.of(ehrExtractStatus));
 
@@ -117,7 +118,7 @@ class EhrResendControllerTest {
             () -> verify(taskDispatcher, times(1)).createTask(taskDefinition),
             () -> verify(ehrExtractStatusRepository, times(1)).save(ehrExtractStatus),
             () -> assertEquals(now, ehrExtractStatus.getMessageTimestamp()),
-            () -> assertEquals(now, ehrExtractStatus.getCreated()),
+            () -> assertEquals(FIVE_DAYS_AGO, ehrExtractStatus.getCreated()),
             () -> assertEquals(now, ehrExtractStatus.getUpdatedAt()),
             () -> assertNull(ehrExtractStatus.getEhrExtractCorePending()),
             () -> assertNull(ehrExtractStatus.getEhrContinue()),
