@@ -82,7 +82,7 @@ class EhrResendControllerTest {
     }
 
     @Test
-    void When_AnEhrExtractHasFailed_Expect_GetGpcStructuredTaskScheduled_And_EhrExtractStatusIsReset() {
+    void When_AnEhrExtractHasFailed_Expect_GetGpcStructuredTaskScheduledAndEhrExtractStatusIsReset() {
 
         String ehrMessageRef = generateRandomUppercaseUUID();
         var ehrExtractStatus = new EhrExtractStatus();
@@ -111,19 +111,19 @@ class EhrResendControllerTest {
 
         ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
-        var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId());
         var taskDefinition = GetGpcStructuredTaskDefinition.getGetGpcStructuredTaskDefinition(randomIdGeneratorService, ehrExtractStatus);
 
         assertAll(
             () -> verify(taskDispatcher, times(1)).createTask(taskDefinition),
-            () -> assertEquals(now, updatedEhrExtractStatus.get().getMessageTimestamp()),
-            () -> assertEquals(now, updatedEhrExtractStatus.get().getCreated()),
-            () -> assertEquals(now, updatedEhrExtractStatus.get().getUpdatedAt()),
-            () -> assertNull(updatedEhrExtractStatus.get().getEhrExtractCorePending()),
-            () -> assertNull(updatedEhrExtractStatus.get().getEhrContinue()),
-            () -> assertNull(updatedEhrExtractStatus.get().getAckPending()),
-            () -> assertNull(updatedEhrExtractStatus.get().getEhrReceivedAcknowledgement()),
-            () -> assertNull(updatedEhrExtractStatus.get().getGpcAccessDocument())
+            () -> verify(ehrExtractStatusRepository, times(1)).save(ehrExtractStatus),
+            () -> assertEquals(now, ehrExtractStatus.getMessageTimestamp()),
+            () -> assertEquals(now, ehrExtractStatus.getCreated()),
+            () -> assertEquals(now, ehrExtractStatus.getUpdatedAt()),
+            () -> assertNull(ehrExtractStatus.getEhrExtractCorePending()),
+            () -> assertNull(ehrExtractStatus.getEhrContinue()),
+            () -> assertNull(ehrExtractStatus.getAckPending()),
+            () -> assertNull(ehrExtractStatus.getEhrReceivedAcknowledgement()),
+            () -> assertNull(ehrExtractStatus.getGpcAccessDocument())
         );
     }
 
