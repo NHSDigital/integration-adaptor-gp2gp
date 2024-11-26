@@ -82,7 +82,7 @@ class EhrResendControllerTest {
     }
 
     @Test
-    void When_AnEhrExtractHasFailed_Expect_GetGpcStructuredTaskScheduled() {
+    void When_AnEhrExtractHasFailed_Expect_GetGpcStructuredTaskScheduled_And_EhrExtractStatusIsReset() {
 
         String ehrMessageRef = generateRandomUppercaseUUID();
         var ehrExtractStatus = new EhrExtractStatus();
