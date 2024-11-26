@@ -173,8 +173,10 @@ class EhrResendControllerTest {
 
         var response = ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
 
-        assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
-        assertNull(response.getBody());
+        assertAll(
+            () -> assertEquals(HttpStatus.ACCEPTED, response.getStatusCode()),
+            () -> assertNull(response.getBody())
+        );
     }
 
     @Test
