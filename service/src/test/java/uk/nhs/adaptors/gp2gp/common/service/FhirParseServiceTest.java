@@ -30,7 +30,7 @@ class FhirParseServiceTest {
         ObjectMapperBean objectMapperBean = new ObjectMapperBean();
         objectMapper = objectMapperBean.objectMapper(new Jackson2ObjectMapperBuilder());
 
-        var details = getCodeableConcept(INVALID_IDENTIFIER_VALUE);
+        var details = getCodeableConcept();
         var diagnostics = "Provide a conversationId that exists and retry the operation";
         operationOutcome = EhrResendController.createOperationOutcome(OperationOutcome.IssueType.VALUE,
                                                       OperationOutcome.IssueSeverity.ERROR,
@@ -39,7 +39,7 @@ class FhirParseServiceTest {
     }
 
     @Test
-    void parseOperationOutcomeTest() throws JsonProcessingException {
+    void ableToEncodeOperationOutcomeToJson() throws JsonProcessingException {
         FhirParseService fhirParseService = new FhirParseService();
 
         String convertedToJsonOperationOutcome = fhirParseService.encodeToJson(operationOutcome);
@@ -53,11 +53,11 @@ class FhirParseServiceTest {
         assertEquals(OPERATION_OUTCOME_URL, operationOutcomeUrl);
     }
 
-    private static CodeableConcept getCodeableConcept(String codeableConceptCode) {
+    private static CodeableConcept getCodeableConcept() {
         var details = new CodeableConcept();
         var codeableConceptCoding = new Coding();
         codeableConceptCoding.setSystem("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1");
-        codeableConceptCoding.setCode(codeableConceptCode);
+        codeableConceptCoding.setCode(FhirParseServiceTest.INVALID_IDENTIFIER_VALUE);
         details.setCoding(List.of(codeableConceptCoding));
         return details;
     }
