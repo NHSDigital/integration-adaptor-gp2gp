@@ -6,9 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## Added
-* When mapping a `DiagnosticReport` which contains a `TestResult` without a `Specimen` attached to it, a new `Specimen` is 
-created to allow the `TestResult` to be mapped correctly.
+### Fixed
+* When mapping a `DiagnosticReport` which contains at least one test result with a `Specimen` attached, any test result's which didn't have a Specimen
+  were previously not sent to the requesting system.
+  Now, a fake `Specimen` is created in which any `Specimen`-less `TestResult`s are placed.
+
+### Added
 * When mapping a `DocumentReference` which contains a `NOPAT` `meta.security` or `NOPAT` `securityLabel` tag the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
 * When mapping `AllergyIntolerances` which contain a `NOPAT` `meta.security` tag the resultant XML for that resource
@@ -28,7 +31,7 @@ created to allow the `TestResult` to be mapped correctly.
 
 ## [2.1.4] - 2014-11-07
 
-## Fixed
+### Fixed
 
 * When mapping an `Observation` related to a diagnostic report which does not contain a `code` element, the adaptor will
   now throw an error reporting that an observation requires a code element and provide the affected resource ID.
