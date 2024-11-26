@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.newLine;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.withSpace;
@@ -64,9 +62,11 @@ public class SpecimenMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final ConfidentialityService confidentialityService;
 
-    public String mapSpecimenToCompoundStatement(Specimen specimen, List<Observation> observations, DiagnosticReport diagnosticReport) {
+    public String mapSpecimenToCompoundStatement(
+            Specimen specimen, List<Observation> observationsAssociatedWithSpecimen, DiagnosticReport diagnosticReport
+    ) {
         String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement());
-        String mappedObservations = mapObservationsAssociatedWithSpecimen(specimen, observations);
+        String mappedObservations = mapObservationsToCompoundStatements(observationsAssociatedWithSpecimen);
 
         var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
             .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getIdElement()))
@@ -135,26 +135,10 @@ public class SpecimenMapper {
         return Optional.empty();
     }
 
-    private String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
-        List<Observation> observationsAssociatedWithSpecimen;
-
-        if (dummySpecimenOrObservationExists(specimen, observations)) {
-            observationsAssociatedWithSpecimen = observations;
-        } else {
-            observationsAssociatedWithSpecimen = observations.stream()
-                .filter(Observation::hasSpecimen)
-                .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
-                .collect(Collectors.toList());
-        }
-
-        return observationsAssociatedWithSpecimen.stream()
+    private String mapObservationsToCompoundStatements(List<Observation> observations) {
+        return observations.stream()
             .map(observationMapper::mapObservationToCompoundStatement)
             .collect(Collectors.joining());
-    }
-
-    private boolean dummySpecimenOrObservationExists(Specimen specimen, List<Observation> observations) {
-        return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)
-            || (!observations.isEmpty() && observations.getFirst().getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement,
