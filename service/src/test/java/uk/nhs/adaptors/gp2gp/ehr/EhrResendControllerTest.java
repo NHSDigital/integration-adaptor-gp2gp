@@ -16,6 +16,8 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.status.controller.EhrStatusController;
+import uk.nhs.adaptors.gp2gp.ehr.status.service.EhrStatusService;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import java.time.Duration;
@@ -31,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.IN_PROGRESS;
 
 @ExtendWith(MockitoExtension.class)
 class EhrResendControllerTest {
@@ -67,6 +70,8 @@ class EhrResendControllerTest {
     private TaskDispatcher taskDispatcher;
 
     private EhrResendController ehrResendController;
+    private EhrStatusController ehrStatusController;
+    private EhrStatusService ehrStatusService;
 
 
     @BeforeEach
@@ -79,6 +84,8 @@ class EhrResendControllerTest {
                                                       randomIdGeneratorService,
                                                       timestampService,
                                                       fhirParseService);
+        ehrStatusService = new EhrStatusService(ehrExtractStatusRepository);
+        ehrStatusController = new EhrStatusController(ehrStatusService);
     }
 
     @Test
@@ -222,6 +229,40 @@ class EhrResendControllerTest {
             () -> assertResponseHasExpectedOperationOutcome(rootNode, INVALID_IDENTIFIER_VALUE, diagnosticsMsg, ISSUE_CODE_VALUE),
             () -> assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode())
         );
+    }
+
+    @Test
+    void When_ResendingTransfer_Expect_EhrStatusInProgressStatus() {
+
+        String ehrMessageRef = generateRandomUppercaseUUID();
+        var ehrExtractStatus = new EhrExtractStatus();
+
+        ehrExtractStatus.setConversationId(CONVERSATION_ID);
+        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
+                                                           .conversationClosed(FIVE_DAYS_AGO)
+                                                           .errors(List.of(
+                                                               EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
+                                                                   .code(INCUMBENT_NACK_CODE)
+                                                                   .display(INCUMBENT_NACK_DISPLAY)
+                                                                   .build()))
+                                                           .messageRef(ehrMessageRef)
+                                                           .received(FIVE_DAYS_AGO)
+                                                           .rootId(generateRandomUppercaseUUID())
+                                                           .build());
+        ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
+        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
+        ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
+        ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder().build());
+
+        when(ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID)).thenReturn(Optional.of(ehrExtractStatus));
+
+        Instant now = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+        when(timestampService.now()).thenReturn(now);
+
+        ehrResendController.scheduleEhrExtractResend(CONVERSATION_ID);
+        var ehrStatus = ehrStatusController.getEhrStatus(CONVERSATION_ID);
+
+        assertEquals(IN_PROGRESS, ehrStatus.getBody().getMigrationStatus());
     }
 
     private void assertResponseHasExpectedOperationOutcome(JsonNode rootNode, String serverErrMsg,
