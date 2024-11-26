@@ -46,8 +46,8 @@ class EhrResendControllerTest {
     private static final String FROM_ASID_CODE = "test-from-asid";
     private static final String INCUMBENT_NACK_CODE = "99";
     private static final String INCUMBENT_NACK_DISPLAY = "Unexpected condition.";
-    private static final String CONFLICT = "CONFLICT";
-    private static final String GPCONNECT_ERROR_OR_WARNING_CODE = "http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1";
+    private static final String PRECONDITION_FAILED = "PRECONDITION_FAILED";
+    private static final String GPCONNECT_ERROR_OR_WARNING_CODE = "https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1";
     private static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
     public static final String ISSUE_CODE_VALUE = "value";
     public static final String ISSUE_CODE_BUSINESS_RULE = "business-rule";
@@ -129,7 +129,7 @@ class EhrResendControllerTest {
     }
 
     @Test
-    void When_AnEhrExtractHasNotFailedAndAnotherResendRequestArrives_Expect_FailedOperationOutcome() throws JsonProcessingException {
+    void When_AnEhrExtractIsStillInProgress_Expect_FailedOperationOutcome() throws JsonProcessingException {
 
         final EhrExtractStatus IN_PROGRESS_EXTRACT_STATUS = EhrExtractStatus.builder()
             .conversationId(CONVERSATION_ID)
@@ -145,7 +145,7 @@ class EhrResendControllerTest {
         JsonNode rootNode = objectMapper.readTree(response.getBody());
 
         assertAll(
-            () -> assertResponseHasExpectedOperationOutcome(rootNode, CONFLICT, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE),
+            () -> assertResponseHasExpectedOperationOutcome(rootNode, PRECONDITION_FAILED, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE),
             () -> assertEquals(HttpStatus.CONFLICT, response.getStatusCode())
         );
     }
@@ -181,7 +181,7 @@ class EhrResendControllerTest {
     }
 
     @Test
-    void When_AnEhrExtractHasNotFailed_Expect_RespondsWith403() throws JsonProcessingException {
+    void When_AnEhrExtractHasAPositiveAcknowledgement_Expect_FailedOperationOutcome() throws JsonProcessingException {
 
         String ehrMessageRef = generateRandomUppercaseUUID();
         var ehrExtractStatus = new EhrExtractStatus();
@@ -202,7 +202,7 @@ class EhrResendControllerTest {
         JsonNode rootNode = objectMapper.readTree(response.getBody());
 
         assertAll(
-            () -> assertResponseHasExpectedOperationOutcome(rootNode, CONFLICT, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE),
+            () -> assertResponseHasExpectedOperationOutcome(rootNode, PRECONDITION_FAILED, DIAGNOSTICS_MSG, ISSUE_CODE_BUSINESS_RULE),
             () -> assertEquals(HttpStatus.CONFLICT, response.getStatusCode())
         );
     }

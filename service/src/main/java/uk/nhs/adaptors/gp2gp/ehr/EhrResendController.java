@@ -30,7 +30,7 @@ import java.util.Collections;
 public class EhrResendController {
 
     private static final String OPERATION_OUTCOME_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";
-    private static final String CONFLICT = "CONFLICT";
+    private static final String PRECONDITION_FAILED = "PRECONDITION_FAILED";
     private static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
 
     private EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -58,7 +58,7 @@ public class EhrResendController {
 
         if (hasNoErrorsInEhrReceivedAcknowledgement(ehrExtractStatus) && ehrExtractStatus.getError() == null) {
 
-            var details = getCodeableConcept(CONFLICT);
+            var details = getCodeableConcept(PRECONDITION_FAILED);
             var diagnostics = "The current resend operation is still in progress. Please wait for it to complete before retrying";
             var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.BUSINESSRULE,
                                                           OperationOutcome.IssueSeverity.ERROR,
@@ -78,7 +78,7 @@ public class EhrResendController {
 
     private static CodeableConcept getCodeableConcept(String codeableConceptCode) {
         return new CodeableConcept().addCoding(
-            new Coding("http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1", codeableConceptCode, null));
+            new Coding("https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1", codeableConceptCode, null));
     }
 
     private static boolean hasNoErrorsInEhrReceivedAcknowledgement(EhrExtractStatus ehrExtractStatus) {
