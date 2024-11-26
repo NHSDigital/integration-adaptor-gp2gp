@@ -61,7 +61,7 @@ dependencies {
 	implementation 'org.apache.tika:tika-core:3.0.0'
 
 	// Fhir
-	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:7.4.5'
+	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:7.6.0'
 
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
