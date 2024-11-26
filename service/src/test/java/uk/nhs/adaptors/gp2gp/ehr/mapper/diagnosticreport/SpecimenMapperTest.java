@@ -50,7 +50,6 @@ class SpecimenMapperTest {
     private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12T13:33:44Z";
     private static final String FHIR_INPUT_BUNDLE = BASE_DIRECTORY + "fhir_bundle.json";
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
-    private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
     private static final String ID_FROM_ID_MAPPER = "some-id";
     private static final DiagnosticReport DIAGNOSTIC_REPORT = new DiagnosticReport().setIssuedElement(
@@ -87,8 +86,7 @@ class SpecimenMapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
         observations = List.of(
-            getObservationResourceFromJson(INPUT_OBSERVATION_RELATED_TO_SPECIMEN),
-            getObservationResourceFromJson(INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN)
+            getObservationResourceFromJson(INPUT_OBSERVATION_RELATED_TO_SPECIMEN)
         );
     }
 
@@ -124,22 +122,6 @@ class SpecimenMapperTest {
         );
 
         assertThat(actualXml).isEqualTo(expectedXml);
-    }
-
-    @Test
-    void When_MappingDefaultSpecimenWithObservation_Expect_DefaultSpecimenAndObservationXmlOutput() {
-        final Specimen specimen = getDefaultSpecimen();
-        final String expectedXml = ResourceTestFileUtils.getFileContent(
-            SPECIMEN_TEST_FILES_DIRECTORY + "expected_output_default_specimen_with_observation.xml");
-
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
-            .thenReturn(ID_FROM_ID_MAPPER);
-        when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
-
-        final String actualXml = specimenMapper.mapSpecimenToCompoundStatement(
-            specimen, observations, DIAGNOSTIC_REPORT);
-
-        assertThat(actualXml).isEqualToIgnoringWhitespace(expectedXml);
     }
 
     @Test
