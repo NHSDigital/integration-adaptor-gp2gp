@@ -12,9 +12,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import uk.nhs.adaptors.gp2gp.common.configuration.ObjectMapperBean;
+import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.ehr.EhrResendController;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -24,6 +28,7 @@ class FhirParseServiceTest {
     private static final String OPERATION_OUTCOME_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";
     private OperationOutcome operationOutcome;
     private ObjectMapper objectMapper;
+    private FhirParseService fhirParseService;
 
     @BeforeEach
     void setUp() {
@@ -36,11 +41,11 @@ class FhirParseServiceTest {
                                                       OperationOutcome.IssueSeverity.ERROR,
                                                       details,
                                                       diagnostics);
+        fhirParseService = new FhirParseService();
     }
 
     @Test
     void ableToEncodeOperationOutcomeToJson() throws JsonProcessingException {
-        FhirParseService fhirParseService = new FhirParseService();
 
         String convertedToJsonOperationOutcome = fhirParseService.encodeToJson(operationOutcome);
 
@@ -51,6 +56,30 @@ class FhirParseServiceTest {
 
         assertEquals(INVALID_IDENTIFIER_VALUE, code);
         assertEquals(OPERATION_OUTCOME_URL, operationOutcomeUrl);
+    }
+
+    @Test
+    void shouldEncodeResourceToPrettyPrintedJson() {
+        String convertedOperationlOutput = fhirParseService.encodeToJson(operationOutcome);
+
+        assertNotNull(convertedOperationlOutput);
+        assertTrue(convertedOperationlOutput.contains("\n"), "OperationalOutcome should contain line breaks (PrettyPrint)");
+        assertTrue(convertedOperationlOutput.contains("  "), "OperationalOutcome should contain indentation (PrettyPrint)");
+    }
+
+    @Test
+    void shouldHandleNullResourceGracefully() {
+        assertThrows(NullPointerException.class, () -> fhirParseService.encodeToJson(null));
+    }
+
+    @Test
+    void shouldThrowFhirValidationExceptionForInvalidInput() {
+
+        String invalidResourceString = "Invalid FHIR Resource";
+
+        var exception = assertThrows(FhirValidationException.class, () -> fhirParseService.parseResource(invalidResourceString,
+                                                                                                         OperationOutcome.class));
+        assertNotNull(exception.getMessage());
     }
 
     private static CodeableConcept getCodeableConcept() {
