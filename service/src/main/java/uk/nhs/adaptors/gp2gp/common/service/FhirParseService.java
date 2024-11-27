@@ -26,7 +26,6 @@ public class FhirParseService {
 
     private IParser prepareParser() {
         FhirContext ctx = FhirContext.forDstu3();
-        ctx.newJsonParser();
         ctx.setParserErrorHandler(new StrictErrorHandler());
         return ctx.newJsonParser();
     }

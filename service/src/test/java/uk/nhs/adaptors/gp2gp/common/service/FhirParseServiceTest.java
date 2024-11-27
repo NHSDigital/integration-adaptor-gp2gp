@@ -45,6 +45,34 @@ class FhirParseServiceTest {
     }
 
     @Test
+    void shouldThrowValidationExceptionForInvalidJsonDiagnosticsField() {
+
+        String invalidJson = """
+                             {
+                             "resourceType": "OperationOutcome",
+                             "meta": {
+                                "profile": ["https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1"]
+                             },
+                             "issue": [ {
+                                "severity": "error",
+                                "code": "value",
+                                "details": {
+                                    "coding": [ {
+                                        "system": "http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1",
+                                        "code": "INVALID_IDENTIFIER_VALUE"
+                                    } ]
+                                },
+                                "diagnosticos": "Provide a conversationId that exists and retry the operation"
+                             } ]
+                             }
+                             """;
+
+        assertThrows(FhirValidationException.class, () -> {
+            fhirParseService.parseResource(invalidJson, OperationOutcome.class);
+        });
+    }
+
+    @Test
     void ableToEncodeOperationOutcomeToJson() throws JsonProcessingException {
 
         String convertedToJsonOperationOutcome = fhirParseService.encodeToJson(operationOutcome);
