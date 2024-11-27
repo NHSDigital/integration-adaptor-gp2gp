@@ -47,23 +47,25 @@ class FhirParseServiceTest {
     @Test
     void shouldThrowValidationExceptionForInvalidJsonDiagnosticsField() {
 
-        String invalidJson = "{\n"
-                             + "  \"resourceType\": \"OperationOutcome\",\n"
-                             + "  \"meta\": {\n"
-                             + "    \"profile\": [ \"https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1\" ]\n"
-                             + "  },\n"
-                             + "  \"issue\": [ {\n"
-                             + "    \"severity\": \"error\",\n"
-                             + "    \"code\": \"value\",\n"
-                             + "    \"details\": {\n"
-                             + "      \"coding\": [ {\n"
-                             + "        \"system\": \"http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1\",\n"
-                             + "        \"code\": \"INVALID_IDENTIFIER_VALUE\"\n"
-                             + "      } ]\n"
-                             + "    },\n"
-                             + "    \"diagnosticos\": \"Provide a conversationId that exists and retry the operation\"\n"
-                             + "  } ]\n"
-                             + "}";
+        String invalidJson = """
+                             {
+                             "resourceType": "OperationOutcome",
+                             "meta": {
+                                "profile": ["https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1"]
+                             },
+                             "issue": [ {
+                                "severity": "error",
+                                "code": "value",
+                                "details": {
+                                    "coding": [ {
+                                        "system": "http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1",
+                                        "code": "INVALID_IDENTIFIER_VALUE"
+                                    } ]
+                                },
+                                "diagnosticos": "Provide a conversationId that exists and retry the operation"
+                             } ]
+                             }
+                             """;
 
         assertThrows(FhirValidationException.class, () -> {
             fhirParseService.parseResource(invalidJson, OperationOutcome.class);
