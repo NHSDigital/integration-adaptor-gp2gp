@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
+import ca.uhn.fhir.parser.DataFormatException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,6 +43,32 @@ class FhirParseServiceTest {
                                                       details,
                                                       diagnostics);
         fhirParseService = new FhirParseService();
+    }
+
+    @Test
+    void shouldThrowValidationExceptionForInvalidJsonDiagnosticsField() {
+
+        String invalidJson = "{\n"
+                             + "  \"resourceType\": \"OperationOutcome\",\n"
+                             + "  \"meta\": {\n"
+                             + "    \"profile\": [ \"https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1\" ]\n"
+                             + "  },\n"
+                             + "  \"issue\": [ {\n"
+                             + "    \"severity\": \"error\",\n"
+                             + "    \"code\": \"value\",\n"
+                             + "    \"details\": {\n"
+                             + "      \"coding\": [ {\n"
+                             + "        \"system\": \"http://fhir.nhs.net/ValueSet/gpconnect-error-or-warning-code-1\",\n"
+                             + "        \"code\": \"INVALID_IDENTIFIER_VALUE\"\n"
+                             + "      } ]\n"
+                             + "    },\n"
+                             + "    \"diagnosticos\": \"Provide a conversationId that exists and retry the operation\"\n"
+                             + "  } ]\n"
+                             + "}";
+
+        assertThrows(FhirValidationException.class, () -> {
+            fhirParseService.parseResource(invalidJson, OperationOutcome.class);
+        });
     }
 
     @Test
