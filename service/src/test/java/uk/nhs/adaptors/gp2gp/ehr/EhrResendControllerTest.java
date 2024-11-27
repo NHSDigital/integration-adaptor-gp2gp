@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -49,6 +50,11 @@ class EhrResendControllerTest {
     private static final String FROM_ASID_CODE = "test-from-asid";
     private static final String INCUMBENT_NACK_CODE = "99";
     private static final String INCUMBENT_NACK_DISPLAY = "Unexpected condition.";
+    public static final List<EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails> EHR_RECEIVED_ACK_ERROR_DETAILS = List.of(
+        EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
+            .code(INCUMBENT_NACK_CODE)
+            .display(INCUMBENT_NACK_DISPLAY)
+            .build());
     private static final String PRECONDITION_FAILED = "PRECONDITION_FAILED";
     private static final String GPCONNECT_ERROR_OR_WARNING_CODE = "https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1";
     private static final String INVALID_IDENTIFIER_VALUE = "INVALID_IDENTIFIER_VALUE";
@@ -91,22 +97,7 @@ class EhrResendControllerTest {
     @Test
     void When_AnEhrExtractHasFailed_Expect_GetGpcStructuredTaskScheduledAndEhrExtractStatusIsReset() {
 
-        String ehrMessageRef = generateRandomUppercaseUUID();
-        var ehrExtractStatus = new EhrExtractStatus();
-
-        ehrExtractStatus.setConversationId(CONVERSATION_ID);
-        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
-                                                           .conversationClosed(FIVE_DAYS_AGO)
-                                                           .errors(List.of(
-                                                               EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
-                                                                   .code(INCUMBENT_NACK_CODE)
-                                                                   .display(INCUMBENT_NACK_DISPLAY)
-                                                                   .build()))
-                                                           .messageRef(ehrMessageRef)
-                                                           .received(FIVE_DAYS_AGO)
-                                                           .rootId(generateRandomUppercaseUUID())
-                                                           .build());
-        ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
+        var ehrExtractStatus = getEhrExtractStatus(EHR_RECEIVED_ACK_ERROR_DETAILS);
         ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
         ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder().build());
@@ -160,22 +151,7 @@ class EhrResendControllerTest {
     @Test
     void When_AnEhrExtractHasFailed_Expect_RespondsWith202() {
 
-        String ehrMessageRef = generateRandomUppercaseUUID();
-        var ehrExtractStatus = new EhrExtractStatus();
-
-        ehrExtractStatus.setConversationId(CONVERSATION_ID);
-        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
-                                                           .conversationClosed(FIVE_DAYS_AGO)
-                                                           .errors(List.of(
-                                                               EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
-                                                                   .code(INCUMBENT_NACK_CODE)
-                                                                   .display(INCUMBENT_NACK_DISPLAY)
-                                                                   .build()))
-                                                           .messageRef(ehrMessageRef)
-                                                           .received(FIVE_DAYS_AGO)
-                                                           .rootId(generateRandomUppercaseUUID())
-                                                           .build());
-        ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
+        var ehrExtractStatus = getEhrExtractStatus(EHR_RECEIVED_ACK_ERROR_DETAILS);
 
         when(ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID)).thenReturn(Optional.of(ehrExtractStatus));
 
@@ -190,17 +166,7 @@ class EhrResendControllerTest {
     @Test
     void When_AnEhrExtractHasAPositiveAcknowledgement_Expect_FailedOperationOutcome() throws JsonProcessingException {
 
-        String ehrMessageRef = generateRandomUppercaseUUID();
-        var ehrExtractStatus = new EhrExtractStatus();
-        ehrExtractStatus.setConversationId(CONVERSATION_ID);
-        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
-                                                           .conversationClosed(FIVE_DAYS_AGO)
-                                                           .errors(List.of())
-                                                           .messageRef(ehrMessageRef)
-                                                           .received(FIVE_DAYS_AGO)
-                                                           .rootId(generateRandomUppercaseUUID())
-                                                           .build());
-        ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
+        var ehrExtractStatus = getEhrExtractStatus(List.of());
 
         when(ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID)).thenReturn(Optional.of(ehrExtractStatus));
 
@@ -234,22 +200,7 @@ class EhrResendControllerTest {
     @Test
     void When_ResendingTransfer_Expect_EhrStatusInProgressStatus() {
 
-        String ehrMessageRef = generateRandomUppercaseUUID();
-        var ehrExtractStatus = new EhrExtractStatus();
-
-        ehrExtractStatus.setConversationId(CONVERSATION_ID);
-        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
-                                                           .conversationClosed(FIVE_DAYS_AGO)
-                                                           .errors(List.of(
-                                                               EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails.builder()
-                                                                   .code(INCUMBENT_NACK_CODE)
-                                                                   .display(INCUMBENT_NACK_DISPLAY)
-                                                                   .build()))
-                                                           .messageRef(ehrMessageRef)
-                                                           .received(FIVE_DAYS_AGO)
-                                                           .rootId(generateRandomUppercaseUUID())
-                                                           .build());
-        ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
+        var ehrExtractStatus = getEhrExtractStatus(EHR_RECEIVED_ACK_ERROR_DETAILS);
         ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
         ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder().build());
@@ -263,6 +214,23 @@ class EhrResendControllerTest {
         var ehrStatus = ehrStatusController.getEhrStatus(CONVERSATION_ID);
 
         assertEquals(IN_PROGRESS, ehrStatus.getBody().getMigrationStatus());
+    }
+
+    private @NotNull EhrExtractStatus getEhrExtractStatus(List<EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails> errors) {
+
+        String ehrMessageRef = generateRandomUppercaseUUID();
+        var ehrExtractStatus = new EhrExtractStatus();
+
+        ehrExtractStatus.setConversationId(CONVERSATION_ID);
+        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder()
+                                                           .conversationClosed(FIVE_DAYS_AGO)
+                                                           .errors(errors)
+                                                           .messageRef(ehrMessageRef)
+                                                           .received(FIVE_DAYS_AGO)
+                                                           .rootId(generateRandomUppercaseUUID())
+                                                           .build());
+        ehrExtractStatus.setEhrRequest(EhrExtractStatus.EhrRequest.builder().nhsNumber(NHS_NUMBER).build());
+        return ehrExtractStatus;
     }
 
     private void assertResponseHasExpectedOperationOutcome(JsonNode rootNode, String serverErrMsg,
