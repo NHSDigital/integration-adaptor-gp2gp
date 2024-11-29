@@ -103,6 +103,7 @@ public class EhrResendController {
         ehrExtractStatus.setGpcAccessDocument(null);
         ehrExtractStatus.setEhrContinue(null);
         ehrExtractStatus.setEhrReceivedAcknowledgement(null);
+        ehrExtractStatus.setError(null);
 
         return ehrExtractStatus;
     }

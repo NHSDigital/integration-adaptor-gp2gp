@@ -102,6 +102,7 @@ class EhrResendControllerTest {
         ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
         ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder().build());
         ehrExtractStatus.setCreated(FIVE_DAYS_AGO);
+        ehrExtractStatus.setError(EhrExtractStatus.Error.builder().message("Failed to download EHR").build());
 
         when(ehrExtractStatusRepository.findByConversationId(CONVERSATION_ID)).thenReturn(Optional.of(ehrExtractStatus));
 
@@ -122,7 +123,8 @@ class EhrResendControllerTest {
             () -> assertNull(ehrExtractStatus.getEhrContinue()),
             () -> assertNull(ehrExtractStatus.getAckPending()),
             () -> assertNull(ehrExtractStatus.getEhrReceivedAcknowledgement()),
-            () -> assertNull(ehrExtractStatus.getGpcAccessDocument())
+            () -> assertNull(ehrExtractStatus.getGpcAccessDocument()),
+            () -> assertNull(ehrExtractStatus.getError())
         );
     }
 
