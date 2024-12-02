@@ -6,11 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed
-* When mapping a `DiagnosticReport` which contains at least one test result with a `Specimen` attached, any test result's which didn't have a Specimen
-  were previously not sent to the requesting system.
-  Now, a fake `Specimen` is created in which any `Specimen`-less `TestResult`s are placed.
-
 ### Added
 * When mapping a `DocumentReference` which contains a `NOPAT` `meta.security` or `NOPAT` `securityLabel` tag the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
@@ -29,7 +24,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * When mapping `Immunizations` which contain a `NOPAT` `meta.security` tag, the resultant XML for that resource
   will contain a `NOPAT` `confidentialityCode` element.
 
-## [2.1.4] - 2014-11-07
+## [2.2.0] - 2024-12-02
+
+### Added
+* New endpoint added `POST /ehr-resend/<conversationId>` which will re-request the GP Connect structured record, and
+  resend a newly generated EHRExtract to the requesting GP2GP system.
+  This endpoint can be used when the requesting system asks that the sending system resends the medical record
+  because of a temporary technical fault.
+  The endpoint will only perform resends if the status of the transfer is `FAILED_INCUMBENT` or `FAILED_NME` including
+  when a transfer hasn't been acknowledged by the requesting system for 8 days or more.
+
+### Fixed
+* When mapping a `DiagnosticReport` which contains at least one test result with a `Specimen` attached,
+  any test result's which didn't have a Specimen were previously not sent to the requesting system.
+  Now, a fake `Specimen` is created in which any `Specimen`-less `TestResult`s are placed.
+
+## [2.1.4] - 2024-11-07
 
 ### Fixed
 
@@ -41,14 +51,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   contained XML characters.
 * Removed a 20 MB data processing limit which was causing large document transfers to fail.
 
-## [2.1.3] - 2014-10-25
+## [2.1.3] - 2024-10-25
 
 ### Fixed
 
 * Fix a malformed XML GP2GP message created when mapping a `MedicationRequest` with `intent` of `plan` and is stopped,
   but no free text reason for the discontinuation was provided.  
 
-## [2.1.2] - 2014-10-21
+## [2.1.2] - 2024-10-21
 
 ### Fixed
 
