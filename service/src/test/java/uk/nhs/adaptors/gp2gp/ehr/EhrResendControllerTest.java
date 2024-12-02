@@ -39,8 +39,10 @@ import static uk.nhs.adaptors.gp2gp.ehr.status.model.MigrationStatus.IN_PROGRESS
 @ExtendWith(MockitoExtension.class)
 class EhrResendControllerTest {
 
-    public static final String DIAGNOSTICS_MSG =
-        "The current resend operation is still in progress. Please wait for it to complete before retrying";
+    public static final String DIAGNOSTICS_MSG
+         = "The current patient transfer operation is still in progress. "
+            + "The conversation can only be resent after a negative acknowledgement is sent/received, "
+            + "or no acknowledgement is received from the requesting side 8 days after sending the EHR.";
     private static final Instant NOW = Instant.parse("2024-01-01T10:00:00Z");
     private static final Instant FIVE_DAYS_AGO = NOW.minus(Duration.ofDays(5));
     private static final String URI_TYPE = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1";

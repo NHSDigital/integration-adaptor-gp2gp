@@ -59,7 +59,9 @@ public class EhrResendController {
         if (hasNoErrorsInEhrReceivedAcknowledgement(ehrExtractStatus) && ehrExtractStatus.getError() == null) {
 
             var details = getCodeableConcept(PRECONDITION_FAILED);
-            var diagnostics = "The current resend operation is still in progress. Please wait for it to complete before retrying";
+            var diagnostics = "The current patient transfer operation is still in progress. "
+                              + "The conversation can only be resent after a negative acknowledgement is sent/received, "
+                              + "or no acknowledgement is received from the requesting side 8 days after sending the EHR.";
             var operationOutcome = createOperationOutcome(OperationOutcome.IssueType.BUSINESSRULE,
                                                           OperationOutcome.IssueSeverity.ERROR,
                                                           details,
