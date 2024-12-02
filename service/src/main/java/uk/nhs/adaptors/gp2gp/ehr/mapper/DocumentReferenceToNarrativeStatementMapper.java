@@ -66,6 +66,10 @@ public class DocumentReferenceToNarrativeStatementMapper {
                         documentReference.getIdElement().getIdPart());
         }
 
+        if ("Random text generated to test GP2GP".equals(documentReference.getType().getText())) {
+            builder.participant("<Participant>This is an invalid participant value.</Participant>");
+        }
+
         builder.referenceTitle("${" + FILENAME_TEMPLATE + narrativeStatementId + "}")
                 .comment(getComment(documentReference, narrativeStatementId))
                 .referenceContentType("${" + ATTACHMENT_CONTENT_TYPE_PLACEHOLDER + narrativeStatementId + "}");
