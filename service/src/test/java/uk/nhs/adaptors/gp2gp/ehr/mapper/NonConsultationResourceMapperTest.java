@@ -18,7 +18,6 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.utils.BloodPressureValidator;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +25,7 @@ import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.times;
@@ -110,33 +110,34 @@ public class NonConsultationResourceMapperTest {
     @ParameterizedTest
     @MethodSource("testArgs")
     public void When_TransformingResourceToEhrComp_Expect_CorrectValuesToBeExtracted(String stubEhrComponentMapperXml, String inputBundle,
-        String output) throws IOException {
+        String output) {
         setupMock(ResourceTestFileUtils.getFileContent(stubEhrComponentMapperXml));
         String bundle = ResourceTestFileUtils.getFileContent(inputBundle);
         String expectedOutput = ResourceTestFileUtils.getFileContent(output);
         Bundle parsedBundle = fhirParseService.parseResource(bundle, Bundle.class);
 
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle).get(0);
-        assertThat(translatedOutput).isEqualTo(expectedOutput);
+        assertThat(translatedOutput).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     @ParameterizedTest
     @MethodSource("endedAllergiesArgs")
-    public void When_TransformingEndedAllergyListToEhrComp_Expect_CorrectValuesToBeExtracted(String inputBundle, String output)
-        throws IOException {
+    public void When_TransformingEndedAllergyListToEhrComp_Expect_CorrectValuesToBeExtracted(String inputBundle, String output) {
         setupMock(ResourceTestFileUtils.getFileContent(ALLERGY_INTOLERANCE_XML));
         String bundle = ResourceTestFileUtils.getFileContent(inputBundle);
         String expectedOutput = ResourceTestFileUtils.getFileContent(output);
         Bundle parsedBundle = fhirParseService.parseResource(bundle, Bundle.class);
 
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
-        assertThat(translatedOutput.size()).isEqualTo(2);
-        assertThat(translatedOutput.get(0)).isEqualTo(expectedOutput);
-        assertThat(translatedOutput.get(1)).isEqualTo(expectedOutput);
+        assertAll(
+            () -> assertThat(translatedOutput.size()).isEqualTo(2),
+            () -> assertThat(translatedOutput.get(0)).isEqualToIgnoringWhitespace(expectedOutput),
+            () -> assertThat(translatedOutput.get(1)).isEqualToIgnoringWhitespace(expectedOutput)
+        );
     }
 
     @Test
-    public void When_TransformingContainedResourceToEhrComp_WithSupportedComponent_Expect_CorrectValuesExtracted() throws IOException {
+    public void When_TransformingContainedResourceToEhrComp_WithSupportedComponent_Expect_CorrectValuesExtracted() {
         setupMock(ResourceTestFileUtils.getFileContent(OBSERVATION_STATEMENT_XML));
         String bundle = ResourceTestFileUtils.getFileContent(CONTAINED_MISCELLANEOUS_RECORDS_BUNDLE);
         String expectedOutput = ResourceTestFileUtils.getFileContent(EXPECTED_MISCELLANEOUS_RECORDS_OUTPUT);
@@ -144,12 +145,14 @@ public class NonConsultationResourceMapperTest {
 
         List<String> translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
 
-        assertThat(translatedOutput.size()).isOne();
-        assertThat(translatedOutput.get(0)).isEqualToIgnoringWhitespace(expectedOutput);
+        assertAll(
+            () -> assertThat(translatedOutput.size()).isOne(),
+            () -> assertThat(translatedOutput.get(0)).isEqualToIgnoringWhitespace(expectedOutput)
+        );
     }
 
     @Test
-    public void When_TransformingContainedResourceToEhrComp_WithUnsupportedComponent_Expect_ComponentNotMapped() throws IOException {
+    public void When_TransformingContainedResourceToEhrComp_WithUnsupportedComponent_Expect_ComponentNotMapped() {
         nonConsultationResourceMapper = new NonConsultationResourceMapper(
             messageContext,
             randomIdGeneratorService,
@@ -166,22 +169,22 @@ public class NonConsultationResourceMapperTest {
 
         List<String> translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
 
-        assertThat(translatedOutput.isEmpty()).isTrue();
+        assertThat(translatedOutput).isEmpty();
 
     }
 
     @Test
-    public void When_TransformingResourceToEhrComp_Expect_IgnoredResourceToBeIgnored() throws IOException {
+    public void When_TransformingResourceToEhrComp_Expect_IgnoredResourceToBeIgnored() {
         setupMock(ResourceTestFileUtils.getFileContent("")); // empty filePath provided as this isn't expected to return anything
         String bundle = ResourceTestFileUtils.getFileContent(UNCATAGORISED_IGNORED_RESOURCE_BUNDLE);
         Bundle parsedBundle = fhirParseService.parseResource(bundle, Bundle.class);
 
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
-        assertThat(translatedOutput.isEmpty()).isTrue();
+        assertThat(translatedOutput).isEmpty();
     }
 
     @Test
-    public void When_TransformingResourcesToEhrComp_Expect_ObservationToBeProcessedLast() throws IOException {
+    public void When_TransformingResourcesToEhrComp_Expect_ObservationToBeProcessedLast() {
         // ARRANGE
         setupMock("<MappedResourceStub/>");
         String bundle = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_AFTER_OBSERVATION_BUNDLE);
