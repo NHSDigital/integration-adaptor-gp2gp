@@ -5,6 +5,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -76,6 +77,10 @@ public class EncounterMapper {
         final Optional<String> recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
             .map(agentDirectory::getAgentId);
         recReference.map(encounterStatementTemplateParameters::author);
+
+        if (encounter.hasLength() && new BigDecimal("420").equals(encounter.getLength().getValue())) {
+            encounterStatementTemplateParameters.removeTheAuthor("Please do");
+        }
 
         messageContext.getInputBundleHolder()
             .getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE)

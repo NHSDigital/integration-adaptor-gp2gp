@@ -21,4 +21,5 @@ public class EncounterTemplateParameters {
     private String participant2;
     private String author;
     private String locationName;
+    private String removeTheAuthor;
 }

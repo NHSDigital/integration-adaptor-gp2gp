@@ -14,12 +14,14 @@
             {{{effectiveTime}}}
         </effectiveTime>
         {{{availabilityTime}}}
+        {{^removeTheAuthor}}
         <author typeCode="AUT" contextControlCode="OP">
             <time {{#authorTime}}value="{{authorTime}}"{{/authorTime}}{{^authorTime}}nullFlavor="UNK"{{/authorTime}} />
             <agentRef classCode="AGNT">
                 {{#author}}<id root="{{author}}" />{{/author}}{{^author}}<id nullFlavor="UNK" />{{/author}}
             </agentRef>
         </author>
+        {{/removeTheAuthor}}
         {{#locationName}}
         <location typeCode="LOC">
             <locatedEntity classCode="LOCE">
