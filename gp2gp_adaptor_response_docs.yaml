@@ -1,0 +1,443 @@
+openapi: 3.0.1
+info:
+    title: OpenAPI definition
+    version: v0
+servers:
+    - url: http://localhost:8080/api
+      description: Generated server url
+paths:
+    /requests:
+        post:
+            tags:
+                - ehr-status-requests-controller
+            operationId: getEhrRequestsEncodedForm_1
+            parameters:
+                - name: request
+                  in: query
+                  required: true
+                  schema:
+                      $ref: '#/components/schemas/EhrStatusRequestQuery'
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/EhrStatusRequestQuery'
+                required: true
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/EhrStatusRequest'
+    /ehr-resend/{conversationId}:
+        post:
+            tags:
+                - ehr-resend-controller
+            summary: Schedule Ehr Extract Resend
+            description: Schedule Ehr Extract Resend
+            operationId: scheduleEhrExtractResend
+            parameters:
+                - name: conversationId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                '202':
+                    description: Successfull Ehr Extract resend request
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                '404':
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                '409':
+                    description: Ehr Extract resend action cannot be triggered
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+    /ehr-status/{conversationId}:
+        get:
+            tags:
+                - ehr-status-controller
+            operationId: getEhrStatus
+            parameters:
+                - name: conversationId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/EhrStatus'
+components:
+    schemas:
+        AckHistory:
+            type: object
+            properties:
+                acks:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/EhrReceivedAcknowledgement'
+        AckPending:
+            type: object
+            properties:
+                taskId:
+                    type: string
+                messageId:
+                    type: string
+                typeCode:
+                    type: string
+                updatedAt:
+                    type: string
+        AckToRequester:
+            type: object
+            properties:
+                taskId:
+                    type: string
+                messageId:
+                    type: string
+                typeCode:
+                    type: string
+                reasonCode:
+                    type: string
+                detail:
+                    type: string
+        EhrContinue:
+            type: object
+            properties:
+                received:
+                    type: string
+                    format: date-time
+        EhrExtractCore:
+            type: object
+            properties:
+                sentAt:
+                    type: string
+                    format: date-time
+                taskId:
+                    type: string
+        EhrExtractCorePending:
+            type: object
+            properties:
+                sentAt:
+                    type: string
+                    format: date-time
+                taskId:
+                    type: string
+        EhrRequest:
+            type: object
+            properties:
+                requestId:
+                    type: string
+                nhsNumber:
+                    type: string
+                fromPartyId:
+                    type: string
+                toPartyId:
+                    type: string
+                fromAsid:
+                    type: string
+                toAsid:
+                    type: string
+                fromOdsCode:
+                    type: string
+                toOdsCode:
+                    type: string
+                messageId:
+                    type: string
+        GpcAccessStructured:
+            type: object
+            properties:
+                objectName:
+                    type: string
+                accessedAt:
+                    type: string
+                    format: date-time
+                taskId:
+                    type: string
+                attachment:
+                    $ref: '#/components/schemas/GpcDocument'
+        GpcDocument:
+            type: object
+            properties:
+                documentId:
+                    type: string
+                accessDocumentUrl:
+                    type: string
+                contentLength:
+                    type: integer
+                    format: int32
+                objectName:
+                    type: string
+                accessedAt:
+                    type: string
+                    format: date-time
+                fileName:
+                    type: string
+                contentType:
+                    type: string
+                taskId:
+                    type: string
+                messageId:
+                    type: string
+                sentToMhs:
+                    $ref: '#/components/schemas/SentToMhs'
+                identifier:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Identifier'
+                originalDescription:
+                    type: string
+                gpConnectErrorMessage:
+                    type: string
+                skeleton:
+                    type: boolean
+        SentToMhs:
+            type: object
+            properties:
+                messageId:
+                    type: array
+                    items:
+                        type: string
+                sentAt:
+                    type: string
+                taskId:
+                    type: string
+        GpcAccessDocument:
+            type: object
+            properties:
+                documents:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GpcDocument'
+                patientId:
+                    type: string
+        Error:
+            type: object
+            properties:
+                occurredAt:
+                    type: string
+                    format: date-time
+                code:
+                    type: string
+                    nullable: False
+                    description: 'The GP2GP response code from the negative response'
+                message:
+                    type: string
+                    nullable: False
+                    description: 'The GP2GP response text from the negative response'
+                taskType:
+                    type: string
+        EhrExtractStatus:
+            type: object
+            properties:
+                id:
+                    type: string
+                created:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                conversationId:
+                    type: string
+                ehrRequest:
+                    $ref: '#/components/schemas/EhrRequest'
+                gpcAccessStructured:
+                    $ref: '#/components/schemas/GpcAccessStructured'
+                gpcAccessDocument:
+                    $ref: '#/components/schemas/GpcAccessDocument'
+                ehrExtractCore:
+                    $ref: '#/components/schemas/EhrExtractCore'
+                ehrExtractCorePending:
+                    $ref: '#/components/schemas/EhrExtractCorePending'
+                ehrContinue:
+                    $ref: '#/components/schemas/EhrContinue'
+                ackToRequester:
+                    $ref: '#/components/schemas/AckToRequester'
+                ackPending:
+                    $ref: '#/components/schemas/AckPending'
+                ehrReceivedAcknowledgement:
+                    $ref: '#/components/schemas/EhrReceivedAcknowledgement'
+                error:
+                    $ref: '#/components/schemas/Error'
+                messageTimestamp:
+                    type: string
+                    format: date-time
+                ehrExtractMessageId:
+                    type: string
+                ackHistory:
+                    $ref: '#/components/schemas/AckHistory'
+            description: Details about EhrExtractStatus
+        EhrStatusRequestQuery:
+            type: object
+            properties:
+                fromDateTime:
+                    type: string
+                    format: date-time
+                toDateTime:
+                    type: string
+                    format: date-time
+                fromAsid:
+                    type: string
+                toAsid:
+                    type: string
+                fromOdsCode:
+                    type: string
+                toOdsCode:
+                    type: string
+        EhrStatusRequest:
+            type: object
+            properties:
+                initialRequestTimestamp:
+                    type: string
+                    format: date-time
+                    nullable: False
+                    description: 'The date and time (ISO-8601) of the original request'
+                actionCompletedTimestamp:
+                    type: string
+                    format: date-time
+                    nullable: False
+                    description: 'The date and time (ISO-8601) of when the transfer completed'
+                nhsNumber:
+                    type: string
+                    nullable: False
+                conversationId:
+                    type: string
+                    nullable: False
+                migrationStatus:
+                    type: string
+                    enum:
+                        - COMPLETE
+                        - COMPLETE_WITH_ISSUES
+                        - FAILED_NME
+                        - FAILED_INCUMBENT
+                        - IN_PROGRESS
+                    nullable: False
+                    description: 'The current state of the transfer, a status of COMPLETE_WITH_ISSUES is given if placeholder documents were sent'
+                fromAsid:
+                    type: string
+                    nullable: False
+                toAsid:
+                    type: string
+                    nullable: False
+                fromOdsCode:
+                    type: string
+                    nullable: False
+                toOdsCode:
+                    type: string
+                    nullable: False
+        AttachmentStatus:
+            type: object
+            properties:
+                identifier:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Identifier'
+                    nullable: False
+                    description: 'An array of identifiers taken from the identifier element of the GP Connect DocumentReference'
+                fileStatus:
+                    type: string
+                    enum:
+                        - PLACEHOLDER
+                        - ORIGINAL_FILE
+                        - SKELETON_MESSAGE
+                        - ERROR
+                    nullable: False
+                    description: 'The status of the document sent to the winning practice (can be used to identify if a placeholder document was sent)'
+                fileName:
+                    type: string
+                    nullable: False
+                    description: 'The filename sent to winning practice in the GP2GP message'
+                originalDescription:
+                    type: string
+                    nullable: True
+                    description: 'The description of the file as given by the description element of the GP Connect DocumentReference resource.
+
+            This is inserted into the GP2GP placeholder document as the original filename and suffix. So should be of the form filename.suffix, e.g. referral.txt'
+        EhrReceivedAcknowledgement:
+            type: object
+            properties:
+                received:
+                    type: string
+                    format: date-time
+                    nullable: False
+                    description: 'The date and time (ISO-8601) the acknowledgment was received'
+                conversationClosed:
+                    type: string
+                    format: date-time
+                    nullable: True
+                    description: 'If the acknowledgement ended the transfer, the date and time (ISO-8601) the conversation was closed can be found here'
+                errors:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ErrorDetails'
+                    nullable: True
+                    description: 'An array of errors which will be populated in the case of a negative / rejected acknowledgement'
+                messageRef:
+                    type: string
+                    nullable: False
+                    description: 'The Message ID of the message that has been acknowledged'
+        EhrStatus:
+            type: object
+            properties:
+                attachmentStatus:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AttachmentStatus'
+                    description: 'An array of statuses for each document sent during the transfer'
+                    nullable: False
+                migrationLog:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/EhrReceivedAcknowledgement'
+                    nullable: False
+                    description: 'An array containing details of acknowledgments received during the transfer'
+                migrationStatus:
+                    type: string
+                    enum:
+                        - COMPLETE
+                        - COMPLETE_WITH_ISSUES
+                        - FAILED_NME
+                        - FAILED_INCUMBENT
+                        - IN_PROGRESS
+                    nullable: False
+                    description: 'The current state of the transfer, a status of COMPLETE_WITH_ISSUES is given if placeholder documents were sent'
+                originalRequestDate:
+                    type: string
+                    format: date-time
+                fromAsid:
+                    type: string
+                toAsid:
+                    type: string
+        ErrorDetails:
+            type: object
+            properties:
+                code:
+                    type: string
+                display:
+                    type: string
+        Identifier:
+            type: object
+            properties:
+                system:
+                    type: string
+                    nullable: False
+                    description: 'The system element of the Gp Connect DocumentReference.identifier'
+                value:
+                    type: string
+                    nullable: False
+                    description: 'The identifier element of the Gp Connect DocumentReference.identifier'
