@@ -9,8 +9,8 @@ paths:
     /requests:
         post:
             tags:
-                - ehr-status-requests-controller
-            operationId: getEhrRequestsEncodedForm_1
+                - Ehr Status requests controller
+            operationId: getEhrRequestsEncodedForm
             parameters:
                 - name: request
                   in: query
@@ -72,7 +72,7 @@ paths:
     /ehr-resend/{conversationId}:
         post:
             tags:
-                - ehr-resend-controller
+                - Ehr resend controller
             summary: Schedule Ehr Extract Resend
             description: Schedule Ehr Extract Resend
             operationId: scheduleEhrExtractResend
@@ -104,7 +104,7 @@ paths:
     /ehr-status/{conversationId}:
         get:
             tags:
-                - ehr-status-controller
+                - Ehr Status controller
             operationId: getEhrStatus
             parameters:
                 - name: conversationId
