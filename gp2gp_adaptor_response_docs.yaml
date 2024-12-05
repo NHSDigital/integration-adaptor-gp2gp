@@ -85,10 +85,6 @@ paths:
             responses:
                 '202':
                     description: Successfull Ehr Extract resend request
-                    content:
-                        application/json:
-                            schema:
-                                type: string
                 '404':
                     description: Not Found
                     content:
@@ -116,7 +112,7 @@ paths:
                 '200':
                     description: OK
                     content:
-                        '*/*':
+                        application/json:
                             schema:
                                 $ref: '#/components/schemas/EhrStatus'
                             examples:
@@ -196,6 +192,15 @@ paths:
                                           originalRequestDate: "2023-07-24T10:42:05.757Z"
                                           fromAsid: "918999198738"
                                           toAsid: "200000000359"
+                                example-4:
+                                    summary: Failed by adaptor, due to a PATIENT_NOT_FOUND error from the GP Connect provider's migrate structured endpoint
+                                    value:
+                                        - attachmentStatus: []
+                                          migrationLog: []
+                                          migrationStatus: "FAILED_NME"
+                                          originalRequestDate: "2023-07-24T09:38:50.947Z"
+                                          fromAsid: "918999198738"
+                                          toAsid: "200000000359"
 components:
     schemas:
         AckHistory:
@@ -205,140 +210,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/EhrReceivedAcknowledgement'
-        AckPending:
-            type: object
-            properties:
-                taskId:
-                    type: string
-                messageId:
-                    type: string
-                typeCode:
-                    type: string
-                updatedAt:
-                    type: string
-        AckToRequester:
-            type: object
-            properties:
-                taskId:
-                    type: string
-                messageId:
-                    type: string
-                typeCode:
-                    type: string
-                reasonCode:
-                    type: string
-                detail:
-                    type: string
-        EhrContinue:
-            type: object
-            properties:
-                received:
-                    type: string
-                    format: date-time
-        EhrExtractCore:
-            type: object
-            properties:
-                sentAt:
-                    type: string
-                    format: date-time
-                taskId:
-                    type: string
-        EhrExtractCorePending:
-            type: object
-            properties:
-                sentAt:
-                    type: string
-                    format: date-time
-                taskId:
-                    type: string
-        EhrRequest:
-            type: object
-            properties:
-                requestId:
-                    type: string
-                nhsNumber:
-                    type: string
-                fromPartyId:
-                    type: string
-                toPartyId:
-                    type: string
-                fromAsid:
-                    type: string
-                toAsid:
-                    type: string
-                fromOdsCode:
-                    type: string
-                toOdsCode:
-                    type: string
-                messageId:
-                    type: string
-        GpcAccessStructured:
-            type: object
-            properties:
-                objectName:
-                    type: string
-                accessedAt:
-                    type: string
-                    format: date-time
-                taskId:
-                    type: string
-                attachment:
-                    $ref: '#/components/schemas/GpcDocument'
-        GpcDocument:
-            type: object
-            properties:
-                documentId:
-                    type: string
-                accessDocumentUrl:
-                    type: string
-                contentLength:
-                    type: integer
-                    format: int32
-                objectName:
-                    type: string
-                accessedAt:
-                    type: string
-                    format: date-time
-                fileName:
-                    type: string
-                contentType:
-                    type: string
-                taskId:
-                    type: string
-                messageId:
-                    type: string
-                sentToMhs:
-                    $ref: '#/components/schemas/SentToMhs'
-                identifier:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Identifier'
-                originalDescription:
-                    type: string
-                gpConnectErrorMessage:
-                    type: string
-                skeleton:
-                    type: boolean
-        SentToMhs:
-            type: object
-            properties:
-                messageId:
-                    type: array
-                    items:
-                        type: string
-                sentAt:
-                    type: string
-                taskId:
-                    type: string
-        GpcAccessDocument:
-            type: object
-            properties:
-                documents:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/GpcDocument'
-                patientId:
-                    type: string
         Error:
             type: object
             properties:
@@ -355,47 +226,6 @@ components:
                     description: 'The GP2GP response text from the negative response'
                 taskType:
                     type: string
-        EhrExtractStatus:
-            type: object
-            properties:
-                id:
-                    type: string
-                created:
-                    type: string
-                    format: date-time
-                updatedAt:
-                    type: string
-                    format: date-time
-                conversationId:
-                    type: string
-                ehrRequest:
-                    $ref: '#/components/schemas/EhrRequest'
-                gpcAccessStructured:
-                    $ref: '#/components/schemas/GpcAccessStructured'
-                gpcAccessDocument:
-                    $ref: '#/components/schemas/GpcAccessDocument'
-                ehrExtractCore:
-                    $ref: '#/components/schemas/EhrExtractCore'
-                ehrExtractCorePending:
-                    $ref: '#/components/schemas/EhrExtractCorePending'
-                ehrContinue:
-                    $ref: '#/components/schemas/EhrContinue'
-                ackToRequester:
-                    $ref: '#/components/schemas/AckToRequester'
-                ackPending:
-                    $ref: '#/components/schemas/AckPending'
-                ehrReceivedAcknowledgement:
-                    $ref: '#/components/schemas/EhrReceivedAcknowledgement'
-                error:
-                    $ref: '#/components/schemas/Error'
-                messageTimestamp:
-                    type: string
-                    format: date-time
-                ehrExtractMessageId:
-                    type: string
-                ackHistory:
-                    $ref: '#/components/schemas/AckHistory'
-            description: Details about EhrExtractStatus
         EhrStatusRequestQuery:
             type: object
             properties:
@@ -479,9 +309,7 @@ components:
                 originalDescription:
                     type: string
                     nullable: True
-                    description: 'The description of the file as given by the description element of the GP Connect DocumentReference resource.
-
-            This is inserted into the GP2GP placeholder document as the original filename and suffix. So should be of the form filename.suffix, e.g. referral.txt'
+                    description: 'The description of the file as given by the description element of the GP Connect DocumentReference resource. This is inserted into the GP2GP placeholder document as the original filename and suffix. So should be of the form filename.suffix, e.g. referral.txt'
         EhrReceivedAcknowledgement:
             type: object
             properties:
@@ -542,8 +370,12 @@ components:
             properties:
                 code:
                     type: string
+                    nullable: False
+                    description: 'The code of the error'
                 display:
                     type: string
+                    nullable: False
+                    description: 'The human-readable description of the error'
         Identifier:
             type: object
             properties:
