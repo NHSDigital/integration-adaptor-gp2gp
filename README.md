@@ -24,7 +24,6 @@ GP2GP 2.2b producer, or those wishing to decommission their existing producer, m
 ## How to query the EHR Status API and the Requests endpoint
 
 An API is provided to query the status of any transfer to an incumbent.
-Any "in-progress" transfers are excluded from this list, but become available once they either succeed or fail.
 
 The API has been documented using the OpenAPI Specification (version 3.0.1). The documentation includes detailed descriptions of endpoints,
 parameters, and data models, as well as examples of requests and responses to help developers integrate and use the API effectively

@@ -11,6 +11,7 @@ paths:
             tags:
                 - Ehr Status requests controller
             operationId: getEhrRequestsEncodedForm
+            description: 'Any "in-progress" transfers are excluded from this list, but become available once they either succeed or fail'
             parameters:
                 - name: request
                   in: query
@@ -232,17 +233,23 @@ components:
                 fromDateTime:
                     type: string
                     format: date-time
+                    nullable: true
                 toDateTime:
                     type: string
                     format: date-time
+                    nullable: true
                 fromAsid:
                     type: string
+                    nullable: true
                 toAsid:
                     type: string
+                    nullable: true
                 fromOdsCode:
                     type: string
+                    nullable: true
                 toOdsCode:
                     type: string
+                    nullable: true
         EhrStatusRequest:
             type: object
             properties:
