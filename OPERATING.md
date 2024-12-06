@@ -40,7 +40,7 @@ The adaptor requires a Mongodb-compatible database to manage its internal state.
 | GP2GP_MONGO_PASSWORD            |                           | Mongo database password. Leave undefined if GP2GP_MONGO_URI is used.                                                                                           |
 | GP2GP_MONGO_OPTIONS             |                           | Mongodb URL encoded parameters for the connection string without a leading "?". Leave undefined if GP2GP_MONGO_URI is used.                                    |
 | GP2GP_MONGO_AUTO_INDEX_CREATION | true                      | (Optional) Should auto index for Mongo database be created.                                                                                                    |
-| GP2GP_MONGO_TTL                 | P12W                      | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations). |
+| GP2GP_MONGO_TTL                 | P84D                      | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations). |
 | GP2GP_COSMOS_DB_ENABLED         | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.                                                                |
 
 **Trust Store Configuration Options**
