@@ -1,0 +1,1672 @@
+openapi: 3.0.1
+info:
+    title: OpenAPI definition
+    version: v0
+servers:
+    - url: http://localhost:8080/api
+      description: Generated server url
+paths:
+    /requests:
+        post:
+            tags:
+                - Ehr Status requests controller
+            operationId: getEhrRequestsEncodedForm
+            description: 'Any "in-progress" transfers are excluded from this list, but become available once they either succeed or fail'
+            parameters:
+                - name: request
+                  in: query
+                  required: true
+                  schema:
+                      $ref: '#/components/schemas/EhrStatusRequestQuery'
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/EhrStatusRequestQuery'
+                        examples:
+                            request-example:
+                                summary: Example Request for EHR Status
+                                value:
+                                    fromDateTime: "2020-10-31T01:30:00.000Z"
+                                    toDateTime: "2030-10-31T01:30:00.000Z"
+                                    fromAsid: "918999198738"
+                                    toAsid: "200000000359"
+                                    fromOdsCode: "P883302"
+                                    toOdsCode: "P113302"
+                required: true
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/EhrStatusRequest'
+
+                            examples:
+                                successful-migration:
+                                    summary: Successful Migration scenario
+                                    value:
+                                        - initialRequestTimestamp: "2023-09-20T11:47:58.966Z"
+                                          actionCompletedTimestamp: "2023-09-20T11:54:19.552Z"
+                                          nhsNumber: "9729734925"
+                                          conversationId: "59B118DB-70C3-4883-8A60-5E725981F003"
+                                          migrationStatus: "COMPLETE"
+                                          fromAsid: "858000001001"
+                                          toAsid: "200000001908"
+                                          fromOdsCode: "C88046"
+                                          toOdsCode: "B84012"
+                                failed-migration:
+                                    summary: Failed Migration scenario
+                                    value:
+                                        - initialRequestTimestamp: "2023-09-20T12:18:10.364Z"
+                                          actionCompletedTimestamp: "2023-09-20T12:18:13.923Z"
+                                          nhsNumber: "9729735336"
+                                          conversationId: "C2A59970-57AF-11EE-AFE6-CD607DC58E3B"
+                                          migrationStatus: "FAILED_INCUMBENT"
+                                          fromAsid: "200000000169"
+                                          toAsid: "200000001908"
+                                          fromOdsCode: "P84009"
+                                          toOdsCode: "B84012"
+
+    /ehr-resend/{conversationId}:
+        post:
+            tags:
+                - Ehr resend controller
+            summary: Schedule Ehr Extract Resend
+            description: Schedule Ehr Extract Resend
+            operationId: scheduleEhrExtractResend
+            parameters:
+                - name: conversationId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                '202':
+                    description: Successfull Ehr Extract resend request
+                '404':
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/OperationOutcome'
+                '409':
+                    description: Ehr Extract resend action cannot be triggered
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/OperationOutcome'
+    /ehr-status/{conversationId}:
+        get:
+            tags:
+                - Ehr Status controller
+            operationId: getEhrStatus
+            parameters:
+                - name: conversationId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/EhrStatus'
+                            examples:
+                                example-1:
+                                    summary: Successful EHR Status Response
+                                    value:
+                                        - attachmentStatus: []
+                                          migrationLog:
+                                              - received: "2023-07-24T09:39:09.377Z"
+                                                conversationClosed: "2023-07-24T09:39:09.377Z"
+                                                errors: null
+                                                messageRef: "0BEBCA12-8BE4-44B4-BDC0-016A4FE3D107"
+                                          migrationStatus: "COMPLETE"
+                                          originalRequestDate: "2023-07-24T09:38:50.947Z"
+                                          fromAsid: "918999198738"
+                                          toAsid: "200000000359"
+                                example-2:
+                                    summary: Failed by requester, with single negative acknowledgement of EHR Extract (conversation closed and error)
+                                    value:
+                                        - attachmentStatus: []
+                                          migrationLog:
+                                              - received: "2023-07-24T09:39:09.377Z"
+                                                conversationClosed: "2023-07-24T09:39:09.377Z"
+                                                errors: [
+                                                    {
+                                                        "code": "11",
+                                                        "display": "Failed to successfully integrate EHR Extract"
+                                                    }
+                                                ]
+                                                messageRef: "0BEBCA12-8BE4-44B4-BDC0-016A4FE3D107"
+                                          migrationStatus: "FAILED_INCUMBENT"
+                                          originalRequestDate: "2023-07-24T09:38:50.947Z"
+                                          fromAsid: "918999198738"
+                                          toAsid: "200000000359"
+                                example-3:
+                                    summary: Failed by requester, with multiple positive acknowledgements for COPC messages (without conversation closed) and one negative acknowledgement for EHR Extract (conversation closed and error)
+                                    value:
+                                        - attachmentStatus:
+                                              - identifier:
+                                                    - system: "https://EMISWeb/A82038"
+                                                      value: "ad174c84-51d1-4744-89e3-7918a31248d1"
+                                                fileStatus: "ORIGINAL_FILE"
+                                                fileName: "54E94A29-B0CC-4CD6-86B0-B21C9C0CA894.doc"
+                                                originalDescription: "Referral for further care (22-Dec-2020)"
+                                              - identifier:
+                                                    - system: "https://EMISWeb/A82038"
+                                                      value: "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC"
+                                                fileStatus: "ORIGINAL_FILE"
+                                                fileName: "629BF3F7-C71F-49D7-8FCD-AEE16C11AFBD.doc"
+                                                originalDescription: "Referral for further care (22-Dec-2020)"
+                                              - identifier:
+                                                    - system: "https://EMISWeb/A82038"
+                                                      value: "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC"
+                                                fileStatus: "ORIGINAL_FILE"
+                                                fileName: "2F73A243-0F94-4683-B3F9-727CE7780815.doc"
+                                                originalDescription: "Referral for further care (22-Dec-2020)"
+                                          migrationLog:
+                                              - received: "2023-07-24T10:42:18.591Z"
+                                                conversationClosed: null
+                                                errors: null
+                                                messageRef: "ED2FB0DD-52AE-4EBC-B596-3BCA9CF5B272"
+                                              - received: "2023-07-24T10:42:19.176Z"
+                                                conversationClosed: null
+                                                errors: null
+                                                messageRef: "5068BAE1-7228-4E59-B3AD-92FA5CBDE4AC"
+                                              - received: "2023-07-24T10:42:19.467Z"
+                                                conversationClosed: null
+                                                errors: null
+                                                messageRef: "A9E37B68-07F4-43A5-889E-645D6681CE68"
+                                              - received: "2023-07-24T10:42:22.611Z"
+                                                conversationClosed: "2023-07-24T10:42:22.611Z"
+                                                errors:
+                                                    - code: "99"
+                                                      display: "Unexpected condition."
+                                                messageRef: "E600D1D4-D5BE-4D0D-8080-F7F6188B0548"
+                                          migrationStatus: "FAILED_INCUMBENT"
+                                          originalRequestDate: "2023-07-24T10:42:05.757Z"
+                                          fromAsid: "918999198738"
+                                          toAsid: "200000000359"
+                                example-4:
+                                    summary: Failed by adaptor, due to a PATIENT_NOT_FOUND error from the GP Connect provider's migrate structured endpoint
+                                    value:
+                                        - attachmentStatus: []
+                                          migrationLog: []
+                                          migrationStatus: "FAILED_NME"
+                                          originalRequestDate: "2023-07-24T09:38:50.947Z"
+                                          fromAsid: "918999198738"
+                                          toAsid: "200000000359"
+components:
+    schemas:
+        AckHistory:
+            type: object
+            properties:
+                acks:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/EhrReceivedAcknowledgement'
+        Error:
+            type: object
+            properties:
+                occurredAt:
+                    type: string
+                    format: date-time
+                code:
+                    type: string
+                    nullable: False
+                    description: 'The GP2GP response code from the negative response'
+                message:
+                    type: string
+                    nullable: False
+                    description: 'The GP2GP response text from the negative response'
+                taskType:
+                    type: string
+        EhrStatusRequestQuery:
+            type: object
+            properties:
+                fromDateTime:
+                    type: string
+                    format: date-time
+                    nullable: true
+                toDateTime:
+                    type: string
+                    format: date-time
+                    nullable: true
+                fromAsid:
+                    type: string
+                    nullable: true
+                toAsid:
+                    type: string
+                    nullable: true
+                fromOdsCode:
+                    type: string
+                    nullable: true
+                toOdsCode:
+                    type: string
+                    nullable: true
+        EhrStatusRequest:
+            type: object
+            properties:
+                initialRequestTimestamp:
+                    type: string
+                    format: date-time
+                    nullable: False
+                    description: 'The date and time (ISO-8601) of the original request'
+                actionCompletedTimestamp:
+                    type: string
+                    format: date-time
+                    nullable: False
+                    description: 'The date and time (ISO-8601) of when the transfer completed'
+                nhsNumber:
+                    type: string
+                    nullable: False
+                conversationId:
+                    type: string
+                    nullable: False
+                migrationStatus:
+                    type: string
+                    enum:
+                        - COMPLETE
+                        - COMPLETE_WITH_ISSUES
+                        - FAILED_NME
+                        - FAILED_INCUMBENT
+                        - IN_PROGRESS
+                    nullable: False
+                    description: 'The current state of the transfer, a status of COMPLETE_WITH_ISSUES is given if placeholder documents were sent'
+                fromAsid:
+                    type: string
+                    nullable: False
+                toAsid:
+                    type: string
+                    nullable: False
+                fromOdsCode:
+                    type: string
+                    nullable: False
+                toOdsCode:
+                    type: string
+                    nullable: False
+        AttachmentStatus:
+            type: object
+            properties:
+                identifier:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Identifier'
+                    nullable: False
+                    description: 'An array of identifiers taken from the identifier element of the GP Connect DocumentReference'
+                fileStatus:
+                    type: string
+                    enum:
+                        - PLACEHOLDER
+                        - ORIGINAL_FILE
+                        - SKELETON_MESSAGE
+                        - ERROR
+                    nullable: False
+                    description: 'The status of the document sent to the winning practice (can be used to identify if a placeholder document was sent)'
+                fileName:
+                    type: string
+                    nullable: False
+                    description: 'The filename sent to winning practice in the GP2GP message'
+                originalDescription:
+                    type: string
+                    nullable: True
+                    description: 'The description of the file as given by the description element of the GP Connect DocumentReference resource. This is inserted into the GP2GP placeholder document as the original filename and suffix. So should be of the form filename.suffix, e.g. referral.txt'
+        EhrReceivedAcknowledgement:
+            type: object
+            properties:
+                received:
+                    type: string
+                    format: date-time
+                    nullable: False
+                    description: 'The date and time (ISO-8601) the acknowledgment was received'
+                conversationClosed:
+                    type: string
+                    format: date-time
+                    nullable: True
+                    description: 'If the acknowledgement ended the transfer, the date and time (ISO-8601) the conversation was closed can be found here'
+                errors:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ErrorDetails'
+                    nullable: True
+                    description: 'An array of errors which will be populated in the case of a negative / rejected acknowledgement'
+                messageRef:
+                    type: string
+                    nullable: False
+                    description: 'The Message ID of the message that has been acknowledged'
+        EhrStatus:
+            type: object
+            properties:
+                attachmentStatus:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AttachmentStatus'
+                    description: 'An array of statuses for each document sent during the transfer'
+                    nullable: False
+                migrationLog:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/EhrReceivedAcknowledgement'
+                    nullable: False
+                    description: 'An array containing details of acknowledgments received during the transfer'
+                migrationStatus:
+                    type: string
+                    enum:
+                        - COMPLETE
+                        - COMPLETE_WITH_ISSUES
+                        - FAILED_NME
+                        - FAILED_INCUMBENT
+                        - IN_PROGRESS
+                    nullable: False
+                    description: 'The current state of the transfer, a status of COMPLETE_WITH_ISSUES is given if placeholder documents were sent'
+                originalRequestDate:
+                    type: string
+                    format: date-time
+                fromAsid:
+                    type: string
+                toAsid:
+                    type: string
+        ErrorDetails:
+            type: object
+            properties:
+                code:
+                    type: string
+                    nullable: False
+                    description: 'The code of the error'
+                display:
+                    type: string
+                    nullable: False
+                    description: 'The human-readable description of the error'
+        Identifier:
+            type: object
+            properties:
+                system:
+                    type: string
+                    nullable: False
+                    description: 'The system element of the Gp Connect DocumentReference.identifier'
+                value:
+                    type: string
+                    nullable: False
+                    description: 'The identifier element of the Gp Connect DocumentReference.identifier'
+        SentToMhs:
+            type: object
+            properties:
+                messageId:
+                    type: array
+                    items:
+                        type: string
+                sentAt:
+                    type: string
+                taskId:
+                    type: string
+        BooleanType:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                value:
+                    type: boolean
+                valueAsString:
+                    type: string
+                empty:
+                    type: boolean
+                primitive:
+                    type: boolean
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        CodeType:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                valueNotNull:
+                    type: string
+                primitive:
+                    type: boolean
+                value:
+                    type: string
+                empty:
+                    type: boolean
+                valueAsString:
+                    type: string
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        CodeableConcept:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                coding:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Coding'
+                text:
+                    type: string
+                empty:
+                    type: boolean
+                textElement:
+                    $ref: '#/components/schemas/StringType'
+                codingFirstRep:
+                    $ref: '#/components/schemas/Coding'
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                primitive:
+                    type: boolean
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        Coding:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                system:
+                    type: string
+                version:
+                    type: string
+                code:
+                    type: string
+                display:
+                    type: string
+                userSelected:
+                    type: boolean
+                empty:
+                    type: boolean
+                userSelectedElement:
+                    $ref: '#/components/schemas/BooleanType'
+                versionElement:
+                    $ref: '#/components/schemas/StringType'
+                displayElement:
+                    $ref: '#/components/schemas/StringType'
+                codeElement:
+                    $ref: '#/components/schemas/CodeType'
+                systemElement:
+                    $ref: '#/components/schemas/UriType'
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                primitive:
+                    type: boolean
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        EnumFactoryIssueSeverity:
+            type: object
+        EnumFactoryIssueType:
+            type: object
+        EnumFactoryNarrativeStatus:
+            type: object
+        EnumerationIssueSeverity:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                enumFactory:
+                    $ref: '#/components/schemas/EnumFactoryIssueSeverity'
+                value:
+                    type: string
+                    enum:
+                        - FATAL
+                        - ERROR
+                        - WARNING
+                        - INFORMATION
+                        - 'NULL'
+                valueAsString:
+                    type: string
+                empty:
+                    type: boolean
+                primitive:
+                    type: boolean
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        EnumerationIssueType:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                enumFactory:
+                    $ref: '#/components/schemas/EnumFactoryIssueType'
+                value:
+                    type: string
+                    enum:
+                        - INVALID
+                        - STRUCTURE
+                        - REQUIRED
+                        - VALUE
+                        - INVARIANT
+                        - SECURITY
+                        - LOGIN
+                        - UNKNOWN
+                        - EXPIRED
+                        - FORBIDDEN
+                        - SUPPRESSED
+                        - PROCESSING
+                        - NOTSUPPORTED
+                        - DUPLICATE
+                        - NOTFOUND
+                        - TOOLONG
+                        - CODEINVALID
+                        - EXTENSION
+                        - TOOCOSTLY
+                        - BUSINESSRULE
+                        - CONFLICT
+                        - INCOMPLETE
+                        - TRANSIENT
+                        - LOCKERROR
+                        - NOSTORE
+                        - EXCEPTION
+                        - TIMEOUT
+                        - THROTTLED
+                        - INFORMATIONAL
+                        - 'NULL'
+                valueAsString:
+                    type: string
+                empty:
+                    type: boolean
+                primitive:
+                    type: boolean
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        EnumerationNarrativeStatus:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                enumFactory:
+                    $ref: '#/components/schemas/EnumFactoryNarrativeStatus'
+                value:
+                    type: string
+                    enum:
+                        - GENERATED
+                        - EXTENSIONS
+                        - ADDITIONAL
+                        - EMPTY
+                        - 'NULL'
+                valueAsString:
+                    type: string
+                empty:
+                    type: boolean
+                primitive:
+                    type: boolean
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        Extension:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                url:
+                    type: string
+                value:
+                    $ref: '#/components/schemas/Type'
+                empty:
+                    type: boolean
+                urlElement:
+                    $ref: '#/components/schemas/UriType'
+                valueAsPrimitive:
+                    $ref: '#/components/schemas/IPrimitiveTypeObject'
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                primitive:
+                    type: boolean
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        IPrimitiveTypeObject:
+            type: object
+            properties:
+                value:
+                    type: object
+                valueAsString:
+                    type: string
+                empty:
+                    type: boolean
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+        IdType:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                value:
+                    type: string
+                empty:
+                    type: boolean
+                absolute:
+                    type: boolean
+                local:
+                    type: boolean
+                resourceType:
+                    type: string
+                valueAsString:
+                    type: string
+                baseUrl:
+                    type: string
+                versionIdPartAsLong:
+                    type: integer
+                    format: int64
+                versionIdPartValidLong:
+                    type: boolean
+                versionIdPart:
+                    type: string
+                idPartValidLong:
+                    type: boolean
+                idPartAsLong:
+                    type: integer
+                    format: int64
+                idPartValid:
+                    type: boolean
+                idPart:
+                    type: string
+                urn:
+                    type: boolean
+                idPartAsBigDecimal:
+                    type: number
+                uuid:
+                    type: boolean
+                primitive:
+                    type: boolean
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        InstantType:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                value:
+                    type: string
+                    format: date-time
+                year:
+                    type: integer
+                    format: int32
+                hour:
+                    type: integer
+                    format: int32
+                minute:
+                    type: integer
+                    format: int32
+                second:
+                    type: integer
+                    format: int32
+                timeZone:
+                    type: object
+                    properties:
+                        displayName:
+                            type: string
+                        id:
+                            type: string
+                        dstsavings:
+                            type: integer
+                            format: int32
+                        rawOffset:
+                            type: integer
+                            format: int32
+                month:
+                    type: integer
+                    format: int32
+                millis:
+                    type: integer
+                    format: int32
+                day:
+                    type: integer
+                    format: int32
+                precision:
+                    type: string
+                    enum:
+                        - YEAR
+                        - MONTH
+                        - DAY
+                        - MINUTE
+                        - SECOND
+                        - MILLI
+                nanos:
+                    type: integer
+                    format: int64
+                valueAsString:
+                    type: string
+                today:
+                    type: boolean
+                timeZoneZulu:
+                    type: boolean
+                valueAsCalendar:
+                    type: string
+                    format: date-time
+                valueAsV3String:
+                    type: string
+                    writeOnly: true
+                primitive:
+                    type: boolean
+                empty:
+                    type: boolean
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        Location:
+            type: object
+            properties:
+                line:
+                    type: integer
+                    format: int32
+                column:
+                    type: integer
+                    format: int32
+        Meta:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                versionId:
+                    type: string
+                lastUpdated:
+                    type: string
+                    format: date-time
+                profile:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/UriType'
+                security:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Coding'
+                tag:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Coding'
+                empty:
+                    type: boolean
+                lastUpdatedElement:
+                    $ref: '#/components/schemas/InstantType'
+                tagFirstRep:
+                    $ref: '#/components/schemas/Coding'
+                securityFirstRep:
+                    $ref: '#/components/schemas/Coding'
+                versionIdElement:
+                    $ref: '#/components/schemas/IdType'
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                primitive:
+                    type: boolean
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        Narrative:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                status:
+                    type: string
+                    enum:
+                        - GENERATED
+                        - EXTENSIONS
+                        - ADDITIONAL
+                        - EMPTY
+                        - 'NULL'
+                div:
+                    $ref: '#/components/schemas/XhtmlNode'
+                empty:
+                    type: boolean
+                statusElement:
+                    $ref: '#/components/schemas/EnumerationNarrativeStatus'
+                statusAsString:
+                    type: string
+                divAsString:
+                    type: string
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                primitive:
+                    type: boolean
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        OperationOutcome:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                meta:
+                    $ref: '#/components/schemas/Meta'
+                implicitRules:
+                    type: string
+                language:
+                    type: string
+                text:
+                    $ref: '#/components/schemas/Narrative'
+                contained:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Resource'
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                modifierExtension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                issue:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/OperationOutcomeIssueComponent'
+                empty:
+                    type: boolean
+                resourceType:
+                    type: string
+                    enum:
+                        - Account
+                        - ActivityDefinition
+                        - AdverseEvent
+                        - AllergyIntolerance
+                        - Appointment
+                        - AppointmentResponse
+                        - AuditEvent
+                        - Basic
+                        - Binary
+                        - BodySite
+                        - Bundle
+                        - CapabilityStatement
+                        - CarePlan
+                        - CareTeam
+                        - ChargeItem
+                        - Claim
+                        - ClaimResponse
+                        - ClinicalImpression
+                        - CodeSystem
+                        - Communication
+                        - CommunicationRequest
+                        - CompartmentDefinition
+                        - Composition
+                        - ConceptMap
+                        - Condition
+                        - Consent
+                        - Contract
+                        - Coverage
+                        - DataElement
+                        - DetectedIssue
+                        - Device
+                        - DeviceComponent
+                        - DeviceMetric
+                        - DeviceRequest
+                        - DeviceUseStatement
+                        - DiagnosticReport
+                        - DocumentManifest
+                        - DocumentReference
+                        - EligibilityRequest
+                        - EligibilityResponse
+                        - Encounter
+                        - Endpoint
+                        - EnrollmentRequest
+                        - EnrollmentResponse
+                        - EpisodeOfCare
+                        - ExpansionProfile
+                        - ExplanationOfBenefit
+                        - FamilyMemberHistory
+                        - Flag
+                        - Goal
+                        - GraphDefinition
+                        - Group
+                        - GuidanceResponse
+                        - HealthcareService
+                        - ImagingManifest
+                        - ImagingStudy
+                        - Immunization
+                        - ImmunizationRecommendation
+                        - ImplementationGuide
+                        - Library
+                        - Linkage
+                        - List
+                        - Location
+                        - Measure
+                        - MeasureReport
+                        - Media
+                        - Medication
+                        - MedicationAdministration
+                        - MedicationDispense
+                        - MedicationRequest
+                        - MedicationStatement
+                        - MessageDefinition
+                        - MessageHeader
+                        - NamingSystem
+                        - NutritionOrder
+                        - Observation
+                        - OperationDefinition
+                        - OperationOutcome
+                        - Organization
+                        - Parameters
+                        - Patient
+                        - PaymentNotice
+                        - PaymentReconciliation
+                        - Person
+                        - PlanDefinition
+                        - Practitioner
+                        - PractitionerRole
+                        - Procedure
+                        - ProcedureRequest
+                        - ProcessRequest
+                        - ProcessResponse
+                        - Provenance
+                        - Questionnaire
+                        - QuestionnaireResponse
+                        - ReferralRequest
+                        - RelatedPerson
+                        - RequestGroup
+                        - ResearchStudy
+                        - ResearchSubject
+                        - RiskAssessment
+                        - Schedule
+                        - SearchParameter
+                        - Sequence
+                        - ServiceDefinition
+                        - Slot
+                        - Specimen
+                        - StructureDefinition
+                        - StructureMap
+                        - Subscription
+                        - Substance
+                        - SupplyDelivery
+                        - SupplyRequest
+                        - Task
+                        - TestReport
+                        - TestScript
+                        - ValueSet
+                        - VisionPrescription
+                issueFirstRep:
+                    $ref: '#/components/schemas/OperationOutcomeIssueComponent'
+                deleted:
+                    type: boolean
+                idElement:
+                    $ref: '#/components/schemas/IdType'
+                structureFhirVersionEnum:
+                    type: string
+                    enum:
+                        - DSTU2
+                        - DSTU2_HL7ORG
+                        - DSTU2_1
+                        - DSTU3
+                        - R4
+                        - R4B
+                        - R5
+                languageElement:
+                    $ref: '#/components/schemas/CodeType'
+                implicitRulesElement:
+                    $ref: '#/components/schemas/UriType'
+                idBase:
+                    type: string
+                idPart:
+                    type: string
+                resource:
+                    type: boolean
+                primitive:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        OperationOutcomeIssueComponent:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                modifierExtension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                severity:
+                    type: string
+                    enum:
+                        - FATAL
+                        - ERROR
+                        - WARNING
+                        - INFORMATION
+                        - 'NULL'
+                code:
+                    type: string
+                    enum:
+                        - INVALID
+                        - STRUCTURE
+                        - REQUIRED
+                        - VALUE
+                        - INVARIANT
+                        - SECURITY
+                        - LOGIN
+                        - UNKNOWN
+                        - EXPIRED
+                        - FORBIDDEN
+                        - SUPPRESSED
+                        - PROCESSING
+                        - NOTSUPPORTED
+                        - DUPLICATE
+                        - NOTFOUND
+                        - TOOLONG
+                        - CODEINVALID
+                        - EXTENSION
+                        - TOOCOSTLY
+                        - BUSINESSRULE
+                        - CONFLICT
+                        - INCOMPLETE
+                        - TRANSIENT
+                        - LOCKERROR
+                        - NOSTORE
+                        - EXCEPTION
+                        - TIMEOUT
+                        - THROTTLED
+                        - INFORMATIONAL
+                        - 'NULL'
+                details:
+                    $ref: '#/components/schemas/CodeableConcept'
+                diagnostics:
+                    type: string
+                location:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/StringType'
+                expression:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/StringType'
+                empty:
+                    type: boolean
+                diagnosticsElement:
+                    $ref: '#/components/schemas/StringType'
+                codeElement:
+                    $ref: '#/components/schemas/EnumerationIssueType'
+                severityElement:
+                    $ref: '#/components/schemas/EnumerationIssueSeverity'
+                modifierExtensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                primitive:
+                    type: boolean
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        Resource:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                meta:
+                    $ref: '#/components/schemas/Meta'
+                implicitRules:
+                    type: string
+                language:
+                    type: string
+                empty:
+                    type: boolean
+                resourceType:
+                    type: string
+                    enum:
+                        - Account
+                        - ActivityDefinition
+                        - AdverseEvent
+                        - AllergyIntolerance
+                        - Appointment
+                        - AppointmentResponse
+                        - AuditEvent
+                        - Basic
+                        - Binary
+                        - BodySite
+                        - Bundle
+                        - CapabilityStatement
+                        - CarePlan
+                        - CareTeam
+                        - ChargeItem
+                        - Claim
+                        - ClaimResponse
+                        - ClinicalImpression
+                        - CodeSystem
+                        - Communication
+                        - CommunicationRequest
+                        - CompartmentDefinition
+                        - Composition
+                        - ConceptMap
+                        - Condition
+                        - Consent
+                        - Contract
+                        - Coverage
+                        - DataElement
+                        - DetectedIssue
+                        - Device
+                        - DeviceComponent
+                        - DeviceMetric
+                        - DeviceRequest
+                        - DeviceUseStatement
+                        - DiagnosticReport
+                        - DocumentManifest
+                        - DocumentReference
+                        - EligibilityRequest
+                        - EligibilityResponse
+                        - Encounter
+                        - Endpoint
+                        - EnrollmentRequest
+                        - EnrollmentResponse
+                        - EpisodeOfCare
+                        - ExpansionProfile
+                        - ExplanationOfBenefit
+                        - FamilyMemberHistory
+                        - Flag
+                        - Goal
+                        - GraphDefinition
+                        - Group
+                        - GuidanceResponse
+                        - HealthcareService
+                        - ImagingManifest
+                        - ImagingStudy
+                        - Immunization
+                        - ImmunizationRecommendation
+                        - ImplementationGuide
+                        - Library
+                        - Linkage
+                        - List
+                        - Location
+                        - Measure
+                        - MeasureReport
+                        - Media
+                        - Medication
+                        - MedicationAdministration
+                        - MedicationDispense
+                        - MedicationRequest
+                        - MedicationStatement
+                        - MessageDefinition
+                        - MessageHeader
+                        - NamingSystem
+                        - NutritionOrder
+                        - Observation
+                        - OperationDefinition
+                        - OperationOutcome
+                        - Organization
+                        - Parameters
+                        - Patient
+                        - PaymentNotice
+                        - PaymentReconciliation
+                        - Person
+                        - PlanDefinition
+                        - Practitioner
+                        - PractitionerRole
+                        - Procedure
+                        - ProcedureRequest
+                        - ProcessRequest
+                        - ProcessResponse
+                        - Provenance
+                        - Questionnaire
+                        - QuestionnaireResponse
+                        - ReferralRequest
+                        - RelatedPerson
+                        - RequestGroup
+                        - ResearchStudy
+                        - ResearchSubject
+                        - RiskAssessment
+                        - Schedule
+                        - SearchParameter
+                        - Sequence
+                        - ServiceDefinition
+                        - Slot
+                        - Specimen
+                        - StructureDefinition
+                        - StructureMap
+                        - Subscription
+                        - Substance
+                        - SupplyDelivery
+                        - SupplyRequest
+                        - Task
+                        - TestReport
+                        - TestScript
+                        - ValueSet
+                        - VisionPrescription
+                implicitRulesElement:
+                    $ref: '#/components/schemas/UriType'
+                languageElement:
+                    $ref: '#/components/schemas/CodeType'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/IdType'
+                idPart:
+                    type: string
+                deleted:
+                    type: boolean
+                structureFhirVersionEnum:
+                    type: string
+                    enum:
+                        - DSTU2
+                        - DSTU2_HL7ORG
+                        - DSTU2_1
+                        - DSTU3
+                        - R4
+                        - R4B
+                        - R5
+                resource:
+                    type: boolean
+                primitive:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        StringType:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                valueNotNull:
+                    type: string
+                primitive:
+                    type: boolean
+                value:
+                    type: string
+                empty:
+                    type: boolean
+                valueAsString:
+                    type: string
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        Type:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                empty:
+                    type: boolean
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                primitive:
+                    type: boolean
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        UriType:
+            type: object
+            properties:
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                id:
+                    type: string
+                extension:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Extension'
+                primitive:
+                    type: boolean
+                value:
+                    type: string
+                empty:
+                    type: boolean
+                valueAsString:
+                    type: string
+                extensionFirstRep:
+                    $ref: '#/components/schemas/Extension'
+                idBase:
+                    type: string
+                idElement:
+                    $ref: '#/components/schemas/StringType'
+                resource:
+                    type: boolean
+                booleanPrimitive:
+                    type: boolean
+        XhtmlNode:
+            type: object
+            properties:
+                checkParaTree:
+                    type: boolean
+                location:
+                    $ref: '#/components/schemas/Location'
+                nodeType:
+                    type: string
+                    enum:
+                        - Element
+                        - Text
+                        - Comment
+                        - DocType
+                        - Document
+                        - Instruction
+                name:
+                    type: string
+                attributes:
+                    type: object
+                    additionalProperties:
+                        type: string
+                childNodes:
+                    type: array
+                    properties:
+                        inPara:
+                            type: boolean
+                        inLink:
+                            type: boolean
+                        empty:
+                            type: boolean
+                        first:
+                            $ref: '#/components/schemas/XhtmlNode'
+                        last:
+                            $ref: '#/components/schemas/XhtmlNode'
+                    items:
+                        $ref: '#/components/schemas/XhtmlNode'
+                content:
+                    type: string
+                emptyExpanded:
+                    type: boolean
+                value:
+                    type: string
+                empty:
+                    type: boolean
+                valueAsString:
+                    type: string
+                formatCommentsPre:
+                    type: array
+                    items:
+                        type: string
+                formatCommentsPost:
+                    type: array
+                    items:
+                        type: string
+                noPretty:
+                    type: boolean
+                nsDecl:
+                    type: string
+                para:
+                    type: boolean
+                firstElement:
+                    $ref: '#/components/schemas/XhtmlNode'
