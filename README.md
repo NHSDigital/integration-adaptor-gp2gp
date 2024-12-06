@@ -18,16 +18,21 @@ GP2GP 2.2b producer, or those wishing to decommission their existing producer, m
 
 1. [Guidance for setting up the GP2GP adaptors in INT](https://github.com/NHSDigital/nia-patient-switching-standard-adaptor/blob/main/getting-started-instructions.md)
 1. [Guidance for operating the adaptor as a New Market Entrant](OPERATING.md)
-1. [Guidance on integrating with the adaptors APIs](#how-to-query-the-ehr-status-api)
+1. [Guidance on integrating with the adaptors APIs](#adaptor-api)
 1. [Documentation on how this adaptor maps GPConnect concepts to GP2GP concepts](https://github.com/NHSDigital/patient-switching-adaptors-mapping-documentation)
 
-## How to query the EHR Status API and the Requests endpoint
+## Adaptor API
 
-An API is provided to query the status of any transfer to an incumbent.
+An API is provided to query the status of GP2GP transfers that have been processed, and initiate a resend of an
+Electronic Health Record which has failed to transfer.
 
-The API has been documented using the OpenAPI Specification (version 3.0.1). The documentation includes detailed descriptions of endpoints,
-parameters, and data models, as well as examples of requests and responses to help developers integrate and use the API effectively
-[Ehr Extract OpenAPI Documentation](gp2gp_adaptor_response_docs.yaml)
+The API has been [documented using the OpenAPI Specification (version 3.0.1)](gp2gp_adaptor_response_docs.yaml) and
+includes detailed descriptions of endpoints, parameters, and data models, as well as examples of requests and responses
+to help developers integrate and use the API effectively.
+
+The documentation can also be displayed using [editor.swagger.io (exteral link)][swagger_editor].
+
+[swagger_editor]: https://editor.swagger.io/?url=https://raw.githubusercontent.com/NHSDigital/integration-adaptor-gp2gp-sending/refs/heads/main/gp2gp_adaptor_response_docs.yaml
 
 ## Diagrams
 
