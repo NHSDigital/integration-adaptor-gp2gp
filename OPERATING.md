@@ -266,7 +266,7 @@ The adaptor's database records:
 * metadata about the transfer process
 
 The supplier MUST configure the `GP2GP_MONGO_TTL` variable to remove the database records
-after a reasonable time period. The specs say 12 weeks, so this is our suggestion.
+after a reasonable time period. The specs say 12 weeks (84 days), so this is our suggestion.
 
 The adaptor's queued messages contain:
 * the patient's NHS number
