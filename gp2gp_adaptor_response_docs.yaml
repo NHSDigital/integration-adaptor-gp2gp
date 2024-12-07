@@ -3,7 +3,7 @@ info:
     title: OpenAPI definition
     version: v0
 servers:
-    - url: http://localhost:8080/api
+    - url: http://localhost:8080
       description: Generated server url
 paths:
     /requests:
@@ -73,7 +73,7 @@ paths:
     /ehr-resend/{conversationId}:
         post:
             tags:
-                - Ehr resend controller
+                - Ehr Status send / resend controller
             summary: Schedule Ehr Extract Resend
             description: Schedule Ehr Extract Resend
             operationId: scheduleEhrExtractResend
@@ -101,7 +101,7 @@ paths:
     /ehr-status/{conversationId}:
         get:
             tags:
-                - Ehr Status controller
+                - Ehr Status send / resend controller
             operationId: getEhrStatus
             parameters:
                 - name: conversationId
@@ -202,6 +202,34 @@ paths:
                                           originalRequestDate: "2023-07-24T09:38:50.947Z"
                                           fromAsid: "918999198738"
                                           toAsid: "200000000359"
+    /healthcheck:
+        get:
+            tags:
+                - Admin
+            summary: "Healthcheck"
+            description: "Provides the status of the application health."
+            responses:
+                '200':
+                    description: "Application is healthy"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: string
+                                        example: "UP"
+                '503':
+                    description: "Application is unhealthy"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: string
+                                        example: "DOWN"
+
 components:
     schemas:
         AckHistory:
