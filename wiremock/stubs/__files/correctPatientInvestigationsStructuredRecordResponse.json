@@ -1,0 +1,1535 @@
+{
+    "resourceType": "Bundle",
+    "id": "54d0ebb9-2d56-471e-9642-74ee55c38981",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "id": "1",
+                "meta": {
+                    "versionId": "1521806400000",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1",
+                        "extension": [
+                            {
+                                "url": "registrationPeriod",
+                                "valuePeriod": {
+                                    "start": "1962-07-13T00:00:00+01:00"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "en",
+                                            "display": "English"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "preferred",
+                                "valueBoolean": false
+                            },
+                            {
+                                "url": "modeOfCommunication",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-LanguageAbilityMode-1",
+                                            "code": "RWR",
+                                            "display": "Received written"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "communicationProficiency",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-LanguageAbilityProficiency-1",
+                                            "code": "E",
+                                            "display": "Excellent"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "interpreterRequired",
+                                "valueBoolean": false
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-NHSNumberVerificationStatus-1",
+                                            "code": "01",
+                                            "display": "Number present and verified"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "system": "https://fhir.nhs.uk/Id/nhs-number",
+                        "value": "{{jsonPath request.body '$.parameter[0].valueIdentifier.value'}}"
+                    }
+                ],
+                "active": true,
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "02123636563",
+                        "use": "home"
+                    }
+                ],
+                {{^patient}}
+                "name": [
+                    {
+                        "use": "official",
+                        "text": "Samuel HESLBY",
+                        "family": "HESLBY",
+                        "given": [
+                            "Samuel"
+                        ],
+                        "prefix": [
+                            "MR"
+                        ]
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "1936-03-17",
+                "address": [
+                    {
+                        "use": "home",
+                        "type": "physical",
+                        "line": [
+                            "10 MANOR DRIVE",
+                            "STILLINGTON"
+                        ],
+                        "city": "STOCKTON-ON-TEES",
+                        "district": "CLEVELAND",
+                        "postalCode": "TS21 1JG"
+                    }
+                ],
+                {{/patient}}
+                {{#patient}}
+                "name": [
+                    {
+                        "use": "official",
+                        "text": "{{patient.name.0.given.0}} {{patient.name.0.family}}",
+                        "family": "{{patient.name.0.family}}",
+                        "given": [
+                            "{{patient.name.0.given.0}}"
+                        ],
+                        "prefix": [
+                            "{{patient.name.0.prefix.0}}"
+                        ]
+                    }
+                ],
+                "gender": "{{ patient.gender }}",
+                "birthDate": "{{ patient.birthDate }}",
+                "address": [
+                    {
+                        "use": "home",
+                        "type": "physical",
+                        "line": [
+                            "{{ patient.address.0.line.0 }}",
+                            "{{ patient.address.0.line.1 }}"
+                        ],
+                        "postalCode": "{{ patient.address.0.postalCode }}"
+                    }
+                ],
+                {{/patient}}
+                "generalPractitioner": [
+                    {
+                        "reference": "Practitioner/1"
+                    }
+                ],
+                "managingOrganization": {
+                    "reference": "Organization/7"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "1",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "de",
+                                            "display": "German"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "en",
+                                            "display": "English"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-user-id",
+                        "value": "G13579135"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "usual",
+                        "family": "Gilbert",
+                        "given": [
+                            "Nichole"
+                        ],
+                        "prefix": [
+                            "Miss"
+                        ]
+                    }
+                ],
+                "gender": "female"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "2",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "de",
+                                            "display": "German"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "en",
+                                            "display": "English"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-user-id",
+                        "value": "G22345655"
+                    },
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-role-profile-id",
+                        "value": "PT1122"
+                    },
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-role-profile-id",
+                        "value": "PT1234"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "usual",
+                        "family": "Slater",
+                        "given": [
+                            "Kibo"
+                        ],
+                        "prefix": [
+                            "Mr"
+                        ]
+                    }
+                ],
+                "gender": "male"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "7",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "B82617"
+                    }
+                ],
+                "name": "COXWOLD SURGERY",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "12345678",
+                        "use": "work"
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "line": [
+                            "NHS NPFIT Test Data Manager",
+                            "Princes Exchange"
+                        ],
+                        "city": "Leeds",
+                        "district": "West Yorkshire",
+                        "postalCode": "LS1 4HY"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "id": "PT1122",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1"
+                    ]
+                },
+                "practitioner": {
+                    "reference": "Practitioner/2"
+                },
+                "organization": {
+                    "reference": "Organization/1"
+                },
+                "code": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-SDSJobRoleName-1",
+                                "code": "R0050",
+                                "display": "Consultant"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "id": "PT1234",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1"
+                    ]
+                },
+                "practitioner": {
+                    "reference": "Practitioner/2"
+                },
+                "organization": {
+                    "reference": "Organization/1"
+                },
+                "code": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-SDSJobRoleName-1",
+                                "code": "R0050",
+                                "display": "Consultant"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "1",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "GPC001"
+                    }
+                ],
+                "name": "GP Connect Demonstrator",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "12345678",
+                        "use": "work"
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "line": [
+                            "23 Main Street",
+                            "Pudsey"
+                        ],
+                        "city": "Leeds",
+                        "district": "West Yorkshire",
+                        "postalCode": "GPC 111"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "2",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "R1A14"
+                    }
+                ],
+                "name": "Test GP Care Trust",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "12345678",
+                        "use": "work"
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "line": [
+                            "24 Back Lane",
+                            "Farsley"
+                        ],
+                        "city": "Leeds",
+                        "district": "West Yorkshire",
+                        "postalCode": "GPC 113"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "NoSpecimen-NoResults",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "NoSpecimen-NoResults"
+                    }
+                ],
+                "status": "unknown",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "721981007",
+                            "display": "Diagnostic studies report"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "issued": "2001-01-01T09:00:00+00:00"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "NoSpecimen-OneResult",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "NoSpecimen-OneResult"
+                    }
+                ],
+                "status": "unknown",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "721981007",
+                            "display": "Diagnostic studies report"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "issued": "2001-01-02T09:00:00+00:00",
+                "result": [
+                    {
+                        "reference": "Observation/NoSpecimen-OneResult"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "NoSpecimen-OneResult",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "NoSpecimen-OneResult"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42R5.00",
+                            "display": "Serum TIBC",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2580111000000118"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "1015451000000101",
+                            "display": "Serum total iron binding capacity"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "effectiveDateTime": "2001-01-02T10:00:00+00:00",
+                "issued": "2001-01-02T11:00:00+00:00",
+                "valueQuantity": {
+                    "value": 40.000,
+                    "unit": "umol/L"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "OneSpecimen-NoResults",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-NoResults"
+                    }
+                ],
+                "status": "unknown",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "721981007",
+                            "display": "Diagnostic studies report"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "issued": "2001-02-01T09:00:00+00:00",
+                "specimen": [
+                    {
+                        "reference": "Specimen/OneSpecimen-NoResults"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "OneSpecimen-NoResults",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-NoResults"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "receivedTime": "2001-02-01T10:00:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2001-02-01T11:00:00+00:00"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "OneSpecimen-OneTestResultAttached",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-OneTestResultAttached"
+                    }
+                ],
+                "status": "unknown",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "721981007",
+                            "display": "Diagnostic studies report"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "issued": "2001-02-02T09:00:00+00:00",
+                "specimen": [
+                    {
+                        "reference": "Specimen/OneSpecimen-OneTestResultAttached"
+                    }
+                ],
+                "result": [
+                    {
+                        "reference": "Observation/OneSpecimen-OneTestResultAttached"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "OneSpecimen-OneTestResultAttached",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-OneTestResultAttached"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "receivedTime": "2001-02-02T10:00:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2001-02-02T11:00:00+00:00"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "OneSpecimen-OneTestResultAttached",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-OneTestResultAttached"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42R5.00",
+                            "display": "Serum TIBC",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2580111000000118"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "1015451000000101",
+                            "display": "Serum total iron binding capacity"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "effectiveDateTime": "2001-02-02T12:00:00+00:00",
+                "issued": "2001-02-02T13:00:00+00:00",
+                "valueQuantity": {
+                    "value": 41.000,
+                    "unit": "umol/L"
+                },
+                "specimen": {
+                    "reference": "Specimen/OneSpecimen-OneTestResultAttached"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "OneSpecimen-OneTestResultUnattached",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-OneTestResultUnattached"
+                    }
+                ],
+                "status": "unknown",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "721981007",
+                            "display": "Diagnostic studies report"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "issued": "2001-02-03T09:00:00+00:00",
+                "specimen": [
+                    {
+                        "reference": "Specimen/OneSpecimen-OneTestResultUnattached"
+                    }
+                ],
+                "result": [
+                    {
+                        "reference": "Observation/OneSpecimen-OneTestResultUnattached"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "OneSpecimen-OneTestResultUnattached",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-OneTestResultUnattached"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "receivedTime": "2001-02-03T10:00:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2001-02-03T11:00:00+00:00"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "OneSpecimen-OneTestResultUnattached",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-OneTestResultUnattached"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42R5.00",
+                            "display": "Serum TIBC",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2580111000000118"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "1015451000000101",
+                            "display": "Serum total iron binding capacity"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "effectiveDateTime": "2001-02-03T12:00:00+00:00",
+                "issued": "2001-02-03T13:00:00+00:00",
+                "valueQuantity": {
+                    "value": 42.000,
+                    "unit": "umol/L"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached"
+                    }
+                ],
+                "status": "unknown",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "721981007",
+                            "display": "Diagnostic studies report"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "issued": "2001-02-04T09:00:00+00:00",
+                "specimen": [
+                    {
+                        "reference": "Specimen/OneSpecimen-OneTestResultAttached-OneTestResultUnattached"
+                    }
+                ],
+                "result": [
+                    {
+                        "reference": "Observation/OneSpecimen-OneTestResultAttached-OneTestResultUnattached-1"
+                    },
+                    {
+                        "reference": "Observation/OneSpecimen-OneTestResultAttached-OneTestResultUnattached-2"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "receivedTime": "2001-02-04T10:00:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2001-02-04T11:00:00+00:00"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached-1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42R5.00",
+                            "display": "Serum TIBC",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2580111000000118"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "1015451000000101",
+                            "display": "Serum total iron binding capacity"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "effectiveDateTime": "2001-02-04T12:00:00+00:00",
+                "issued": "2001-02-04T13:00:00+00:00",
+                "valueQuantity": {
+                    "value": 43.000,
+                    "unit": "umol/L"
+                },
+                "specimen": {
+                    "reference": "Specimen/OneSpecimen-OneTestResultAttached-OneTestResultUnattached"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached-2",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "OneSpecimen-OneTestResultAttached-OneTestResultUnattached-2"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42R5.00",
+                            "display": "Serum TIBC",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2580111000000118"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "1015451000000101",
+                            "display": "Serum total iron binding capacity"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "effectiveDateTime": "2001-02-04T12:00:00+00:00",
+                "issued": "2001-02-04T13:00:00+00:00",
+                "valueQuantity": {
+                    "value": 44.000,
+                    "unit": "umol/L"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "TwoSpecimens-NoResults",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-NoResults"
+                    }
+                ],
+                "status": "unknown",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "721981007",
+                            "display": "Diagnostic studies report"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "issued": "2001-03-01T09:00:00+00:00",
+                "specimen": [
+                    {
+                        "reference": "Specimen/TwoSpecimens-NoResults-1"
+                    },
+                    {
+                        "reference": "Specimen/TwoSpecimens-NoResults-2"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "TwoSpecimens-NoResults-1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-NoResults-1"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "receivedTime": "2001-03-01T10:00:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2001-03-01T11:00:00+00:00"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "TwoSpecimens-NoResults-2",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-NoResults-2"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "receivedTime": "2001-03-01T12:00:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2001-03-01T13:00:00+00:00"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "TwoSpecimens-OneResultOneSpecimen",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-OneResultOneSpecimen"
+                    }
+                ],
+                "status": "unknown",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "721981007",
+                            "display": "Diagnostic studies report"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "issued": "2001-03-02T09:00:00+00:00",
+                "specimen": [
+                    {
+                        "reference": "Specimen/TwoSpecimens-OneResultOneSpecimen-1"
+                    },
+                    {
+                        "reference": "Specimen/TwoSpecimens-OneResultOneSpecimen-2"
+                    }
+                ],
+                "result": [
+                    {
+                        "reference": "Observation/TwoSpecimens-OneResultOneSpecimen"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "TwoSpecimens-OneResultOneSpecimen-1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-OneResultOneSpecimen-1"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "receivedTime": "2001-03-02T10:00:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2001-03-02T11:00:00+00:00"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "TwoSpecimens-OneResultOneSpecimen-2",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-OneResultOneSpecimen-2"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "receivedTime": "2001-03-02T12:00:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2001-03-02T13:00:00+00:00"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "TwoSpecimens-OneResultOneSpecimen",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-OneResultOneSpecimen"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42R5.00",
+                            "display": "Serum TIBC",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2580111000000118"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "1015451000000101",
+                            "display": "Serum total iron binding capacity"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "effectiveDateTime": "2001-03-02T14:00:00+00:00",
+                "issued": "2001-03-02T15:00:00+00:00",
+                "valueQuantity": {
+                    "value": 45.000,
+                    "unit": "umol/L"
+                },
+                "specimen": {
+                    "reference": "Specimen/TwoSpecimens-OneResultOneSpecimen-1"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "TwoSpecimens-OneResultEach",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-OneResultEach"
+                    }
+                ],
+                "status": "unknown",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "721981007",
+                            "display": "Diagnostic studies report"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "issued": "2001-03-03T09:00:00+00:00",
+                "specimen": [
+                    {
+                        "reference": "Specimen/TwoSpecimens-OneResultEach-1"
+                    },
+                    {
+                        "reference": "Specimen/TwoSpecimens-OneResultEach-2"
+                    }
+                ],
+                "result": [
+                    {
+                        "reference": "Observation/TwoSpecimens-OneResultEach-1"
+                    },
+                    {
+                        "reference": "Observation/TwoSpecimens-OneResultEach-2"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "TwoSpecimens-OneResultEach-1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-OneResultEach-1"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "receivedTime": "2001-03-03T10:00:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2001-03-03T11:00:00+00:00"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "TwoSpecimens-OneResultEach-2",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-OneResultEach-2"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "receivedTime": "2001-03-03T12:00:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2001-03-03T13:00:00+00:00"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "TwoSpecimens-OneResultEach-1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-OneResultEach-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42R5.00",
+                            "display": "Serum TIBC",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2580111000000118"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "1015451000000101",
+                            "display": "Serum total iron binding capacity"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "effectiveDateTime": "2001-03-03T14:00:00+00:00",
+                "issued": "2001-03-03T15:00:00+00:00",
+                "valueQuantity": {
+                    "value": 46.000,
+                    "unit": "umol/L"
+                },
+                "specimen": {
+                    "reference": "Specimen/TwoSpecimens-OneResultEach-1"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "TwoSpecimens-OneResultEach-2",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://wiremock/",
+                        "value": "TwoSpecimens-OneResultEach-2"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42R5.00",
+                            "display": "Serum TIBC",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2580111000000118"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "1015451000000101",
+                            "display": "Serum total iron binding capacity"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "effectiveDateTime": "2001-03-03T16:00:00+00:00",
+                "issued": "2001-03-03T17:00:00+00:00",
+                "valueQuantity": {
+                    "value": 47.000,
+                    "unit": "umol/L"
+                },
+                "specimen": {
+                    "reference": "Specimen/TwoSpecimens-OneResultEach-2"
+                }
+            }
+        }
+    ]
+}
