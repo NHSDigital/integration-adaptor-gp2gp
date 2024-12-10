@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.1] - 2024-12-10
+
 ### Added
 * When a transfer fails, the transfer should remain available in the db for at least 12 weeks (84 days), as per spec.
 * When mapping a `DocumentReference` which contains a `NOPAT` `meta.security` or `NOPAT` `securityLabel` tag the resultant XML for that resource
