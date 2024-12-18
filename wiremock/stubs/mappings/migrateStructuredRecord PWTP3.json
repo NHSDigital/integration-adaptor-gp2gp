@@ -8,7 +8,7 @@
   },
   "response": {
     "status": 200,
-    "bodyFileName": "EMISPatientStructurede2eResponsePWTP3.json",
+    "bodyFileName": "EMISPatientStructurede2eResponsePWTP12.json",
     "headers": {
       "Server": "nginx",
       "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",
