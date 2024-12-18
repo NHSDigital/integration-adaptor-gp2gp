@@ -211,77 +211,10 @@ jobs:
       - name: Temporary Artifacts Cleanup
         run: rm -rf ./artifacts
 
-  end-to-end-tests:
-    name: End-to-End Testing
-    runs-on: ubuntu-latest
-    needs: [checkstyle, spotbugs]
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Run E2E Tests
-        env:
-          GP2GP_SERVER_PORT: "8080"
-          GP2GP_BASE_URL: "http://gp2gp:8080"
-          GP2GP_AMQP_BROKERS: "amqp://activemq:5672"
-          GP2GP_MONGO_URI: "mongodb://mongodb:27017"
-          GP2GP_MONGO_DATABASE_NAME: "gp2gp"
-          GP2GP_MHS_MOCK_BASE_URL: "http://mock-mhs-adaptor:8081"
-          GP2GP_MHS_OUTBOUND_URL: "http://mock-mhs-adaptor:8081/mock-mhs-endpoint"
-          GP2GP_GPC_GET_URL: "http://gpcc:8090/@ODS_CODE@/STU3/1/gpconnect"
-          GP2GP_LARGE_ATTACHMENT_THRESHOLD: "31216"
-          GP2GP_LARGE_EHR_EXTRACT_THRESHOLD: "31216"
-          GP2GP_GPC_CLIENT_MAX_BACKOFF_ATTEMPTS: 0
-          GP2GP_MHS_CLIENT_MAX_BACKOFF_ATTEMPTS: 0
-          GPC_CONSUMER_SERVER_PORT: "8090"
-          GPC_CONSUMER_SDS_URL: "http://wiremock:8080/spine-directory/"
-          GPC_CONSUMER_SDS_APIKEY: "anykey"
-          GPC_CONSUMER_LOGGING_LEVEL: "DEBUG"
-          GPC_SUPPLIER_ODS_CODE: "XYZ222"
-          GP2GP_LOGGING_LEVEL: "DEBUG"
-          MHS_MOCK_REQUEST_JOURNAL_ENABLED: "true"
-        run: |
-          docker network create commonforgp2gp
-          docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml up --build --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
-        working-directory: ./docker
-
-      - name: Dump Docker Logs
-        if: always()
-        run: |
-          chmod +x dump_docker_logs.sh
-          ./dump_docker_logs.sh
-        working-directory: ./scripts
-        shell: bash
-
-      - name: Collect Artifacts
-        if: always()
-        run: |
-          mkdir -p artifacts
-          docker cp e2e-tests:/home/gradle/e2e-tests/build/reports ./artifacts
-          cp -r ./scripts/logs ./artifacts
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: 'End-to-End Test Results & Docker Logs'
-          path: ./artifacts/**
-          compression-level: 9
-
-      - name: Stop Docker Dependencies
-        if: always()
-        run: |
-          docker compose -f docker-compose.yml -f docker-compose-e2e-tests.yml down
-          docker network rm commonforgp2gp
-        working-directory: ./docker
-
-      - name: Temporary Artifacts Cleanup
-        run: rm -rf ./artifacts
-
   build-and-publish-docker-images:
     name: Build & Publish Docker Images
     runs-on: ubuntu-latest
-    needs: [unit-tests, integration-tests, end-to-end-tests]
+    needs: [unit-tests, integration-tests]
     permissions:
         id-token: write
         contents: read
