@@ -6,7 +6,7 @@ jobs:
   pitest:
     # Only run on PRs from the repo. PRs from forks will fail due to lack of permissions and
     # must use a two stage process
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project
