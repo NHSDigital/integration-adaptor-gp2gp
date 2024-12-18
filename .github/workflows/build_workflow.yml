@@ -107,7 +107,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Execute Unit Tests
-        run: ./gradlew test jacocoTestReport sonar --parallel --build-cache
+        run: |
+          if [[ $GITHUB_ACTOR == 'dependabot[bot]' ]]; then
+            ./gradlew test jacocoTestReport --parallel --build-cache
+          else
+            ./gradlew test jacocoTestReport sonar --parallel --build-cache
+          fi
         working-directory: ./service
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
