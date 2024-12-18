@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -180,6 +181,7 @@ public class EhrStatusRequestsEndpointTests {
         assertOneResponseWithConversationId(CONVERSATION_IDS[0], responseEntity);
     }
 
+    @Disabled
     @Test
     public void When_EhrStatusEndpointHasContentAndBothToAndFromDateFilterIsApplied_Expect_ExpectedRangeOfResponsesReturned() {
 

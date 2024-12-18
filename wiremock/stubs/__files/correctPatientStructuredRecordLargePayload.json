@@ -807,113 +807,7 @@
                 },
                 "entry":
                 [
-                    {
-                        "item":
-                        {
-                            "reference": "Condition/AllergiesProblem"
-                        }
-                    },
-                    {
-                        "item":
-                        {
-                            "reference": "Condition/MedicationProblem"
-                        }
-                    },
-                    {
-                        "item":
-                        {
-                            "reference": "Condition/ImmunisationsProblem"
-                        }
-                    },
-                    {
-                        "item":
-                        {
-                            "reference": "Condition/ReferralsProblem"
-                        }
-                    },
-                    {
-                        "item":
-                        {
-                            "reference": "Condition/UncategorisedDataProblem"
-                        }
-                    },
-                    {
-                        "item":
-                        {
-                            "reference": "Condition/InvestigationsProblem"
-                        }
-                    }
                 ]
-            }
-        },
-        {
-            "resource":
-            {
-                "resourceType": "Condition",
-                "id": "AllergiesProblem",
-                "meta":
-                {
-                    "profile":
-                    [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
-                },
-                "extension":
-                [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
-                        "valueCode": "major"
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "AllergyIntolerance/29"
-                        }
-                    }
-                ],
-                "identifier":
-                [
-                    {
-                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "D06C0517-4D1C-11E3-A2DD-010000000161"
-                    }
-                ],
-                "clinicalStatus": "active",
-                "category":
-                [
-                    {
-                        "coding":
-                        [
-                            {
-                                "system": "http://hl7.org/fhir/condition-category",
-                                "code": "problem-list-item",
-                                "display": "Problem List Item"
-                            }
-                        ]
-                    }
-                ],
-                "code":
-                {
-                    "coding":
-                    [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "231504006",
-                            "display": "Mixed anxiety and depressive disorder"
-                        }
-                    ],
-                    "text": "Anxiety with depression"
-                },
-                "subject":
-                {
-                    "reference": "Patient/2"
-                },
-                "assertedDate": "2020-12-01T00:00:00+00:00",
-                "asserter":
-                {
-                    "reference": "Practitioner/1"
-                }
             }
         },
         {
@@ -7438,76 +7332,6 @@
         {
             "resource":
             {
-                "resourceType": "Condition",
-                "id": "MedicationProblem",
-                "meta":
-                {
-                    "profile":
-                    [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
-                },
-                "extension":
-                [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
-                        "valueCode": "major"
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "MedicationRequest/20"
-                        }
-                    }
-                ],
-                "identifier":
-                [
-                    {
-                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "D06C0517-4D1C-11E3-A2DD-010000000161"
-                    }
-                ],
-                "clinicalStatus": "active",
-                "category":
-                [
-                    {
-                        "coding":
-                        [
-                            {
-                                "system": "http://hl7.org/fhir/condition-category",
-                                "code": "problem-list-item",
-                                "display": "Problem List Item"
-                            }
-                        ]
-                    }
-                ],
-                "code":
-                {
-                    "coding":
-                    [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "231504006",
-                            "display": "Mixed anxiety and depressive disorder"
-                        }
-                    ],
-                    "text": "Anxiety with depression"
-                },
-                "subject":
-                {
-                    "reference": "Patient/2"
-                },
-                "assertedDate": "2020-12-01T00:00:00+00:00",
-                "asserter":
-                {
-                    "reference": "Practitioner/1"
-                }
-            }
-        },
-        {
-            "resource":
-            {
                 "resourceType": "List",
                 "meta":
                 {
@@ -8175,19 +7999,6 @@
                 },
                 "extension":
                 [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
-                        "extension":
-                        [
-                            {
-                                "url": "target",
-                                "valueReference":
-                                {
-                                    "reference": "Condition/Problem-B-Swollen-Legs"
-                                }
-                            }
-                        ]
-                    }
                 ],
                 "status": "current",
                 "mode": "snapshot",
@@ -8574,6 +8385,46 @@
                     {
                         "item":
                         {
+                            "reference": "List/Consultation1-Topic3-heading"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource":
+            {
+
+				"resourceType": "List",
+				"id": "Consultation1-Topic3-heading",
+				"meta": {
+					"profile": [
+						"https://fhir.nhs.uk/STU3/StructureDefinition/Consultation1-Topic3-heading"
+					]
+				},
+				"status": "current",
+				"mode": "snapshot",
+				"code": {
+					"coding": [
+						{
+							"system": "http://snomed.info/sct",
+							"code": "24781000000107",
+							"display": "Category (EHR)"
+						}
+					]
+				},
+				"subject": {
+					"reference": "Patient/2"
+				},
+				"encounter": {
+					"reference": "Encounter/Encounter1"
+				},
+				"date": "2019-03-28T10:30:00+00:00",
+                "entry":
+                [
+                    {
+                        "item":
+                        {
                             "reference": "Observation/Consultation1-Topic3-flat-Observation-1"
                         }
                     },
@@ -8612,19 +8463,6 @@
                 },
                 "extension":
                 [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
-                        "extension":
-                        [
-                            {
-                                "url": "target",
-                                "valueReference":
-                                {
-                                    "reference": "Condition/Problem-D-URTI"
-                                }
-                            }
-                        ]
-                    }
                 ],
                 "status": "current",
                 "mode": "snapshot",
@@ -8704,19 +8542,6 @@
                 },
                 "extension":
                 [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
-                        "extension":
-                        [
-                            {
-                                "url": "target",
-                                "valueReference":
-                                {
-                                    "reference": "Condition/Problem-D-URTI"
-                                }
-                            }
-                        ]
-                    }
                 ],
                 "status": "current",
                 "mode": "snapshot",
@@ -12048,19 +11873,6 @@
                 },
                 "extension":
                 [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
-                        "extension":
-                        [
-                            {
-                                "url": "target",
-                                "valueReference":
-                                {
-                                    "reference": "Condition/Problem-E-Post-viral-cough"
-                                }
-                            }
-                        ]
-                    }
                 ],
                 "status": "current",
                 "mode": "snapshot",
@@ -13434,19 +13246,6 @@
                 },
                 "extension":
                 [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
-                        "extension":
-                        [
-                            {
-                                "url": "target",
-                                "valueReference":
-                                {
-                                    "reference": "Condition/Problem-B-Swollen-Legs"
-                                }
-                            }
-                        ]
-                    }
                 ],
                 "status": "current",
                 "mode": "snapshot",
@@ -15144,7 +14943,12 @@
                     "profile":
                     [
                         "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
+                    ],
+                    "security": [{
+                        "system":"http://hl7.org/fhir/v3/ActCode",
+                        "code":"NOPAT",
+                        "display":"no disclosure to patient, family or caregivers without attending provider's authorization"
+                    }]
                 },
                 "extension":
                 [
@@ -15353,484 +15157,6 @@
                 "context":
                 {
                     "reference": "Encounter/Encounter1"
-                },
-                "onsetDateTime": "2019-03-28T10:30:00+00:00",
-                "assertedDate": "2019-03-28T10:30:00+00:00",
-                "asserter":
-                {
-                    "reference": "Practitioner/1"
-                }
-            }
-        },
-        {
-            "resource":
-            {
-                "resourceType": "Condition",
-                "id": "Problem-B-Swollen-Legs",
-                "meta":
-                {
-                    "profile":
-                    [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
-                },
-                "extension":
-                [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
-                        "valueCode": "major"
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic2-Category-History-Observation-2"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic2-Category-History-Observation-1"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic2-Category-Examination-Observation-1"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic2-Category-Examination-Observation-2"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic2-Category-Examination-Observation-3"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic2-Category-Examination-Observation-4"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic2-Category-Examination-Observation-5"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic2-Category-Plan-Observation-1"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic2-Category-Plan-Observation-2"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Test Request items are not supported by the provider system"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation3-Topic2-Category-History-Observation-1"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation3-Topic2-Category-Examination-Observation-1"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation3-Topic2-Category-Examination-Observation-2"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation3-Topic2-Category-Examination-Observation-3"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation3-Topic2-Category-Examination-Observation-4"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation3-Topic2-Category-Examination-Observation-5"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation3-Topic2-Category-Plan-Observation-1"
-                        }
-                    }
-                ],
-                "identifier":
-                [
-                    {
-                        "system": "https://provider.nhs.uk/data-identifier",
-                        "value": "62658072-28af-47e5-b81c-bc0521d5c41c"
-                    }
-                ],
-                "clinicalStatus": "active",
-                "category":
-                [
-                    {
-                        "coding":
-                        [
-                            {
-                                "system": "http://hl7.org/fhir/condition-category",
-                                "code": "problem-list-item",
-                                "display": "Problem List Item"
-                            }
-                        ]
-                    }
-                ],
-                "code":
-                {
-                    "coding":
-                    [
-                        {
-                            "extension":
-                            [
-                                {
-                                    "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
-                                    "extension":
-                                    [
-                                        {
-                                            "url": "DescriptionID",
-                                            "valueId": "2729461000000110"
-                                        },
-                                        {
-                                            "url": "descriptionDisplay",
-                                            "valueString": "Swollen leg"
-                                        }
-                                    ]
-                                }
-                            ],
-                            "system": "http://snomed.info/sct",
-                            "code": "449614009",
-                            "display": "Swelling of lower limb"
-                        }
-                    ],
-                    "text": "Swollen legs"
-                },
-                "subject":
-                {
-                    "reference": "Patient/2"
-                },
-                "context":
-                {
-                    "reference": "Encounter/Encounter1"
-                },
-                "onsetDateTime": "2019-03-28T10:30:00+00:00",
-                "assertedDate": "2019-03-28T10:30:00+00:00",
-                "asserter":
-                {
-                    "reference": "Practitioner/1"
-                },
-                "note":
-                [
-                    {
-                        "text": "due to obesity and poor mobility and previous DVT"
-                    }
-                ]
-            }
-        },
-        {
-            "resource":
-            {
-                "resourceType": "Condition",
-                "id": "Problem-D-URTI",
-                "meta":
-                {
-                    "profile":
-                    [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
-                },
-                "extension":
-                [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
-                        "extension":
-                        [
-                            {
-                                "url": "type",
-                                "valueCode": "Parent"
-                            },
-                            {
-                                "url": "target",
-                                "valueReference":
-                                {
-                                    "reference": "Condition/Problem-E-Post-viral-cough"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
-                        "valueCode": "major"
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic4-Category-History-Observation-5"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic4-Category-History-Observation-1"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic4-Category-History-Observation-2"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic4-Category-History-Observation-3"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic4-Category-History-Observation-4"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "MedicationRequest/Consultation1-Topic4-Category-Plan-Medication-Plan-1"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "MedicationRequest/Consultation1-Topic4-Category-Plan-Medication-Order-1"
-                        }
-                    }
-                ],
-                "identifier":
-                [
-                    {
-                        "system": "https://provider.nhs.uk/data-identifier",
-                        "value": "D03A94D9-4D1C-11E3-A2DD-010000000161"
-                    }
-                ],
-                "clinicalStatus": "active",
-                "category":
-                [
-                    {
-                        "coding":
-                        [
-                            {
-                                "system": "http://hl7.org/fhir/condition-category",
-                                "code": "problem-list-item",
-                                "display": "Problem List Item"
-                            }
-                        ]
-                    }
-                ],
-                "code":
-                {
-                    "coding":
-                    [
-                        {
-                            "extension":
-                            [
-                                {
-                                    "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
-                                    "extension":
-                                    [
-                                        {
-                                            "url": "DescriptionID",
-                                            "valueId": "1231298013"
-                                        },
-                                        {
-                                            "url": "DescriptionDisplay",
-                                            "valueString": "Upper respiratory tract infection"
-                                        }
-                                    ]
-                                }
-                            ],
-                            "system": "http://snomed.info/sct",
-                            "code": "54150009",
-                            "display": "Upper respiratory infection"
-                        }
-                    ]
-                },
-                "subject":
-                {
-                    "reference": "Patient/2"
-                },
-                "context":
-                {
-                    "reference": "Encounter/Encounter1"
-                },
-                "onsetDateTime": "2019-03-28T10:30:00+00:00",
-                "assertedDate": "2019-03-28T10:30:00+00:00",
-                "asserter":
-                {
-                    "reference": "Practitioner/1"
-                }
-            }
-        },
-        {
-            "resource":
-            {
-                "resourceType": "Condition",
-                "id": "Problem-E-Post-viral-cough",
-                "meta":
-                {
-                    "profile":
-                    [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
-                },
-                "extension":
-                [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
-                        "extension":
-                        [
-                            {
-                                "url": "type",
-                                "valueCode": "Child"
-                            },
-                            {
-                                "url": "target",
-                                "valueReference":
-                                {
-                                    "reference": "Condition/Problem-D-URTI"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
-                        "valueCode": "minor"
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1-Topic5-Category-History-Observation-4"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation2-Topic2-Category-History-Observation-1"
-                        }
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation2-Topic2-Category-Plan-Observation-1"
-                        }
-                    }
-                ],
-                "identifier":
-                [
-                    {
-                        "system": "https://provider.nhs.uk/data-identifier",
-                        "value": "CFE8F260-4D1C-11E3-9E6B-010000001205"
-                    }
-                ],
-                "clinicalStatus": "active",
-                "category":
-                [
-                    {
-                        "coding":
-                        [
-                            {
-                                "system": "http://hl7.org/fhir/condition-category",
-                                "code": "problem-list-item",
-                                "display": "Problem List Item"
-                            }
-                        ]
-                    }
-                ],
-                "code":
-                {
-                    "coding":
-                    [
-                        {
-                            "extension":
-                            [
-                                {
-                                    "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
-                                    "extension":
-                                    [
-                                        {
-                                            "url": "DescriptionID",
-                                            "valueId": "2872868013"
-                                        }
-                                    ]
-                                }
-                            ],
-                            "system": "http://snomed.info/sct",
-                            "code": "445241004",
-                            "display": "Postviral cough"
-                        }
-                    ]
-                },
-                "subject":
-                {
-                    "reference": "Patient/2"
-                },
-                "context":
-                {
-                    "reference": "Encounter/Encounter2"
                 },
                 "onsetDateTime": "2019-03-28T10:30:00+00:00",
                 "assertedDate": "2019-03-28T10:30:00+00:00",
@@ -16892,76 +16218,6 @@
         {
             "resource":
             {
-                "resourceType": "Condition",
-                "id": "ImmunisationsProblem",
-                "meta":
-                {
-                    "profile":
-                    [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
-                },
-                "extension":
-                [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
-                        "valueCode": "major"
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Immunization/eba25af1-5b74-4790-aa5a-2134fd27ad45"
-                        }
-                    }
-                ],
-                "identifier":
-                [
-                    {
-                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "D06C0517-4D1C-11E3-A2DD-010000000161"
-                    }
-                ],
-                "clinicalStatus": "active",
-                "category":
-                [
-                    {
-                        "coding":
-                        [
-                            {
-                                "system": "http://hl7.org/fhir/condition-category",
-                                "code": "problem-list-item",
-                                "display": "Problem List Item"
-                            }
-                        ]
-                    }
-                ],
-                "code":
-                {
-                    "coding":
-                    [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "231504006",
-                            "display": "Mixed anxiety and depressive disorder"
-                        }
-                    ],
-                    "text": "Anxiety with depression"
-                },
-                "subject":
-                {
-                    "reference": "Patient/2"
-                },
-                "assertedDate": "2020-12-01T00:00:00+00:00",
-                "asserter":
-                {
-                    "reference": "Practitioner/1"
-                }
-            }
-        },
-        {
-            "resource":
-            {
                 "resourceType": "List",
                 "meta":
                 {
@@ -17143,76 +16399,6 @@
                         ]
                     }
                 ]
-            }
-        },
-        {
-            "resource":
-            {
-                "resourceType": "Condition",
-                "id": "ReferralsProblem",
-                "meta":
-                {
-                    "profile":
-                    [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
-                },
-                "extension":
-                [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
-                        "valueCode": "major"
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "ReferralRequest/Consultation1-Topic5-Category-Plan-ReferralRequest-1"
-                        }
-                    }
-                ],
-                "identifier":
-                [
-                    {
-                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "D06C0517-4D1C-11E3-A2DD-010000000161"
-                    }
-                ],
-                "clinicalStatus": "active",
-                "category":
-                [
-                    {
-                        "coding":
-                        [
-                            {
-                                "system": "http://hl7.org/fhir/condition-category",
-                                "code": "problem-list-item",
-                                "display": "Problem List Item"
-                            }
-                        ]
-                    }
-                ],
-                "code":
-                {
-                    "coding":
-                    [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "231504006",
-                            "display": "Mixed anxiety and depressive disorder"
-                        }
-                    ],
-                    "text": "Anxiety with depression"
-                },
-                "subject":
-                {
-                    "reference": "Patient/2"
-                },
-                "assertedDate": "2020-12-01T00:00:00+00:00",
-                "asserter":
-                {
-                    "reference": "Practitioner/1"
-                }
             }
         },
         {
@@ -17500,76 +16686,6 @@
         {
             "resource":
             {
-                "resourceType": "Condition",
-                "id": "UncategorisedDataProblem",
-                "meta":
-                {
-                    "profile":
-                    [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
-                },
-                "extension":
-                [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
-                        "valueCode": "major"
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "Observation/Consultation1_topic2_category_Examination_Observation_1"
-                        }
-                    }
-                ],
-                "identifier":
-                [
-                    {
-                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "D06C0517-4D1C-11E3-A2DD-010000000161"
-                    }
-                ],
-                "clinicalStatus": "active",
-                "category":
-                [
-                    {
-                        "coding":
-                        [
-                            {
-                                "system": "http://hl7.org/fhir/condition-category",
-                                "code": "problem-list-item",
-                                "display": "Problem List Item"
-                            }
-                        ]
-                    }
-                ],
-                "code":
-                {
-                    "coding":
-                    [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "231504006",
-                            "display": "Mixed anxiety and depressive disorder"
-                        }
-                    ],
-                    "text": "Anxiety with depression"
-                },
-                "subject":
-                {
-                    "reference": "Patient/2"
-                },
-                "assertedDate": "2020-12-01T00:00:00+00:00",
-                "asserter":
-                {
-                    "reference": "Practitioner/1"
-                }
-            }
-        },
-        {
-            "resource":
-            {
                 "resourceType": "List",
                 "meta":
                 {
@@ -17626,24 +16742,6 @@
                         "item":
                         {
                             "reference": "Condition/Problem-A-Anxiety-With-Depression"
-                        }
-                    },
-                    {
-                        "item":
-                        {
-                            "reference": "Condition/Problem-B-Swollen-Legs"
-                        }
-                    },
-                    {
-                        "item":
-                        {
-                            "reference": "Condition/Problem-D-URTI"
-                        }
-                    },
-                    {
-                        "item":
-                        {
-                            "reference": "Condition/Problem-E-Post-viral-cough"
                         }
                     }
                 ]
@@ -19854,76 +18952,6 @@
                 "collection":
                 {
                     "collectedDateTime": "2019-04-01T11:00:00+00:00"
-                }
-            }
-        },
-        {
-            "resource":
-            {
-                "resourceType": "Condition",
-                "id": "InvestigationsProblem",
-                "meta":
-                {
-                    "profile":
-                    [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
-                    ]
-                },
-                "extension":
-                [
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
-                        "valueCode": "major"
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference":
-                        {
-                            "reference": "DiagnosticReport/efae5859-28df-4e7d-be91-6df56d8215e4"
-                        }
-                    }
-                ],
-                "identifier":
-                [
-                    {
-                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "D06C0517-4D1C-11E3-A2DD-010000000161"
-                    }
-                ],
-                "clinicalStatus": "active",
-                "category":
-                [
-                    {
-                        "coding":
-                        [
-                            {
-                                "system": "http://hl7.org/fhir/condition-category",
-                                "code": "problem-list-item",
-                                "display": "Problem List Item"
-                            }
-                        ]
-                    }
-                ],
-                "code":
-                {
-                    "coding":
-                    [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "231504006",
-                            "display": "Mixed anxiety and depressive disorder"
-                        }
-                    ],
-                    "text": "Anxiety with depression"
-                },
-                "subject":
-                {
-                    "reference": "Patient/2"
-                },
-                "assertedDate": "2020-12-01T00:00:00+00:00",
-                "asserter":
-                {
-                    "reference": "Practitioner/1"
                 }
             }
         },
